@@ -196,10 +196,10 @@
                                                     <th><label for="code"><spring:message code="label.code"/></label></th>
                                                     <td class="text-left">
                                                         <img id="captchaImg" src="${path}/modules/board/captchaImg.do" />
-                                                        <div id="captchaAudio" style="display:none;"></div>
-                                                        <input type="text" id="answer" name="answer" value="">
-                                                        <input type="button" value="<spring:message code="button.refresh"/>" onClick="refreshBtn();">
-                                                        <input type="button" value="<spring:message code="button.voice"/>" onClick="audio();"> 보안문자를 입력하세요.
+                                                        <div id="captchaAudio" style="display:none;"></div>                                                       
+                                                        <input type="button" id="refreshBtn" value="<spring:message code="button.refresh"/>" >
+                                                        <input type="button" id="audio" value="<spring:message code="button.voice"/>" >  
+                                                        <input type="text" id="answer" name="answer" placeholder="CaptchaCode"/> 
                                                     </td>
                                                 </tr>
                                             </tbody>

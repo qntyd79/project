@@ -190,7 +190,8 @@ public class BoardController {
 			Model model, 
 			@ModelAttribute BoardVO boardVO, 
 			BindingResult bindingResult,
-			@RequestParam(defaultValue = "1") int kind 
+			@RequestParam(defaultValue = "1") int kind,
+			HttpServletRequest request
 			/* RedirectAttributes redirectAttributes */
 			) throws Exception {
 
@@ -206,13 +207,22 @@ public class BoardController {
 			model.addAttribute("categorylist", service.getCategoryList(kind));
 			return "modules/board/board_write";
 		}
+		
+		// 보안코드 검사 
+		String getAnswer = (String) request.getSession().getAttribute("captcha");
+		String answer = request.getParameter("answer");
+		
+		if (getAnswer.equals(answer)) {
+			service.insert(boardVO);
 
-		service.insert(boardVO);
+			model.addAttribute("msg", "InsertSuccess");
+			model.addAttribute("url", "list.do");
+		} else {
+			model.addAttribute("msg", "CaptchaFailed");
+			model.addAttribute("url", "write.do");
+		}
 
-		model.addAttribute("msg", "InsertSuccess");
-		model.addAttribute("url", "list.do");
-		// redirectAttributes.addFlashAttribute("msg", "InsertSuccess");
-		// return "redirect:list.do";
+		
 		return "/modules/common/common_message";
 	}
 
@@ -322,8 +332,7 @@ public class BoardController {
 			// return "redirect:modify.do?board_idx=" + dto.getBoard_idx() +
 			// "&category_idx=" + dto.getCategory_idx();
 			model.addAttribute("msg", "PassFailed");
-			model.addAttribute("url",
-					"modify.do?board_idx=" + boardVO.getBoard_idx() + "&category_idx=" + boardVO.getCategory_idx());
+			model.addAttribute("url", "modify.do?board_idx=" + boardVO.getBoard_idx() + "&category_idx=" + boardVO.getCategory_idx());
 		}
 
 		return "/modules/common/common_message";
@@ -405,5 +414,4 @@ public class BoardController {
 				new CaptchaUtil().captchaAudio(request, response);
 	}
 	
-
 }

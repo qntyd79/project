@@ -49,4 +49,6 @@ public class CaptchaUtil {
         CaptchaServletUtil.writeAudio(response,  ac.getChallenge());;
         request.getSession().setAttribute("captcha", ac.getAnswer());
     }
+    
+    
 }

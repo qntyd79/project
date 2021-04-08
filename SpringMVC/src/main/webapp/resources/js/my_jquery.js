@@ -618,23 +618,29 @@ $(document).ready(function() {
             title: {
                 required : true,
                 minlength: 2
-            },            
+            },  
+        
             content: {
             	//https://dzone.com/articles/using-jquery-validate-plugin 참고사이트
                 required: function(textarea) {
-                	CKEDITOR.instances['content'].updateElement(); // update textarea
-                	CKEDITOR.instances['content'].focus();
+                	CKEDITOR.instances["content"].updateElement(); // update textarea
+                	CKEDITOR.instances["content"].focus();
                 	var editorcontent = textarea.value.replace(/<[^>]*>/gi, ''); // strip tags
                 	return editorcontent.length === 0;
+
                 },
                 minlength: 5
-            }            
+            },
+			answer: {
+				required : true,
+				numeric : true
+			}          
         },
         messages: { //규칙체크 실패시 출력될 메시지 설정
             userid: {
-                required: "아이디를 입력하세요.",
-                minlength: $.validator.format("아이디는 최소{0}글자 이상 입력하세요."),
-                alphanumeric: "알파벳과 숫자만 사용가능합니다.",
+                required: "아이디를 입력하세요. my_jquery.js 사용",
+                minlength: $.validator.format("아이디는 최소{0}글자 이상 입력하세요. my_jquery.js 사용"),
+                alphanumeric: "알파벳과 숫자만 사용 가능합니다.",
                 remote: "존재하는 아이디입니다."
             },
             name: {
@@ -645,7 +651,7 @@ $(document).ready(function() {
             pass: {
                 required: "비밀번호를 입력하세요",
                 rangelength: $.validator.format("패스워드는 최소{0}글자 이상 {1}글자 이하로 입력하세요."),
-                passwordCk: "비밀번호는 영문대소문자,숫자,툭수문자를 반드시 입력해주시기 바랍니다."
+                passwordCk: "비밀번호는 영문대소문자,숫자,툭수문자를 반드시 입력해주시기 바랍니다. my_jquery.js 사용"
 
             },
             email: {
@@ -658,9 +664,13 @@ $(document).ready(function() {
                 minlength: $.validator.format("제목은 최소{0}글자 이상 입력하세요.")
             },
             content: {
-            	required: "내용을 입력하세요.",
+				required: "내용을 입력하세요.",
                 minlength: $.validator.format("내용은 최소{0}글자 이상 입력하세요.")
-            }
+            },
+			answer: {
+				required: " 자동등록방지을 입력하세요.",
+				numeric: $.validator.format(" 자동등록방지는 숫자만 입력하세요.")
+			}
         },
         /* 추가작업 
         errorPlacement: function(error, element) {
@@ -671,7 +681,7 @@ $(document).ready(function() {
             }
         }, 
         */             
-        invalidHandler: function(form, validator) {
+        invalidHandler: function(validator) {
             var errors = validator.numberOfInvalids();
             if (errors) {
             	// 필드아래에 메세지 출력시 아래사랑 주석처리 
@@ -686,7 +696,14 @@ $(document).ready(function() {
                 return false;
             }
         }
-    });
+    });	
+	
+	// 내용검증시 메세지 삭제 
+	CKEDITOR.instances.content.on('change', function() { 	
+	    if(CKEDITOR.instances.content.getData().length >  0) {
+	     $('label[for="content"]').hide();
+	    }
+	});
     
     $('#searchForm').validate({
     	ignore : '*:not([name])',
@@ -1330,7 +1347,7 @@ $(document).ready(function() {
 
     // simplecaptcha 보안코드 적용
     // https://rwd337.tistory.com/122
-    function audio() { 
+    $("#audio").on("click", function() {
         var rand = Math.random();
         var url = 'captchaAudio.do';
         $.ajax({
@@ -1338,12 +1355,11 @@ $(document).ready(function() {
             type:'post',
             dataType:'text',
             data: 'rand=' + rand,
-            async:false,
             success:function(resp){
                 var uAgent = navigator.userAgent;
                 var soundUrl = 'captchaAudio.do?rand=' + rand;
 
-                if(uAgent.inddexOf('Trident') > -1 || uAgent.indexOf('MSIE') > -1) {
+                if(uAgent.indexOf('Trident') > -1 || uAgent.indexOf('MSIE') > -1) {
                     winPlayer(soundUrl);
                 } else if(!!document.createElement('audio').canPlayType){
                     try {
@@ -1356,18 +1372,21 @@ $(document).ready(function() {
                 }
             }
         });
-    }
+    });
 
-    function refreshBtn(type) {
+    
+	$("#refreshBtn").on("click", function() {
         var rand = Math.random();
         var url = "captchaImg.do?rand=" + rand;
         $('#captchaImg').attr("src", url);
-    }
+    });
 
     function winPlayer(objUrl) {
-        $('#captchaAudio').hmtl('<vgsound src=" ' + objUrl + '">');
+        $('#captchaAudio').hmtl('<bgsound src=" ' + objUrl + '">');
     }
     
+	
+
 
             
 });

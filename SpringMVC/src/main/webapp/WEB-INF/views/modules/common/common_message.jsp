@@ -22,6 +22,9 @@
 	} else if (message == "PassFailed") {
 	  	alert("비밀번호가 일치하지 않습니다.");
 	  	location.href = url;
+	} else if (message == "CaptchaFailed") {
+		alert("보안코드가 일치하지 않습니다.");
+		location.href = url;
 	} else if (message == "UploadSuccess") {
 	  	alert("파일 등록 성공");
 	  	location.href = url;
