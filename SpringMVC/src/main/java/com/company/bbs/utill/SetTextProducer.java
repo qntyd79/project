@@ -1,4 +1,4 @@
-/*package com.company.bbs.utill;
+package com.company.bbs.utill;
 
 import nl.captcha.text.producer.TextProducer;
 
@@ -15,5 +15,5 @@ public class SetTextProducer implements TextProducer {
     }
  
 }
-*/
+
 

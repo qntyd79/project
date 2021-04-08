@@ -1,4 +1,4 @@
-/*package com.company.bbs.utill;
+package com.company.bbs.utill;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +16,7 @@ public class CaptchaUtil {
     }
     
     public void captchaImg(HttpServletRequest request, HttpServletResponse response){
-        Captcha captcha = new Captcha.Builder(200, 39)
+        Captcha captcha = new Captcha.Builder(200, 35)
         .addText(new NumbersAnswerProducer(6))
         .addNoise().addNoise().addNoise()
         .addBackground(new GradiatedBackgroundProducer())
@@ -50,4 +50,3 @@ public class CaptchaUtil {
         request.getSession().setAttribute("captcha", ac.getAnswer());
     }
 }
-*/

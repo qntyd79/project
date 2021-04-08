@@ -232,7 +232,7 @@ $(document).ready(function() {
     var button = area.find('.toggle-btn');
 
     button.click(function() {
-        if (area.hasClass('off')) { //on/off 로딩시 기본값 close
+        if (area.hasClass('on')) { //on/off 로딩시 기본값 close
             area.stop().animate({ left: '0' }, 'slow').removeClass('on');
             //$('#aside-wrap').css({'display':'block','opacity':'1'});
             button.html('<i class="fa fa-chevron-left" aria-hidden="true"></i>');
@@ -908,7 +908,7 @@ $(document).ready(function() {
 	$('.datePicker').datepicker( "getDate" );
     $("#ui-datepicker-div").hide();
 
-  //동적파일폼 추가
+  // 동적파일폼 추가
     var formcount = 1;
     var current_count = $("input[type='file']").length;
 
@@ -1275,7 +1275,7 @@ $(document).ready(function() {
         return front + end;
     }
 
-    //업로드 파일 삭제 처리
+    // 업로드 파일 삭제 처리
     $(".uploadlist").on("click", "small", function(event) {
 
         var that = $(this);
@@ -1327,6 +1327,47 @@ $(document).ready(function() {
             }
         });
     });
+
+    // simplecaptcha 보안코드 적용
+    // https://rwd337.tistory.com/122
+    function audio() { 
+        var rand = Math.random();
+        var url = 'captchaAudio.do';
+        $.ajax({
+            url:url,
+            type:'post',
+            dataType:'text',
+            data: 'rand=' + rand,
+            async:false,
+            success:function(resp){
+                var uAgent = navigator.userAgent;
+                var soundUrl = 'captchaAudio.do?rand=' + rand;
+
+                if(uAgent.inddexOf('Trident') > -1 || uAgent.indexOf('MSIE') > -1) {
+                    winPlayer(soundUrl);
+                } else if(!!document.createElement('audio').canPlayType){
+                    try {
+                        new Audio(soundUrl).play();
+                    } catch(e) {
+                        winPlayer(soundUrl);
+                    }
+                } else {
+                    window.open(soundUrl,'','width=1, height=1');
+                }
+            }
+        });
+    }
+
+    function refreshBtn(type) {
+        var rand = Math.random();
+        var url = "captchaImg.do?rand=" + rand;
+        $('#captchaImg').attr("src", url);
+    }
+
+    function winPlayer(objUrl) {
+        $('#captchaAudio').hmtl('<vgsound src=" ' + objUrl + '">');
+    }
     
+
             
 });

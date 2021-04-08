@@ -5,6 +5,8 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +24,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
 import com.company.bbs.service.board.BoardService;
-//import com.company.bbs.utill.CaptchaUtil;
+import com.company.bbs.utill.CaptchaUtil;
 import com.company.bbs.utill.Criteria;
 import com.company.bbs.utill.PageMaker;
 import com.company.bbs.vo.board.BoardVO;
@@ -387,14 +389,21 @@ public class BoardController {
 		return "/modules/common/common_message";
 	}
 
-	/*
-	 * @RequestMapping(value = "captchaImg.do", method = RequestMethod.GET) public
-	 * void cpatchaImg(HttpServletRequest request, HttpServletResponse response)
-	 * throws Exception { new CaptchaUtil().captchaImg(request, response); }
-	 * 
-	 * @RequestMapping(value = "captchaAudio.do", method = RequestMethod.GET) public
-	 * void cpatchaAudio(HttpServletRequest request, HttpServletResponse response)
-	 * throws Exception { new CaptchaUtil().captchaAudio(request, response); }
-	 */
+	@RequestMapping(value = "captchaImg.do", method = RequestMethod.GET) 
+	public void cpatchaImg(
+			HttpServletRequest request, 
+			HttpServletResponse response
+			) throws Exception { 
+				new CaptchaUtil().captchaImg(request, response);
+	}
+	 
+	@RequestMapping(value = "captchaAudio.do", method = RequestMethod.GET) 
+	public void cpatchaAudio(
+			HttpServletRequest request, 
+			HttpServletResponse response
+			) throws Exception { 
+				new CaptchaUtil().captchaAudio(request, response);
+	}
+	
 
 }

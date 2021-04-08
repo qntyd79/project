@@ -195,11 +195,11 @@
                                                 <tr>
                                                     <th><label for="code"><spring:message code="label.code"/></label></th>
                                                     <td class="text-left">
-                                                        <%-- <img id="captchaImg" src="${path}/modules/board/captchaImg.do" /> --%>
+                                                        <img id="captchaImg" src="${path}/modules/board/captchaImg.do" />
                                                         <div id="captchaAudio" style="display:none;"></div>
-                                                        <input type="text" id="captcha" name="captcha" value="">
+                                                        <input type="text" id="answer" name="answer" value="">
                                                         <input type="button" value="<spring:message code="button.refresh"/>" onClick="refreshBtn();">
-                                                        <input type="button" value="<spring:message code="button.voice"/>" onClick="audioBtn();"> 보안문자를 입력하세요.
+                                                        <input type="button" value="<spring:message code="button.voice"/>" onClick="audio();"> 보안문자를 입력하세요.
                                                     </td>
                                                 </tr>
                                             </tbody>
