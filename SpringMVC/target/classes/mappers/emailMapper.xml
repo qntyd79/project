@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="email">
+
+	<!-- 글목록 -->
+	<select id="getList"
+		resultType="com.company.bbs.dto.email.EmailDto">
+	<![CDATA[ 
+	select * from jhbbs_email where email_idx > 0 and del = 'N'
+	]]>
+		<include refid="search"></include>
+	<![CDATA[ 
+	order by email_idx desc limit #{pageStart}, ${perPageNum}
+	]]>
+	</select>
+
+	<!-- 글저장 -->
+	<insert id="insert"
+		parameterType="com.company.bbs.dto.email.EmailDto">
+		INSERT INTO jhbbs_email (
+		userid, pass, toemail,
+		sendemail, title, content, hit, cipp, regdate, del
+		) VALUES (
+		#{userid}, #{pass}, #{toemail}, #{sendemail}, #{title}, #{content},
+		#{hit}, #{cipp}, #{regdate}, #{del}
+		)
+	</insert>
+
+
+	<!-- 글보기 -->
+	<select id="getView"
+		resultType="com.company.bbs.dto.email.EmailDto">
+		select * from jhbbs_email where email_idx = #{email_idx}
+		and del = 'N'
+	</select>
+
+	<!-- 글수정 -->
+	<update id="update">
+		update jhbbs_email set
+		title=#{title},
+		content=#{content},
+		cipp=#{cipp}
+		where
+		email_idx=#{email_idx}
+	</update>
+
+	<!-- 글삭제 <delete id="delete"> delete from jhbbs_email where email_idx = 
+		#{email_idx} </delete> -->
+
+	<!-- 글삭제 update처리 -->
+	<update id="delete">
+		update jhbbs_email set del = 'Y' where email_idx =
+		#{email_idx}
+	</update>
+
+	<!-- 글조회수 -->
+	<update id="increaseCnt">
+		update jhbbs_email set hit= hit + 1 where email_idx =
+		#{email_idx} and del = 'N'
+	</update>
+
+	<!-- 글이전값 -->
+	<select id="getPrevNum"
+		resultType="com.company.bbs.dto.email.EmailDto">
+	<![CDATA[ 
+	select * from jhbbs_email where email_idx > #{email_idx} and del = 'N' order by email_idx asc limit 1
+	]]>
+	</select>
+
+	<!-- 글다음값 -->
+	<select id="getNextNum"
+		resultType="com.company.bbs.dto.email.EmailDto">
+	<![CDATA[
+	select * from jhbbs_email where email_idx < #{email_idx} and del = 'N' order by email_idx desc limit 1
+	]]>
+	</select>
+
+	<!-- 글최고값 -->
+	<select id="getMaxNum" resultType="int">
+		select max(email_idx) from jhbbs_email
+		<include refid="search"></include>
+	</select>
+
+	<!-- 글갯수 -->
+	<select id="getCount" resultType="int">
+	<![CDATA[ 
+	select count(email_idx) from jhbbs_email where email_idx > 0 and del = 'N'
+	]]>
+		<include refid="search"></include>
+	</select>
+
+	<!-- 글비밀번호리턴 -->
+	<select id="getPassword" resultType="String">
+		select pass from jhbbs_email
+		where email_idx = #{email_idx} and del = 'N'
+	</select>
+
+	<sql id="search">
+		<if test="searchField != null">
+			<if test="searchField == 'n'.toString()">
+				AND (title LIKE CONCAT('%', #{keyWord}, '%') OR content
+				LIKE CONCAT('%', #{keyWord}, '%'))
+			</if>
+			<if test="searchField == 't'.toString()">
+				AND title LIKE CONCAT('%', #{keyWord}, '%')
+			</if>
+			<if test="searchField == 'c'.toString()">
+				AND content LIKE CONCAT('%', #{keyWord}, '%')
+			</if>
+			<if test="searchField == 'tc'.toString()">
+				AND (title LIKE CONCAT('%', #{keyWord}, '%') OR content
+				LIKE CONCAT('%', #{keyWord}, '%'))
+			</if>
+		</if>
+	</sql>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

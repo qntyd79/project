@@ -1,0 +1,270 @@
+<? include ('../../include/header.html');?>
+<div id="container-wrap">
+    <div class="clearfix">
+        <div class="content-box">
+            <div class="content-full-img01">
+            </div>
+            <div class="content-full-bg01-hidden">
+                <section class="content">
+                    <? include ('../../include/content_header.html');?>
+                    <article>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>글수정</h2>
+                                <form>
+                                    <fieldset>
+                                        <legend>Board Write Form</legend>
+                                        <table summary="기본게시판 보여주고 있습니다." class="table">
+                                            <caption>등록일 : 2017년08월24일 기준</caption>
+                                            <colgroup>
+                                                <col width="20%" />
+                                                <col width="80%" />
+                                            </colgroup>
+                                            <tbody>
+                                                <tr>
+                                                    <th>
+                                                        <label for="cate">분류</label>
+                                                    </th>
+                                                    <td class="text-left">
+                                                        <!-- 게시판 카테고리 시작 -->
+                                                        <select name="select">
+                                                            <option value="1">일반</option>
+                                                        </select>
+                                                        <input type="button" value="분류추가" />
+                                                        <div class="layer">
+                                                            <div class="bg"></div>
+                                                            <div id="layer1" class="pop-layer">
+                                                                <div class="pop-container">
+                                                                    <div class="pop-conts">
+                                                                        <iframe name="ifrm_file" src="${path}/modules/category/list.do" height="670px" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="width: 100%;"></iframe>
+                                                                        <div class="btn-r">
+                                                                            <a href="#" class="cbtn">Close</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- 게시판 카테고리 종료 -->
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="userid"> 아이디</label>
+                                                    </th>
+                                                    <td class="text-left">
+                                                        <input type="text" id="userid" name="userid">
+                                                        <span>6~12자의 영문 소문자, 숫자만 사용할 수 있습니다.</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="name"> 이름</label>
+                                                    </th>
+                                                    <td class="text-left">
+                                                        <input type="text" id="name" name="name">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="pw"> 비밀번호 </label>
+                                                    </th>
+                                                    <td class="text-left">
+                                                        <input type="password" id="pass" name="pass">
+                                                        <span>6~12자의 영문 소문자, 숫자만 사용할 수 있습니다.</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"><label for="email"> 이메일 </label></th>
+                                                    <td class="text-left"><input type="text" id="email" name="email" placeholder="Email" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"><label for="email"> 이메일 </label></th>
+                                                    <td scope="row" class="text-left"><input type="text" id="emailid" name="emailid" /> @ <input type="text" id="emaildomain" name="emaildomain" /> <select name="selectdomain">
+                                                            <option>직접입력</option>
+                                                            <option value="naver.com">naver.com</option>
+                                                            <option value="hanmail.net">hanmail.net</option>
+                                                            <option value="nate.com">nate.com</option>
+                                                            <option value="hotmail.com">hotmail.com</option>
+                                                            <option value="paran.com">paran.com</option>
+                                                            <option value="yahoo.com">yahoo.com</option>
+                                                            <option value="chol.com">chol.com</option>
+                                                            <option value="dreamwiz.com">dreamwiz.com</option>
+                                                            <option value="empal.com">empal.com</option>
+                                                            <option value="freechal.com">freechal.com</option>
+                                                            <option value="gmail.com">gmail.com</option>
+                                                            <option value="hanafos.com">hanafos.com</option>
+                                                            <option value="hanmir.com">hanmir.com</option>
+                                                            <option value="hitel.net">hitel.net</option>
+                                                            <option value="korea.com">korea.com</option>
+                                                            <option value="lycos.co.kr">lycos.co.kr</option>
+                                                            <option value="netian.com">netian.com</option>
+                                                        </select> <span>알찬 서비스 소식 및 이벤트을 전해드립니다.</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="homepage"> 홈페이지 </label>
+                                                    </th>
+                                                    <td class="text-left">
+                                                        <input type="text" id="homepage" name="homepage" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="title"> 제목 </label>
+                                                    </th>
+                                                    <td class="text-left">
+                                                        <input type="text" id="title" name="title">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th><label for="date"> 일정 </label></th>
+                                                    <td class="text-left"><input type="text" name="sdate" id="sdate"> - <input type="text" name="sdate" id="edate"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="notice"> 옵션</label>
+                                                    </th>
+                                                    <td class="text-left">
+                                                        <input type="checkbox" name="notice" value="1" id="notice"> 공지사항
+                                                        <input type="checkbox" name="secret" value="1" id="secret"> 비밀글
+                                                        <input type="checkbox" name="mailsend" value="1" id="mailsend"> 소스코드
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th><label for="content">내용</label></th>
+                                                    <td class="text-left"><textarea name="content" id="editor" placeholder="Content"></textarea>
+                                                        <script>
+                                                            CKEDITOR
+                                                                        .replace(
+                                                                                'editor',
+                                                                                {
+                                                                                    // customConfig:'${path}/plugin/ckeditor4/basic/custom-config.js'
+                                                                                    // customConfig:'${path}/plugin/ckeditor4/standard/custom-config.js'
+                                                                                    customConfig : '/plugin/ckeditor4/full/custom-config.js'
+                                                                                });
+                                                                // CKEDITOR.replace('editor',{
+                                                                // filebrowserUploadUrl: '${pageContext.request.contextPath }/adm/fileupload.do'
+                                                                // });
+                                                            </script>
+                                                    </td>
+                                                </tr>
+                                                <!-- ckeditor5
+                                                                        <tr>
+                                                                            <th><label for="content">내용</label></th>
+                                                                            <td class="text-left">
+                                                                            <h3>Classic editor</h3>
+                                                                            <textarea name="content" id="editor" placeholder="Content">내용테스트입니다.</textarea>
+                                                                            
+                                                                            <style>
+                                                                            .ck-editor__editable {
+                                                                                min-height: 400px;
+                                                                            }
+                                                                            </style>
+                                                                                <script>
+                                                                                         ClassicEditor
+                                                                                         .create( document.querySelector( '#editor' ) )
+                                                                                         .then( editor => {
+                                                                                                console.log( editor );
+                                                                                            } )
+                                                                                            .catch( error => {
+                                                                                                console.error( error );
+                                                                                            } );        
+                                                                                            /*
+                                                                                            .create(document.querySelector( '#editor' ), {
+                                                                                                toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+                                                                                                heading: {
+                                                                                                    options: [
+                                                                                                        { modelElement: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                                                                                                        { modelElement: 'heading1', viewElement: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                                                                                                        { modelElement: 'heading2', viewElement: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+                                                                                                    ]
+                                                                                                }
+                                                                                            } )
+                                                                                            */
+                                                                                                                                             
+                                                                                </script>
+                                                                                <h3>Document editor</h3>
+                                                                                <div id="toolbar-container"></div>
+                                                                                <div id="documenteditor" style="border:1px solid #e1e1e1;">
+                                                                                    <p>This is the initial editor content.</p>
+                                                                                </div>
+                                                                                <script>
+                                                                                    DecoupledEditor
+                                                                                    .create( document.querySelector( '#documenteditor' ) )
+                                                                                        .then( editor => {
+                                                                                            const toolbarContainer = document.querySelector( '#toolbar-container' );        
+                                                                                            toolbarContainer.appendChild( editor.ui.view.toolbar.element );
+                                                                                        } )
+                                                                                        .catch( error => {
+                                                                                            console.error( error );
+                                                                                        } );
+                                                                                </script>
+                                                                            </td>
+                                                                        </tr>
+                                                                         -->
+                                                <tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="link1"> 관련링크1 </label>
+                                                    </th>
+                                                    <td class="text-left">
+                                                        <input type="text" id="link1" name="link1">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="link2"> 관련링크2 </label>
+                                                    </th>
+                                                    <td class="text-left">
+                                                        <input type="text" id="link2" name="link2">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th><label for="name">첨부파일</label></th>
+                                                    <td class="text-left">
+                                                        <div class="filebox">
+                                                            <ul id="example">
+                                                                <li style="margin-bottom: 5px;"><input class="upload-name" value="파일선택" disabled="disabled"> <label for="ex_filename">업로드 #1</label> <input type="file" name="attach" id="ex_filename" class="upload-hidden"></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div>
+                                                            <input type="button" value="파일폼추가" id="addItemBtn" /> <input type="button" value="파일폼삭제" id="delItemBtn" />
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th><label for="code">자동등록방지</label></th>
+                                                    <td class="text-left"><input type="text" name="anti_robotCodeimg"> <span>코드를 입력하세요.</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <nav class="btn-group">
+                                            <ul>
+                                                <li>
+                                                    <input type="button" value="글목록" onclick="location.href='./board_list.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글보기" onclick="location.href='./board_view.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글작성" onclick="location.href='./board_write.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글수정" onclick="location.href='./board_edit.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글삭제" onclick="location.href='./board_delete.html'">
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<? include ('../../include/footer.html');?>

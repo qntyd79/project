@@ -1,0 +1,99 @@
+<? include ('../include/head.html');?>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>답글쓰기</h2>
+                                <form>
+                                    <fieldset>
+                                        <legend>Board Write Form</legend>
+                                        <table summary="기본게시판 보여주고 있습니다." class="table">
+                                            <caption>등록일 : 2017년08월24일 기준</caption>
+                                            <colgroup>
+                                                <col width="20%" />
+                                                <col width="30%" />
+                                                <col width="20%" />
+                                                <col width="30%" />
+                                            </colgroup>
+                                            <tbody>                                                
+                                                <tr>
+                                                    <th>
+                                                        <label for="userid"> 아이디</label>
+                                                    </th>
+                                                    <td class="text-left">
+                                                        <input type="text" id="userid" name="userid" placeholder="" >
+                                                    </td>
+                                                    <th>
+                                                        <label for="pw"> 비밀번호 </label>
+                                                    </th>
+                                                    <td class="text-left">
+                                                        <input type="password" id="pass" name="pass" placeholder="" >
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="name"> 이름</label>
+                                                    </th>
+                                                    <td class="text-left">
+                                                        <input type="text" id="name" name="name">
+                                                    </td>
+                                                    <th scope="row"><label for="email"> 이메일 </label></th>
+                                                    <td class="text-left"><input type="text" id="email" name="email" placeholder="" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="4" class="text-left"><textarea name="content" id="editor" placeholder="Content"></textarea>
+                                                        <script>
+                                                            CKEDITOR
+                                                                        .replace(
+                                                                                'editor',
+                                                                                {
+                                                                                    // customConfig:'${path}/plugin/ckeditor4/basic/custom-config.js'
+                                                                                    // customConfig:'${path}/plugin/ckeditor4/standard/custom-config.js'
+                                                                                    customConfig : '/plugin/ckeditor4/full/custom-config.js'
+                                                                                });
+                                                                // CKEDITOR.replace('editor',{
+                                                                // filebrowserUploadUrl: '${pageContext.request.contextPath }/adm/fileupload.do'
+                                                                // });
+                                                            </script>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <th><label for="code">자동등록방지</label></th>
+                                                    <td colspan="3" class="text-left"><input type="text" name="anti_robotCodeimg"> <span>코드를 입력하세요.</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <nav class="btn-group">
+                                            <ul>
+                                                <li>
+                                                    <input type="button" value="글목록" onclick="location.href='./comment_list.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글보기" onclick="location.href='./comment_view.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글작성" onclick="location.href='./comment_write.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="답변글작성" onclick="location.href='./comment_reply.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글수정" onclick="location.href='./comment_edit.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글삭제" onclick="location.href='./comment_delete.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="전체선택" id="allCheck">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="선택삭제" onClick="window.location='write.do'">
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                        
+                    <? include ('../include/foot.html');?>

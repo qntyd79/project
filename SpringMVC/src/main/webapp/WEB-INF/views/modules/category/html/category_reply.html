@@ -1,0 +1,76 @@
+<? include ('../include/head.html');?>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>답글쓰기</h2>
+                                <form id="writeForm" name="writeForm" method="post" enctype="multipart/form-data" action="<c:url value='insert.do'/>">
+                                    <fieldset>
+                                        <legend>Board Write Form</legend>
+                                        <table summary="기본게시판 보여주고 있습니다." class="table">
+                                            <caption>등록일 : 2017년08월24일 기준</caption>
+                                            <colgroup>
+                                                <col width="20%" />
+                                                <col width="80%" />
+                                            </colgroup>
+                                            <tbody>
+                                                <tr>
+                                                    <th>
+                                                        <label for="name"> 이름</label>
+                                                    </th>
+                                                    <td class="text-left">
+                                                        <input type="text" id="name" name="name" value="홍길동" placeholder="Name">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="pw"> 비밀번호 </label>
+                                                    </th>
+                                                    <td class="text-left">
+                                                        <input type="password" id="pass" name="pass" value="1234" placeholder="Password">
+                                                        <span>6~12자의 영문 소문자, 숫자만 사용할 수 있습니다.</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="title"> 분류명 </label>
+                                                    </th>
+                                                    <td class="text-left">
+                                                        <input type="text" id="title" name="title" placeholder="Category">
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <nav class="btn-group">
+                                            <ul>
+                                                <li>
+                                                    <input type="button" value="글목록" onclick="location.href='./category_list.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글보기" onclick="location.href='./category_view.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글작성" onclick="location.href='./category_write.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="답변글작성" onclick="location.href='./category_reply.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글수정" onclick="location.href='./category_edit.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글삭제" onclick="location.href='./category_delete.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="전체선택" id="allCheck">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="선택삭제" onClick="window.location='write.do'">
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                        
+                    <? include ('../include/foot.html');?>

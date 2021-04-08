@@ -1,0 +1,671 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"  isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:import url="/WEB-INF/views/include/header.jsp"/>
+<div id="container-wrap">
+    <div class="clearfix">
+        <div class="content-box">
+            <div class="content-full-img01">
+            </div>
+            <div class="content-full-bg01-hidden">
+                <section class="content">
+                   <%@ include file="../include/content_header.jsp"%>
+                    <article>
+                        <h2>테이블</h2>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table">
+                                    <caption>
+                                        대전광역시 행정동 및 법정동 현황 - 구분,행정동,법정동,면적,통,반 정보를 제공하는 표입니다.
+                                    </caption>
+                                    <colgroup>
+                                        <col style="width: 15%;">
+                                        <col style="width: 15%;">
+                                        <col style="width: 40%;">
+                                        <col style="width: 10%;">
+                                        <col style="width: 10%;">
+                                        <col style="width: 10%;">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">
+                                                <label for="date">구별</label>
+                                            </th>
+                                            <th scope="col">행정동</th>
+                                            <th scope="col">법정동</th>
+                                            <th scope="col">면적</th>
+                                            <th scope="col">통</th>
+                                            <th scope="col">반</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>
+                                                <label for="date">계</label>
+                                            </th>
+                                            <th>79</th>
+                                            <th>177</th>
+                                            <th>539.34㎢</th>
+                                            <th>2,501</th>
+                                            <th>14,103</th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label for="date">(소계)</label>
+                                            </td>
+                                            <td>16</td>
+                                            <td>45</td>
+                                            <td rowspan="17">136.65</td>
+                                            <td rowspan="17">378</td>
+                                            <td rowspan="17">2,043</td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="16">동구</td>
+                                            <td>중앙동</td>
+                                            <td>원, 정, 중, 소제, 신안</td>
+                                        </tr>
+                                        <tr>
+                                            <td>신인동</td>
+                                            <td>인, 신흥</td>
+                                        </tr>
+                                        <tr>
+                                            <td>효 동</td>
+                                            <td>효, 천, 가오</td>
+                                        </tr>
+                                        <tr>
+                                            <td>판암1동</td>
+                                            <td>판암(일부), 삼정</td>
+                                        </tr>
+                                        <tr>
+                                            <td>판암2동</td>
+                                            <td>판암(일부)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>용운동</td>
+                                            <td>용운</td>
+                                        </tr>
+                                        <tr>
+                                            <td>대동</td>
+                                            <td>대</td>
+                                        </tr>
+                                        <tr>
+                                            <td>자양동</td>
+                                            <td>자양</td>
+                                        </tr>
+                                        <tr>
+                                            <td>가양1동</td>
+                                            <td>가양(일부)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>가양2동</td>
+                                            <td>〃</td>
+                                        </tr>
+                                        <tr>
+                                            <td>용전동</td>
+                                            <td>용전</td>
+                                        </tr>
+                                        <tr>
+                                            <td>성남동</td>
+                                            <td>성남</td>
+                                        </tr>
+                                        <tr>
+                                            <td>홍도동</td>
+                                            <td>홍도</td>
+                                        </tr>
+                                        <tr>
+                                            <td>삼성동</td>
+                                            <td>삼성</td>
+                                        </tr>
+                                        <tr>
+                                            <td>대청동</td>
+                                            <td>추,비룡,주산,용계,마산,효평,직,세천,신상,신하,신촌,주촌,내탑,사성,오</td>
+                                        </tr>
+                                        <tr>
+                                            <td>산내동</td>
+                                            <td>낭월,대별,이사,대성,장척,소호,구도,삼괴,상소,하소</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label for="date">(소계)</label>
+                                            </td>
+                                            <td>17</td>
+                                            <td>26</td>
+                                            <td rowspan="18">62.14</td>
+                                            <td rowspan="18">409</td>
+                                            <td rowspan="18">2,355</td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="17">중구</td>
+                                            <td>운행선화동</td>
+                                            <td>은행, 선화</td>
+                                        </tr>
+                                        <tr>
+                                            <td>목동</td>
+                                            <td>목</td>
+                                        </tr>
+                                        <tr>
+                                            <td>중촌동</td>
+                                            <td>중촌</td>
+                                        </tr>
+                                        <tr>
+                                            <td>대흥동</td>
+                                            <td>대흥</td>
+                                        </tr>
+                                        <tr>
+                                            <td>문창동</td>
+                                            <td>문창</td>
+                                        </tr>
+                                        <tr>
+                                            <td>석교동</td>
+                                            <td>석교, 옥계, 호</td>
+                                        </tr>
+                                        <tr>
+                                            <td>대사동</td>
+                                            <td>대사</td>
+                                        </tr>
+                                        <tr>
+                                            <td>부사동</td>
+                                            <td>부사</td>
+                                        </tr>
+                                        <tr>
+                                            <td>용두동</td>
+                                            <td>용두</td>
+                                        </tr>
+                                        <tr>
+                                            <td>오류동</td>
+                                            <td>오류</td>
+                                        </tr>
+                                        <tr>
+                                            <td>태평1동</td>
+                                            <td>태평(일부)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>태평2동</td>
+                                            <td>〃</td>
+                                        </tr>
+                                        <tr>
+                                            <td>유천1동</td>
+                                            <td>유천(일부)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>유천2동</td>
+                                            <td>〃</td>
+                                        </tr>
+                                        <tr>
+                                            <td>문화1동</td>
+                                            <td>문화(일부)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>문화2동</td>
+                                            <td>〃</td>
+                                        </tr>
+                                        <tr>
+                                            <td>산성동</td>
+                                            <td>산성,사정,안영,구완,무수,침산,목달,정생,어남,금</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label for="date">(소계)</label>
+                                            </td>
+                                            <td>23</td>
+                                            <td>27</td>
+                                            <td rowspan="24">95.50</td>
+                                            <td rowspan="24">792</td>
+                                            <td rowspan="24">4,676</td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="23">서 구</td>
+                                            <td>복수동</td>
+                                            <td>복수</td>
+                                        </tr>
+                                        <tr>
+                                            <td>도마1동</td>
+                                            <td>도마(일부)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>도마2동</td>
+                                            <td>〃</td>
+                                        </tr>
+                                        <tr>
+                                            <td>정림동</td>
+                                            <td>정림, 괴곡(일부)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>변동</td>
+                                            <td>변</td>
+                                        </tr>
+                                        <tr>
+                                            <td>용문동</td>
+                                            <td>용문</td>
+                                        </tr>
+                                        <tr>
+                                            <td>탄방동</td>
+                                            <td>탄방</td>
+                                        </tr>
+                                        <tr>
+                                            <td>둔산1동</td>
+                                            <td>둔산(일부)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>둔산2동</td>
+                                            <td>〃</td>
+                                        </tr>
+                                        <tr>
+                                            <td>둔산3동</td>
+                                            <td>〃</td>
+                                        </tr>
+                                        <tr>
+                                            <td>괴정동</td>
+                                            <td>괴정</td>
+                                        </tr>
+                                        <tr>
+                                            <td>가장동</td>
+                                            <td>가장</td>
+                                        </tr>
+                                        <tr>
+                                            <td>내동</td>
+                                            <td>내</td>
+                                        </tr>
+                                        <tr>
+                                            <td>갈마1동</td>
+                                            <td>갈마(일부)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>갈마2동</td>
+                                            <td>〃</td>
+                                        </tr>
+                                        <tr>
+                                            <td>월평1동</td>
+                                            <td>월평(일부)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>월평2동</td>
+                                            <td>〃</td>
+                                        </tr>
+                                        <tr>
+                                            <td>월평3동</td>
+                                            <td>〃</td>
+                                        </tr>
+                                        <tr>
+                                            <td>만년동</td>
+                                            <td>만년</td>
+                                        </tr>
+                                        <tr>
+                                            <td>가수원동</td>
+                                            <td>가수원, 도안, 괴곡(일부)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>관저1동</td>
+                                            <td>관저(일부)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>관저2동</td>
+                                            <td>〃</td>
+                                        </tr>
+                                        <tr>
+                                            <td>기성동</td>
+                                            <td>흑석,매노,산직,장안,평촌,오,우명,원정,용촌,봉곡</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label for="date">(소계)</label>
+                                            </td>
+                                            <td>11</td>
+                                            <td>53</td>
+                                            <td rowspan="12">176.37</td>
+                                            <td rowspan="12">569</td>
+                                            <td rowspan="12">3,181</td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="11">유성구</td>
+                                            <td>진잠동</td>
+                                            <td>성북,세,송정,원내,방,교촌,대정,용계,학하,계산</td>
+                                        </tr>
+                                        <tr>
+                                            <td>원신흥동</td>
+                                            <td>원신흥, 상대, 봉명(일부)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>온천1동</td>
+                                            <td>봉명(일부),구암,덕명,복용</td>
+                                        </tr>
+                                        <tr>
+                                            <td>온천2동</td>
+                                            <td>장대(일부),죽(일부),궁,어은,구성,노은(일부)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>노은1동</td>
+                                            <td>갑,노은(일부),지족(일부),죽(일부),장대(일부)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>노은2동</td>
+                                            <td>하기(일부),수남,안산,외삼,반석(일부),죽(일부),지족(일부)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p>노은3동</p>
+                                            </td>
+                                            <td>
+                                                <p>지족(일부), 반석(일부)</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>신성동</td>
+                                            <td>신성,가정,도룡,장,방현,화암,덕진,하기(일부),추목,자운,신봉</td>
+                                        </tr>
+                                        <tr>
+                                            <td>전민동</td>
+                                            <td>전민, 문지, 원촌</td>
+                                        </tr>
+                                        <tr>
+                                            <td>구즉동</td>
+                                            <td>봉산,송강,금고,대,금탄,신,둔곡,구룡</td>
+                                        </tr>
+                                        <tr>
+                                            <td>관평동</td>
+                                            <td>관평, 용산, 탑립</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label for="date">(소계)</label>
+                                            </td>
+                                            <td>12</td>
+                                            <td>26</td>
+                                            <td rowspan="13">68.69</td>
+                                            <td rowspan="13">353</td>
+                                            <td rowspan="13">1,848</td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="12">대덕구</td>
+                                            <td>오정동</td>
+                                            <td>오정</td>
+                                        </tr>
+                                        <tr>
+                                            <td>대화동</td>
+                                            <td>대화</td>
+                                        </tr>
+                                        <tr>
+                                            <td>회덕동</td>
+                                            <td>읍내,연축,신대,와,장</td>
+                                        </tr>
+                                        <tr>
+                                            <td>비래동</td>
+                                            <td>비래</td>
+                                        </tr>
+                                        <tr>
+                                            <td>송촌동</td>
+                                            <td>송촌</td>
+                                        </tr>
+                                        <tr>
+                                            <td>중리동</td>
+                                            <td>중리</td>
+                                        </tr>
+                                        <tr>
+                                            <td>법1동</td>
+                                            <td>법(일부)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>법2동</td>
+                                            <td>〃</td>
+                                        </tr>
+                                        <tr>
+                                            <td>신탄진동</td>
+                                            <td>신탄진,용호,이현,갈전,부수,황호,삼정,미호</td>
+                                        </tr>
+                                        <tr>
+                                            <td>석봉동</td>
+                                            <td>석봉</td>
+                                        </tr>
+                                        <tr>
+                                            <td>덕암동</td>
+                                            <td>덕암, 상서, 평촌</td>
+                                        </tr>
+                                        <tr>
+                                            <td>목상동</td>
+                                            <td>목상, 문평, 신일</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </article>
+                    <article>
+                        <h2>테이블</h2>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table">
+                                    <caption>
+                                        대전광역시 행정동 및 법정동 현황 - 구분,행정동,법정동,면적,통,반 정보를 제공하는 표입니다.
+                                    </caption>
+                                    <colgroup>
+                                        <col style="width: 15%;">
+                                        <col style="width: 15%;">
+                                        <col style="width: 40%;">
+                                        <col style="width: 10%;">
+                                        <col style="width: 10%;">
+                                        <col style="width: 10%;">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">
+                                                <label for="date">구별</label>
+                                            </th>
+                                            <th scope="col">행정동</th>
+                                            <th scope="col">법정동</th>
+                                            <th scope="col">면적</th>
+                                            <th scope="col">통</th>
+                                            <th scope="col">반</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>
+                                                <label for="date">계</label>
+                                            </th>
+                                            <th>79</th>
+                                            <th>177</th>
+                                            <th>539.34㎢</th>
+                                            <th>2,501</th>
+                                            <th>14,103</th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label for="date">(소계)</label>
+                                            </td>
+                                            <td>16</td>
+                                            <td>45</td>
+                                            <td rowspan="17">136.65</td>
+                                            <td rowspan="17">378</td>
+                                            <td rowspan="17">2,043</td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="16">동구</td>
+                                            <td>중앙동</td>
+                                            <td>원, 정, 중, 소제, 신안</td>
+                                        </tr>
+                                        <tr>
+                                            <td>신인동</td>
+                                            <td>인, 신흥</td>
+                                        </tr>
+                                        <tr>
+                                            <td>효 동</td>
+                                            <td>효, 천, 가오</td>
+                                        </tr>
+                                        <tr>
+                                            <td>판암1동</td>
+                                            <td>판암(일부), 삼정</td>
+                                        </tr>
+                                        <tr>
+                                            <td>판암2동</td>
+                                            <td>판암(일부)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>용운동</td>
+                                            <td>용운</td>
+                                        </tr>
+                                        <tr>
+                                            <td>대동</td>
+                                            <td>대</td>
+                                        </tr>
+                                        <tr>
+                                            <td>자양동</td>
+                                            <td>자양</td>
+                                        </tr>
+                                        <tr>
+                                            <td>가양1동</td>
+                                            <td>가양(일부)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>가양2동</td>
+                                            <td>〃</td>
+                                        </tr>
+                                        <tr>
+                                            <td>용전동</td>
+                                            <td>용전</td>
+                                        </tr>
+                                        <tr>
+                                            <td>성남동</td>
+                                            <td>성남</td>
+                                        </tr>
+                                        <tr>
+                                            <td>홍도동</td>
+                                            <td>홍도</td>
+                                        </tr>
+                                        <tr>
+                                            <td>삼성동</td>
+                                            <td>삼성</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </article>
+                    <article>
+                        <h2>테이블</h2>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table">
+                                    <caption>
+                                        대전광역시 행정동 및 법정동 현황 - 구분,행정동,법정동,면적,통,반 정보를 제공하는 표입니다.
+                                    </caption>
+                                    <colgroup>
+                                        <col style="width: 15%;">
+                                        <col style="width: 15%;">
+                                        <col style="width: 40%;">
+                                        <col style="width: 10%;">
+                                        <col style="width: 10%;">
+                                        <col style="width: 10%;">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">
+                                                <label for="date">구별</label>
+                                            </th>
+                                            <th scope="col">행정동</th>
+                                            <th scope="col">법정동</th>
+                                            <th scope="col">면적</th>
+                                            <th scope="col">통</th>
+                                            <th scope="col">반</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>
+                                                <label for="date">계</label>
+                                            </th>
+                                            <th>79</th>
+                                            <th>177</th>
+                                            <th>539.34㎢</th>
+                                            <th>2,501</th>
+                                            <th>14,103</th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <label for="date">계</label>
+                                            </th>
+                                            <th>79</th>
+                                            <th>177</th>
+                                            <th>539.34㎢</th>
+                                            <th>2,501</th>
+                                            <th>14,103</th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <label for="date">계</label>
+                                            </th>
+                                            <th>79</th>
+                                            <th>177</th>
+                                            <th>539.34㎢</th>
+                                            <th>2,501</th>
+                                            <th>14,103</th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <label for="date">계</label>
+                                            </th>
+                                            <th>79</th>
+                                            <th>177</th>
+                                            <th>539.34㎢</th>
+                                            <th>2,501</th>
+                                            <th>14,103</th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <label for="date">계</label>
+                                            </th>
+                                            <th>79</th>
+                                            <th>177</th>
+                                            <th>539.34㎢</th>
+                                            <th>2,501</th>
+                                            <th>14,103</th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <label for="date">계</label>
+                                            </th>
+                                            <th>79</th>
+                                            <th>177</th>
+                                            <th>539.34㎢</th>
+                                            <th>2,501</th>
+                                            <th>14,103</th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <label for="date">계</label>
+                                            </th>
+                                            <th>79</th>
+                                            <th>177</th>
+                                            <th>539.34㎢</th>
+                                            <th>2,501</th>
+                                            <th>14,103</th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <label for="date">계</label>
+                                            </th>
+                                            <th>79</th>
+                                            <th>177</th>
+                                            <th>539.34㎢</th>
+                                            <th>2,501</th>
+                                            <th>14,103</th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <label for="date">계</label>
+                                            </th>
+                                            <th>79</th>
+                                            <th>177</th>
+                                            <th>539.34㎢</th>
+                                            <th>2,501</th>
+                                            <th>14,103</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<c:import url="/WEB-INF/views/include/footer.jsp"/>

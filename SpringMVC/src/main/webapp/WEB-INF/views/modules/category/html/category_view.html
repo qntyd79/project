@@ -1,0 +1,94 @@
+<? include ('../include/head.html');?>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>글보기</h2>
+                                <form name="readForm" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="category_idx" value="" />
+                                    <input type="hidden" name="page" value="${criteria.page}" />
+                                    <input type="hidden" name="perPageNum" value="" />
+                                    <input type="hidden" name="searchField" value="" />
+                                    <input type="hidden" name="keyWord" value="" />
+                                    <fieldset>
+                                        <legend>Borad View Form</legend>
+                                        <table summary="기본게시판 보여주고 있습니다." class="table">
+                                            <caption>등록일 : 2017년08월24일 기준</caption>
+                                            <colgroup>
+                                                <col width="20%" />
+                                                <col width="20%" />
+                                                <col width="15%" />
+                                                <col width="15%" />
+                                                <col width="15%" />
+                                                <col width="15%" />
+                                            </colgroup>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="col"><label for="date">제목 </label></th>
+                                                    <td scope="col" colspan="5" class="text-left">제목이 나오는 곳입니다.</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="date">작성자</label>
+                                                    </th>
+                                                    <td>홍길동</td>
+                                                    <th>
+                                                        <label for="date">등록일</label>
+                                                    </th>
+                                                    <td>2011-04-08</td>
+                                                    <th>
+                                                        <label for="hit">조회수</label>
+                                                    </th>
+                                                    <td>10</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="date">다음글</label>
+                                                    </th>
+                                                    <td colspan="5" class="text-left">이전글이 존재하지 않습니다.</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="date">이전글</label>
+                                                    </th>
+                                                    <td colspan="5" class="text-left">다음글이 존재하지 않습니다.</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><label for="next">접속아이피</label></th>
+                                                    <td colspan="5" class="text-left">127.168.0.1</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <nav class="btn-group">
+                                            <ul>
+                                                <li>
+                                                    <input type="button" value="글목록" onclick="location.href='./category_list.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글보기" onclick="location.href='./category_view.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글작성" onclick="location.href='./category_write.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="답변글작성" onclick="location.href='./category_reply.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글수정" onclick="location.href='./category_edit.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글삭제" onclick="location.href='./category_delete.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="전체선택" id="allCheck">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="선택삭제" onClick="window.location='write.do'">
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                        
+                    <? include ('../include/foot.html');?>
