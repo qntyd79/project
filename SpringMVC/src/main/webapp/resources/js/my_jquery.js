@@ -618,8 +618,7 @@ $(document).ready(function() {
             title: {
                 required : true,
                 minlength: 2
-            },  
-        
+            },          
             content: {
             	//https://dzone.com/articles/using-jquery-validate-plugin 참고사이트
                 required: function(textarea) {
@@ -681,7 +680,7 @@ $(document).ready(function() {
             }
         }, 
         */             
-        invalidHandler: function(validator) {
+        invalidHandler: function(form, validator) {
             var errors = validator.numberOfInvalids();
             if (errors) {
             	// 필드아래에 메세지 출력시 아래사랑 주석처리 

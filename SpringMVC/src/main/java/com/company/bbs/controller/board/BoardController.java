@@ -192,7 +192,6 @@ public class BoardController {
 			BindingResult bindingResult,
 			@RequestParam(defaultValue = "1") int kind,
 			HttpServletRequest request
-			/* RedirectAttributes redirectAttributes */
 			) throws Exception {
 
 		logger.info("글저장처리");
@@ -208,7 +207,7 @@ public class BoardController {
 			return "modules/board/board_write";
 		}
 		
-		// 보안코드 검사 
+		// 자동등록방지 검증 
 		String getAnswer = (String) request.getSession().getAttribute("captcha");
 		String answer = request.getParameter("answer");
 		
@@ -220,8 +219,9 @@ public class BoardController {
 		} else {
 			model.addAttribute("msg", "CaptchaFailed");
 			model.addAttribute("url", "write.do");
+			
+			// 리다이렉트 처이방법을 찾아서 수정예정 
 		}
-
 		
 		return "/modules/common/common_message";
 	}
