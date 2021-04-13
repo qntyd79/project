@@ -9,6 +9,7 @@
 //org.springframework.ide.eclipse.xml.namespaces.default.version.http\://www.springframework.org/schema/lang=
 //org.springframework.ide.eclipse.xml.namespaces.default.version.http\://www.springframework.org/schema/mvc=
 //org.springframework.ide.eclipse.xml.namespaces.default.version.http\://www.springframework.org/schema/p=
+//org.springframework.ide.eclipse.xml.namespaces.default.version.http\://www.springframework.org/schema/security=
 //org.springframework.ide.eclipse.xml.namespaces.default.version.http\://www.springframework.org/schema/task=
 //org.springframework.ide.eclipse.xml.namespaces.default.version.http\://www.springframework.org/schema/tx=
 //org.springframework.ide.eclipse.xml.namespaces.default.version.http\://www.springframework.org/schema/util=
@@ -24,6 +25,7 @@
 //org.springframework.ide.eclipse.xml.namespaces.prefix.http\://www.springframework.org/schema/lang=lang
 //org.springframework.ide.eclipse.xml.namespaces.prefix.http\://www.springframework.org/schema/mvc=mvc
 //org.springframework.ide.eclipse.xml.namespaces.prefix.http\://www.springframework.org/schema/p=p
+//org.springframework.ide.eclipse.xml.namespaces.prefix.http\://www.springframework.org/schema/security=security
 //org.springframework.ide.eclipse.xml.namespaces.prefix.http\://www.springframework.org/schema/task=task
 //org.springframework.ide.eclipse.xml.namespaces.prefix.http\://www.springframework.org/schema/tx=tx
 //org.springframework.ide.eclipse.xml.namespaces.prefix.http\://www.springframework.org/schema/util=util

@@ -18,7 +18,7 @@ public class CaptchaUtil {
     public void captchaImg(HttpServletRequest request, HttpServletResponse response){
         Captcha captcha = new Captcha.Builder(200, 35)
         .addText(new NumbersAnswerProducer(6))
-        .addNoise().addNoise().addNoise()
+        //.addNoise().addNoise().addNoise()
         .addBackground(new GradiatedBackgroundProducer())
         .addBorder()
         .build();

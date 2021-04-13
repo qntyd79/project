@@ -231,6 +231,13 @@
             <artifactId>spring-security-config</artifactId>
             <version>5.0.3.RELEASE</version>
         </dependency>
+        
+        <!--스프링시큐리티 taglibs 라이브러리-->
+        <dependency> 
+            <groupId>org.springframework.security</groupId> 
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>5.0.3.RELEASE</version> 
+        </dependency>
 
 		<!-- 기본설정 -->
 		<!-- Spring -->

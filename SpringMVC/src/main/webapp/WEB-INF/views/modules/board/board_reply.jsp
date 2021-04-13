@@ -6,7 +6,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="validator" uri="http://www.springmodules.org/tags/commons-validator" %>
 <script type="text/javascript" src="<c:url value="validator.do"/>"></script>
-<validator:javascript formName="BoardVO" staticJavascript="false" xhtml="true" cdata="false"/>
+<validator:javascript formName="boardVO" staticJavascript="false" xhtml="true" cdata="false"/>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <c:import url="/WEB-INF/views/include/header.jsp"/>
@@ -132,7 +132,7 @@
                                                     <td class="text-left">
                                                         <input type="checkbox" name="notice" value="1" /> 공지사항
                                                         <input type="checkbox" name="secret" value="1" /> 비밀글
-                                                        <input type="checkbox" name="mailsend" value="1" /> 소스코드
+                                                        <input type="checkbox" name="tag" value="1" /> 소스코드
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -153,7 +153,7 @@
                                                     <th><label for="link2"> <spring:message code="label.link2"/></label></th>
                                                     <td class="text-left"><input path="link2" type="text" placeholder="Link2" class="wfull"/> <form:errors path="link2"/></td>
                                                 </tr>
-                                                <tr>
+                                               	<tr>
                                                     <th><label for="name"><spring:message code="label.file"/></label></th>
                                                     <td class="text-left">
                                                         <!-- <div class="preview">
@@ -187,18 +187,18 @@
                                                             <ul id="example"></ul>
                                                         </div>
                                                         <div>
-                                                            <input type="button" id="addItemBtn" value="<spring:message code="button.fileadd"/>"  /> 첨부파일은 최대5개까지 첨부가능합니다.
+                                                            <input type="button" id="addItemBtn" value="<spring:message code="button.fileadd"/>" /> 첨부파일은 최대5개까지 첨부가능합니다.
                                                         </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="code"><spring:message code="label.code"/></label></th>
                                                     <td class="text-left">
-                                                        <%-- <img id="captchaImg" src="${path}/modules/board/captchaImg.do" /> --%>
-                                                        <div id="captchaAudio" style="display:none;"></div>
-                                                        <input type="text" id="captcha" name="captcha" value="" placeholder="보안문자를 입력하세요" >
-                                                        <input type="button" value="<spring:message code="button.refresh"/>" onClick="refreshBtn();">
-                                                        <input type="button" value="<spring:message code="button.voice"/>" onClick="audioBtn();"> 보안문자를 입력하세요.
+                                                        <img id="captchaImg" src="${path}/modules/board/captchaImg.do" />
+                                                        <div id="captchaAudio" style="display:none;"></div>                                                       
+                                                        <input type="button" id="refreshBtn" value="<spring:message code="button.refresh"/>" >
+                                                        <input type="button" id="audio" value="<spring:message code="button.voice"/>" >  
+                                                        <input type="text" id="answer" name="answer" placeholder="CaptchaCode"/> 
                                                     </td>
                                                 </tr>
                                             </tbody>

@@ -12,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,8 +39,12 @@ public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 
 	@Inject
-	private BoardService service;
-
+	private BoardService service;		
+	
+	// 암호화 설정 
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
+	
 	// 다국어 지역세션설정
 	@Autowired
 	private SessionLocaleResolver localeResolver;
@@ -155,10 +161,10 @@ public class BoardController {
 			Model model, 
 			@ModelAttribute BoardVO boardVO, 
 			@RequestParam(defaultValue = "1") int kind
-			)  throws Exception {
+			) throws Exception {
 
 		logger.info("글쓰기");
-
+		
 		model.addAttribute("boardVO", boardVO);
 		model.addAttribute("categorylist", service.getCategoryList(kind));
 
@@ -185,7 +191,7 @@ public class BoardController {
 	}
 
 	// 글저장
-	@RequestMapping(value = "insert.do", method = RequestMethod.POST)
+	@RequestMapping(value = "insert.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String Insert(
 			Model model, 
 			@ModelAttribute BoardVO boardVO, 
@@ -216,14 +222,17 @@ public class BoardController {
 
 			model.addAttribute("msg", "InsertSuccess");
 			model.addAttribute("url", "list.do");
+			
+			return "/modules/common/common_message";
+			
 		} else {
 			model.addAttribute("msg", "CaptchaFailed");
 			model.addAttribute("url", "write.do");
 			
-			// 리다이렉트 처이방법을 찾아서 수정예정 
+			return "modules/board/board_write";
 		}
 		
-		return "/modules/common/common_message";
+		
 	}
 
 	// 글보기
@@ -297,8 +306,10 @@ public class BoardController {
 	// 글수정처리
 	@RequestMapping(value = "update.do", method = RequestMethod.POST)
 	public String Modify(
-			Model model, @ModelAttribute Criteria criteria, 
+			Model model, 
+			@ModelAttribute Criteria criteria, 
 			@ModelAttribute BoardVO boardVO,
+			@RequestParam String pass,
 			BindingResult bindingResult
 			/* RedirectAttributes redirectAttributes */
 			) throws Exception {
@@ -313,24 +324,15 @@ public class BoardController {
 			model.addAttribute("boardVO", boardVO);
 			return "modules/board/board_edit";
 		}
-
-		String dbpass = service.getPassword(boardVO.getBoard_idx());
-
-		if (dbpass.equals(boardVO.getPass()) || (boardVO.getPass()).equals("admin")) {
+		
+		String rawPassword = boardVO.getPass();
+		String encodedPassword = service.getPassword(boardVO.getBoard_idx());	
+	
+		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin@1234")){
 			service.update(boardVO);
-			// redirectAttributes.addFlashAttribute("page", criteria.getPage());
-			// redirectAttributes.addFlashAttribute("perPageNum", criteria.getPerPageNum());
-			// redirectAttributes.addFlashAttribute("searchField",
-			// criteria.getSearchField());
-			// redirectAttributes.addFlashAttribute("keyWord", criteria.getKeyWord());
-			// redirectAttributes.addFlashAttribute("msg", "UpdateSuccess");
-			// return "redirect:list.do";
 			model.addAttribute("msg", "UpdateSuccess");
 			model.addAttribute("url", "list.do");
 		} else {
-			// redirectAttributes.addFlashAttribute("msg", "PassFailed");
-			// return "redirect:modify.do?board_idx=" + dto.getBoard_idx() +
-			// "&category_idx=" + dto.getCategory_idx();
 			model.addAttribute("msg", "PassFailed");
 			model.addAttribute("url", "modify.do?board_idx=" + boardVO.getBoard_idx() + "&category_idx=" + boardVO.getCategory_idx());
 		}
@@ -359,40 +361,24 @@ public class BoardController {
 			Model model, 
 			@ModelAttribute Criteria criteria, 
 			@ModelAttribute BoardVO boardVO,
-			BindingResult bindingResult, 
-			@RequestParam int board_idx, 
-			@RequestParam String pass
+			@RequestParam String pass,			
+			BindingResult bindingResult
 			/* RedirectAttributes redirectAttributes */
 			) throws Exception {
 
-		logger.info("글삭제처리");
+		logger.info("글삭제처리");		
+		
+		String rawPassword = boardVO.getPass();
+		String encodedPassword = service.getPassword(boardVO.getBoard_idx());	
+		
+		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin@1234")){
+			service.delete(boardVO.getBoard_idx());
 
-		// 서버측 유효성검증
-		beanValidator.validate(boardVO, bindingResult);
-
-		// 서버측 유효성검증 후 에러가 발생할 경우 등록폼 출력
-		if (bindingResult.hasErrors()) {
-			model.addAttribute("boardVO", boardVO);
-			return "modules/board/board_delete";
-		}
-
-		String dbpass = service.getPassword(board_idx);
-
-		if (dbpass.equals(pass) || pass.equals("admin")) {
-			service.delete(board_idx);
-			// redirectAttributes.addFlashAttribute("page", criteria.getPage());
-			// redirectAttributes.addFlashAttribute("perPageNum", criteria.getPerPageNum());
-			// redirectAttributes.addFlashAttribute("searchField",criteria.getSearchField());
-			// redirectAttributes.addFlashAttribute("keyWord", criteria.getKeyWord());
-			// redirectAttributes.addFlashAttribute("msg", "DeleteSuccess");
-			// return "redirect:list.do";
 			model.addAttribute("msg", "DeleteSuccess");
 			model.addAttribute("url", "list.do");
 		} else {
-			// redirectAttributes.addFlashAttribute("msg", "PassFailed");
-			// return "redirect:delete.do?board_idx=" + board_idx;
 			model.addAttribute("msg", "PassFailed");
-			model.addAttribute("url", "delete.do?board_idx=" + board_idx);
+			model.addAttribute("url", "delete.do?board_idx=" + boardVO.getBoard_idx()); 
 		}
 
 		return "/modules/common/common_message";

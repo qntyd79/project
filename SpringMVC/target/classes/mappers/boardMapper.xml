@@ -115,8 +115,9 @@
 
 	<!-- 글삭제 update처리 -->
 	<update id="delete">
-		update jhbbs_board set del = 'Y' where board_idx =
-		#{board_idx}
+		update jhbbs_board set del = 'Y' 
+		where 
+		board_idx =	#{board_idx}
 	</update>
 
 	<!-- 글조회수 -->

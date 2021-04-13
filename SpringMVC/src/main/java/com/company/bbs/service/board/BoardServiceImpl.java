@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.company.bbs.dao.board.BoardDao;
@@ -18,8 +20,12 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Inject
 	BoardDao dao;
-	Criteria criteria;
-
+	Criteria criteria;	
+	
+	// 암호화 설정 
+	@Autowired
+    BCryptPasswordEncoder passwordEncoder;
+	
 	// 글목록
 	@Override
 	public List<BoardVO> getList(Criteria criteria) throws Exception {
@@ -33,18 +39,23 @@ public class BoardServiceImpl implements BoardService {
 	}
 		
 	// 글저장 
+	@SuppressWarnings("unused")
 	@Override
 	public void insert(BoardVO boardVO) throws Exception {
 
 		// for(int i=1; i <=200; i++) {
-		int board_idx = boardVO.getBoard_idx();
+		int board_idx = boardVO.getBoard_idx();		
 		String title = boardVO.getTitle();
 		String content = boardVO.getContent();
 		int parent = boardVO.getParent();
 		int depth = boardVO.getDepth();
 		int sortno = boardVO.getSortno();
 		String del = boardVO.getDel(); 
-	
+		String pass = boardVO.getPass();
+		
+		// 비밀번호 암호화 
+		String pwdBycrypt = passwordEncoder.encode(pass);
+		
 		// 접속아이피
 		String cipp = InetAddress.getLocalHost().getHostAddress();
 
@@ -91,6 +102,7 @@ public class BoardServiceImpl implements BoardService {
 		boardVO.setRegdate(regdate);
 		boardVO.setDel(del);
 		boardVO.setContent(content);
+		boardVO.setPass(pwdBycrypt);
 		// dto.setTitle(i + "번쨰 제목입니다.");
 
 		dao.insert(boardVO);
@@ -112,9 +124,11 @@ public class BoardServiceImpl implements BoardService {
 	// 글수정
 	@Override
 	public void update(BoardVO boardVO) throws Exception {
+						
 		// 접속아이피
 		String cipp = InetAddress.getLocalHost().getHostAddress();
 		boardVO.setCipp(cipp);
+				
 		dao.update(boardVO);
 	}
 

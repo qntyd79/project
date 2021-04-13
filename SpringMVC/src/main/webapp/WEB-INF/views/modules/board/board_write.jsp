@@ -6,7 +6,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="validator" uri="http://www.springmodules.org/tags/commons-validator" %>
 <script type="text/javascript" src="<c:url value="validator.do"/>"></script>
-<validator:javascript formName="BoardVO" staticJavascript="false" xhtml="true" cdata="false"/>
+<validator:javascript formName="boardVO" staticJavascript="false" xhtml="true" cdata="false"/>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <c:import url="/WEB-INF/views/include/header.jsp"/>
@@ -119,13 +119,13 @@
                                                 <tr>
                                                     <th><label for="date"><spring:message code="label.sdate"/></label></th>
                                                     <td class="text-left">
-                                                        <form:input path="sdate" type="text" placeholder="StartDay" class="datePicker"/><form:errors path="sdate" />                                                        
+                                                        <form:input path="sdate" type="text" placeholder="StartDay" class="datePicker"/> <form:errors path="sdate" />                                                        
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="date"><spring:message code="label.edate"/></label></th>
                                                     <td class="text-left">
-                                                        <form:input path="edate" type="text" placeholder="EndDay" class="datePicker"/><form:errors path="edate" />
+                                                        <form:input path="edate" type="text" placeholder="EndDay" class="datePicker"/> <form:errors path="edate" />
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -133,12 +133,12 @@
                                                     <td class="text-left">
                                                         <input type="checkbox" name="notice" value="1" /> 공지사항
                                                         <input type="checkbox" name="secret" value="1" /> 비밀글
-                                                        <input type="checkbox" name="mailsend" value="1" /> 소스코드
+                                                        <input type="checkbox" name="tag" value="1" /> 소스코드
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="10" class="text-left">
-                                                        <form:textarea path="content" id="content" placeholder="Content"/><form:errors path="content"/>
+                                                        <form:textarea path="content" id="content" placeholder="Content"/> <form:errors path="content"/>
                                                         <script>
                                                             CKEDITOR.replace('content',{customConfig: '${path}/plugin/ckeditor4/full/custom-config.js'});
                                                            	<!--CKEDITOR.instances.content.updateElement();-->

@@ -6,7 +6,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="validator" uri="http://www.springmodules.org/tags/commons-validator" %>
 <script type="text/javascript" src="<c:url value="validator.do"/>"></script>
-<validator:javascript formName="BoardVO" staticJavascript="false" xhtml="true" cdata="false"/>
+<validator:javascript formName="boardVO" staticJavascript="false" xhtml="true" cdata="false"/>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <c:import url="/WEB-INF/views/include/header.jsp"/>

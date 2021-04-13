@@ -159,7 +159,8 @@ $(document).ready(function() {
         var area = str;
         var content = area.find('.toggle-content');
         var button = area.find('.toggle-btn');
-        content.show();
+		// 처음 로딩시 보여지는 부분(show/hide)
+        content.hide();
         //$content.slideToggle(500);
         //$(this)는 이벤트가 발생한 시점의 $content를 가리킴
         button.click(function() {
@@ -650,7 +651,7 @@ $(document).ready(function() {
             pass: {
                 required: "비밀번호를 입력하세요",
                 rangelength: $.validator.format("패스워드는 최소{0}글자 이상 {1}글자 이하로 입력하세요."),
-                passwordCk: "비밀번호는 영문대소문자,숫자,툭수문자를 반드시 입력해주시기 바랍니다. my_jquery.js 사용"
+                passwordCk: "비밀번호는 영문대소문자,숫자,특수문자를 반드시 입력해주시기 바랍니다. my_jquery.js 사용"
 
             },
             email: {
@@ -689,7 +690,7 @@ $(document).ready(function() {
             }
         },
         submitHandler: function(form) {   	
-            if (confirm("게시물을 등록하시겠습니까?")) {
+            if (confirm("게시물을 등록하시겠습니까? my_jquery사용")) {
                 form.submit();
             } else {
                 return false;
@@ -698,9 +699,10 @@ $(document).ready(function() {
     });	
 	
 	// 내용검증시 메세지 삭제 
-	CKEDITOR.instances.content.on('change', function() { 	
-	    if(CKEDITOR.instances.content.getData().length >  0) {
-	     $('label[for="content"]').hide();
+	var editor = CKEDITOR.instances['content'];
+	$('#editor').on('change', function() { 	
+	    if(editor.getData().length >  0) {
+	    	$('label[for="content"]').hide();
 	    }
 	});
     
@@ -720,13 +722,19 @@ $(document).ready(function() {
                 minlength: $.validator.format('검색어는 최소 {0}글자 이상 입력하세요.')
             }
         },
+        /* 추가작업 
         errorPlacement: function(error, element) {
-            // $(element).removeClass('error');
-            // do nothing;
-        },
+            if(element.attr("name")=="content"){
+            	error.appendTo("#content");
+            } else {
+            	error.insertAfter(element);
+            }
+        }, 
+        */             
         invalidHandler: function(form, validator) {
             var errors = validator.numberOfInvalids();
             if (errors) {
+            	// 필드아래에 메세지 출력시 아래사랑 주석처리 
                 alert(validator.errorList[0].message);
                 validator.errorList[0].element.focus();
             }
@@ -747,28 +755,37 @@ $(document).ready(function() {
         rules: {
             pass: {
                 required: true,
-                rangelength: [4, 12],
-                number: true
+                rangelength: [4,15],
+                passwordCk: true
             }
         },
         messages: {
-            pass: {
+             pass: {
                 required: "비밀번호를 입력하세요",
-                rangelength: $.validator.format("패스워드 확인은 최소{0}글자 이상 {1}글자 이하로 입력하세요.")
+                rangelength: $.validator.format("패스워드는 최소{0}글자 이상 {1}글자 이하로 입력하세요."),
+                passwordCk: "비밀번호는 영문대소문자,숫자,특수문자를 반드시 입력해주시기 바랍니다. my_jquery.js 사용"
+
             }
         },
+        /* 추가작업 
         errorPlacement: function(error, element) {
-        	error.insertBefore(element);
-        },
+            if(element.attr("name")=="content"){
+            	error.appendTo("#content");
+            } else {
+            	error.insertAfter(element);
+            }
+        }, 
+        */             
         invalidHandler: function(form, validator) {
             var errors = validator.numberOfInvalids();
             if (errors) {
+            	// 필드아래에 메세지 출력시 아래사랑 주석처리 
                 alert(validator.errorList[0].message);
                 validator.errorList[0].element.focus();
             }
         },
-        submitHandler: function(form) {
-            if (confirm("게시물을 삭하시겠습니까?")) {
+        submitHandler: function(form) {   	
+            if (confirm("게시물을 삭제하시겠습니까? my_jquery사용")) {
                 form.submit();
             } else {
                 return false;
