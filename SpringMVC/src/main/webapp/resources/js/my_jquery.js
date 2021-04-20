@@ -34,37 +34,7 @@ $(document).ready(function() {
 
         lastScrollTop = st;
     }
-
-    
-    /* 화면리사이즈 */
-	/*$(document).ready(function(){
-	    $(window).resize(throttle(100, function(e) {
-	        resizeContents();
-	    }));
-	
-	    resizeContents();
-	});
-	
-	function resizeContents() {
-	    $(".content").height($(window).height()-120);
-	}
-		
-	// 주어진 시간만큼 지나야 주어진 함수를 실행 합니다.
-	function throttle(ms, fn) {
-	    var allow = true;
-	    function enable() {
-	        allow = true;
-	    }
-	
-	    return function(e) {
-	        if(allow) {
-	            allow = false;
-	            setTimeout(enable, ms);
-	            fn.call(this, e);
-	        }
-	    }
-	}*/
-	
+ 			
     // 버튼 클릭시 TOP으로 스크롤 이동 / 유튜브 바위처럼의 Ezweb
     $('html').append('<div id="toTop"><i class="fas fa-angle-double-up"></i></div>');
 
@@ -81,30 +51,6 @@ $(document).ready(function() {
         $('html').stop().animate({ scrollTop: 0 }, 500);
     });
     
-    /*
-    // 자바스크립트 / 유튜브 바위처럼의 Ezweb
-    var btt = document.getElementById("back-to-top"),
-        docElem = document.documentElement,
-        offset,
-        scrollPos,
-        docHeight;
-
-    // 문서높이 구하기
-    docHeight = math.max(docElem.offsetHeight, docElem.scrollHeight);
-
-    if(docHeight != 0){
-        offset = docHeight / 4;
-    }
-
-    // 스크롤 이벤트 추가
-    window.addEventListener("scroll", function(){
-        
-    });
-
-    // 클릭 이벤트 추가
-	*/
-
-
     // 스크롤 메뉴 클릭시 이미지 스크롤 변경 / 유튜브 바위처럼의 Ezweb
     var menu = $('.scroll li');
     var contents = $('.scroll-content');
@@ -167,9 +113,9 @@ $(document).ready(function() {
             content.slideToggle("slow", function() {
 
                 if ($(this).css('display') != 'none') {
-                    button.html('<i class="fa fa-chevron-down" aria-hidden="true"></i>');
-                } else {
                     button.html('<i class="fa fa-chevron-up" aria-hidden="true"></i>');
+                } else {                   
+					button.html('<i class="fa fa-chevron-down" aria-hidden="true"></i>');
                 }
 
                 /*// 조건문에서만 사용 hasClass true/false
@@ -183,50 +129,6 @@ $(document).ready(function() {
             });
         });
     }
-
-
-    // 이미지 비율을 유지하면서 전체화면 채우기 / 유튜브 바위처럼의 Ezweb
-    /*
-    $(window).resize(function() {
-        var currentWindow = $(this);
-        var windowWidth = currentWindow.width();
-        var windowHeight = currentWindow.height();
-        var borswerRatio = windowWidth / windowHeight;
-        var imageRatio = 864/486; // 이미지 실제 사이즈 기재;
-
-        if(imageRatio > borswerRatio) {
-            container.css({
-                height : '100%',
-                width : windowHeight * imageRatio,
-                left : (windowWidth - windowHeight * imageRatio)/2,
-                top : 0
-            });
-        } else {
-        	container.css({
-                height :windowWidth/imageRatio,
-                width : '100%',
-                left : 0,
-                top : (windowHeight - windowWidth * imageRatio)/2
-            });
-        }
-    });
-
-    $(window).trigger('resize');
-    */
-
-
-    // 화면사이즈 체크
-    /*
-    var resizeWeight = $('#map').css('width', $(window).width());
-    var resizeHeight = $('#map').css('height', $(window).height() - 60);
-
-    $(window).resize(function() {
-        resizeWeight;
-        resizeHeight;
-    });
-
-    $(window).trigger('resize');
-	*/
 
     // 슬라이드 토글(지도) / 유튜브 바위처럼의 Ezweb
     var area = $('#aside-wrap');
@@ -538,6 +440,11 @@ $(document).ready(function() {
     $.validator.addMethod("hanglealpha", function(value, element) {
         return this.optional(element) || /^[가-힣a-zA-Z]+$/.test(value);
     });
+
+	// 날짜 
+	$.validator.addMethod("anydate", function(value, element) {
+        return this.optional(element) || /^(0?[1-9]|[12][0-9]|3[0-1])[/., -](0?[1-9]|1[0-2])[/., -](19|20)?\d{2}$/.test(value);
+    });
     
     // 전화번호 000-0000-0000
     $.validator.addMethod("phone", function(value, element) {
@@ -570,16 +477,25 @@ $(document).ready(function() {
     });    
 
     // ckeditor 
+	/* 추후 삭제 예정 적용안됨 
     $.validator.addMethod("check_ck_add_method", function(value, element) {
     	return check_ck_editor();
     });
 
     function check_ck_editor() {
-    	var ckeditor = CKEDITOR.instances.content.getData();
+    	var ckeditor = CKEDITOR.instances.content.updateElement(); // update textarea
     	if (ckeditor == '' || ckeditor.length ==0) {
     		return false;
         } 
     }    
+	*/
+	
+	// content에 내용입력시 에러메세지 안보임처리 
+	CKEDITOR.instances.content.on('change', function() {    
+	    if(CKEDITOR.instances.content.getData().length >  0) {
+	      $('label[for="content"]').hide();
+	    }
+	});
     
     $("#writeForm").validate({
     	ignore : '*:not([name])',
@@ -616,6 +532,18 @@ $(document).ready(function() {
                 required: true,
                 minlength: 2
             },
+ 			homepage: {
+                required: true,
+				domain: true
+            },
+			sdate: {
+                required: true,
+				date: true
+            },
+			edate: {
+                required: true,
+				date: true
+            },
             title: {
                 required : true,
                 minlength: 2
@@ -623,17 +551,16 @@ $(document).ready(function() {
             content: {
             	//https://dzone.com/articles/using-jquery-validate-plugin 참고사이트
                 required: function(textarea) {
-                	CKEDITOR.instances["content"].updateElement(); // update textarea
-                	CKEDITOR.instances["content"].focus();
-                	var editorcontent = textarea.value.replace(/<[^>]*>/gi, ''); // strip tags
-                	return editorcontent.length === 0;
-
+                	CKEDITOR.instances[textarea.id].updateElement(); // update textarea
+			        var editorcontent = textarea.value.replace(/<[^>]*>/gi, ''); // strip tags					
+			        return editorcontent.length === 0;
                 },
                 minlength: 5
             },
 			answer: {
 				required : true,
-				numeric : true
+				numeric : true,
+				maxlength : 6
 			}          
         },
         messages: { //규칙체크 실패시 출력될 메시지 설정
@@ -659,6 +586,16 @@ $(document).ready(function() {
                 minlength: $.validator.format("이메일은 최소{0}글자 이상 입력하세요."),
                 email: "올바른 이메일 주소가 아닙니다."
             },
+			homepage: {
+                required: "홈페이지 주소를 입력하세요",
+                domain: "올바른 홈페이지 주소가 아닙니다."
+            },
+			sdate: {
+                required: "시작일을 입력하세요"
+            },
+			edate: {
+                required: "종료일을 입력하세요"
+            },
             title: {
                 required: "제목을 입력하세요.",
                 minlength: $.validator.format("제목은 최소{0}글자 이상 입력하세요.")
@@ -668,24 +605,21 @@ $(document).ready(function() {
                 minlength: $.validator.format("내용은 최소{0}글자 이상 입력하세요.")
             },
 			answer: {
-				required: " 자동등록방지을 입력하세요.",
-				numeric: $.validator.format(" 자동등록방지는 숫자만 입력하세요.")
+				required: "자동등록방지를 입력하세요.",
+				numeric: $.validator.format("자동등록방지는 숫자만 입력하세요.")
 			}
         },
-        /* 추가작업 
+		// 달력옆에 메세지 출력 
         errorPlacement: function(error, element) {
-            if(element.attr("name")=="content"){
-            	error.appendTo("#content");
-            } else {
-            	error.insertAfter(element);
-            }
+            var trigger = element.next('.ui-datepicker-trigger');
+                error.insertAfter(trigger.length > 0 ? trigger : element);
         }, 
-        */             
-        invalidHandler: function(form, validator) {
+       invalidHandler: function(form, validator) {
             var errors = validator.numberOfInvalids();
             if (errors) {
-            	// 필드아래에 메세지 출력시 아래사랑 주석처리 
-                alert(validator.errorList[0].message);
+            	// 팝업알림처리 
+                //alert(validator.errorList[0].message);
+				// 필드아래처리 
                 validator.errorList[0].element.focus();
             }
         },
@@ -698,13 +632,7 @@ $(document).ready(function() {
         }
     });	
 	
-	// 내용검증시 메세지 삭제 
-	var editor = CKEDITOR.instances['content'];
-	$('#editor').on('change', function() { 	
-	    if(editor.getData().length >  0) {
-	    	$('label[for="content"]').hide();
-	    }
-	});
+	
     
     $('#searchForm').validate({
     	ignore : '*:not([name])',
@@ -935,7 +863,11 @@ $(document).ready(function() {
         showOn: "both",
         yearRange: 'c-100:c+10,',
 		currentText:'오늘',
-		closeText: '닫기'
+		closeText: '닫기',
+		onClose:function(){
+			$("form").validate().element("#sdate");
+			$("form").validate().element("#edate");
+		}
     });
 	
 	$('.datePicker').datepicker( "getDate" );

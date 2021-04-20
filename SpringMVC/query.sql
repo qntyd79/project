@@ -44,7 +44,7 @@ select count(notice) from mydb.jhbbs_bbs_board where notice = 1;
 
 select count(board_idx) from mydb.jhbbs_bbs_board where board_idx > 0;
 
-select * from mydb.jhbbs_bbs_board where board_idx > 0 AND  name LIKE '%홍길동%' order by board_idx desc, regdate desc limit 1, 10;
+select * from mydb.jhbbs_bbs_board where board_idx > 0 AND name LIKE '%홍길동%' order by board_idx desc, regdate desc limit 1, 10;
 
 DELETE FROM mydb.JHBBS_bbs_board WHERE board_idx BETWEEN 1032 AND 1045;
 

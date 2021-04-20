@@ -110,11 +110,15 @@
                                                 </tr>
                                                 <tr>
                                                     <th><label for="homepage"><spring:message code="label.homepage"/></label></th>
-                                                    <td class="text-left"><form:input path="homepage" type="text" placeholder="Homepage" class="wfull"/> <form:errors path="homepage" /></td>
+                                                    <td class="text-left">
+                                                    	<form:input path="homepage" type="text" placeholder="Homepage" class="wfull"/> <form:errors path="homepage" />
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="title"><spring:message code="label.title"/></label></th>
-                                                    <td class="text-left"><form:input path="title" type="text" placeholder="Title" class="wfull"/> <form:errors path="title" /></td>
+                                                    <td class="text-left">
+                                                    	<form:input path="title" type="text" placeholder="Title" class="wfull"/> <form:errors path="title" />
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="date"><spring:message code="label.sdate"/></label></th>
@@ -138,7 +142,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td colspan="10" class="text-left">
-                                                        <form:textarea path="content" id="content" placeholder="Content"/> <form:errors path="content"/>
+                                                        <form:textarea  path="content" id="content" placeholder="Content"/> <form:errors path="content"/>
                                                         <script>
                                                             CKEDITOR.replace('content',{customConfig: '${path}/plugin/ckeditor4/full/custom-config.js'});
                                                            	<!--CKEDITOR.instances.content.updateElement();-->

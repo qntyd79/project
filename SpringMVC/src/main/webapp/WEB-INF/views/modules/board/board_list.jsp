@@ -113,8 +113,8 @@
                                                                 </td>
                                                                 <td>${row1.name}</td>
                                                                 <td>
-                                                                	<fmt:parseDate var="dateString" value="${row1.regdate}" pattern="yyyy-MM-dd HH:mm:ss" />                                                               
-	                                                                <fmt:formatDate value="${dateString}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                                                	<fmt:parseDate var="dateString" value="${row1.regdate}" pattern="yyyy-MM-dd" />                                                               
+	                                                                <fmt:formatDate value="${dateString}" pattern="yyyy-MM-dd"/>
                                                                 </td>
                                                                 <td>filecnt</td>
                                                                 <td>${row1.vote}</td>
@@ -146,7 +146,10 @@
                                                                     </c:if>
                                                                 </td>
                                                                 <td>${row.name}</td>
-                                                                <td>${row.regdate}</td>
+                                                                <td>
+                                                                	<fmt:parseDate var="dateString" value="${row.regdate}" pattern="yyyy-MM-dd" />                                                               
+	                                                                <fmt:formatDate value="${dateString}" pattern="yyyy-MM-dd"/>
+	                                                            </td>
                                                                 <td>filecnt</td>
                                                                 <td>${row.vote}</td>
                                                                 <td>${row.hit}</td>

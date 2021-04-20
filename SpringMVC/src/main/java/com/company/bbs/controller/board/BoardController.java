@@ -210,7 +210,11 @@ public class BoardController {
 			model.addAttribute("boardVO", boardVO);
 			model.addAttribute("categoryname", service.getCategory());
 			model.addAttribute("categorylist", service.getCategoryList(kind));
-			return "modules/board/board_write";
+			if(boardVO.getBoard_idx() != 0) {
+				return "modules/board/board_reply";
+			} else {
+				return "modules/board/board_write";
+			}
 		}
 		
 		// 자동등록방지 검증 
@@ -227,12 +231,15 @@ public class BoardController {
 			
 		} else {
 			model.addAttribute("msg", "CaptchaFailed");
-			model.addAttribute("url", "write.do");
 			
-			return "modules/board/board_write";
-		}
-		
-		
+			if(boardVO.getBoard_idx() != 0) {
+				model.addAttribute("url", "reply.do");			
+				return "modules/board/board_reply";
+			} else {
+				model.addAttribute("url", "write.do");			
+				return "modules/board/board_write";
+			}
+		}		
 	}
 
 	// 글보기

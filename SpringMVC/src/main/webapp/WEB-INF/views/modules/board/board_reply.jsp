@@ -21,9 +21,10 @@
                     <article>
                         <div class="row">
                             <div class="col-md-12">
+                            
                                                         
                                 <h2><spring:message code="bbs.title.reply"/></h2>
-                                <form:form modelAttribute="boardVO" method="post" id="writeForm" name="writeForm" enctype="multipart/form-data" action="insert.do">
+                                <form method="post" id="writeForm" name="writeForm" enctype="multipart/form-data" action="insert.do">
                                 <input type="hidden" name="board_idx" value="<c:out value="${boardVO.board_idx}"/>" > 
 								<input type="hidden" name="page" value="<c:out value="${criteria.page}"/>" > 
 								<input type="hidden" name="perPageNum" value="<c:out value="${criteria.perPageNum}"/>" > 
@@ -32,9 +33,10 @@
 								<input type="hidden" name="parent" value="<c:out value="${boardVO.parent}"/>" > 
 								<input type="hidden" name="depth" value="<c:out value="${boardVO.depth}"/>" > 
 								<input type="hidden" name="sortno" value="<c:out value="${boardVO.sortno}"/>" > 
+                                <input type="hidden" name="msgStr" value="<c:out value="${msg}"/> ">
                                     <fieldset>
-                                         <legend><spring:message code="bbs.table.legend"/></legend>
-                                        <table summary="<spring:message code="bbs.table.summary.reply"/>" class="board_detail">
+                                        <legend><spring:message code="bbs.table.legend"/></legend>
+                                        <table summary="<spring:message code="bbs.table.summary.write"/>" class="board_detail">
                                             <caption><spring:message code="bbs.table.caption"/></caption>
                                             <colgroup>
                                                 <col width="20%" />
@@ -44,7 +46,7 @@
                                                 <tr>
                                                     <th><label for="category_idx"><spring:message code="label.category_idx"/></label></th>
                                                     <td class="text-left">
-                                                        <form:select path="category_idx" id="category_idx" name="category_idx" >
+                                                        <select name="category_idx" id="category_idx" name="category_idx" >
                                                             <c:forEach var="item" items="${categorylist}" varStatus="status">
                                                                 <option value="<c:out value='${item.category_idx}'/>"
 	                                                                <c:if test="${item.category_idx == categoryselect}">
@@ -53,15 +55,17 @@
                                                                 	<c:out value="${item.title}" />
                                                                 </option>
                                                             </c:forEach>
-                                                        </form:select>
+                                                        </select>
                                                         <form:errors path="category_idx" />
+                                                        <!-- 
                                                         <button type="button" value="#layer1" class="popupBtn" >분류추가</button>
                                                         <div class="layer">
                                                             <div class="bg"></div>
                                                             <div id="layer1" class="pop-layer">
                                                                 <div class="pop-container">
                                                                     <div class="pop-conts">
-                                                                        <iframe name="ifrm_file" src="${path}/modules/category/list.do?idx=1" height="680px" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="width:100%;"></iframe>
+                                                                        <iframe name="ifrm_file" src="${path}/modules/category/list.do?idx=1" height="680px" marginwidth="0" marginheight="0" 
+                                                                        scrolling="no" frameborder="0" style="width:100%;"></iframe>
                                                                         <div class="btn-r">
                                                                             <a href="#" class="cbtn">Close</a>
                                                                         </div>
@@ -69,24 +73,25 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        -->
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="userid"><spring:message code="label.userid"/></label></th>
-                                                    <td class="text-left"><input path="userid" type="text" placeholder="UserID" class="wfull"/> <form:errors path="userid" /></td>
+                                                    <td class="text-left"><input name="userid" type="text" placeholder="UserID" class="wfull"/> <form:errors path="userid" /> </td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="name"><spring:message code="label.name"/></label></th>
-                                                    <td class="text-left"><input path="name" type="text"  placeholder="Name" class="wfull"/> <form:errors path="name" /></td>
+                                                    <td class="text-left"><input name="name" type="text"  placeholder="Name" class="wfull"/> <form:errors path="name" /> </td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="pass"><spring:message code="label.pass"/></label></th>
-                                                    <td class="text-left"><input path="pass" type="password" placeholder="Password" class="wfull"/> <form:errors path="pass" /></td>
+                                                    <td class="text-left"><input name="pass" type="password" placeholder="Password" class="wfull"/> <form:errors path="pass" /> </td>
                                                 </tr>                                               
                                                 <tr>
                                                     <th><label for="email"><spring:message code="label.email"/></label></th>
                                                     <td class="text-left">
-                                                        <input path="email" type="text" placeholder="Email" class="wfull"/>
+                                                        <input name="email" type="text" placeholder="Email" class="wfull"/>
                                                         <!-- <input type="text" name="email2" />
                                                         <select id="selectEmail">
                                                             <option value="1" selected="selected">직접입력</option>
@@ -113,18 +118,22 @@
                                                 </tr>
                                                 <tr>
                                                     <th><label for="homepage"><spring:message code="label.homepage"/></label></th>
-                                                    <td class="text-left"><input path="homepage" type="text" placeholder="Homepage" class="wfull"/> <form:errors path="homepage" /></td>
+                                                    <td class="text-left"><input name="homepage" type="text" placeholder="Homepage" class="wfull"/> <form:errors path="homepage" /></td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="title"><spring:message code="label.title"/></label></th>
-                                                    <td class="text-left"><input path="title" type="text" placeholder="Title" class="wfull"/> <form:errors path="title" /></td>
+                                                    <td class="text-left"><input name="title" type="text" placeholder="Title" class="wfull"/> <form:errors path="title" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <th><label for="date"><spring:message code="label.date"/></label></th>
+                                                    <th><label for="date"><spring:message code="label.sdate"/></label></th>
                                                     <td class="text-left">
-                                                        <input path="sdate" type="text" placeholder="StartDay" class="datePicker"/> -
-                                                        <input path="edate" type="text" placeholder="EndDay" class="datePicker"/>                                                        
-                                                        <form:errors path="sdate" /> <form:errors path="edate" />
+                                                        <input name="sdate" type="text" placeholder="StartDay" class="datePicker"/> <form:errors path="sdate" />                                                        
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th><label for="date"><spring:message code="label.edate"/></label></th>
+                                                    <td class="text-left">
+                                                        <input name="edate" type="text" placeholder="EndDay" class="datePicker"/> <form:errors path="edate" />
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -136,24 +145,24 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                   <td colspan="10" class="text-left">
-                                                        <textarea path="content" id="content" placeholder="Content"><form:errors path="content"/></textarea>
+                                                    <td colspan="10" class="text-left">
+                                                        <textarea name="content" id="content" placeholder="Content"> </textarea><form:errors path="content"/>
                                                         <script>
                                                             CKEDITOR.replace('content',{customConfig: '${path}/plugin/ckeditor4/full/custom-config.js'});
                                                            	<!--CKEDITOR.instances.content.updateElement();-->
                                                         </script>
                                                         <!--<label for="content"><spring:message code="label.content"/></label>-->   
-                                                    </td>
+                                                     </td>
                                                 </tr>                                                
                                                 <tr>
                                                     <th><label for="link1"><spring:message code="label.link1"/></label></th>
-                                                    <td class="text-left"><input path="link1" type="text" placeholder="Link1" class="wfull"/> <form:errors path="link1"/></td>
+                                                    <td class="text-left"><input name="link1" type="text" placeholder="Link1"  class="wfull"/> <form:errors path="link1"/></td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="link2"> <spring:message code="label.link2"/></label></th>
-                                                    <td class="text-left"><input path="link2" type="text" placeholder="Link2" class="wfull"/> <form:errors path="link2"/></td>
+                                                    <td class="text-left"><input name="link2" type="text" placeholder="Link2"  class="wfull"/> <form:errors path="link2"/></td>
                                                 </tr>
-                                               	<tr>
+                                                <tr>
                                                     <th><label for="name"><spring:message code="label.file"/></label></th>
                                                     <td class="text-left">
                                                         <!-- <div class="preview">
@@ -209,9 +218,9 @@
 												<li><input type="button" value="<spring:message code="button.create"/>" onClick="$(this.form).submit();"/></li>												
 											</ul>
 										</nav>
-                                        <!--<c:import url="/WEB-INF/views/modules/common/common_btn.jsp"/>-->
-                                    </fieldset>
-                                </form:form>
+										<!--<c:import url="/WEB-INF/views/modules/common/common_btn.jsp"/>-->
+                                        </fieldset>
+                                </form>
                                 
                                 
                             </div>
