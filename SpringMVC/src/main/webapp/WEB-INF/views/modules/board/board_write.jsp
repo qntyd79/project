@@ -123,13 +123,13 @@
                                                 <tr>
                                                     <th><label for="date"><spring:message code="label.sdate"/></label></th>
                                                     <td class="text-left">
-                                                        <form:input path="sdate" type="text" placeholder="StartDay" class="datePicker"/> <form:errors path="sdate" />                                                        
+                                                        <form:input path="sdate" id="sdate" type="text" placeholder="StartDay" class="datePicker"/> <form:errors path="sdate" />                                                        
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="date"><spring:message code="label.edate"/></label></th>
                                                     <td class="text-left">
-                                                        <form:input path="edate" type="text" placeholder="EndDay" class="datePicker"/> <form:errors path="edate" />
+                                                        <form:input path="edate" id="edate" type="text" placeholder="EndDay" class="datePicker"/> <form:errors path="edate" />
                                                     </td>
                                                 </tr>
                                                 <tr>

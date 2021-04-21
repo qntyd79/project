@@ -32,33 +32,37 @@
                                             <caption><spring:message code="bbs.table.caption"/></caption>
                                             <colgroup>
                                                 <col width="20%" />
-                                                <col width="20%" />
-                                                <col width="15%" />
-                                                <col width="15%" />
-                                                <col width="15%" />
-                                                <col width="15%" />
+                                                <col width="11.42%" />
+                                                <col width="11.42%" />
+                                                <col width="11.42%" />
+                                                <col width="11.42%" />
+                                                <col width="11.42%" />
+                                                <col width="11.42%" />
+                                                <col width="11.42%" />
                                             </colgroup>
                                             <tbody>
                                                 <tr>
                                                     <th scope="col"><label for="date">제목 </label></th>
-                                                    <td scope="col" colspan="3" class="text-left"><c:out value="${boardVO.title}" /></td>
-                                                    <th><label for="hit">분류</label></th>
+                                                    <td scope="col" colspan="7" class="text-center"><c:out value="${boardVO.title}" /></td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                	<th><label for="hit">분류</label></th>
                                                     <td>
                                                         <c:forEach var="item" items="${categoryname}">
                                                             <c:if test="${boardVO.category_idx eq item.category_idx}">${item.title}</c:if>
                                                         </c:forEach>
                                                     </td>
-                                                </tr>
-                                                <tr>
                                                     <th><label for="name">작성자</label></th>
                                                     <td><c:out value="${boardVO.name}" /></td>
                                                     <th><label for="regdate">등록일</label></th>
-                                                    <td><c:out value="${boardVO.regdate}" /></td>
+                                                    <td><fmt:parseDate var="dateString" value="${boardVO.regdate}" pattern="yyyy-MM-dd" />                                                               
+	                                                    <fmt:formatDate value="${dateString}" pattern="yyyy-MM-dd"/></td>
                                                     <th><label for="hit">조회수</label></th>
                                                     <td><c:out value="${boardVO.hit}" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="6" class="text-left" style="padding: 15px;">
+                                                    <td colspan="8" class="text-left" style="padding: 15px;">
                                                         <c:if test="${boardVO.tag == 0}">
                                                             <c:out value="${boardVO.content}" escapeXml="false" />
                                                         </c:if>
@@ -68,11 +72,11 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="6" class="align-left">첨부파일목록출력</td>
+                                                    <td colspan="8" class="align-left">첨부파일목록출력</td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="link1">관련링크1</label></th>
-                                                    <td colspan="5" class="text-left">
+                                                    <td colspan="7" class="text-left">
                                                         <c:choose>
                                                             <c:when test="${not empty boardVO.link1}"><a href="${boardVO.link1}" target="_blank"><c:out value="${boardVO.link1}" /></a>
                                                             </c:when>
@@ -84,7 +88,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th><label for="link2">관련링크2</label></th>
-                                                    <td colspan="5" class="text-left">
+                                                    <td colspan="7" class="text-left">
                                                         <c:choose>
                                                             <c:when test="${not empty boardVO.link2}"><a href="${boardVO.link2}" target="_blank"><c:out value="${boardVO.link2}" /></a>
                                                             </c:when>
@@ -96,7 +100,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th><label for="pre">이전글 </label></th>
-                                                    <td colspan="5" class="text-left">
+                                                    <td colspan="7" class="text-left">
                                                         <c:choose>
                                                             <c:when test="${prenum.board_idx ne null}"><a href="read.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&board_idx=<c:out value="${prenum.board_idx}" />"><c:out value="${prenum.title}" /></a>
                                                             </c:when>
@@ -108,7 +112,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th><label for="next">다음글 </label></th>
-                                                    <td colspan="5" class="text-left">
+                                                    <td colspan="7" class="text-left">
                                                         <c:choose>
                                                             <c:when test="${nextnum.board_idx ne null}"><a href="read.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&board_idx=<c:out value="${nextnum.board_idx}" />"><c:out value="${nextnum.title}" /></a>
                                                             </c:when>
@@ -120,7 +124,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th><label for="next">접속아이피</label></th>
-                                                    <td colspan="5" class="text-left">
+                                                    <td colspan="7" class="text-left">
                                                         <c:out value="${boardVO.cipp}" />
                                                     </td>
                                                 </tr>

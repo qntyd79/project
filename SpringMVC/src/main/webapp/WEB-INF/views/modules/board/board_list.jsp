@@ -59,7 +59,7 @@
                                 </div>
                                 <form name="listForm" method="post" enctype="multipart/form-data" action="list.do">
                                     <fieldset>
-                                         <legend><spring:message code="bbs.table.legend"/></legend>
+                                        <legend><spring:message code="bbs.table.legend"/></legend>
                                         <table summary="<spring:message code="bbs.table.summary.list"/>">
                                             <caption><spring:message code="bbs.table.caption"/></caption>
                                             <colgroup>
