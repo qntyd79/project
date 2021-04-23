@@ -63,8 +63,7 @@
 		tag, secret, notice, vote,
 		sdate, edate, regdate, del,
 		category_idx,comment_idx, file_idx, member_idx
-		)
-		VALUES (
+		) VALUES (
 		#{parent}, #{depth}, #{sortno},
 		#{userid}, #{name}, #{pass}, #{email}, #{homepage}, #{link1}, #{link2},
 		#{title}, #{content}, #{hit}, #{cipp}, #{tag}, #{secret}, #{notice},
@@ -184,31 +183,25 @@
 	<sql id="search">
 		<if test="searchField != null">
 			<if test="searchField == 'n'.toString()">
-				AND (title LIKE CONCAT('%', #{keyWord}, '%') OR content
-				LIKE CONCAT('%', #{keyWord}, '%') OR name LIKE CONCAT('%',
-				#{keyWord},'%'))
+				AND (title LIKE CONCAT('%',#{keyWord}, '%') OR content	LIKE CONCAT('%',#{keyWord}, '%') OR name LIKE CONCAT('%',#{keyWord},'%'))
 			</if>
 			<if test="searchField == 't'.toString()">
-				AND title LIKE CONCAT('%', #{keyWord}, '%')
+				AND title LIKE CONCAT('%',#{keyWord}, '%')
 			</if>
 			<if test="searchField == 'c'.toString()">
-				AND content LIKE CONCAT('%', #{keyWord}, '%')
+				AND content LIKE CONCAT('%',#{keyWord}, '%')
 			</if>
 			<if test="searchField == 'w'.toString()">
-				AND name LIKE CONCAT('%', #{keyWord}, '%')
+				AND name LIKE CONCAT('%',#{keyWord}, '%')
 			</if>
 			<if test="searchField == 'tc'.toString()">
-				AND (title LIKE CONCAT('%', #{keyWord}, '%') OR content
-				LIKE CONCAT('%', #{keyWord}, '%'))
+				AND (title LIKE CONCAT('%',#{keyWord}, '%') OR content	LIKE CONCAT('%', #{keyWord}, '%'))
 			</if>
 			<if test="searchField == 'cw'.toString()">
-				AND (content LIKE CONCAT('%', #{keyWord}, '%') OR name
-				LIKE CONCAT('%',#{keyWord}, '%'))
+				AND (content LIKE CONCAT('%',#{keyWord}, '%') OR name LIKE CONCAT('%',#{keyWord}, '%'))
 			</if>
 			<if test="searchField == 'tcw'.toString()">
-				AND (title LIKE CONCAT('%', #{keyWord}, '%') OR content
-				LIKE CONCAT('%', #{keyWord}, '%') OR name LIKE CONCAT('%',
-				#{keyWord},'%'))
+				AND (title LIKE CONCAT('%',#{keyWord}, '%') OR content	LIKE CONCAT('%',#{keyWord}, '%') OR name LIKE CONCAT('%',#{keyWord},'%'))
 			</if>
 		</if>
 	</sql>

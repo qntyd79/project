@@ -54,6 +54,7 @@
                                                             </c:forEach>
                                                         </form:select>
                                                         <form:errors path="category_idx" />
+                                                        <!-- 
                                                         <button type="button" value="#layer1" class="popupBtn" >분류추가</button>
                                                         <div class="layer">
                                                             <div class="bg"></div>
@@ -68,6 +69,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        -->
                                                     </td>
                                                 </tr>
                                                 <tr>

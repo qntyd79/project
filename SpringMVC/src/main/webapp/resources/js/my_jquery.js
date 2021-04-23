@@ -558,7 +558,7 @@ $(document).ready(function() {
         },
         messages: { //규칙체크 실패시 출력될 메시지 설정
             userid: {
-                required: "아이디를 입력하세요. my_jquery.js 사용",
+                required: "아이디를 입력하세요.",
                 minlength: $.validator.format("아이디는 최소{0}글자 이상 입력하세요."),
                 alphanumeric: "알파벳과 숫자만 사용 가능합니다.",
                 remote: "존재하는 아이디입니다."
@@ -611,16 +611,22 @@ $(document).ready(function() {
 			CKEDITOR.instances.content.on('change', function() {    
 			    if(CKEDITOR.instances.content.getData().length >  0) {
 			      $('label[for="content"]').hide();
-			    }
+			    } else {
+				  $('label[for="content"]').show();
+				}
 			});
         }, 
-       invalidHandler: function(form, validator) {
+		// 에러메세지 표시 설정 : 주석처리하면 에러메세지 보여짐 
+		/* errorPlacement: function(error, element) {
+           $(element).removeClass('error');
+        }, */
+        invalidHandler: function(form, validator) {
             var errors = validator.numberOfInvalids();
             if (errors) {
             	// 팝업알림처리 
-                //alert(validator.errorList[0].message);
+                // alert(validator.errorList[0].message);
 				// 필드아래처리 
-                validator.errorList[0].element.focus();
+                // validator.errorList[0].element.focus();
             }
         },
         submitHandler: function(form) {   	
@@ -631,8 +637,7 @@ $(document).ready(function() {
             }
         }
     });	
-	
-	
+		
     
     $("#searchForm").validate({
     	ignore : '*:not([name])',
@@ -650,20 +655,16 @@ $(document).ready(function() {
                 minlength: $.validator.format('검색어는 최소 {0}글자 이상 입력하세요.')
             }
         },
-        errorPlacement: function(error, element) {         
-			/*if(element.attr("name")=="content"){
-            	error.appendTo("#content");
-            } else {
-            	error.insertAfter(element);
-            }*/
-        },            
+		// 에러메세지 표시 설정 : 주석처리하면 에러메세지 보여짐 
+       	errorPlacement: function(error, element) {
+          // $(element).removeClass('error');
+        },           
         invalidHandler: function(form, validator) {
             var errors = validator.numberOfInvalids();
             if (errors) {
             	// 팝업알림처리 
                 alert(validator.errorList[0].message);
-				// 필드아래처리 
-                // validator.errorList[0].element.focus();
+	            validator.errorList[0].element.focus();
             }
         },
         submitHandler: function(form) {
@@ -694,19 +695,16 @@ $(document).ready(function() {
 
             }
         },
+		// 에러메세지 표시 설정 : 주석처리하면 에러메세지 표지
+		/*
         errorPlacement: function(error, element) {
-            /*if(element.attr("name")=="content"){
-            	error.appendTo("#content");
-            } else {
-            	error.insertAfter(element);
-            }*/
-        },            
+           $(element).removeClass('error');
+        }, */           
         invalidHandler: function(form, validator) {
             var errors = validator.numberOfInvalids();
             if (errors) {
             	// 팝업알림처리 
-                alert(validator.errorList[0].message);
-				// 필드아래처리 
+                //alert(validator.errorList[0].message);
                 validator.errorList[0].element.focus();
             }
         },

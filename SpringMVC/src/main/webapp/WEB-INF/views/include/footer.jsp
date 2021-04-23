@@ -180,9 +180,9 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="company-info">
-                                    주소 : 대구광역시 달성군 현풍면 테크노중앙대로 333, 304-B호 <br>
-                                    TEL : 053-611-6910 / FAX : 053-611-6911 / E-mail : webmaster@test.com
-                                    <br> COPYRIGHT 2019 IDREAMFACTORY ALL RIGHTS RESERVED.
+                                    주소 : 대전광역시 유성구 봉명로93 (주)노라조<br>
+                                    TEL : 02-123-4567 / FAX : 042-123-4567 / E-mail : webmaster@test.com
+                                    <br> COPYRIGHT 2021 IDREAMFACTORY ALL RIGHTS RESERVED.
                                 </div>
                             </div>
                             <div class="col-md-4">

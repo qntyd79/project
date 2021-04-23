@@ -24,15 +24,15 @@
                                     <div class="search-form" style="float:right; margin-bottom:10px;">
                                         <fieldset>
                                             <select id="searchField" name="searchField" title="<spring:message code="select.searchCondition"/>">
-                                                <option value="n" <c:out value="${criteria.searchField == null ? 'selected' : ' '}" />>선택해주세요</option>
-                                                <option value="t" <c:out value="${criteria.searchField eq 't' ? 'selected' : ' '}" />>제목</option>
-                                                <option value="c" <c:out value="${criteria.searchField eq 'c' ? 'selected' : ' '}" />>내용</option>
-                                                <option value="w" <c:out value="${criteria.searchField eq 'w' ? 'selected' : ' '}" />>작성자</option>
-                                                <option value="tc" <c:out value="${criteria.searchField eq 'tc' ? 'selected' : ' '}" />>제목+내용</option>
-                                                <option value="cw" <c:out value="${criteria.searchField eq 'cw' ? 'selected' : ' '}" />>내용+작성자</option>
-                                                <option value="tcw" <c:out value="${criteria.searchField eq 'tcw' ? 'selected' : ' '}" />>제목+내용+작성자</option>
+                                                <option value="n" <c:out value="${criteria.searchField == null ? 'selected' : ''}" />>선택해주세요</option>
+                                                <option value="t" <c:out value="${criteria.searchField eq 't' ? 'selected' : ''}" />>제목</option>
+                                                <option value="c" <c:out value="${criteria.searchField eq 'c' ? 'selected' : ''}" />>내용</option>
+                                                <option value="w" <c:out value="${criteria.searchField eq 'w' ? 'selected' : ''}" />>작성자</option>
+                                                <option value="tc" <c:out value="${criteria.searchField eq 'tc' ? 'selected' : ''}" />>제목+내용</option>
+                                                <option value="cw" <c:out value="${criteria.searchField eq 'cw' ? 'selected' : ''}" />>내용+작성자</option>
+                                                <option value="tcw" <c:out value="${criteria.searchField eq 'tcw' ? 'selected' : ''}" />>제목+내용+작성자</option>
                                             </select>
-                                            <input type="search" id="keyWord" name="keyWord" value="<c:out value=" ${criteria.keyWord}"/>" title="<spring:message code="button.search"/>" />
+                                            <input type="search" id="keyWord" name="keyWord" value="<c:out value="${criteria.keyWord}"/>" title="<spring:message code="button.search"/>" />
                                             <input type="button" value="<spring:message code="button.search"/>" onclick="$(this.form).submit();" />
                                             <input type="button" value="<spring:message code="button.init"/>" onClick="window.location='list.do'" />
                                         </fieldset>
@@ -153,7 +153,7 @@
                                                                 <td>filecnt</td>
                                                                 <td>${row.vote}</td>
                                                                 <td>${row.hit}</td>
-                                                                <td><a href="delete.do${pageMaker.makeSearch(pageMaker.criteria.page)}&board_idx=<c:out value="${row.board_idx}"/>">DEL</a></td>
+                                                                <td><a href="delete.do${pageMaker.makeSearch(pageMaker.criteria.page)}&board_idx=<c:out value="${row.board_idx}"/>">D</a></td>
                                                             </tr>
                                                         </c:forEach>
                                                     </c:otherwise>
