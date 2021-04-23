@@ -11,10 +11,7 @@
 			</field>
 			<field property="pass" depends="required">
         		<arg0 key="label.pass" />
-			</field>
-			<field property="email" depends="required,email">
-        		<arg0 key="label.email" />
-			</field>						
+			</field>				
 			<field property="kind" depends="required">
         		<arg0 key="label.kind" />
 			</field>			

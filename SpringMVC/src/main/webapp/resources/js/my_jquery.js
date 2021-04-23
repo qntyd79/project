@@ -475,7 +475,11 @@ $(document).ready(function() {
     $.validator.addMethod("compare", function(value, element) {
         return (maxpoolsize.value >= minpoolsize.value)
     });    
-
+	
+	// 셀렉트롬 
+	$.validator.addMethod("selectCheck", function (value, element) {
+        return (value != '이벤트 선택 하세요');
+ 	});
     // ckeditor 
 	/* 추후 삭제 예정 적용안됨 
     $.validator.addMethod("check_ck_add_method", function(value, element) {
@@ -620,6 +624,78 @@ $(document).ready(function() {
 		/* errorPlacement: function(error, element) {
            $(element).removeClass('error');
         }, */
+        invalidHandler: function(form, validator) {
+            var errors = validator.numberOfInvalids();
+            if (errors) {
+            	// 팝업알림처리 
+                // alert(validator.errorList[0].message);
+				// 필드아래처리 
+                // validator.errorList[0].element.focus();
+            }
+        },
+        submitHandler: function(form) {   	
+            if (confirm("게시물을 등록하시겠습니까?")) {
+                form.submit();
+            } else {
+                return false;
+            }
+        }
+    });	
+
+	$("#categoryForm").validate({
+    	ignore : '*:not([name])',
+        debug: false,
+        onfocusout: false,
+        // 규칙설정
+        rules: {            
+            name: {
+                required: true,
+                minlength: 2
+            },
+            pass: {
+                required: true,
+                rangelength: [4,15],
+                passwordCk: true
+            },  
+			kind: {
+                required: true
+            },          
+            title: {
+                required : true,
+                minlength: 2
+            },
+			answer: {
+				required : true,
+				numeric : true,
+				maxlength : 6
+			}          
+        },
+        messages: { //규칙체크 실패시 출력될 메시지 설정            
+            name: {
+                required: "이름을 입력하세요",
+                minlength: $.validator.format("이름은 최소{0}글자 이상 입력하세요.")
+
+            },
+            pass: {
+                required: "비밀번호를 입력하세요",
+                rangelength: $.validator.format("패스워드는 최소{0}글자 이상 {1}글자 이하로 입력하세요."),
+                passwordCk: "비밀번호는 영문대소문자,숫자,특수문자를 반드시 입력해주시기 바랍니다."
+
+            },            
+            kind: {
+				required: "분류를 추가할 항목을 선택해주세요."
+            },           
+            title: {
+                required: "제목을 입력하세요.",
+                minlength: $.validator.format("제목은 최소{0}글자 이상 입력하세요.")
+            },           
+			answer: {
+				required: "자동등록방지를 입력하세요.",
+				numeric: $.validator.format("자동등록방지는 숫자만 입력하세요.")
+			}
+        },		
+		// 에러메세지 표시 설정 : 주석처리하면 에러메세지 보여짐 
+		
         invalidHandler: function(form, validator) {
             var errors = validator.numberOfInvalids();
             if (errors) {

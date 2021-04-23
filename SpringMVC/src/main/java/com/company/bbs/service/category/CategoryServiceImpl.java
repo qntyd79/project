@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.company.bbs.dao.category.CategoryDao;
@@ -20,6 +22,10 @@ public class CategoryServiceImpl implements CategoryService {
 	CategoryDao dao;
 	Criteria criteria;
 	
+	// 암호화 설정 
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
+		
 	// 글목록 
 	@Override
 	public List<CategoryVO> getList(Criteria criteria) throws Exception {
@@ -43,9 +49,13 @@ public class CategoryServiceImpl implements CategoryService {
 		int parent = categoryVO.getParent();
 		int depth = categoryVO.getDepth();
 		int sortno = categoryVO.getSortno();
-		String del = categoryVO.getDel(); 
+		String del = categoryVO.getDel();
+		String pass = categoryVO.getPass();
 		int board_idx  = categoryVO.getBoard_idx();
-
+		
+		// 비밀번호 암호화 
+		String pwdBycrypt = passwordEncoder.encode(pass);
+				
 		// 접속아이피
 		String cipp = InetAddress.getLocalHost().getHostAddress();
 
@@ -91,6 +101,7 @@ public class CategoryServiceImpl implements CategoryService {
 		categoryVO.setCipp(cipp);
 		categoryVO.setRegdate(regdate);
 		categoryVO.setDel(del);
+		categoryVO.setPass(pwdBycrypt);
 		categoryVO.setBoard_idx(board_idx);
 		// categoryVO.setTitle(i + "번쨰 제목입니다.");
 

@@ -43,7 +43,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void insert(BoardVO boardVO) throws Exception {
 
-		// for(int i=1; i <=200; i++) {
+		//for(int i=1; i <=200; i++) {
 		int board_idx = boardVO.getBoard_idx();		
 		String title = boardVO.getTitle();
 		String content = boardVO.getContent();
@@ -103,10 +103,9 @@ public class BoardServiceImpl implements BoardService {
 		boardVO.setDel(del);
 		boardVO.setContent(content);
 		boardVO.setPass(pwdBycrypt);
-		// dto.setTitle(i + "번쨰 제목입니다.");
 
 		dao.insert(boardVO);
-		// }
+		//}
 	}
 	
 	// 답글업데이트
