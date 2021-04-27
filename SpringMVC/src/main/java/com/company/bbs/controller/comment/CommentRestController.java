@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.company.bbs.dto.comment.CommentDto;
 import com.company.bbs.service.comment.CommentService;
 import com.company.bbs.utill.Criteria;
 import com.company.bbs.utill.PageMaker;
+import com.company.bbs.vo.comment.CommentVO;
 
 @RestController
 @RequestMapping("modules/comment/*")
@@ -33,7 +33,7 @@ public class CommentRestController {
 	// 댓글등록
 	@ResponseBody
 	@RequestMapping(value = "ajaxInsert", method = RequestMethod.POST)
-	public ResponseEntity<String> Insert(@RequestBody CommentDto dto) {
+	public ResponseEntity<String> Insert(@RequestBody CommentVO dto) {
 
 		ResponseEntity<String> entity = null;
 
@@ -51,9 +51,9 @@ public class CommentRestController {
 	// 댓글목록
 	@ResponseBody
 	@RequestMapping(value = "ajaxlist/all/{board_idx}", method = RequestMethod.GET)
-	public ResponseEntity<List<CommentDto>> List(@PathVariable("board_idx") int board_idx, Criteria criteria) {
+	public ResponseEntity<List<CommentVO>> List(@PathVariable("board_idx") int board_idx, Criteria criteria) {
 
-		ResponseEntity<List<CommentDto>> entity = null;
+		ResponseEntity<List<CommentVO>> entity = null;
 
 		try {
 			entity = new ResponseEntity<>(service.getLista(board_idx, criteria), HttpStatus.OK);
@@ -79,7 +79,7 @@ public class CommentRestController {
 			criteria.setPage(page);
 			//criteria.setPerPageNum(5);
 
-			List<CommentDto> list = service.getLista(board_idx, criteria);
+			List<CommentVO> list = service.getLista(board_idx, criteria);
 			int commentTotalCount = service.getCommentCount(board_idx);
 
 			PageMaker pageMaker = new PageMaker();
@@ -103,9 +103,9 @@ public class CommentRestController {
 	// 댓글보기
 	@ResponseBody
 	@RequestMapping(value = "ajaxlist/read/{comment_idx}", method = RequestMethod.GET)
-	public ResponseEntity<CommentDto> Read(@PathVariable("comment_idx") int comment_idx) {
+	public ResponseEntity<CommentVO> Read(@PathVariable("comment_idx") int comment_idx) {
 
-		ResponseEntity<CommentDto> entity = null;
+		ResponseEntity<CommentVO> entity = null;
 
 		try {
 			service.increaseCnt(comment_idx);
@@ -121,7 +121,7 @@ public class CommentRestController {
 	// 댓글수정
 	@ResponseBody
 	@RequestMapping(value = "ajaxlist/modify/{comment_idx}", method = { RequestMethod.PUT, RequestMethod.PATCH })
-	public ResponseEntity<String> Modify(@PathVariable("comment_idx") int comment_idx, @RequestBody CommentDto dto) {
+	public ResponseEntity<String> Modify(@PathVariable("comment_idx") int comment_idx, @RequestBody CommentVO dto) {
 
 		ResponseEntity<String> entity = null;
 

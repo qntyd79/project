@@ -14,9 +14,9 @@ import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
 import com.company.bbs.dao.email.EmailDao;
-import com.company.bbs.dto.email.EmailDto;
 import com.company.bbs.utill.Criteria;
 import com.company.bbs.utill.MailSendUtils;
+import com.company.bbs.vo.email.EmailVO;
 
 @Service
 public class EmailServiceImpl implements EmailService {
@@ -30,27 +30,27 @@ public class EmailServiceImpl implements EmailService {
 	
 	// 메일발송 유틸사용
 	@Override
-	public String sendMailTest(EmailDto dto) throws Exception {		
+	public String sendMailTest(EmailVO dto) throws Exception {		
 		MailSendUtils mailSendUtils = new MailSendUtils(mailSender);		
 		return mailSendUtils.sendMessage(dto);
 	}
 	
 	// 글목록
 	@Override
-	public List<EmailDto> getList(Criteria criteria) throws Exception {
+	public List<EmailVO> getList(Criteria criteria) throws Exception {
 		return dao.getList(criteria);
 	}
 
 	// 공지글목록
 	@Override
-	public List<EmailDto> getNoticeList(Criteria criteria) throws Exception {
+	public List<EmailVO> getNoticeList(Criteria criteria) throws Exception {
 		return dao.getNoticeList(criteria);
 	}
 
 	// 글저장
 	@SuppressWarnings("unused")
 	@Override
-	public void insert(EmailDto dto) throws Exception {
+	public void insert(EmailVO dto) throws Exception {
 
 		int email_idx = dto.getEmail_idx();
 		String title = dto.getTitle();
@@ -85,19 +85,19 @@ public class EmailServiceImpl implements EmailService {
 
 	// 답글업데이트
 	@Override
-	public void getReply(EmailDto dto) throws Exception {
+	public void getReply(EmailVO dto) throws Exception {
 		dao.getReply(dto);
 	}
 
 	// 글보기
 	@Override
-	public EmailDto getView(int email_idx) throws Exception {
+	public EmailVO getView(int email_idx) throws Exception {
 		return dao.getView(email_idx);
 	}
 
 	// 글수정
 	@Override
-	public void update(EmailDto dto) throws Exception {
+	public void update(EmailVO dto) throws Exception {
 		// 접속아이피
 		String cipp = InetAddress.getLocalHost().getHostAddress();
 		dto.setCipp(cipp);
@@ -118,13 +118,13 @@ public class EmailServiceImpl implements EmailService {
 
 	// 글이전값
 	@Override
-	public EmailDto getPrevNum(int email_idx) throws Exception {
+	public EmailVO getPrevNum(int email_idx) throws Exception {
 		return dao.getPrevNum(email_idx);
 	}
 
 	// 글다음값
 	@Override
-	public EmailDto getNextNum(int email_idx) throws Exception {
+	public EmailVO getNextNum(int email_idx) throws Exception {
 		return dao.getNextNum(email_idx);
 	}
 
@@ -154,7 +154,7 @@ public class EmailServiceImpl implements EmailService {
 	
 	// 메일발송
 	@Override
-	public String sendMail(EmailDto dto) throws Exception {
+	public String sendMail(EmailVO dto) throws Exception {
 
 		MimeMessagePreparator preparator = new MimeMessagePreparator() {
 

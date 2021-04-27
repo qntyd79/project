@@ -1243,41 +1243,42 @@ $(document).ready(function() {
 
         var files = e.originalEvent.dataTransfer.files;
 
-        var file = files[0];
-
-        console.log(file);
-
-        var formData = new FormData(); // HTML5 지원
-        formData.append("file", file);
-
-        $.ajax({
-            url: 'upload.do',
-            data: formData,
-            dataType: 'text',
-            processData: false,
-            contentType: false,
-            type: 'POST',
-            success: function(data) {
-                //alert(data);
-
-                //이미지 인경우 썸네일을 보여준다.
-                if (checkImageType(data)) {
-                    str = "<div>" +
-                        "<a href='display?fileName=" + getImageLink(data) + "'>" +
-                        "<img src='display?fileName=" + data + "'/>" +
-                        "</a>" +
-                        "<small data-src='" + data + "'>X</small></div>";
-                } else {
-                    str = "<div>" +
-                        "<a href='display?fileName=" + data + "'>" +
-                        getOriginalName(data) + "</a>" +
-                        "<small data-src='" + data + "'>X</small></div>";
-                }
-
-                $(".uploadlist").append(str);
-            },
-        });
-
+		for(var i=0; i < files.length; i++){
+	        var file = files[i];
+	
+	        console.log(file);
+	
+	        var formData = new FormData(); // HTML5 지원
+	        formData.append("file", file);
+	
+	        $.ajax({
+	            url: 'upload.do',
+	            data: formData,
+	            dataType: 'text',
+	            processData: false,
+	            contentType: false,
+	            type: 'POST',
+	            success: function(data) {
+	                //alert(data);
+	
+	                //이미지 인경우 썸네일을 보여준다.
+	                if (checkImageType(data)) {
+	                    str = "<div>" +
+	                        "<a href='display?fileName=" + getImageLink(data) + "'>" +
+	                        "<img src='display?fileName=" + data + "'/>" +
+	                        "</a>" +
+	                        "<small data-src='" + data + "'>X</small></div>";
+	                } else {
+	                    str = "<div>" +
+	                        "<a href='display?fileName=" + data + "'>" +
+	                        getOriginalName(data) + "</a>" +
+	                        "<small data-src='" + data + "'>X</small></div>";
+	                }
+	
+	                $(".uploadlist").append(str);
+	            },
+	        });
+		}
     });
 
 

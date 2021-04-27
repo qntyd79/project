@@ -1,6 +1,6 @@
-package com.company.bbs.dto.email;
+package com.company.bbs.vo.email;
 
-public class EmailVo {
+public class Emaild {
 	
 	private String tomail;
 	private String sendmail;

@@ -1,6 +1,6 @@
-package com.company.bbs.dto.email;
+package com.company.bbs.vo.email;
 
-public class EmailDto {	
+public class EmailVO {	
 	
 	private int email_idx;
 	private String userid;	

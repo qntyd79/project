@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.company.bbs.dto.comment.CommentDto;
 import com.company.bbs.service.comment.CommentService;
 import com.company.bbs.utill.Criteria;
 import com.company.bbs.utill.PageMaker;
+import com.company.bbs.vo.comment.CommentVO;
 
 @Controller
 @RequestMapping("modules/comment/*")
@@ -139,12 +139,12 @@ public class CommentController {
 
 	// 글저장
 	@RequestMapping(value = "insert.do", method = RequestMethod.POST)
-	public String Insert(Model model, @ModelAttribute CommentDto dto /* RedirectAttributes redirectAttributes */)
+	public String Insert(Model model, @ModelAttribute CommentVO commentVO /* RedirectAttributes redirectAttributes */)
 			throws Exception {
 
 		logger.info("글저장처리");
 		
-		service.insert(dto);
+		service.insert(commentVO);
 		
 		model.addAttribute("msg", "InsertSuccess");
 		model.addAttribute("url", "list.do");
@@ -205,15 +205,15 @@ public class CommentController {
 
 	// 글수정처리
 	@RequestMapping(value = "update.do", method = RequestMethod.POST)
-	public String Modify(Model model, @ModelAttribute CommentDto dto, @ModelAttribute Criteria criteria
+	public String Modify(Model model, @ModelAttribute CommentVO commentVO, @ModelAttribute Criteria criteria
 	/* RedirectAttributes redirectAttributes */) throws Exception {
 
 		logger.info("글수정처리");
 
-		String dbpass = service.getPassword(dto.getComment_idx());
+		String dbpass = service.getPassword(commentVO.getComment_idx());
 
-		if (dbpass.equals(dto.getPass()) || (dto.getPass()).equals("admin")) {
-			service.update(dto);
+		if (dbpass.equals(commentVO.getPass()) || (commentVO.getPass()).equals("admin")) {
+			service.update(commentVO);
 			// redirectAttributes.addFlashAttribute("page", criteria.getPage());
 			// redirectAttributes.addFlashAttribute("perPageNum", criteria.getPerPageNum());
 			// redirectAttributes.addFlashAttribute("searchField", criteria.getSearchField());
@@ -227,7 +227,7 @@ public class CommentController {
 			// return "redirect:modify.do?comment_idx=" + dto.getcomment_idx() + "&category_idx=" + dto.getCategory_idx();
 			model.addAttribute("msg", "PassFailed");
 			model.addAttribute("url",
-					"modify.do?comment_idx=" + dto.getComment_idx() + "&category_idx=" + dto.getCategory_idx());
+					"modify.do?comment_idx=" + commentVO.getComment_idx() + "&category_idx=" + commentVO.getCategory_idx());
 		}
 
 		return "/modules/common/common_message";

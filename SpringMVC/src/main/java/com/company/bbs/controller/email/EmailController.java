@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.company.bbs.dto.email.EmailDto;
 import com.company.bbs.service.email.EmailService;
 import com.company.bbs.utill.Criteria;
 import com.company.bbs.utill.PageMaker;
+import com.company.bbs.vo.email.EmailVO;
 
 @Controller
 @RequestMapping("modules/email/*")
@@ -40,13 +40,13 @@ public class EmailController {
 
 	// 메일발송
 	@RequestMapping(value = "sending.do", method = RequestMethod.POST)
-	public String Send(Model model, @ModelAttribute EmailDto dto) throws Exception {
+	public String Send(Model model, @ModelAttribute EmailVO emailVO) throws Exception {
 
 		logger.info("메일발송");
 
 		// 메일발송 유틸사용
 		try {
-			service.sendMailTest(dto);
+			service.sendMailTest(emailVO);
 			model.addAttribute("msg", "MailSuccess");
 			model.addAttribute("url", "send.do");
 		} catch (Exception e) {
@@ -145,16 +145,16 @@ public class EmailController {
 
 	// 글저장
 	@RequestMapping(value = "insert.do", method = RequestMethod.POST)
-	public String Insert(Model model, @ModelAttribute EmailDto dto /* RedirectAttributes redirectAttributes */)
+	public String Insert(Model model, @ModelAttribute EmailVO emailVO /* RedirectAttributes redirectAttributes */)
 			throws Exception {
 
 		logger.info("글저장처리");
 
 		// 메일발송 유틸사용
-		service.sendMail(dto);
+		service.sendMail(emailVO);
 
 		// 발송된 메일 저장
-		service.insert(dto);
+		service.insert(emailVO);
 
 		model.addAttribute("msg", "InsertSuccess");
 		model.addAttribute("url", "list.do");
@@ -209,15 +209,15 @@ public class EmailController {
 
 	// 글수정처리
 	@RequestMapping(value = "update.do", method = RequestMethod.POST)
-	public String Modify(Model model, @ModelAttribute EmailDto dto, @ModelAttribute Criteria criteria
+	public String Modify(Model model, @ModelAttribute EmailVO emailVO, @ModelAttribute Criteria criteria
 	/* RedirectAttributes redirectAttributes */) throws Exception {
 
 		logger.info("글수정처리");
 
-		String dbpass = service.getPassword(dto.getEmail_idx());
+		String dbpass = service.getPassword(emailVO.getEmail_idx());
 
-		if (dbpass.equals(dto.getPass()) || (dto.getPass()).equals("admin")) {
-			service.update(dto);
+		if (dbpass.equals(emailVO.getPass()) || (emailVO.getPass()).equals("admin")) {
+			service.update(emailVO);
 			// redirectAttributes.addFlashAttribute("page", criteria.getPage());
 			// redirectAttributes.addFlashAttribute("perPageNum", criteria.getPerPageNum());
 			// redirectAttributes.addFlashAttribute("searchField",
@@ -232,7 +232,7 @@ public class EmailController {
 			// return "redirect:modify.do?email_idx=" + dto.getemail_idx() +
 			// "&category_idx=" + dto.getCategory_idx();
 			model.addAttribute("msg", "PassFailed");
-			model.addAttribute("url", "modify.do?email_idx=" + dto.getEmail_idx());
+			model.addAttribute("url", "modify.do?email_idx=" + emailVO.getEmail_idx());
 		}
 
 		return "/modules/common/common_message";

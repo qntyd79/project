@@ -1,6 +1,6 @@
-package com.company.bbs.dto.member;
+package com.company.bbs.vo.member;
 
-public class MemberDto {
+public class MemberVO {
 	
 	private int member_idx;
 	private String userid;	

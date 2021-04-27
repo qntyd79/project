@@ -32,7 +32,7 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
+		
 	<!-- 애노테이션 관련 설정 -->
 	<context:component-scan base-package="com.company.bbs"/>    	
 	

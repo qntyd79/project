@@ -3,51 +3,109 @@ package com.company.bbs.controller.attach;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.List;
 import java.util.UUID;
+
+import javax.inject.Inject;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.springmodules.validation.commons.DefaultBeanValidator;
 
+import com.company.bbs.service.attach.AttachService;
 import com.company.bbs.utill.MediaUtils;
 import com.company.bbs.utill.UploadFileUtils;
+import com.company.bbs.vo.attach.AttachVO;
 
+@SuppressWarnings("unused")
 @Controller
 @RequestMapping("modules/attach/*")
 public class UploadController {
 
 	private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
+	
+	@Inject
+	private AttachService service;		
+	
+	// 암호화 설정 
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
+	
+	// 다국어 지역세션설정
 
-	// @Autowired("uploadPaht")
-	// private String uploadPath;
-	private String uploadPath = "C:\\Users\\ohjeonghwan\\OneDrive\\Web-Project\\WEB_app\\Spring_Project\\src\\main\\webapp\\resources\\data";
+	@Autowired
+	private SessionLocaleResolver localeResolver;
+
+	// 다국어 설정
+	@Autowired
+	private MessageSource messageSource;
+
+	// 유효성검사
+	//@Autowired
+	//private DefaultBeanValidator beanValidator;
+
+	// 클라이언트측 유효성검증 설정
+	//@RequestMapping(value = "validator.do")
+	//protected String getValidator() throws Exception {
+	//	return "modules/attach/validator";
+	//}
+	
+	//@Resoruce(name="uploadPath")
+	//private String uploadPath;
+	//String sep = File.separator;
+	private String uploadPath = "/Users/ojeonghwan/git/project/SpringMVC/src/main/webapp/resources/upload";
 
 	// 절대경로 webapp폴더 경로설정
-	// String rootPath = request.getSession().getServletContext().getRealPath("/");
-	// String uploadPath = rootPath + "resources/upload/";
-
-	// 일반적인 방식
+	//private HttpServletRequest req;
+	//String rootPath = req.getSession().getServletContext().getRealPath("/");
+	//String uploadPath = rootPath + "resources/upload/";
+	
+	//@Autowired
+	//ServletContext servletContext;
+	//private String uploadPath;
+	
+	//@PostConstruct
+	//public void initController() {
+		//this.uploadPath = servletContext.getRealPath("/resources/upload");
+	//}
+	
+	// 1.일반적인 방식
 	// 파일폼
-	@RequestMapping(value = "write.do", method = RequestMethod.GET)
-	public String Write(Model model) throws Exception {
+	@RequestMapping(value = "write1.do", method = RequestMethod.GET)
+	public String Write(
+			Model model, 
+			@ModelAttribute AttachVO attachVO, 
+			@RequestParam(defaultValue = "1") int kind
+			) throws Exception {
 
 		logger.info("글쓰기");
-
-		//model.addAttribute("categorylist", service.getCategoryList());
+		
+		model.addAttribute("attachVO", attachVO);
+		model.addAttribute("categorylist", service.getCategoryList(kind));
 
 		return "modules/attach/attach_write";
-	}
+	}	
+
 	
 	// 파일등록
 	@RequestMapping(value = "write.do", method = RequestMethod.POST)
@@ -80,7 +138,6 @@ public class UploadController {
 	}
 
 	// 파일저장함수
-	@SuppressWarnings("unused")
 	private String uploadFile(String originalName, byte[] fileDate) throws Exception {
 
 		UUID uid = UUID.randomUUID();
@@ -92,7 +149,7 @@ public class UploadController {
 		return savedName;
 	}
 
-	// Ajax 파일업로드
+	// 2.Ajax 방식 
 	@RequestMapping(value = "upload.do", method = RequestMethod.GET)
 	public void Upload() throws Exception {
 
@@ -103,17 +160,27 @@ public class UploadController {
 	@RequestMapping(value = "upload.do", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	public ResponseEntity<String> Upload(MultipartFile file) throws Exception {
 
+		ResponseEntity<String> entity = null;
+		
 		logger.info("Ajax 파일업로드");
+		
+		try {
+			logger.info("------------- file start -------------");
+			logger.info("fileName : " + file.getOriginalFilename());
+			logger.info("fileSize : " + file.getSize());
+			logger.info("contentType : " + file.getContentType());
+			logger.info("server FileName : " + file.getName());
+			logger.info("-------------- file end --------------");
+			
+			// UploadFileUtils함수 사용하여 저장
+			entity = new ResponseEntity<>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()), HttpStatus.CREATED);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		} 
 
-		logger.info("------------- file start -------------");
-		logger.info("fileName : " + file.getOriginalFilename());
-		logger.info("fileSize : " + file.getSize());
-		logger.info("contentType : " + file.getContentType());
-		logger.info("server FileName : " + file.getName());
-		logger.info("-------------- file end --------------");
-
-		// UploadFileUtils함수 사용하여 저장
-		return new ResponseEntity<>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()), HttpStatus.CREATED);
+		return entity;		
 	}
 	
 	// 파일미리보기

@@ -8,8 +8,8 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.company.bbs.dao.member.MemberDao;
-import com.company.bbs.dto.member.MemberDto;
 import com.company.bbs.utill.Criteria;
+import com.company.bbs.vo.member.MemberVO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -20,7 +20,7 @@ public class MemberServiceImpl implements MemberService {
 
 	// 글목록
 	@Override
-	public List<MemberDto> getList(Criteria criteria) throws Exception {
+	public List<MemberVO> getList(Criteria criteria) throws Exception {
 		return dao.getList(criteria);
 	}
 	
@@ -32,7 +32,7 @@ public class MemberServiceImpl implements MemberService {
 
 	// 글저장
 	@Override
-	public void insert(MemberDto dto) throws Exception {
+	public void insert(MemberVO dto) throws Exception {
 
 		// for(int i=1; i <=200; i++) {
 		@SuppressWarnings("unused")
@@ -133,14 +133,14 @@ public class MemberServiceImpl implements MemberService {
 
 	// 글보기
 	@Override
-	public MemberDto getView(int member_idx) throws Exception {				
+	public MemberVO getView(int member_idx) throws Exception {				
 		
 		return dao.getView(member_idx);
 	}
 
 	// 글수정
 	@Override
-	public void update(MemberDto dto) throws Exception {
+	public void update(MemberVO dto) throws Exception {
 		// 접속아이피
 		String cipp = InetAddress.getLocalHost().getHostAddress();
 		
@@ -163,13 +163,13 @@ public class MemberServiceImpl implements MemberService {
 
 	// 글이전값
 	@Override
-	public MemberDto getPrevNum(int member_idx) throws Exception {
+	public MemberVO getPrevNum(int member_idx) throws Exception {
 		return dao.getPrevNum(member_idx);
 	}
 
 	// 글다음값
 	@Override
-	public MemberDto getNextNum(int member_idx) throws Exception {
+	public MemberVO getNextNum(int member_idx) throws Exception {
 		return dao.getNextNum(member_idx);
 	}
 

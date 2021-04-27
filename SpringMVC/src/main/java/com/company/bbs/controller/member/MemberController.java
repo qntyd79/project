@@ -15,10 +15,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.company.bbs.dto.member.MemberDto;
 import com.company.bbs.service.member.MemberService;
 import com.company.bbs.utill.Criteria;
 import com.company.bbs.utill.PageMaker;
+import com.company.bbs.vo.member.MemberVO;
 
 @Controller
 @RequestMapping("modules/member/*")
@@ -151,12 +151,12 @@ public class MemberController {
 
 	// 글저장
 	@RequestMapping(value = "insert.do", method = RequestMethod.POST)
-	public String Insert(Model model, @RequestParam MultipartFile[] attach, @ModelAttribute MemberDto dto /* RedirectAttributes redirectAttributes */) throws Exception {
+	public String Insert(Model model, @RequestParam MultipartFile[] attach, @ModelAttribute MemberVO memberVO /* RedirectAttributes redirectAttributes */) throws Exception {
 
 		logger.info("글저장처리");
-		logger.info(dto.toString());
+		logger.info(memberVO.toString());
 
-		service.insert(dto);
+		service.insert(memberVO);
 		model.addAttribute("msg", "InsertSuccess");
 		model.addAttribute("url", "list.do");
 		// redirectAttributes.addFlashAttribute("msg", "InsertSuccess");
@@ -194,15 +194,15 @@ public class MemberController {
 
 	// 글수정처리
 	@RequestMapping(value = "update.do", method = RequestMethod.POST)
-	public String Modify(Model model, @ModelAttribute MemberDto dto, @ModelAttribute Criteria criteria
+	public String Modify(Model model, @ModelAttribute MemberVO memberVO, @ModelAttribute Criteria criteria
 	/* RedirectAttributes redirectAttributes */) throws Exception {
 
 		logger.info("글수정처리");
 
-		String dbpass = service.getPassword(dto.getMember_idx());
+		String dbpass = service.getPassword(memberVO.getMember_idx());
 
-		if (dbpass.equals(dto.getPass()) || (dto.getPass()).equals("admin")) {
-			service.update(dto);
+		if (dbpass.equals(memberVO.getPass()) || (memberVO.getPass()).equals("admin")) {
+			service.update(memberVO);
 			// redirectAttributes.addFlashAttribute("page", criteria.getPage());
 			// redirectAttributes.addFlashAttribute("perPageNum", criteria.getPerPageNum());
 			// redirectAttributes.addFlashAttribute("searchField", criteria.getSearchField());
@@ -215,7 +215,7 @@ public class MemberController {
 			// redirectAttributes.addFlashAttribute("msg", "PassFailed");
 			// return "redirect:modify.do?member_idx=" + dto.getmember_idx() + "&category_idx=" + dto.getCategory_idx();
 			model.addAttribute("msg", "PassFailed");
-			model.addAttribute("url","read.do?member_idx=" + dto.getMember_idx() + "&category_idx=" + dto.getCategory_idx());
+			model.addAttribute("url","read.do?member_idx=" + memberVO.getMember_idx() + "&category_idx=" + memberVO.getCategory_idx());
 		}
 
 		return "/modules/common/common_message";

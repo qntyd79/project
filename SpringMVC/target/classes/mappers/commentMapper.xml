@@ -6,7 +6,7 @@
 
 	<!-- 글목록 -->
 	<select id="getLista"
-		resultType="com.company.bbs.dto.comment.CommentDto">
+		resultType="com.company.bbs.vo.comment.CommentVO">
 	<![CDATA[ 
 	select * from jhbbs_comment where comment_idx > 0 and del = 'N' and board_idx = #{board_idx}
 	]]>		
@@ -17,7 +17,7 @@
 
 	<!-- 글목록 -->
 	<select id="getList"
-		resultType="com.company.bbs.dto.comment.CommentDto">
+		resultType="com.company.bbs.vo.comment.CommentVO">
 	<![CDATA[ 
 	select * from jhbbs_comment where comment_idx > 0 and del = 'N'
 	]]>
@@ -39,7 +39,7 @@
 
 	<!-- 글저장 -->
 	<insert id="insert"
-		parameterType="com.company.bbs.dto.comment.CommentDto">
+		parameterType="com.company.bbs.vo.comment.CommentVO">
 		INSERT INTO jhbbs_comment (
 		parent, depth, sortno,
 		userid, name, pass, email, content, hit, cipp, regdate, del,
@@ -61,7 +61,7 @@
 
 	<!-- 글보기 -->
 	<select id="getView"
-		resultType="com.company.bbs.dto.comment.CommentDto">
+		resultType="com.company.bbs.vo.comment.CommentVO">
 		select * from jhbbs_comment where comment_idx =
 		#{comment_idx} and del = 'N'
 	</select>
@@ -93,7 +93,7 @@
 
 	<!-- 글이전값 -->
 	<select id="getPrevNum"
-		resultType="com.company.bbs.dto.comment.CommentDto">
+		resultType="com.company.bbs.vo.comment.CommentVO">
 	<![CDATA[ 
 	select * from jhbbs_comment where comment_idx > #{comment_idx} and del = 'N' order by comment_idx asc limit 1
 	]]>
@@ -101,7 +101,7 @@
 
 	<!-- 글다음값 -->
 	<select id="getNextNum"
-		resultType="com.company.bbs.dto.comment.CommentDto">
+		resultType="com.company.bbs.vo.comment.CommentVO">
 	<![CDATA[
 	select * from jhbbs_comment where comment_idx < #{comment_idx} and del = 'N' order by comment_idx desc limit 1
 	]]>
@@ -147,18 +147,15 @@
 		<if test="searchField != null">
 			<if test="searchField == 'n'.toString()">
 				AND (content
-				LIKE CONCAT('%', #{keyWord}, '%') OR name
-				LIKE CONCAT('%', #{keyWord},'%'))
+				LIKE CONCAT('%',#{keyWord},'%') OR name LIKE CONCAT('%',#{keyWord},'%'))
 			</if>
 			<if test="searchField == 'c'.toString()">
-				AND content LIKE CONCAT('%', #{keyWord}, '%')
-			</if>
+				AND content LIKE CONCAT('%',#{keyWord},'%')</if>
 			<if test="searchField == 'w'.toString()">
-				AND name LIKE CONCAT('%', #{keyWord}, '%')
+				AND name LIKE CONCAT('%',#{keyWord},'%')
 			</if>
 			<if test="searchField == 'cw'.toString()">
-				AND (content LIKE CONCAT('%', #{keyWord}, '%') OR name
-				LIKE CONCAT('%',#{keyWord}, '%'))
+				AND (content LIKE CONCAT('%',#{keyWord},'%') OR name LIKE CONCAT('%',#{keyWord},'%'))
 			</if>
 		</if>
 	</sql>

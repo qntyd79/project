@@ -2,28 +2,28 @@ package com.company.bbs.dao.member;
 
 import java.util.List;
 
-import com.company.bbs.dto.member.MemberDto;
 import com.company.bbs.utill.Criteria;
+import com.company.bbs.vo.member.MemberVO;
 
 public interface MemberDao {
 
 	// 글목록
-	public List<MemberDto> getList(Criteria criteria) throws Exception;
+	public List<MemberVO> getList(Criteria criteria) throws Exception;
 	
 	// 공지글목록
 	/*public List<MemberDto> getNoticeList(Criteria criteria) throws Exception;*/
 
 	// 글저장 
-	public void insert(MemberDto dto) throws Exception;
+	public void insert(MemberVO dto) throws Exception;
 	
 	// 답글업데이트 
 	/*public void getReply(MemberDto dto) throws Exception;*/
 	
 	// 글보기
-	public MemberDto getView(int member_idx) throws Exception;
+	public MemberVO getView(int member_idx) throws Exception;
 
 	// 글수정
-	public void update(MemberDto dto) throws Exception;
+	public void update(MemberVO dto) throws Exception;
 
 	// 글삭제
 	public void delete(int member_idx) throws Exception;
@@ -32,10 +32,10 @@ public interface MemberDao {
 	public void increaseCnt(int member_idx) throws Exception;
 
 	// 글이전값
-	public MemberDto getPrevNum(int member_idx) throws Exception;
+	public MemberVO getPrevNum(int member_idx) throws Exception;
 
 	// 글다음값
-	public MemberDto getNextNum(int member_idx) throws Exception;
+	public MemberVO getNextNum(int member_idx) throws Exception;
 
 	// 글최고값
 	public int getMaxNum() throws Exception;
@@ -53,7 +53,7 @@ public interface MemberDao {
 	public List<Object> getCategoryList(int idx) throws Exception;
 	
 	// 이메일중복확인  
-	public MemberDto getEmailCheck(String str) throws Exception;
+	public MemberVO getEmailCheck(String str) throws Exception;
 			
 	
 }

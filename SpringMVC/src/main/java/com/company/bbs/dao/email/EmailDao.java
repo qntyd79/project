@@ -2,28 +2,28 @@ package com.company.bbs.dao.email;
 
 import java.util.List;
 
-import com.company.bbs.dto.email.EmailDto;
 import com.company.bbs.utill.Criteria;
+import com.company.bbs.vo.email.EmailVO;
 
 public interface EmailDao {
 
 	// 글목록
-	public List<EmailDto> getList(Criteria criteria) throws Exception;
+	public List<EmailVO> getList(Criteria criteria) throws Exception;
 	
 	// 공지글목록
-	public List<EmailDto> getNoticeList(Criteria criteria) throws Exception;
+	public List<EmailVO> getNoticeList(Criteria criteria) throws Exception;
 
 	// 글저장 
-	public void insert(EmailDto dto) throws Exception;
+	public void insert(EmailVO dto) throws Exception;
 	
 	// 답글업데이트 
-	public void getReply(EmailDto dto) throws Exception;
+	public void getReply(EmailVO dto) throws Exception;
 
 	// 글보기
-	public EmailDto getView(int email_idx) throws Exception;
+	public EmailVO getView(int email_idx) throws Exception;
 
 	// 글수정
-	public void update(EmailDto dto) throws Exception;
+	public void update(EmailVO dto) throws Exception;
 
 	// 글삭제
 	public void delete(int email_idx) throws Exception;
@@ -32,10 +32,10 @@ public interface EmailDao {
 	public void increaseCnt(int email_idx) throws Exception;
 
 	// 글이전값
-	public EmailDto getPrevNum(int email_idx) throws Exception;
+	public EmailVO getPrevNum(int email_idx) throws Exception;
 
 	// 글다음값
-	public EmailDto getNextNum(int email_idx) throws Exception;
+	public EmailVO getNextNum(int email_idx) throws Exception;
 
 	// 글최고값
 	public int getMaxNum() throws Exception;

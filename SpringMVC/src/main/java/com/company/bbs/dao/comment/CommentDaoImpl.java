@@ -9,8 +9,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.company.bbs.dto.comment.CommentDto;
 import com.company.bbs.utill.Criteria;
+import com.company.bbs.vo.comment.CommentVO;
 
 @Repository
 public class CommentDaoImpl implements CommentDao {
@@ -20,7 +20,7 @@ public class CommentDaoImpl implements CommentDao {
 
 	// 글목록
 	@Override
-	public List<CommentDto> getLista(int board_idx, Criteria criteria) throws Exception {
+	public List<CommentVO> getLista(int board_idx, Criteria criteria) throws Exception {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("board_idx", board_idx);
@@ -30,7 +30,7 @@ public class CommentDaoImpl implements CommentDao {
 	}
 	
 	// 글목록
-	public List<CommentDto> getList(Criteria criteria) throws Exception {
+	public List<CommentVO> getList(Criteria criteria) throws Exception {
 		return sqlSession.selectList("comment.getList", criteria);
 	}
 
@@ -42,25 +42,25 @@ public class CommentDaoImpl implements CommentDao {
 
 	// 글저장
 	@Override
-	public void insert(CommentDto dto) throws Exception {
+	public void insert(CommentVO dto) throws Exception {
 		sqlSession.insert("comment.insert", dto);
 	}
 
 	// 답글업데이트
 	@Override
-	public void getReply(CommentDto dto) throws Exception {
+	public void getReply(CommentVO dto) throws Exception {
 		sqlSession.update("comment.getReply", dto);
 	}
 
 	// 글보기
 	@Override
-	public CommentDto getView(int comment_idx) throws Exception {
+	public CommentVO getView(int comment_idx) throws Exception {
 		return sqlSession.selectOne("comment.getView", comment_idx);
 	}
 
 	// 글수정
 	@Override
-	public void update(CommentDto dto) throws Exception {
+	public void update(CommentVO dto) throws Exception {
 		sqlSession.update("comment.update", dto);
 	}
 
@@ -78,13 +78,13 @@ public class CommentDaoImpl implements CommentDao {
 
 	// 글이전값
 	@Override
-	public CommentDto getPrevNum(int comment_idx) throws Exception {
+	public CommentVO getPrevNum(int comment_idx) throws Exception {
 		return sqlSession.selectOne("comment.getPrevNum", comment_idx);
 	}
 
 	// 글다음값
 	@Override
-	public CommentDto getNextNum(int comment_idx) throws Exception {
+	public CommentVO getNextNum(int comment_idx) throws Exception {
 		return sqlSession.selectOne("comment.getNextNum", comment_idx);
 	}
 

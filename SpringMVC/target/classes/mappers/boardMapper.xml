@@ -5,8 +5,7 @@
 <mapper namespace="board">
 
 	<!-- 글목록 -->
-	<select id="getList"
-		resultType="com.company.bbs.vo.board.BoardVO">
+	<select id="getList" resultType="com.company.bbs.vo.board.BoardVO">
 	<![CDATA[ 
 	select * from jhbbs_board where board_idx > 0 and del = 'N' and notice = 0
 	]]>
@@ -18,8 +17,7 @@
 	</select>
 
 	<!-- 공지글목록 -->
-	<select id="getNoticeList"
-		resultType="com.company.bbs.vo.board.BoardVO">
+	<select id="getNoticeList" resultType="com.company.bbs.vo.board.BoardVO">
 	<![CDATA[ 
 	select * from jhbbs_board where board_idx > 0 and del = 'N' and notice = 1
 	]]>
@@ -31,8 +29,7 @@
 	</select>
 	
 	<!-- 카테고리명 -->
-	<select id="getCategory"
-		resultType="com.company.bbs.vo.category.CategoryVO">
+	<select id="getCategory" resultType="com.company.bbs.vo.category.CategoryVO">
 	<![CDATA[ 
 	select * from jhbbs_category where del = 'N'
 	]]>
@@ -42,8 +39,7 @@
 	</select>
 	
 	<!-- 카테고리목록 -->
-	<select id="getCategoryList"
-		resultType="com.company.bbs.vo.category.CategoryVO">
+	<select id="getCategoryList" resultType="com.company.bbs.vo.category.CategoryVO">
 	<![CDATA[ 
 	select * from jhbbs_category where kind=#{kind} and del = 'N'
 	]]>
@@ -53,8 +49,7 @@
 	</select>		
 	
 	<!-- 글저장 -->
-	<insert id="insert"
-		parameterType="com.company.bbs.vo.board.BoardVO">
+	<insert id="insert" parameterType="com.company.bbs.vo.board.BoardVO">
 		INSERT INTO jhbbs_board (
 		parent, depth, sortno,
 		userid,
@@ -82,8 +77,7 @@
 	</update>
 
 	<!-- 글보기 -->
-	<select id="getView"
-		resultType="com.company.bbs.vo.board.BoardVO">
+	<select id="getView" resultType="com.company.bbs.vo.board.BoardVO">
 		select * from jhbbs_board where board_idx =
 		#{board_idx} and
 		del = 'N'
@@ -126,16 +120,14 @@
 	</update>
 
 	<!-- 글이전값 -->
-	<select id="getPrevNum"
-		resultType="com.company.bbs.vo.board.BoardVO">
+	<select id="getPrevNum"	resultType="com.company.bbs.vo.board.BoardVO">
 	<![CDATA[ 
 	select * from jhbbs_board where board_idx > #{board_idx} and del = 'N' order by parent desc, sortno asc limit 1
 	]]>
 	</select>
 
 	<!-- 글다음값 -->
-	<select id="getNextNum"
-		resultType="com.company.bbs.vo.board.BoardVO">
+	<select id="getNextNum"	resultType="com.company.bbs.vo.board.BoardVO">
 	<![CDATA[
 	select * from jhbbs_board where board_idx < #{board_idx} and del = 'N' order by parent desc, sortno desc limit 1
 	]]>
@@ -183,25 +175,25 @@
 	<sql id="search">
 		<if test="searchField != null">
 			<if test="searchField == 'n'.toString()">
-				AND (title LIKE CONCAT('%',#{keyWord}, '%') OR content	LIKE CONCAT('%',#{keyWord}, '%') OR name LIKE CONCAT('%',#{keyWord},'%'))
+				AND (title LIKE CONCAT('%',#{keyWord},'%') OR content LIKE CONCAT('%',#{keyWord},'%') OR name LIKE CONCAT('%',#{keyWord},'%'))
 			</if>
 			<if test="searchField == 't'.toString()">
-				AND title LIKE CONCAT('%',#{keyWord}, '%')
+				AND title LIKE CONCAT('%',#{keyWord},'%')
 			</if>
 			<if test="searchField == 'c'.toString()">
-				AND content LIKE CONCAT('%',#{keyWord}, '%')
+				AND content LIKE CONCAT('%',#{keyWord},'%')
 			</if>
 			<if test="searchField == 'w'.toString()">
-				AND name LIKE CONCAT('%',#{keyWord}, '%')
+				AND name LIKE CONCAT('%',#{keyWord},'%')
 			</if>
 			<if test="searchField == 'tc'.toString()">
-				AND (title LIKE CONCAT('%',#{keyWord}, '%') OR content	LIKE CONCAT('%', #{keyWord}, '%'))
+				AND (title LIKE CONCAT('%',#{keyWord},'%') OR content LIKE CONCAT('%',#{keyWord},'%'))
 			</if>
 			<if test="searchField == 'cw'.toString()">
-				AND (content LIKE CONCAT('%',#{keyWord}, '%') OR name LIKE CONCAT('%',#{keyWord}, '%'))
+				AND (content LIKE CONCAT('%',#{keyWord},'%') OR name LIKE CONCAT('%',#{keyWord},'%'))
 			</if>
 			<if test="searchField == 'tcw'.toString()">
-				AND (title LIKE CONCAT('%',#{keyWord}, '%') OR content	LIKE CONCAT('%',#{keyWord}, '%') OR name LIKE CONCAT('%',#{keyWord},'%'))
+				AND (title LIKE CONCAT('%',#{keyWord},'%') OR content LIKE CONCAT('%',#{keyWord},'%') OR name LIKE CONCAT('%',#{keyWord},'%'))
 			</if>
 		</if>
 	</sql>

@@ -6,7 +6,7 @@
 
 	<!-- 글목록 -->
 	<select id="getList"
-		resultType="com.company.bbs.dto.member.MemberDto">
+		resultType="com.company.bbs.vo.member.MemberVO">
 	<![CDATA[ 
 	select * from jhbbs_member where member_idx > 0 and del = 'N'
 	]]>
@@ -36,7 +36,7 @@
 
 	<!-- 글저장 -->
 	<insert id="insert"
-		parameterType="com.company.bbs.dto.member.MemberDto">
+		parameterType="com.company.bbs.vo.member.MemberVO">
 		INSERT INTO jhbbs_member (
 		userid, pass, pass_ask, pass_account, name,
 		nickname, <!-- jumin1, jumin2, -->
@@ -67,7 +67,7 @@
 
 	<!-- 글보기 -->
 	<select id="getView"
-		resultType="com.company.bbs.dto.member.MemberDto">
+		resultType="com.company.bbs.vo.member.MemberVO">
 		select * from jhbbs_member where member_idx =
 		#{member_idx}
 		and del = 'N'
@@ -111,7 +111,7 @@
 
 	<!-- 글이전값 -->
 	<select id="getPrevNum"
-		resultType="com.company.bbs.dto.member.MemberDto">
+		resultType="com.company.bbs.vo.member.MemberVO">
 	<![CDATA[ 
 	select * from jhbbs_member where member_idx > #{member_idx} and del = 'N' order by  member_idx asc limit 1
 	]]>
@@ -119,7 +119,7 @@
 
 	<!-- 글다음값 -->
 	<select id="getNextNum"
-		resultType="com.company.bbs.dto.member.MemberDto">
+		resultType="com.company.bbs.vo.member.MemberVO">
 	<![CDATA[
 	select * from jhbbs_member where member_idx < #{member_idx} and del = 'N' order by  member_idx desc limit 1
 	]]>
@@ -162,35 +162,25 @@
 	<sql id="search">
 		<if test="searchField != null">
 			<if test="searchField == 'n'.toString()">
-				AND (userid LIKE CONCAT('%', #{keyWord}, '%') OR etc
-				LIKE
-				CONCAT('%', #{keyWord}, '%') OR name LIKE CONCAT('%',
-				#{keyWord},'%'))
+				AND (userid LIKE CONCAT('%',#{keyWord},'%') OR etc LIKE CONCAT('%',#{keyWord},'%') OR name LIKE CONCAT('%',#{keyWord},'%'))
 			</if>
 			<if test="searchField == 't'.toString()">
-				AND userid LIKE CONCAT('%', #{keyWord}, '%')
+				AND userid LIKE CONCAT('%',#{keyWord},'%')
 			</if>
 			<if test="searchField == 'c'.toString()">
-				AND etc LIKE CONCAT('%', #{keyWord}, '%')
+				AND etc LIKE CONCAT('%',#{keyWord},'%')
 			</if>
 			<if test="searchField == 'w'.toString()">
-				AND name LIKE CONCAT('%', #{keyWord}, '%')
+				AND name LIKE CONCAT('%',#{keyWord},'%')
 			</if>
 			<if test="searchField == 'tc'.toString()">
-				AND (userid LIKE CONCAT('%', #{keyWord}, '%') OR etc
-				LIKE
-				CONCAT('%', #{keyWord}, '%'))
+				AND (userid LIKE CONCAT('%',#{keyWord},'%') OR etc LIKE CONCAT('%', #{keyWord},'%'))
 			</if>
 			<if test="searchField == 'cw'.toString()">
-				AND (etc LIKE CONCAT('%', #{keyWord}, '%') OR name
-				LIKE
-				CONCAT('%',#{keyWord}, '%'))
+				AND (etc LIKE CONCAT('%',#{keyWord},'%') OR name LIKE CONCAT('%',#{keyWord},'%'))
 			</if>
 			<if test="searchField == 'tcw'.toString()">
-				AND (userid LIKE CONCAT('%', #{keyWord}, '%') OR etc
-				LIKE
-				CONCAT('%', #{keyWord}, '%') OR name LIKE CONCAT('%',
-				#{keyWord},'%'))
+				AND (userid LIKE CONCAT('%',#{keyWord},'%') OR etc LIKE CONCAT('%',#{keyWord},'%') OR name LIKE CONCAT('%',#{keyWord},'%'))
 			</if>
 		</if>
 	</sql>

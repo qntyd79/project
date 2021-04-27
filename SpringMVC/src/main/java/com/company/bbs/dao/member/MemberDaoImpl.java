@@ -5,8 +5,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.company.bbs.dto.member.MemberDto;
 import com.company.bbs.utill.Criteria;
+import com.company.bbs.vo.member.MemberVO;
 
 @Repository
 public class MemberDaoImpl implements MemberDao {
@@ -16,7 +16,7 @@ public class MemberDaoImpl implements MemberDao {
 	
 	// 글목록
 	@Override
-	public List<MemberDto> getList(Criteria criteria) throws Exception {
+	public List<MemberVO> getList(Criteria criteria) throws Exception {
 		return sqlSession.selectList("member.getList", criteria);
 	}
 	
@@ -28,7 +28,7 @@ public class MemberDaoImpl implements MemberDao {
 	
 	// 글저장 
 	@Override
-	public void insert(MemberDto dto) throws Exception {
+	public void insert(MemberVO dto) throws Exception {
 		sqlSession.insert("member.insert", dto);
 	}
 	
@@ -40,13 +40,13 @@ public class MemberDaoImpl implements MemberDao {
 	
 	// 글보기
 	@Override
-	public MemberDto getView(int member_idx) throws Exception {
+	public MemberVO getView(int member_idx) throws Exception {
 		return sqlSession.selectOne("member.getView", member_idx);
 	}
 
 	// 글수정 
 	@Override
-	public void update(MemberDto dto) throws Exception {
+	public void update(MemberVO dto) throws Exception {
 		sqlSession.update("member.update", dto);
 	}
 	
@@ -64,13 +64,13 @@ public class MemberDaoImpl implements MemberDao {
 
 	// 글이전값
 	@Override
-	public MemberDto getPrevNum(int member_idx) throws Exception {
+	public MemberVO getPrevNum(int member_idx) throws Exception {
 		return sqlSession.selectOne("member.getPrevNum", member_idx);
 	}
 
 	// 글다음값 
 	@Override
-	public MemberDto getNextNum(int member_idx) throws Exception {
+	public MemberVO getNextNum(int member_idx) throws Exception {
 		return sqlSession.selectOne("member.getNextNum", member_idx);
 	}
 
@@ -105,7 +105,7 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public MemberDto getEmailCheck(String str) throws Exception {
+	public MemberVO getEmailCheck(String str) throws Exception {
 		return sqlSession.selectOne("member.getEmailCheck", str);
 	}
 	

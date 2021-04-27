@@ -14,7 +14,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 
-import com.company.bbs.dto.email.EmailDto;
+import com.company.bbs.vo.email.EmailVO;
 
 public class MailSendUtils {
 
@@ -62,7 +62,7 @@ public class MailSendUtils {
 	
 		
 	// 텍스트 단순 메일보내기
-	public String sendMessage(EmailDto dto) throws Exception {
+	public String sendMessage(EmailVO dto) throws Exception {
 
 		SimpleMailMessage message = new SimpleMailMessage();
 

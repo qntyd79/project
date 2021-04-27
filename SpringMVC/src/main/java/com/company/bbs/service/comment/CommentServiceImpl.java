@@ -10,8 +10,8 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.company.bbs.dao.comment.CommentDao;
-import com.company.bbs.dto.comment.CommentDto;
 import com.company.bbs.utill.Criteria;
+import com.company.bbs.vo.comment.CommentVO;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -22,12 +22,12 @@ public class CommentServiceImpl implements CommentService {
 
 	// 글목록
 	@Override
-	public List<CommentDto> getLista(int board_idx, Criteria criteria) throws Exception {
+	public List<CommentVO> getLista(int board_idx, Criteria criteria) throws Exception {
 		return dao.getLista(board_idx, criteria);
 	}
 	
 	// 글목록
-	public List<CommentDto> getList(Criteria criteria) throws Exception {
+	public List<CommentVO> getList(Criteria criteria) throws Exception {
 		return dao.getList(criteria);
 	}
 
@@ -39,7 +39,7 @@ public class CommentServiceImpl implements CommentService {
 
 	// 글저장
 	@Override
-	public void insert(CommentDto dto) throws Exception {
+	public void insert(CommentVO dto) throws Exception {
 
 		// for(int i=1; i <=200; i++) {
 		int comment_idx = dto.getComment_idx();
@@ -106,19 +106,19 @@ public class CommentServiceImpl implements CommentService {
 
 	// 답글업데이트
 	@Override
-	public void getReply(CommentDto dto) throws Exception {
+	public void getReply(CommentVO dto) throws Exception {
 		dao.getReply(dto);
 	}
 
 	// 글보기
 	@Override
-	public CommentDto getView(int comment_idx) throws Exception {
+	public CommentVO getView(int comment_idx) throws Exception {
 		return dao.getView(comment_idx);
 	}
 
 	// 글수정
 	@Override
-	public void update(CommentDto dto) throws Exception {
+	public void update(CommentVO dto) throws Exception {
 		// 접속아이피
 		String cipp = InetAddress.getLocalHost().getHostAddress();
 		dto.setCipp(cipp);
@@ -139,13 +139,13 @@ public class CommentServiceImpl implements CommentService {
 
 	// 글이전값
 	@Override
-	public CommentDto getPrevNum(int comment_idx) throws Exception {
+	public CommentVO getPrevNum(int comment_idx) throws Exception {
 		return dao.getPrevNum(comment_idx);
 	}
 
 	// 글다음값
 	@Override
-	public CommentDto getNextNum(int comment_idx) throws Exception {
+	public CommentVO getNextNum(int comment_idx) throws Exception {
 		return dao.getNextNum(comment_idx);
 	}
 

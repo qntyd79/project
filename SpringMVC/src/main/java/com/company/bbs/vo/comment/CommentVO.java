@@ -1,6 +1,6 @@
-package com.company.bbs.dto.comment;
+package com.company.bbs.vo.comment;
 
-public class CommentDto {
+public class CommentVO {
 
 	private int comment_idx;
 	private int parent;
