@@ -2,6 +2,11 @@ package com.company.bbs.utill;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.net.URLConnection;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.UUID;
@@ -112,4 +117,19 @@ public class UploadFileUtils {
 		return iconName.substring(uploadPath.length()).replace(File.separatorChar, '/');
 	}
 	
+	// Mime Type 탐지
+	public String detectFileMimeType(String uploadPath, String fileName) {
+		
+		String filepath = uploadPath + fileName;
+		Path path = Paths.get(filepath);
+		String detectedMimeType = null;
+		
+		try {
+			detectedMimeType = Files.probeContentType(path);
+		} catch (IOException e) {
+			// ignore
+		}
+		
+		return detectedMimeType != null ? detectedMimeType : URLConnection.guessContentTypeFromName(filepath);
+	}
 }

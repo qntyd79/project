@@ -217,18 +217,20 @@ public class AttachController {
 						logger.info("-------------- file end --------------\n");			
 					
 						// UploadFileUtils 사용하여 저장
-						String savedName = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
-						model.addAttribute("savedName", savedName);
-						
-						String file_name = savedName;
+						String savedName = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());						
 						attachVO.setFile_name(file.getOriginalFilename());
-						attachVO.setFile_hash_name(file_name);
+						attachVO.setFile_hash_name(savedName);
 						attachVO.setFile_size(file.getSize());
 						attachVO.setFile_type(file.getContentType());
-						attachVO.setFile_ext(file.getName());					
+						
+						// 파일확장자
+						String fileName = file.getOriginalFilename();
+						int index = fileName.lastIndexOf(".");
+						String fileExt = fileName.substring(index + 1);
+						attachVO.setFile_ext(fileExt);					
 					}	
 					
-					service.insert(attachVO);		
+					service.insert(attachVO);			
 				
 			}
 					

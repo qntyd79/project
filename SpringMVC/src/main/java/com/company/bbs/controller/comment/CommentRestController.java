@@ -7,20 +7,26 @@ import java.util.Map;
 import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.springmodules.validation.commons.DefaultBeanValidator;
 
 import com.company.bbs.service.comment.CommentService;
 import com.company.bbs.utill.Criteria;
 import com.company.bbs.utill.PageMaker;
 import com.company.bbs.vo.comment.CommentVO;
 
+@SuppressWarnings("unused")
 @RestController
 @RequestMapping("modules/comment/*")
 public class CommentRestController {
@@ -29,16 +35,16 @@ public class CommentRestController {
 
 	@Inject
 	CommentService service;
-
+	
 	// 댓글등록
 	@ResponseBody
 	@RequestMapping(value = "ajaxInsert", method = RequestMethod.POST)
-	public ResponseEntity<String> Insert(@RequestBody CommentVO dto) {
+	public ResponseEntity<String> Insert(@RequestBody CommentVO commentVO) {
 
 		ResponseEntity<String> entity = null;
 
 		try {
-			service.insert(dto);
+			service.insert(commentVO);
 			entity = new ResponseEntity<>("insertSuccess", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -68,8 +74,7 @@ public class CommentRestController {
 	// 댓글목록페이징
 	@ResponseBody
 	@RequestMapping(value = "ajaxlist/{board_idx}/{page}", method = RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>> List(@PathVariable("board_idx") int board_idx,
-			@PathVariable("page") int page) {
+	public ResponseEntity<Map<String, Object>> List(@PathVariable("board_idx") int board_idx, @PathVariable("page") int page) {
 
 		ResponseEntity<Map<String, Object>> entity = null;
 
@@ -121,13 +126,13 @@ public class CommentRestController {
 	// 댓글수정
 	@ResponseBody
 	@RequestMapping(value = "ajaxlist/modify/{comment_idx}", method = { RequestMethod.PUT, RequestMethod.PATCH })
-	public ResponseEntity<String> Modify(@PathVariable("comment_idx") int comment_idx, @RequestBody CommentVO dto) {
+	public ResponseEntity<String> Modify(@PathVariable("comment_idx") int comment_idx, @RequestBody CommentVO commentVO) {
 
 		ResponseEntity<String> entity = null;
 
 		try {
-			dto.setComment_idx(comment_idx);
-			service.update(dto);
+			commentVO.setComment_idx(comment_idx);
+			service.update(commentVO);
 			entity = new ResponseEntity<>("modifySuccess", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

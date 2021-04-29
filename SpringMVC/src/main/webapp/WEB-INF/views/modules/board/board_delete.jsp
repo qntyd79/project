@@ -31,7 +31,7 @@
 						        	<input type="hidden" name="searchField" value="<c:out value="${criteria.searchField}"/>" >
 		        					<input type="hidden" name="keyWord" value="<c:out value="${criteria.keyWord}"/>" >
                                     <fieldset>
-                                         <legend><spring:message code="bbs.table.legend"/></legend>
+                                        <legend><spring:message code="bbs.table.legend"/></legend>
                                         <table summary="<spring:message code="bbs.table.summary.delete"/>" class="board_detail">
                                             <caption><spring:message code="bbs.table.caption"/></caption>
                                             <colgroup>

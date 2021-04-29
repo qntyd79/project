@@ -43,6 +43,7 @@
     <script src="<c:url value="/resources/js/my_jquery.js"/>" type="text/javascript" charset="UTF-8"></script>      
     
     <!--  plugin -->
+    <script src="<c:url value="/resources/plugin/ckeditor4/basic/ckeditor.js" />"type="text/javascript" charset="UTF-8"></script>
     <script src="<c:url value="/resources/plugin/ckeditor4/full/ckeditor.js" />"type="text/javascript" charset="UTF-8"></script>
     <script src="<c:url value="/resources/plugin/syntaxhighlighter/scripts/shCore.js"/>" type="text/javascript" charset="UTF-8"></script> 
     <script src="<c:url value="/resources/plugin/syntaxhighlighter/scripts/shBrushJava.js"/>" type="text/javascript" charset="UTF-8"></script> 

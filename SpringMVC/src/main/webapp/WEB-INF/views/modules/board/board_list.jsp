@@ -76,7 +76,7 @@
                                             </colgroup>
                                             <thead>
                                                 <tr class="tline">
-                                                    <th scope="col"><input type="checkbox" class="allCheck" name="allCheck" /></th>
+                                                    <th scope="col"><label><input type="checkbox" class="allCheck" name="allCheck" /></label></th>
                                                     <th scope="col"><spring:message code="bbs.list.no"/></th>
                                                     <th scope="col"><spring:message code="bbs.list.catetory_idx"/></th>
                                                     <th scope="col"><spring:message code="bbs.list.title"/></th>

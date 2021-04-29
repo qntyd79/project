@@ -24,6 +24,19 @@ CKEDITOR.editorConfig = function( config ) {
 	];
 	*/
 	
+	config.toolbar = [
+        ['Font', 'FontSize'],
+        ['BGColor', 'TextColor' ],
+        ['Bold', 'Italic', 'Strike', 'Superscript', 'Subscript', 'Underline', 'RemoveFormat'],   
+        ['BidiLtr', 'BidiRtl'],
+        ['Image', 'SpecialChar', 'Smiley'],
+        ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+        ['Blockquote', 'NumberedList', 'BulletedList'],
+        ['Link', 'Unlink'],
+        ['Source'],
+        ['Undo', 'Redo']
+	];
+
 	config.language = 'ko';
 	config.uiColor = '#e1e1e1';
 	config.width = 500;     // 500 pixels wide.
@@ -31,4 +44,10 @@ CKEDITOR.editorConfig = function( config ) {
 	config.height = 500;        // 500 pixels high.
 	config.height = '25em';     // CSS unit (em).
 	config.resize_enabled = false;
+	config.enterMode = CKEDITOR.ENTER_BR;
+	config.shiftEnterMode = CKEDITOR.ENTER_P;
+	config.htmlEncodeOutput = false; 
+	config.extraAllowedContent = '*(*);*{*}';
+	config.fillEmptyBlocks = false;
+	config.allowedContent = true; 
 };

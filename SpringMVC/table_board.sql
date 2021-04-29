@@ -67,7 +67,6 @@ cipp 			VARCHAR(30) NOT NULL,
 vote 			INT(10) DEFAULT '0',
 regdate 		DATETIME NOT NULL,
 del 			VARCHAR(2) NOT NULL DEFAULT 'N',
-category_idx 	INT(10) DEFAULT '1',
 member_idx 		INT(10) NOT NULL,
 board_idx 		INT(10) NOT NULL,
 PRIMARY KEY (comment_idx)

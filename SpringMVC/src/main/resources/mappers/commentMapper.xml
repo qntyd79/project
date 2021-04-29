@@ -21,33 +21,22 @@
 	<![CDATA[ 
 	select * from jhbbs_comment where comment_idx > 0 and del = 'N'
 	]]>
-		<!-- <include refid="category"></include> -->
 		<include refid="search"></include>
 	<![CDATA[ 
 	order by parent desc, sortno asc limit #{pageStart}, ${perPageNum}
 	]]>
 	</select>
 
-	<!-- 공지글목록 <select id="getNoticeList" resultType="com.company.bbs.dto.comment.CommentDto"> 
-		<![CDATA[ select * from jhbbs_comment where comment_idx > 0 and del = 'N' 
-		and notice = 1 ]]> <include refid="category"></include> <include refid="search"></include> 
-		<![CDATA[ order by parent desc, sortno asc ]]> </select> -->
-
-	<!-- 카테고리목록 <select id="getCategoryList" resultType="com.company.bbs.dto.comment.CommentDto"> 
-		<![CDATA[ select * from jhbbs_board_category where del = 'N' ]]> <![CDATA[ 
-		order by category_idx DESC ]]> </select> -->
-
 	<!-- 글저장 -->
 	<insert id="insert"
 		parameterType="com.company.bbs.vo.comment.CommentVO">
 		INSERT INTO jhbbs_comment (
 		parent, depth, sortno,
-		userid, name, pass, email, content, hit, cipp, regdate, del,
+		userid, name, pass, email, content, hit, cipp, vote, regdate, del,
 		member_idx, board_idx
 		) VALUES (
 		#{parent}, #{depth}, #{sortno},
-		#{userid}, #{name}, #{pass}, #{email}, #{content}, #{hit}, #{cipp},
-		#{regdate}, #{del},
+		#{userid}, #{name}, #{pass}, #{email}, #{content}, #{hit}, #{cipp}, #{vote}, #{regdate}, #{del},
 		#{member_idx}, #{board_idx}
 		)
 	</insert>
@@ -129,19 +118,11 @@
 		<include refid="search"></include>
 	</select>
 
-	<!-- 공지글갯수 <select id="getNoticeCount" resultType="int"> <![CDATA[ select 
-		count(notice) from jhbbs_board where notice > 0 and del = 'N' ]]> <include 
-		refid="category"></include> <include refid="search"></include> </select> -->
-
 	<!-- 글비밀번호리턴 -->
 	<select id="getPassword" resultType="String">
 		select pass from
 		jhbbs_comment where comment_idx = #{comment_idx} and del = 'N'
 	</select>
-
-	<!-- <sql id="category"> <if test="category_idx > 0"> AND category_idx = 
-		${category_idx} </if> <if test="category_idx == 0"> AND category_idx > 0 
-		</if> </sql> -->
 
 	<sql id="search">
 		<if test="searchField != null">

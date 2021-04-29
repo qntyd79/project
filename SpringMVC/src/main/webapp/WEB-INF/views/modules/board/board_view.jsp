@@ -27,7 +27,7 @@
                                     <input type="hidden" name="searchField" value="<c:out value="${criteria.searchField}"/>" >
                                     <input type="hidden" name="keyWord" value="<c:out value="${criteria.keyWord}"/>" >
                                     <fieldset>
-                                         <legend><spring:message code="bbs.table.legend"/></legend>
+                                        <legend><spring:message code="bbs.table.legend"/></legend>
                                         <table summary="<spring:message code="bbs.table.summary.view"/>" class="board_detail">
                                             <caption><spring:message code="bbs.table.caption"/></caption>
                                             <colgroup>
@@ -57,7 +57,8 @@
                                                     <td><c:out value="${boardVO.name}" /></td>
                                                     <th><label for="regdate">등록일</label></th>
                                                     <td><fmt:parseDate var="dateString" value="${boardVO.regdate}" pattern="yyyy-MM-dd" />                                                               
-	                                                    <fmt:formatDate value="${dateString}" pattern="yyyy-MM-dd"/></td>
+	                                                    <fmt:formatDate value="${dateString}" pattern="yyyy-MM-dd"/>
+	                                                </td>
                                                     <th><label for="hit">조회수</label></th>
                                                     <td><c:out value="${boardVO.hit}" /></td>
                                                 </tr>

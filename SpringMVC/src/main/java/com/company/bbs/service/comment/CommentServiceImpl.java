@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.company.bbs.dao.comment.CommentDao;
@@ -19,6 +21,10 @@ public class CommentServiceImpl implements CommentService {
 	@Inject
 	CommentDao dao;
 	Criteria criteria;
+	
+	// 암호화 설정 
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
 
 	// 글목록
 	@Override
@@ -31,25 +37,23 @@ public class CommentServiceImpl implements CommentService {
 		return dao.getList(criteria);
 	}
 
-	// 공지글목록
-	/*@Override
-	public List<CommentDto> getNoticeList(Criteria criteria) throws Exception {
-		return dao.getNoticeList(criteria);
-	}*/
-
 	// 글저장
 	@Override
-	public void insert(CommentVO dto) throws Exception {
+	public void insert(CommentVO commentVO) throws Exception {
 
 		// for(int i=1; i <=200; i++) {
-		int comment_idx = dto.getComment_idx();
-		String content = dto.getContent();
-		int parent = dto.getParent();
-		int depth = dto.getDepth();
-		int sortno = dto.getSortno();
-		String del = dto.getDel();
-		int board_idx = dto.getBoard_idx();
+		int comment_idx = commentVO.getComment_idx();
+		String content = commentVO.getContent();
+		int parent = commentVO.getParent();
+		int depth = commentVO.getDepth();
+		int sortno = commentVO.getSortno();
+		String del = commentVO.getDel();
+		int board_idx = commentVO.getBoard_idx();
+		String pass = commentVO.getPass();
 		// int number = 0;
+		
+		// 비밀번호 암호화 
+		//String pwdBycrypt = passwordEncoder.encode(pass);
 
 		// 접속아이피
 		String cipp = InetAddress.getLocalHost().getHostAddress();
@@ -78,7 +82,7 @@ public class CommentServiceImpl implements CommentService {
 
 		// 답글일경우
 		if (comment_idx != 0) {
-			getReply(dto);
+			getReply(commentVO);
 			depth = depth + 1;
 			sortno = sortno + 1;
 			del = "N";
@@ -89,25 +93,26 @@ public class CommentServiceImpl implements CommentService {
 			del = "N";
 		}
 
-		dto.setComment_idx(number);
-		dto.setParent(parent);
-		dto.setDepth(depth);
-		dto.setSortno(sortno);
-		dto.setCipp(cipp);
-		dto.setRegdate(regdate);
-		dto.setDel(del);
-		dto.setContent(content);
-		dto.setBoard_idx(board_idx);
+		commentVO.setComment_idx(number);
+		commentVO.setParent(parent);
+		commentVO.setDepth(depth);
+		commentVO.setSortno(sortno);
+		commentVO.setCipp(cipp);
+		commentVO.setRegdate(regdate);
+		commentVO.setDel(del);
+		commentVO.setContent(content);
+		commentVO.setBoard_idx(board_idx);
+		//commentVO.setPass(pwdBycrypt);
 		// dto.setTitle(i + "번쨰 제목입니다.");
 
-		dao.insert(dto);
+		dao.insert(commentVO);
 		// }
 	}
 
 	// 답글업데이트
 	@Override
-	public void getReply(CommentVO dto) throws Exception {
-		dao.getReply(dto);
+	public void getReply(CommentVO commentVO) throws Exception {
+		dao.getReply(commentVO);
 	}
 
 	// 글보기
@@ -118,11 +123,12 @@ public class CommentServiceImpl implements CommentService {
 
 	// 글수정
 	@Override
-	public void update(CommentVO dto) throws Exception {
+	public void update(CommentVO commentVO) throws Exception {
 		// 접속아이피
 		String cipp = InetAddress.getLocalHost().getHostAddress();
-		dto.setCipp(cipp);
-		dao.update(dto);
+		commentVO.setCipp(cipp);
+		
+		dao.update(commentVO);
 	}
 
 	// 글삭제
@@ -161,22 +167,10 @@ public class CommentServiceImpl implements CommentService {
 		return dao.getCount(criteria);
 	}
 
-	// 공지글갯수
-	/*@Override
-	public int getNoticeCount(Criteria criteria) throws Exception {
-		return dao.getNoticeCount(criteria);
-	}*/
-
 	// 글비밀번호리턴
 	@Override
 	public String getPassword(int comment_idx) throws Exception {
 		return dao.getPassword(comment_idx);
-	}
-
-	// 카테고리목록
-	@Override
-	public List<Object> getCategoryList() throws Exception {
-		return dao.getCategoryList();
 	}
 
 	// 댓글갯수

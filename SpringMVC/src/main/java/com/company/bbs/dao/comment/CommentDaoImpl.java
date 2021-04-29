@@ -34,22 +34,16 @@ public class CommentDaoImpl implements CommentDao {
 		return sqlSession.selectList("comment.getList", criteria);
 	}
 
-	// 공지글목록
-	/*@Override
-	public List<CommentDto> getNoticeList(Criteria criteria) throws Exception {
-		return sqlSession.selectList("comment.getNoticeList", criteria);
-	}*/
-
 	// 글저장
 	@Override
-	public void insert(CommentVO dto) throws Exception {
-		sqlSession.insert("comment.insert", dto);
+	public void insert(CommentVO commentVO) throws Exception {
+		sqlSession.insert("comment.insert", commentVO);
 	}
 
 	// 답글업데이트
 	@Override
-	public void getReply(CommentVO dto) throws Exception {
-		sqlSession.update("comment.getReply", dto);
+	public void getReply(CommentVO commentVO) throws Exception {
+		sqlSession.update("comment.getReply", commentVO);
 	}
 
 	// 글보기
@@ -60,8 +54,8 @@ public class CommentDaoImpl implements CommentDao {
 
 	// 글수정
 	@Override
-	public void update(CommentVO dto) throws Exception {
-		sqlSession.update("comment.update", dto);
+	public void update(CommentVO commentVO) throws Exception {
+		sqlSession.update("comment.update", commentVO);
 	}
 
 	// 글삭제
@@ -110,12 +104,6 @@ public class CommentDaoImpl implements CommentDao {
 	@Override
 	public String getPassword(int comment_idx) throws Exception {
 		return sqlSession.selectOne("comment.getPassword", comment_idx);
-	}
-
-	// 카테고리목록
-	@Override
-	public List<Object> getCategoryList() throws Exception {
-		return sqlSession.selectList("comment.getCategoryList");
 	}
 
 	// 댓글갯수

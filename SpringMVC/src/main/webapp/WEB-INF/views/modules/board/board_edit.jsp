@@ -32,7 +32,7 @@
                                 <input type="hidden" name="keyWord" value="<c:out value="${criteria.keyWord}"/> ">
                                 <input type="hidden" name="msgStr" value="<c:out value="${msg}"/> ">
                                     <fieldset>
-                                         <legend><spring:message code="bbs.table.legend"/></legend>
+                                        <legend><spring:message code="bbs.table.legend"/></legend>
                                         <table summary="<spring:message code="bbs.table.summary.edit"/>" class="board_detail">
                                             <caption><spring:message code="bbs.table.caption"/></caption>
                                             <colgroup>

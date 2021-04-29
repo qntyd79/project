@@ -714,7 +714,7 @@ $(document).ready(function() {
         }
     });	
 		
-    
+    // 검색폼 
     $("#searchForm").validate({
     	ignore : '*:not([name])',
         debug: false,
@@ -751,7 +751,8 @@ $(document).ready(function() {
             }
         }
     });
-
+	
+	// 삭제폼 
     $('#deleteForm').validate({
     	ignore : '*:not([name])',
         debug: false,
@@ -1008,7 +1009,8 @@ $(document).ready(function() {
                 html +="<td> 미리보기 </td>";
                 html +="<td>" + files[i].files[0].name + "</td>";
                 html +="<td>" + fileUnitCheck(files[i].files[0].size) + "</td>";
-                html +="<td>" + files[i].files[0].type + "</td>";
+                //html +="<td>" + files[i].files[0].type + "</td>";
+				html +="<td>" + fileExt(files[i].files[0].name) + "</td>";
                 html +="<td>D</td>";
                 html +="</tr>";
          	
@@ -1120,8 +1122,26 @@ $(document).ready(function() {
         } else {
             check = true;
         }
-        // console.log("파일확장자 체크함수" + check);
+        //console.log("파일확장자 체크함수" + check);
         return check;
+    }
+
+	// 파일확장자
+	function fileExt(filename) {
+
+        var fileLen = filename.length; 
+	    /** 
+	     * lastIndexOf('.') 
+	     * 뒤에서부터 '.'의 위치를 찾기위한 함수
+	     * 검색 문자의 위치를 반환한다.
+	     * 파일 이름에 '.'이 포함되는 경우가 있기 때문에 lastIndexOf() 사용
+	     */
+	    var lastDot = filename.lastIndexOf('.')+1;
+	 
+	    // 확장자 명만 추출한 후 소문자로 변경
+	    var fileExt = filename.substring(lastDot,fileLen).toUpperCase();
+	 
+	    return fileExt;
     }
 
     // 파일 삭제 <input name="files" id="fileupload" type="file" multiple />

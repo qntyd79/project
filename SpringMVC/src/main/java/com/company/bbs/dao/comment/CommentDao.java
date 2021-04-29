@@ -13,20 +13,17 @@ public interface CommentDao {
 	// 글목록
 	public List<CommentVO> getList(Criteria criteria) throws Exception;
 
-	// 공지글목록
-	/*public List<CommentDto> getNoticeList(Criteria criteria) throws Exception;*/
-
 	// 글저장
-	public void insert(CommentVO dto) throws Exception;
+	public void insert(CommentVO commentVO) throws Exception;
 
 	// 답글업데이트
-	public void getReply(CommentVO dto) throws Exception;
+	public void getReply(CommentVO commentVO) throws Exception;
 
 	// 글보기
 	public CommentVO getView(int comment_idx) throws Exception;
 
 	// 글수정
-	public void update(CommentVO dto) throws Exception;
+	public void update(CommentVO commentVO) throws Exception;
 
 	// 글삭제
 	public void delete(int comment_idx) throws Exception;
@@ -46,15 +43,9 @@ public interface CommentDao {
 	// 글갯수
 	public int getCount(Criteria criteria) throws Exception;
 
-	// 공지글갯수
-	/*public int getNoticeCount(Criteria criteria) throws Exception;*/
-
 	// 글비밀번호리턴
 	public String getPassword(int comment_idx) throws Exception;
 
-	// 카테고리목록
-	public List<Object> getCategoryList() throws Exception;
-	
 	// 댓글갯수
 	public int getCommentCount(int board_idx) throws Exception;
 
