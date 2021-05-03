@@ -61,7 +61,7 @@ public class CommentController {
 	// 유효성검사
 	@Autowired
 	private DefaultBeanValidator beanValidator;
-
+	
 	// 클라이언트측 유효성검증 설정
 	@RequestMapping(value = "validator.do")
 	protected String getValidator() throws Exception {
@@ -371,7 +371,15 @@ public class CommentController {
 	
 	// ajax 글목록
 	@RequestMapping(value = "ajaxlist.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String List() {
+	public String List(
+			Model model,
+			@ModelAttribute CommentVO commentVO
+			) throws Exception {
+
+		logger.info("댓글쓰기");
+		
+		model.addAttribute("CommentVO", commentVO);				
+		
 		return "modules/comment/ajax_comment_list";
 	}
 

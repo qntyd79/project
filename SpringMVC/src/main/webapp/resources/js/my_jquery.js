@@ -415,6 +415,11 @@ $(document).ready(function() {
         }
         return true;
     }, 'Invalid IP Address');
+	
+	// 이메일 
+	$.validator.addMethod("emailck", function(value, element) {
+        return this.optional(element) || /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/.test(value);
+    });
 
     // 영문만
     $.validator.addMethod("alpha", function(value, element) {
@@ -452,7 +457,7 @@ $(document).ready(function() {
     });
    
     // 비밀번호 체크
-    $.validator.addMethod("passwordCk",  function(value, element ) {
+    $.validator.addMethod("passwordck",  function(value, element ) {
     	return this.optional(element) ||  /^.*(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/.test(value);
     });
     
@@ -480,19 +485,17 @@ $(document).ready(function() {
 	$.validator.addMethod("selectCheck", function (value, element) {
         return (value != '이벤트 선택 하세요');
  	});
-    // ckeditor 
-	/* 추후 삭제 예정 적용안됨 
-    $.validator.addMethod("check_ck_add_method", function(value, element) {
-    	return check_ck_editor();
-    });
-
-    function check_ck_editor() {
-    	var ckeditor = CKEDITOR.instances.content.updateElement(); // update textarea
-    	if (ckeditor == '' || ckeditor.length ==0) {
-    		return false;
-        } 
-    }    
-	*/
+    	
+	// content에 내용입력시 에러메세지 안보임처리 
+	function ckeditor(){		
+		CKEDITOR.instances.content.on('change', function() {    
+			if(CKEDITOR.instances.content.getData().length >  0) {
+			    $('label[for="content"]').hide();
+			} else {
+				$('label[for="content"]').show();
+			}
+		});			
+	}
 	
 	$("#writeForm").validate({
     	ignore : '*:not([name])',
@@ -523,11 +526,12 @@ $(document).ready(function() {
             pass: {
                 required: true,
                 rangelength: [4,15],
-                passwordCk: true
+                passwordck: true
             },
             email: {
-                required: true,
-                minlength: 2
+                required: true,				
+                emailck: true,
+				minlength: 2
             },
  			homepage: {
                 required: true,
@@ -570,18 +574,16 @@ $(document).ready(function() {
             name: {
                 required: "이름을 입력하세요",
                 minlength: $.validator.format("이름은 최소{0}글자 이상 입력하세요.")
-
             },
             pass: {
                 required: "비밀번호를 입력하세요",
                 rangelength: $.validator.format("패스워드는 최소{0}글자 이상 {1}글자 이하로 입력하세요."),
-                passwordCk: "비밀번호는 영문대소문자,숫자,특수문자를 반드시 입력해주시기 바랍니다."
-
+                passwodck: "비밀번호는 영문대소문자,숫자,특수문자를 반드시 입력해주시기 바랍니다."
             },
             email: {
                 required: "이메일을 입력하세요",
                 minlength: $.validator.format("이메일은 최소{0}글자 이상 입력하세요."),
-                email: "올바른 이메일 주소가 아닙니다."
+                emailck: "올바른 이메일 주소가 아닙니다."
             },
 			homepage: {
                 required: "홈페이지 주소를 입력하세요",
@@ -610,15 +612,8 @@ $(document).ready(function() {
         errorPlacement: function(error, element) {
             var trigger = element.next('.ui-datepicker-trigger');
                 error.insertAfter(trigger.length > 0 ? trigger : element);
-			
-			// content에 내용입력시 에러메세지 안보임처리 
-			CKEDITOR.instances.content.on('change', function() {    
-			    if(CKEDITOR.instances.content.getData().length >  0) {
-			      $('label[for="content"]').hide();
-			    } else {
-				  $('label[for="content"]').show();
-				}
-			});
+			// 함수적용 
+			ckeditor();
         }, 
 		// 에러메세지 표시 설정 : 주석처리하면 에러메세지 보여짐 
 		/* errorPlacement: function(error, element) {
@@ -641,6 +636,7 @@ $(document).ready(function() {
             }
         }
     });	
+	
 
 	$("#categoryForm").validate({
     	ignore : '*:not([name])',
@@ -674,13 +670,11 @@ $(document).ready(function() {
             name: {
                 required: "이름을 입력하세요",
                 minlength: $.validator.format("이름은 최소{0}글자 이상 입력하세요.")
-
             },
             pass: {
                 required: "비밀번호를 입력하세요",
                 rangelength: $.validator.format("패스워드는 최소{0}글자 이상 {1}글자 이하로 입력하세요."),
                 passwordCk: "비밀번호는 영문대소문자,숫자,특수문자를 반드시 입력해주시기 바랍니다."
-
             },            
             kind: {
 				required: "분류를 추가할 항목을 선택해주세요."
@@ -695,7 +689,6 @@ $(document).ready(function() {
 			}
         },		
 		// 에러메세지 표시 설정 : 주석처리하면 에러메세지 보여짐 
-		
         invalidHandler: function(form, validator) {
             var errors = validator.numberOfInvalids();
             if (errors) {
@@ -769,7 +762,6 @@ $(document).ready(function() {
                 required: "비밀번호를 입력하세요",
                 rangelength: $.validator.format("패스워드는 최소{0}글자 이상 {1}글자 이하로 입력하세요."),
                 passwordCk: "비밀번호는 영문대소문자,숫자,특수문자를 반드시 입력해주시기 바랍니다."
-
             }
         },
 		// 에러메세지 표시 설정 : 주석처리하면 에러메세지 표지
@@ -795,6 +787,25 @@ $(document).ready(function() {
     });
 
     /*
+
+	$('#form').validate({
+    	ignore : '*:not([name])',
+        debug: false,
+        onfocusout: false,
+        rules: {
+            pass: {
+                required: true,
+                rangelength: [4,15],
+                passwordCk: true
+            }
+        },
+        messages: {
+             pass: {
+                required: "비밀번호를 입력하세요",
+                rangelength: $.validator.format("패스워드는 최소{0}글자 이상 {1}글자 이하로 입력하세요."),
+                passwordCk: "비밀번호는 영문대소문자,숫자,특수문자를 반드시 입력해주시기 바랍니다."
+            }
+        },
         errorElement: "em",
         errorPlacement: function ( error, element ) {
             // Add the `help-block` class to the error element
@@ -810,7 +821,7 @@ $(document).ready(function() {
         },
         unhighlight: function (element, errorClass, validClass) {
             $( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
-        }
+        },
         
         errorPlacement: function (error, element) {
             // $(element).removeClass('error');
@@ -837,6 +848,7 @@ $(document).ready(function() {
                 }
             });
         }
+  	});
     */
 
 
