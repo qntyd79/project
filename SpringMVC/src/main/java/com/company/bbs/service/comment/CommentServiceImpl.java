@@ -53,13 +53,13 @@ public class CommentServiceImpl implements CommentService {
 		// int number = 0;
 		
 		// 비밀번호 암호화 
-		//String pwdBycrypt = passwordEncoder.encode(pass);
+		String pwdBycrypt = passwordEncoder.encode(pass);
 
 		// 접속아이피
 		String cipp = InetAddress.getLocalHost().getHostAddress();
 
 		// 날짜변수
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date currentTime = new Date();
 		String regdate = formatter.format(currentTime);
 
@@ -102,7 +102,7 @@ public class CommentServiceImpl implements CommentService {
 		commentVO.setDel(del);
 		commentVO.setContent(content);
 		commentVO.setBoard_idx(board_idx);
-		//commentVO.setPass(pwdBycrypt);
+		commentVO.setPass(pwdBycrypt);
 		// dto.setTitle(i + "번쨰 제목입니다.");
 
 		dao.insert(commentVO);

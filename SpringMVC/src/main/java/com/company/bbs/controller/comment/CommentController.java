@@ -382,5 +382,37 @@ public class CommentController {
 		
 		return "modules/comment/ajax_comment_list";
 	}
+	
+	// ajax 글수정 
+	@RequestMapping(value = "ajaxmodify.do", method = RequestMethod.GET)
+	public ModelAndView Reply(
+			@RequestParam int comment_idx
+			) throws Exception {
+		
+		logger.info("댓글수정");
+
+		ModelAndView mav = new ModelAndView();
+			
+		mav.addObject("commentVO", service.getView(comment_idx));
+		mav.setViewName("modules/comment/ajax_comment_edit");
+
+		return mav;
+	}
+	
+	// ajax 댓글답글쓰기
+	@RequestMapping(value = "ajaxreply.do", method = RequestMethod.GET)
+	public ModelAndView Modify(
+			@RequestParam int comment_idx
+			) throws Exception {
+
+		logger.info("댓글답글쓰기");
+
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("commentVO", service.getView(comment_idx));
+		mav.setViewName("modules/comment/ajax_comment_reply");
+
+		return mav;
+	}
 
 }

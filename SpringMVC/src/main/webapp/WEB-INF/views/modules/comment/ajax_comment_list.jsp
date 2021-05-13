@@ -98,7 +98,6 @@
 </div>
 <c:import url="/WEB-INF/views/include/footer.jsp"/>
 
-<c:import url="ajax_comment_reply.jsp"/>
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -163,7 +162,7 @@
 	                    "<h1 class='title'><p class='modifyname'>" + icon + this.name + "</p></h1>" +
 	                    "<div class='modifycontent'>" + this.content + "</div>" +
 	                    "<h3 class='desc text-left' style='padding-top:20px;'>" + this.regdate + "</h3>" +
-	                    "<input type='button' value='수정하기' id='modifyBtn'> " +
+	                    "<input type='button' value='수정하기작업중' id='modifyBtn'> " +
 	                    "<input type='button' value='삭제하기' id='deleteBtn'> " +
 	                    "<input type='button' value='댓글달기' id='replyBtn'>" +
 	                    "</div>" +
@@ -214,67 +213,89 @@
 	        });
 	    }
 		
-	//댓글등록    	
-	$("#writeBtn").on("click",function(){
-
-		var isValid = $("#writeForm").validate().form();
-		
-		if (isValid == true){ //true 반환 
-    		
-   			CKupdate();
-			    
-		    //화면입력값 변수처리
-		    var userid = $("#userid").val();
-		    var pass = $("#pass").val();
-		    var name = $("#name").val();
-		    var email = $("#email").val();
-		    var content = $("#content").val();
-				
-				//ajax
-			    $.ajax({
-			    	type: "POST",
-			        url: "ajaxInsert",
-			        headers: { "Content-Type": "application/json", "X-HTTP-Method-Override": "POST" },
-			        dataType: "text",
-			        data: JSON.stringify({ // stringify는 json개체를 string개체로 변환
-			        userid: userid,
-			        pass: pass,
-			        name: name,
-			        email: email,
-			        content: content,
-			        board_idx: 1
-			    }),
-			    success: function(result) {
-				    //서비스 성공 시 처리 할 내용
-				    if (result == "insertSuccess") {
-				      	alert("댓글등록 완료");
+		//댓글등록    	
+		$("#writeBtn").on("click",function(){
+	
+			var isValid = $("#writeForm").validate().form();
+			
+			if (isValid == true){ //true 반환 
+	    		
+	   			CKupdate();
+				    
+			    //화면입력값 변수처리
+			    var userid = $("#userid").val();
+			    var pass = $("#pass").val();
+			    var name = $("#name").val();
+			    var email = $("#email").val();
+			    var content = $("#content").val();
+					
+					//ajax
+				    $.ajax({
+				    	type: "POST",
+				        url: "ajaxInsert",
+				        headers: { "Content-Type": "application/json", "X-HTTP-Method-Override": "POST" },
+				        dataType: "text",
+				        data: JSON.stringify({ // stringify는 json개체를 string개체로 변환
+				        userid: userid,
+				        pass: pass,
+				        name: name,
+				        email: email,
+				        content: content,
+				        board_idx: 1
+				    }),
+				    success: function(result) {
+					    //서비스 성공 시 처리 할 내용
+					    if (result == "insertSuccess") {
+					      	alert("댓글등록 완료");
+					    }
+					    //댓글목록출력
+					    getPageList(1);
+	
+					    //댓글입력폼 초기화
+					    $("#userid").val("");
+					    $("#pass").val("");
+					    $("#name").val("");
+					    $("#email").val("");
+					    $("#answer").val("");           
+					    CKreset(); 
+	
+				    },
+				    error: function(request, status, error) {
+				        // 서비스 실패 시 처리 할 내용
+				    	alert("댓글등록 실패");
 				    }
-				    //댓글목록출력
-				    getPageList(1);
-
-				    //댓글입력폼 초기화
-				    $("#userid").val("");
-				    $("#pass").val("");
-				    $("#name").val("");
-				    $("#email").val("");
-				    $("#answer").val("");           
-				    CKreset(); 
-
-			    },
-			    error: function(request, status, error) {
-			        // 서비스 실패 시 처리 할 내용
-			    	alert("댓글등록 실패");
-			    }
-			}); //ajax종료 	
-
-			return false;
-	   } 
-
-	});
+				}); //ajax종료 	
 	
-	    //댓글목록에서 수정하기 버튼 클릭시 
+				return false;
+		   } 
+	
+		});
+
+		 //댓글목록에서 수정하기 버튼 클릭시 - window.open실행 
+		$("#replies").on("click", "#modifyBtn", function() {
+	    	//화면입력값 변수처리
+	        var comment = $(this).parent().parent();
+	        var comment_idx = comment.attr("data-rno");
+	    	//console.log(comment_idx);
+			openModify(comment_idx);
+	    });
+	    
+	    function openModify(val) {	
+		    var comment_idx = val;    	 
+	        var _width = '910';
+	        var _height = '550';
+	     
+	        // 팝업을 가운데 위치시키기 위해 아래와 같이 값 구하기
+	        var _left = Math.ceil(( window.screen.width - _width )/2);
+	        var _top = Math.ceil(( window.screen.height - _height )/2); 
+	     
+	        window.open('/modules/comment/ajaxmodify.do?comment_idx=' + comment_idx + '', '댓글수정', 'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top +', location=no, resizable=no' );
+	    }
+	
+	    //댓글목록에서 수정하기 버튼 클릭시 - 모달창 실행 
+	    /*
 	    $("#replies").on("click", "#modifyBtn", function() {
-	
+			
 	        // 모달창 뛰우기 
 	        $('.modal-box').addClass('modal-on');
 	        $('.modal-back').addClass('back-on');
@@ -289,8 +310,7 @@
 	            url: "${path}/modules/comment/ajaxlist/read/" + comment_idx,
 	            headers: { "Content-Type": "application/json", "X-HTTP-Method-Override": "GET" },
 	            dataType: "json",
-	            success: function(result) {
-	
+	            success: function(result) {	
 	                //서비스 성공 시 처리 할 내용                  
 	                $("#replycomment_idx").val(result.comment_idx);
 	                $("#replyuserid").val(result.userid);
@@ -300,56 +320,60 @@
 	                var html = $("#replyeditor").val(result.content);
 	                CKEDITOR.instances['replyeditor'].setData(html);
 	            },
-	            error: function(request, status, error) {
-	
+	            error: function(request, status, error) {	
 	                //서비스 실패 시 처리 할 내용              
 	                alert("댓글보기 실패");
 	            }
 	        });
 	    });
+	    */
 	
-	    //모달댓글수정
+	    //모달창에서 수정버튼 클릭시 수정 처리 
 	    $("#modifyBtn").on("click", function() {
-	
-	        CKupdate();
-	
-	        //화면입력값 변수처리
-	        var comment_idx = $("#replycomment_idx").val();
-	        var email = $("#replyemail").val();
-	        var content = $("#editor1").val();
-	
-	        //ajax통신
-	        $.ajax({
-	            type: "PUT",
-	            url: "${path}/modules/comment/ajaxlist/modify/" + comment_idx,
-	            headers: { "Content-Type": "application/json", "X-HTTP-Method-Override": "PUT" },
-	            dataType: "text",
-	            data: JSON.stringify({ //stringify는 json개체를 string개체로 변환
-	                comment_idx: comment_idx,
-	                email: email,
-	                content: content
-	            }),
-	            success: function(result) {
-	
-	                //서비스 성공 시 처리 할 내용
-	                if (result == "modifySuccess") {
-	                    alert("댓글수정 완료");
-	                    $('.modal-box').removeClass('modal-on');
-	                    $('.modal-back').removeClass('back-on');
-	                    $('body').removeClass('body-lock');
-	                }
-	
-	                //댓글목록출력
-	                getPageList(1);
-	            },
-	            error: function(request, status, error) {	
-	                //서비스 실패 시 처리 할 내용
-	                alert("댓글수정 실패");
-	            }
-	        });
+	    	    	
+	    	var isValid = $("#writeForm").validate().form();
+			
+			if (isValid == true){ //true 반환
+				
+		        CKupdate();
+		
+		        //화면입력값 변수처리
+		        var comment_idx = $("#comment_idx").val();
+		        var email = $("#email").val();
+		        var content = $("#content").val();
+		
+		        //ajax통신
+		        $.ajax({
+		            type: "PUT",
+		            url: "${path}/modules/comment/ajaxlist/modify/" + comment_idx,
+		            headers: { "Content-Type": "application/json", "X-HTTP-Method-Override": "PUT" },
+		            dataType: "text",
+		            data: JSON.stringify({ //stringify는 json개체를 string개체로 변환
+		                comment_idx: comment_idx,
+		                email: email,
+		                content: content
+		            }),
+		            success: function(result) {		
+		                //서비스 성공 시 처리 할 내용
+		                if (result == "modifySuccess") {
+		                    alert("댓글수정 완료");
+		                    $('.modal-box').removeClass('modal-on');
+		                    $('.modal-back').removeClass('back-on');
+		                    $('body').removeClass('body-lock');
+		                }		
+		                //댓글목록출력
+		                getPageList(1);
+		            },
+		            error: function(request, status, error) {	
+		                //서비스 실패 시 처리 할 내용
+		                alert("댓글수정 실패");
+		            }
+		        });
+	        	return false;
+			} 
 	    });
 	
-	    //목록댓글삭제 
+	    //댓글목록에서 삭제버튼 클릭 시 삭제처리  
 	    $("#replies").on("click", "#deleteBtn", function() {
 	
 	        //화면입력값 변수처리
@@ -365,27 +389,46 @@
 	            data: JSON.stringify({
 	                comment_idx: comment_idx
 	            }),
-	            success: function(result) {
-	
+	            success: function(result) {	
 	                //서비스 성공 시 처리 할 내용
 	                if (result == "deleteSuccess") {
 	                    alert("댓글삭제 완료");
-	                }
-	
+	                }	
 	                //댓글목록출력
 	                getPageList(1);
 	            },
-	            error: function(request, status, error) {
-	
+	            error: function(request, status, error) {	
 	                // 서비스 실패 시 처리 할 내용
 	                alert("댓글삭제 실패");
 	            }
 	        });
 	    });
-	
-	    //댓글목록에서 답글하기 버튼 클릭시 답글등록창 실행 
+
+	  	//댓글목록에서 답글하기 버튼 클릭시 답글등록창 실행 - window.open 실행 
 	    $("#replies").on("click", "#replyBtn", function() {
-	
+	    	//화면입력값 변수처리
+	        var comment = $(this).parent().parent();
+	        var comment_idx = comment.attr("data-rno");
+	    	//console.log(comment_idx);
+			openReply(comment_idx);
+	    });
+	    
+	    function openReply(val) {	
+		    var comment_idx = val;    	 
+	        var _width = '910';
+	        var _height = '550';
+	     
+	        // 팝업을 가운데 위치시키기 위해 아래와 같이 값 구하기
+	        var _left = Math.ceil(( window.screen.width - _width )/2);
+	        var _top = Math.ceil(( window.screen.height - _height )/2); 
+	     
+	        window.open('/modules/comment/ajaxreply.do?comment_idx=' + comment_idx + '', '답글등록', 'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top +', location=no, resizable=no' );    
+	    }
+	    
+	    //댓글목록에서 답글하기 버튼 클릭시 답글등록창 실행 - 모달창 실행 
+	   	/*
+	    $("#replies").on("click", "#replyBtn", function() {
+	    	
 	        // 모달창 뛰우기 
 	        $('.modal-box').addClass('modal-on');
 	        $('.modal-back').addClass('back-on');
@@ -415,8 +458,9 @@
 	            }
 	        });
 	    });
+	    */	  	
 	
-	    //답글달기 
+	    //모달창에서 답글버튼 클릭 시 답글등록 처리  
 	    $("#replyBtn").on("click", function() {
 	
 	        CKupdate();

@@ -578,7 +578,7 @@ $(document).ready(function() {
             pass: {
                 required: "비밀번호를 입력하세요",
                 rangelength: $.validator.format("패스워드는 최소{0}글자 이상 {1}글자 이하로 입력하세요."),
-                passwodck: "비밀번호는 영문대소문자,숫자,특수문자를 반드시 입력해주시기 바랍니다."
+                passwordck: "비밀번호는 영문대소문자,숫자,특수문자를 반드시 입력해주시기 바랍니다."
             },
             email: {
                 required: "이메일을 입력하세요",
