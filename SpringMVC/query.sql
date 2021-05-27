@@ -12,8 +12,9 @@ SELECT * FROM mydb.jhbbs_board;
 
 ALTER TABLE `mydb`.`JHBBS_board` AUTO_INCREMENT=1;
 
-SELECT * FROM mydb.jhbbs_comment;
+SELECT * FROM mydb.jhbbs_comment;JHBBS_category
 
+Select * from mydb.JHBBS_category;
 ALTER TABLE `mydb`.`JHBBS_comment` AUTO_INCREMENT=1;
 
 DELETE FROM `mydb`.`jhbbs_board` WHERE (`board_idx` = '1016');
@@ -55,7 +56,9 @@ select max(board_idx) from mydb.jhbbs_bbs_board;
 DELETE FROM `mydb`.`JHBBS_board` WHERE `board_idx`='7';
 
 /* 테이블 초기화 */
-truncate mydb.jhbbs_board;
+truncate mydb.jhbbs_attach;
 
 ALTER TABLE `mydb`.`JHBBS_category` CHANGE COLUMN `idx` `kind` INT(10) NULL DEFAULT NULL ;
+
+UPDATE `mydb`.`JHBBS_comment` SET `email` = 'qntyd79@naver.com' WHERE (`comment_idx` = '4');
 

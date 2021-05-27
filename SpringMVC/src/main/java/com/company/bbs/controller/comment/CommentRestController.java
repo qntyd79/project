@@ -52,7 +52,7 @@ public class CommentRestController {
 		}
 
 		return entity;
-	}
+	}	
 	
 	// 댓글목록
 	@ResponseBody

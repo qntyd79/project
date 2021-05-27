@@ -383,9 +383,9 @@ public class CommentController {
 		return "modules/comment/ajax_comment_list";
 	}
 	
-	// ajax 글수정 
+	// ajax 글수정폼  
 	@RequestMapping(value = "ajaxmodify.do", method = RequestMethod.GET)
-	public ModelAndView Reply(
+	public ModelAndView Modify(
 			@RequestParam int comment_idx
 			) throws Exception {
 		
@@ -399,9 +399,9 @@ public class CommentController {
 		return mav;
 	}
 	
-	// ajax 댓글답글쓰기
+	// ajax 댓글답글쓰기폼 
 	@RequestMapping(value = "ajaxreply.do", method = RequestMethod.GET)
-	public ModelAndView Modify(
+	public ModelAndView Reply(
 			@RequestParam int comment_idx
 			) throws Exception {
 

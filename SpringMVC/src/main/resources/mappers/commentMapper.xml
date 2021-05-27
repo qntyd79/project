@@ -58,7 +58,6 @@
 	<!-- 글수정 -->
 	<update id="update">
 		update jhbbs_comment set
-		email=#{email},
 		content=#{content},
 		cipp=#{cipp}
 		where

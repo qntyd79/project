@@ -68,7 +68,7 @@
                                         </table>
                                         <nav class="btn-group">
 											<ul>
-												<li><input type="button" value="<spring:message code="button.create"/>" id="modifyBtn" onclick="$(this.form).submit()" /></li>
+												<li><input type="button" value="<spring:message code="button.create"/>" id="modifyBtn" /></li>
 												<li><input type="button" value="<spring:message code="button.close"/>" id="closeBtn" onclick="self.close()" /></li>												
 											</ul>
 										</nav>
@@ -99,23 +99,21 @@
 		
 		        //화면입력값 변수처리
 		        var comment_idx = $("#comment_idx").val();
-		        //var email = $("#email").val();
 		        var content = $("#content").val();
 		
 		        //ajax통신
 		        $.ajax({
-		            type: "PUT",
+		        	type: "PUT",
 		            url: "${path}/modules/comment/ajaxlist/modify/" + comment_idx,
 		            headers: { "Content-Type": "application/json", "X-HTTP-Method-Override": "PUT" },
 		            dataType: "text",
 		            data: JSON.stringify({ //stringify는 json개체를 string개체로 변환
 		                comment_idx: comment_idx,
-		                //email: email,
 		                content: content
 		            }),
 		            success: function(result) {		
 		                //서비스 성공 시 처리 할 내용
-		                if (result == "insertSuccess") {
+		                if (result == "modifySuccess") {
 		                    alert("댓글수정 완료");
 		                    opener.document.location.reload();
 		                    window.close();
@@ -125,12 +123,12 @@
 		                //서비스 실패 시 처리 할 내용
 		                alert("댓글수정 실패");
 		            }
-		        });
+		        }); //ajax종료 	
+		        
 	        	return false;
 			} 
 	    });
-	
-	
+		
 	    //AJAX 로 폼의 데이터를 전송할 때 CKEDITOR로 변환 된 textarea값을 다시 변경해줘야 데이터가 전달된다.
 	    function CKupdate() {
 	        for (instance in CKEDITOR.instances)

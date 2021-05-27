@@ -120,7 +120,7 @@
 	                    "<ul class='content-data-1'>" +
 	                    "<li data-rno='" + this.comment_idx + "'>" +
 	                    "<div class='text-left'>" +
-	                    "<h1 class='title'><p class='modifyname'>" + this.name + "</p></h1>" +
+	                    "<h1 class='title'><p class='modifyname' style='font-weight:400;'>" + this.name + "</p></h1>" +
 	                    "<div class='modifycontent'>" + this.content + "</div>" +
 	                    "<h3 class='desc text-left' style='padding-top:20px;'>" + this.regdate + "</h3>" +
 	                    "<input type='button' value='수정하기' class='modal-open-btn'> " +
@@ -159,10 +159,10 @@
 	                    "<ul class='content-data-1'>" +
 	                    "<li data-rno='" + this.comment_idx + "'>" +
 	                    "<div class='text-left'>" +
-	                    "<h1 class='title'><p class='modifyname'>" + icon + this.name + "</p></h1>" +
+	                    "<h1 class='title'><p class='modifyname' style='font-weight:400;'>" + icon + this.name + "</p></h1>" +
 	                    "<div class='modifycontent'>" + this.content + "</div>" +
 	                    "<h3 class='desc text-left' style='padding-top:20px;'>" + this.regdate + "</h3>" +
-	                    "<input type='button' value='수정하기작업중' id='modifyBtn'> " +
+	                    "<input type='button' value='수정하기' id='modifyBtn'> " +
 	                    "<input type='button' value='삭제하기' id='deleteBtn'> " +
 	                    "<input type='button' value='댓글달기' id='replyBtn'>" +
 	                    "</div>" +
