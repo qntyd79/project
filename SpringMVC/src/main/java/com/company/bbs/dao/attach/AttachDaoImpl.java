@@ -20,6 +20,13 @@ public class AttachDaoImpl implements AttachDao {
 		return sqlSession.selectList("attach.getList", criteria);
 	}
 	
+	// 글목록
+	@Override
+	public List<AttachVO> getFileList(int board_idx) throws Exception {
+		return sqlSession.selectList("attach.getFileList", board_idx);
+	}
+		
+	
 	// 글저장 
 	@Override
 	public void insert(AttachVO attachVO) throws Exception {

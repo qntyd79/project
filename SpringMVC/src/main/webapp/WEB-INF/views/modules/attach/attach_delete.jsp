@@ -6,7 +6,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="validator" uri="http://www.springmodules.org/tags/commons-validator" %>
 <script type="text/javascript" src="<c:url value="validator.do"/>"></script>
-<validator:javascript formName="boardVO" staticJavascript="false" xhtml="true" cdata="false"/>
+<validator:javascript formName="attachVO" staticJavascript="false" xhtml="true" cdata="false"/>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <c:import url="/WEB-INF/views/include/header.jsp"/>
@@ -25,7 +25,7 @@
                             
                                 <h2><spring:message code="bbs.title.delete"/></h2>
                                 <form method="post" id="deleteForm" name="deleteForm" enctype="multipart/form-data" action="delete.do">
-									<input type="hidden" name="board_idx" value="<c:out value="${boardVO.board_idx}"/>" >
+									<input type="hidden" name="file_idx" value="<c:out value="${attachVO.file_idx}"/>" >
 						        	<input type="hidden" name="page" value="<c:out value="${criteria.page}"/>" >
 						       	 	<input type="hidden" name="perPageNum" value="<c:out value="${criteria.perPageNum}"/>" >
 						        	<input type="hidden" name="searchField" value="<c:out value="${criteria.searchField}"/>" >

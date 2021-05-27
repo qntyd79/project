@@ -42,21 +42,21 @@
                                             </colgroup>
                                             <tbody>
                                                 <tr>
-                                                	<th><label for="hit">분류</label></th>
+                                                	<th><label for="category_idx"><spring:message code="label.category_idx"/></label></th>
                                                     <td><c:out value="${categoryVO.title}" /></td>
-                                                    <th><label for="name">작성자</label></th>
+                                                    <th><label for="name"><spring:message code="label.name"/></label></th>
                                                     <td><c:out value="${categoryVO.name}" /></td>
-                                                    <th><label for="regdate">등록일</label></th>
+                                                    <th><label for="regdate"><spring:message code="label.regdate"/></label></th>
                                                     <td><fmt:parseDate var="dateString" value="${categoryVO.regdate}" pattern="yyyy-MM-dd" />                                                               
 	                                                    <fmt:formatDate value="${dateString}" pattern="yyyy-MM-dd"/></td>
-                                                    <th><label for="hit">조회수</label></th>
+                                                    <th><label for="hit"><spring:message code="label.hit"/></label></th>
                                                     <td><c:out value="${categoryVO.hit}" /></td>
                                                 </tr>                                                                                                                                          
                                                 <tr>
-                                                    <th><label for="pre">이전글 </label></th>
+                                                    <th><label for="pre"><spring:message code="label.pre"/></label></th>
                                                     <td colspan="7" class="text-left">
                                                         <c:choose>
-                                                            <c:when test="${prenum.category_idx ne null}"><a href="read.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&board_idx=<c:out value="${prenum.category_idx}" />"><c:out value="${prenum.title}" /></a>
+                                                            <c:when test="${prenum.category_idx ne null}"><a href="read.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&category_idx=<c:out value="${prenum.category_idx}" />"><c:out value="${prenum.title}" /></a>
                                                             </c:when>
                                                             <c:otherwise>
                                                                 	이전글이 없습니다.
@@ -65,10 +65,10 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th><label for="next">다음글 </label></th>
+                                                    <th><label for="next"><spring:message code="label.next"/></label></th>
                                                     <td colspan="7" class="text-left">
                                                         <c:choose>
-                                                            <c:when test="${nextnum.category_idx ne null}"><a href="read.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&board_idx=<c:out value="${nextnum.category_idx}" />"><c:out value="${nextnum.title}" /></a>
+                                                            <c:when test="${nextnum.category_idx ne null}"><a href="read.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&category_idx=<c:out value="${nextnum.category_idx}" />"><c:out value="${nextnum.title}" /></a>
                                                             </c:when>
                                                             <c:otherwise>
                                                                	 다음글이 없습니다.
@@ -77,7 +77,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th><label for="next">접속아이피</label></th>
+                                                    <th><label for="cipp"><spring:message code="label.cipp"/></label></th>
                                                     <td colspan="7" class="text-left">
                                                         <c:out value="${categoryVO.cipp}" />
                                                     </td>
@@ -87,9 +87,9 @@
                                         <nav class="btn-group">
 											<ul>												
 												<li><input type="button" value="<spring:message code="button.list"/>" onClick="location.href='list.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&kind=${criteria.kind}'" /></li>
-										        <li><input type="button" value="<spring:message code="button.update"/>" onClick="location.href='modify.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&board_idx=<c:out value="${categoryVO.category_idx}" />&category_idx=<c:out value="${categoryVO.category_idx}" />'" /></li>
-										        <li><input type="button" value="<spring:message code="button.reply"/>" onClick="location.href='reply.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&board_idx=<c:out value="${categoryVO.category_idx}" />'" /></li>
-										        <li><input type="button" value="<spring:message code="button.delete"/>" onClick="location.href='delete.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&board_idx=<c:out value="${categoryVO.category_idx}" />'" /></li>
+										        <li><input type="button" value="<spring:message code="button.update"/>" onClick="location.href='modify.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&category_idx=<c:out value="${categoryVO.category_idx}" />&board_idx=<c:out value="${categoryVO.board_idx}" />'" /></li>
+										        <li><input type="button" value="<spring:message code="button.reply"/>" onClick="location.href='reply.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&board_idx=<c:out value="${categoryVO.board_idx}" />'" /></li>
+										        <li><input type="button" value="<spring:message code="button.delete"/>" onClick="location.href='delete.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&board_idx=<c:out value="${categoryVO.board_idx}" />'" /></li>
 											</ul>
 										</nav>                                       
                                         <!--<c:import url="/WEB-INF/views/modules/common/common_btn.jsp"/> -->                                       

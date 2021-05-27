@@ -79,6 +79,7 @@ file_hash_name 	VARCHAR(255) NOT NULL,
 file_size 		VARCHAR(100) NOT NULL,
 file_type		VARCHAR(100) NOT NULL,
 file_ext		VARCHAR(100) NOT NULL,
+file_index		INT(10) NOT NULL,
 download 		INT(10) NOT NULL,  
 regdate 		DATETIME NOT NULL,
 del 			VARCHAR(2) NOT NULL DEFAULT 'N',
@@ -86,13 +87,14 @@ board_idx 		INT(10) NOT NULL,
 PRIMARY KEY (file_idx)
 );
 
-CREATE TABLE IF NOT EXISTS  mydb.JHBBS_attach_back(
+CREATE TABLE IF NOT EXISTS  mydb.JHBBS_attach(
 file_idx		INT(10) NOT NULL AUTO_INCREMENT,
 file_name 		VARCHAR(255) NOT NULL,
 file_hash_name 	VARCHAR(255) NOT NULL,
 file_size 		VARCHAR(100) NOT NULL,
 file_type		VARCHAR(100) NOT NULL,
 file_ext		VARCHAR(100) NOT NULL,
+file_index		INT(10) NOT NULL,
 download 		INT(10) NOT NULL,
 userid			VARCHAR(100),
 name 			VARCHAR(100) NOT NULL,

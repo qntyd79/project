@@ -38,15 +38,15 @@
                                             </colgroup>
                                             <tbody>
                                                 <tr>
-                                                    <th><label for="userid"> 아이디 </label></th>
+                                                    <th><label for="userid"><spring:message code="label.userid"/></label></th>
                                                     <td class="text-left"><c:out value="${commentVO.userid}" /></td>
-                                                    <th><label for="pass"> 비밀번호 </label></th>
+                                                    <th><label for="pass"><spring:message code="label.pass"/></label></th>
                                                     <td class="text-left"><input name="pass" type="password" placeholder="Password" class="wfull"/> <form:errors path="pass" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <th><label for="name"> 이름</label></th>
+                                                    <th><label for="name"><spring:message code="label.name"/></label></th>
                                                     <td class="text-left"><c:out value="${commentVO.name}" /></td>
-                                                    <th scope="row"><label for="email"> 이메일 </label></th>
+                                                    <th scope="row"><label for="email"><spring:message code="label.email"/></label></th>
                                                     <td class="text-left"><c:out value="${commentVO.email}" /></td>
                                                 </tr>
                                                 <tr>
@@ -55,7 +55,7 @@
                                                     </td>
                                                 </tr>                                                
                                                 <tr>
-                                                    <th><label for="next">접속아이피</label></th>
+                                                    <th><label for="cipp"><spring:message code="label.cipp"/></label></th>
                                                     <td colspan="4" class="text-left">
                                                     	<c:out value="${commentVO.cipp}" />
                                                     </td>

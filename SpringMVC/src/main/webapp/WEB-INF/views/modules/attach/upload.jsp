@@ -14,9 +14,7 @@
 
 <c:import url="/WEB-INF/views/include/header.jsp" />
 
-<h2>
-	<spring:message code="bbs.title.write" />
-</h2>
+<h2><spring:message code="bbs.title.write" /></h2>
 <form:form modelAttribute="attachVO" method="post" id="writeForm" name="writeForm" enctype="multipart/form-data" action="upload.do">
 	<input type="hidden" name="msgStr" value="<c:out value="${msg}"/> ">
 	<fieldset>

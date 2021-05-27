@@ -9,6 +9,9 @@ public interface AttachService {
 
 	// 글목록
 	public List<AttachVO> getList(Criteria criteria) throws Exception;
+	
+	// 파일목록
+	public List<AttachVO> getFileList(int board_idx) throws Exception;
 
 	// 글작성
 	public void insert(AttachVO attachVO) throws Exception;

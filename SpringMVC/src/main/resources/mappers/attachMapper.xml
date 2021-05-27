@@ -16,6 +16,16 @@
 	]]>
 	</select>
 	
+	<!-- 파일목록 -->
+	<select id="getFileList" resultType="com.company.bbs.vo.attach.AttachVO">
+	<![CDATA[ 
+	select * from jhbbs_attach where file_idx > 0 and del = 'N' and board_idx = #{board_idx}
+	]]>
+	<![CDATA[ 
+	order by regdate DESC
+	]]>
+	</select>
+	
 	<!-- 카테고리명 -->
 	<select id="getCategory" resultType="com.company.bbs.vo.category.CategoryVO">
 	<![CDATA[ 
@@ -40,13 +50,13 @@
 	<insert id="insert"  parameterType="com.company.bbs.vo.attach.AttachVO">
 		INSERT INTO jhbbs_attach (
 		file_name, file_hash_name,
-		file_size, file_type, file_ext,
+		file_size, file_type, file_ext, file_index,
 		download, userid, name, pass, title,
 		content, hit, cipp, vote, regdate, del,
 		category_idx, board_idx
 		) VALUES (
 		#{file_name}, #{file_hash_name}, 
-		#{file_size}, #{file_type}, #{file_ext},
+		#{file_size}, #{file_type}, #{file_ext}, #{file_index},
 		#{download}, #{userid}, #{name}, #{pass}, #{title}, 
 		#{content}, #{hit}, #{cipp}, #{vote}, #{regdate}, #{del}, 
 		#{category_idx}, #{board_idx}
@@ -55,9 +65,7 @@
 
 	<!-- 글보기 -->
 	<select id="getView" resultType="com.company.bbs.vo.attach.AttachVO">
-		select * from jhbbs_attach where file_idx =
-		#{file_idx} and
-		del = 'N'
+		select * from jhbbs_attach where file_idx =	#{file_idx} and del = 'N'
 	</select>
 
 	<!-- 글수정 -->
@@ -68,6 +76,7 @@
 		file_size=#{file_size},
 		file_type=#{file_type},
 		file_ext=#{file_ext},
+		file_index=#{file_index},
 		title=#{title},
 		content=#{content},
 		cipp=#{cipp},

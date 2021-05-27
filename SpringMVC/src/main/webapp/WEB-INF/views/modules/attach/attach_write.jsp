@@ -48,24 +48,7 @@
                                                                 </option>
                                                             </c:forEach>
                                                         </form:select>
-                                                        <form:errors path="category_idx" />
-                                                        <!-- 
-                                                        <button type="button" value="#layer1" class="popupBtn" >분류추가</button>
-                                                        <div class="layer">
-                                                            <div class="bg"></div>
-                                                            <div id="layer1" class="pop-layer">
-                                                                <div class="pop-container">
-                                                                    <div class="pop-conts">
-                                                                        <iframe name="ifrm_file" src="${path}/modules/category/list.do?idx=1" height="680px" marginwidth="0" marginheight="0" 
-                                                                        scrolling="no" frameborder="0" style="width:100%;"></iframe>
-                                                                        <div class="btn-r">
-                                                                            <a href="#" class="cbtn">Close</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        -->
+                                                        <form:errors path="category_idx" />                                                        
                                                     </td>
                                                 </tr>
                                                 <tr>

@@ -651,7 +651,7 @@ $(document).ready(function() {
             pass: {
                 required: true,
                 rangelength: [4,15],
-                passwordCk: true
+                passwordck: true
             },  
 			kind: {
                 required: true
@@ -674,7 +674,7 @@ $(document).ready(function() {
             pass: {
                 required: "비밀번호를 입력하세요",
                 rangelength: $.validator.format("패스워드는 최소{0}글자 이상 {1}글자 이하로 입력하세요."),
-                passwordCk: "비밀번호는 영문대소문자,숫자,특수문자를 반드시 입력해주시기 바랍니다."
+                passwordck: "비밀번호는 영문대소문자,숫자,특수문자를 반드시 입력해주시기 바랍니다."
             },            
             kind: {
 				required: "분류를 추가할 항목을 선택해주세요."
@@ -721,7 +721,7 @@ $(document).ready(function() {
         messages: {
         	keyWord: {
                 required: '검색어를 입력해주세요.',
-                minlength: $.validator.format('검색어는 최소 {0}글자 이상 입력하세요.')
+                minlength: $.validator.format('검색어는 최소{0}글자 이상 입력하세요.')
             }
         },
 		// 에러메세지 표시 설정 : 주석처리하면 에러메세지 보여짐 
@@ -754,14 +754,14 @@ $(document).ready(function() {
             pass: {
                 required: true,
                 rangelength: [4,15],
-                passwordCk: true
+                passwordck: true
             }
         },
         messages: {
              pass: {
                 required: "비밀번호를 입력하세요",
                 rangelength: $.validator.format("패스워드는 최소{0}글자 이상 {1}글자 이하로 입력하세요."),
-                passwordCk: "비밀번호는 영문대소문자,숫자,특수문자를 반드시 입력해주시기 바랍니다."
+                passwordck: "비밀번호는 영문대소문자,숫자,특수문자를 반드시 입력해주시기 바랍니다."
             }
         },
 		// 에러메세지 표시 설정 : 주석처리하면 에러메세지 표지

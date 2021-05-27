@@ -230,8 +230,7 @@ public class AttachController {
 						attachVO.setFile_ext(fileExt);					
 					}	
 					
-					service.insert(attachVO);			
-				
+					service.insert(attachVO);				
 			}
 					
 			
@@ -254,6 +253,7 @@ public class AttachController {
 			Model model, 
 			@ModelAttribute Criteria criteria, 
 			@RequestParam int file_idx,
+			@RequestParam int board_idx,
 			@RequestParam(defaultValue = "0") int category_idx, 
 			@RequestParam(defaultValue = "1") int kind
 			) throws Exception {
@@ -261,8 +261,9 @@ public class AttachController {
 		logger.info("글보기");
 
 		service.increaseCnt(file_idx);
-
-		model.addAttribute("attchVO", service.getView(file_idx));
+		
+		model.addAttribute("list", service.getFileList(board_idx));
+		model.addAttribute("attachVO", service.getView(file_idx));
 		model.addAttribute("prenum", service.getPrevNum(file_idx));
 		model.addAttribute("nextnum", service.getNextNum(file_idx));
 		model.addAttribute("categoryname", service.getCategory());
@@ -284,9 +285,8 @@ public class AttachController {
 
 		service.increaseCnt(file_idx);
 
-		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("attchVO", service.getView(file_idx));
+		ModelAndView mav = new ModelAndView();		
+		mav.addObject("attachVO", service.getView(file_idx));
 		mav.addObject("prenum", service.getPrevNum(file_idx));
 		mav.addObject("nextnum", service.getNextNum(file_idx));
 		mav.addObject("categoryname", service.getCategory());
@@ -363,7 +363,7 @@ public class AttachController {
 
 		logger.info("글삭제");
 
-		model.addAttribute("attchVO", service.getView(file_idx));
+		model.addAttribute("attachVO", service.getView(file_idx));
 
 		return "modules/attach/attach_delete";
 	}
@@ -385,7 +385,7 @@ public class AttachController {
 		String encodedPassword = service.getPassword(attachVO.getFile_idx());	
 		
 		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin@1234")){
-			service.delete(attachVO.getBoard_idx());
+			service.delete(attachVO.getFile_idx());
 
 			model.addAttribute("msg", "DeleteSuccess");
 			model.addAttribute("url", "list.do");

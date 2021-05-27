@@ -42,24 +42,23 @@
                                             </colgroup>
                                             <tbody>
                                                 <tr>
-                                                    <th scope="col"><label for="date">제목 </label></th>
+                                                    <th scope="col"><label for="title"><spring:message code="label.title"/></label></th>
                                                     <td scope="col" colspan="7" class="text-center"><c:out value="${boardVO.title}" /></td>
-                                                    
                                                 </tr>
                                                 <tr>
-                                                	<th><label for="hit">분류</label></th>
+                                                	<th><label for="category_idx"><spring:message code="label.category_idx"/></label></th>
                                                     <td>
                                                         <c:forEach var="item" items="${categoryname}">
                                                             <c:if test="${boardVO.category_idx eq item.category_idx}">${item.title}</c:if>
                                                         </c:forEach>
                                                     </td>
-                                                    <th><label for="name">작성자</label></th>
+                                                    <th><label for="name"><spring:message code="label.name"/></label></th>
                                                     <td><c:out value="${boardVO.name}" /></td>
-                                                    <th><label for="regdate">등록일</label></th>
+                                                    <th><label for="regdate"><spring:message code="label.regdate"/></label></th>
                                                     <td><fmt:parseDate var="dateString" value="${boardVO.regdate}" pattern="yyyy-MM-dd" />                                                               
 	                                                    <fmt:formatDate value="${dateString}" pattern="yyyy-MM-dd"/>
 	                                                </td>
-                                                    <th><label for="hit">조회수</label></th>
+                                                    <th><label for="hit"><spring:message code="label.hit"/></label></th>
                                                     <td><c:out value="${boardVO.hit}" /></td>
                                                 </tr>
                                                 <tr>
@@ -76,7 +75,7 @@
                                                     <td colspan="8" class="align-left">첨부파일목록출력</td>
                                                 </tr>
                                                 <tr>
-                                                    <th><label for="link1">관련링크1</label></th>
+                                                    <th><label for="link1"><spring:message code="label.link1"/></label></th>
                                                     <td colspan="7" class="text-left">
                                                         <c:choose>
                                                             <c:when test="${not empty boardVO.link1}"><a href="${boardVO.link1}" target="_blank"><c:out value="${boardVO.link1}" /></a>
@@ -88,7 +87,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th><label for="link2">관련링크2</label></th>
+                                                    <th><label for="link2"><spring:message code="label.link2"/></label></th>
                                                     <td colspan="7" class="text-left">
                                                         <c:choose>
                                                             <c:when test="${not empty boardVO.link2}"><a href="${boardVO.link2}" target="_blank"><c:out value="${boardVO.link2}" /></a>
@@ -100,7 +99,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th><label for="pre">이전글 </label></th>
+                                                    <th><label for="pre"><spring:message code="label.pre"/></label></th>
                                                     <td colspan="7" class="text-left">
                                                         <c:choose>
                                                             <c:when test="${prenum.board_idx ne null}"><a href="read.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&board_idx=<c:out value="${prenum.board_idx}" />"><c:out value="${prenum.title}" /></a>
@@ -112,7 +111,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th><label for="next">다음글 </label></th>
+                                                    <th><label for="next"><spring:message code="label.next"/> </label></th>
                                                     <td colspan="7" class="text-left">
                                                         <c:choose>
                                                             <c:when test="${nextnum.board_idx ne null}"><a href="read.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&board_idx=<c:out value="${nextnum.board_idx}" />"><c:out value="${nextnum.title}" /></a>
@@ -124,7 +123,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th><label for="next">접속아이피</label></th>
+                                                    <th><label for="cipp"><spring:message code="label.cipp"/></label></th>
                                                     <td colspan="7" class="text-left">
                                                         <c:out value="${boardVO.cipp}" />
                                                     </td>

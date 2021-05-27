@@ -10,6 +10,7 @@ public class AttachVO {
 	private long file_size;
 	private String file_type;
 	private String file_ext;
+	private int file_index;	
 	private int download;	
 	private MultipartFile[] attach;
 	private String userid;
@@ -60,6 +61,12 @@ public class AttachVO {
 	}
 	public void setFile_ext(String file_ext) {
 		this.file_ext = file_ext;
+	}
+	public int getFile_index() {
+		return file_index;
+	}
+	public void setFile_index(int file_index) {
+		this.file_index = file_index;
 	}
 	public int getDownload() {
 		return download;

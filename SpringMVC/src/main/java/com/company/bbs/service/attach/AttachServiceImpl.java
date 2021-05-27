@@ -30,7 +30,13 @@ public class AttachServiceImpl implements AttachService {
 	@Override
 	public List<AttachVO> getList(Criteria criteria) throws Exception {
 		return dao.getList(criteria);
-	}	
+	}
+	
+	// 파일목록
+	@Override
+	public List<AttachVO> getFileList(int board_idx) throws Exception {
+		return dao.getFileList(board_idx);
+	}
 
 	// 글저장 
 	@SuppressWarnings("unused")

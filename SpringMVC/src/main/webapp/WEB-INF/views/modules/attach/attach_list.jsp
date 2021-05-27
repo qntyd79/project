@@ -106,7 +106,7 @@
                                                                     </c:forEach>
                                                                 </td>
                                                                 <td class="text-left">                                                                    
-                                                                    <a href="read.do${pageMaker.makeSearch(pageMaker.criteria.page)}&file_idx=<c:out value="${row.file_idx}"/>">${row.title}</a>
+                                                                    <a href="read.do${pageMaker.makeSearch(pageMaker.criteria.page)}&file_idx=<c:out value="${row.file_idx}"/>&board_idx=<c:out value="${row.board_idx}"/>">${row.title}</a>
                                                                     <c:if test="${row.hit >= 20}">
                                                                         <span class="hit">HIT</span>
                                                                     </c:if>
