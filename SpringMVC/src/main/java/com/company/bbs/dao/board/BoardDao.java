@@ -3,6 +3,7 @@ package com.company.bbs.dao.board;
 import java.util.List;
 
 import com.company.bbs.utill.Criteria;
+import com.company.bbs.vo.attach.AttachVO;
 import com.company.bbs.vo.board.BoardVO;
 
 public interface BoardDao {
@@ -15,6 +16,9 @@ public interface BoardDao {
 
 	// 글저장 
 	public void insert(BoardVO boardVO) throws Exception;
+	
+	// 첨부파일 저장 
+	public void insert(AttachVO attachVO) throws Exception;
 	
 	// 답글업데이트 
 	public void getReply(BoardVO boardVO) throws Exception;
@@ -54,5 +58,14 @@ public interface BoardDao {
 	
 	// 카테고리목록
 	public List<Object> getCategoryList(int idx) throws Exception;
+
+	// 첨부파일갯수
+	public int getAttachCount(Criteria criteria) throws Exception;
+	
+	// 첨부파일목록
+	public List<Object> getFileList(int board_idx) throws Exception;
+	
+	// 첨부파일삭제
+	public void attachDelete(int file_idx) throws Exception;
 
 }

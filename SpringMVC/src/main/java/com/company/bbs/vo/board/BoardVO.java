@@ -1,6 +1,12 @@
 package com.company.bbs.vo.board;
 
-public class BoardVO {
+import java.util.Arrays;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import com.company.bbs.vo.attach.AttachVO;
+
+public class BoardVO extends AttachVO {
 
 	private int board_idx;
 	private int parent;
@@ -29,6 +35,7 @@ public class BoardVO {
 	private int comment_idx;
 	private int file_idx;
 	private int member_idx;
+	private MultipartFile[] attach;
 
 	public int getBoard_idx() {
 		return board_idx;
@@ -245,6 +252,15 @@ public class BoardVO {
 	public void setMember_idx(int member_idx) {
 		this.member_idx = member_idx;
 	}
+	
+
+	public MultipartFile[] getAttach() {
+		return attach;
+	}
+
+	public void setAttach(MultipartFile[] attach) {
+		this.attach = attach;
+	}
 
 	@Override
 	public String toString() {
@@ -254,8 +270,12 @@ public class BoardVO {
 				+ ", hit=" + hit + ", cipp=" + cipp + ", tag=" + tag + ", secret=" + secret + ", notice=" + notice
 				+ ", vote=" + vote + ", sdate=" + sdate + ", edate=" + edate + ", regdate=" + regdate + ", del=" + del
 				+ ", category_idx=" + category_idx + ", comment_idx=" + comment_idx + ", file_idx=" + file_idx
-				+ ", member_idx=" + member_idx + "]";
+				+ ", member_idx=" + member_idx + ", attach=" + Arrays.toString(attach) + "]";
 	}
+
+	
+
+	
 
 	
 

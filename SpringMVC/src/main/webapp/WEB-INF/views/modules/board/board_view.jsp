@@ -72,7 +72,63 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="8" class="align-left">첨부파일목록출력</td>
+                                                    <td colspan="8" class="align-left">
+                                                    	<!-- 첨부파일 목록출력 -->
+	                                                    <fieldset>
+															<legend><spring:message code="bbs.table.legend" /></legend>
+															<table summary="<spring:message code="bbs.table.summary.list"/>">
+																<caption><spring:message code="bbs.table.caption" /></caption>
+																<colgroup>
+																	<col width="5%" />
+																	<col width="35%" />
+																	<col width="10%" />
+																	<col width="15%" />
+																	<col width="10%" />
+																	<col width="10%" />
+																	<col width="10%" />
+																	<col width="5%" />
+																</colgroup>
+																<thead>
+																	<tr class="tline">
+																		<th scope="col"><spring:message code="bbs.list.no"/></th>
+																		<th scope="col">파일명</th>
+																		<th scope="col">파일사이즈</th>
+																		<th scope="col">파일타입</th>
+																		<th scope="col">파일확장자</th>
+																		<th scope="col">등록일</th>
+																		<th scope="col">다운로드</th>
+																		<th scope="col"><spring:message code="bbs.list.del" /></th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<c:choose>
+																		<c:when test="${fn:length(list) == 0}">
+																			<tr>
+																				<td colspan="10"><spring:message code="info.nodata.msg" /></td>
+																			</tr>
+																		</c:when>
+																		<c:otherwise>
+																			<c:forEach varStatus="status" var="row" items="${list}">
+																				<tr>	
+																					<td><strong>${status.index+1}</strong></td>														
+																					<td class="text-left"><a href="read.do${pageMaker.makeSearch(pageMaker.criteria.page)}&file_idx=<c:out value="${row.file_idx}"/>">${row.file_name}</a></td>
+																					<td><fmt:formatNumber value="${row.file_size}" type="number"/>KB</td>
+																					<td>${row.file_type}</td>
+																					<td>${row.file_ext}</td>
+																					<td>
+																						<fmt:parseDate var="dateString" value="${row.regdate}" pattern="yyyy-MM-dd"/> 
+																						<fmt:formatDate	value="${dateString}" pattern="yyyy-MM-dd"/></td>
+																					<td>클릭</td>
+																					<td><a href="attachDelete.do?filename=<c:out value="${row.file_hash_name}"/>&board_idx=<c:out value="${boardVO.board_idx}"/>&file_idx=<c:out value="${row.file_idx}"/>">D</a></td>
+																				</tr>
+																			</c:forEach>
+																		</c:otherwise>
+																	</c:choose>
+																</tbody>
+															</table>										
+														</fieldset>
+									
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="link1"><spring:message code="label.link1"/></label></th>
@@ -141,6 +197,7 @@
                                         <!--<c:import url="/WEB-INF/views/modules/common/common_btn.jsp"/> -->                                       
                                     </fieldset>
                                 </form>
+                                
                                 
                                 
                             </div>

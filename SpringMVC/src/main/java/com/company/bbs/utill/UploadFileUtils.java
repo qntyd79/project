@@ -35,7 +35,7 @@ public class UploadFileUtils {
 		FileCopyUtils.copy(fileData, target);	
 		
 		// 확장자 추출
-		String formatName = originalName.substring(originalName.lastIndexOf(".")+1);	
+		String formatName = originalName.substring(originalName.lastIndexOf(".") + 1);	
 		
 		// 최종적으로 리턴할 uploadedFileName 선언
 		String uploadedFileName = null;
@@ -49,6 +49,26 @@ public class UploadFileUtils {
 
 		return uploadedFileName;
 	}
+	
+	// 파일삭제 처리 
+	public static void removeFile(String uploadPath, String originalName) throws Exception { 
+		// 확장자 추출 
+		String formatName = originalName.substring(originalName.lastIndexOf(".") + 1); 
+
+		// 이미지 파일일 경우, 원본파일 삭제 
+		if (MediaUtils.getMediaType(formatName) != null) { 
+			// 원본 이미지의 경로 + 파일명 추출 
+			// 날짜 경로 추출 
+			String front = originalName.substring(0, 12); 
+			// UUID + 파일명 추출 
+			String end = originalName.substring(14); 
+			// 원본 이미지 파일 삭제(구분자 변환) 
+			new File(uploadPath + (front + end).replace('/', File.separatorChar)).delete();
+		} 
+		// 파일 삭제(일반 파일 or 썸네일 이미지 파일 삭제) 
+		new File(uploadPath + originalName.replace('/', File.separatorChar)).delete();
+	}
+
 	
 	// 날짜 폴더명 추출
 	private static String calcPath(String uploadPath) {

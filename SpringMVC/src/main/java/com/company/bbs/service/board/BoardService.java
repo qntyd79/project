@@ -44,8 +44,8 @@ public interface BoardService {
 	public int getCount(Criteria criteria) throws Exception;
 
 	// 공지글갯수
-	public int getNoticeCount(Criteria criteria) throws Exception;
-
+	public int getNoticeCount(Criteria criteria) throws Exception;	
+	
 	// 글비밀번호리턴
 	public String getPassword(int board_idx) throws Exception;
 	
@@ -54,5 +54,14 @@ public interface BoardService {
 	
 	// 카테고리목록
 	public List<Object> getCategoryList(int idx) throws Exception;	
+	
+	// 첨부파일갯수
+	public int getAttachCount(Criteria criteria) throws Exception;
+	
+	// 첨부파일조회 
+	public List<Object> getFileList(int board_idx) throws Exception;
+	
+	// 첨부파일삭제
+	public void attachDelete(int file_idx) throws Exception;
 
 }

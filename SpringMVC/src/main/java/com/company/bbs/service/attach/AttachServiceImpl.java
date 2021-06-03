@@ -39,22 +39,21 @@ public class AttachServiceImpl implements AttachService {
 	}
 
 	// 글저장 
-	@SuppressWarnings("unused")
 	@Override
 	public void insert(AttachVO attachVO) throws Exception {
 
 		//for(int i=1; i <=200; i++) {
 		int file_idx = attachVO.getFile_idx();		
-		String title = attachVO.getTitle();
-		String content = attachVO.getContent();
+		//String title = attachVO.getTitle();
+		//String content = attachVO.getContent();
 		String del = attachVO.getDel(); 
-		String pass = attachVO.getPass();
+		//String pass = attachVO.getPass();
 		
 		// 비밀번호 암호화 
-		String pwdBycrypt = passwordEncoder.encode(pass);
+		//String pwdBycrypt = passwordEncoder.encode(pass);
 		
 		// 접속아이피
-		String cipp = InetAddress.getLocalHost().getHostAddress();
+		//String cipp = InetAddress.getLocalHost().getHostAddress();
 
 		// 날짜변수
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -81,11 +80,11 @@ public class AttachServiceImpl implements AttachService {
 		del = "N";
 		
 		attachVO.setFile_idx(number);
-		attachVO.setCipp(cipp);
+		//attachVO.setCipp(cipp);
 		attachVO.setRegdate(regdate);
 		attachVO.setDel(del);
-		attachVO.setContent(content);
-		attachVO.setPass(pwdBycrypt);
+		//attachVO.setContent(content);
+		//attachVO.setPass(pwdBycrypt);
 		
 
 		dao.insert(attachVO);
@@ -104,7 +103,7 @@ public class AttachServiceImpl implements AttachService {
 						
 		// 접속아이피
 		String cipp = InetAddress.getLocalHost().getHostAddress();
-		attachVO.setCipp(cipp);
+		//attachVO.setCipp(cipp);
 				
 		dao.update(attachVO);
 	}

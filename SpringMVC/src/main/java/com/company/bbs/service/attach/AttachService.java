@@ -14,8 +14,8 @@ public interface AttachService {
 	public List<AttachVO> getFileList(int board_idx) throws Exception;
 
 	// 글작성
-	public void insert(AttachVO attachVO) throws Exception;
-	
+	public void insert(AttachVO attachVO) throws Exception;	
+
 	// 글보기
 	public AttachVO getView(int file_idx) throws Exception;
 
@@ -51,6 +51,5 @@ public interface AttachService {
 	
 	// 첨부파일갯수
 	public int getFileCount(Criteria criteria) throws Exception;
-
 	
 }

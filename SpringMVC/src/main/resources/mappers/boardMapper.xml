@@ -15,6 +15,16 @@
 	order by parent desc, sortno asc limit #{pageStart}, ${perPageNum}
 	]]>
 	</select>
+	
+	<!-- 파일목록 -->
+	<select id="getFileList" resultType="com.company.bbs.vo.board.BoardVO">
+	<![CDATA[ 
+	select * from jhbbs_file where file_idx > 0 and del = 'N' and board_idx = #{board_idx}
+	]]>
+	<![CDATA[ 
+	order by regdate DESC
+	]]>
+	</select>
 
 	<!-- 공지글목록 -->
 	<select id="getNoticeList" resultType="com.company.bbs.vo.board.BoardVO">
@@ -68,7 +78,38 @@
 		#{comment_idx}, #{file_idx}, #{member_idx}
 		)
 	</insert>
-
+	
+	<!-- 첨부파일저장 -->
+	<insert id="attachInsert" parameterType="com.company.bbs.vo.board.BoardVO"> 
+		INSERT INTO jhbbs_file (
+		file_name, file_hash_name,
+		file_size, file_type, file_ext,
+		download, regdate, del, board_idx
+		) VALUES (
+		#{file_name}, #{file_hash_name}, 
+		#{file_size}, #{file_type}, #{file_ext},
+		#{download}, #{regdate}, #{del}, #{board_idx}
+		)
+	</insert>
+	
+	<!--  첨부파일수정 -->
+	<update id="attachUpdate">
+		update jhbbs_file set
+		file_name=#{file_name},
+		file_hash_name=#{file_hash_name},
+		file_size=#{file_size},
+		file_type=#{file_type},
+		file_ext=#{file_ext},		
+		board_idx=#{board_idx}
+		where
+		file_idx=#{file_idx}
+	</update>
+	
+	<!-- 글삭제 update처리 -->
+	<update id="attachDelete">
+		update jhbbs_file set del = 'Y' where file_idx = #{file_idx}
+	</update>
+	
 	<!-- 답글업데이트 -->
 	<update id="getReply">
 	<![CDATA[
@@ -78,9 +119,7 @@
 
 	<!-- 글보기 -->
 	<select id="getView" resultType="com.company.bbs.vo.board.BoardVO">
-		select * from jhbbs_board where board_idx =
-		#{board_idx} and
-		del = 'N'
+		select * from jhbbs_board where board_idx = #{board_idx} and del = 'N'
 	</select>
 
 	<!-- 글수정 -->
@@ -108,9 +147,7 @@
 
 	<!-- 글삭제 update처리 -->
 	<update id="delete">
-		update jhbbs_board set del = 'Y' 
-		where 
-		board_idx =	#{board_idx}
+		update jhbbs_board set del = 'Y' where board_idx =	#{board_idx}
 	</update>
 
 	<!-- 글조회수 -->
@@ -146,6 +183,13 @@
 	]]>
 		<include refid="category"></include>
 		<include refid="search"></include>
+	</select>
+	
+	<!-- 첨부파일 갯수 -->
+	<select id="getAttachCount" resultType="int">
+	<![CDATA[ 
+	select count(file_idx) from JHBBS_file where board_idx = #{board_idx} and file_idx > 0 and del = 'N'
+	]]>
 	</select>
 
 	<!-- 공지글갯수 -->

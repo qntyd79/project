@@ -2,7 +2,7 @@ package com.company.bbs.vo.attach;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class AttachVO {
+public class AttachVOBackup {
 
 	private int file_idx;
 	private String file_name;
@@ -12,9 +12,18 @@ public class AttachVO {
 	private String file_ext;
 	private int file_index;	
 	private int download;	
-	private MultipartFile[] attach;		
+	private MultipartFile[] attach;
+	private String userid;
+	private String name;
+	private String pass;
+	private String title;
+	private String content;
+	private int hit;
+	private String cipp;
+	private int vote;
 	private String regdate;
 	private String del;
+	private int category_idx;
 	private int board_idx;
 	
 	public int getFile_idx() {
@@ -59,18 +68,66 @@ public class AttachVO {
 	public void setFile_index(int file_index) {
 		this.file_index = file_index;
 	}
+	public int getDownload() {
+		return download;
+	}
+	public void setDownload(int download) {
+		this.download = download;
+	}
 	public MultipartFile[] getAttach() {
 		return attach;
 	}
 	public void setAttach(MultipartFile[] attach) {
 		this.attach = attach;
 	}
-	public int getDownload() {
-		return download;
+	public String getUserid() {
+		return userid;
 	}
-	public void setDownload(int download) {
-		this.download = download;
-	}	
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPass() {
+		return pass;
+	}
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+	public String getCipp() {
+		return cipp;
+	}
+	public void setCipp(String cipp) {
+		this.cipp = cipp;
+	}
+	public int getVote() {
+		return vote;
+	}
+	public void setVote(int vote) {
+		this.vote = vote;
+	}
 	public String getRegdate() {
 		return regdate;
 	}
@@ -82,21 +139,29 @@ public class AttachVO {
 	}
 	public void setDel(String del) {
 		this.del = del;
-	}	
+	}
+	public int getCategory_idx() {
+		return category_idx;
+	}
+	public void setCategory_idx(int category_idx) {
+		this.category_idx = category_idx;
+	}
 	public int getBoard_idx() {
 		return board_idx;
 	}
 	public void setBoard_idx(int board_idx) {
 		this.board_idx = board_idx;
 	}
+	
 	@Override
 	public String toString() {
 		return "AttachVO [file_idx=" + file_idx + ", file_name=" + file_name + ", file_hash_name=" + file_hash_name
-				+ ", file_size=" + file_size + ", file_type=" + file_type + ", file_ext=" + file_ext + ", file_index="
-				+ file_index + ", download=" + download + ", attach=" + attach + ", regdate=" + regdate
-				+ ", del=" + del + ", board_idx=" + board_idx + "]";
-	}
-	
+				+ ", file_size=" + file_size + ", file_type=" + file_type + ", file_ext=" + file_ext + ", download="
+				+ download + ", attach=" + attach + ", userid=" + userid + ", name=" + name + ", pass=" + pass
+				+ ", title=" + title + ", content=" + content + ", hit=" + hit + ", cipp=" + cipp + ", vote=" + vote
+				+ ", regdate=" + regdate + ", del=" + del + ", category_idx=" + category_idx + ", board_idx="
+				+ board_idx + "]";
+	}	
 	
 		
 }

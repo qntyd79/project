@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.company.bbs.utill.Criteria;
+import com.company.bbs.vo.attach.AttachVO;
 import com.company.bbs.vo.board.BoardVO;
 
 @Repository
@@ -108,6 +109,30 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public List<Object> getCategoryList(int idx) throws Exception {
 		return sqlSession.selectList("board.getCategoryList", idx);
+	}
+	
+	// 첨부파일 저장
+	@Override
+	public void insert(AttachVO attachVO) throws Exception {
+		sqlSession.insert("board.attachInsert", attachVO);
+	}
+		
+	// 첨부파일갯수 
+	@Override
+	public int getAttachCount(Criteria criteria) throws Exception {
+		return sqlSession.selectOne("board.getAttachCount", criteria);
+	}
+	
+	// 첨부파일목록 
+	@Override
+	public List<Object> getFileList(int board_idx) throws Exception {
+		return sqlSession.selectList("board.getFileList", board_idx);
+	}
+	
+	// 첨부파일삭제
+	@Override
+	public void attachDelete(int file_idx) throws Exception {
+		sqlSession.selectOne("board.attachDelete", file_idx);		
 	}
 
 }

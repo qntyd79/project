@@ -20,7 +20,7 @@
 	</bean>
 
 	<bean id="uploadPath" class="java.lang.String"> 
-		<constructor-arg value="${path}/data" /> 
+		<constructor-arg value="/Users/ojeonghwan/git/project/SpringMVC/src/main/webapp/resources/upload"/> 
 	</bean>		
    
 </beans>
