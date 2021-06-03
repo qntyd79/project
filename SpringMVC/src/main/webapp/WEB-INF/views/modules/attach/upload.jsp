@@ -5,12 +5,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="validator"
-	uri="http://www.springmodules.org/tags/commons-validator"%>
+<%@ taglib prefix="validator" uri="http://www.springmodules.org/tags/commons-validator"%>
 <script type="text/javascript" src="<c:url value="validator.do"/>"></script>
-<validator:javascript formName="attachVO" staticJavascript="false"
-	xhtml="true" cdata="false" />
-<c:set var="path" value="${pageContext.request.contextPath}" />
+<validator:javascript formName="attachVO" staticJavascript="false" xhtml="true" cdata="false" />
 
 <c:import url="/WEB-INF/views/include/header.jsp" />
 

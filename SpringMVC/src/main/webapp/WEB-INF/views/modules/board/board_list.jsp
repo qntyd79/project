@@ -116,7 +116,7 @@
                                                                 	<fmt:parseDate var="dateString" value="${row1.regdate}" pattern="yyyy-MM-dd" />                                                               
 	                                                                <fmt:formatDate value="${dateString}" pattern="yyyy-MM-dd"/>
                                                                 </td>
-                                                                <td></td>
+                                                                <td>${row1.filecnt}</td>
                                                                 <td>${row1.vote}</td>
                                                                 <td>${row1.hit}</td>
                                                                 <td><a href="delete.do${pageMaker.makeSearch(pageMaker.criteria.page)}&board_idx=<c:out value="${row1.board_idx}"/>">D</a></td>
@@ -150,7 +150,7 @@
                                                                 	<fmt:parseDate var="dateString" value="${row.regdate}" pattern="yyyy-MM-dd" />                                                               
 	                                                                <fmt:formatDate value="${dateString}" pattern="yyyy-MM-dd"/>
 	                                                            </td>
-                                                                <td></td>
+                                                                <td>${row.filecnt}</td>
                                                                 <td>${row.vote}</td>
                                                                 <td>${row.hit}</td>
                                                                 <td><a href="delete.do${pageMaker.makeSearch(pageMaker.criteria.page)}&board_idx=<c:out value="${row.board_idx}"/>">D</a></td>

@@ -6,24 +6,24 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="validator" uri="http://www.springmodules.org/tags/commons-validator" %>
 <validator:javascript formName="commentVO" staticJavascript="false" xhtml="true" cdata="false"/>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
 
-<c:import url="/WEB-INF/views/include/header.jsp"/>
-
+<c:import url="/WEB-INF/views/include/head.jsp"/>
+<!-- 
 <div id="container-wrap">
     <div class="clearfix">
         <div class="content-box">
             <div class="content-full-img02"></div>
             <div class="content-full-bg02-hidden">
                 <section class="content">
-                    <c:import url="/WEB-INF/views/include/content_header.jsp"/>
+                
                     <article>
+                    -->
                         <!-- 글작성폼 시작 -->
                         <div class="row">
                             <div class="col-md-12">
                             
                             
-                               <h2><spring:message code="bbs.title.write"/></h2>
+                               <h2>Comment <!--<spring:message code="bbs.title.write"/>--></h2>
                                <form method="post" id="writeForm" name="writeForm" >
                                     <fieldset>
                                         <legend><spring:message code="bbs.table.legend"/></legend>
@@ -91,12 +91,13 @@
                         </nav>
                         <!-- 페이징 종료 -->
                     </article>
+                    <!--
                 </section>
             </div>
         </div>
     </div>
 </div>
-<c:import url="/WEB-INF/views/include/footer.jsp"/>
+-->
 
 
 <script type="text/javascript">
@@ -232,7 +233,7 @@
 					//ajax
 				    $.ajax({
 				    	type: "POST",
-				        url: "ajaxInsert",
+				        url: "${path}/modules/comment/ajaxInsert.do",
 				        headers: { "Content-Type": "application/json", "X-HTTP-Method-Override": "POST" },
 				        dataType: "text",
 				        data: JSON.stringify({ // stringify는 json개체를 string개체로 변환
@@ -243,9 +244,9 @@
 				        content: content,
 				        board_idx: 1
 				    }),
-				    success: function(result) {
+				    success: function(result1) {
 					    //서비스 성공 시 처리 할 내용
-					    if (result == "insertSuccess") {
+					    if (result1 == "insertSuccess") {
 					      	alert("댓글등록 완료");
 					    }
 					    //댓글목록출력

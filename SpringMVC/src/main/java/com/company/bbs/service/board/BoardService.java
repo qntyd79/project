@@ -53,10 +53,7 @@ public interface BoardService {
 	public List<Object> getCategory() throws Exception;
 	
 	// 카테고리목록
-	public List<Object> getCategoryList(int idx) throws Exception;	
-	
-	// 첨부파일갯수
-	public int getAttachCount(Criteria criteria) throws Exception;
+	public List<Object> getCategoryList(int idx) throws Exception;		
 	
 	// 첨부파일조회 
 	public List<Object> getFileList(int board_idx) throws Exception;

@@ -119,8 +119,8 @@ public class BoardDaoImpl implements BoardDao {
 		
 	// 첨부파일갯수 
 	@Override
-	public int getAttachCount(Criteria criteria) throws Exception {
-		return sqlSession.selectOne("board.getAttachCount", criteria);
+	public void getAttachCount(int board_idx) throws Exception {
+		sqlSession.selectOne("board.getAttachCount", board_idx);
 	}
 	
 	// 첨부파일목록 

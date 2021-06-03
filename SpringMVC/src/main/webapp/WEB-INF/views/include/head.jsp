@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <c:set var="siteTitle"><spring:message code="site.title"/></c:set>
 <!DOCTYPE html>
 <html lang="kor">

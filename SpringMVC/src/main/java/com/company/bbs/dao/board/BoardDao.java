@@ -60,7 +60,7 @@ public interface BoardDao {
 	public List<Object> getCategoryList(int idx) throws Exception;
 
 	// 첨부파일갯수
-	public int getAttachCount(Criteria criteria) throws Exception;
+	public void getAttachCount(int board_idx) throws Exception;
 	
 	// 첨부파일목록
 	public List<Object> getFileList(int board_idx) throws Exception;

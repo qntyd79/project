@@ -89,7 +89,6 @@ public class BoardController {
 		model.addAttribute("noticelist", service.getNoticeList(criteria));
 		model.addAttribute("categoryname", service.getCategory());
 		model.addAttribute("categorylist", service.getCategoryList(kind));
-		// model.addAttribute("fileCount", service.getAttachCount(criteria));
 		model.addAttribute("categoryselect", category_idx);
 		model.addAttribute("pageMaker", pageMaker);
 		// model.addAttribute("searchField", searchField);

@@ -185,12 +185,12 @@
 		<include refid="search"></include>
 	</select>
 	
-	<!-- 첨부파일 갯수 -->
-	<select id="getAttachCount" resultType="int">
-	<![CDATA[ 
-	select count(file_idx) from JHBBS_file where board_idx = #{board_idx} and file_idx > 0 and del = 'N'
-	]]>
-	</select>
+	<!-- 첨부파일 갯수-->
+	<update id="getAttachCount" parameterType="int">
+		update jhbbs_board b
+		set b.filecnt = (select count(file_idx) from JHBBS_file where board_idx = #{board_idx} and file_idx > 0 and del = 'N') 
+		where b.board_idx = #{board_idx};     
+	</update>
 
 	<!-- 공지글갯수 -->
 	<select id="getNoticeCount" resultType="int">
