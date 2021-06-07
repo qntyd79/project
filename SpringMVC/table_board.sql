@@ -73,6 +73,8 @@ board_idx 		INT(10) NOT NULL,
 PRIMARY KEY (comment_idx)
 );
 
+ALTER TABLE mydb.JHBBS_comment ADD CONSTRAINT `fk_comment_idx` FOREIGN KEY (`board_idx`) REFERENCES mydb.JHBBS_board (`board_idx`);
+
 CREATE TABLE IF NOT EXISTS  mydb.JHBBS_file (
 file_idx		INT(10) NOT NULL AUTO_INCREMENT,
 file_name 		VARCHAR(255) NOT NULL,
@@ -86,6 +88,8 @@ del 			VARCHAR(2) NOT NULL DEFAULT 'N',
 board_idx 		INT(10) NOT NULL,
 PRIMARY KEY (file_idx)
 );
+
+ALTER TABLE mydb.JHBBS_file ADD CONSTRAINT `fk_file_idx` FOREIGN KEY (`board_idx`) REFERENCES mydb.JHBBS_board (`board_idx`);
 
 CREATE TABLE IF NOT EXISTS  mydb.JHBBS_attach(
 file_idx		INT(10) NOT NULL AUTO_INCREMENT,

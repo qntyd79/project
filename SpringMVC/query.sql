@@ -12,7 +12,7 @@ SELECT * FROM mydb.jhbbs_board;
 
 ALTER TABLE `mydb`.`JHBBS_board` AUTO_INCREMENT=1;
 
-SELECT * FROM mydb.jhbbs_comment;JHBBS_category
+SELECT * FROM `mydb`.`JHBBS_comment`;
 
 Select * from mydb.JHBBS_category;
 ALTER TABLE `mydb`.`JHBBS_comment` AUTO_INCREMENT=1;
@@ -56,11 +56,13 @@ select max(board_idx) from mydb.jhbbs_bbs_board;
 DELETE FROM `mydb`.`JHBBS_board` WHERE `board_idx`='7';
 
 /* 테이블 초기화 */
-truncate mydb.jhbbs_board;
+SET FOREIGN_KEY_CHECKS = 1; -- Disable foreign key checking.
+truncate mydb.jhbbs_comment;
 
 ALTER TABLE `mydb`.`JHBBS_category` CHANGE COLUMN `idx` `kind` INT(10) NULL DEFAULT NULL ;
 
 UPDATE `mydb`.`JHBBS_comment` SET `email` = 'qntyd79@naver.com' WHERE (`comment_idx` = '4');
 
 /* 외래키 설정 */
-ALTER TABLE `mydb`.`JHBBS_file` ADD CONSTRAINT `fk_board_idx` FOREIGN KEY (`board_idx`) REFERENCES `mydb`.`JHBBS_board` (`board_idx`)
+ALTER TABLE `mydb`.`JHBBS_file` ADD CONSTRAINT `fk_file_idx` FOREIGN KEY (`board_idx`) REFERENCES `mydb`.`JHBBS_board` (`board_idx`);
+ALTER TABLE `mydb`.`JHBBS_comment` ADD CONSTRAINT `fk_comment_idx` FOREIGN KEY (`board_idx`) REFERENCES `mydb`.`JHBBS_board` (`board_idx`);

@@ -373,12 +373,14 @@ public class CommentController {
 	@RequestMapping(value = "ajaxlist.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String List(
 			Model model,
-			@ModelAttribute CommentVO commentVO
+			@ModelAttribute CommentVO commentVO,
+			@RequestParam int board_idx
 			) throws Exception {
 
 		logger.info("댓글쓰기");
 		
-		model.addAttribute("CommentVO", commentVO);				
+		model.addAttribute("CommentVO", commentVO);	
+		model.addAttribute("board_idx", board_idx);
 		
 		return "modules/comment/ajax_comment_list";
 	}

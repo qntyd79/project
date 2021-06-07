@@ -43,7 +43,7 @@
                                             <tbody>
                                                 <tr>
                                                     <th scope="col"><label for="title"><spring:message code="label.title"/></label></th>
-                                                    <td scope="col" colspan="7" class="text-center"><c:out value="${boardVO.title}" /></td>
+                                                    <td scope="col" colspan="7" class="text-left"><c:out value="${boardVO.title}" /></td>
                                                 </tr>
                                                 <tr>
                                                 	<th><label for="category_idx"><spring:message code="label.category_idx"/></label></th>
@@ -73,7 +73,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td colspan="8" class="align-left">
-                                                    	<!-- 첨부파일 목록출력 -->
+                                                    	<!-- 첨부파일 목록출력 시작 -->
 	                                                    <fieldset>
 															<legend><spring:message code="bbs.table.legend" /></legend>
 															<table summary="<spring:message code="bbs.table.summary.list"/>">
@@ -127,7 +127,7 @@
 																</tbody>
 															</table>										
 														</fieldset>
-									
+														<!-- 첨부파일 목록출력 종료 -->
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -197,26 +197,29 @@
                                         <!--<c:import url="/WEB-INF/views/modules/common/common_btn.jsp"/> -->                                       
                                     </fieldset>
                                 </form>
-                                
+                                <!-- 코멘트 목록출력 시작 -->
                                 <script type="text/javascript" language="javascript">
-                             		$(document).ready(function(){								    	
+                             		$(document).ready(function(){	
+
+                             			var board_idx = "${boardVO.board_idx}";
+                    
 										$.ajax({
 											type : "POST", //전송방식을 지정한다 (POST,GET)
-										    url : "${path}/modules/comment/ajaxlist.do",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.									    
-										    dataType : "text",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
-										    error : function(){
-										    	console.log("호출실패");
-										    },
-										    success : function(result){
+										    url : "${path}/modules/comment/ajaxlist.do?board_idx=" + board_idx,//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
+	    								    dataType : "text",
+	 									    success : function(result){
 										    	$("#result").html(result); //div에 받아온 값을 넣는다.
 										    	//alert("통신 데이터 값 : " + result);
 										    	console.log("호출성공");
+										    },
+										    error : function(){
+										    	console.log("호출실패");
 										    }
 									    });
 									});
 								</script>
                                 <div id="result"></div>
-                                
+                                <!-- 코멘트 목록출력 종료 -->
                             </div>
                         </div>
                     </article>

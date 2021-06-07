@@ -7,7 +7,6 @@
 <%@ taglib prefix="validator" uri="http://www.springmodules.org/tags/commons-validator" %>
 <validator:javascript formName="commentVO" staticJavascript="false" xhtml="true" cdata="false"/>
 
-<c:import url="/WEB-INF/views/include/head.jsp"/>
 <!-- 
 <div id="container-wrap">
     <div class="clearfix">
@@ -15,15 +14,13 @@
             <div class="content-full-img02"></div>
             <div class="content-full-bg02-hidden">
                 <section class="content">
-                
-                    <article>
-                    -->
-                        <!-- 글작성폼 시작 -->
+                	-->
+                	<!-- 글작성폼 및 목록 시작 -->
+                    <article>  
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12">                            
                             
-                            
-                               <h2>Comment <!--<spring:message code="bbs.title.write"/>--></h2>
+                               <h2>Comment<!--<spring:message code="bbs.title.write"/>--></h2>
                                <form method="post" id="writeForm" name="writeForm" >
                                     <fieldset>
                                         <legend><spring:message code="bbs.table.legend"/></legend>
@@ -53,9 +50,7 @@
                                                         <textarea name="content" id="content" placeholder="Content"></textarea><form:errors path="content"/>
                                                         <script>
                                                             CKEDITOR.replace('content',{height:150, customConfig: '${path}/plugin/ckeditor4/full/custom-config.js'});
-                                                           	<!--CKEDITOR.instances.content.updateElement();-->
                                                         </script>
-                                                        <!--<label for="content"><spring:message code="label.content"/></label>-->   
                                                      </td>
                                                 </tr>                                               
                                                 <tr>
@@ -77,20 +72,15 @@
 										</nav>
                                     </fieldset>
                                 </form>
-                                
-                                
                             </div>
                         </div>
-                        <!-- 글작성폼 종료 -->
-                        <!-- 글목록폼 시작 -->
+                        
                         <div id="replies"></div>
-                        <!-- 글목록폼 종료 -->
-                        <!-- 페이징 시작 -->
                         <nav class="paging-group">
                             <ul class="pagination"></ul>
                         </nav>
-                        <!-- 페이징 종료 -->
                     </article>
+                    <!-- 글작성폼 및 목록 종료 -->
                     <!--
                 </section>
             </div>
@@ -103,7 +93,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 	
-	    var board_idx = 1;
+	    var board_idx = ${board_idx};
 	
 	    //초기화
 	    getPageList(1);
@@ -216,7 +206,9 @@
 		
 		//댓글등록    	
 		$("#writeBtn").on("click",function(){
-	
+
+			var board_idx = ${board_idx};
+			
 			var isValid = $("#writeForm").validate().form();
 			
 			if (isValid == true){ //true 반환 
@@ -242,7 +234,7 @@
 				        name: name,
 				        email: email,
 				        content: content,
-				        board_idx: 1
+				        board_idx: board_idx
 				    }),
 				    success: function(result1) {
 					    //서비스 성공 시 처리 할 내용
@@ -463,7 +455,9 @@
 	
 	    //모달창에서 답글버튼 클릭 시 답글등록 처리  
 	    $("#replyBtn").on("click", function() {
-	
+
+	    	var board_idx = ${board_idx};
+	    	
 	        CKupdate();
 	
 	        //화면입력값 변수처리
@@ -493,7 +487,7 @@
 	                name: name,
 	                email: email,
 	                content: content,
-	                board_idx: 1
+	                board_idx: board_idx
 	            }),
 	            success: function(result) {
 	
