@@ -60,5 +60,8 @@ public interface BoardService {
 	
 	// 첨부파일삭제
 	public void attachDelete(int file_idx) throws Exception;
+	
+	// 코멘트갯수 
+	public void getCommentCount(int board_idx)throws Exception;
 
 }

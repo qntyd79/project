@@ -172,8 +172,8 @@ public class BoardServiceImpl implements BoardService {
 
 	// 글보기
 	@Override
-	public BoardVO getView(int board_idx) throws Exception {
-		return dao.getView(board_idx);
+	public BoardVO getView(int board_idx) throws Exception {			
+		return dao.getView(board_idx);			
 	}
 
 	// 글수정
@@ -259,6 +259,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void attachDelete(int file_idx) throws Exception {		
 		dao.attachDelete(file_idx);
+	}
+	
+	// 코멘트갯수
+	@Override
+	public void getCommentCount(int board_idx) throws Exception {
+		dao.getCommentCount(board_idx);		
 	}
 
 }

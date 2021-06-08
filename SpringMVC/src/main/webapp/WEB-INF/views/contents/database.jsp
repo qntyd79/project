@@ -71,7 +71,7 @@
                                         <div class="thumbnail">
                                             <p class="icon-top"><i class="fas fa-chess-board"></i></p>
                                             <h1 class="title">UAV형 항공영상 수집</h1>
-                                            <h2 class="subtitle">최대 40분 비행시간 최소GSD 0.7cm/px급 정사영상 확보, GSD3cm/px급 최대 4.0㎢ 면적 촬영</h2>
+                                            <h2 class="subtitle">최대 40분 비행 최소GSD 0.7cm/px 정사영상 확보</h2>
                                             <ul class="list">
                                                 <li>수직이착륙형 WingtraOne으로 공간이 협소한 도심의 정사영상 촬영 유리</li>
                                                 <li>4,240만 화소의 Sony RX1RII 카메라</li>
@@ -86,7 +86,7 @@
                                         <div class="thumbnail">
                                             <p class="icon-top"><i class="fas fa-database"></i></p>
                                             <h1 class="title">실내용 고정밀 모바일 매핑 수집</h1>
-                                            <h2 class="subtitle">고정밀 IMU기반 관성항법시스템, SLAM 기반 실내매핑장치 대비 우수한 품질의 데이터 획득</h2>
+                                            <h2 class="subtitle">고정밀 IMU기반 관성항법시스템</h2>
                                             <ul class="list">
                                                 <li>Applanix TIMMS Indoor Mapping 장비 보유</li>
                                                 <li>Ladybug Spherical Camera와 FARO LiDAR System</li>

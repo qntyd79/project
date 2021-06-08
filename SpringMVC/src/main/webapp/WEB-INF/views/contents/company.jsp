@@ -222,28 +222,6 @@
                                     <li>
                                         <div class="panel text-center">
                                             <div class="thumbnail">
-                                                <img src="<c:url value="http://c2l-equipment.com/images/company/1.jpg" />"/>
-                                            </div>
-                                            <h1 class="title">Applanix</h1>
-                                            <h2 class="subtitle">Inertial Navigation System</h2>
-                                            <h3 class="desc">When most organizations talk of being a global enterprise, the label is more figurative than literal. As a world leader in products and solutions </h3>
-                                            <h4 class="summary summary-last-child">http://www.applanix.com</h4>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="panel text-center">
-                                            <div class="thumbnail">
-                                                <img src="<c:url value="http://c2l-equipment.com/images/company/2.jpg" />"/>
-                                            </div>
-                                            <h1 class="title">Orbit</h1>
-                                            <h2 class="subtitle">GeoSpatial Technologies</h2>
-                                            <h3 class="desc">orbit GeoSpatial Technologies provides product and serices to maximize the effective integration of geospatial data throughout your organization's workflows</h3>
-                                            <h4 class="summary summary-last-child">http://www.orbitgt.com</h4>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="panel text-center">
-                                            <div class="thumbnail">
                                                 <img src="<c:url value="http://c2l-equipment.com/images/company/5.jpg" />"/>
                                             </div>
                                             <h1 class="title">Wingtra</h1>
@@ -264,6 +242,28 @@
                                             <h4 class="summary summary-last-child">http://www.seagullUAV.com</h4>
                                         </div>
                                     </li>
+                                    <li>
+                                        <div class="panel text-center">
+                                            <div class="thumbnail">
+                                                <img src="<c:url value="http://c2l-equipment.com/images/company/1.jpg" />"/>
+                                            </div>
+                                            <h1 class="title">Applanix</h1>
+                                            <h2 class="subtitle">Inertial Navigation System</h2>
+                                            <h3 class="desc">When most organizations talk of being a global enterprise, the label is more figurative than literal. As a world leader in products and solutions </h3>
+                                            <h4 class="summary summary-last-child">http://www.applanix.com</h4>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="panel text-center">
+                                            <div class="thumbnail">
+                                                <img src="<c:url value="http://c2l-equipment.com/images/company/2.jpg" />"/>
+                                            </div>
+                                            <h1 class="title">Orbit</h1>
+                                            <h2 class="subtitle">GeoSpatial Technologies</h2>
+                                            <h3 class="desc">orbit GeoSpatial Technologies provides product and serices to maximize the effective integration of geospatial data </h3>
+                                            <h4 class="summary summary-last-child">http://www.orbitgt.com</h4>
+                                        </div>
+                                    </li>                                    
                                 </ul>
                             </div>
                         </div>

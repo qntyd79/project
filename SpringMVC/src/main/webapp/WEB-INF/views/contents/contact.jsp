@@ -22,7 +22,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="thumbnail">
-                                    <img src="<c:url value="/resources/images/innomaps/map.png" />" class="img-border" />
+                                    <img src="<c:url value="/resources/images/innomaps/map.png" />" class="img-border"/>
                                 </div>
                             </div>
                         </div>

@@ -154,8 +154,8 @@
                                             <h1 class="title">3DM FEATURE EXTRACTION</h1>
                                             <h2 class="subtitle">Asset Modeling</h2>
                                             <ul class="list">
-                                                <li>Velodyne HDL-32E, Quanergy M8 등 LiDAR DATA 수집</li>
-                                                <li>Applanix AP-20E의 고정밀 항법장치 POSPac을 후처리</li>
+                                                <li>Velodyne HDL-32E, Quanergy M8 등</li>
+                                                <li>Applanix AP-20E의 고정밀 항법장치 POSPac</li>
                                                 <li>거리뷰 영상 및 Point Cloud 동시 취득</li>
                                             </ul>
                                             <!-- <div class="btn-group-m">

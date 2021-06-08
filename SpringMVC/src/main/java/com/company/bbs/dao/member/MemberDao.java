@@ -3,22 +3,17 @@ package com.company.bbs.dao.member;
 import java.util.List;
 
 import com.company.bbs.utill.Criteria;
+import com.company.bbs.vo.attach.AttachVO;
 import com.company.bbs.vo.member.MemberVO;
 
 public interface MemberDao {
 
 	// 글목록
 	public List<MemberVO> getList(Criteria criteria) throws Exception;
-	
-	// 공지글목록
-	/*public List<MemberDto> getNoticeList(Criteria criteria) throws Exception;*/
 
-	// 글저장 
+	// 글저장
 	public void insert(MemberVO dto) throws Exception;
-	
-	// 답글업데이트 
-	/*public void getReply(MemberDto dto) throws Exception;*/
-	
+
 	// 글보기
 	public MemberVO getView(int member_idx) throws Exception;
 
@@ -43,17 +38,26 @@ public interface MemberDao {
 	// 글갯수
 	public int getCount(Criteria criteria) throws Exception;
 
-	// 공지글갯수
-	/*public int getNoticeCount(Criteria criteria) throws Exception;
-*/
 	// 글비밀번호리턴
 	public String getPassword(int member_idx) throws Exception;
-	
+
 	// 카테고리목록
 	public List<Object> getCategoryList(int idx) throws Exception;
-	
-	// 이메일중복확인  
+
+	// 이메일중복확인
 	public MemberVO getEmailCheck(String str) throws Exception;
-			
-	
+
+	// 첨부파일 저장
+	public void insert(AttachVO attachVO) throws Exception;
+
+	// 첨부파일갯수
+	public void getAttachCount(int member_idx) throws Exception;
+
+	// 첨부파일목록
+	public List<Object> getFileList(int member_idx) throws Exception;
+
+	// 첨부파일삭제
+	public void attachDelete(int file_idx) throws Exception;
+
+
 }

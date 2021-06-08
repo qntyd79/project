@@ -81,13 +81,15 @@
                     </section>
                 </div>
                 <div class="slider-img">
-                        <img src="<c:url value="/resources/images/slide/slide02.jpg"/> "/>
-                    </div>
-                <!-- <div class="slider-video">
+                        <img src="<c:url value="/resources/images/slide/slide02.jpg"/>"/>
+                </div>
+                <!-- 
+                <div class="slider-video">
                     <video width="100%" muted autoplay loop>
                         <source src="/jhbbs/images/slide/wingtra.mp4" type="video/mp4">
                     </video>
-                </div> -->
+                </div>
+                -->
             </div>
         </div>
     </div>

@@ -43,7 +43,7 @@
 @link-color-hover-base: darken(@link-color-base, 15%);
 
 //@fixed-width: 100%;
-@fixed-width: 1000px;
+@fixed-width: 1080px;
 
 /* css 초기화 선언 */
 * {
@@ -1213,7 +1213,9 @@ article {
         color: @font-color-base;
         .border;
 
-        .license {}
+        .license {
+			height: 200px;
+		}
     }
 
     .panel-footer {
@@ -1224,8 +1226,15 @@ article {
             .background(#777);
             color: #fff;
         }
+		
+		
     }
 }
+
+.privacy-btn-all {
+	padding: 10px 20px;
+	text-align: center;
+	}
 
 
 dl {

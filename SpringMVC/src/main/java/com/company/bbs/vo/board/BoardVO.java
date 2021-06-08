@@ -37,6 +37,15 @@ public class BoardVO extends AttachVO {
 	private int member_idx;
 	private MultipartFile[] attach;
 	private int filecnt;
+	private int commentcnt;
+	
+	public int getCommentcnt() {
+		return commentcnt;
+	}
+
+	public void setCommentcnt(int commentcnt) {
+		this.commentcnt = commentcnt;
+	}
 
 	public int getFilecnt() {
 		return filecnt;
@@ -279,9 +288,11 @@ public class BoardVO extends AttachVO {
 				+ ", hit=" + hit + ", cipp=" + cipp + ", tag=" + tag + ", secret=" + secret + ", notice=" + notice
 				+ ", vote=" + vote + ", sdate=" + sdate + ", edate=" + edate + ", regdate=" + regdate + ", del=" + del
 				+ ", category_idx=" + category_idx + ", comment_idx=" + comment_idx + ", file_idx=" + file_idx
-				+ ", member_idx=" + member_idx + ", attach=" + Arrays.toString(attach) + ", filecnt=" + filecnt + "]";
+				+ ", member_idx=" + member_idx + ", attach=" + Arrays.toString(attach) + ", filecnt=" + filecnt
+				+ ", commentcnt=" + commentcnt + "]";
 	}
 
+	
 	
 
 }

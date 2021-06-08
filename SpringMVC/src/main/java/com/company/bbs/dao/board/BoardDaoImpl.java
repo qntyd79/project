@@ -134,5 +134,11 @@ public class BoardDaoImpl implements BoardDao {
 	public void attachDelete(int file_idx) throws Exception {
 		sqlSession.selectOne("board.attachDelete", file_idx);		
 	}
+	
+	// 코멘트갯수 
+	@Override
+	public void getCommentCount(int board_idx) throws Exception {
+		sqlSession.selectOne("board.getCommentCount", board_idx);
+	}
 
 }

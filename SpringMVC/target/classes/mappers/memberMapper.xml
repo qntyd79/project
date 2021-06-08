@@ -16,18 +16,22 @@
 	order by member_idx desc limit #{pageStart}, ${perPageNum}
 	]]>
 	</select>
-
-	<!-- 공지글목록 <select id="getNoticeList" resultType="com.company.bbs.dto.member.MemberDto"> 
-		<![CDATA[ select * from jhbbs_member where member_idx > 0 and del = 'N' and 
-		notice = 1 ]]> <include refid="category"></include> <include refid="search"></include> 
-		<![CDATA[ order by parent desc, sortno asc ]]> </select> -->
-
-	<!-- 카테고리목록 -->
-	<!-- <select id="getCategoryList" resultType="com.company.bbs.dto.member.MemberDto"> -->
-	<select id="getCategoryList"
-		resultType="com.company.bbs.vo.category.CategoryVO">
+	
+	
+	<!-- 파일목록 -->
+	<select id="getFileList" resultType="com.company.bbs.vo.member.MemberVO">
 	<![CDATA[ 
-	select * from jhbbs_category where idx=2 and del = 'N'
+	select * from jhbbs_file where file_idx > 0 and del = 'N' and member_idx = #{member_idx}
+	]]>
+	<![CDATA[ 
+	order by regdate DESC
+	]]>
+	</select>
+	
+	<!-- 카테고리목록 -->
+	<select id="getCategoryList" resultType="com.company.bbs.vo.category.CategoryVO">
+	<![CDATA[ 
+	select * from jhbbs_category where kind=#{kind} and del = 'N'
 	]]>
 	<![CDATA[ 
 	order by category_idx DESC
@@ -42,7 +46,7 @@
 		nickname, <!-- jumin1, jumin2, -->
 		email, homepage, zipcode, address, detailaddress, extraaddress,
 		phone,
-		hphone, job, attach, message, etc, mail_check,
+		hphone, job, message, etc, mail_check,
 		<!-- com_name, com_homepage, com_station, com_position, com_zipcode, com_address1, 
 			com_address2, com_phone, com_fax, -->
 		level, point, approval, join_date, login_last, login_cnt, login_ip,
@@ -52,8 +56,7 @@
 		#{pass}, #{pass_ask}, #{pass_account}, #{name}, #{nickname}, <!-- #{jumin1}, 
 			#{jumin2}, -->
 		#{email}, #{homepage}, #{zipcode}, #{address}, #{detailaddress},
-		#{extraaddress},#{phone}, #{hphone}, #{job}, #{attach}, #{message},
-		#{etc}, #{mail_check},
+		#{extraaddress},#{phone}, #{hphone}, #{job}, #{message}, #{etc}, #{mail_check},
 		<!-- #{com_name}, #{com_homepage}, #{com_station}, #{com_position}, #{com_zipcode}, 
 			#{com_address1}, #{com_address2}, #{com_phone}, #{com_fax}, -->
 		#{level}, #{point}, #{approval}, #{join_date}, #{login_last},
@@ -61,16 +64,42 @@
 		#{category_idx}
 		)
 	</insert>
-
-	<!-- 답글업데이트 <update id="getReply"> <![CDATA[ update jhbbs_member set sortno 
-		= sortno+1 where parent=#{parent} and sortno > #{sortno} ]]> </update> -->
-
+	
+	<!-- 첨부파일저장 -->
+	<insert id="attachInsert" parameterType="com.company.bbs.vo.board.BoardVO"> 
+		INSERT INTO jhbbs_file (
+		file_name, file_hash_name,
+		file_size, file_type, file_ext,
+		download, regdate, del, board_idx, member_idx
+		) VALUES (
+		#{file_name}, #{file_hash_name}, 
+		#{file_size}, #{file_type}, #{file_ext},
+		#{download}, #{regdate}, #{del}, #{board_idx}, #{member_idx}
+		)
+	</insert>
+	
+	<!--  첨부파일수정 -->
+	<update id="attachUpdate">
+		update jhbbs_file set
+		file_name=#{file_name},
+		file_hash_name=#{file_hash_name},
+		file_size=#{file_size},
+		file_type=#{file_type},
+		file_ext=#{file_ext},		
+		board_idx=#{board_idx}
+		member_idx=#{member_idx}
+		where
+		file_idx=#{file_idx}
+	</update>
+	
+	<!-- 글삭제 update처리 -->
+	<update id="attachDelete">
+		update jhbbs_file set del = 'Y' where file_idx = #{file_idx}
+	</update>
+	
 	<!-- 글보기 -->
-	<select id="getView"
-		resultType="com.company.bbs.vo.member.MemberVO">
-		select * from jhbbs_member where member_idx =
-		#{member_idx}
-		and del = 'N'
+	<select id="getView" resultType="com.company.bbs.vo.member.MemberVO">
+		select * from jhbbs_member where member_idx = #{member_idx}	and del = 'N'
 	</select>
 
 	<!-- 글수정 -->
@@ -99,8 +128,7 @@
 
 	<!-- 글삭제 update처리 -->
 	<update id="delete">
-		update jhbbs_member set del = 'Y' where member_idx =
-		#{member_idx}
+		update jhbbs_member set del = 'Y' where member_idx = #{member_idx}
 	</update>
 
 	<!-- 글조회수 -->
@@ -110,16 +138,14 @@
 	</update>
 
 	<!-- 글이전값 -->
-	<select id="getPrevNum"
-		resultType="com.company.bbs.vo.member.MemberVO">
+	<select id="getPrevNum"	resultType="com.company.bbs.vo.member.MemberVO">
 	<![CDATA[ 
 	select * from jhbbs_member where member_idx > #{member_idx} and del = 'N' order by  member_idx asc limit 1
 	]]>
 	</select>
 
 	<!-- 글다음값 -->
-	<select id="getNextNum"
-		resultType="com.company.bbs.vo.member.MemberVO">
+	<select id="getNextNum"	resultType="com.company.bbs.vo.member.MemberVO">
 	<![CDATA[
 	select * from jhbbs_member where member_idx < #{member_idx} and del = 'N' order by  member_idx desc limit 1
 	]]>
@@ -127,7 +153,9 @@
 
 	<!-- 글최고값 -->
 	<select id="getMaxNum" resultType="int">
+	<![CDATA[ 
 		select max(member_idx) from jhbbs_member
+	]]>
 		<include refid="search"></include>
 	</select>
 
@@ -139,15 +167,12 @@
 		<include refid="category"></include>
 		<include refid="search"></include>
 	</select>
-
-	<!-- 공지글갯수 <select id="getNoticeCount" resultType="int"> <![CDATA[ select 
-		count(notice) from jhbbs_member where notice > 0 and del = 'N' ]]> <include 
-		refid="category"></include> <include refid="search"></include> </select> -->
-
+	
 	<!-- 글비밀번호리턴 -->
 	<select id="getPassword" resultType="String">
-		select pass from
-		jhbbs_member where member_idx = #{member_idx} and del = 'N'
+	<![CDATA[ 
+	select pass from jhbbs_member where member_idx = #{member_idx} and del = 'N'
+	]]>
 	</select>
 
 	<sql id="category">

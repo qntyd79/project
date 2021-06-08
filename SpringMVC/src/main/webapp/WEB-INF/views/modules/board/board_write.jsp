@@ -23,7 +23,7 @@
                             
                             
                                 <h2><spring:message code="bbs.title.write"/></h2>
-                                <form:form modelAttribute="boardVO" method="post" id="writeForm" name="writeForm" enctype="multipart/form-data" action="insert.do">
+                                <form:form modelAttribute="boardVO" method="post" id="writeForm" name="writeForm" enctype="multipart/form-data" action="<c:url value='insert.do'/>">
                                 	<input type="hidden" name="msgStr" value="<c:out value="${msg}"/> ">
                                     <fieldset>
                                         <legend><spring:message code="bbs.table.legend"/></legend>

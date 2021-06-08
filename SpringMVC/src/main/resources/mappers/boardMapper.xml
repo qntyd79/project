@@ -113,7 +113,7 @@
 	<!-- 답글업데이트 -->
 	<update id="getReply">
 	<![CDATA[
-	update jhbbs_board set sortno = sortno+1 where parent=#{parent} and sortno > #{sortno}
+		update jhbbs_board set sortno = sortno+1 where parent=#{parent} and sortno > #{sortno}
 	]]>
 	</update>
 
@@ -159,37 +159,50 @@
 	<!-- 글이전값 -->
 	<select id="getPrevNum"	resultType="com.company.bbs.vo.board.BoardVO">
 	<![CDATA[ 
-	select * from jhbbs_board where board_idx > #{board_idx} and del = 'N' order by parent desc, sortno asc limit 1
+		select * from jhbbs_board where board_idx > #{board_idx} and del = 'N' order by parent desc, sortno asc limit 1
 	]]>
 	</select>
 
 	<!-- 글다음값 -->
 	<select id="getNextNum"	resultType="com.company.bbs.vo.board.BoardVO">
 	<![CDATA[
-	select * from jhbbs_board where board_idx < #{board_idx} and del = 'N' order by parent desc, sortno desc limit 1
+		select * from jhbbs_board where board_idx < #{board_idx} and del = 'N' order by parent desc, sortno desc limit 1
 	]]>
 	</select>
 
 	<!-- 글최고값 -->
 	<select id="getMaxNum" resultType="int">
+	<![CDATA[ 
 		select max(board_idx) from jhbbs_board
+	]]>
 		<include refid="search"></include>
 	</select>
 
 	<!-- 글갯수 -->
 	<select id="getCount" resultType="int">
 	<![CDATA[ 
-	select count(board_idx) from jhbbs_board where board_idx > 0 and del = 'N'
+		select count(board_idx) from jhbbs_board where board_idx > 0 and del = 'N'
 	]]>
 		<include refid="category"></include>
 		<include refid="search"></include>
 	</select>
 	
+	<!-- 코멘트갯수 -->
+	<update id="getCommentCount" parameterType="int">
+	<![CDATA[ 
+	update jhbbs_board b
+	set b.commentcnt = (select count(comment_idx) from jhbbs_comment where board_idx = #{board_idx} and comment_idx > 0 and del = 'N')
+	where b.board_idx = #{board_idx};
+	]]>
+	</update>
+	 
 	<!-- 첨부파일 갯수-->
 	<update id="getAttachCount" parameterType="int">
-		update jhbbs_board b
-		set b.filecnt = (select count(file_idx) from JHBBS_file where board_idx = #{board_idx} and file_idx > 0 and del = 'N') 
-		where b.board_idx = #{board_idx};     
+	<![CDATA[ 
+	update jhbbs_board b
+	set b.filecnt = (select count(file_idx) from JHBBS_file where board_idx = #{board_idx} and file_idx > 0 and del = 'N') 
+	where b.board_idx = #{board_idx};  
+	]]>   
 	</update>
 
 	<!-- 공지글갯수 -->
@@ -203,8 +216,9 @@
 
 	<!-- 글비밀번호리턴 -->
 	<select id="getPassword" resultType="String">
-		select pass from jhbbs_board
-		where board_idx = #{board_idx} and del = 'N'
+	<![CDATA[  
+	select pass from jhbbs_board where board_idx = #{board_idx} and del = 'N'
+	]]>
 	</select>
 
 	<sql id="category">

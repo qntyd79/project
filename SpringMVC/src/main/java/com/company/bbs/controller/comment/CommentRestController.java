@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
+import com.company.bbs.service.board.BoardService;
 import com.company.bbs.service.comment.CommentService;
 import com.company.bbs.utill.Criteria;
 import com.company.bbs.utill.PageMaker;
@@ -36,6 +38,9 @@ public class CommentRestController {
 	@Inject
 	CommentService service;
 	
+	@Inject
+	BoardService bservice;
+	
 	// 댓글등록
 	@ResponseBody
 	@RequestMapping(value = "ajaxInsert", method = RequestMethod.POST)
@@ -45,6 +50,9 @@ public class CommentRestController {
 
 		try {
 			service.insert(commentVO);
+			// 코멘트갯수 업데이트 
+			bservice.getCommentCount(commentVO.getBoard_idx());
+			
 			entity = new ResponseEntity<>("insertSuccess", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

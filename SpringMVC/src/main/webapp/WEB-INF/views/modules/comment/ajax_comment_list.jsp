@@ -6,7 +6,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="validator" uri="http://www.springmodules.org/tags/commons-validator" %>
 <validator:javascript formName="commentVO" staticJavascript="false" xhtml="true" cdata="false"/>
-
+<script src="<c:url value="/resources/js/my_jquery.js"/>" type="text/javascript" charset="UTF-8"></script>  
 <!-- 
 <div id="container-wrap">
     <div class="clearfix">
@@ -225,7 +225,7 @@
 					//ajax
 				    $.ajax({
 				    	type: "POST",
-				        url: "${path}/modules/comment/ajaxInsert.do",
+				        url: "${path}/modules/comment/ajaxInsert",
 				        headers: { "Content-Type": "application/json", "X-HTTP-Method-Override": "POST" },
 				        dataType: "text",
 				        data: JSON.stringify({ // stringify는 json개체를 string개체로 변환

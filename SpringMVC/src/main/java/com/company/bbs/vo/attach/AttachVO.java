@@ -1,5 +1,7 @@
 package com.company.bbs.vo.attach;
 
+import java.util.Arrays;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class AttachVO {
@@ -16,6 +18,7 @@ public class AttachVO {
 	private String regdate;
 	private String del;
 	private int board_idx;
+	private int member_idx;
 	
 	public int getFile_idx() {
 		return file_idx;
@@ -89,13 +92,22 @@ public class AttachVO {
 	public void setBoard_idx(int board_idx) {
 		this.board_idx = board_idx;
 	}
+	public int getMember_idx() {
+		return member_idx;
+	}
+	public void setMember_idx(int member_idx) {
+		this.member_idx = member_idx;
+	}
+	
 	@Override
 	public String toString() {
 		return "AttachVO [file_idx=" + file_idx + ", file_name=" + file_name + ", file_hash_name=" + file_hash_name
 				+ ", file_size=" + file_size + ", file_type=" + file_type + ", file_ext=" + file_ext + ", file_index="
-				+ file_index + ", download=" + download + ", attach=" + attach + ", regdate=" + regdate
-				+ ", del=" + del + ", board_idx=" + board_idx + "]";
+				+ file_index + ", download=" + download + ", attach=" + Arrays.toString(attach) + ", regdate=" + regdate
+				+ ", del=" + del + ", board_idx=" + board_idx + ", member_idx=" + member_idx + "]";
 	}
+	
+	
 	
 	
 		

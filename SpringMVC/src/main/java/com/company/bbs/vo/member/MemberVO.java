@@ -1,6 +1,12 @@
 package com.company.bbs.vo.member;
 
-public class MemberVO {
+import java.util.Arrays;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import com.company.bbs.vo.attach.AttachVO;
+
+public class MemberVO extends AttachVO {
 	
 	private int member_idx;
 	private String userid;	
@@ -19,7 +25,6 @@ public class MemberVO {
 	private String phone;
 	private String hphone;
 	private String job;
-	private String attach;
 	private String message;
 	private String etc;
 	private int mail_check;
@@ -35,19 +40,7 @@ public class MemberVO {
 	private String regdate;
 	private String del;
 	private int category_idx;
-	
-	@Override
-	public String toString() {
-		return "MemberDto [member_idx=" + member_idx + ", userid=" + userid + ", pass=" + pass + ", pass_ask="
-				+ pass_ask + ", pass_account=" + pass_account + ", name=" + name + ", nickname=" + nickname + ", email="
-				+ email + ", email2=" + email2 + ", homepage=" + homepage + ", zipcode=" + zipcode + ", address="
-				+ address + ", detailaddress=" + detailaddress + ", extraaddress=" + extraaddress + ", phone=" + phone
-				+ ", hphone=" + hphone + ", job=" + job + ", attach=" + attach + ", message=" + message + ", etc=" + etc
-				+ ", mail_check=" + mail_check + ", level=" + level + ", point=" + point + ", approval=" + approval
-				+ ", join_date=" + join_date + ", login_last=" + login_last + ", login_cnt=" + login_cnt + ", login_ip="
-				+ login_ip + ", user_leave=" + user_leave + ", cipp=" + cipp + ", regdate=" + regdate + ", del=" + del
-				+ ", category_idx=" + category_idx + "]";
-	}
+	private MultipartFile[] attach;
 	
 	public int getMember_idx() {
 		return member_idx;
@@ -151,12 +144,6 @@ public class MemberVO {
 	public void setJob(String job) {
 		this.job = job;
 	}
-	public String getAttach() {
-		return attach;
-	}
-	public void setAttach(String attach) {
-		this.attach = attach;
-	}
 	public String getMessage() {
 		return message;
 	}
@@ -247,31 +234,25 @@ public class MemberVO {
 	public void setCategory_idx(int category_idx) {
 		this.category_idx = category_idx;
 	}
-	
-	/*
-	public String toStringPhone (String phone, String phone2, String phone3) {
-		return phone + "-" + phone2 + "-" + phone3;		
+	public MultipartFile[] getAttach() {
+		return attach;
+	}
+	public void setAttach(MultipartFile[] attach) {
+		this.attach = attach;
 	}
 	
-	public String[] parsePhone(){
-        String[] phones = new String[3];
-        int mid = phone.length() == 10? 7:8;
-        phones[0] = phone.substring(0,3);
-        phones[1] = phone.substring(4,mid);
-        phones[2] = phone.substring(mid,phone.length()-1);
-        return phones;
-    }
-	
-	public String toStringEmail (String email, String email2) {
-		return email + "@" + email2 ;		
+	@Override
+	public String toString() {
+		return "MemberVO [member_idx=" + member_idx + ", userid=" + userid + ", pass=" + pass + ", pass_ask=" + pass_ask
+				+ ", pass_account=" + pass_account + ", name=" + name + ", nickname=" + nickname + ", email=" + email
+				+ ", email2=" + email2 + ", homepage=" + homepage + ", zipcode=" + zipcode + ", address=" + address
+				+ ", detailaddress=" + detailaddress + ", extraaddress=" + extraaddress + ", phone=" + phone
+				+ ", hphone=" + hphone + ", job=" + job + ", message=" + message + ", etc=" + etc + ", mail_check="
+				+ mail_check + ", level=" + level + ", point=" + point + ", approval=" + approval + ", join_date="
+				+ join_date + ", login_last=" + login_last + ", login_cnt=" + login_cnt + ", login_ip=" + login_ip
+				+ ", user_leave=" + user_leave + ", cipp=" + cipp + ", regdate=" + regdate + ", del=" + del
+				+ ", category_idx=" + category_idx + ", attach=" + Arrays.toString(attach) + "]";
 	}
-	
-	public String[] parseEmail(){
-        String[] emails = email.split("@");
-        return emails;
-    }
-    */
-	
-	
+		
 	
 }

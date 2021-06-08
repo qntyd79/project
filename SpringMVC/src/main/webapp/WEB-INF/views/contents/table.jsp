@@ -557,9 +557,7 @@
                                     </colgroup>
                                     <thead>
                                         <tr>
-                                            <th scope="col">
-                                                <label for="date">구별</label>
-                                            </th>
+                                            <th scope="col"><label for="date">구별</label></th>
                                             <th scope="col">행정동</th>
                                             <th scope="col">법정동</th>
                                             <th scope="col">면적</th>
@@ -569,94 +567,76 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <th>
-                                                <label for="date">계</label>
-                                            </th>
-                                            <th>79</th>
-                                            <th>177</th>
-                                            <th>539.34㎢</th>
-                                            <th>2,501</th>
-                                            <th>14,103</th>
+                                            <th><label for="date">계</label></th>
+                                            <td>79</td>
+                                            <td>177</td>
+                                            <td>539.34㎢</td>
+                                           	<td>2,501</td>
+                                            <td>14,103</td>
                                         </tr>
                                         <tr>
-                                            <th>
-                                                <label for="date">계</label>
-                                            </th>
-                                            <th>79</th>
-                                            <th>177</th>
-                                            <th>539.34㎢</th>
-                                            <th>2,501</th>
-                                            <th>14,103</th>
+                                            <th><label for="date">계</label></th>
+                                            <td>79</td>
+                                            <td>177</td>
+                                            <td>539.34㎢</td>
+                                           	<td>2,501</td>
+                                            <td>14,103</td>
                                         </tr>
                                         <tr>
-                                            <th>
-                                                <label for="date">계</label>
-                                            </th>
-                                            <th>79</th>
-                                            <th>177</th>
-                                            <th>539.34㎢</th>
-                                            <th>2,501</th>
-                                            <th>14,103</th>
+                                            <th><label for="date">계</label></th>
+                                            <td>79</td>
+                                            <td>177</td>
+                                            <td>539.34㎢</td>
+                                           	<td>2,501</td>
+                                            <td>14,103</td>
                                         </tr>
                                         <tr>
-                                            <th>
-                                                <label for="date">계</label>
-                                            </th>
-                                            <th>79</th>
-                                            <th>177</th>
-                                            <th>539.34㎢</th>
-                                            <th>2,501</th>
-                                            <th>14,103</th>
+                                            <th><label for="date">계</label></th>
+                                            <td>79</td>
+                                            <td>177</td>
+                                            <td>539.34㎢</td>
+                                           	<td>2,501</td>
+                                            <td>14,103</td>
                                         </tr>
                                         <tr>
-                                            <th>
-                                                <label for="date">계</label>
-                                            </th>
-                                            <th>79</th>
-                                            <th>177</th>
-                                            <th>539.34㎢</th>
-                                            <th>2,501</th>
-                                            <th>14,103</th>
+                                            <th><label for="date">계</label></th>
+                                            <td>79</td>
+                                            <td>177</td>
+                                            <td>539.34㎢</td>
+                                           	<td>2,501</td>
+                                            <td>14,103</td>
                                         </tr>
                                         <tr>
-                                            <th>
-                                                <label for="date">계</label>
-                                            </th>
-                                            <th>79</th>
-                                            <th>177</th>
-                                            <th>539.34㎢</th>
-                                            <th>2,501</th>
-                                            <th>14,103</th>
+                                            <th><label for="date">계</label></th>
+                                            <td>79</td>
+                                            <td>177</td>
+                                            <td>539.34㎢</td>
+                                          	<td>2,501</td>
+                                            <td>14,103</td>
                                         </tr>
                                         <tr>
-                                            <th>
-                                                <label for="date">계</label>
-                                            </th>
-                                            <th>79</th>
-                                            <th>177</th>
-                                            <th>539.34㎢</th>
-                                            <th>2,501</th>
-                                            <th>14,103</th>
+                                            <th><label for="date">계</label></th>
+                                            <td>79</td>
+                                            <td>177</td>
+                                            <td>539.34㎢</td>
+                                           	<td>2,501</td>
+                                            <td>14,103</td>
                                         </tr>
                                         <tr>
-                                            <th>
-                                                <label for="date">계</label>
-                                            </th>
-                                            <th>79</th>
-                                            <th>177</th>
-                                            <th>539.34㎢</th>
-                                            <th>2,501</th>
-                                            <th>14,103</th>
+                                            <th><label for="date">계</label></th>
+                                            <td>79</td>
+                                            <td>177</td>
+                                            <td>539.34㎢</td>
+                                           	<td>2,501</td>
+                                            <td>14,103</td>
                                         </tr>
                                         <tr>
-                                            <th>
-                                                <label for="date">계</label>
-                                            </th>
-                                            <th>79</th>
-                                            <th>177</th>
-                                            <th>539.34㎢</th>
-                                            <th>2,501</th>
-                                            <th>14,103</th>
+                                            <th><label for="date">계</label></th>
+                                            <td>79</td>
+                                            <td>177</td>
+                                            <td>539.34㎢</td>
+                                           	<td>2,501</td>
+                                            <td>14,103</td>
                                         </tr>
                                     </tbody>
                                 </table>

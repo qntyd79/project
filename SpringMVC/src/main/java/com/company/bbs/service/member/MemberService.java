@@ -12,15 +12,9 @@ public interface MemberService {
 
 	// 글목록
 	public List<MemberVO> getList(Criteria criteria) throws Exception;
-	
-	// 공지글목록
-	/*public List<MemberDto> getNoticeList(Criteria criteria) throws Exception;*/
-	
-	// 글저장 
+
+	// 글저장
 	public void insert(MemberVO dto) throws Exception;
-	
-	// 답글업데이트 
-	/* public void getReply(MemberDto dto) throws Exception; */
 
 	// 글보기
 	public MemberVO getView(int member_idx) throws Exception;
@@ -46,13 +40,22 @@ public interface MemberService {
 	// 글갯수
 	public int getCount(Criteria criteria) throws Exception;
 
-	// 공지글갯수
-	/*public int getNoticeCount(Criteria criteria) throws Exception;*/
-
 	// 글비밀번호리턴
 	public String getPassword(int member_idx) throws Exception;
-	
+
+	// 카테고리명
+	public List<Object> getCategory() throws Exception;
+
 	// 카테고리목록
 	public List<Object> getCategoryList(int idx) throws Exception;
+
+	// 첨부파일조회
+	public List<Object> getFileList(int member_idx) throws Exception;
+
+	// 첨부파일삭제
+	public void attachDelete(int file_idx) throws Exception;
+
+	// 코멘트갯수
+	public void getCommentCount(int member_idx) throws Exception;
 
 }

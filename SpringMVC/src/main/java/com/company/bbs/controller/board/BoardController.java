@@ -28,6 +28,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
 import com.company.bbs.service.board.BoardService;
+import com.company.bbs.service.comment.CommentService;
 import com.company.bbs.utill.CaptchaUtil;
 import com.company.bbs.utill.Criteria;
 import com.company.bbs.utill.PageMaker;
@@ -154,7 +155,7 @@ public class BoardController {
 		return "modules/board/board_list";
 	}
 
-	// 글등록
+	// 글등록폼 
 	@RequestMapping(value = "write.do", method = RequestMethod.GET)
 	public String Write(Model model, @ModelAttribute BoardVO boardVO, @RequestParam(defaultValue = "1") int kind)
 			throws Exception {
@@ -273,7 +274,7 @@ public class BoardController {
 		return mav;
 	}
 
-	// 글수정
+	// 글수정폼 
 	@RequestMapping(value = "modify.do", method = RequestMethod.GET)
 	public String Modify(Model model, @ModelAttribute Criteria criteria, @RequestParam int board_idx,
 			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "1") int kind)

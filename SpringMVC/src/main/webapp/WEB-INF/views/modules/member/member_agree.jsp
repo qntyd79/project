@@ -4,60 +4,26 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<script type="text/javaScript" language="javascript" defer="defer">
-       
-	/* 수정 화면 function */
-    function fn_egov_select(id)
-	{
-       	document.listForm.selectedId.value = id;
-       	document.listForm.action = "<c:url value='/updateSampleView.do'/>";
-       	document.listForm.submit();
-    }
-        
-    /* 등록 화면 function */
-    function fn_egov_addView()
-    {
-     	document.listForm.action = "<c:url value='insertPermssionUser.do'/>";
-       	document.listForm.submit();
-    }
-        
-    /* 목록 화면 function */
-    function fn_egov_selectList()
-    {
-      	document.listForm.action = "<c:url value='/egovSampleList.do'/>";
-       	document.listForm.submit();
-    }
-        
-    /* pagination 페이지 링크 function */
-    function fn_egov_link_page(pageNo)
-    {
-      	document.listForm.pageIndex.value = pageNo;
-       	document.listForm.action = "<c:url value='/egovSampleList.do'/>";
-      	document.listForm.submit();
-    }
 
-</script>
 <c:import url="/WEB-INF/views/include/header.jsp"/>
+
 <div id="container-wrap">
 	<div class="clearfix">
 		<div class="content-box">
 			<div class="content-full-img01"></div>
 			<div class="content-full-bg01-hidden">
 				<section class="content">
-					<%@ include file="../../include/content_header.jsp"%>
+					 <c:import url="/WEB-INF/views/include/content_header.jsp"/>
 					<article>
 						<div class="row">
 							<div class="col-md-12">
 								<h2>개인정보동의</h2>
-								<form>
+								 <form name="agreeForm" id="agreeForm" method="post" enctype="multipart/form-data" action="write.do">
 									<fieldset>
-										<legend>회원가입약관</legend>
-										
+										<legend>회원가입약관</legend>										
 										<div class="panel-box">
 											<div class="panel-header">
-												<h3 class="panel-title">
-													<i class="fas fa-file-alt"></i> 회원약관 (필수)
-												</h3>
+												<h3 class="panel-title"><i class="fas fa-file-alt"></i> 회원약관 (필수)</h3>
 											</div>
 											<div class="panel-body">
 												<div class="license">
@@ -99,17 +65,14 @@
 											</div>
 											<div class="panel-footer">
 												<div class="privacy-btn">
-													<input type="checkbox" name="agree1" value="1"> 이용
-													약관에 동의합니다.
+													<input type="checkbox" name="agree1" value="1"> 이용 약관에 동의합니다.
 												</div>
 											</div>
 										</div>
 										<hr>
 										<div class="panel-box">
 											<div class="panel-header">
-												<h3 class="panel-title">
-													<i class="fas fa-file-alt"></i> 개인정보보호정책 (필수)
-												</h3>
+												<h3 class="panel-title"><i class="fas fa-file-alt"></i> 개인정보보호정책 (필수)</h3>
 											</div>
 											<div class="panel-body">
 												<div class="license">
@@ -151,17 +114,14 @@
 											</div>
 											<div class="panel-footer">
 												<div class="privacy-btn">
-													<input type="checkbox" name="agree2" value="1"> 이용
-													약관에 동의합니다.
+													<input type="checkbox" name="agree2" value="1"> 이용 약관에 동의합니다.
 												</div>
 											</div>
 										</div>
 										<hr>
 										<div class="panel-box">
 											<div class="panel-header">
-												<h3 class="panel-title">
-													<i class="fas fa-file-alt"></i> 제3자 정보제공 동의 (선택)
-												</h3>
+												<h3 class="panel-title"><i class="fas fa-file-alt"></i> 제3자 정보제공 동의 (선택)</h3>
 											</div>
 											<div class="panel-body">
 												<div class="license">
@@ -203,22 +163,17 @@
 											</div>
 											<div class="panel-footer">
 												<div class="privacy-btn">
-													<input type="checkbox" name="agree3" value="1"> 이용
-													약관에 동의합니다.
+													<input type="checkbox" name="agree3" value="1"> 이용	약관에 동의합니다.
 												</div>
 											</div>
 										</div>
-										<div class="privacy-btn">
-													<input type="checkbox" name="allagree" value="1"> 이용
-													이용약관, 개인정보 수집 및 이용, 위치정보 이용약관(선택), 프로모션 안내 메일 수신(선택)에 모두 동의합니다.
+										<div class="privacy-btn-all">
+											<input type="checkbox" name="allagree" value="1">이용약관, 개인정보 수집 및 이용, 위치정보 이용약관(선택), 프로모션 안내 메일 수신(선택)에 모두 동의합니다.
 										</div>
 										<nav class="btn-group">
 											<ul>
-												<li><input type="button" value="확인"
-													onclick="$(this.form).submit()">
-												</li>
-												<li><input type="button" value="취소"
-													onclick="location.href='history.back(-1)"></li>
+												<li><input type="button" value="확인" onclick="$(this.form).submit()"></li>
+												<li><input type="button" value="취소" onclick="location.href='history.back(-1)"></li>
 											</ul>
 										</nav>
 									</fieldset>
@@ -231,7 +186,9 @@
 		</div>
 	</div>
 </div>
+
 <c:import url="/WEB-INF/views/include/footer.jsp"/>
+
 <script>
 $(document).ready(function() {
 	

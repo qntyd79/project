@@ -5,8 +5,7 @@
 <mapper namespace="comment">
 
 	<!-- 글목록 -->
-	<select id="getLista"
-		resultType="com.company.bbs.vo.comment.CommentVO">
+	<select id="getLista" resultType="com.company.bbs.vo.comment.CommentVO">
 	<![CDATA[ 
 	select * from jhbbs_comment where comment_idx > 0 and del = 'N' and board_idx = #{board_idx}
 	]]>		
@@ -16,8 +15,7 @@
 	</select>
 
 	<!-- 글목록 -->
-	<select id="getList"
-		resultType="com.company.bbs.vo.comment.CommentVO">
+	<select id="getList" resultType="com.company.bbs.vo.comment.CommentVO">
 	<![CDATA[ 
 	select * from jhbbs_comment where comment_idx > 0 and del = 'N'
 	]]>
@@ -28,8 +26,7 @@
 	</select>
 
 	<!-- 글저장 -->
-	<insert id="insert"
-		parameterType="com.company.bbs.vo.comment.CommentVO">
+	<insert id="insert"	parameterType="com.company.bbs.vo.comment.CommentVO">
 		INSERT INTO jhbbs_comment (
 		parent, depth, sortno,
 		userid, name, pass, email, content, hit, cipp, vote, regdate, del,
@@ -49,8 +46,7 @@
 	</update>
 
 	<!-- 글보기 -->
-	<select id="getView"
-		resultType="com.company.bbs.vo.comment.CommentVO">
+	<select id="getView" resultType="com.company.bbs.vo.comment.CommentVO">
 		select * from jhbbs_comment where comment_idx =
 		#{comment_idx} and del = 'N'
 	</select>
@@ -112,7 +108,7 @@
 	<!-- 글갯수 -->
 	<select id="getCommentCount" resultType="int">
 	<![CDATA[ 
-	select count(comment_idx) from jhbbs_comment where board_idx > 0 and del = 'N'
+	select count(comment_idx) from jhbbs_comment where board_idx = ${board_idx} and comment_idx > 0 and del = 'N'
 	]]>
 		<include refid="search"></include>
 	</select>
