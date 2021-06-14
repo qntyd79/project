@@ -1,7 +1,18 @@
 package com.company.bbs.controller.member;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -32,7 +43,6 @@ import com.company.bbs.utill.Criteria;
 import com.company.bbs.utill.PageMaker;
 import com.company.bbs.utill.UploadFileUtils;
 import com.company.bbs.vo.attach.AttachVO;
-import com.company.bbs.vo.board.BoardVO;
 import com.company.bbs.vo.member.MemberVO;
 
 @SuppressWarnings("unused")
@@ -68,46 +78,82 @@ public class MemberController {
 	// 클라이언트측 유효성검증 설정
 	@RequestMapping(value = "validator.do")
 	protected String getValidator() throws Exception {
-		return "modules/board/validator";
+		return "modules/member/validator";
 	}
 
 	// 로그인폼
-	@RequestMapping(value = "/modules/login/login.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "login.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login() {
-		return "modules/login/login";
+		return "modules/member/member_login";
 	}
 
 	// 로그인풀화면폼
-	@RequestMapping(value = "/modules/login/loginfull.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "loginfull.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String loginfull() {
-		return "modules/login/loginfull";
+		return "modules/member/loginfull";
 	}
 
 	// 아이디/비밀번호찾기
-	@RequestMapping(value = "/modules/login/find.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "find.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String find() {
-		return "modules/login/find";
+		return "modules/member/member_find";
 	}
 
 	// 회원인증폼
 	@RequestMapping(value = "auth.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String auth() {
+	public String auth() throws Exception {
 		return "modules/member/member_auth";
 	}
 
 	// 회원약관동의폼
 	@RequestMapping(value = "agree.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String agree() {
+	public String agree(Model model) throws Exception {
+		
+		/*
+		File file = new File("/Users/ojeonghwan/git/project/SpringMVC/src/main/webapp/WEB-INF/views/modules/member/license01.txt");	
+		
+		FileReader filereader = new FileReader(file);	
+		
+		BufferedReader bufferreader = new BufferedReader(filereader);  // 크기를 안써도 됨
+		
+		List<String> list = new ArrayList<String>();
+		
+		while(true) {
+			String str = bufferreader.readLine();  //buffer로부터 한 줄씩 읽어서 저장
+			if(str == null) {//읽을 내용이 없으면 반복문 종료
+				break;
+			}
+			System.out.println(str); //한 줄씩 바로바로 출력
+		}
+		*/
+		
+		// 파일 객체 생 
+		Path path = Paths.get("/Users/ojeonghwan/git/project/SpringMVC/src/main/webapp/WEB-INF/views/modules/member/license01.txt");	
+				
+		// 캐릭터셋 지정
+		Charset cs = StandardCharsets.UTF_8;
+		        
+		// 파일 내용담을 리스트
+		List<String> list = new ArrayList<String>();
+				
+		list = Files.readAllLines(path,cs);
+		        
+		for(String readLine : list){
+		   //System.out.println(readLine);
+		}
+				
+        model.addAttribute("license", list);
+        
 		return "modules/member/member_agree";
 	}
 
-	// 글목록 (Model)
+	// 회원목록 (Model)
 	@RequestMapping(value = "list.do")
 	public String List(Model model, @ModelAttribute Criteria criteria,
 			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "2") int idx)
 			throws Exception {
 
-		logger.info("글목록");
+		logger.info("목록");
 
 		PageMaker pageMaker = new PageMaker();
 
@@ -115,6 +161,7 @@ public class MemberController {
 		pageMaker.setTotalCount(service.getCount(criteria));
 
 		model.addAttribute("list", service.getList(criteria));
+		model.addAttribute("categoryname", service.getCategory());
 		model.addAttribute("categorylist", service.getCategoryList(idx));
 		model.addAttribute("categoryselect", category_idx);
 		model.addAttribute("pageMaker", pageMaker);
@@ -124,12 +171,12 @@ public class MemberController {
 		return "modules/member/member_list";
 	}
 
-	// 글목록 (ModelAndView)
+	// 회원목록 (ModelAndView)
 	@RequestMapping(value = "mvlist.do")
 	public ModelAndView List(@ModelAttribute Criteria criteria, @RequestParam(defaultValue = "0") int category_idx,
 			@RequestParam(defaultValue = "2") int idx) throws Exception {
 
-		logger.info("글목록");
+		logger.info("회원목록");
 
 		PageMaker pageMaker = new PageMaker();
 
@@ -139,6 +186,7 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("list", service.getList(criteria));
+		mav.addObject("categoryname", service.getCategory());
 		mav.addObject("categorylist", service.getCategoryList(idx));
 		mav.addObject("categoryselect", category_idx);
 		mav.addObject("pageMaker", pageMaker);
@@ -149,13 +197,13 @@ public class MemberController {
 		return mav;
 	}
 
-	// 글목록 (Map)
+	// 회원목록 (Map)
 	@RequestMapping(value = "mlist.do")
 	public String List1(Model model, @ModelAttribute Criteria criteria,
 			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "2") int idx)
 			throws Exception {
 
-		logger.info("글목록");
+		logger.info("회원목록");
 
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCriteria(criteria);
@@ -164,6 +212,7 @@ public class MemberController {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		map.put("list", service.getList(criteria));
+		map.put("categoryname", service.getCategory());
 		map.put("categorylist", service.getCategoryList(idx));
 		map.put("categoryselect", category_idx);
 		map.put("pageMaker", pageMaker);
@@ -175,12 +224,12 @@ public class MemberController {
 		return "modules/member/member_list";
 	}
 
-	// 글등록폼
+	// 회원등록폼
 	@RequestMapping(value = "write.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String Write(Model model, @ModelAttribute MemberVO memberVO, @RequestParam(defaultValue = "2") int kind)
 			throws Exception {
 
-		logger.info("글쓰기");
+		logger.info("회원쓰기");
 
 		model.addAttribute("memberVO", memberVO);
 		model.addAttribute("categorylist", service.getCategoryList(kind));
@@ -188,12 +237,12 @@ public class MemberController {
 		return "modules/member/member_write";
 	}
 
-	// 글저장
+	// 회원저장
 	@RequestMapping(value = "insert.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public String Insert(Model model, @ModelAttribute MemberVO memberVO, BindingResult bindingResult,
 			@RequestParam(defaultValue = "2") int kind, HttpServletRequest request) throws Exception {
 
-		logger.info("글저장처리");
+		logger.info("회원저장처리");
 
 		// 서버측 유효성검증
 		beanValidator.validate(memberVO, bindingResult);
@@ -201,13 +250,10 @@ public class MemberController {
 		// 서버측 유효성검증 후 에러가 발생할 경우 등록폼 출력
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("memberVO", memberVO);
-			// model.addAttribute("categoryname", service.getCategory());
+			model.addAttribute("categoryname", service.getCategory());
 			model.addAttribute("categorylist", service.getCategoryList(kind));
-			if (memberVO.getMember_idx() != 0) {
-				return "modules/member/member_reply";
-			} else {
-				return "modules/member/member_write";
-			}
+
+			return "modules/member/member_write";
 		}
 
 		// 자동등록방지 검증
@@ -219,44 +265,43 @@ public class MemberController {
 			service.insert(memberVO);
 
 			model.addAttribute("msg", "InsertSuccess");
-			model.addAttribute("url", "list.do");
+			model.addAttribute("url", "list.do?kind=2");
 
 			return "/modules/common/common_message";
 
 		} else {
 			model.addAttribute("msg", "CaptchaFailed");
 			model.addAttribute("url", "write.do");
-			
+
 			return "modules/member/member_write";
 		}
 	}
 
-	// 글보기
+	// 회원보기
 	@RequestMapping(value = "read.do", method = RequestMethod.GET)
 	public String Read(Model model, @ModelAttribute Criteria criteria, @RequestParam int member_idx,
 			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "2") int kind)
 			throws Exception {
 
-		logger.info("글보기");
-
-		service.increaseCnt(member_idx);
+		logger.info("회원보기");
 
 		model.addAttribute("memberVO", service.getView(member_idx));
 		model.addAttribute("prenum", service.getPrevNum(member_idx));
 		model.addAttribute("nextnum", service.getNextNum(member_idx));
+		model.addAttribute("categoryname", service.getCategory());
 		model.addAttribute("categorylist", service.getCategoryList(kind));
 		model.addAttribute("list", service.getFileList(member_idx));
 
 		return "modules/member/member_view";
 	}
 
-	// 글보기
+	// 회원보기
 	@RequestMapping(value = "mvread.do", method = RequestMethod.GET)
 	public ModelAndView Read(@ModelAttribute Criteria criteria, @RequestParam int member_idx,
 			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "2") int kind)
 			throws Exception {
 
-		logger.info("글보기");
+		logger.info("회원보기");
 
 		service.increaseCnt(member_idx);
 
@@ -265,33 +310,35 @@ public class MemberController {
 		mav.addObject("memberVO", service.getView(member_idx));
 		mav.addObject("prenum", service.getPrevNum(member_idx));
 		mav.addObject("nextnum", service.getNextNum(member_idx));
+		mav.addObject("categoryname", service.getCategory());
 		mav.addObject("categorylist", service.getCategoryList(kind));
 		mav.setViewName("modules/member/member_view");
 
 		return mav;
 	}
 
-	// 글수정
+	// 회원수정
 	@RequestMapping(value = "modify.do", method = RequestMethod.GET)
 	public String Modify(Model model, @ModelAttribute Criteria criteria, @RequestParam int member_idx,
 			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "2") int kind)
 			throws Exception {
 
-		logger.info("글수정");
+		logger.info("회원수정");
 
 		model.addAttribute("memberVO", service.getView(member_idx));
+		model.addAttribute("categoryname", service.getCategory());
 		model.addAttribute("categorylist", service.getCategoryList(kind));
 		model.addAttribute("categoryselect", category_idx);
 
 		return "modules/member/member_edit";
 	}
 
-	// 글수정처리
+	// 회원수정처리
 	@RequestMapping(value = "update.do", method = RequestMethod.POST)
 	public String Modify(Model model, @ModelAttribute MemberVO memberVO, @ModelAttribute Criteria criteria,
 			@RequestParam String pass, BindingResult bindingResult) throws Exception {
 
-		logger.info("글수정처리");
+		logger.info("회원수정처리");
 
 		// 서버측 유효성검증
 		beanValidator.validate(memberVO, bindingResult);
@@ -308,7 +355,7 @@ public class MemberController {
 		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin@1234")) {
 			service.update(memberVO);
 			model.addAttribute("msg", "UpdateSuccess");
-			model.addAttribute("url", "list.do");
+			model.addAttribute("url", "list.do?kind=2");
 		} else {
 			model.addAttribute("msg", "PassFailed");
 			model.addAttribute("url",
@@ -318,24 +365,24 @@ public class MemberController {
 		return "/modules/common/common_message";
 	}
 
-	// 글삭제
+	// 회원삭제
 	@RequestMapping(value = "delete.do", method = RequestMethod.GET)
 	public String Delete(Model model, @ModelAttribute Criteria criteria, @RequestParam int member_idx)
 			throws Exception {
 
-		logger.info("글삭제");
+		logger.info("회원삭제");
 
 		model.addAttribute("memberVO", service.getView(member_idx));
 
 		return "modules/member/member_delete";
 	}
 
-	// 글삭제처리
+	// 회원삭제처리
 	@RequestMapping(value = "delete.do", method = RequestMethod.POST)
 	public String Delete(Model model, @ModelAttribute Criteria criteria, @ModelAttribute MemberVO memberVO,
 			@RequestParam String pass, BindingResult bindingResult) throws Exception {
 
-		logger.info("글삭제처리");
+		logger.info("회원삭제처리");
 
 		String rawPassword = memberVO.getPass();
 		String encodedPassword = service.getPassword(memberVO.getMember_idx());
@@ -344,7 +391,7 @@ public class MemberController {
 			service.delete(memberVO.getMember_idx());
 
 			model.addAttribute("msg", "DeleteSuccess");
-			model.addAttribute("url", "list.do");
+			model.addAttribute("url", "list.do?kind=2");
 		} else {
 			model.addAttribute("msg", "PassFailed");
 			model.addAttribute("url", "delete.do?member_idx=" + memberVO.getMember_idx());

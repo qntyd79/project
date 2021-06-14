@@ -80,7 +80,13 @@ public class MemberDaoImpl implements MemberDao {
 	public String getPassword(int member_idx) throws Exception {
 		return sqlSession.selectOne("member.getPassword", member_idx);
 	}
-
+	
+	// 카테고리명
+	@Override
+	public List<Object> getCategory() throws Exception {
+		return sqlSession.selectList("member.getCategory");
+	}
+	
 	// 카테고리목록
 	@Override
 	public List<Object> getCategoryList(int idx) throws Exception {
@@ -115,6 +121,7 @@ public class MemberDaoImpl implements MemberDao {
 	public void attachDelete(int file_idx) throws Exception {
 		sqlSession.selectOne("member.attachDelete", file_idx);
 	}
+
 
 
 }

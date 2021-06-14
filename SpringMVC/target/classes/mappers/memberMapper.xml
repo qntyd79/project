@@ -15,16 +15,16 @@
 	<![CDATA[ 
 	order by member_idx desc limit #{pageStart}, ${perPageNum}
 	]]>
-	</select>
+	</select>	
 	
 	
-	<!-- 파일목록 -->
-	<select id="getFileList" resultType="com.company.bbs.vo.member.MemberVO">
+	<!-- 카테고리명 -->
+	<select id="getCategory" resultType="com.company.bbs.vo.category.CategoryVO">
 	<![CDATA[ 
-	select * from jhbbs_file where file_idx > 0 and del = 'N' and member_idx = #{member_idx}
+	select * from jhbbs_category where del = 'N'
 	]]>
 	<![CDATA[ 
-	order by regdate DESC
+	order by category_idx DESC
 	]]>
 	</select>
 	
@@ -63,7 +63,17 @@
 		#{login_cnt}, #{login_ip}, #{user_leave}, #{cipp}, #{regdate}, #{del},
 		#{category_idx}
 		)
-	</insert>
+	</insert>	
+	
+	<!-- 첨부파일목록 -->
+	<select id="getFileList" resultType="com.company.bbs.vo.member.MemberVO">
+	<![CDATA[ 
+	select * from jhbbs_file where file_idx > 0 and del = 'N' and member_idx = #{member_idx}
+	]]>
+	<![CDATA[ 
+	order by regdate DESC
+	]]>
+	</select>
 	
 	<!-- 첨부파일저장 -->
 	<insert id="attachInsert" parameterType="com.company.bbs.vo.board.BoardVO"> 
@@ -92,7 +102,7 @@
 		file_idx=#{file_idx}
 	</update>
 	
-	<!-- 글삭제 update처리 -->
+	<!-- 첨부파일update처리 -->
 	<update id="attachDelete">
 		update jhbbs_file set del = 'Y' where file_idx = #{file_idx}
 	</update>
@@ -129,12 +139,6 @@
 	<!-- 글삭제 update처리 -->
 	<update id="delete">
 		update jhbbs_member set del = 'Y' where member_idx = #{member_idx}
-	</update>
-
-	<!-- 글조회수 -->
-	<update id="increaseCnt">
-		update jhbbs_member set hit= hit + 1 where member_idx
-		= #{member_idx} and del = 'N'
 	</update>
 
 	<!-- 글이전값 -->

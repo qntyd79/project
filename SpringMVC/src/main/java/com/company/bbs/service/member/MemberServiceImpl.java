@@ -51,7 +51,6 @@ public class MemberServiceImpl implements MemberService {
 	public void insert(MemberVO memberVO) throws Exception {
 
 		// for(int i=1; i <=200; i++) {
-		@SuppressWarnings("unused")
 		int member_idx = memberVO.getMember_idx();
 		String userid = memberVO.getUserid();
 		String pass = memberVO.getPass();
@@ -60,7 +59,6 @@ public class MemberServiceImpl implements MemberService {
 		String name = memberVO.getName();
 		String nickname = memberVO.getNickname();
 		String email = memberVO.getEmail();
-		String email2 = memberVO.getEmail2();
 		String homepage = memberVO.getHomepage();
 		String zipcode = memberVO.getZipcode();
 		String address = memberVO.getAddress();
@@ -86,7 +84,8 @@ public class MemberServiceImpl implements MemberService {
 
 		// 로그인아이피
 		String login_ip = InetAddress.getLocalHost().getHostAddress();
-
+		
+		// 마지막로그인아이피
 		String login_last = InetAddress.getLocalHost().getHostAddress();
 
 		// 접속아이피
@@ -105,9 +104,10 @@ public class MemberServiceImpl implements MemberService {
 		} else {
 			number = 1;
 		}
-
+		
+		memberVO.setMember_idx(number);
 		memberVO.setUserid(userid);
-		memberVO.setPass(pass);
+		memberVO.setPass(pwdBycrypt);
 		memberVO.setPass_ask(pass_ask);
 		memberVO.setPass_account(pass_account);
 		memberVO.setName(name);
@@ -184,14 +184,7 @@ public class MemberServiceImpl implements MemberService {
 		// 첨부파일 등록 후 board테이블 filecnt(파일갯수) 업데이트
 		// dao.getAttachCount(attachVO.getMember_idx());
 	}
-
-	/*
-	 * // 답글업데이트
-	 * 
-	 * @Override public void getReply(MembermemberVO memberVO) throws Exception {
-	 * dao.getReply(memberVO); }
-	 */
-
+	
 	// 글보기
 	@Override
 	public MemberVO getView(int member_idx) throws Exception {
@@ -244,31 +237,24 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int getCount(Criteria criteria) throws Exception {
 		return dao.getCount(criteria);
-	}
-
-	/*
-	 * // 공지글갯수
-	 * 
-	 * @Override public int getNoticeCount(Criteria criteria) throws Exception {
-	 * return dao.getNoticeCount(criteria); }
-	 */
+	}	
 
 	// 글비밀번호리턴
 	@Override
 	public String getPassword(int member_idx) throws Exception {
 		return dao.getPassword(member_idx);
 	}
+	
+	// 카테고리명
+	@Override
+	public List<Object> getCategory() throws Exception {
+		return dao.getCategory();
+	}
 
 	// 카테고리목록
 	@Override
 	public List<Object> getCategoryList(int idx) throws Exception {
 		return dao.getCategoryList(idx);
-	}
-
-	@Override
-	public List<Object> getCategory() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

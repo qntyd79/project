@@ -54,6 +54,9 @@ PRIMARY KEY (category_idx)
 INSERT INTO mydb.JHBBS_category (category_idx, parent, depth, sortno, title, name, pass, total, kind, hit, cipp, regdate, del, board_idx, member_idx) 
 VALUES ('1', '1', '0', '0', '일반', 'admin', '1111', '0', '1', '0', '', now(), 'N', '0', '0'); 
 
+INSERT INTO mydb.JHBBS_category (category_idx, parent, depth, sortno, title, name, pass, total, kind, hit, cipp, regdate, del, board_idx, member_idx) 
+VALUES ('1', '1', '0', '0', '일반회원', 'admin', '1111', '0', '1', '0', '', now(), 'N', '0', '0'); 
+
 CREATE TABLE IF NOT EXISTS  mydb.JHBBS_comment (
 comment_idx		INT(10) NOT NULL AUTO_INCREMENT,
 parent		  	INT(10) NOT NULL,
@@ -87,6 +90,7 @@ download 		INT(10) NOT NULL,
 regdate 		DATETIME NOT NULL,
 del 			VARCHAR(2) NOT NULL DEFAULT 'N',
 board_idx 		INT(10) NOT NULL,
+member_idx      INT(10) NOT NULL,
 PRIMARY KEY (file_idx)
 );
 

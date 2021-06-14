@@ -4,47 +4,16 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<script type="text/javaScript" language="javascript" defer="defer">
-       
-	/* 수정 화면 function */
-    function fn_egov_select(id)
-	{
-       	document.listForm.selectedId.value = id;
-       	document.listForm.action = "<c:url value='/updateSampleView.do'/>";
-       	document.listForm.submit();
-    }
-        
-    /* 등록 화면 function */
-    function fn_egov_addView()
-    {
-     	document.listForm.action = "<c:url value='insertPermssionUser.do'/>";
-       	document.listForm.submit();
-    }
-        
-    /* 목록 화면 function */
-    function fn_egov_selectList()
-    {
-      	document.listForm.action = "<c:url value='/egovSampleList.do'/>";
-       	document.listForm.submit();
-    }
-        
-    /* pagination 페이지 링크 function */
-    function fn_egov_link_page(pageNo)
-    {
-      	document.listForm.pageIndex.value = pageNo;
-       	document.listForm.action = "<c:url value='/egovSampleList.do'/>";
-      	document.listForm.submit();
-    }
 
-</script>
 <c:import url="/WEB-INF/views/include/header.jsp"/>
+
 <div id="container-wrap">
     <div class="clearfix">
         <div class="content-box">
             <div class="content-full-img01"></div>
             <div class="content-full-bg01-hidden">
                 <section class="content">
-                    <%@ include file="../../include/content_header.jsp"%>
+                    <c:import url="/WEB-INF/views/include/content_header.jsp"/>
                     <article>
                         <div class="row">
                             <div class="col-md-12">
@@ -62,8 +31,8 @@
 									            <option value="tcw" <c:out value="${criteria.searchField eq 'tcw' ? 'selected' : ' '}"/>>제목+내용+작성자</option>
 											</select>
 											<input type="search" name="keyWord" id="keyWord" value="<c:out value="${criteria.keyWord}"/>" placeholder="검색어" /> 
-											<input type="button" value="검색"  id="searchBtn" onclick="$(this.form).submit()"/> 
-											<input type="button" value="초기화" onClick="window.location='list.do'" />  											                                   
+											<input type="button" value="<spring:message code="button.search"/>"  id="searchBtn" onclick="$(this.form).submit()"/> 
+											<input type="button" value="<spring:message code="button.init"/>" onClick="window.location='list.do'" />  											                                   
                                         </fieldset>
                                     </div>
                                 </form>
@@ -87,10 +56,9 @@
                                 <form name="listForm" method="post" enctype="multipart/form-data" action="list.do">
                                     <fieldset>
                                         <legend>Board List Form</legend>
-                                        <table summary="기본게시판 보여주고 있습니다." class="table">
+                                        <table summary="기본게시판 보여주고 있습니다.">
                                             <caption>등록일 : 2017년08월24일 기준</caption>
                                             <colgroup>
-                                                <col width="5%" />
                                                 <col width="5%" />
                                                 <col width="5%" />
                                                 <col width="10%" />
@@ -99,22 +67,19 @@
                                                 <col width="10%" />
                                                 <col width="10%" />
                                                 <col width="5%" />
-                                                <col width="5%" />
-                                                <col width="5%" />
                                                 <col width="10%" />
+                                                <col width="15%" />
                                                 <col width="5%" />
                                             </colgroup>
                                             <thead>
                                                 <tr class="tline">
                                                     <th scope="col"><label><input type="checkbox" class="allCheck" name="allCheck"/></label></th>
                                                     <th scope="col">N</th>
-                                                    <th scope="col">분류</th>
                                                     <th scope="col">회원아이디</th>
                                                     <th scope="col">회원이름</th>
                                                     <th scope="col">이메일</th>
                                                     <th scope="col">핸드폰번호</th>
                                                     <th scope="col">전화번호</th>                                                    
-                                                    <th scope="col">회원등급</th>
                                                     <th scope="col">포인트</th>
                                                     <th scope="col">메일수신</th>
                                                     <th scope="col">가입일</th>
@@ -125,29 +90,23 @@
                                             <c:choose>
 												<c:when test="${fn:length(list) == 0}">
 													<tr>
-                                                        <td colspan="13"><label>등록된 글이 없습니다.</label></td>
+                                                        <td colspan="12"><label>등록된 회원이 없습니다.</label></td>
 													</tr>
 												</c:when>									
 												<c:otherwise>
 												<c:forEach varStatus="status" var="row" items="${list}">
                                                 <tr>
                                                     <td><label><input type="checkbox" name="check" /></label></td>
-                                                    <td><strong>${pageMaker.curNum-status.index}</strong></td>
-                                                    <td>
-                                                        <c:forEach var="item" items="${categorylist}">												
-															<c:if test="${row.category_idx == item.category_idx}">${item.title}</c:if>
-														</c:forEach>											
-													</td>
-                                                    <td><a href="${path}/modules/member/read.do${pageMaker.makeSearch(pageMaker.criteria.page)}&member_idx=<c:out value="${row.member_idx}"/>">${row.userid}</a></td>
+                                                    <td><strong>${pageMaker.curNum-status.index}</strong></td>                                                    
+                                                    <td><a href="read.do${pageMaker.makeSearch(pageMaker.criteria.page)}&member_idx=<c:out value="${row.member_idx}"/>">${row.userid}</a></td>
                                                     <td>${row.name}</td>
                                                     <td>${row.email}</td>
                                                     <td>${row.hphone}</td>
                                                     <td>${row.phone}</td>
-                                                    <td>${row.level}</td>
                                                     <td>${row.point}</td>
                                                     <td>${row.mail_check eq '1' ? 'Y' : 'N'}</td>
                                                     <td>${row.join_date}</td>                                                    
-                                                    <td><a href="${path}/modules/member/delete.do${pageMaker.makeSearch(pageMaker.criteria.page)}&member_idx=<c:out value="${row.member_idx}"/>">DEL</a></td>
+                                                    <td><a href="delete.do${pageMaker.makeSearch(pageMaker.criteria.page)}&member_idx=<c:out value="${row.member_idx}"/>">DEL</a></td>
                                                 </tr>
                                             	</c:forEach>									
 												</c:otherwise>									
@@ -157,25 +116,34 @@
                                         <nav class="paging-group">
 											<ul>
 												<c:if test="${pageMaker.prev}">
-													<li><a href="${path}/modules/member/list.do${pageMaker.makeSearch(1)}"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
-													<li><a href="${path}/modules/member/list.do${pageMaker.makeSearch(pageMaker.startPage - 1)}"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+													<li><a href="list.do${pageMaker.makeSearch(1)}"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
+													<li><a href="list.do${pageMaker.makeSearch(pageMaker.startPage - 1)}"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
 													<%-- <li><a href="${pageMaker.startPage - 1}"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li> --%>
 												</c:if>
 												
 												<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
 													<li>
-														<a href="${path}/modules/member/list.do${pageMaker.makeSearch(idx)}" <c:out value="${pageMaker.criteria.page == idx ? 'class=active' : ' '}"/> >${idx}</a>
+														<a href="list.do${pageMaker.makeSearch(idx)}" <c:out value="${pageMaker.criteria.page == idx ? 'class=active' : ' '}"/> >${idx}</a>
 													</li>
 												</c:forEach>
 												
 												<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 													<%-- <li><a href="${pageMaker.endPage + 1}"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li> --%>
-													<li><a href="${path}/modules/member/list.do${pageMaker.makeSearch(pageMaker.endPage + 1)}"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-													<li><a href="${path}/modules/member/list.do${pageMaker.makeSearch(pageMaker.totalPage)}"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+													<li><a href="list.do${pageMaker.makeSearch(pageMaker.endPage + 1)}"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+													<li><a href="list.do${pageMaker.makeSearch(pageMaker.totalPage)}"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
 												</c:if>
 											</ul>
 										</nav>
-                                        <c:import url="/WEB-INF/views/modules/common/common_btn.jsp"/>    
+                                        <nav class="btn-group">
+											<ul>												
+												<li><input type="button" value="<spring:message code="button.allselect"/>" class="btnallCheck"/></li>
+												<li><input type="button" value="<spring:message code="button.selectreverse"/>" class="reversalallCheck"/></li>
+												<li><input type="button" value="<spring:message code="button.selectcancle"/>" class="unallCheck"/></li>
+												<li><input type="button" value="<spring:message code="button.selectdelete"/>" onClick="location.href='delete.do'"/></li>	
+												<li><input type="button" value="<spring:message code="button.list"/>" onClick="location.href='list.do'"/></li>
+												<li><input type="button" value="<spring:message code="button.create"/>" onClick="location.href='write.do'"/></li>											
+											</ul>
+										</nav>    
                                     </fieldset>
                                 </form>
                             </div>

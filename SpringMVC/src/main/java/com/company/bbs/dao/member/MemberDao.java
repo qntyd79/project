@@ -40,6 +40,9 @@ public interface MemberDao {
 
 	// 글비밀번호리턴
 	public String getPassword(int member_idx) throws Exception;
+	
+	// 카테고리명
+	public List<Object> getCategory() throws Exception ;
 
 	// 카테고리목록
 	public List<Object> getCategoryList(int idx) throws Exception;

@@ -30,9 +30,9 @@
                                     </ul>
                                 </li>
                                 <li class="dropdown">
-                                    <a href="${path}/modules/login/login.do"> 회원로그인폼</a>
+                                    <a href="${path}/modules/member/login.do"> 회원로그인폼</a>
                                     <ul class="dropdown-submenu">
-                                        <li><a href="${path}/modules/login/loginfull.do">로그인풀화면</a></li>                                       
+                                        <li><a href="${path}/modules/member/loginfull.do">로그인풀화면</a></li>                                       
                                         <li><a href="${path}/modules/member/auth.do">회원실명인증</a></li>
                                         <li><a href="#">메뉴추가</a></li>
                                         <li><a href="#">메뉴추가</a></li>

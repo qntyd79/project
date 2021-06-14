@@ -452,10 +452,10 @@ $(document).ready(function() {
     });
     
     // 전화번호 000-0000-0000
-    $.validator.addMethod("phone", function(value, element) {
+    $.validator.addMethod("phoneck", function(value, element) {
         return this.optional(element) || /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/.test(value);
     });
-   
+  
     // 비밀번호 체크
     $.validator.addMethod("passwordck",  function(value, element ) {
     	return this.optional(element) ||  /^.*(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/.test(value);
@@ -481,9 +481,9 @@ $(document).ready(function() {
         return (maxpoolsize.value >= minpoolsize.value)
     });    
 	
-	// 셀렉트롬 
-	$.validator.addMethod("selectCheck", function (value, element) {
-        return (value != '이벤트 선택 하세요');
+	// Selectbox 
+	$.validator.addMethod("selectck", function (value, element) {
+        return (value != '0') ;
  	});
     	
 	// content에 내용입력시 에러메세지 안보임처리 
@@ -572,28 +572,28 @@ $(document).ready(function() {
                 remote: "존재하는 아이디입니다."
             },
             name: {
-                required: "이름을 입력하세요",
+                required: "이름을 입력하세요.",
                 minlength: $.validator.format("이름은 최소{0}글자 이상 입력하세요.")
             },
             pass: {
-                required: "비밀번호를 입력하세요",
+                required: "비밀번호를 입력하세요.",
                 rangelength: $.validator.format("패스워드는 최소{0}글자 이상 {1}글자 이하로 입력하세요."),
                 passwordck: "비밀번호는 영문대소문자,숫자,특수문자를 반드시 입력해주시기 바랍니다."
             },
             email: {
-                required: "이메일을 입력하세요",
+                required: "이메일을 입력하세요.",
                 minlength: $.validator.format("이메일은 최소{0}글자 이상 입력하세요."),
                 emailck: "올바른 이메일 주소가 아닙니다."
             },
 			homepage: {
-                required: "홈페이지 주소를 입력하세요",
+                required: "홈페이지 주소를 입력하세요.",
                 domain: "올바른 홈페이지 주소가 아닙니다."
             },
 			sdate: {
-                required: "시작일을 입력하세요"
+                required: "시작일을 입력하세요."
             },
 			edate: {
-                required: "종료일을 입력하세요"
+                required: "종료일을 입력하세요."
             },
             title: {
                 required: "제목을 입력하세요.",
@@ -668,11 +668,11 @@ $(document).ready(function() {
         },
         messages: { //규칙체크 실패시 출력될 메시지 설정            
             name: {
-                required: "이름을 입력하세요",
+                required: "이름을 입력하세요.",
                 minlength: $.validator.format("이름은 최소{0}글자 이상 입력하세요.")
             },
             pass: {
-                required: "비밀번호를 입력하세요",
+                required: "비밀번호를 입력하세요.",
                 rangelength: $.validator.format("패스워드는 최소{0}글자 이상 {1}글자 이하로 입력하세요."),
                 passwordck: "비밀번호는 영문대소문자,숫자,특수문자를 반드시 입력해주시기 바랍니다."
             },            
@@ -785,7 +785,148 @@ $(document).ready(function() {
             }
         }
     });
-
+	
+	// 회원가입폼
+	$("#memberForm").validate({
+    	ignore : '*:not([name])',
+        debug: false,
+        onfocusout: false,
+        // 규칙설정
+        rules: {
+            userid: {
+                required: true,
+                minlength: 2,
+                alphanumeric: true                
+            },
+			pass: {
+                required: true,
+                rangelength: [4,15],
+                passwordck: true
+            },
+			pass_ask: {
+                required: true
+            },
+			pass_account: {
+                required: true
+            },
+            name: {
+                required: true,
+                minlength: 2
+            },            
+            email: {
+                required: true,				
+                emailck: true,
+				minlength: 2
+            },
+			zipcode: {
+                required: true,
+				numeric : true,
+				maxlength : 5			
+            },
+		    address: {
+                required: true	
+            },
+			detailaddress: {
+                required: true			
+            },
+ 			phone: {
+                required: true,
+				phoneck: true
+            },
+			hphone: {
+                required: true,
+				phoneck: true
+            },
+			mail_check: {
+				required: true
+			},
+			answer: {
+				required : true,
+				numeric : true,
+				maxlength : 6
+			}          
+        },
+        messages: { //규칙체크 실패시 출력될 메시지 설정
+            userid: {
+                required: "아이디를 입력하세요.",
+                minlength: $.validator.format("아이디는 최소{0}글자 이상 입력하세요."),
+                alphanumeric: "알파벳과 숫자만 사용 가능합니다.",
+                remote: "존재하는 아이디입니다."
+            },            
+            pass: {
+                required: "비밀번호를 입력하세요.",
+                rangelength: $.validator.format("패스워드는 최소{0}글자 이상 {1}글자 이하로 입력하세요."),
+                passwordck: "비밀번호는 영문대소문자,숫자,특수문자를 반드시 입력해주시기 바랍니다."
+            },
+			pass_ask: {
+                required: "비밀번호 분실시 질문을 선택하세요."
+            },
+			pass_account: {
+                required: "비밀번호 분실시 답변을 입력하세요."
+            },
+			name: {
+                required: "이름을 입력하세요.",
+                minlength: $.validator.format("이름은 최소{0}글자 이상 입력하세요.")
+            },
+            email: {
+                required: "이메일을 입력하세요.",
+                minlength: $.validator.format("이메일은 최소{0}글자 이상 입력하세요."),
+                emailck: "올바른 이메일 주소가 아닙니다."
+            },
+			zipcode: {
+                required: "우편번호찾기를 클릭하세요."
+            },
+			address: {
+                required: "주소를 입력하세요."
+            },
+			detailaddress: {
+                required: "상세주소를 입력하세요."
+            },
+			phone: {
+                required: "전화번호를 입력하세요.",
+				phoneck:"올바른 전화번호가 아닙니다."
+            },
+			hphone: {
+                required: "핸드폰번호를 입력하세요.",
+				phoneck:"올바른 휴대폰번호가 아닙니다."
+            }, 
+			mail_check: {
+				required: "메일수신여부를 선택하세요."
+			},        
+			answer: {
+				required: "자동등록방지를 입력하세요.",
+				numeric: $.validator.format("자동등록방지는 숫자만 입력하세요.")
+			}
+        },
+		// 아이디중복버튼 옆에 메세지 출력 
+        errorPlacement: function(error, element) {
+			if (element.is(":radio")) {
+                error.appendTo(element.parents('.container') );
+            } else { // This is the default behavior 
+                var trigger = element.next('input[type=button]');
+                error.insertAfter(trigger.length > 0 ? trigger : element);
+            }		
+			if (element.is("select")){
+				$(element).css('border-color','red');  
+			}
+        }, 				
+        invalidHandler: function(form, validator) {
+            var errors = validator.numberOfInvalids();
+            if (errors) {
+            	// 팝업알림처리 
+                // alert(validaor.errorList[0].message);
+				// 필드아래처리 
+                // validator.errorList[0].element.focus();
+            }
+        },
+        submitHandler: function(form) {   	
+            if (confirm("게시물을 등록하시겠습니까?")) {
+                form.submit();
+            } else {
+                return false;
+            }
+        }
+    });
     /*
 
 	$('#form').validate({
@@ -1439,7 +1580,65 @@ $(document).ready(function() {
     }
     
 	
+	
+	// 회원가입 동의 체크박스 전체 선택
+	$(document).on("click", "#allagree", function () {
+	    $(this).parents(".checkbox_group").find('input').prop("checked", $(this).is(":checked"));
+			
+		// 버튼 활성화
+ 		var tmpp = $(this).prop('checked'); 
+	
+	    if(tmpp){
+	    	$("#agreeBtn").css({"backgroundColor":"#d2201d","cursor":"pointer","color":"#fff"}).prop("disabled",false);
+	    } else {
+	        $("#agreeBtn").css({"backgroundColor":"#cbcbcb","cursor":"auto","color":"#303033"}).prop("disabled",true);
+	    }
+	});
 
+	// 회원가입 동의 체크박스 개별 선택
+	$(document).on("click", ".normal", function() {
+	    var is_checked = true;
+
+	    $(".checkbox_group .normal").each(function(){
+	        is_checked = is_checked && $(this).is(":checked");
+	    });
+
+	    $("#allagree").prop("checked", is_checked);	
+		
+		// 버튼 활성화 
+		var tmpp = $(this).prop('checked'); 
+		
+		if(tmpp && is_checked){
+	    	$("#agreeBtn").css({"backgroundColor":"#d2201d","cursor":"pointer","color":"#fff"}).prop("disabled",false);
+	    } else {
+	        $("#agreeBtn").css({"backgroundColor":"#cbcbcb","cursor":"auto","color":"#303033"}).prop("disabled",true);
+	    }		
+	});	
+				
+	$("#agreeBtn").on("click", function() {	
+						
+		// 경고창 뛰우기
+		if(!$("#agree1").is(":checked")) {
+			alert("회원약관에 동의하셔야 합니다.");
+			$('#agree1').focus();
+			return;
+		}
+		
+		if(!$("#agree2").is(":checked")){
+			alert("개인정보보호정책에 동의하셔야 합니다.");
+			$('#agree2').focus();
+			return;
+		}
+		
+		if(!$("#agree3").is(":checked")){
+			alert("제3자 정보제공에 동의하셔야 합니다.");
+			$('#agree3').focus();
+			return;
+		}
+		
+		$(this.form).submit();
+		
+	});
 
             
 });

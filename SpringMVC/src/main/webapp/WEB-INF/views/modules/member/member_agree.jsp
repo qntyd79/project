@@ -19,6 +19,7 @@
 							<div class="col-md-12">
 								<h2>개인정보동의</h2>
 								 <form name="agreeForm" id="agreeForm" method="post" enctype="multipart/form-data" action="write.do">
+								 	<div class="checkbox_group">
 									<fieldset>
 										<legend>회원가입약관</legend>										
 										<div class="panel-box">
@@ -27,6 +28,8 @@
 											</div>
 											<div class="panel-body">
 												<div class="license">
+													
+													
 													<h3>제1장 총 칙</h3>
 													<h4>제1조 (목 적)</h4>
 													<p>이 약관은 주식회사 온세텔레콤(이하 "회사")이 제공하는 온세테마샵 웹사이트(이하
@@ -61,11 +64,12 @@
 													<p>6. 서비스 중지 : 정상 이용 중 회사가 정한 일정한 요건에 따라 일정기간 동안 서비스의
 														제공을 중지하는 것을 말합니다. ② 이 약관에서 사용하는 용어의 정의는 제1항에서 정하는 것을 제외하고는
 														관계법령 및 서비스별 안내에서 정하는 바에 의합니다.</p>
+													
 												</div>
 											</div>
 											<div class="panel-footer">
 												<div class="privacy-btn">
-													<input type="checkbox" name="agree1" value="1"> 이용 약관에 동의합니다.
+													<input type="checkbox" id="agree1" value="1" class="normal"> 회원약관에 동의합니다.
 												</div>
 											</div>
 										</div>
@@ -114,7 +118,7 @@
 											</div>
 											<div class="panel-footer">
 												<div class="privacy-btn">
-													<input type="checkbox" name="agree2" value="1"> 이용 약관에 동의합니다.
+													<input type="checkbox" id="agree2" value="1" class="normal"> 개인정보보호정책에 동의합니다.
 												</div>
 											</div>
 										</div>
@@ -163,20 +167,21 @@
 											</div>
 											<div class="panel-footer">
 												<div class="privacy-btn">
-													<input type="checkbox" name="agree3" value="1"> 이용	약관에 동의합니다.
+													<input type="checkbox" id="agree3" value="1" class="normal"> 제3자 정보제공에 동의합니다.
 												</div>
 											</div>
 										</div>
 										<div class="privacy-btn-all">
-											<input type="checkbox" name="allagree" value="1">이용약관, 개인정보 수집 및 이용, 위치정보 이용약관(선택), 프로모션 안내 메일 수신(선택)에 모두 동의합니다.
+											<input type="checkbox" id="allagree" name="allagree" >이용약관, 개인정보 수집 및 이용, 위치정보 이용약관(선택), 프로모션 안내 메일 수신(선택)에 모두 동의합니다.
 										</div>
 										<nav class="btn-group">
 											<ul>
-												<li><input type="button" value="확인" onclick="$(this.form).submit()"></li>
-												<li><input type="button" value="취소" onclick="location.href='history.back(-1)"></li>
+												<li><input type="button" value="다음단계" id="agreeBtn" ></li>
+												<li><input type="button" value="이전단계" onclick="location.href='/index.do'"></li>
 											</ul>
 										</nav>
 									</fieldset>
+									</div>
 								</form>
 							</div>
 						</div>
@@ -188,65 +193,3 @@
 </div>
 
 <c:import url="/WEB-INF/views/include/footer.jsp"/>
-
-<script>
-$(document).ready(function() {
-	
-   	$("[name=allagree]").prop("checked",true); 
-   	
-   	$("[name=agree1]").prop("checked",true);
-   	
-   	$("[name=agree2]").prop("checked",true);
-   	
-   	$("[name=agree3]").prop("checked",true);
- 
-	function oneCheck(a)
-	{
-	    var allChkBox = $("[name=agree]");
-	    var chkBoxName = $(a).attr("name");
-	 
-	    if( $(a).prop("checked") )
-	    {
-	        checkBoxLength = $("[name="+ chkBoxName +"]").length;
-	         //전체체크박스 수(모두동의하기 체크박스 제외)
-	        checkedLength = $("[name="+ chkBoxName +"]:checked").length;
-	        //체크된 체크박스 수 
-	        if( checkBoxLength == checkedLength ) {
-	            allChkBox.prop("checked", true);
-	            //전체체크박스수 == 체크된 체크박스 수 같다면 모두체크
-	 
-	        } else {
-	            allChkBox.prop("checked", false);
-	            
-	        }
-	    }
-	    else
-	    {
-	        allChkBox.prop("checked", false);
-	    }
-	}
-	 
-	$(function(){
-	    $("[name=allagree]").click(function(){
-	        allCheck(this);
-	    });
-	    $("[name=agree1]").each(function(){
-	        $(this).click(function(){
-	            oneCheck(this);
-	        });
-	    });
-	    $("[name=agree2]").each(function(){
-	        $(this).click(function(){
-	            oneCheck(this);
-	        });
-	    });
-	    $("[name=agree3]").each(function(){
-	        $(this).click(function(){
-	            oneCheck(this);
-	        });
-	    });
-	});
-
-}
-</script>
-

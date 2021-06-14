@@ -45,9 +45,9 @@ public class BoardController {
 
 	@Inject
 	private BoardService service;
-	
-	// 첨부파일 저장경로 설정 
-	@Resource(name = "uploadPath") 
+
+	// 첨부파일 저장경로 설정
+	@Resource(name = "uploadPath")
 	private String uploadPath;
 
 	// 암호화 설정
@@ -155,7 +155,7 @@ public class BoardController {
 		return "modules/board/board_list";
 	}
 
-	// 글등록폼 
+	// 글등록폼
 	@RequestMapping(value = "write.do", method = RequestMethod.GET)
 	public String Write(Model model, @ModelAttribute BoardVO boardVO, @RequestParam(defaultValue = "1") int kind)
 			throws Exception {
@@ -215,7 +215,7 @@ public class BoardController {
 			service.insert(boardVO);
 
 			model.addAttribute("msg", "InsertSuccess");
-			model.addAttribute("url", "list.do");
+			model.addAttribute("url", "list.do?kind=1");
 
 			return "/modules/common/common_message";
 
@@ -274,7 +274,7 @@ public class BoardController {
 		return mav;
 	}
 
-	// 글수정폼 
+	// 글수정폼
 	@RequestMapping(value = "modify.do", method = RequestMethod.GET)
 	public String Modify(Model model, @ModelAttribute Criteria criteria, @RequestParam int board_idx,
 			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "1") int kind)
@@ -314,7 +314,7 @@ public class BoardController {
 		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin@1234")) {
 			service.update(boardVO);
 			model.addAttribute("msg", "UpdateSuccess");
-			model.addAttribute("url", "list.do");
+			model.addAttribute("url", "list.do?kind=1");
 		} else {
 			model.addAttribute("msg", "PassFailed");
 			model.addAttribute("url",
@@ -351,7 +351,7 @@ public class BoardController {
 			service.delete(boardVO.getBoard_idx());
 
 			model.addAttribute("msg", "DeleteSuccess");
-			model.addAttribute("url", "list.do");
+			model.addAttribute("url", "list.do?kind=1");
 		} else {
 			model.addAttribute("msg", "PassFailed");
 			model.addAttribute("url", "delete.do?board_idx=" + boardVO.getBoard_idx());
@@ -366,9 +366,9 @@ public class BoardController {
 			@RequestParam int board_idx, @RequestParam String filename) throws Exception {
 
 		logger.info("첨부파일삭제처리");
-		
+
 		UploadFileUtils.removeFile(uploadPath, filename);
-		
+
 		service.attachDelete(attachVO.getFile_idx());
 
 		model.addAttribute("msg", "DeleteSuccess");

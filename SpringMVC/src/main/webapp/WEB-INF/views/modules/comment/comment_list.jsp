@@ -30,8 +30,8 @@
                                                 <option value="cw" <c:out value="${criteria.searchField eq 'cw' ? 'selected' : ' '}" />>내용+작성자</option>
                                             </select>
                                             <input type="search" id="keyWord" name="keyWord" value="<c:out value="${criteria.keyWord}"/>" title="<spring:message code="button.search"/>" />
-                                            <input type="button" value="검색" id="searchBtn" onclick="$(this.form).submit();" />
-                                            <input type="button" value="초기화" onClick="window.location='list.do'" />
+                                            <input type="button" value="<spring:message code="button.search"/>" onclick="$(this.form).submit();" />
+                                            <input type="button" value="<spring:message code="button.init"/>" onClick="window.location='list.do'" />
                                         </fieldset>
                                     </div>
                                 </form>
