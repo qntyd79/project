@@ -253,8 +253,8 @@ public class MemberServiceImpl implements MemberService {
 
 	// 카테고리목록
 	@Override
-	public List<Object> getCategoryList(int idx) throws Exception {
-		return dao.getCategoryList(idx);
+	public List<Object> getCategoryList(int kind) throws Exception {
+		return dao.getCategoryList(kind);
 	}
 
 	@Override

@@ -4,6 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="validator" uri="http://www.springmodules.org/tags/commons-validator" %>
+<script type="text/javascript" src="<c:url value="validator.do"/>"></script>
+<validator:javascript formName="memberVO" staticJavascript="false" xhtml="true" cdata="false"/>
 
 <c:import url="/WEB-INF/views/include/header.jsp"/>
 
@@ -14,75 +17,62 @@
             <div class="content-full-bg01-hidden">
                 <section class="content">
                     <c:import url="/WEB-INF/views/include/content_header.jsp"/>
-                    <article>
+                    <article>                    
                         <div class="row">
                             <div class="col-md-12">
-                                <h2>회원가입</h2>
-                                <form id="writeForm" name="writeForm" method="post" enctype="multipart/form-data" action="<c:url value='insert.do'/>">
-                                	<input type="hidden" name="member_idx" value="<c:out value="${dto.member_idx}"/>" >
-                                    <input type="hidden" name="page" value="<c:out value="${criteria.page}"/>" >
-                                    <input type="hidden" name="perPageNum" value="<c:out value="${criteria.perPageNum}"/>" >
-                                    <input type="hidden" name="searchField" value="<c:out value="${criteria.searchField}"/>" >
-                                    <input type="hidden" name="keyWord" value="<c:out value="${criteria.keyWord}"/>" >
-                                    <input type="hidden" name="msgStr" value="<c:out value="${msg}"/>" >
+                            
+                            
+                                <h2><spring:message code="bbs.title.write"/></h2>
+                                <form:form modelAttribute="memberVO" method="post" id="memberForm" name="memberForm" enctype="multipart/form-data" action="update.do">
+                                	<input type="hidden" name="msgStr" value="<c:out value="${msg}"/> ">  
                                     <fieldset>
-                                        <div class="panel-box">
-                                            <legend>Board Write Form</legend>
+                                    	<legend><spring:message code="bbs.table.legend"/></legend>
+                                        <div class="panel-box">                                            
                                             <div class="panel-header">
                                                 <h3 class="panel-title"><i class="fas fa-file-alt"></i> 01. 고객님의 기본사항을 입력해 주세요. (필수항목)</h3>
                                             </div>
-                                            <table summary="회원가입폼을 보여주고 있습니다." class="table">
+                                           	<table summary="<spring:message code="bbs.table.summary.write"/>" class="board_detail">
+                                           		<caption><spring:message code="bbs.table.caption"/></caption>
                                                 <colgroup>
                                                     <col width="20%" />
                                                     <col width="80%" />
-                                                </colgroup>
-                                                <%--
-                                                <tr class="tline">
-                                                    <th><label for="cate">분류</label></th>
-                                                    <td class="text-left">
-                                                    <select name="category_idx" id="category_idx">
-                                                        <c:forEach var="item" items="${categorylist}" varStatus="status">
-                                                            <option value="<c:out value="${item.category_idx}"/>"
-                                                                <c:if test="${item.category_idx == categoryselect}"><c:out value= "selected=selected"/></c:if>>
-                                                                <c:out value="${item.title}" />
-                                                            </option>
-                                                        </c:forEach>
-                                                    </select>
-                                                    <button type="button" class="popupBtn" value="#layer1">분류추가</button>
-                                                    <div class="layer">
-                                                        <div class="bg"></div>
-                                                        <div id="layer1" class="pop-layer">
-                                                            <div class="pop-container">
-                                                                <div class="pop-conts">
-                                                                    <iframe name="ifrm_file" src="${path}/modules/category/list.do" height="680px" marginwidth="0" marginheight="0" scrolling="no"
-                                                                        frameborder="0" style="width:100%;"></iframe>
-                                                                    <div class="btn-r">
-                                                                        <a href="#" class="cbtn">Close</a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div></td>
-                                                </tr>
-                                                --%>
+                                                </colgroup>                                                
                                                 <tr>
-                                                    <th scope="row"><label for="userid">회원아이디</label></th>
-                                                    <td scope="row" class="text-left">
-                                                        <input type="text" id="userid" name="userid" value="userid" />
+                                                    <th><label for="category_idx"><spring:message code="label.category_idx"/></label></th>
+                                                    <td class="text-left">
+                                                        <form:select path="category_idx" id="category_idx" name="category_idx" >
+                                                            <c:forEach var="item" items="${categorylist}" varStatus="status">
+                                                                <option value="<c:out value='${item.category_idx}'/>"
+	                                                                <c:if test="${item.category_idx == categoryselect}">
+	                                                                    <c:out value="selected=selected" />
+	                                                                </c:if> >
+                                                                	<c:out value="${item.title}" />
+                                                                </option>
+                                                            </c:forEach>
+                                                        </form:select>
+                                                        <form:errors path="category_idx" />                                                        
+                                                    </td>
+                                                </tr>                                                
+                                                <tr>
+                                                    <th><label for="userid"><spring:message code="label.userid"/></label></th>
+                                                    <td class="text-left">
+                                                        <form:input path="userid" type="text" placeholder="UserID" />
                                                         <input type="button" value="아이디 중복검사" class="modal-open-btn">
+                                                        <form:errors path="userid" /> 
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row"><label for="pass"> 비밀번호 </label></th>
-                                                    <td scope="row" class="text-left"><input type="password" id="pass" name="pass" value="1111" /> <span>6~12자의 영문 소문자, 숫자만 사용할 수 있습니다.</span></td>
-                                                </tr>
+                                                    <th><label for="pass"><spring:message code="label.pass"/></label></th>
+                                                   	<td class="text-left"><form:input path="pass" type="password" placeholder="Password" class="wfull"/> 
+                                                   	<form:errors path="pass" /> </td>
+                                                </tr>                                               
                                                 <tr>
-                                                    <th scope="row"><label for="pass_ask"> 비밀번호 분실시 질문</label></th>
-                                                    <td scope="row" class="text-left">
-                                                        <select name="pass_ask">
-                                                            <option value='' selected="selected">-질문을 선택하여 주십시오-</option>
+                                                    <th><label for="pass_ask"><spring:message code="label.pass_ask"/></label></th>
+                                                    <td class="text-left">
+                                                        <form:select path="pass_ask" name="pass_ask" class="select">
+                                                            <option value=''>Please select a question</option>
                                                             <option value="1">가장 인상깊었던 여행지는 </option>
-                                                            <option value="2" selected="selected">나의보물 1호는 </option>
+                                                            <option value="2" >나의보물 1호는 </option>
                                                             <option value="3">아버지 성함은 </option>
                                                             <option value="4">어머니 성함은 </option>
                                                             <option value="5">어릴적 별명은 </option>
@@ -90,145 +80,91 @@
                                                             <option value="7">좋아하는 동물은 </option>
                                                             <option value="8">좋아하는 색깔은 </option>
                                                             <option value="9">태어난 곳은 </option>
-                                                        </select>
+                                                        </form:select>
+                                                        <form:errors path="pass_ask" />
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row"><label for="pass_account"> 비밀번호 분실시 답변 </label></th>
-                                                    <td scope="row" class="text-left"><input type="text" id="pass_account" name="pass_account" value="홍길동" /> </td>
+                                                    <th><label for="pass_account"><spring:message code="label.pass_account"/></label></th>
+                                                    <td class="text-left"><form:input path="pass_account" id="pass_account" placeholder="Password Answer" class="wfull"/> 
+                                                    <form:errors path="pass_account" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row"><label for="name"> 이름 </label></th>
-                                                    <td scope="row" class="text-left"><input type="text" id="name" name="name" value="오정환" /> </td>
-                                                </tr>
+                                                    <th><label for="name"><spring:message code="label.name"/></label></th>
+                                                    <td class="text-left"><form:input path="name" type="text" placeholder="Name" class="wfull"/> 
+                                                    <form:errors path="name" /> </td>
+                                                </tr>                                               
                                                 <tr>
-                                                    <th scope="row"><label for="email"> 이메일 </label></th>
-                                                    <td scope="row" class="text-left">
-                                                        <input type="text" name="email" id="str_email01" value="test79" /> 
-                                                        <!--  @
-													    <input type="text" name="email2" id="str_email02" value="" readonly/>
-													    <select id="selectEmail">
-													        <option value="1">직접입력</option>
-													        <option value="naver.com">naver.com</option>
-													        <option value="hanmail.net">hanmail.net</option>
-													        <option value="nate.com">nate.com</option>
-													        <option value="hotmail.com">hotmail.com</option>
-													        <option value="paran.com">paran.com</option>
-													        <option value="yahoo.com">yahoo.com</option>
-													        <option value="chol.com">chol.com</option>
-													        <option value="dreamwiz.com">dreamwiz.com</option>
-													        <option value="empal.com">empal.com</option>
-													        <option value="freechal.com">freechal.com</option>
-													        <option value="gmail.com">gmail.com</option>
-													        <option value="hanafos.com">hanafos.com</option>
-													        <option value="hanmir.com">hanmir.com</option>
-													        <option value="hitel.net">hitel.net</option>
-													        <option value="korea.com">korea.com</option>
-													        <option value="lycos.co.kr">lycos.co.kr</option>
-													        <option value="netian.com">netian.com</option>
-													    </select>
-													    -->
-                                                        <span>알찬 서비스 소식 및 이벤트을 전해드립니다.</span>
+                                                    <th><label for="email"><spring:message code="label.email"/></label></th>
+                                                    <td class="text-left">
+                                                        <input name="email" type="text" placeholder="Email" class="wfull"/>                                                       
+                                                        <form:errors path="email" />
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row"><label for="zipcode"> 우편번호 </label></th>
-                                                    <td scope="row" class="text-left">
-                                                        <input type="text"  id="zipcode"  name="zipcode" value="${dto.zipcode}" placeholder="우편번호"/>
-                                                        <input type="button"  onclick="findzipcode()" value="우편번호 찾기" />
+                                                    <th><label for="zipcode"><spring:message code="label.zipcode"/></label></th>
+                                                    <td class="text-left">
+                                                        <input name="zipcode" type="text" id="zipcode" placeholder="Zipcode" readonly="readonly"/>
+                                                        <input type="button" onclick="findzipcode()" value="우편번호찾기" />
+                                                        <form:errors path="zipcode" />
                                                     </td> 
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row"><label for="address"> 주소 </label></th>
-                                                    <td scope="row" class="text-left">
-	                                                    <input type="text" name="address" id="address" value="${dto.address}" placeholder="주소"/> 
-	                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><label for="address2"> 상세주소 </label></th>
-                                                    <td scope="row" class="text-left">
-                                                    	<input type="text" name="detailaddress" id="detailAddress" value="${dto.detailaddress}" placeholder="상세주소"/> 
-                                                    	<input type="text" name="extraaddress" id="extraAddress" value="${dto.extraaddress}" placeholder="참고항목" style="margin-top:5px;"/> 	
+                                                    <th><label for="address"><spring:message code="label.address"/></label></th>
+                                                    <td class="text-left">
+                                                    <form:input path="address" type="text" id="address" placeholder="Address" class="wfull"/>
+                                                    <form:errors path="address" />
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row"><label for="phone"> 전화번호 </label></th>
-                                                    <td scope="row" class="text-left"><input type="text" name="phone" id="phone" value="${dto.phone}"/> </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><label for="hphone"> 핸드폰번호 </label></th>
-                                                    <td scope="row" class="text-left"><input type="text" name="hphone" id="hphone" value="${dto.hphone}"/> </td>
-                                                </tr>
-                                                <!--                                                 
-                                                <tr>
-                                                    <th scope="row"><label for="phone1"> 전화번호</label></th>
-                                                    <td scope="row" class="text-left">
-                                                        <select name="phone" id="phone">
-                                                            <option>선택</option>
-                                                            <option value="02" selected="selected">02</option>
-                                                            <option value="031">031</option>
-                                                            <option value="032">032</option>
-                                                            <option value="033">033</option>
-                                                            <option value="041">041</option>
-                                                            <option value="042">042</option>
-                                                            <option value="043">043</option>
-                                                            <option value="051">051</option>
-                                                            <option value="052">052</option>
-                                                            <option value="053">053</option>
-                                                            <option value="054">054</option>
-                                                            <option value="055">055</option>
-                                                            <option value="061">061</option>
-                                                            <option value="062">062</option>
-                                                            <option value="063">063</option>
-                                                            <option value="064">064</option>
-                                                            <option value="070">070</option>
-                                                        </select>
-                                                        -
-                                                        <input name="phone2" type="text" id="phone2" value="1234"/> -
-                                                        <input name="phone3" type="text" id="phone3" value="5678"/>
+                                                    <th><label for="detailaddress"><spring:message code="label.detailaddress"/> </label></th>
+                                                    <td class="text-left">
+                                                    	<form:input path="detailaddress" type="text" id="detailAddress" placeholder="Detail Address" class="wfull"/> 
+                                                    	<input name="extraaddress" type="text" id="extraAddress" placeholder="Refer to item" style="margin-top:3px;" class="wfull"/> 
+                                                    	<form:errors path="detailaddress" />	
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row"><label for="hphone"> 핸드폰</label></th>
-                                                    <td scope="row" class="text-left">
-                                                        <select name="hphone" id="hphone">
-                                                            <option>선택</option>
-                                                            <option value="010" selected="selected">010</option>
-                                                            <option value="011">011</option>
-                                                            <option value="016">016</option>
-                                                            <option value="017">017</option>
-                                                            <option value="018">018</option>
-                                                            <option value="019">019</option>
-                                                        </select>
-                                                        -
-                                                        <input name="hphone2" type="text" id="hphone2" value="5674"/> -
-                                                        <input name="hphone3" type="text" id="hphone3" value="3456"/>
+                                                    <th><label for="phone"><spring:message code="label.phone"/></label></th>
+                                                    <td class="text-left">
+	                                                    <form:input path="phone" type="text" id="phone" placeholder="000-0000-0000" class="wfull"/>
+	                                                    <form:errors path="phone" />
                                                     </td>
                                                 </tr>
-                                                -->
+                                                <tr>
+                                                    <th><label for="hphone"><spring:message code="label.hphone"/></label></th>
+                                                    <td class="text-left">
+                                                    <form:input path="hphone" type="text" id="hphone" placeholder="000-0000-0000" class="wfull"/>
+                                                    <form:errors path="hphone" /> </td>
+                                                </tr>                                                
                                             </table>
                                             <hr>
                                             <div class="panel-header">
                                                 <h3 class="panel-title"><i class="fas fa-file-alt"></i> 02. 고객님의 추가사항을 입력해 주세요. (선택항목)</h3>
                                             </div>
-                                            <table summary="회원가입폼을 보여주고 있습니다." class="table">
+                                            <table summary="회원가입폼을 보여주고 있습니다." class="board_detail">
                                                 <colgroup>
                                                     <col width="20%" />
                                                     <col width="80%" />
                                                 </colgroup>
-                                                <tr class="tline">
-                                                    <th scope="row"><label for="nickname"> 닉네임</label></th>
-                                                    <td scope="row" class="text-left"><input type="text" id="nickname" name="nickname" value="쿠쿠짱" /></td>
+                                                <tr>
+                                                    <th><label for="nickname"><spring:message code="label.nickname"/></label></th>
+                                                    <td class="text-left">
+                                                    <form:input path="nickname" type="text"  placeholder="Nickname" class="wfull"/> 
+                                                    <form:errors path="nickname" /> </td>
+                                                </tr> 
+                                                <tr>
+                                                    <th><label for="homepage"><spring:message code="label.homepage"/></label></th>
+                                                    <td class="text-left">
+                                                    	<form:input path="homepage" type="text" placeholder="Homepage" class="wfull"/> 
+                                                    	<form:errors path="homepage" />
+                                                    </td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row"><label for="homepage"> 홈페이지 </label></th>
-                                                    <td scope="row" class="text-left"><input type="text" id="homepage" name="homepage" value="homepage" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><label for="job"> 직업</label></th>
-                                                    <td scope="row" class="text-left">
-                                                        <select name="job">
-                                                            <option value="" selected="selected">선택하세요</option>
+                                                    <th><label for="job"><spring:message code="label.job"/></label></th>
+                                                    <td class="text-left">
+                                                        <form:select path="job" >
+                                                            <option value='선택' selected="selected">Please choose a job</option>
                                                             <option value="은행업">은행업</option>
                                                             <option value="증권업">증권업</option>
                                                             <option value="보험업">보험업</option>
@@ -237,38 +173,27 @@
                                                             <option value="학생">학생</option>
                                                             <option value="의료">의료</option>
                                                             <option value="서비스업">서비스업</option>
-                                                            <option value="공무원">공무원</option>
-                                                            <option value="제조업">제조업</option>
-                                                            <option value="농/수/임/축/광업">농/수/임/축/광업</option>
-                                                            <option value="컴퓨터/인터넷">컴퓨터/인터넷</option>
-                                                            <option value="법률">법률</option>
-                                                            <option value="군인">군인</option>
-                                                            <option value="부동산">부동산</option>
-                                                            <option value="예술">예술</option>
-                                                            <option value="종교">종교</option>
-                                                            <option value="연예">연예</option>
-                                                            <option value="가사">가사</option>
-                                                            <option value="무직">무직</option>
-                                                            <option value="방송사">방송사</option>
-                                                            <option value="신문사">신문사</option>
-                                                            <option value="건설업">건설업</option>
                                                             <option value="기타">기타</option>
-                                                        </select>
+                                                        </form:select>
+                                                        <form:errors path="job" />
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                     <td colspan="2" class="text-left">
-                                                        <textarea name="message" id="message" /></textarea>
+                                                    <td colspan="2" class="text-left">
+                                                        <form:textarea  path="message" id="message" placeholder="Message"/> <form:errors path="message"/>
                                                         <script>
-                                                            CKEDITOR.replace('message',{customConfig: '${path}/plugin/ckeditor4/full/custom-config.js'});
+                                                            CKEDITOR.replace('message',{height:150, customConfig:'${path}/plugin/ckeditor4/full/custom-config.js'});
                                                         </script>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row"><label for="mail_check"> 메일수신여부</label></th>
-                                                    <td scope="row" class="text-left">
-                                                        <input type="radio" name="mail_check" <c:if test="${dto.mail_check == '1'}"><c:out value= "checked"/></c:if>> 예
-                                                        <input type="radio" name="mail_check" <c:if test="${dto.mail_check == '0'}"><c:out value= "checked"/></c:if>> 아니오
+                                                    <th><label for="mail_check"><spring:message code="label.mail_check"/></label></th>
+                                                    <td class="text-left">
+                                                    	<div class='container'>
+	                                                        <input type="radio" name="mail_check" value="1" /> 예
+	                                                        <input type="radio" name="mail_check" value="0" /> 아니오 
+	                       									<form:errors path="mail_check"/>
+                       									</div>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -281,12 +206,12 @@
                                                     <col width="20%" />
                                                     <col width="80%" />
                                                 </colgroup>
-                                                <tr class="tline">
-                                                     <td colspan="2" class="text-left">
+                                                <tr>
+                                                    <td colspan="2" class="text-left">
                                                         <div class="fileboxlist">
                                                             <!-- 첨부파일목록 -->
                                                             <table summary="기본게시판 보여주고 있습니다." id="filelist">
-                                                                <caption>등록일 : 2017년08월24일 기준</caption>
+                                                                <caption><spring:message code="bbs.table.caption"/></caption>
                                                                 <colgroup>
                                                                     <col width="20%" />
                                                                     <col width="40%" />
@@ -295,12 +220,12 @@
                                                                     <col width="10%" />
                                                                 </colgroup>
                                                                 <thead>
-                                                                    <tr class="tline1">
-                                                                        <th scope="col"><label for="cate">미리보기</label></th>
-                                                                        <th scope="col"><label for="cate">파일명</label></th>
-                                                                        <th scope="col"><label for="cate">파일사이즈</label></th>
-                                                                        <th scope="col"><label for="cate">파일타입</label></th>
-                                                                        <th scope="col"><label for="cate">삭제</label></th>
+                                                                    <tr>
+                                                                        <th scope="col"><spring:message code="bbs.list.preview"/></th>
+                                                                        <th scope="col"><spring:message code="bbs.list.filename"/></th>
+                                                                        <th scope="col"><spring:message code="bbs.list.filesize"/></th>
+                                                                        <th scope="col"><spring:message code="bbs.list.filetype"/></th>
+                                                                        <th scope="col"><spring:message code="bbs.list.del"/></th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -308,21 +233,13 @@
                                                             </table>
                                                         </div>
                                                         <div class="filebox">
-                                                            <ul id="example">
-                                                                <!--
-                                                                <li style="margin-bottom:5px;">
-                                                                    <input class="upload-name" id="item_1" />
-                                                                    <label for="ex_filename_1">업로드</label>
-                                                                    <input type="file" name="attach" id="ex_filename_1" class="upload-hidden_1">
-                                                                </li>
-                                                            -->
-                                                            </ul>
+                                                            <ul id="example"></ul>
                                                         </div>
                                                         <div>
-                                                            <input type="button" value="파일폼추가" id="addItemBtn" /> <span>첨부파일은 최대5개까지 첨부가능합니다.</span> <!-- <input type="button" value="파일폼삭제" id="delItemBtn" /> -->
+                                                            <input type="button" id="addItemBtn" value="<spring:message code="button.fileadd"/>" /> 첨부파일은 최대5개까지 첨부가능합니다.
                                                         </div>
                                                     </td>
-                                                </tr>
+                                                </tr>                                               
                                             </table>
                                             <hr>
                                             <div class="panel-header">
@@ -333,35 +250,51 @@
                                                     <col width="20%" />
                                                     <col width="80%" />
                                                 </colgroup>
-                                                <tr class="tline">
-                                                     <td colspan="2" class="text-left">
-                                                        <textarea name="etc" id="etc"></textarea>
+                                                <tr>
+                                                    <td colspan="2" class="text-left">
+                                                        <textarea name="etc" id="etc" placeholder="Etc"></textarea> 
+                                                        <form:errors path="Etc"/>
                                                         <script>
-                                                            CKEDITOR.replace('etc',{customConfig: '${path}/plugin/ckeditor4/full/custom-config.js'});
+                                                            CKEDITOR.replace('etc',{height:150, customConfig:'${path}/plugin/ckeditor4/full/custom-config.js'});
+                                                           	<!--CKEDITOR.instances.content.updateElement();-->
                                                         </script>
                                                     </td>
                                                 </tr>
-                                            </table>
+                                                <tr>
+                                                    <th><label for="code"><spring:message code="label.code"/></label></th>
+                                                    <td class="text-left">
+                                                        <img id="captchaImg" src="${path}/modules/member/captchaImg.do" />
+                                                        <div id="captchaAudio" style="display:none;"></div>                                                       
+                                                        <input type="button" id="refreshBtn" value="<spring:message code="button.refresh"/>" >
+                                                        <input type="button" id="audio" value="<spring:message code="button.voice"/>" >  
+                                                        <input type="text" id="answer" name="answer" placeholder="CaptchaCode"/> 
+                                                    </td>
+                                                </tr>
+                                            </table>                                            
+                                            
                                             <nav class="btn-group">
-                                                <ul>
-                                                    <li><input type="button" value="회원목록" onClick="location.href='list.do'"></li>
-                                                    <!--<li><input type="button" value="등록하기" onClick="Board_Write_Check();"></li> -->
-                                                    <li><input type="button" value="회원가입" onclick="$(this.form).submit()"></li>
-                                                </ul>
-                                            </nav>
+												<ul>
+													<li><input type="button" value="<spring:message code="button.list"/>" onClick="location.href='list.do'"/></li>
+													<li><input type="button" value="<spring:message code="button.create"/>" onClick="$(this.form).submit();"/></li>												
+												</ul>
+											</nav>
                                         </div>
                                     </fieldset>
-                                </form>
+                                </form:form>
+                                
+                                
                             </div>
-                        </div>
-                    </article>
+                        </div>                        
+                	</article>
                 </section>
             </div>
         </div>
     </div>
-</div>
+</div>                       
 <c:import url="/WEB-INF/views/include/footer.jsp"/>
-<%@ include file="../../include/modal.jsp"%>
+
+<c:import url="/WEB-INF/views/include/modal.jsp"/>
+
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function findzipcode() {
@@ -394,7 +327,7 @@
                     }
                     // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
                     if(extraAddr !== ''){
-                        extraAddr = ' (' + extraAddr + ')';
+                        extraAddr = '(' + extraAddr + ')';
                     }
                     // 조합된 참고항목을 해당 필드에 넣는다.
                     document.getElementById("extraAddress").value = extraAddr;

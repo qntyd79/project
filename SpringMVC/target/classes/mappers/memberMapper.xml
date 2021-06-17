@@ -107,14 +107,16 @@
 		update jhbbs_file set del = 'Y' where file_idx = #{file_idx}
 	</update>
 	
-	<!-- 글보기 -->
+	<!-- 회원보기 -->
 	<select id="getView" resultType="com.company.bbs.vo.member.MemberVO">
 		select * from jhbbs_member where member_idx = #{member_idx}	and del = 'N'
 	</select>
 
-	<!-- 글수정 -->
+	<!-- 회원정보수정 -->
 	<update id="update">
 		update jhbbs_member set
+		pass_ask=#{pass_ask},
+		pass_account=#{pass_account},
 		email=#{email},
 		homepage=#{homepage},
 		zipcode=#{zipcode},
@@ -123,8 +125,9 @@
 		extraaddress=#{extraaddress},
 		phone=#{phone},
 		hphone=#{hphone},
+		nickname=#{nickname},
+		homepage=#{homepage},
 		job=#{job},
-		attach=#{attach},
 		message=#{message},
 		etc=#{etc},
 		mail_check=#{mail_check},

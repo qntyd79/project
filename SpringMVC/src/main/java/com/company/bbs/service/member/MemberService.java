@@ -14,13 +14,13 @@ public interface MemberService {
 	public List<MemberVO> getList(Criteria criteria) throws Exception;
 
 	// 글저장
-	public void insert(MemberVO dto) throws Exception;
+	public void insert(MemberVO memberVO) throws Exception;
 
 	// 글보기
 	public MemberVO getView(int member_idx) throws Exception;
 
 	// 글수정
-	public void update(MemberVO dto) throws Exception;
+	public void update(MemberVO memberVO) throws Exception;
 
 	// 글삭제
 	public void delete(int member_idx) throws Exception;
@@ -47,7 +47,7 @@ public interface MemberService {
 	public List<Object> getCategory() throws Exception;
 
 	// 카테고리목록
-	public List<Object> getCategoryList(int idx) throws Exception;
+	public List<Object> getCategoryList(int kind) throws Exception;
 
 	// 첨부파일조회
 	public List<Object> getFileList(int member_idx) throws Exception;

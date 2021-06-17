@@ -2322,6 +2322,14 @@ input[type=number] {
     //-moz-appearance: textfield;
 }
 
+input[readonly="readonly"]{
+	background-color:#e1e1e1;
+}
+
+textarea[readonly="readonly"]{
+	background-color:#e1e1e1;
+}
+
 input,
 select,
 textarea,
@@ -2462,10 +2470,6 @@ textarea {
     vertical-align: top;
 }
 
-.readonly {
-    background:#e1e1e1;
-}
-
 // 버튼색깔 CSS
 .success {
     .background(#4CAF50);
@@ -2518,7 +2522,7 @@ textarea {
 .form-group {
     .layout;
     margin-bottom: 15px;
-    padding: 5px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
     .background(#efefef);
     .border-radius(0px);
     .text-left;
@@ -2532,10 +2536,13 @@ textarea {
     input[type="password"],
     input[type="file"],
     input[type="search"],
-    select,
-    textarea {
+    select,textarea {
         margin-bottom: 5px;
     }
+	label {
+		padding-bottom:5px;
+		display:inline-block;
+	}
 }
 
 // 버튼그룹 CSS

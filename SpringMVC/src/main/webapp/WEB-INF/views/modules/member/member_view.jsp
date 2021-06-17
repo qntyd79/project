@@ -23,8 +23,13 @@
                             
                             
                                 <h2><spring:message code="bbs.title.write"/></h2>
-                                <form:form modelAttribute="memberVO" method="post" id="memberForm" name="memberForm" enctype="multipart/form-data" action="insert.do">
-                                	<input type="hidden" name="msgStr" value="<c:out value="${msg}"/> ">  
+                                <form:form modelAttribute="memberVO" method="post" id="memberForm" name="memberForm" enctype="multipart/form-data" action="update.do">
+                                	<input type="hidden" name="member_idx" value="<c:out value="${memberVO.member_idx}"/>" >
+                                    <input type="hidden" name="page" value="<c:out value="${criteria.page}"/>" >
+                                    <input type="hidden" name="perPageNum" value="<c:out value="${criteria.perPageNum}"/>" >
+                                    <input type="hidden" name="searchField" value="<c:out value="${criteria.searchField}"/>" >
+                                    <input type="hidden" name="keyWord" value="<c:out value="${criteria.keyWord}"/>" >
+                                    <input type="hidden" name="msgStr" value="<c:out value="${msg}"/>" >  
                                     <fieldset>
                                     	<legend><spring:message code="bbs.table.legend"/></legend>
                                         <div class="panel-box">                                            
@@ -56,7 +61,7 @@
                                                 <tr>
                                                     <th><label for="userid"><spring:message code="label.userid"/></label></th>
                                                     <td class="text-left">
-                                                        <form:input path="userid" type="text" placeholder="UserID" readonly="readonly"/>
+                                                        <input name="userid" type="text" placeholder="UserID" value="<c:out value="${memberVO.userid}"/>" readonly="readonly"/>
                                                         <form:errors path="userid" /> 
                                                     </td>
                                                 </tr>
@@ -68,9 +73,7 @@
                                                 <tr>
                                                     <th><label for="pass_ask"><spring:message code="label.pass_ask"/></label></th>
                                                     <td class="text-left">
-                                                        <form:select path="pass_ask" name="pass_ask" class="select" style="width:200px;" readonly="readonly" 
-                                                        onFocus="this.initialSelect = this.selectedIndex;" 
-												        onChange="this.selectedIndex = this.initialSelect;">
+                                                        <form:select path="pass_ask" name="pass_ask" class="select" style="width:200px;" readonly="readonly">
                                                             <option value='' <c:if test="${memberVO.pass_ask eq 0}">selected</c:if>>-질문을 선택하여 주십시오-</option>
                                                             <option value="1" <c:if test="${memberVO.pass_ask eq 1}">selected</c:if>>가장 인상깊었던 여행지는 </option>
                                                             <option value="2" <c:if test="${memberVO.pass_ask eq 2}">selected</c:if>>나의보물 1호는 </option>
@@ -95,7 +98,7 @@
                                                 <tr>
                                                     <th><label for="name"><spring:message code="label.name"/></label></th>
                                                     <td class="text-left">
-	                                                    <form:input path="name" type="text" placeholder="Name" class="wfull" readonly="readonly" /> 
+	                                                    <input name="name" type="text" placeholder="Name" value="<c:out value="${memberVO.name}"/>" class="wfull" readonly="readonly" /> 
 	                                                    <form:errors path="name" />
                                                     </td>
                                                 </tr>                                               
@@ -125,7 +128,7 @@
                                                     <th><label for="detailaddress"><spring:message code="label.detailaddress"/> </label></th>
                                                     <td class="text-left">
                                                     	<form:input path="detailaddress" type="text" id="detailAddress" placeholder="Detail Address" class="wfull"/> 
-                                                    	<input name="extraaddress" type="text" id="extraAddress" placeholder="Refer to item" style="margin-top:3px;" class="wfull"/> 
+                                                    	<form:input path="extraaddress" type="text" id="extraAddress" placeholder="Refer to item" style="margin-top:3px;" class="wfull"/> 
                                                     	<form:errors path="detailaddress" />	
                                                     </td>
                                                 </tr>

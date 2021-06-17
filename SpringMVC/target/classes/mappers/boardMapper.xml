@@ -152,8 +152,7 @@
 
 	<!-- 글조회수 -->
 	<update id="increaseCnt">
-		update jhbbs_board set hit= hit + 1 where board_idx =
-		#{board_idx} and del = 'N'
+		update jhbbs_board set hit= hit + 1 where board_idx = #{board_idx} and del = 'N'
 	</update>
 
 	<!-- 글이전값 -->

@@ -4,47 +4,19 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<script type="text/javaScript" language="javascript" defer="defer">
-       
-	/* 수정 화면 function */
-    function fn_egov_select(id)
-	{
-       	document.listForm.selectedId.value = id;
-       	document.listForm.action = "<c:url value='/updateSampleView.do'/>";
-       	document.listForm.submit();
-    }
-        
-    /* 등록 화면 function */
-    function fn_egov_addView()
-    {
-     	document.listForm.action = "<c:url value='insertPermssionUser.do'/>";
-       	document.listForm.submit();
-    }
-        
-    /* 목록 화면 function */
-    function fn_egov_selectList()
-    {
-      	document.listForm.action = "<c:url value='/egovSampleList.do'/>";
-       	document.listForm.submit();
-    }
-        
-    /* pagination 페이지 링크 function */
-    function fn_egov_link_page(pageNo)
-    {
-      	document.listForm.pageIndex.value = pageNo;
-       	document.listForm.action = "<c:url value='/egovSampleList.do'/>";
-      	document.listForm.submit();
-    }
+<%@ taglib prefix="validator" uri="http://www.springmodules.org/tags/commons-validator" %>
+<script type="text/javascript" src="<c:url value="validator.do"/>"></script>
+<validator:javascript formName="memberVO" staticJavascript="false" xhtml="true" cdata="false"/>
 
-</script>
 <c:import url="/WEB-INF/views/include/header.jsp"/>
+
 <div id="container-wrap">
     <div class="clearfix">
         <div class="content-box">
             <div class="content-full-img01"></div>
             <div class="content-full-bg01-hidden">
                 <section class="content">
-                    <%@ include file="../../include/content_header.jsp"%>
+                    <c:import url="/WEB-INF/views/include/content_header.jsp"/>
                     <article>
                         <div class="row">
                             <div class="col-md-12">
@@ -58,7 +30,7 @@
                                                     <h3 class="panel-title"><i class="fas fa-file-alt"></i> 01. 고객님의 기본사항을 입력해 주세요. (필수항목)</h3>
                                                 </div>
                                                 <div class="thumbnail">
-                                                    <img src="/jhbbs/images/slide/slide01.jpg" />
+                                                    <img src="/resources/images/slide/slide01.jpg" />
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="name"> 회원아이디</label>

@@ -73,11 +73,11 @@
                                                 </tr>
                                                 <tr>
                                                     <th><label for="userid"><spring:message code="label.userid"/></label></th>
-                                                    <td class="text-left"><form:input path="userid" type="text" placeholder="UserID" readonly="readonly" class="wfull"/> <form:errors path="userid" /></td>
+                                                    <td class="text-left"><input name="userid" type="text" placeholder="UserID" value="<c:out value="${memberVO.userid}"/>" readonly="readonly" class="wfull"/> <form:errors path="userid" /></td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="name"><spring:message code="label.name"/></label></th>
-                                                    <td class="text-left"><form:input path="name" type="text"  placeholder="Name" readonly="readonly" class="wfull"/> <form:errors path="name" /></td>
+                                                    <td class="text-left"><input name="name" type="text"  placeholder="Name" value="<c:out value="${memberVO.name}"/>" readonly="readonly" class="wfull"/> <form:errors path="name" /></td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="pass"><spring:message code="label.pass"/></label></th>

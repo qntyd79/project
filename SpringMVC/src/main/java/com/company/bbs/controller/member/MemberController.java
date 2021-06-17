@@ -150,7 +150,7 @@ public class MemberController {
 	// 회원목록 (Model)
 	@RequestMapping(value = "list.do")
 	public String List(Model model, @ModelAttribute Criteria criteria,
-			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "2") int idx)
+			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "2") int kind)
 			throws Exception {
 
 		logger.info("목록");
@@ -162,7 +162,7 @@ public class MemberController {
 
 		model.addAttribute("list", service.getList(criteria));
 		model.addAttribute("categoryname", service.getCategory());
-		model.addAttribute("categorylist", service.getCategoryList(idx));
+		model.addAttribute("categorylist", service.getCategoryList(kind));
 		model.addAttribute("categoryselect", category_idx);
 		model.addAttribute("pageMaker", pageMaker);
 		// model.addAttribute("searchField", searchField);
@@ -174,7 +174,7 @@ public class MemberController {
 	// 회원목록 (ModelAndView)
 	@RequestMapping(value = "mvlist.do")
 	public ModelAndView List(@ModelAttribute Criteria criteria, @RequestParam(defaultValue = "0") int category_idx,
-			@RequestParam(defaultValue = "2") int idx) throws Exception {
+			@RequestParam(defaultValue = "2") int kind) throws Exception {
 
 		logger.info("회원목록");
 
@@ -187,7 +187,7 @@ public class MemberController {
 
 		mav.addObject("list", service.getList(criteria));
 		mav.addObject("categoryname", service.getCategory());
-		mav.addObject("categorylist", service.getCategoryList(idx));
+		mav.addObject("categorylist", service.getCategoryList(kind));
 		mav.addObject("categoryselect", category_idx);
 		mav.addObject("pageMaker", pageMaker);
 		// mav.addObject("searchField", searchField);
@@ -200,7 +200,7 @@ public class MemberController {
 	// 회원목록 (Map)
 	@RequestMapping(value = "mlist.do")
 	public String List1(Model model, @ModelAttribute Criteria criteria,
-			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "2") int idx)
+			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "2") int kind)
 			throws Exception {
 
 		logger.info("회원목록");
@@ -213,7 +213,7 @@ public class MemberController {
 
 		map.put("list", service.getList(criteria));
 		map.put("categoryname", service.getCategory());
-		map.put("categorylist", service.getCategoryList(idx));
+		map.put("categorylist", service.getCategoryList(kind));
 		map.put("categoryselect", category_idx);
 		map.put("pageMaker", pageMaker);
 		// map.put("searchField", searchField);
@@ -235,6 +235,19 @@ public class MemberController {
 		model.addAttribute("categorylist", service.getCategoryList(kind));
 
 		return "modules/member/member_write";
+	}
+	
+	// 회원그룹등록폼
+	@RequestMapping(value = "write_group.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String Writegroup(Model model, @ModelAttribute MemberVO memberVO, @RequestParam(defaultValue = "2") int kind)
+			throws Exception {
+
+		logger.info("회원쓰기");
+
+		model.addAttribute("memberVO", memberVO);
+		model.addAttribute("categorylist", service.getCategoryList(kind));
+
+		return "modules/member/member_write_group";
 	}
 
 	// 회원저장
