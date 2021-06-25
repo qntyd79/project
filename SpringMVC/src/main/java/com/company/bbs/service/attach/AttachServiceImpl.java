@@ -58,17 +58,8 @@ public class AttachServiceImpl implements AttachService {
 		// 날짜변수
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date currentTime = new Date();
-		String regdate = formatter.format(currentTime);
-		
-		// 치환함수 적용
-		//content = content.replace(" ", "&nbsp;");
-		//content = content.replace("<", "&lt;");
-		//content = content.replace(">", "&gt;");		
-		//content = content.replace("\n", "<br>");
-
-		// 긴글입력
-		// StringReader scontent = new StringReader(content);
-		
+		String regdate = formatter.format(currentTime);		
+	
 		int number = getCount(criteria);
 		
 		if (number != 0) {
@@ -86,7 +77,6 @@ public class AttachServiceImpl implements AttachService {
 		//attachVO.setContent(content);
 		//attachVO.setPass(pwdBycrypt);
 		
-
 		dao.insert(attachVO);
 		//}
 	}
@@ -158,8 +148,8 @@ public class AttachServiceImpl implements AttachService {
 	
 	// 카테고리목록
 	@Override
-	public List<Object> getCategoryList(int idx) throws Exception {
-		return dao.getCategoryList(idx);
+	public List<Object> getCategoryList(int kind) throws Exception {
+		return dao.getCategoryList(kind);
 	}
 	
 	// 첨부파일갯수 

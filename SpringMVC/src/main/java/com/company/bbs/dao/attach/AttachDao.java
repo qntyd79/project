@@ -47,7 +47,7 @@ public interface AttachDao {
 	public List<Object> getCategory() throws Exception;
 		
 	// 카테고리목록
-	public List<Object> getCategoryList(int idx) throws Exception;
+	public List<Object> getCategoryList(int kind) throws Exception;
 	
 	// 첨부파일갯수
 	public int getFileCount(Criteria criteria) throws Exception;

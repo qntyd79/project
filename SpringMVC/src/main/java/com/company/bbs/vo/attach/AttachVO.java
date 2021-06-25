@@ -19,6 +19,8 @@ public class AttachVO {
 	private String del;
 	private int board_idx;
 	private int member_idx;
+	private int email_idx;
+	private int category_idx;
 	
 	public int getFile_idx() {
 		return file_idx;
@@ -62,18 +64,18 @@ public class AttachVO {
 	public void setFile_index(int file_index) {
 		this.file_index = file_index;
 	}
+	public int getDownload() {
+		return download;
+	}
+	public void setDownload(int download) {
+		this.download = download;
+	}
 	public MultipartFile[] getAttach() {
 		return attach;
 	}
 	public void setAttach(MultipartFile[] attach) {
 		this.attach = attach;
 	}
-	public int getDownload() {
-		return download;
-	}
-	public void setDownload(int download) {
-		this.download = download;
-	}	
 	public String getRegdate() {
 		return regdate;
 	}
@@ -85,7 +87,7 @@ public class AttachVO {
 	}
 	public void setDel(String del) {
 		this.del = del;
-	}	
+	}
 	public int getBoard_idx() {
 		return board_idx;
 	}
@@ -98,17 +100,26 @@ public class AttachVO {
 	public void setMember_idx(int member_idx) {
 		this.member_idx = member_idx;
 	}
+	public int getEmail_idx() {
+		return email_idx;
+	}
+	public void setEmail_idx(int email_idx) {
+		this.email_idx = email_idx;
+	}
+	public int getCategory_idx() {
+		return category_idx;
+	}
+	public void setCategory_idx(int category_idx) {
+		this.category_idx = category_idx;
+	}
 	
 	@Override
 	public String toString() {
 		return "AttachVO [file_idx=" + file_idx + ", file_name=" + file_name + ", file_hash_name=" + file_hash_name
 				+ ", file_size=" + file_size + ", file_type=" + file_type + ", file_ext=" + file_ext + ", file_index="
 				+ file_index + ", download=" + download + ", attach=" + Arrays.toString(attach) + ", regdate=" + regdate
-				+ ", del=" + del + ", board_idx=" + board_idx + ", member_idx=" + member_idx + "]";
+				+ ", del=" + del + ", board_idx=" + board_idx + ", member_idx=" + member_idx + ", email_idx="
+				+ email_idx + ", category_idx=" + category_idx + "]";
 	}
-	
-	
-	
-	
 		
 }

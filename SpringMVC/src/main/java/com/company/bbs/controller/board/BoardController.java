@@ -294,7 +294,6 @@ public class BoardController {
 	@RequestMapping(value = "update.do", method = RequestMethod.POST)
 	public String Modify(Model model, @ModelAttribute Criteria criteria, @ModelAttribute BoardVO boardVO,
 			@RequestParam String pass, BindingResult bindingResult
-	/* RedirectAttributes redirectAttributes */
 	) throws Exception {
 
 		logger.info("글수정처리");

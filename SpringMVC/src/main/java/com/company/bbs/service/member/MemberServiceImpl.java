@@ -21,13 +21,15 @@ import com.company.bbs.dao.member.MemberDao;
 import com.company.bbs.utill.Criteria;
 import com.company.bbs.utill.UploadFileUtils;
 import com.company.bbs.vo.attach.AttachVO;
+import com.company.bbs.vo.board.BoardVO;
 import com.company.bbs.vo.member.MemberVO;
+import com.company.bbs.vo.email.EmailVO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
-	
+
 	@Inject
 	MemberDao dao;
 	Criteria criteria;
@@ -52,39 +54,19 @@ public class MemberServiceImpl implements MemberService {
 
 		// for(int i=1; i <=200; i++) {
 		int member_idx = memberVO.getMember_idx();
-		String userid = memberVO.getUserid();
 		String pass = memberVO.getPass();
-		String pass_ask = memberVO.getPass_ask();
-		String pass_account = memberVO.getPass_account();
-		String name = memberVO.getName();
-		String nickname = memberVO.getNickname();
-		String email = memberVO.getEmail();
-		String homepage = memberVO.getHomepage();
-		String zipcode = memberVO.getZipcode();
-		String address = memberVO.getAddress();
-		String detailaddress = memberVO.getDetailaddress();
-		String extraaddress = memberVO.getExtraaddress();
-		String phone = memberVO.getPhone();
-		String hphone = memberVO.getHphone();
-		String job = memberVO.getJob();
-		String message = memberVO.getMessage();
-		String etc = memberVO.getEtc();
-		int mail_check = memberVO.getMail_check();
-		int category_idx = memberVO.getCategory_idx();
 		int level = 10;
 		int point = 100;
 		int approval = 0;
 		int login_cnt = 0;
 		int user_leave = 1;
-		String del = memberVO.getDel();
-		del = "N";
 
 		// 비밀번호 암호화
 		String pwdBycrypt = passwordEncoder.encode(pass);
 
 		// 로그인아이피
 		String login_ip = InetAddress.getLocalHost().getHostAddress();
-		
+
 		// 마지막로그인아이피
 		String login_last = InetAddress.getLocalHost().getHostAddress();
 
@@ -97,6 +79,9 @@ public class MemberServiceImpl implements MemberService {
 		String regdate = formatter.format(currentTime);
 		String join_date = formatter.format(currentTime);
 
+		String del = memberVO.getDel();
+		del = "N";
+
 		int number = getCount(criteria);
 
 		if (number != 0) {
@@ -104,25 +89,9 @@ public class MemberServiceImpl implements MemberService {
 		} else {
 			number = 1;
 		}
-		
+
 		memberVO.setMember_idx(number);
-		memberVO.setUserid(userid);
 		memberVO.setPass(pwdBycrypt);
-		memberVO.setPass_ask(pass_ask);
-		memberVO.setPass_account(pass_account);
-		memberVO.setName(name);
-		memberVO.setNickname(nickname);
-		memberVO.setEmail(email);
-		memberVO.setHomepage(homepage);
-		memberVO.setZipcode(zipcode);
-		memberVO.setDetailaddress(detailaddress);
-		memberVO.setExtraaddress(extraaddress);
-		memberVO.setPhone(phone);
-		memberVO.setHphone(hphone);
-		memberVO.setJob(job);
-		memberVO.setMessage(message);
-		memberVO.setEtc(etc);
-		memberVO.setMail_check(mail_check);
 		memberVO.setLevel(level);
 		memberVO.setPoint(point);
 		memberVO.setApproval(approval);
@@ -133,15 +102,19 @@ public class MemberServiceImpl implements MemberService {
 		memberVO.setUser_leave(user_leave);
 		memberVO.setCipp(cipp);
 		memberVO.setRegdate(regdate);
-		memberVO.setCategory_idx(category_idx);
 		memberVO.setDel(del);
 
 		// memberVO.setTitle(i + "번쨰 제목입니다.");
 
 		dao.insert(memberVO);
 		// }
+		fileinsert(memberVO);
+	}
 
-		// 첨부파일 처리
+	// 첨부파일 처리
+	@Transactional
+	@Override
+	public void fileinsert(MemberVO memberVO) throws Exception {
 		AttachVO attachVO = new AttachVO();
 		MultipartFile[] attach = memberVO.getAttach(); // 첨부파일 배열
 
@@ -184,11 +157,10 @@ public class MemberServiceImpl implements MemberService {
 		// 첨부파일 등록 후 board테이블 filecnt(파일갯수) 업데이트
 		// dao.getAttachCount(attachVO.getMember_idx());
 	}
-	
+
 	// 글보기
 	@Override
 	public MemberVO getView(int member_idx) throws Exception {
-
 		return dao.getView(member_idx);
 	}
 
@@ -237,14 +209,14 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int getCount(Criteria criteria) throws Exception {
 		return dao.getCount(criteria);
-	}	
+	}
 
 	// 글비밀번호리턴
 	@Override
 	public String getPassword(int member_idx) throws Exception {
 		return dao.getPassword(member_idx);
 	}
-	
+
 	// 카테고리명
 	@Override
 	public List<Object> getCategory() throws Exception {
@@ -266,13 +238,13 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void attachDelete(int file_idx) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void getCommentCount(int member_idx) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

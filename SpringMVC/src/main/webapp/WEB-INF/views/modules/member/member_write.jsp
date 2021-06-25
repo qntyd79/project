@@ -163,7 +163,7 @@
                                                 <tr>
                                                     <th><label for="job"><spring:message code="label.job"/></label></th>
                                                     <td class="text-left">
-                                                        <form:select path="job" >
+                                                        <form:select path="job" class="select">
                                                             <option value='선택' selected="selected">Please choose a job</option>
                                                             <option value="은행업">은행업</option>
                                                             <option value="증권업">증권업</option>
@@ -207,7 +207,8 @@
                                                     <col width="80%" />
                                                 </colgroup>
                                                 <tr>
-                                                    <td colspan="2" class="text-left">
+                                                    <th><label for="file"><spring:message code="label.file"/></label></th>
+                                                    <td class="text-left">
                                                         <div class="fileboxlist">
                                                             <!-- 첨부파일목록 -->
                                                             <table summary="기본게시판 보여주고 있습니다." id="filelist">

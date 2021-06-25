@@ -76,19 +76,19 @@
 	</select>
 	
 	<!-- 첨부파일저장 -->
-	<insert id="attachInsert" parameterType="com.company.bbs.vo.board.BoardVO"> 
+	<insert id="attachInsert" parameterType="com.company.bbs.vo.member.MemberVO"> 
 		INSERT INTO jhbbs_file (
 		file_name, file_hash_name,
 		file_size, file_type, file_ext,
-		download, regdate, del, board_idx, member_idx
+		download, regdate, del, board_idx, member_idx, email_idx
 		) VALUES (
 		#{file_name}, #{file_hash_name}, 
 		#{file_size}, #{file_type}, #{file_ext},
-		#{download}, #{regdate}, #{del}, #{board_idx}, #{member_idx}
+		#{download}, #{regdate}, #{del}, #{board_idx}, #{member_idx}, #{email_idx}
 		)
 	</insert>
 	
-	<!--  첨부파일수정 -->
+	<!-- 글수정 -->
 	<update id="attachUpdate">
 		update jhbbs_file set
 		file_name=#{file_name},
@@ -96,8 +96,9 @@
 		file_size=#{file_size},
 		file_type=#{file_type},
 		file_ext=#{file_ext},		
-		board_idx=#{board_idx}
-		member_idx=#{member_idx}
+		board_idx=#{board_idx},
+		member_idx=#{member_idx},
+		email_idx=#{email_idx}
 		where
 		file_idx=#{file_idx}
 	</update>

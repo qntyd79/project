@@ -84,11 +84,11 @@
 		INSERT INTO jhbbs_file (
 		file_name, file_hash_name,
 		file_size, file_type, file_ext,
-		download, regdate, del, board_idx
+		download, regdate, del, board_idx, member_idx, email_idx
 		) VALUES (
 		#{file_name}, #{file_hash_name}, 
 		#{file_size}, #{file_type}, #{file_ext},
-		#{download}, #{regdate}, #{del}, #{board_idx}
+		#{download}, #{regdate}, #{del}, #{board_idx}, #{member_idx}, #{email_idx}
 		)
 	</insert>
 	
@@ -100,7 +100,9 @@
 		file_size=#{file_size},
 		file_type=#{file_type},
 		file_ext=#{file_ext},		
-		board_idx=#{board_idx}
+		board_idx=#{board_idx},
+		member_idx=#{member_idx},
+		email_idx=#{email_idx}
 		where
 		file_idx=#{file_idx}
 	</update>

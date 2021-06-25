@@ -46,9 +46,10 @@
 						                            <th><label for="kind"> <spring:message code="label.kind"/></label></th>
 						                            <td class="text-left">
 						                            	<form:select path="kind" id="kind" name="kind">
-						                            		<option value='0'>분류를 선택해주세요 </option>
+						                            		<option value=''>분류를 선택해주세요 </option>
 						                                	<option value='1'>게시판에 분류 추가 </option>
 						                                	<option value="2">회원가입에 분류 추가 </option>
+						                                	<option value="3">메일서비스에 분류 추가 </option>
 						                           		</form:select>
 						                           		<form:errors path="kind" />
 						                        	</td>

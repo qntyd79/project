@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.company.bbs.utill.Criteria;
 import com.company.bbs.vo.board.BoardVO;
+import com.company.bbs.vo.email.EmailVO;
 
 public interface BoardService {
 
@@ -63,5 +64,8 @@ public interface BoardService {
 	
 	// 코멘트갯수 
 	public void getCommentCount(int board_idx)throws Exception;
+
+	// 첨부파일등록
+	public void fileinsert(BoardVO boardVO) throws Exception;
 
 }

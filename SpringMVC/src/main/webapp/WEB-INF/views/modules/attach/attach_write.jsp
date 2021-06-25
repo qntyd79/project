@@ -49,35 +49,7 @@
                                                         </form:select>
                                                         <form:errors path="category_idx" />                                                        
                                                     </td>
-                                                </tr>
-                                                <tr>
-                                                    <th><label for="userid"><spring:message code="label.userid"/></label></th>
-                                                    <td class="text-left"><form:input path="userid" type="text" placeholder="UserID" class="wfull"/> <form:errors path="userid" /> </td>
-                                                </tr>
-                                                <tr>
-                                                    <th><label for="name"><spring:message code="label.name"/></label></th>
-                                                    <td class="text-left"><form:input path="name" type="text"  placeholder="Name" class="wfull"/> <form:errors path="name" /> </td>
-                                                </tr>
-                                                <tr>
-                                                    <th><label for="pass"><spring:message code="label.pass"/></label></th>
-                                                    <td class="text-left"><form:input path="pass" type="password" placeholder="Password" class="wfull"/> <form:errors path="pass" /> </td>
-                                                </tr>
-                                                <tr>
-                                                    <th><label for="title"><spring:message code="label.title"/></label></th>
-                                                    <td class="text-left">
-                                                    	<form:input path="title" type="text" placeholder="Title" class="wfull"/> <form:errors path="title" />
-                                                    </td>
-                                                </tr>                                               
-                                                <tr>
-                                                    <td colspan="10" class="text-left">
-                                                        <form:textarea  path="content" id="content" placeholder="Content"/> <form:errors path="content"/>
-                                                        <script>
-                                                            CKEDITOR.replace('content',{customConfig: '${path}/plugin/ckeditor4/full/custom-config.js'});
-                                                           	<!--CKEDITOR.instances.content.updateElement();-->
-                                                        </script>
-                                                        <!--<label for="content"><spring:message code="label.content"/></label>-->   
-                                                     </td>
-                                                </tr>
+                                                </tr>                                              
                                                 <tr>
                                                     <th><label for="name"><spring:message code="label.file"/></label></th>
                                                     <td class="text-left">

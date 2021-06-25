@@ -57,5 +57,8 @@ public interface MemberService {
 
 	// 코멘트갯수
 	public void getCommentCount(int member_idx) throws Exception;
+	
+	// 첨부파일등록
+	public void fileinsert(MemberVO memberVO) throws Exception;
 
 }

@@ -53,9 +53,10 @@
 						                            <th><label for="kind"> <spring:message code="label.kind"/></label></th>
 						                            <td class="text-left">
 						                            	<select id="kind" name="kind">
-						                            		<option value='0' <c:if test="${categoryVO.kind eq 0}">selected</c:if>>선택된 분류가 없습니다.</option>
+						                            		<option value='' <c:if test="${categoryVO.kind eq 0}">selected</c:if>>선택된 분류가 없습니다.</option>
 						                                	<option value='1' <c:if test="${categoryVO.kind eq 1}">selected</c:if>>게시판에 분류 추가 </option>
 						                                	<option value="2" <c:if test="${categoryVO.kind eq 2}">selected</c:if>>회원가입에 분류 추가 </option>
+						                                	<option value="3" <c:if test="${categoryVO.kind eq 3}">selected</c:if>>메일링서비스에 분류 추가 </option>
 						                           		</select>						                           		
                                                         <form:errors path="kind" />						                           	
 						                        	</td>

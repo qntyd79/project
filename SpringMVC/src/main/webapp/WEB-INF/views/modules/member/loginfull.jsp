@@ -74,4 +74,4 @@
     </div>
 </div>
 
-<c:import url="/WEB-INF/views/modules/login/find.jsp"/>
+<c:import url="/WEB-INF/views/modules/member/find.jsp"/>

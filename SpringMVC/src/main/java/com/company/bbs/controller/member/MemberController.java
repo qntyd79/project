@@ -416,16 +416,16 @@ public class MemberController {
 	// 첨부파일삭제처리
 	@RequestMapping(value = "attachDelete.do", method = RequestMethod.GET)
 	public String attachDelete(Model model, @ModelAttribute Criteria criteria, @ModelAttribute AttachVO attachVO,
-			@RequestParam int board_idx, @RequestParam String filename) throws Exception {
+			@RequestParam int member_idx, @RequestParam String filename) throws Exception {
 
 		logger.info("첨부파일삭제처리");
 
 		UploadFileUtils.removeFile(uploadPath, filename);
 
 		service.attachDelete(attachVO.getFile_idx());
-
+ 
 		model.addAttribute("msg", "DeleteSuccess");
-		model.addAttribute("url", "read.do?board_idx=" + board_idx);
+		model.addAttribute("url", "read.do?member_idx=" + member_idx);
 
 		return "/modules/common/common_message";
 	}

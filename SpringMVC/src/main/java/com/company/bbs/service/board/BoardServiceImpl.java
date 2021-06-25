@@ -22,6 +22,7 @@ import com.company.bbs.utill.Criteria;
 import com.company.bbs.utill.UploadFileUtils;
 import com.company.bbs.vo.attach.AttachVO;
 import com.company.bbs.vo.board.BoardVO;
+import com.company.bbs.vo.email.EmailVO;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -119,7 +120,13 @@ public class BoardServiceImpl implements BoardService {
 
 		dao.insert(boardVO);
 		// }
+		fileinsert(boardVO);
+	}
 
+	// 첨부파일 처리
+	@Transactional
+	@Override
+	public void fileinsert(BoardVO boardVO) throws Exception {
 		// 첨부파일 처리
 		AttachVO attachVO = new AttachVO();
 		MultipartFile[] attach = boardVO.getAttach(); // 첨부파일 배열

@@ -533,6 +533,16 @@ $(document).ready(function() {
                 emailck: true,
 				minlength: 2
             },
+			toemail: {
+                required: true,				
+                emailck: true,
+				minlength: 2
+            },
+			sendemail: {
+                required: true,				
+                emailck: true,
+				minlength: 2
+            },
  			homepage: {
                 required: true,
 				domain: true
@@ -585,6 +595,16 @@ $(document).ready(function() {
                 minlength: $.validator.format("이메일은 최소{0}글자 이상 입력하세요."),
                 emailck: "올바른 이메일 주소가 아닙니다."
             },
+			toemail: {
+                required: "받는사람 이메일을 입력하세요.",
+                minlength: $.validator.format("이메일은 최소{0}글자 이상 입력하세요."),
+                emailck: "올바른 이메일 주소가 아닙니다."
+            },
+			sendemail: {
+                required: "보내는사람 이메일을 입력하세요.",
+                minlength: $.validator.format("이메일은 최소{0}글자 이상 입력하세요."),
+                emailck: "올바른 이메일 주소가 아닙니다."
+            },
 			homepage: {
                 required: "홈페이지 주소를 입력하세요.",
                 domain: "올바른 홈페이지 주소가 아닙니다."
@@ -629,11 +649,7 @@ $(document).ready(function() {
             }
         },
         submitHandler: function(form) {   	
-            if (confirm("게시물을 등록하시겠습니까?")) {
-                form.submit();
-            } else {
-                return false;
-            }
+            form.submit();
         }
     });	
 	
@@ -699,11 +715,8 @@ $(document).ready(function() {
             }
         },
         submitHandler: function(form) {   	
-            if (confirm("게시물을 등록하시겠습니까?")) {
-                form.submit();
-            } else {
-                return false;
-            }
+           form.submit();
+           
         }
     });	
 		
@@ -737,11 +750,7 @@ $(document).ready(function() {
             }
         },
         submitHandler: function(form) {
-            if (confirm("게시물을 검색하시겠습니까?")) {
-                form.submit();
-            } else {
-                return false;
-            }
+           form.submit();
         }
     });
 	
@@ -778,11 +787,7 @@ $(document).ready(function() {
             }
         },
         submitHandler: function(form) {   	
-            if (confirm("게시물을 삭제하시겠습니까?")) {
-                form.submit();
-            } else {
-                return false;
-            }
+            form.submit();
         }
     });
 	
@@ -920,13 +925,11 @@ $(document).ready(function() {
             }
         },
         submitHandler: function(form) {   	
-            if (confirm("게시물을 등록하시겠습니까?")) {
-                form.submit();
-            } else {
-                return false;
-            }
+           form.submit();
         }
     });
+
+
     /*
 
 	$('#form').validate({

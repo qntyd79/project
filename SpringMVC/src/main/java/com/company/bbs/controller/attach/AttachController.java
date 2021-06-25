@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,6 +44,10 @@ public class AttachController {
 	@Inject
 	private AttachService service;
 
+	// 첨부파일 저장경로 설정
+	@Resource(name = "uploadPath")
+	private String uploadPath;
+
 	// 암호화 설정
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
@@ -64,8 +69,6 @@ public class AttachController {
 	protected String getValidator() throws Exception {
 		return "modules/attach/validator";
 	}
-
-	private String uploadPath = "/Users/ojeonghwan/git/project/SpringMVC/src/main/webapp/resources/upload";
 
 	// 글목록 (Model)
 	@RequestMapping(value = "list.do")
@@ -144,7 +147,7 @@ public class AttachController {
 		return "modules/attach/attach_list";
 	}
 
-	// 글등록
+	// 글등록폼
 	@RequestMapping(value = "write.do", method = RequestMethod.GET)
 	public String Write(Model model, @ModelAttribute AttachVO attachVO, @RequestParam(defaultValue = "1") int kind)
 			throws Exception {
@@ -155,6 +158,19 @@ public class AttachController {
 		model.addAttribute("categorylist", service.getCategoryList(kind));
 
 		return "modules/attach/attach_write";
+	}
+
+	// 글등록폼(ajax)
+	@RequestMapping(value = "ajaxwrite.do", method = RequestMethod.GET)
+	public String ajaxWrite(Model model, @ModelAttribute AttachVO attachVO, @RequestParam(defaultValue = "1") int kind)
+			throws Exception {
+
+		logger.info("글쓰기");
+
+		model.addAttribute("attachVO", attachVO);
+		model.addAttribute("categorylist", service.getCategoryList(kind));
+
+		return "modules/attach/ajax_attach_write";
 	}
 
 	// 글저장
@@ -232,7 +248,7 @@ public class AttachController {
 	// 글보기
 	@RequestMapping(value = "read.do", method = RequestMethod.GET)
 	public String Read(Model model, @ModelAttribute Criteria criteria, @RequestParam int file_idx,
-			@RequestParam int board_idx, @RequestParam(defaultValue = "0") int category_idx,
+			@RequestParam(defaultValue = "0") int board_idx, @RequestParam(defaultValue = "0") int category_idx,
 			@RequestParam(defaultValue = "1") int kind) throws Exception {
 
 		logger.info("글보기");
@@ -248,7 +264,7 @@ public class AttachController {
 
 		return "modules/attach/attach_view";
 	}
-
+	
 	// 글보기
 	@RequestMapping(value = "mvread.do", method = RequestMethod.GET)
 	public ModelAndView Read(@ModelAttribute Criteria criteria, @RequestParam int file_idx,

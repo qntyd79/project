@@ -95,8 +95,8 @@ public class AttachDaoImpl implements AttachDao {
 	
 	// 카테고리목록
 	@Override
-	public List<Object> getCategoryList(int idx) throws Exception {
-		return sqlSession.selectList("attach.getCategoryList", idx);
+	public List<Object> getCategoryList(int kind) throws Exception {
+		return sqlSession.selectList("attach.getCategoryList", kind);
 	}
 	
 	// 첨부파일갯수 

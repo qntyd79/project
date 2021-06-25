@@ -4,140 +4,183 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<script type="text/javaScript" language="javascript" defer="defer">
-       
-	/* 수정 화면 function */
-    function fn_egov_select(id)
-	{
-       	document.listForm.selectedId.value = id;
-       	document.listForm.action = "<c:url value='/updateSampleView.do'/>";
-       	document.listForm.submit();
-    }
-        
-    /* 등록 화면 function */
-    function fn_egov_addView()
-    {
-     	document.listForm.action = "<c:url value='insertPermssionUser.do'/>";
-       	document.listForm.submit();
-    }
-        
-    /* 목록 화면 function */
-    function fn_egov_selectList()
-    {
-      	document.listForm.action = "<c:url value='/egovSampleList.do'/>";
-       	document.listForm.submit();
-    }
-        
-    /* pagination 페이지 링크 function */
-    function fn_egov_link_page(pageNo)
-    {
-      	document.listForm.pageIndex.value = pageNo;
-       	document.listForm.action = "<c:url value='/egovSampleList.do'/>";
-      	document.listForm.submit();
-    }
 
-</script>
 <c:import url="/WEB-INF/views/include/header.jsp"/>
+
 <div id="container-wrap">
     <div class="clearfix">
         <div class="content-box">
             <div class="content-full-img01"></div>
             <div class="content-full-bg01-hidden">
                 <section class="content">
-                    <%@ include file="../../include/content_header.jsp"%>
+                    <c:import url="/WEB-INF/views/include/content_header.jsp"/>
                     <article>
                         <div class="row">
                             <div class="col-md-12">
-                                <h2>글보기</h2>
+                            
+                            
+                                <h2><spring:message code="bbs.title.view"/></h2>
                                 <form name="readForm" method="post" enctype="multipart/form-data">
-                                    <input type="hidden" name="email_idx" value="<c:out value="${dto.email_idx}" />" >
+                                    <input type="hidden" name="email_idx" value="<c:out value="${emailVO.email_idx}" />" >
                                     <input type="hidden" name="page" value="<c:out value="${criteria.page}"/>" >
                                     <input type="hidden" name="perPageNum" value="<c:out value="${criteria.perPageNum}"/>" >
                                     <input type="hidden" name="searchField" value="<c:out value="${criteria.searchField}"/>" >
                                     <input type="hidden" name="keyWord" value="<c:out value="${criteria.keyWord}"/>" >
                                     <fieldset>
-                                        <legend>Borad View Form</legend>
-                                        <table summary="기본게시판 보여주고 있습니다." class="table">
-                                            <caption>등록일 : 2017년08월24일 기준</caption>
+                                        <legend><spring:message code="bbs.table.legend"/></legend>
+                                        <table summary="<spring:message code="bbs.table.summary.view"/>" class="board_detail">
+                                            <caption><spring:message code="bbs.table.caption"/></caption>
                                             <colgroup>
                                                 <col width="20%" />
+                                                <col width="15%" />
+                                                <col width="15%" />
                                                 <col width="20%" />
-                                                <col width="15%" />
-                                                <col width="15%" />
                                                 <col width="15%" />
                                                 <col width="15%" />
                                             </colgroup>
                                             <tbody>
                                                 <tr>
-                                                    <th scope="col"><label for="date">메일제목 </label></th>
-                                                    <td scope="col" colspan="5" class="text-left"><c:out value="${dto.title}" /></td>
+                                                    <th scope="col"><label for="title"><spring:message code="label.title"/></label></th>
+                                                    <td scope="col" colspan="6" class="text-left"><c:out value="${emailVO.title}" /></td>
+                                                   
                                                 </tr>
-                                                 <tr>
-                                                    <th scope="col"><label for="date">받는메일 </label></th>
-                                                    <td scope="col" colspan="5" class="text-left"><c:out value="${dto.toemail}" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="col"><label for="date">보내는메일 </label></th>
-                                                    <td scope="col" colspan="5" class="text-left"><c:out value="${dto.sendemail}" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <th><label for="name">작성자</label></th>
-                                                    <td><c:out value="${dto.userid}" /></td>
-                                                    <th><label for="regdate">등록일</label></th>
-                                                    <td><c:out value="${dto.regdate}" /></td>
-                                                    <th><label for="hit">조회수</label></th>
-                                                    <td><c:out value="${dto.hit}" /></td>
+                                                <tr>                                                	
+                                                   	<th><label for="toemail"><spring:message code="label.toemail"/></label></th>
+                                                    <td colspan="2"><c:out value="${emailVO.toemail}" /></td>
+                                                    <th><label for="regdate"><spring:message code="label.regdate"/></label></th>
+                                                    <td colspan="2"><fmt:parseDate var="dateString" value="${emailVO.regdate}" pattern="yyyy-MM-dd" />                                                               
+	                                                    <fmt:formatDate value="${dateString}" pattern="yyyy-MM-dd"/>
+	                                                </td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="6" class="text-left" style="padding: 15px;">
-                                                    	<c:out value="${dto.content}" escapeXml="false" />                                                        
+                                                    <td colspan="8" class="text-left" style="padding: 15px;">                                                       
+                                                    	<c:out value="${emailVO.content}" escapeXml="false" />
                                                     </td>
-                                                </tr>                                              
+                                                </tr>
                                                 <tr>
-                                                    <td colspan="6" class="align-left">첨부파일목록출력</td>
+                                                    <td colspan="8" class="align-left">
+                                                    	<!-- 첨부파일 목록출력 시작 -->
+	                                                    <fieldset>
+															<legend><spring:message code="bbs.table.legend" /></legend>
+															<table summary="<spring:message code="bbs.table.summary.list"/>">
+																<caption><spring:message code="bbs.table.caption" /></caption>
+																<colgroup>
+																	<col width="5%" />
+																	<col width="35%" />
+																	<col width="10%" />
+																	<col width="15%" />
+																	<col width="10%" />
+																	<col width="10%" />
+																	<col width="10%" />
+																	<col width="5%" />
+																</colgroup>
+																<thead>
+																	<tr class="tline">
+																		<th scope="col"><spring:message code="bbs.list.no"/></th>
+																		<th scope="col">파일명</th>
+																		<th scope="col">파일사이즈</th>
+																		<th scope="col">파일타입</th>
+																		<th scope="col">파일확장자</th>
+																		<th scope="col">등록일</th>
+																		<th scope="col">다운로드</th>
+																		<th scope="col"><spring:message code="bbs.list.del" /></th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<c:choose>
+																		<c:when test="${fn:length(list) == 0}">
+																			<tr>
+																				<td colspan="10"><spring:message code="info.nodata.msg" /></td>
+																			</tr>
+																		</c:when>
+																		<c:otherwise>
+																			<c:forEach varStatus="status" var="row" items="${list}">
+																				<tr>	
+																					<td><strong>${status.index+1}</strong></td>														
+																					<td class="text-left"><a href="read.do${pageMaker.makeSearch(pageMaker.criteria.page)}&file_idx=<c:out value="${row.file_idx}"/>">${row.file_name}</a></td>
+																					<td><fmt:formatNumber value="${row.file_size}" type="number"/>KB</td>
+																					<td>${row.file_type}</td>
+																					<td>${row.file_ext}</td>
+																					<td>
+																						<fmt:parseDate var="dateString" value="${row.regdate}" pattern="yyyy-MM-dd"/> 
+																						<fmt:formatDate	value="${dateString}" pattern="yyyy-MM-dd"/></td>
+																					<td>클릭</td>
+																					<td><a href="attachDelete.do?filename=<c:out value="${row.file_hash_name}"/>&email_idx=<c:out value="${emailVO.email_idx}"/>&file_idx=<c:out value="${row.file_idx}"/>">D</a></td>
+																				</tr>
+																			</c:forEach>
+																		</c:otherwise>
+																	</c:choose>
+																</tbody>
+															</table>										
+														</fieldset>
+														<!-- 첨부파일 목록출력 종료 -->
+                                                    </td>
                                                 </tr>                                               
                                                 <tr>
-                                                    <th><label for="pre">이전글 </label></th>
-                                                    <td colspan="5" class="text-left">
+                                                    <th><label for="pre"><spring:message code="label.pre"/></label></th>
+                                                    <td colspan="7" class="text-left">
                                                         <c:choose>
-                                                            <c:when test="${prenum.email_idx ne null}"><a href="read.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&email_idx=<c:out value=" ${prenum.email_idx}" />"><c:out value="${prenum.title}" /></a>
+                                                            <c:when test="${prenum.email_idx ne null}"><a href="read.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&email_idx=<c:out value="${prenum.email_idx}" />"><c:out value="${prenum.title}" /></a>
                                                             </c:when>
                                                             <c:otherwise>
-                                                                이전글이 없습니다.
+                                                                	이전글이 없습니다.
                                                             </c:otherwise>
                                                         </c:choose>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th><label for="next">다음글 </label></th>
-                                                    <td colspan="5" class="text-left">
+                                                    <th><label for="next"><spring:message code="label.next"/> </label></th>
+                                                    <td colspan="7" class="text-left">
                                                         <c:choose>
-                                                            <c:when test="${nextnum.email_idx ne null}"><a href="read.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&email_idx=<c:out value=" ${nextnum.email_idx}" />"><c:out value="${nextnum.title}" /></a>
+                                                            <c:when test="${nextnum.email_idx ne null}"><a href="read.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&email_idx=<c:out value="${nextnum.email_idx}" />"><c:out value="${nextnum.title}" /></a>
                                                             </c:when>
                                                             <c:otherwise>
-                                                                다음글이 없습니다.
+                                                               	 다음글이 없습니다.
                                                             </c:otherwise>
                                                         </c:choose>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th><label for="next">접속아이피</label></th>
-                                                    <td colspan="5" class="text-left">
-                                                        <c:out value="${dto.cipp}" />
+                                                    <th><label for="cipp"><spring:message code="label.cipp"/></label></th>
+                                                    <td colspan="7" class="text-left">
+                                                        <c:out value="${emailVO.cipp}" />
                                                     </td>
                                                 </tr>
                                             </tbody>
-                                        </table>
+                                        </table> 
                                         <nav class="btn-group">
-                                            <ul>
-                                                <li><input type="button" value="글목록" onClick="location.href='list.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}'" /></li>
-                                                <li><input type="button" value="글등록" onClick="location.href='write.do'" /></li>
-                                                <li><input type="button" value="글수정" onClick="location.href='modify.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&email_idx=<c:out value=" ${dto.email_idx}" />'" /></li>
-                                                <li><input type="button" value="글삭제" onClick="location.href='delete.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&email_idx=<c:out value=" ${dto.email_idx}" />'" /></li>
-                                            </ul>
-                                        </nav>
+											<ul>												
+												<li><input type="button" value="<spring:message code="button.list"/>" onClick="location.href='list.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}'" /></li>
+										        <li><input type="button" value="<spring:message code="button.update"/>" onClick="location.href='modify.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&email_idx=<c:out value="${emailVO.email_idx}" />&category_idx=<c:out value="${emailVO.category_idx}" />'" /></li>
+										        <li><input type="button" value="<spring:message code="button.delete"/>" onClick="location.href='delete.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&email_idx=<c:out value="${emailVO.email_idx}" />'" /></li>
+											</ul>
+										</nav>                                       
+                                        <!--<c:import url="/WEB-INF/views/modules/common/common_btn.jsp"/> -->                                       
                                     </fieldset>
                                 </form>
+                                <!-- 코멘트 목록출력 시작
+                                <script type="text/javascript" language="javascript">
+                             		$(document).ready(function(){	
+
+                             			var email_idx = "${emailVO.email_idx}";
+                    
+										$.ajax({
+											type : "POST", //전송방식을 지정한다 (POST,GET)
+										    url : "${path}/modules/comment/ajaxlist.do?email_idx=" + email_idx,//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
+	    								    dataType : "text",
+	 									    success : function(result){
+										    	$("#result").html(result); //div에 받아온 값을 넣는다.
+										    	//alert("통신 데이터 값 : " + result);
+										    	console.log("호출성공");
+										    },
+										    error : function(){
+										    	console.log("호출실패");
+										    }
+									    });
+									});
+								</script>
+                                <div id="result"></div>
+                               코멘트 목록출력 종료 -->
                             </div>
                         </div>
                     </article>
@@ -146,4 +189,5 @@
         </div>
     </div>
 </div>
+
 <c:import url="/WEB-INF/views/include/footer.jsp"/>
