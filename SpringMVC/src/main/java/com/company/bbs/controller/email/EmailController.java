@@ -364,28 +364,6 @@ public class EmailController {
 		return "/modules/common/common_message";
 	}
 
-	// 메일발송
-	/*
-	@RequestMapping(value = "sending.do", method = RequestMethod.POST)
-	public String send(Model model, @ModelAttribute EmailVO emailVO) throws Exception {
-
-		logger.info("메일발송");
-
-		// 메일발송 유틸사용
-		try {
-			service.sendMail(emailVO);
-			model.addAttribute("msg", "MailSuccess");
-			model.addAttribute("url", "write.do");
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("msg", "MailFailed"); // 이메일 발송이 실패되었다는 메시지를 출력
-			model.addAttribute("url", "write.do");
-		}
-
-		return "/modules/common/common_message";
-	}
-	*/
-
 	@RequestMapping(value = "captchaImg.do", method = RequestMethod.GET)
 	public void cpatchaImg(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		new CaptchaUtil().captchaImg(request, response);

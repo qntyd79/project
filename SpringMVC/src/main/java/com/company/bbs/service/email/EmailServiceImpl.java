@@ -2,6 +2,7 @@ package com.company.bbs.service.email;
 
 import java.net.InetAddress;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class EmailServiceImpl implements EmailService {
 	@Inject
 	EmailDao dao;
 	Criteria criteria;
-	
+
 	@Autowired
 	JavaMailSenderImpl mailSender;
 
@@ -101,10 +102,12 @@ public class EmailServiceImpl implements EmailService {
 
 		dao.insert(emailVO);
 		// }
-
-		fileinsert(emailVO);
+		//emailVO.setFile_hash_name(attachVO.getFile_hash_name());
+		//emailVO.setFile_name(attachVO.getFile_name());
+		sendMail(emailVO, uploadPath);
 		
-		sendMail(emailVO);
+		fileinsert(emailVO);
+
 	}
 
 	// 첨부파일 처리
@@ -145,21 +148,24 @@ public class EmailServiceImpl implements EmailService {
 				attachVO.setRegdate(emailVO.getRegdate());
 				attachVO.setDel(emailVO.getDel());
 				attachVO.setEmail_idx(emailVO.getEmail_idx());
+
 			}
 
 			dao.insert(attachVO);
+
 		}
 
-		// 첨부파일 등록 후 board테이블 filecnt(파일갯수) 업데이트
-		dao.getAttachCount(attachVO.getEmail_idx());
+	
+
 	}
 
 	// 메일발송 유틸사용
 	@Transactional
 	@Override
-	public String sendMail(EmailVO emailVO) throws Exception {
+	public String sendMail(EmailVO emailVO, String uploadPath) throws Exception {
 		MailSendUtils mailSendUtils = new MailSendUtils(mailSender);
-		return mailSendUtils.sendMailing(emailVO);
+
+		return mailSendUtils.sendMailing(emailVO, uploadPath);
 	}
 
 	// 글보기
@@ -240,6 +246,12 @@ public class EmailServiceImpl implements EmailService {
 		return dao.getFileList(email_idx);
 	}
 
+	// 첨부파일목록
+	@Override
+	public List<Object> getMailFileList(int email_idx) throws Exception {
+		return dao.getFileList(email_idx);
+	}
+
 	// 첨부파일삭제
 	@Transactional
 	@Override
@@ -255,27 +267,21 @@ public class EmailServiceImpl implements EmailService {
 
 	// 메일발송
 	/*
-	@Override
-	public String sendMail(EmailVO emailVO) throws Exception {
-
-		MimeMessagePreparator preparator = new MimeMessagePreparator() {
-
-			@Override
-			public void prepare(MimeMessage mimeMessage) throws Exception {
-
-				MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-
-				helper.setFrom(emailVO.getSendemail());
-				helper.setTo(emailVO.getToemail());
-				helper.setSubject(emailVO.getTitle());
-				helper.setText(emailVO.getContent(), true);
-			}
-		};
-
-		mailSender.send(preparator);
-
-		return "result";
-	}
-	*/
+	 * @Override public String sendMail(EmailVO emailVO) throws Exception {
+	 * 
+	 * MimeMessagePreparator preparator = new MimeMessagePreparator() {
+	 * 
+	 * @Override public void prepare(MimeMessage mimeMessage) throws Exception {
+	 * 
+	 * MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+	 * 
+	 * helper.setFrom(emailVO.getSendemail()); helper.setTo(emailVO.getToemail());
+	 * helper.setSubject(emailVO.getTitle()); helper.setText(emailVO.getContent(),
+	 * true); } };
+	 * 
+	 * mailSender.send(preparator);
+	 * 
+	 * return "result"; }
+	 */
 
 }

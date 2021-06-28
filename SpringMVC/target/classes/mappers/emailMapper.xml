@@ -26,6 +26,16 @@
 	]]>
 	</select>
 	
+	<!-- 메일발송파일목록 -->
+	<select id="getMailFileList" resultType="com.company.bbs.vo.attach.AttachVO">
+	<![CDATA[ 
+	select * from jhbbs_file where file_idx > 0 and del = 'N' and email_idx = #{email_idx}
+	]]>
+	<![CDATA[ 
+	order by regdate DESC
+	]]>
+	</select>
+	
 	<!-- 카테고리명 -->
 	<select id="getCategory" resultType="com.company.bbs.vo.category.CategoryVO">
 	<![CDATA[ 
@@ -154,25 +164,7 @@
 		<include refid="category"></include>
 		<include refid="search"></include>
 	</select>
-	
-	<!-- 코멘트갯수 -->
-	<update id="getCommentCount" parameterType="int">
-	<![CDATA[ 
-	update jhbbs_email b
-	set b.commentcnt = (select count(comment_idx) from jhbbs_comment where email_idx = #{email_idx} and comment_idx > 0 and del = 'N')
-	where b.email_idx = #{email_idx};
-	]]>
-	</update>
-	 
-	<!-- 첨부파일 갯수-->
-	<update id="getAttachCount" parameterType="int">
-	<![CDATA[ 
-	update jhbbs_email b
-	set b.filecnt = (select count(file_idx) from JHBBS_file where email_idx = #{email_idx} and file_idx > 0 and del = 'N') 
-	where b.email_idx = #{email_idx};  
-	]]>   
-	</update>
-
+		
 	<!-- 글비밀번호리턴 -->
 	<select id="getPassword" resultType="String">
 	<![CDATA[  

@@ -1,8 +1,12 @@
 package com.company.bbs.vo.email;
 
+import java.util.Arrays;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.company.bbs.vo.attach.AttachVO;
 
-public class EmailVO extends AttachVO{	
+public class EmailVO extends AttachVO {	
 	
 	private int email_idx;
 	private String userid;	
@@ -16,6 +20,7 @@ public class EmailVO extends AttachVO{
 	private String regdate;
 	private String del;
 	private int category_idx;
+	private MultipartFile[] attach;
 
 	public int getEmail_idx() {
 		return email_idx;
@@ -112,15 +117,24 @@ public class EmailVO extends AttachVO{
 	public void setCategory_idx(int category_idx) {
 		this.category_idx = category_idx;
 	}
-	
-	
-	
+	public MultipartFile[] getAttach() {
+		return attach;
+	}
+
+	public void setAttach(MultipartFile[] attach) {
+		this.attach = attach;
+	}
+
 	@Override
 	public String toString() {
 		return "EmailVO [email_idx=" + email_idx + ", userid=" + userid + ", pass=" + pass + ", toemail=" + toemail
 				+ ", sendemail=" + sendemail + ", title=" + title + ", content=" + content + ", hit=" + hit + ", cipp="
-				+ cipp + ", regdate=" + regdate + ", del=" + del + ", category_idx=" + category_idx + "]";
+				+ cipp + ", regdate=" + regdate + ", del=" + del + ", category_idx=" + category_idx + ", attach="
+				+ Arrays.toString(attach) + "]";
 	}
+	
+	
+	
 
 	
 }

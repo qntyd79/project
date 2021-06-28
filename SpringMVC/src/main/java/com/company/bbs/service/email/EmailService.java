@@ -56,9 +56,11 @@ public interface EmailService {
 	public void getCommentCount(int email_idx) throws Exception;
 	
 	// 메일발송
-	public String sendMail(EmailVO emailVO) throws Exception;
+	public String sendMail(EmailVO emailVO, String uploadPath) throws Exception;
 
 	// 첨부파일등록
 	public void fileinsert(EmailVO emailVO) throws Exception;
+
+	public List<Object> getMailFileList(int email_idx) throws Exception;
 
 }
