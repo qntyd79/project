@@ -7,7 +7,9 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,13 +43,13 @@ public class MemberServiceImpl implements MemberService {
 	@Resource(name = "uploadPath")
 	private String uploadPath;
 
-	// 글목록
+	// 회원목록
 	@Override
 	public List<MemberVO> getList(Criteria criteria) throws Exception {
 		return dao.getList(criteria);
 	}
 
-	// 글저장
+	// 회원저장
 	@Transactional
 	@Override
 	public void insert(MemberVO memberVO) throws Exception {
@@ -158,13 +160,13 @@ public class MemberServiceImpl implements MemberService {
 		// dao.getAttachCount(attachVO.getMember_idx());
 	}
 
-	// 글보기
+	// 회원보기
 	@Override
 	public MemberVO getView(int member_idx) throws Exception {
 		return dao.getView(member_idx);
 	}
 
-	// 글수정
+	// 회원수정
 	@Override
 	public void update(MemberVO memberVO) throws Exception {
 		// 접속아이피
@@ -175,43 +177,43 @@ public class MemberServiceImpl implements MemberService {
 		dao.update(memberVO);
 	}
 
-	// 글삭제
+	// 회원삭제
 	@Override
 	public void delete(int member_idx) throws Exception {
 		dao.delete(member_idx);
 	}
 
-	// 글조회수
+	// 회원조회수
 	@Override
 	public void increaseCnt(int member_idx) throws Exception {
 		dao.increaseCnt(member_idx);
 	}
 
-	// 글이전값
+	// 회원이전값
 	@Override
 	public MemberVO getPrevNum(int member_idx) throws Exception {
 		return dao.getPrevNum(member_idx);
 	}
 
-	// 글다음값
+	// 회원다음값
 	@Override
 	public MemberVO getNextNum(int member_idx) throws Exception {
 		return dao.getNextNum(member_idx);
 	}
 
-	// 글최고값
+	// 회원최고값
 	@Override
 	public int getMaxNum() throws Exception {
 		return dao.getMaxNum();
 	}
 
-	// 글갯수
+	// 회원갯수
 	@Override
 	public int getCount(Criteria criteria) throws Exception {
 		return dao.getCount(criteria);
 	}
 
-	// 글비밀번호리턴
+	// 회원비밀번호리턴
 	@Override
 	public String getPassword(int member_idx) throws Exception {
 		return dao.getPassword(member_idx);
@@ -229,22 +231,63 @@ public class MemberServiceImpl implements MemberService {
 		return dao.getCategoryList(kind);
 	}
 
+	// 첨부파일목록
 	@Override
 	public List<Object> getFileList(int member_idx) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.getFileList(member_idx);
 	}
 
+	// 첨부파일삭제
 	@Override
 	public void attachDelete(int file_idx) throws Exception {
-		// TODO Auto-generated method stub
+		dao.attachDelete(file_idx);
+	}
+
+	// 코멘트갯수
+	@Override
+	public void getCommentCount(int member_idx) throws Exception {
 
 	}
 
+	// 회원로그인
 	@Override
-	public void getCommentCount(int member_idx) throws Exception {
-		// TODO Auto-generated method stub
+	public boolean loginCheck(MemberVO memberVO, HttpSession session) throws Exception {
+		
+		boolean result = dao.loginCheck(memberVO);
+		
+		if (result) {
+			MemberVO memberVO2 = getViewMember(memberVO);
+			
+			session.setAttribute("userid", memberVO2.getUserid());
+			session.setAttribute("name", memberVO2.getName());
+		}
+		return result;
+	}
 
+	// 회원로그아웃
+	@Override
+	public void logout(HttpSession session) throws Exception {
+		// session.removeAttribute("userid"); 세션변수 개별삭제
+		session.invalidate(); // 세션정보 초기화
+	}
+	
+	// 회원보기
+	@Override
+	public MemberVO getViewMember(MemberVO memberVO) throws Exception {
+		return dao.getViewMember(memberVO);
+	}
+
+	@Override
+	public String getLoginPassword(String userid) throws Exception {
+		return dao.getLoginPassword(userid);
+	}
+	
+	// 아이디중복확인
+	@Override
+	public int idCheck(MemberVO memberVO) throws Exception {
+		int result = dao.idCheck(memberVO);
+		System.out.println(result);
+		return result;
 	}
 
 }

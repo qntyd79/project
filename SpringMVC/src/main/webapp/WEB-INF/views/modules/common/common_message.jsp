@@ -9,8 +9,17 @@
 	//메세지 출력
 	var message = '${msg}';
 	var url = '${url}';
-   
-	if (message == "InsertSuccess") {
+	
+	if (message == "LoginSuccess") {
+		alert("정상적으로 로그되었습니다.");
+		location.href = url;
+	} else if (message == "LoginFailed") {
+	    alert("로그인정보가 일치하지 않습니다.");
+	    location.href = url;
+	} else if (message == "LogoutSuccess") {
+	    alert("로그아웃 되었습니다.");
+	    location.href = url;
+	} else if (message == "InsertSuccess") {
 		alert("정상적으로 등록되었습니다.");
 		location.href = url;
 	} else if (message == "UpdateSuccess") {

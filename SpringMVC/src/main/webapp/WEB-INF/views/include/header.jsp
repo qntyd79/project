@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"  isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ include file="head.jsp"%>
+<c:import url="/WEB-INF/views/include/head.jsp"/>
 <body>
     <div id="preloader">
         <div id="status"></div>

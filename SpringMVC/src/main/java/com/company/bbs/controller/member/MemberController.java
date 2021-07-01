@@ -1,9 +1,6 @@
 package com.company.bbs.controller.member;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -11,13 +8,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,10 +30,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
 import com.company.bbs.service.member.MemberService;
@@ -83,19 +81,78 @@ public class MemberController {
 
 	// 로그인폼
 	@RequestMapping(value = "login.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String login() {
+	public String login(Model model, @ModelAttribute MemberVO memberVO) throws Exception {
+		logger.info("회원로그인폼");
+
+		model.addAttribute("memberVO", memberVO);
+
 		return "modules/member/member_login";
+	}
+
+	// 로그인처리
+	@RequestMapping(value = "loginCheck.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String login(Model model, @ModelAttribute MemberVO memberVO, HttpSession session) throws Exception {
+
+		logger.info("회원로그인처리");
+
+		String rawPassword = memberVO.getPass();
+		logger.info("로그인폼 비밀번호 " + rawPassword);
+
+		String encodedPassword = service.getLoginPassword(memberVO.getUserid());
+		logger.info("DB 비밀번호 " + encodedPassword);
+
+		boolean passMatch = passwordEncoder.matches(rawPassword, encodedPassword);
+
+		service.getLoginPassword(memberVO.getUserid());
+		memberVO.setPass(encodedPassword);
+
+		boolean result = service.loginCheck(memberVO, session);
+
+		if (result == true && passMatch == true) {
+			model.addAttribute("member", null);
+			model.addAttribute("msg", "LoginSuccess");
+			model.addAttribute("url", "../../index.do");
+		} else {
+			model.addAttribute("msg", "LoginFailed");
+			model.addAttribute("url", "login.do");
+		}
+
+		return "/modules/common/common_message";
 	}
 
 	// 로그인풀화면폼
 	@RequestMapping(value = "loginfull.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String loginfull() {
+	public String loginfull() throws Exception {
 		return "modules/member/loginfull";
+	}
+
+	// 회원로그아웃
+	@RequestMapping(value = "logout.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String logout(Model model, HttpSession session) throws Exception {
+
+		service.logout(session);
+		model.addAttribute("msg", "LogoutSuccess");
+		model.addAttribute("url", "login.do?kind=2");
+		return "/modules/common/common_message";
+	}
+
+	// 아이디중복확인
+	@SuppressWarnings("null")
+	@RequestMapping(value = "idCheck.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public int idCheck(MemberVO memberVO, HttpServletResponse response) throws Exception {
+		
+		logger.info("아이디중복확인");
+		
+		int result = service.idCheck(memberVO);
+		
+		// 1이면 중복된 아이디 0이면 사용가능한 아이디
+		return result;
 	}
 
 	// 아이디/비밀번호찾기
 	@RequestMapping(value = "find.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String find() {
+	public String find() throws Exception {
 		return "modules/member/member_find";
 	}
 
@@ -108,42 +165,41 @@ public class MemberController {
 	// 회원약관동의폼
 	@RequestMapping(value = "agree.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String agree(Model model) throws Exception {
-		
+
 		/*
-		File file = new File("/Users/ojeonghwan/git/project/SpringMVC/src/main/webapp/WEB-INF/views/modules/member/license01.txt");	
-		
-		FileReader filereader = new FileReader(file);	
-		
-		BufferedReader bufferreader = new BufferedReader(filereader);  // 크기를 안써도 됨
-		
-		List<String> list = new ArrayList<String>();
-		
-		while(true) {
-			String str = bufferreader.readLine();  //buffer로부터 한 줄씩 읽어서 저장
-			if(str == null) {//읽을 내용이 없으면 반복문 종료
-				break;
-			}
-			System.out.println(str); //한 줄씩 바로바로 출력
-		}
-		*/
-		
-		// 파일 객체 생 
-		Path path = Paths.get("/Users/ojeonghwan/git/project/SpringMVC/src/main/webapp/WEB-INF/views/modules/member/license01.txt");	
-				
+		 * File file = new File(
+		 * "/Users/ojeonghwan/git/project/SpringMVC/src/main/webapp/WEB-INF/views/modules/member/license01.txt"
+		 * );
+		 * 
+		 * FileReader filereader = new FileReader(file);
+		 * 
+		 * BufferedReader bufferreader = new BufferedReader(filereader); // 크기를 안써도 됨
+		 * 
+		 * List<String> list = new ArrayList<String>();
+		 * 
+		 * while(true) { String str = bufferreader.readLine(); //buffer로부터 한 줄씩 읽어서 저장
+		 * if(str == null) {//읽을 내용이 없으면 반복문 종료 break; } System.out.println(str); //한 줄씩
+		 * 바로바로 출력 }
+		 */
+
+		// 파일 객체 생
+		Path path = Paths.get(
+				"/Users/ojeonghwan/git/project/SpringMVC/src/main/webapp/WEB-INF/views/modules/member/license01.txt");
+
 		// 캐릭터셋 지정
 		Charset cs = StandardCharsets.UTF_8;
-		        
+
 		// 파일 내용담을 리스트
 		List<String> list = new ArrayList<String>();
-				
-		list = Files.readAllLines(path,cs);
-		        
-		for(String readLine : list){
-		   //System.out.println(readLine);
+
+		list = Files.readAllLines(path, cs);
+
+		for (String readLine : list) {
+			// System.out.println(readLine);
 		}
-				
-        model.addAttribute("license", list);
-        
+
+		model.addAttribute("license", list);
+
 		return "modules/member/member_agree";
 	}
 
@@ -236,7 +292,7 @@ public class MemberController {
 
 		return "modules/member/member_write";
 	}
-	
+
 	// 회원그룹등록폼
 	@RequestMapping(value = "write_group.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String Writegroup(Model model, @ModelAttribute MemberVO memberVO, @RequestParam(defaultValue = "2") int kind)
@@ -274,20 +330,17 @@ public class MemberController {
 		String answer = request.getParameter("answer");
 
 		if (getAnswer.equals(answer)) {
-
+			
 			service.insert(memberVO);
 
 			model.addAttribute("msg", "InsertSuccess");
 			model.addAttribute("url", "list.do?kind=2");
-
-			return "/modules/common/common_message";
-
 		} else {
 			model.addAttribute("msg", "CaptchaFailed");
 			model.addAttribute("url", "write.do");
-
-			return "modules/member/member_write";
 		}
+
+		return "/modules/common/common_message";
 	}
 
 	// 회원보기
@@ -423,7 +476,7 @@ public class MemberController {
 		UploadFileUtils.removeFile(uploadPath, filename);
 
 		service.attachDelete(attachVO.getFile_idx());
- 
+
 		model.addAttribute("msg", "DeleteSuccess");
 		model.addAttribute("url", "read.do?member_idx=" + member_idx);
 

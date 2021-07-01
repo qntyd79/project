@@ -2,6 +2,8 @@ package com.company.bbs.service.member;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
 
 import com.company.bbs.utill.Criteria;
@@ -10,37 +12,37 @@ import com.company.bbs.vo.member.MemberVO;
 @Service
 public interface MemberService {
 
-	// 글목록
+	// 회원목록
 	public List<MemberVO> getList(Criteria criteria) throws Exception;
 
-	// 글저장
+	// 회원저장
 	public void insert(MemberVO memberVO) throws Exception;
 
-	// 글보기
+	// 회원보기
 	public MemberVO getView(int member_idx) throws Exception;
 
-	// 글수정
+	// 회원수정
 	public void update(MemberVO memberVO) throws Exception;
 
-	// 글삭제
+	// 회원삭제
 	public void delete(int member_idx) throws Exception;
 
-	// 글조회수
+	// 회원조회수
 	public void increaseCnt(int member_idx) throws Exception;
 
-	// 글이전값
+	// 회원이전값
 	public MemberVO getPrevNum(int member_idx) throws Exception;
 
-	// 글다음값
+	// 회원다음값
 	public MemberVO getNextNum(int member_idx) throws Exception;
 
-	// 글최고값
+	// 회원최고값
 	public int getMaxNum() throws Exception;
 
-	// 글갯수
+	// 회원갯수
 	public int getCount(Criteria criteria) throws Exception;
 
-	// 글비밀번호리턴
+	// 회원비밀번호리턴
 	public String getPassword(int member_idx) throws Exception;
 
 	// 카테고리명
@@ -60,5 +62,20 @@ public interface MemberService {
 	
 	// 첨부파일등록
 	public void fileinsert(MemberVO memberVO) throws Exception;
-
+	
+	// 회원로그인
+	public boolean loginCheck(MemberVO memberVO, HttpSession session) throws Exception;
+	
+	// 회원로그아읏 
+	public void logout(HttpSession session) throws Exception;
+	
+	// 회원로그인정보
+	public MemberVO getViewMember(MemberVO memberVO) throws Exception;
+		
+	// 로그인비밀번호리턴 
+	public String getLoginPassword(String userid) throws Exception;
+	
+	// 아이디중복확인
+	public int idCheck(MemberVO memberVO) throws Exception;
+ 
 }

@@ -3,8 +3,9 @@
 
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="member">
-
-	<!-- 글목록 -->
+	
+	
+	<!-- 회원목록 -->
 	<select id="getList"
 		resultType="com.company.bbs.vo.member.MemberVO">
 	<![CDATA[ 
@@ -38,7 +39,7 @@
 	]]>
 	</select>
 
-	<!-- 글저장 -->
+	<!-- 회원저장 -->
 	<insert id="insert"
 		parameterType="com.company.bbs.vo.member.MemberVO">
 		INSERT INTO jhbbs_member (
@@ -137,10 +138,10 @@
 		member_idx=#{member_idx}
 	</update>
 
-	<!-- 글삭제 <delete id="delete"> delete from jhbbs_member where member_idx 
+	<!-- 회원삭제 <delete id="delete"> delete from jhbbs_member where member_idx 
 		= #{member_idx} </delete> -->
 
-	<!-- 글삭제 update처리 -->
+	<!-- 회원삭제 update처리 -->
 	<update id="delete">
 		update jhbbs_member set del = 'Y' where member_idx = #{member_idx}
 	</update>
@@ -181,6 +182,34 @@
 	<![CDATA[ 
 	select pass from jhbbs_member where member_idx = #{member_idx} and del = 'N'
 	]]>
+	</select>
+	
+	<!-- 로그인비밀번호리턴 -->
+	<select id="getLoginPassword" resultType="String">
+	<![CDATA[ 
+	select pass from jhbbs_member where userid = #{userid} and del = 'N'
+	]]>
+	</select>
+	
+	<!-- 회원로그인체크 -->
+	<select id="loginCheck" resultType="String">
+	<![CDATA[ 
+		SELECT name FROM jhbbs_member WHERE userid = #{userid} AND pass = #{pass}
+	]]>
+	</select>
+	
+	<!-- 회원로그인정보 -->
+	<select id="getViewMember" resultType="com.company.bbs.vo.member.MemberVO">
+	<![CDATA[ 
+		SELECT * FROM jhbbs_member WHERE userid = #{userid} AND pass = #{pass}
+	]]>
+	</select>
+	
+	<!-- 아이디중복확인 1이면 존재 0이면 존재하지 않음-->
+	<select id="idCheck" resultType="int">
+	<![CDATA[ 
+		SELECT COUNT(*) FROM jhbbs_member WHERE userid = #{userid} AND del = 'N'
+	]]>	
 	</select>
 
 	<sql id="category">

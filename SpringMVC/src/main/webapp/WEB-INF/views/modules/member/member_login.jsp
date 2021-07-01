@@ -4,6 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="validator" uri="http://www.springmodules.org/tags/commons-validator" %>
+<script type="text/javascript" src="<c:url value="validator.do"/>"></script>
+<validator:javascript formName="memberVO" staticJavascript="false" xhtml="true" cdata="false"/>
 
 <c:import url="/WEB-INF/views/include/header.jsp"/>
 
@@ -16,7 +19,8 @@
                     <c:import url="/WEB-INF/views/include/content_header.jsp"/>
                     <article>
                         <h2>회원로그인</h2>
-                        <form>
+                        <form method="post" id="loginForm" name="loginForm" enctype="multipart/form-data" action="loginCheck.do">
+                            <input type="hidden" name="msgStr" value="<c:out value="${msg}"/> ">
                             <fieldset>
                                 <legend>Member Login Form</legend>
                                 <div class="row">
@@ -25,19 +29,18 @@
                                             <ul class="content-data-2">
                                                 <li>
                                                     <div class="panel">
-                                                        <h1 class="logo-box"><a href="/index.do"><img src="/resources/images/logo/logo.png" /></a></h1>
+                                                        <h1 class="logo-box"><a href="${path}/index.do"><img src="${path}/resources/images/logo/logo.png" /></a></h1>
                                                         <div class="form-group">
-                                                            <label for="name"> 회원아이디</label>
-                                                            <input type="text" id="name" name="name" class="btn-block" placeholder="아이디를 입력해주세요">
+                                                            <label for="userid"><spring:message code="label.userid"/></label>
+                                                            <input name="userid" type="text" class="btn-block" placeholder="UserID"/> <form:errors path="userid" />
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="pw"> 비밀번호 </label>
-                                                            <input type="password" id="pass" name="pass" class="btn-block" placeholder="비밀번호를 입력해주세요">
+                                                            <label for="pass"><spring:message code="label.pass"/></label>
+                                                            <input name="pass" type="password" class="btn-block" placeholder="Password"/> <form:errors path="pass" />
                                                         </div>
                                                         <div class="text-left"><input type="checkbox" name="state" value="1" id="state"> 로그인 상태유지</div>
                                                         <div class="btn-group-m">
-                                                            <input type="button" value="Login" onclick="location.href='login.do'" 
-                                                            class="btn-block danger" style="font-size:20px; height:57px;">
+                                                            <input type="button" value="Login" class="btn-block danger" style="font-size:20px; height:57px;" onClick="$(this.form).submit();"/>
                                                         </div>
                                                         <div class="social-box">
                                                             <a href="#"><i class="fab fa-facebook"></i></a>
@@ -57,7 +60,7 @@
                                                 <li>
                                                     <div class="panel">
                                                         <div class="thumbnail">
-                                                            <img src="/resources/images/add/s02.jpg" />
+                                                            <img src="${path}/resources/images/add/s02.jpg" />
                                                         </div>
                                                     </div>
                                                 </li>

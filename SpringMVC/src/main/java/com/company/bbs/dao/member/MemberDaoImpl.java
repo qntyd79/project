@@ -2,6 +2,8 @@ package com.company.bbs.dao.member;
 
 import java.util.List;
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -14,68 +16,68 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Inject
 	SqlSession sqlSession;
-
-	// 글목록
+		
+	// 회원목록
 	@Override
 	public List<MemberVO> getList(Criteria criteria) throws Exception {
 		return sqlSession.selectList("member.getList", criteria);
 	}
 
-	// 글저장
+	// 회원저장
 	@Override
-	public void insert(MemberVO dto) throws Exception {
-		sqlSession.insert("member.insert", dto);
+	public void insert(MemberVO memberVO) throws Exception {
+		sqlSession.insert("member.insert", memberVO);
 	}
 
-	// 글보기
+	// 회원보기
 	@Override
 	public MemberVO getView(int member_idx) throws Exception {
 		return sqlSession.selectOne("member.getView", member_idx);
 	}
 
-	// 글수정
+	// 회원수정
 	@Override
-	public void update(MemberVO dto) throws Exception {
-		sqlSession.update("member.update", dto);
+	public void update(MemberVO memberVO) throws Exception {
+		sqlSession.update("member.update", memberVO);
 	}
 
-	// 글삭제
+	// 회원삭제
 	@Override
 	public void delete(int member_idx) throws Exception {
 		sqlSession.update("member.delete", member_idx);
 	}
 
-	// 글조회수
+	// 회원조회수
 	@Override
 	public void increaseCnt(int member_idx) throws Exception {
 		sqlSession.update("member.increaseCnt", member_idx);
 	}
 
-	// 글이전값
+	// 회원이전값
 	@Override
 	public MemberVO getPrevNum(int member_idx) throws Exception {
 		return sqlSession.selectOne("member.getPrevNum", member_idx);
 	}
 
-	// 글다음값
+	// 회원다음값
 	@Override
 	public MemberVO getNextNum(int member_idx) throws Exception {
 		return sqlSession.selectOne("member.getNextNum", member_idx);
 	}
 
-	// 글최고값
+	// 회원최고값
 	@Override
 	public int getMaxNum() throws Exception {
 		return sqlSession.selectOne("member.getMaxNum");
 	}
 
-	// 글갯수
+	// 회원갯수
 	@Override
 	public int getCount(Criteria criteria) throws Exception {
 		return sqlSession.selectOne("member.getCount", criteria);
 	}
 
-	// 글비밀번호리턴
+	// 회원비밀번호리턴
 	@Override
 	public String getPassword(int member_idx) throws Exception {
 		return sqlSession.selectOne("member.getPassword", member_idx);
@@ -89,8 +91,8 @@ public class MemberDaoImpl implements MemberDao {
 	
 	// 카테고리목록
 	@Override
-	public List<Object> getCategoryList(int idx) throws Exception {
-		return sqlSession.selectList("member.getCategoryList", idx);
+	public List<Object> getCategoryList(int kind) throws Exception {
+		return sqlSession.selectList("member.getCategoryList", kind);
 	}
 
 	@Override
@@ -122,6 +124,36 @@ public class MemberDaoImpl implements MemberDao {
 		sqlSession.selectOne("member.attachDelete", file_idx);
 	}
 
+	// 회원로그인체크
+	@Override
+	public boolean loginCheck(MemberVO memberVO) throws Exception {
+		String name = sqlSession.selectOne("member.loginCheck", memberVO);	
+		return (name == null) ? false : true;
+	}
+	
+	// 회원로그아웃
+	@Override
+	public void logout(HttpSession session) throws Exception {
 
+	}
+	
+	// 회원로그인정보
+	@Override
+	public MemberVO getViewMember(MemberVO memberVO) throws Exception {
+		return sqlSession.selectOne("member.getViewMember", memberVO);
+	}
+
+	@Override
+	public String getLoginPassword(String userid) throws Exception {
+		return sqlSession.selectOne("member.getLoginPassword", userid);
+	}
+	
+	// 아이디중복확인
+	@Override
+	public int idCheck(MemberVO memberVO) throws Exception {
+		int result = sqlSession.selectOne("member.idCheck", memberVO);
+		return result;
+	}
+	
 
 }

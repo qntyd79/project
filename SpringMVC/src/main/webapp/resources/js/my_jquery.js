@@ -484,7 +484,7 @@ $(document).ready(function() {
 	// Selectbox 
 	$.validator.addMethod("selectck", function (value, element) {
         return (value != '0') ;
- 	});
+ 	}, "선택해 주세요");
     	
 	// content에 내용입력시 에러메세지 안보임처리 
 	function ckeditor(){		
@@ -497,10 +497,16 @@ $(document).ready(function() {
 		});			
 	}
 	
+	// 셀렉트박스 메세지 사라짐 설정 		
+	$('select').change(function(){ 
+		$('select').valid();
+		$('select').css('border-color','#e6e6e6');  
+	})
+	
 	$("#writeForm").validate({
     	ignore : '*:not([name])',
-        debug: false,
-        onfocusout: false,
+        debug : false,
+        onfocusout : false,
         // 규칙설정
         rules: {
             userid: {
@@ -648,16 +654,17 @@ $(document).ready(function() {
                 // validator.errorList[0].element.focus();
             }
         },
-        submitHandler: function(form) {   	
-            form.submit();
-        }
+        submitHandler: function(form) {  
+					
+            form.submit(); 
+       }
     });	
 	
-
+	// 카테고리폼 
 	$("#categoryForm").validate({
     	ignore : '*:not([name])',
-        debug: false,
-        onfocusout: false,
+        debug : false,
+        onfocusout : false,
         // 규칙설정
         rules: {            
             name: {
@@ -723,8 +730,8 @@ $(document).ready(function() {
     // 검색폼 
     $("#searchForm").validate({
     	ignore : '*:not([name])',
-        debug: false,
-        onfocusout: false,
+        debug : false,
+        onfocusout : false,
         rules: {
         	keyWord: {
                 required: true,
@@ -772,12 +779,7 @@ $(document).ready(function() {
                 rangelength: $.validator.format("패스워드는 최소{0}글자 이상 {1}글자 이하로 입력하세요."),
                 passwordck: "비밀번호는 영문대소문자,숫자,특수문자를 반드시 입력해주시기 바랍니다."
             }
-        },
-		// 에러메세지 표시 설정 : 주석처리하면 에러메세지 표지
-		/*
-        errorPlacement: function(error, element) {
-           $(element).removeClass('error');
-        }, */           
+        },		        
         invalidHandler: function(form, validator) {
             var errors = validator.numberOfInvalids();
             if (errors) {
@@ -794,14 +796,25 @@ $(document).ready(function() {
 	// 회원가입폼
 	$("#memberForm").validate({
     	ignore : '*:not([name])',
-        debug: false,
-        onfocusout: false,
+        debug : false,
+        onfocusout : false,
         // 규칙설정
         rules: {
             userid: {
                 required: true,
-                minlength: 2,
-                alphanumeric: true                
+                rangelength: [4,15],
+                alphanumeric: true
+				/*
+                remote : {
+                    url : "${path}/modules/member/idCheck.do",
+                    type : "post",
+                    data : {
+                        userid : function() {
+                            return $("#userid").val();
+                        }
+                    }
+                }
+				*/
             },
 			pass: {
                 required: true,
@@ -809,7 +822,8 @@ $(document).ready(function() {
                 passwordck: true
             },
 			pass_ask: {
-                required: true
+                required: true,
+				selectck : true
             },
 			pass_account: {
                 required: true
@@ -849,14 +863,14 @@ $(document).ready(function() {
 				required : true,
 				numeric : true,
 				maxlength : 6
-			}          
+			}     
         },
         messages: { //규칙체크 실패시 출력될 메시지 설정
             userid: {
                 required: "아이디를 입력하세요.",
-                minlength: $.validator.format("아이디는 최소{0}글자 이상 입력하세요."),
+                rangelength: $.validator.format("아이디는 최소{0}글자 이상 {1}글자 이하로 입력하세요."),
                 alphanumeric: "알파벳과 숫자만 사용 가능합니다.",
-                remote: "존재하는 아이디입니다."
+                remote: "이미 존재하는 아이디입니다."
             },            
             pass: {
                 required: "비밀번호를 입력하세요.",
@@ -865,6 +879,7 @@ $(document).ready(function() {
             },
 			pass_ask: {
                 required: "비밀번호 분실시 질문을 선택하세요."
+
             },
 			pass_account: {
                 required: "비밀번호 분실시 답변을 입력하세요."
@@ -913,6 +928,68 @@ $(document).ready(function() {
             }		
 			if (element.is("select")){
 				$(element).css('border-color','red');  
+			}					
+        }, 				
+        invalidHandler: function(form, validator) {
+            var errors = validator.numberOfInvalids();
+            if (errors) {
+            	// 팝업알림처리 
+                // alert(validaor.errorList[0].message);
+				// 필드아래처리 
+                // validator.errorList[0].element.focus();
+            }
+        },
+        submitHandler: function(form) {  
+			if ($("#me_id_yn").val() != "Y") {			
+				alert("아이디 중복체크를 눌러주세요.");		
+				return false;			
+			}  	
+					
+			form.submit();
+        }
+    });
+
+	// 회원로그인폼 
+	$("#loginForm").validate({
+    	ignore : '*:not([name])',
+        debug : false,
+        onfocusout : false,
+		onkeyup : false,
+        // 규칙설정
+        rules: {
+            userid: {
+                required: true,
+                minlength: 2,
+                alphanumeric: true                
+            },
+			pass: {
+                required: true,
+                rangelength: [4,15],
+                passwordck: true
+            }        
+        },
+        messages: { //규칙체크 실패시 출력될 메시지 설정
+            userid: {
+                required: "아이디를 입력하세요.",
+                minlength: $.validator.format("아이디는 최소{0}글자 이상 입력하세요."),
+                alphanumeric: "알파벳과 숫자만 사용 가능합니다.",
+            },            
+            pass: {
+                required: "비밀번호를 입력하세요.",
+                rangelength: $.validator.format("패스워드는 최소{0}글자 이상 {1}글자 이하로 입력하세요."),
+                passwordck: "비밀번호는 영문대소문자,숫자,특수문자를 반드시 입력해주시기 바랍니다."
+            }
+        },
+		// 아이디중복버튼 옆에 메세지 출력 
+        errorPlacement: function(error, element) {
+			if (element.is(":radio")) {
+                error.appendTo(element.parents('.container') );
+            } else { // This is the default behavior 
+                var trigger = element.next('input[type=button]');
+                error.insertAfter(trigger.length > 0 ? trigger : element);
+            }		
+			if (element.is("select")){
+				$(element).css('border-color','red');  
 			}
         }, 				
         invalidHandler: function(form, validator) {
@@ -928,14 +1005,13 @@ $(document).ready(function() {
            form.submit();
         }
     });
-
-
     /*
 
 	$('#form').validate({
     	ignore : '*:not([name])',
-        debug: false,
-        onfocusout: false,
+        debug : false,
+        onfocusout : false,
+		onkeyup : false,
         rules: {
             pass: {
                 required: true,
