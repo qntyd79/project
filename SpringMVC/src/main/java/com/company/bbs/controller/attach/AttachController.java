@@ -33,6 +33,7 @@ import com.company.bbs.utill.Criteria;
 import com.company.bbs.utill.PageMaker;
 import com.company.bbs.utill.UploadFileUtils;
 import com.company.bbs.vo.attach.AttachVO;
+import com.company.bbs.vo.board.BoardVO;
 
 @SuppressWarnings("unused")
 @Controller
@@ -72,9 +73,7 @@ public class AttachController {
 
 	// 글목록 (Model)
 	@RequestMapping(value = "list.do")
-	public String List(Model model, @ModelAttribute Criteria criteria,
-			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "1") int kind)
-			throws Exception {
+	public String List(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("글목록");
 
@@ -85,19 +84,16 @@ public class AttachController {
 
 		model.addAttribute("list", service.getList(criteria));
 		model.addAttribute("categoryname", service.getCategory());
-		model.addAttribute("categorylist", service.getCategoryList(kind));
-		model.addAttribute("categoryselect", category_idx);
+		model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
+		model.addAttribute("categoryselect", criteria.getCategory_idx());
 		model.addAttribute("pageMaker", pageMaker);
-		// model.addAttribute("searchField", searchField);
-		// model.addAttribute("searchWord", searchWord);
 
 		return "modules/attach/attach_list";
 	}
 
 	// 글목록 (ModelAndView)
 	@RequestMapping(value = "mvlist.do")
-	public ModelAndView List(@ModelAttribute Criteria criteria, @RequestParam(defaultValue = "0") int category_idx,
-			@RequestParam(defaultValue = "1") int kind) throws Exception {
+	public ModelAndView List(@ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("글목록");
 
@@ -110,11 +106,9 @@ public class AttachController {
 
 		mav.addObject("list", service.getList(criteria));
 		mav.addObject("categoryname", service.getCategory());
-		mav.addObject("categorylist", service.getCategoryList(kind));
-		mav.addObject("categoryselect", category_idx);
+		mav.addObject("categorylist", service.getCategoryList(criteria.getKind()));
+		mav.addObject("categoryselect", criteria.getCategory_idx());
 		mav.addObject("pageMaker", pageMaker);
-		// mav.addObject("searchField", searchField);
-		// mav.addObject("searchWord", searchWord);
 		mav.setViewName("modules/attach/attach_list");
 
 		return mav;
@@ -122,9 +116,7 @@ public class AttachController {
 
 	// 글목록 (Map)
 	@RequestMapping(value = "mlist.do")
-	public String List1(Model model, @ModelAttribute Criteria criteria,
-			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "1") int kind)
-			throws Exception {
+	public String List1(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("글목록");
 
@@ -137,11 +129,10 @@ public class AttachController {
 
 		map.put("list", service.getList(criteria));
 		map.put("categoryname", service.getCategory());
-		map.put("categorylist", service.getCategoryList(kind));
-		map.put("categoryselect", category_idx);
+		map.put("categorylist", service.getCategoryList(criteria.getKind()));
+		map.put("categoryselect", criteria.getCategory_idx());
 		map.put("pageMaker", pageMaker);
-		// map.put("searchField", searchField);
-		// map.put("searchWord", searchWord);
+
 		model.addAllAttributes(map);
 
 		return "modules/attach/attach_list";
@@ -149,35 +140,35 @@ public class AttachController {
 
 	// 글등록폼
 	@RequestMapping(value = "write.do", method = RequestMethod.GET)
-	public String Write(Model model, @ModelAttribute AttachVO attachVO, @RequestParam(defaultValue = "1") int kind)
+	public String Write(Model model, @ModelAttribute Criteria criteria, @ModelAttribute AttachVO attachVO)
 			throws Exception {
 
 		logger.info("글쓰기");
 
 		model.addAttribute("attachVO", attachVO);
-		model.addAttribute("categorylist", service.getCategoryList(kind));
+		model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
 
 		return "modules/attach/attach_write";
 	}
 
 	// 글등록폼(ajax)
 	@RequestMapping(value = "ajaxwrite.do", method = RequestMethod.GET)
-	public String ajaxWrite(Model model, @ModelAttribute AttachVO attachVO, @RequestParam(defaultValue = "1") int kind)
+	public String ajaxWrite(Model model, @ModelAttribute Criteria criteria, @ModelAttribute AttachVO attachVO)
 			throws Exception {
 
 		logger.info("글쓰기");
 
 		model.addAttribute("attachVO", attachVO);
-		model.addAttribute("categorylist", service.getCategoryList(kind));
+		model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
 
 		return "modules/attach/ajax_attach_write";
 	}
 
 	// 글저장
 	@RequestMapping(value = "insert.do", method = { RequestMethod.POST, RequestMethod.GET })
-	public String Insert(Model model, @ModelAttribute AttachVO attachVO, BindingResult bindingResult,
-			@RequestParam(defaultValue = "1") int kind, HttpServletRequest request,
-			@RequestParam("attach") MultipartFile[] attach) throws Exception {
+	public String Insert(Model model, @ModelAttribute Criteria criteria, @ModelAttribute AttachVO attachVO,
+			BindingResult bindingResult, HttpServletRequest request, @RequestParam("attach") MultipartFile[] attach)
+			throws Exception {
 
 		logger.info("글저장처리");
 
@@ -188,7 +179,7 @@ public class AttachController {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("attachVO", attachVO);
 			model.addAttribute("categoryname", service.getCategory());
-			model.addAttribute("categorylist", service.getCategoryList(kind));
+			model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
 
 			return "modules/attach/attach_write";
 		}
@@ -248,8 +239,7 @@ public class AttachController {
 	// 글보기
 	@RequestMapping(value = "read.do", method = RequestMethod.GET)
 	public String Read(Model model, @ModelAttribute Criteria criteria, @RequestParam int file_idx,
-			@RequestParam(defaultValue = "0") int board_idx, @RequestParam(defaultValue = "0") int category_idx,
-			@RequestParam(defaultValue = "1") int kind) throws Exception {
+			@RequestParam(defaultValue = "0") int board_idx) throws Exception {
 
 		logger.info("글보기");
 
@@ -260,16 +250,14 @@ public class AttachController {
 		model.addAttribute("prenum", service.getPrevNum(file_idx));
 		model.addAttribute("nextnum", service.getNextNum(file_idx));
 		model.addAttribute("categoryname", service.getCategory());
-		model.addAttribute("categorylist", service.getCategoryList(kind));
+		model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
 
 		return "modules/attach/attach_view";
 	}
-	
+
 	// 글보기
 	@RequestMapping(value = "mvread.do", method = RequestMethod.GET)
-	public ModelAndView Read(@ModelAttribute Criteria criteria, @RequestParam int file_idx,
-			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "1") int kind)
-			throws Exception {
+	public ModelAndView Read(@ModelAttribute Criteria criteria, @RequestParam int file_idx) throws Exception {
 
 		logger.info("글보기");
 
@@ -280,57 +268,60 @@ public class AttachController {
 		mav.addObject("prenum", service.getPrevNum(file_idx));
 		mav.addObject("nextnum", service.getNextNum(file_idx));
 		mav.addObject("categoryname", service.getCategory());
-		mav.addObject("categorylist", service.getCategoryList(kind));
+		mav.addObject("categorylist", service.getCategoryList(criteria.getKind()));
 		mav.setViewName("modules/attach/attach_view");
 
 		return mav;
 	}
 
-	// 글수정
-	@RequestMapping(value = "modify.do", method = RequestMethod.GET)
-	public String Modify(Model model, @ModelAttribute Criteria criteria, @RequestParam int file_idx,
-			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "1") int kind)
-			throws Exception {
+	// 글수정폼
+	@RequestMapping(value = "update.do", method = RequestMethod.GET)
+	public String Update(Model model, @ModelAttribute Criteria criteria, @RequestParam int file_idx) throws Exception {
 
 		logger.info("글수정");
 
 		model.addAttribute("attchVO", service.getView(file_idx));
 		model.addAttribute("categoryname", service.getCategory());
-		model.addAttribute("categorylist", service.getCategoryList(kind));
-		model.addAttribute("categoryselect", category_idx);
+		model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
+		model.addAttribute("categoryselect", criteria.getCategory_idx());
 
 		return "modules/attach/attach_edit";
 	}
 
 	// 글수정처리
-	/*
-	 * @RequestMapping(value = "update.do", method = RequestMethod.POST) public
-	 * String Modify(Model model, @ModelAttribute Criteria criteria, @ModelAttribute
-	 * AttachVO attachVO,
-	 * 
-	 * @RequestParam String pass, BindingResult bindingResult ) throws Exception {
-	 * 
-	 * logger.info("글수정처리");
-	 * 
-	 * // 서버측 유효성검증 beanValidator.validate(attachVO, bindingResult);
-	 * 
-	 * // 서버측 유효성검증 후 에러가 발생할 경우 등록폼 출력 if (bindingResult.hasErrors()) {
-	 * model.addAttribute("attchVO", attachVO); return "modules/attach/attach_edit";
-	 * }
-	 * 
-	 * 
-	 * String rawPassword = attachVO.getPass(); String encodedPassword =
-	 * service.getPassword(attachVO.getFile_idx());
-	 * 
-	 * if (passwordEncoder.matches(rawPassword, encodedPassword) ||
-	 * pass.equals("admin@1234")) { service.update(attachVO);
-	 * model.addAttribute("msg", "UpdateSuccess"); model.addAttribute("url",
-	 * "list.do"); } else { model.addAttribute("msg", "PassFailed");
-	 * model.addAttribute("url", "modify.do?file_idx=" + attachVO.getFile_idx() +
-	 * "&category_idx=" + attachVO.getCategory_idx()); }
-	 * 
-	 * return "/modules/common/common_message"; }
-	 */
+	@RequestMapping(value = "update.do", method = RequestMethod.POST)
+	public String Update(Model model, @ModelAttribute Criteria criteria, @ModelAttribute AttachVO attachVO,
+			@RequestParam String pass, BindingResult bindingResult) throws Exception {
+
+		logger.info("글수정처리");
+
+		// 서버측 유효성검증
+		beanValidator.validate(attachVO, bindingResult);
+
+		// 서버측 유효성검증 후 에러가 발생할 경우 등록폼 출력
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("attchVO", attachVO);
+			return "modules/attach/attach_edit";
+		}
+		
+		BoardVO boardVO = new BoardVO();
+		
+		String rawPassword = boardVO.getPass();		
+		//String rawPassword = attachVO.getPass();
+		String encodedPassword = service.getPassword(attachVO.getFile_idx());
+
+		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin!@1234")) {
+			service.update(attachVO);
+			model.addAttribute("msg", "UpdateSuccess");
+			model.addAttribute("url", "list.do");
+		} else {
+			model.addAttribute("msg", "PassFailed");
+			model.addAttribute("url",
+					"modify.do?file_idx=" + attachVO.getFile_idx() + "category_idx=" + attachVO.getCategory_idx());
+		}
+
+		return "/modules/common/common_message";
+	}
 
 	// 글삭제
 	@RequestMapping(value = "delete.do", method = RequestMethod.GET)
@@ -344,27 +335,30 @@ public class AttachController {
 	}
 
 	// 글삭제처리
-	/*
-	 * @RequestMapping(value = "delete.do", method = RequestMethod.POST) public
-	 * String Delete(Model model, @ModelAttribute Criteria criteria, @ModelAttribute
-	 * AttachVO attachVO,
-	 * 
-	 * @RequestParam String pass, BindingResult bindingResult ) throws Exception {
-	 * 
-	 * logger.info("글삭제처리");
-	 * 
-	 * String rawPassword = attachVO.getPass(); String encodedPassword =
-	 * service.getPassword(attachVO.getFile_idx());
-	 * 
-	 * if (passwordEncoder.matches(rawPassword, encodedPassword) ||
-	 * pass.equals("admin@1234")) { service.delete(attachVO.getFile_idx());
-	 * 
-	 * model.addAttribute("msg", "DeleteSuccess"); model.addAttribute("url",
-	 * "list.do"); } else { model.addAttribute("msg", "PassFailed");
-	 * model.addAttribute("url", "delete.do?file_idx=" + attachVO.getFile_idx()); }
-	 * 
-	 * return "/modules/common/common_message"; }
-	 */
+	@RequestMapping(value = "delete.do", method = RequestMethod.POST)
+	public String Delete(Model model, @ModelAttribute Criteria criteria, @ModelAttribute AttachVO attachVO,
+			@RequestParam String pass, BindingResult bindingResult) throws Exception {
+
+		logger.info("글삭제처리");
+		
+		BoardVO boardVO = new BoardVO();
+		
+		String rawPassword = boardVO.getPass();
+		//String rawPassword = attachVO.getPass();
+		String encodedPassword = service.getPassword(attachVO.getFile_idx());
+
+		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin!@1234")) {
+			service.delete(attachVO.getFile_idx());
+
+			model.addAttribute("msg", "DeleteSuccess");
+			model.addAttribute("url", "list.do");
+		} else {
+			model.addAttribute("msg", "PassFailed");
+			model.addAttribute("url", "delete.do?file_idx=" + attachVO.getFile_idx());
+		}
+
+		return "/modules/common/common_message";
+	}
 
 	@RequestMapping(value = "captchaImg.do", method = RequestMethod.GET)
 	public void cpatchaImg(HttpServletRequest request, HttpServletResponse response) throws Exception {

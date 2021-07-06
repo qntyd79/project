@@ -73,11 +73,11 @@
                                                 </tr>
                                                 <tr>
                                                     <th><label for="userid"><spring:message code="label.userid"/></label></th>
-                                                    <td class="text-left"><input name="userid" type="text" placeholder="UserID" value="<c:out value="${memberVO.userid}"/>" readonly="readonly" class="wfull"/> <form:errors path="userid" /></td>
+                                                    <td class="text-left"><input name="userid" type="text" placeholder="UserID" value="<c:out value="${boardVO.userid}"/>" readonly="readonly" class="wfull"/> <form:errors path="userid" /></td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="name"><spring:message code="label.name"/></label></th>
-                                                    <td class="text-left"><input name="name" type="text"  placeholder="Name" value="<c:out value="${memberVO.name}"/>" readonly="readonly" class="wfull"/> <form:errors path="name" /></td>
+                                                    <td class="text-left"><input name="name" type="text"  placeholder="Name" value="<c:out value="${boardVO.name}"/>" readonly="readonly" class="wfull"/> <form:errors path="name" /></td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="pass"><spring:message code="label.pass"/></label></th>
@@ -150,9 +150,7 @@
                                                         <form:textarea path="content" id="content" placeholder="Content"/><form:errors path="content"/>
                                                         <script>
                                                             CKEDITOR.replace('content',{customConfig: '${path}/plugin/ckeditor4/full/custom-config.js'});
-                                                           	<!--CKEDITOR.instances.content.updateElement();-->
                                                         </script>
-                                                        <!--<label for="content"><spring:message code="label.content"/></label>-->   
                                                      </td>
                                                 </tr>                                                
                                                 <tr>
@@ -171,27 +169,50 @@
                                                         </div> -->
                                                         <div class="fileboxlist">
                                                             <!-- 첨부파일목록 -->
-                                                            <table summary="기본게시판 보여주고 있습니다." id="filelist">
-                                                                <caption><spring:message code="bbs.table.caption"/></caption>
+                                                            <table summary="<spring:message code="bbs.table.summary.list"/>">
+																<caption><spring:message code="bbs.table.caption"/></caption>
                                                                 <colgroup>
-                                                                    <col width="20%" />
-                                                                    <col width="40%" />
-                                                                    <col width="15%" />
-                                                                    <col width="15%" />
+                                                                	<col width="5%" />
+                                                                    <col width="55%" />
+                                                                    <col width="10%" />
+                                                                    <col width="10%" />
+                                                                    <col width="10%" />
                                                                     <col width="10%" />
                                                                 </colgroup>
                                                                 <thead>
                                                                     <tr>
-                                                                        <th scope="col"><spring:message code="bbs.list.preview"/></th>
+                                                                        <th scope="col"><spring:message code="bbs.list.no"/></th>
                                                                         <th scope="col"><spring:message code="bbs.list.filename"/></th>
                                                                         <th scope="col"><spring:message code="bbs.list.filesize"/></th>
                                                                         <th scope="col"><spring:message code="bbs.list.filetype"/></th>
+                                                                        <th scope="col"><spring:message code="bbs.list.regdate"/></th>
                                                                         <th scope="col"><spring:message code="bbs.list.del"/></th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody>
-                                                                </tbody>
-                                                            </table>
+																<tbody>
+																	<c:choose>
+																		<c:when test="${fn:length(filelist) == 0}">
+																			<tr>
+																				<td colspan="5"><spring:message code="info.nodata.msg" /></td>
+																			</tr>
+																		</c:when>
+																		<c:otherwise>
+																			<c:forEach varStatus="status" var="row" items="${filelist}">
+																				<tr>	
+																					<td><strong>${status.index+1}</strong></td>														
+																					<td class="text-left"><a href="read.do${pageMaker.makeSearch(pageMaker.criteria.page)}&file_idx=<c:out value="${row.file_idx}"/>">${row.file_name}</a></td>
+																					<td><fmt:formatNumber value="${row.file_size}" type="number"/>KB</td>
+																					<td>${row.file_ext}</td>
+																					<td>
+																						<fmt:parseDate var="dateString" value="${row.regdate}" pattern="yyyy-MM-dd"/> 
+																						<fmt:formatDate	value="${dateString}" pattern="yyyy-MM-dd"/></td>
+																					<td><a href="attachDelete.do?filename=<c:out value="${row.file_hash_name}"/>&board_idx=<c:out value="${boardVO.board_idx}"/>&file_idx=<c:out value="${row.file_idx}"/>">삭제</a></td>
+																				</tr>
+																			</c:forEach>
+																		</c:otherwise>
+																	</c:choose>
+																</tbody>
+															</table>
                                                         </div>
                                                         <div class="filebox">
                                                             <ul id="example"></ul>

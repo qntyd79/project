@@ -8,20 +8,29 @@
 	<select id="getList"
 		resultType="com.company.bbs.vo.category.CategoryVO">
 	<![CDATA[ 
-	select * from jhbbs_category where category_idx > 0 and kind=#{kind} and del = 'N'
+	select * from jhbbs_category where category_idx > 0 and del = 'N'
 	]]>
 		<include refid="category"></include>
 		<include refid="search"></include>
 	<![CDATA[ 
-	order by category_idx desc, parent desc, sortno asc limit #{pageStart}, ${perPageNum}
+	order by parent desc, sortno asc limit #{pageStart}, ${perPageNum}
 	]]>
 	</select>
-
-	<!-- 카테고리목록 -->
-	<select id="getCategoryList"
-		resultType="com.company.bbs.vo.category.CategoryVO">
+	
+	<!-- 카테고리명 -->
+	<select id="getCategory" resultType="com.company.bbs.vo.category.CategoryVO">
 	<![CDATA[ 
-	select * from jhbbs_category where kind=#{kind} and del = 'N'
+	select category_idx, title from jhbbs_category where del = 'N'
+	]]>
+	<![CDATA[ 
+	order by category_idx DESC
+	]]>
+	</select>
+	
+	<!-- 카테고리목록 -->
+	<select id="getCategoryList" resultType="com.company.bbs.vo.category.CategoryVO">
+	<![CDATA[ 
+	select * from jhbbs_category where del = 'N'
 	]]>
 	<![CDATA[ 
 	order by category_idx DESC
@@ -107,15 +116,10 @@
 	<select id="getCount" resultType="int">
 	<![CDATA[ 
 	select count(category_idx) from jhbbs_category where category_idx > 0 and del = 'N' 
-	and kind=#{kind} 
-	]]>
+	]]>	
+		<include refid="category"></include>
 		<include refid="search"></include>
 	</select>
-
-	<!-- 공지글갯수 -->
-	<!-- <select id="getNoticeCount" resultType="int"> <![CDATA[ select count(notice) 
-		from jhbbs_bbs_category where notice > 0 and del = 'N' ]]> <include refid="category"></include> 
-		<include refid="search"></include> </select> -->
 
 	<!-- 글비밀번호리턴 -->
 	<select id="getPassword" resultType="String">

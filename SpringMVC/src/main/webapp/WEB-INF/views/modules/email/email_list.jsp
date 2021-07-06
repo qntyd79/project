@@ -39,7 +39,7 @@
                                     </div>
                                 </form>
                                 <form name="categoryForm" id="categoryForm" method="post" enctype="multipart/form-data" action="list.do">
-                                    <div class="category-form" style="float:right; margin-right:5px; margin-bottom:10px;">
+                                    <div class="category-form" style="float:right;  margin-right:5px; margin-bottom:10px;">
                                         <fieldset>
                                             <select name="category_idx" id="category_idx" form="categoryForm" onChange="$(this.form).submit();">
                                                 <option value="0" <c:if test="${categoryselect == 0}"><c:out value="selected=selected" /></c:if>>전체목록</option>
@@ -66,11 +66,11 @@
                                                 <col width="5%" />
                                                 <col width="5%" />
                                                 <col width="10%" />
-                                                <col width="25%" />
+                                                <col width="20%" />
                                                 <col width="20%" />
                                                 <col width="20%" />
                                                 <col width="10%" />
-                                                <col width="5%" />
+                                                <col width="10%" />
                                             </colgroup>
                                             <thead>
                                                 <tr class="tline">
@@ -114,7 +114,7 @@
                                                                 	<fmt:parseDate var="dateString" value="${row.regdate}" pattern="yyyy-MM-dd" />                                                               
 	                                                                <fmt:formatDate value="${dateString}" pattern="yyyy-MM-dd"/>
 	                                                            </td>
-                                                                <td><a href="delete.do${pageMaker.makeSearch(pageMaker.criteria.page)}&email_idx=<c:out value="${row.email_idx}"/>">D</a></td>
+                                                                <td><a href="delete.do${pageMaker.makeSearch(pageMaker.criteria.page)}&email_idx=<c:out value="${row.email_idx}"/>">삭제</a></td>
                                                             </tr>
                                                         </c:forEach>
                                                     </c:otherwise>

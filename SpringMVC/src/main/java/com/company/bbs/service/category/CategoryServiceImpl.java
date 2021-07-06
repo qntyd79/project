@@ -31,12 +31,6 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<CategoryVO> getList(Criteria criteria) throws Exception {
 		return dao.getList(criteria);
 	}
-	
-	// 공지글목록
-	/*@Override
-	public List<CategorycategoryVO> getNoticeList(Criteria criteria) throws Exception {
-		return dao.getNoticeList(criteria);
-	}*/
 			
 	// 글저장 
 	@Override
@@ -166,12 +160,7 @@ public class CategoryServiceImpl implements CategoryService {
 		return dao.getCount(criteria);
 	}
 	
-	// 공지글갯수 
-	/*@Override
-	public int getNoticeCount(Criteria criteria) throws Exception {
-		return dao.getNoticeCount(criteria);
-	}*/
-	
+
 	// 글비밀번호리턴 
 	@Override
 	public String getPassword(int category_idx) throws Exception {
@@ -183,5 +172,6 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<Object> getCategoryList(int kind) throws Exception {
 		return dao.getCategoryList(kind);
 	}
+	
 
 }

@@ -61,7 +61,7 @@
                                                     <th scope="col"><spring:message code="bbs.list.name"/></th>
                                                     <th scope="col"><spring:message code="bbs.list.regdate"/></th>
                                                     <th scope="col"><spring:message code="bbs.list.vote"/></th>
-                                                    <th scope="col"><spring:message code="bbs.list.hit"/></th>
+                                                    <th scope="col"><spring:message code="bbs.list.edit"/></th>
                                                     <th scope="col"><spring:message code="bbs.list.del"/></th>
                                                 </tr>
                                             </thead>
@@ -106,8 +106,8 @@
 	                                                                <fmt:formatDate value="${dateString}" pattern="yyyy-MM-dd"/>
 	                                                            </td>
                                                                 <td>${row.hit}</td>
-                                                                <td><a href="modify.do${pageMaker.makeSearch(pageMaker.criteria.page)}&comment_idx=<c:out value=" ${row.comment_idx}" />">E</a></td>
-                                                                <td><a href="delete.do${pageMaker.makeSearch(pageMaker.criteria.page)}&comment_idx=<c:out value=" ${row.comment_idx}" />">D</a></td>
+                                                                <td><a href="edit.do${pageMaker.makeSearch(pageMaker.criteria.page)}&comment_idx=<c:out value=" ${row.comment_idx}" />">수정</a></td>
+                                                                <td><a href="delete.do${pageMaker.makeSearch(pageMaker.criteria.page)}&comment_idx=<c:out value=" ${row.comment_idx}" />">삭제</a></td>
                                                             </tr>
                                                         </c:forEach>
                                                     </c:otherwise>

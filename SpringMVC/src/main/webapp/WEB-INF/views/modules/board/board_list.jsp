@@ -107,7 +107,7 @@
                                                                 </td>
                                                                 <td class="text-left">
                                                                     <a href="read.do${pageMaker.makeSearch(pageMaker.criteria.page)}&board_idx=<c:out value="${row1.board_idx}"/>">${row1.title} (${row1.commentcnt})</a>
-                                                                    <c:if test="${row1.hit >= 20}">
+                                                                    <c:if test="${row1.hit >= 100}">
                                                                         <span class="hit">HIT</span>
                                                                     </c:if>
                                                                 </td>
@@ -141,7 +141,7 @@
                                                                     <c:if test="${row.depth > 0}">
                                                                         <i class="fas fa-angle-double-right"></i>&nbsp;
                                                                     </c:if>${row.title} (${row.commentcnt})</a>
-                                                                    <c:if test="${row.hit >= 20}">
+                                                                    <c:if test="${row.hit >= 100}">
                                                                         <span class="hit">HIT</span>
                                                                     </c:if>
                                                                 </td>

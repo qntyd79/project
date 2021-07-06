@@ -39,7 +39,7 @@
 	<!-- 카테고리명 -->
 	<select id="getCategory" resultType="com.company.bbs.vo.category.CategoryVO">
 	<![CDATA[ 
-	select * from jhbbs_category where del = 'N'
+	select category_idx, title from jhbbs_category where del = 'N'
 	]]>
 	<![CDATA[ 
 	order by category_idx DESC
@@ -49,7 +49,7 @@
 	<!-- 카테고리목록 -->
 	<select id="getCategoryList" resultType="com.company.bbs.vo.category.CategoryVO">
 	<![CDATA[ 
-	select * from jhbbs_category where kind=#{kind} and del = 'N'
+	select * from jhbbs_category where kind= 3 and del = 'N'
 	]]>
 	<![CDATA[ 
 	order by category_idx DESC

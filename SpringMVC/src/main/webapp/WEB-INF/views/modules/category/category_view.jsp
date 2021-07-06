@@ -87,7 +87,7 @@
                                         <nav class="btn-group">
 											<ul>												
 												<li><input type="button" value="<spring:message code="button.list"/>" onClick="location.href='list.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&kind=${criteria.kind}'" /></li>
-										        <li><input type="button" value="<spring:message code="button.update"/>" onClick="location.href='modify.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&category_idx=<c:out value="${categoryVO.category_idx}" />&board_idx=<c:out value="${categoryVO.board_idx}" />'" /></li>
+										        <li><input type="button" value="<spring:message code="button.update"/>" onClick="location.href='edit.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&category_idx=<c:out value="${categoryVO.category_idx}" />&board_idx=<c:out value="${categoryVO.board_idx}" />'" /></li>
 										        <li><input type="button" value="<spring:message code="button.reply"/>" onClick="location.href='reply.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&board_idx=<c:out value="${categoryVO.board_idx}" />'" /></li>
 										        <li><input type="button" value="<spring:message code="button.delete"/>" onClick="location.href='delete.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&board_idx=<c:out value="${categoryVO.board_idx}" />'" /></li>
 											</ul>

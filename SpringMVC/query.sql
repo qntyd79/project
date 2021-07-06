@@ -57,7 +57,7 @@ DELETE FROM `mydb`.`JHBBS_board` WHERE `board_idx`='7';
 
 /* 테이블 초기화 */
 SET FOREIGN_KEY_CHECKS = 0; -- Disable foreign key checking.
-truncate mydb.jhbbs_file;
+truncate mydb.jhbbs_member;
 ALTER TABLE `mydb`.`JHBBS_category` CHANGE COLUMN `idx` `kind` INT(10) NULL DEFAULT NULL ;
 
 UPDATE `mydb`.`JHBBS_comment` SET `email` = 'qntyd79@naver.com' WHERE (`comment_idx` = '4');

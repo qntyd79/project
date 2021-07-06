@@ -21,6 +21,15 @@
 
 	<bean id="uploadPath" class="java.lang.String"> 
 		<constructor-arg value="/Users/ojeonghwan/git/project/SpringMVC/src/main/webapp/resources/upload"/> 
-	</bean>		
+	</bean>	
+	
+	<bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+        <property name="order" value="0"/>
+    </bean>
+
+	<bean id="excelDownloadView" class="com.company.bbs.utill.ExcelDownloadFileUtils"/>
+    
+    <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+    		
    
 </beans>

@@ -45,11 +45,11 @@ public class CommentController {
 
 	@Inject
 	CommentService service;
-	
-	// 암호화 설정 
+
+	// 암호화 설정
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
-		
+
 	// 다국어 지역세션설정
 	@Autowired
 	private SessionLocaleResolver localeResolver;
@@ -61,19 +61,16 @@ public class CommentController {
 	// 유효성검사
 	@Autowired
 	private DefaultBeanValidator beanValidator;
-	
+
 	// 클라이언트측 유효성검증 설정
 	@RequestMapping(value = "validator.do")
 	protected String getValidator() throws Exception {
 		return "modules/comment/validator";
 	}
-	
+
 	// 글목록 (Model)
 	@RequestMapping(value = "list.do")
-	public String List(
-			Model model, 
-			@ModelAttribute Criteria criteria
-			) throws Exception {
+	public String List(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("글목록");
 
@@ -91,9 +88,7 @@ public class CommentController {
 
 	// 글목록 (ModelAndView)
 	@RequestMapping(value = "mvlist.do")
-	public ModelAndView List(
-			@ModelAttribute Criteria criteria
-			) throws Exception {
+	public ModelAndView List(@ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("글목록");
 
@@ -106,8 +101,6 @@ public class CommentController {
 
 		mav.addObject("list", service.getList(criteria));
 		mav.addObject("pageMaker", pageMaker);
-		// mav.addObject("searchField", searchField);
-		// mav.addObject("searchWord", searchWord);
 		mav.setViewName("modules/comment/comment_list");
 
 		return mav;
@@ -115,15 +108,12 @@ public class CommentController {
 
 	// 글목록 (Map)
 	@RequestMapping(value = "mlist.do")
-	public String List1(
-			Model model, 
-			@ModelAttribute Criteria criteria
-			) throws Exception {
+	public String List1(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("글목록");
 
 		PageMaker pageMaker = new PageMaker();
-		
+
 		pageMaker.setCriteria(criteria);
 		pageMaker.setTotalCount(service.getCount(criteria));
 
@@ -131,22 +121,17 @@ public class CommentController {
 
 		map.put("list", service.getList(criteria));
 		map.put("pageMaker", pageMaker);
-		// map.put("searchField", searchField);
-		// map.put("searchWord", searchWord);
 		model.addAllAttributes(map);
 
 		return "modules/comment/comment_list";
 	}
 
-	// 글등록 
+	// 글등록
 	@RequestMapping(value = "write.do", method = RequestMethod.GET)
-	public String Write(
-			Model model,
-			@ModelAttribute CommentVO commentVO
-			) throws Exception {
+	public String Write(Model model, @ModelAttribute CommentVO commentVO) throws Exception {
 
 		logger.info("글쓰기");
-		
+
 		model.addAttribute("CommentVO", commentVO);
 
 		return "modules/comment/comment_write";
@@ -154,15 +139,12 @@ public class CommentController {
 
 	// 답글쓰기
 	@RequestMapping(value = "reply.do", method = RequestMethod.GET)
-	public ModelAndView Reply(
-			@RequestParam int comment_idx, 
-			@ModelAttribute Criteria criteria
-			) throws Exception {
+	public ModelAndView Reply(@RequestParam int comment_idx, @ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("답글쓰기");
 
 		ModelAndView mav = new ModelAndView();
-		
+
 		mav.addObject("commentVO", service.getView(comment_idx));
 		mav.setViewName("modules/comment/comment_reply");
 
@@ -170,61 +152,54 @@ public class CommentController {
 	}
 
 	// 글저장
-	@RequestMapping(value = "insert.do", method = {RequestMethod.POST,RequestMethod.GET})
-	public String Insert(
-			Model model, 
-			@ModelAttribute CommentVO commentVO ,
-			BindingResult bindingResult,
-			HttpServletRequest request
-			) throws Exception {
+	@RequestMapping(value = "insert.do", method = { RequestMethod.POST, RequestMethod.GET })
+	public String Insert(Model model, @ModelAttribute CommentVO commentVO, BindingResult bindingResult,
+			HttpServletRequest request) throws Exception {
 
 		logger.info("글저장처리");
-		
+
 		// 서버측 유효성검증
 		beanValidator.validate(commentVO, bindingResult);
 
 		// 서버측 유효성검증 후 에러가 발생할 경우 등록폼 출력
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("commentVO", commentVO);
-			if(commentVO.getComment_idx() != 0) {
+			if (commentVO.getComment_idx() != 0) {
 				return "modules/comment/comment_reply";
 			} else {
 				return "modules/comment/comment_write";
 			}
 		}
-				
-		// 자동등록방지 검증 
+
+		// 자동등록방지 검증
 		String getAnswer = (String) request.getSession().getAttribute("captcha");
 		String answer = request.getParameter("answer");
-				
+
 		if (getAnswer.equals(answer)) {
 			service.insert(commentVO);
 
 			model.addAttribute("msg", "InsertSuccess");
 			model.addAttribute("url", "list.do");
-					
-			return "/modules/common/common_message";
-					
+
+
 		} else {
 			model.addAttribute("msg", "CaptchaFailed");
-					
-			if(commentVO.getComment_idx() != 0) {
-				model.addAttribute("url", "reply.do");			
+
+			if (commentVO.getComment_idx() != 0) {
+				model.addAttribute("url", "reply.do");
 				return "modules/comment/comment_reply";
 			} else {
-				model.addAttribute("url", "write.do");			
+				model.addAttribute("url", "write.do");
 				return "modules/comment/comment_write";
 			}
 		}		
+
+		return "/modules/common/common_message";
 	}
 
 	// 글보기
 	@RequestMapping(value = "read.do", method = RequestMethod.GET)
-	public String Read(
-			Model model, 
-			@RequestParam int comment_idx, 
-			@ModelAttribute Criteria criteria
-			) throws Exception {
+	public String Read(Model model, @RequestParam int comment_idx, @ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("글보기");
 
@@ -239,11 +214,7 @@ public class CommentController {
 
 	// 글보기
 	@RequestMapping(value = "mvread.do", method = RequestMethod.GET)
-	public ModelAndView Read(
-			@RequestParam int comment_idx, 
-			@RequestParam(defaultValue = "0") int category_idx,
-			@ModelAttribute Criteria criteria
-			) throws Exception {
+	public ModelAndView Read(@ModelAttribute Criteria criteria, @RequestParam int comment_idx) throws Exception {
 
 		logger.info("글보기");
 
@@ -260,12 +231,9 @@ public class CommentController {
 	}
 
 	// 글수정
-	@RequestMapping(value = "modify.do", method = RequestMethod.GET)
-	public String Modify(
-			Model model, 
-			@RequestParam int comment_idx,
-			@ModelAttribute Criteria criteria
-			) throws Exception {
+	@RequestMapping(value = "edit.do", method = RequestMethod.GET)
+	public String Edit(Model model,  @ModelAttribute Criteria criteria, @RequestParam int comment_idx)
+			throws Exception {
 
 		logger.info("글수정");
 
@@ -276,13 +244,8 @@ public class CommentController {
 
 	// 글수정처리
 	@RequestMapping(value = "update.do", method = RequestMethod.POST)
-	public String Modify(
-			Model model, 
-			@ModelAttribute CommentVO commentVO, 
-			@ModelAttribute Criteria criteria,
-			@RequestParam String pass,
-			BindingResult bindingResult
-			) throws Exception {
+	public String Update(Model model, @ModelAttribute Criteria criteria, @ModelAttribute CommentVO commentVO, 
+			@RequestParam String pass, BindingResult bindingResult) throws Exception {
 
 		logger.info("글수정처리");
 
@@ -294,11 +257,11 @@ public class CommentController {
 			model.addAttribute("commentVO", commentVO);
 			return "modules/comment/comment_edit";
 		}
-				
+
 		String rawPassword = commentVO.getPass();
-		String encodedPassword = service.getPassword(commentVO.getComment_idx());	
-			
-		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin@1234")){
+		String encodedPassword = service.getPassword(commentVO.getComment_idx());
+
+		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin@1234")) {
 			service.update(commentVO);
 			model.addAttribute("msg", "UpdateSuccess");
 			model.addAttribute("url", "list.do");
@@ -310,13 +273,10 @@ public class CommentController {
 		return "/modules/common/common_message";
 	}
 
-	// 글삭제
+	// 글삭제폼
 	@RequestMapping(value = "delete.do", method = RequestMethod.GET)
-	public String Delete(
-			Model model, 
-			@RequestParam int comment_idx, 
-			@ModelAttribute Criteria criteria
-			) throws Exception {
+	public String Delete(Model model, @ModelAttribute Criteria criteria, @RequestParam int comment_idx)
+			throws Exception {
 
 		logger.info("글삭제");
 
@@ -327,90 +287,71 @@ public class CommentController {
 
 	// 글삭제처리
 	@RequestMapping(value = "delete.do", method = RequestMethod.POST)
-	public String Delete(
-			Model model, 
-			@ModelAttribute Criteria criteria,
-			@ModelAttribute CommentVO commentVO,
-			@RequestParam String pass,
-			BindingResult bindingResult
-			) throws Exception {
+	public String Delete(Model model, @ModelAttribute Criteria criteria, @ModelAttribute CommentVO commentVO,
+			@RequestParam String pass, BindingResult bindingResult) throws Exception {
 
 		logger.info("글삭제처리");
 
 		String rawPassword = commentVO.getPass();
-		String encodedPassword = service.getPassword(commentVO.getComment_idx());	
-		
-		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin@1234")){
+		String encodedPassword = service.getPassword(commentVO.getComment_idx());
+
+		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin!@1234")) {
 			service.delete(commentVO.getComment_idx());
 
 			model.addAttribute("msg", "DeleteSuccess");
 			model.addAttribute("url", "list.do");
 		} else {
 			model.addAttribute("msg", "PassFailed");
-			model.addAttribute("url", "delete.do?comment_idx=" + commentVO.getComment_idx()); 
+			model.addAttribute("url", "delete.do?comment_idx=" + commentVO.getComment_idx());
 		}
 
 		return "/modules/common/common_message";
 	}
-	
-	@RequestMapping(value = "captchaImg.do", method = RequestMethod.GET) 
-	public void cpatchaImg(
-			HttpServletRequest request, 
-			HttpServletResponse response
-			) throws Exception { 
-				new CaptchaUtil().captchaImg(request, response);
+
+	@RequestMapping(value = "captchaImg.do", method = RequestMethod.GET)
+	public void cpatchaImg(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		new CaptchaUtil().captchaImg(request, response);
 	}
-	 
-	@RequestMapping(value = "captchaAudio.do", method = RequestMethod.GET) 
-	public void cpatchaAudio(
-			HttpServletRequest request, 
-			HttpServletResponse response
-			) throws Exception { 
-				new CaptchaUtil().captchaAudio(request, response);
+
+	@RequestMapping(value = "captchaAudio.do", method = RequestMethod.GET)
+	public void cpatchaAudio(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		new CaptchaUtil().captchaAudio(request, response);
 	}
-	
+
 	// ajax 글목록
 	@RequestMapping(value = "ajaxlist.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String List(
-			Model model,
-			@ModelAttribute CommentVO commentVO,
-			@RequestParam int board_idx
-			) throws Exception {
+	public String List(Model model, @ModelAttribute CommentVO commentVO, @RequestParam int board_idx) throws Exception {
 
 		logger.info("댓글쓰기");
-		
-		model.addAttribute("CommentVO", commentVO);	
+
+		model.addAttribute("CommentVO", commentVO);
 		model.addAttribute("board_idx", board_idx);
-		
+
 		return "modules/comment/ajax_comment_list";
 	}
-	
-	// ajax 글수정폼  
+
+	// ajax 글수정폼
 	@RequestMapping(value = "ajaxmodify.do", method = RequestMethod.GET)
-	public ModelAndView Modify(
-			@RequestParam int comment_idx
-			) throws Exception {
-		
+	public ModelAndView Modify(@RequestParam int comment_idx) throws Exception {
+
 		logger.info("댓글수정");
 
 		ModelAndView mav = new ModelAndView();
-			
+
 		mav.addObject("commentVO", service.getView(comment_idx));
 		mav.setViewName("modules/comment/ajax_comment_edit");
 
 		return mav;
 	}
-	
-	// ajax 댓글답글쓰기폼 
+
+	// ajax 댓글답글쓰기폼
 	@RequestMapping(value = "ajaxreply.do", method = RequestMethod.GET)
-	public ModelAndView Reply(
-			@RequestParam int comment_idx
-			) throws Exception {
+	public ModelAndView Reply(@RequestParam int comment_idx) throws Exception {
 
 		logger.info("댓글답글쓰기");
 
 		ModelAndView mav = new ModelAndView();
-		
+
 		mav.addObject("commentVO", service.getView(comment_idx));
 		mav.setViewName("modules/comment/ajax_comment_reply");
 

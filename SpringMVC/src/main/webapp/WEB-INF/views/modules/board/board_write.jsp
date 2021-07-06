@@ -168,18 +168,20 @@
                                                             <table summary="기본게시판 보여주고 있습니다." id="filelist">
                                                                 <caption><spring:message code="bbs.table.caption"/></caption>
                                                                 <colgroup>
-                                                                    <col width="20%" />
-                                                                    <col width="40%" />
-                                                                    <col width="15%" />
-                                                                    <col width="15%" />
+                                                                   <col width="5%" />
+                                                                    <col width="55%" />
+                                                                    <col width="10%" />
+                                                                    <col width="10%" />
+                                                                    <col width="10%" />
                                                                     <col width="10%" />
                                                                 </colgroup>
                                                                 <thead>
                                                                     <tr>
-                                                                        <th scope="col"><spring:message code="bbs.list.preview"/></th>
+                                                                        <th scope="col"><spring:message code="bbs.list.no"/></th>
                                                                         <th scope="col"><spring:message code="bbs.list.filename"/></th>
                                                                         <th scope="col"><spring:message code="bbs.list.filesize"/></th>
                                                                         <th scope="col"><spring:message code="bbs.list.filetype"/></th>
+                                                                        <th scope="col"><spring:message code="bbs.list.regdate"/></th>
                                                                         <th scope="col"><spring:message code="bbs.list.del"/></th>
                                                                     </tr>
                                                                 </thead>

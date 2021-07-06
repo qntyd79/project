@@ -32,9 +32,9 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-		
+    	
 	<!-- 애노테이션 관련 설정 -->
-	<context:component-scan base-package="com.company.bbs"/>    	
+	<context:component-scan base-package="com.*"/>    	
 	
 	<!-- aop의 설정으로 Proxy 객체를 자동으로 생성 -->
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>		

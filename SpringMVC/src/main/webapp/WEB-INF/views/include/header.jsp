@@ -56,7 +56,7 @@
                                 <li class="dropdown">
                                     <a href="${path}/modules/board/list.do"> 기본게시판 </a>
                                     <ul class="dropdown-submenu">
-                                        <li><a href="${path}/modules/category/list.do?kind=1">분류게시판</a></li>
+                                        <li><a href="${path}/modules/category/list.do">분류게시판</a></li>
                                         <li><a href="${path}/modules/comment/list.do">댓글게시판</a></li>
                                         <li><a href="${path}/modules/attach/list.do">파일게시판</a></li>        
                                         <li><a href="${path}/modules/email/list.do">메일게시판</a></li>

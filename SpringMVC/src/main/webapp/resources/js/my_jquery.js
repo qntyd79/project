@@ -1177,8 +1177,22 @@ $(document).ready(function() {
 	
 	$('.datePicker').datepicker( "getDate" );
     $("#ui-datepicker-div").hide();
+	
+	
+  	// 일반파일폼 
+	var fileTarget = $('.filebox .upload-hidden'); 
+	fileTarget.on('change', function(){ 
+		// 값이 변경되면 
+		if(window.FileReader){
+			var filename = $(this)[0].files[0].name;
+		} else { 
+			var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
+		} // 추출한 파일명 삽입 
+		$(this).siblings('.upload-name').val(filename);
+	});
 
-  // 동적파일폼 추가
+
+  	// 동적파일폼 추가
     var formcount = 1;
     var current_count = $("input[type='file']").length;
 
@@ -1238,12 +1252,13 @@ $(document).ready(function() {
                 var html = "";
                 
                 html +="<tr class='itemt_" + count + "'>";
-                html +="<td> 미리보기 </td>";
+                html +="<td>" + filesArrLen++ + "</td>";
                 html +="<td>" + files[i].files[0].name + "</td>";
                 html +="<td>" + fileUnitCheck(files[i].files[0].size) + "</td>";
                 //html +="<td>" + files[i].files[0].type + "</td>";
 				html +="<td>" + fileExt(files[i].files[0].name) + "</td>";
-                html +="<td>D</td>";
+				html +="<td>등록일</td>";
+				html +="<td><input type='button' id='delItemBtn1' value='삭제'/></td>";
                 html +="</tr>";
          	
                 /*html += "<li style='margin-bottom:5px;'class='itemt_" + count + "'>";

@@ -54,7 +54,7 @@ public interface BoardService {
 	public List<Object> getCategory() throws Exception;
 	
 	// 카테고리목록
-	public List<Object> getCategoryList(int kind) throws Exception;		
+	public List<Object> getCategoryList() throws Exception;		
 	
 	// 첨부파일조회 
 	public List<Object> getFileList(int board_idx) throws Exception;
@@ -67,5 +67,7 @@ public interface BoardService {
 
 	// 첨부파일등록
 	public void fileinsert(BoardVO boardVO) throws Exception;
+
+	public int getAttachCount(int board_idx) throws Exception;
 
 }

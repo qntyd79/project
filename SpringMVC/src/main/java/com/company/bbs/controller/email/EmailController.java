@@ -74,9 +74,7 @@ public class EmailController {
 
 	// 글목록 (Model)
 	@RequestMapping(value = "list.do")
-	public String List(Model model, @ModelAttribute Criteria criteria,
-			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "3") int kind)
-			throws Exception {
+	public String List(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("글목록");
 
@@ -87,19 +85,16 @@ public class EmailController {
 
 		model.addAttribute("list", service.getList(criteria));
 		model.addAttribute("categoryname", service.getCategory());
-		model.addAttribute("categorylist", service.getCategoryList(kind));
-		model.addAttribute("categoryselect", category_idx);
+		model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
+		model.addAttribute("categoryselect", criteria.getCategory_idx());
 		model.addAttribute("pageMaker", pageMaker);
-		// model.addAttribute("searchField", searchField);
-		// model.addAttribute("searchWord", searchWord);
 
 		return "modules/email/email_list";
 	}
 
 	// 글목록 (ModelAndView)
 	@RequestMapping(value = "mvlist.do")
-	public ModelAndView List(@ModelAttribute Criteria criteria, @RequestParam(defaultValue = "0") int category_idx,
-			@RequestParam(defaultValue = "1") int kind) throws Exception {
+	public ModelAndView List(@ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("글목록");
 
@@ -112,11 +107,9 @@ public class EmailController {
 
 		mav.addObject("list", service.getList(criteria));
 		mav.addObject("categoryname", service.getCategory());
-		mav.addObject("categorylist", service.getCategoryList(kind));
-		mav.addObject("categoryselect", category_idx);
+		mav.addObject("categorylist", service.getCategoryList(criteria.getKind()));
+		mav.addObject("categoryselect", criteria.getCategory_idx());
 		mav.addObject("pageMaker", pageMaker);
-		// mav.addObject("searchField", searchField);
-		// mav.addObject("searchWord", searchWord);
 		mav.setViewName("modules/email/email_list");
 
 		return mav;
@@ -124,9 +117,7 @@ public class EmailController {
 
 	// 글목록 (Map)
 	@RequestMapping(value = "mlist.do")
-	public String List1(Model model, @ModelAttribute Criteria criteria,
-			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "3") int kind)
-			throws Exception {
+	public String List1(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("글목록");
 
@@ -139,11 +130,9 @@ public class EmailController {
 
 		map.put("list", service.getList(criteria));
 		map.put("categoryname", service.getCategory());
-		map.put("categorylist", service.getCategoryList(kind));
-		map.put("categoryselect", category_idx);
+		map.put("categorylist", service.getCategoryList(criteria.getKind()));
+		map.put("categoryselect", criteria.getCategory_idx());
 		map.put("pageMaker", pageMaker);
-		// map.put("searchField", searchField);
-		// map.put("searchWord", searchWord);
 		model.addAllAttributes(map);
 
 		return "modules/email/email_list";
@@ -151,28 +140,27 @@ public class EmailController {
 
 	// 글등록폼
 	@RequestMapping(value = "write.do", method = RequestMethod.GET)
-	public String Write(Model model, @ModelAttribute EmailVO emailVO, @RequestParam(defaultValue = "3") int kind)
+	public String Write(Model model, @ModelAttribute Criteria criteria, @ModelAttribute EmailVO emailVO)
 			throws Exception {
 
 		logger.info("글쓰기");
 
 		model.addAttribute("emailVO", emailVO);
-		model.addAttribute("categorylist", service.getCategoryList(kind));
+		model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
 
 		return "modules/email/email_write";
 	}
 
 	// 답글쓰기
 	@RequestMapping(value = "reply.do", method = RequestMethod.GET)
-	public ModelAndView Reply(@RequestParam int email_idx, @ModelAttribute Criteria criteria,
-			@RequestParam(defaultValue = "3") int kind) throws Exception {
+	public ModelAndView Reply(@RequestParam int email_idx, @ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("답글쓰기");
 
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("emailVO", service.getView(email_idx));
-		mav.addObject("categorylist", service.getCategoryList(kind));
+		mav.addObject("categorylist", service.getCategoryList(criteria.getKind()));
 		mav.setViewName("modules/email/email_reply");
 
 		return mav;
@@ -180,8 +168,8 @@ public class EmailController {
 
 	// 글저장
 	@RequestMapping(value = "insert.do", method = { RequestMethod.POST, RequestMethod.GET })
-	public String Insert(Model model, @ModelAttribute EmailVO emailVO, BindingResult bindingResult,
-			@RequestParam(defaultValue = "3") int kind, HttpServletRequest request) throws Exception {
+	public String Insert(Model model, @ModelAttribute Criteria criteria, @ModelAttribute EmailVO emailVO,
+			BindingResult bindingResult, HttpServletRequest request) throws Exception {
 
 		logger.info("글저장처리");
 
@@ -192,7 +180,7 @@ public class EmailController {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("emailVO", emailVO);
 			model.addAttribute("categoryname", service.getCategory());
-			model.addAttribute("categorylist", service.getCategoryList(kind));
+			model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
 			if (emailVO.getEmail_idx() != 0) {
 				return "modules/email/email_reply";
 			} else {
@@ -209,23 +197,21 @@ public class EmailController {
 			service.insert(emailVO);
 
 			model.addAttribute("msg", "InsertSuccess");
-			model.addAttribute("url", "list.do?kind=1");
-
-			return "/modules/common/common_message";
+			model.addAttribute("url", "list.do");
 
 		} else {
 			model.addAttribute("msg", "CaptchaFailed");
 			model.addAttribute("url", "write.do");
-			
+
 			return "modules/email/email_write";
-		}
+		}	
+
+		return "/modules/common/common_message";
 	}
 
 	// 글보기
 	@RequestMapping(value = "read.do", method = RequestMethod.GET)
-	public String Read(Model model, @ModelAttribute Criteria criteria, @RequestParam int email_idx,
-			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "3") int kind)
-			throws Exception {
+	public String Read(Model model, @ModelAttribute Criteria criteria, @RequestParam int email_idx) throws Exception {
 
 		logger.info("글보기");
 
@@ -235,7 +221,7 @@ public class EmailController {
 		model.addAttribute("prenum", service.getPrevNum(email_idx));
 		model.addAttribute("nextnum", service.getNextNum(email_idx));
 		model.addAttribute("categoryname", service.getCategory());
-		model.addAttribute("categorylist", service.getCategoryList(kind));
+		model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
 		model.addAttribute("list", service.getFileList(email_idx));
 
 		return "modules/email/email_view";
@@ -243,9 +229,7 @@ public class EmailController {
 
 	// 글보기
 	@RequestMapping(value = "mvread.do", method = RequestMethod.GET)
-	public ModelAndView Read(@ModelAttribute Criteria criteria, @RequestParam int email_idx,
-			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "3") int kind)
-			throws Exception {
+	public ModelAndView Read(@ModelAttribute Criteria criteria, @RequestParam int email_idx) throws Exception {
 
 		logger.info("글보기");
 
@@ -257,31 +241,29 @@ public class EmailController {
 		mav.addObject("prenum", service.getPrevNum(email_idx));
 		mav.addObject("nextnum", service.getNextNum(email_idx));
 		mav.addObject("categoryname", service.getCategory());
-		mav.addObject("categorylist", service.getCategoryList(kind));
+		mav.addObject("categorylist", service.getCategoryList(criteria.getKind()));
 		mav.setViewName("modules/email/email_view");
 
 		return mav;
 	}
 
 	// 글수정폼
-	@RequestMapping(value = "modify.do", method = RequestMethod.GET)
-	public String Modify(Model model, @ModelAttribute Criteria criteria, @RequestParam int email_idx,
-			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "3") int kind)
-			throws Exception {
+	@RequestMapping(value = "edit.do", method = RequestMethod.GET)
+	public String Edit(Model model, @ModelAttribute Criteria criteria, @RequestParam int email_idx) throws Exception {
 
 		logger.info("글수정");
 
 		model.addAttribute("emailVO", service.getView(email_idx));
 		model.addAttribute("categoryname", service.getCategory());
-		model.addAttribute("categorylist", service.getCategoryList(kind));
-		model.addAttribute("categoryselect", category_idx);
+		model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
+		model.addAttribute("categoryselect", criteria.getCategory_idx());
 
 		return "modules/email/email_edit";
 	}
 
 	// 글수정처리
 	@RequestMapping(value = "update.do", method = RequestMethod.POST)
-	public String Modify(Model model, @ModelAttribute Criteria criteria, @ModelAttribute EmailVO emailVO,
+	public String Update(Model model, @ModelAttribute Criteria criteria, @ModelAttribute EmailVO emailVO,
 			@RequestParam String pass, BindingResult bindingResult) throws Exception {
 
 		logger.info("글수정처리");
@@ -301,7 +283,7 @@ public class EmailController {
 		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin@1234")) {
 			service.update(emailVO);
 			model.addAttribute("msg", "UpdateSuccess");
-			model.addAttribute("url", "list.do?kind=3");
+			model.addAttribute("url", "list.do?criteria.getKind()=3");
 		} else {
 			model.addAttribute("msg", "PassFailed");
 			model.addAttribute("url",
@@ -326,7 +308,6 @@ public class EmailController {
 	@RequestMapping(value = "delete.do", method = RequestMethod.POST)
 	public String Delete(Model model, @ModelAttribute Criteria criteria, @ModelAttribute EmailVO emailVO,
 			@RequestParam String pass, BindingResult bindingResult
-	/* RedirectAttributes redirectAttributes */
 	) throws Exception {
 
 		logger.info("글삭제처리");
@@ -338,7 +319,7 @@ public class EmailController {
 			service.delete(emailVO.getEmail_idx());
 
 			model.addAttribute("msg", "DeleteSuccess");
-			model.addAttribute("url", "list.do?kind=3");
+			model.addAttribute("url", "list.do");
 		} else {
 			model.addAttribute("msg", "PassFailed");
 			model.addAttribute("url", "delete.do?email_idx=" + emailVO.getEmail_idx());

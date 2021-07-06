@@ -81,7 +81,7 @@
                                             </thead>
                                             <tbody>
                                                 <c:choose>
-                                                    <c:when test="${fn:length(list) == 0 && fn:length(noticelist) == 0}">
+                                                    <c:when test="${fn:length(list) == 0}">
                                                         <tr>
                                                             <td colspan="7"><spring:message code="info.nodata.msg"/></td>
                                                         </tr>
@@ -110,8 +110,8 @@
                                                                 	<fmt:parseDate var="dateString" value="${row.regdate}" pattern="yyyy-MM-dd" />                                                               
 	                                                                <fmt:formatDate value="${dateString}" pattern="yyyy-MM-dd"/>
 	                                                            </td>                                                                
-                                                                <td><a href="modify.do${pageMaker.makeSearch(pageMaker.criteria.page)}&category_idx=<c:out value="${row.category_idx}"/>">M</a></td>
-                                                                <td><a href="delete.do${pageMaker.makeSearch(pageMaker.criteria.page)}&category_idx=<c:out value="${row.category_idx}"/>">D</a></td>
+                                                                <td><a href="modify.do${pageMaker.makeSearch(pageMaker.criteria.page)}&category_idx=<c:out value="${row.category_idx}"/>">수정</a></td>
+                                                                <td><a href="delete.do${pageMaker.makeSearch(pageMaker.criteria.page)}&category_idx=<c:out value="${row.category_idx}"/>">삭제</a></td>
                                                             </tr>
                                                         </c:forEach>
                                                     </c:otherwise>

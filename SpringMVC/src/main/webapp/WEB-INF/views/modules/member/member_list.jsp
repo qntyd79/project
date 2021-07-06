@@ -18,6 +18,43 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <h2>회원목록</h2>
+                                <script type="text/javascript">
+								
+								    function doExcelUploadProcess(){
+									   
+									var f = new FormData(document.getElementById('excelform'));
+								        $.ajax({
+								            url: "${path}/modules/member/excelUpload.do",
+								            data: f,
+								            processData: false,
+								            contentType: false,
+								            type: "POST",
+								            success: function(data){
+								                console.log(data);
+								                document.getElementById('result').innerHTML = JSON.stringify(data);
+								            }
+								        })
+								    
+								    }
+								    
+								    function doExcelDownloadProcess(){
+								        var f = document.excelform;
+								        f.action = "excelDownload.do";
+								        f.submit();
+								    }								    
+								</script>
+								<form name="excelform" id="excelform" method="post" enctype="multipart/form-data">
+									<div class="search-form" style="float:both; text-align:right; margin-bottom:10px;">
+										<div class="filebox">
+											<input class="upload-name" id="item" disabled="disabled" style="width:260px;"/>
+											<label for="ex_filename" >파일첨부</label>
+											<input type='file' name='attach' id='ex_filename' class='upload-hidden'/>
+											<input type="button" id="addItemBtn" value="엑셀업로드" onclick="doExcelUploadProcess()"/>
+											<button type="button" class="green" onclick="doExcelDownloadProcess()">엑셀다운로드</button>	
+										</div>	
+									</div>						  
+								</form>
+								<div id="result"></div>	
                                 <form name="searchForm" id="searchForm" method="post" enctype="multipart/form-data">
                                     <div class="search-form" style="float:right; margin-bottom:10px;">
                                         <fieldset>                                        	
@@ -49,7 +86,8 @@
 											</select>								 							
 										</fieldset>
 									</div>							
-								</form>
+								</form>	
+											
                                 <div class="articles">
                                 	전체글 : <span>${pageMaker.totalCount}</span> 개 | 공지글 : <span>${pageMaker.noticeCount}</span> | 현재페이지 : <span>${pageMaker.criteria.page}</span> | 총페이지 : <span>${pageMaker.totalPage}</span>
                                 </div> 
@@ -83,7 +121,7 @@
                                                     <th scope="col">포인트</th>
                                                     <th scope="col">메일수신</th>
                                                     <th scope="col">가입일</th>
-                                                    <th scope="col">DEL</th>
+                                                    <th scope="col">삭제</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -106,7 +144,7 @@
                                                     <td>${row.point}</td>
                                                     <td>${row.mail_check eq '1' ? 'Y' : 'N'}</td>
                                                     <td>${row.join_date}</td>                                                    
-                                                    <td><a href="delete.do${pageMaker.makeSearch(pageMaker.criteria.page)}&member_idx=<c:out value="${row.member_idx}"/>">DEL</a></td>
+                                                    <td><a href="delete.do${pageMaker.makeSearch(pageMaker.criteria.page)}&member_idx=<c:out value="${row.member_idx}"/>">삭제</a></td>
                                                 </tr>
                                             	</c:forEach>									
 												</c:otherwise>									

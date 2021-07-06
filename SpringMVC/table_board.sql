@@ -14,14 +14,14 @@ link2 			VARCHAR(100),
 title 			VARCHAR(100) NOT NULL,        
 content 		TEXT NOT NULL,
 hit 			INT(10) NOT NULL,          
-cipp 			VARCHAR(30) NOT NULL,       
+cipp 			VARCHAR(30) DEFAULT '127.0.0.1', 
 tag 			INT(2) DEFAULT '0',
 secret			INT(2) DEFAULT '0',
 notice 			INT(2) DEFAULT '0',
 vote			INT(10) DEFAULT '0',
 sdate           VARCHAR(30),
 edate           VARCHAR(30),
-regdate 		DATETIME NOT NULL,
+regdate 		DATETIME DEFAULT CURRENT_TIMESTAMP,
 del 			VARCHAR(2) NOT NULL DEFAULT 'N',
 filecnt			INT(10) DEFAULT '0',
 commentcnt		INT(10) DEFAULT '0',
@@ -43,8 +43,8 @@ pass 			VARCHAR(100) NOT NULL,
 total	 		INT(10) DEFAULT '0',
 kind	 		INT(10) DEFAULT '0',
 hit 			INT(10) NOT NULL,  
-cipp 			VARCHAR(30) NOT NULL,  
-regdate 		DATETIME NOT NULL,
+cipp 			VARCHAR(30) DEFAULT '127.0.0.1',
+regdate 		DATETIME DEFAULT CURRENT_TIMESTAMP,
 del 			VARCHAR(2) NOT NULL DEFAULT 'N',
 board_idx 		INT(10) DEFAULT '0',
 member_idx 		INT(10) DEFAULT '0',
@@ -52,14 +52,17 @@ email_idx       INT(10) DEFAULT '0',
 PRIMARY KEY (category_idx)
 );
 
+/* 게시판 기본분류 */
 INSERT INTO mydb.JHBBS_category (category_idx, parent, depth, sortno, title, name, pass, total, kind, hit, cipp, regdate, del, board_idx, member_idx) 
-VALUES ('1', '1', '0', '0', '공지', 'admin', '1111', '1', '1', '0', '', now(), 'N', '0', '0'); 
+VALUES ('1', '1', '0', '0', '일반', '관리자', 'admin!@1234', '0', '1', '0', '127.0.0.1', CURRENT_TIMESTAMP(), 'N', '0', '0'); 
 
+/* 회원게시판 기본분류 */
 INSERT INTO mydb.JHBBS_category (category_idx, parent, depth, sortno, title, name, pass, total, kind, hit, cipp, regdate, del, board_idx, member_idx) 
-VALUES ('2', '1', '0', '0', '일반회원', 'admin', '1111', '2', '1', '0', '', now(), 'N', '0', '0'); 
+VALUES ('2', '2', '0', '0', '일반회원', '관리자', 'admin!@1234', '0', '2', '0', '127.0.0.1', CURRENT_TIMESTAMP(), 'N', '0', '0'); 
 
+/* 메일게시판 기본분류 */
 INSERT INTO mydb.JHBBS_category (category_idx, parent, depth, sortno, title, name, pass, total, kind, hit, cipp, regdate, del, board_idx, member_idx) 
-VALUES ('3', '1', '0', '0', '회원', 'admin', '1111', '3', '1', '0', '', now(), 'N', '0', '0'); 
+VALUES ('3', '3', '0', '0', '수신', '관리자', 'admin!@1234', '0', '3', '0', '127.0.0.1', CURRENT_TIMESTAMP(), 'N', '0', '0'); 
 
 CREATE TABLE IF NOT EXISTS  mydb.JHBBS_comment (
 comment_idx		INT(10) NOT NULL AUTO_INCREMENT,
@@ -72,9 +75,9 @@ pass 			VARCHAR(100) NOT NULL,
 email 			VARCHAR(100),       
 content 		TEXT NOT NULL,
 hit 			INT(10) NOT NULL,          
-cipp 			VARCHAR(30) NOT NULL,
+cipp 			VARCHAR(30) DEFAULT '127.0.0.1',
 vote 			INT(10) DEFAULT '0',
-regdate 		DATETIME NOT NULL,
+regdate 		DATETIME DEFAULT CURRENT_TIMESTAMP,
 del 			VARCHAR(2) NOT NULL DEFAULT 'N',
 board_idx 		INT(10) DEFAULT '0',
 PRIMARY KEY (comment_idx)
@@ -90,7 +93,7 @@ file_size 		VARCHAR(100) NOT NULL,
 file_type		VARCHAR(100) NOT NULL,
 file_ext		VARCHAR(100) NOT NULL,
 download 		INT(10) NOT NULL,  
-regdate 		DATETIME NOT NULL,
+regdate 		DATETIME DEFAULT CURRENT_TIMESTAMP,
 del 			VARCHAR(2) NOT NULL DEFAULT 'N',
 board_idx 		INT(10) DEFAULT '0',
 member_idx      INT(10) DEFAULT '0',
@@ -100,8 +103,6 @@ PRIMARY KEY (file_idx)
 );
 
 ALTER TABLE mydb.JHBBS_file ADD CONSTRAINT `fk_board_idx` FOREIGN KEY (`board_idx`) REFERENCES mydb.JHBBS_board (`board_idx`);
-ALTER TABLE mydb.JHBBS_file ADD CONSTRAINT `fk_member_idx` FOREIGN KEY (`member_idx`) REFERENCES mydb.JHBBS_member (`member_idx`);
-ALTER TABLE mydb.JHBBS_file ADD CONSTRAINT `fk_email_idx` FOREIGN KEY (`email_idx`) REFERENCES mydb.JHBBS_email (`email_idx`);
 
 CREATE TABLE IF NOT EXISTS  mydb.JHBBS_attach(
 file_idx		INT(10) NOT NULL AUTO_INCREMENT,
@@ -117,9 +118,9 @@ pass 			VARCHAR(100) NOT NULL,
 title 			VARCHAR(100) NOT NULL,   
 content			TEXT, 
 hit 			INT(10) NOT NULL,       
-cipp 			VARCHAR(30) NOT NULL, 
+cipp 			VARCHAR(30) DEFAULT '127.0.0.1',
 vote 			INT(10) DEFAULT '0',   
-regdate 		DATETIME NOT NULL,
+regdate 		DATETIME DEFAULT CURRENT_TIMESTAMP,
 del 			VARCHAR(2) NOT NULL DEFAULT 'N',
 category_idx 	INT(10) DEFAULT '1',
 board_idx 		INT(10) DEFAULT '0',
@@ -160,18 +161,18 @@ com_address2	VARCHAR(100),
 com_phone		VARCHAR(20),
 com_fax			VARCHAR(20),
 */
-level			INT(10) NOT NULL DEFAULT '0',
-point			INT(10) NOT NULL DEFAULT '0',
+level			INT(10) NOT NULL DEFAULT '10',
+point			INT(10) NOT NULL DEFAULT '100',
 approval		INT(10) NOT NULL DEFAULT '2',
-join_date		VARCHAR(30) NOT NULL,
-login_last		VARCHAR(30) NOT NULL,
-login_cnt		INT(10) NOT NULL DEFAULT '0',
-login_ip		VARCHAR(30) NOT NULL DEFAULT '0',
-user_leave		INT(10) NOT NULL DEFAULT '0',
-cipp 			VARCHAR(30) NOT NULL,
-regdate 		DATETIME NOT NULL,
+join_date		DATETIME DEFAULT CURRENT_TIMESTAMP,
+login_last		VARCHAR(30) DEFAULT '127.0.0.1',
+login_cnt		INT(10) DEFAULT '0',
+login_ip		VARCHAR(30) DEFAULT '127.0.0.1',
+user_leave		INT(10) DEFAULT '0',
+cipp 			VARCHAR(30) DEFAULT '127.0.0.1',
+regdate 		DATETIME DEFAULT CURRENT_TIMESTAMP,
 del 			VARCHAR(2) NOT NULL DEFAULT 'N',
-category_idx 	INT(10) DEFAULT '1',
+category_idx 	INT(10) NOT NULL DEFAULT '1',
 add_frm1		VARCHAR(100),
 add_frm2		VARCHAR(100),
 add_frm3		VARCHAR(100),
@@ -185,6 +186,8 @@ add_frm10		VARCHAR(100),
 PRIMARY KEY(member_idx)
 );
 
+ALTER TABLE mydb.JHBBS_file ADD CONSTRAINT `fk_member_idx` FOREIGN KEY (`member_idx`) REFERENCES mydb.JHBBS_member (`member_idx`);
+
 CREATE TABLE  IF NOT EXISTS mydb.JHBBS_email (
 email_idx		INT(10) NOT NULL AUTO_INCREMENT,
 userid			VARCHAR(10) NOT NULL,
@@ -195,8 +198,10 @@ title 			VARCHAR(100) NOT NULL,
 content			TEXT,   
 hit 			INT(10) NOT NULL,     
 cipp 			VARCHAR(30) NOT NULL,       
-regdate 		DATETIME NOT NULL,
+regdate 		DATETIME DEFAULT CURRENT_TIMESTAMP,
 del 			VARCHAR(2) NOT NULL DEFAULT 'N',
 category_idx 	INT(10) DEFAULT '1',
 PRIMARY KEY(email_idx)
 );
+
+ALTER TABLE mydb.JHBBS_file ADD CONSTRAINT `fk_email_idx` FOREIGN KEY (`email_idx`) REFERENCES mydb.JHBBS_email (`email_idx`);

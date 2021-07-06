@@ -16,16 +16,6 @@
 	]]>
 	</select>
 	
-	<!-- 파일목록 -->
-	<select id="getFileList" resultType="com.company.bbs.vo.board.BoardVO">
-	<![CDATA[ 
-	select * from jhbbs_file where file_idx > 0 and del = 'N' and board_idx = #{board_idx}
-	]]>
-	<![CDATA[ 
-	order by regdate DESC
-	]]>
-	</select>
-
 	<!-- 공지글목록 -->
 	<select id="getNoticeList" resultType="com.company.bbs.vo.board.BoardVO">
 	<![CDATA[ 
@@ -34,14 +24,14 @@
 		<include refid="category"></include>
 		<include refid="search"></include>
 	<![CDATA[ 
-	order by parent desc, sortno asc
+	order by parent desc, sortno asc 
 	]]>
 	</select>
 	
 	<!-- 카테고리명 -->
 	<select id="getCategory" resultType="com.company.bbs.vo.category.CategoryVO">
 	<![CDATA[ 
-	select * from jhbbs_category where del = 'N'
+	select category_idx, title from jhbbs_category where kind=1 and del = 'N'
 	]]>
 	<![CDATA[ 
 	order by category_idx DESC
@@ -51,12 +41,22 @@
 	<!-- 카테고리목록 -->
 	<select id="getCategoryList" resultType="com.company.bbs.vo.category.CategoryVO">
 	<![CDATA[ 
-	select * from jhbbs_category where kind=#{kind} and del = 'N'
+	select * from jhbbs_category where kind=1 and del = 'N'
 	]]>
 	<![CDATA[ 
 	order by category_idx DESC
 	]]>
-	</select>		
+	</select>
+	
+	<!-- 파일목록 -->
+	<select id="getFileList" resultType="com.company.bbs.vo.board.BoardVO">
+	<![CDATA[ 
+	select * from jhbbs_file where file_idx > 0 and del = 'N' and board_idx = #{board_idx}
+	]]>
+	<![CDATA[ 
+	order by regdate DESC
+	]]>
+	</select>
 	
 	<!-- 글저장 -->
 	<insert id="insert" parameterType="com.company.bbs.vo.board.BoardVO">
@@ -188,7 +188,7 @@
 		<include refid="search"></include>
 	</select>
 	
-	<!-- 코멘트갯수 -->
+	<!-- 코멘트갯수
 	<update id="getCommentCount" parameterType="int">
 	<![CDATA[ 
 	update jhbbs_board b
@@ -196,8 +196,16 @@
 	where b.board_idx = #{board_idx};
 	]]>
 	</update>
+	-->
+	
+	<!-- 코멘트갯수 -->
+	<select id="getCommentCount" parameterType="int">
+	<![CDATA[ 
+	select count(comment_idx) from jhbbs_comment where board_idx = #{board_idx} and comment_idx > 0 and del = 'N'
+	]]>
+	</select>
 	 
-	<!-- 첨부파일 갯수-->
+	<!-- 첨부파일 갯수
 	<update id="getAttachCount" parameterType="int">
 	<![CDATA[ 
 	update jhbbs_board b
@@ -205,7 +213,14 @@
 	where b.board_idx = #{board_idx};  
 	]]>   
 	</update>
-
+	-->
+	
+	<select id="getAttachCount" parameterType="int">
+	<![CDATA[ 
+	select count(file_idx) from JHBBS_file where board_idx = #{board_idx} and file_idx > 0 and del = 'N'
+	]]>   
+	</select>
+	
 	<!-- 공지글갯수 -->
 	<select id="getNoticeCount" resultType="int">
 	<![CDATA[  

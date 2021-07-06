@@ -107,8 +107,8 @@ public class BoardDaoImpl implements BoardDao {
 	
 	// 카테고리목록
 	@Override
-	public List<Object> getCategoryList(int idx) throws Exception {
-		return sqlSession.selectList("board.getCategoryList", idx);
+	public List<Object> getCategoryList() throws Exception {
+		return sqlSession.selectList("board.getCategoryList");
 	}
 	
 	// 첨부파일 저장
@@ -119,8 +119,8 @@ public class BoardDaoImpl implements BoardDao {
 		
 	// 첨부파일갯수 
 	@Override
-	public void getAttachCount(int board_idx) throws Exception {
-		sqlSession.selectOne("board.getAttachCount", board_idx);
+	public int getAttachCount(int board_idx) throws Exception {
+		return sqlSession.selectOne("board.getAttachCount", board_idx);
 	}
 	
 	// 첨부파일목록 

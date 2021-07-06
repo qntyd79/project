@@ -78,4 +78,6 @@ public interface MemberDao {
 	// 아이디중복체크
 	public int idCheck(MemberVO memberVO) throws Exception;
 
+	public List<MemberVO> getExcelList() throws Exception;
+
 }

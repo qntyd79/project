@@ -49,4 +49,6 @@ public interface CommentDao {
 	// 댓글갯수
 	public int getCommentCount(int board_idx) throws Exception;
 
+	public int getBoard_idx(int comment_idx) throws Exception;
+
 }

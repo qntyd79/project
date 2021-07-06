@@ -116,4 +116,9 @@ public class CommentDaoImpl implements CommentDao {
 		return sqlSession.selectOne("comment.getCommentCount", map);
 	}
 
+	@Override
+	public int getBoard_idx(int comment_idx) throws Exception {
+		return sqlSession.selectOne("comment.getBoard_idx", comment_idx);
+	}
+
 }

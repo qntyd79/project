@@ -119,7 +119,6 @@ public class PageMaker {
                 .queryParam("perPageNum",criteria.getPerPageNum())
                 .queryParam("searchField",criteria.getSearchField())
 				.queryParam("keyWord",encoding(criteria.getKeyWord()))
-				.queryParam("kind",criteria.getKind())
                 .build();
 
         return uriComponents.toUriString();

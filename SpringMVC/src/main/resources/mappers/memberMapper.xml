@@ -22,7 +22,7 @@
 	<!-- 카테고리명 -->
 	<select id="getCategory" resultType="com.company.bbs.vo.category.CategoryVO">
 	<![CDATA[ 
-	select * from jhbbs_category where del = 'N'
+	select category_idx, title from jhbbs_category where del = 'N'
 	]]>
 	<![CDATA[ 
 	order by category_idx DESC
@@ -32,7 +32,7 @@
 	<!-- 카테고리목록 -->
 	<select id="getCategoryList" resultType="com.company.bbs.vo.category.CategoryVO">
 	<![CDATA[ 
-	select * from jhbbs_category where kind=#{kind} and del = 'N'
+	select * from jhbbs_category where kind= 2 and del = 'N'
 	]]>
 	<![CDATA[ 
 	order by category_idx DESC
@@ -202,6 +202,19 @@
 	<select id="getViewMember" resultType="com.company.bbs.vo.member.MemberVO">
 	<![CDATA[ 
 		SELECT * FROM jhbbs_member WHERE userid = #{userid} AND pass = #{pass}
+	]]>
+	</select>
+	
+	<!-- 회원엑셀목록 -->
+	<select id="getExcelList" fetchSize="100" 
+		resultType="com.company.bbs.vo.member.MemberVO">
+	<![CDATA[ 
+	select * from jhbbs_member where member_idx > 0 and del = 'N'
+	]]>
+		<include refid="category"></include>
+		<include refid="search"></include>
+	<![CDATA[ 
+	order by member_idx desc 
 	]]>
 	</select>
 	

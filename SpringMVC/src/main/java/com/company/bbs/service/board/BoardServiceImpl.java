@@ -168,7 +168,7 @@ public class BoardServiceImpl implements BoardService {
 		}	
 		
 		// 첨부파일 등록 후 board테이블 filecnt(파일갯수) 업데이트
-		dao.getAttachCount(attachVO.getBoard_idx());
+		//dao.getAttachCount(attachVO.getBoard_idx());
 	}
 
 	// 답글업데이트
@@ -251,8 +251,8 @@ public class BoardServiceImpl implements BoardService {
 
 	// 카테고리목록
 	@Override
-	public List<Object> getCategoryList(int idx) throws Exception {
-		return dao.getCategoryList(idx);
+	public List<Object> getCategoryList() throws Exception {
+		return dao.getCategoryList();
 	}
 		
 	// 첨부파일목록
@@ -272,6 +272,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void getCommentCount(int board_idx) throws Exception {
 		dao.getCommentCount(board_idx);		
+	}
+
+	@Override
+	public int getAttachCount(int board_idx) throws Exception {
+		return dao.getAttachCount(board_idx);
 	}
 
 }

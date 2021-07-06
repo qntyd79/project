@@ -2342,7 +2342,7 @@ button {
 input, select{
 	width:auto;
 	height:auto;
-    padding:8px;
+    padding:8px 8px 8px 8px;
     font-size: @font-size-base;
     display: inline-block;
     -webkit-transition-duration: 0.4s;
@@ -2502,6 +2502,17 @@ textarea {
 .danger {
     .background(#f44336);
     border: none;
+    color: #fff;
+
+    &:hover {
+        .background(#da190b);
+        color: #fff;
+    }
+}
+
+.green {
+    .background(#147814	);
+    border: #006400;
     color: #fff;
 
     &:hover {
@@ -2886,13 +2897,13 @@ label.error{
 // 첨부파일 버튼 CSS
 .filebox label {
     display: inline-block;
-    padding: 8.5px 20px;
+    padding: 9px 20px;
     font-size: inherit;
     vertical-align: middle;
     color: #fff;
     cursor: pointer;
     .background(#337ab7);
-    border: 1px solid #2e6da4;
+    //border: 1px solid #2e6da4;
 }
 
 .filebox input[type="file"] {

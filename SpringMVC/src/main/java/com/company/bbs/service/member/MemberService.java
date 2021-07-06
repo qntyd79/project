@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.company.bbs.utill.Criteria;
 import com.company.bbs.vo.member.MemberVO;
@@ -77,5 +79,14 @@ public interface MemberService {
 	
 	// 아이디중복확인
 	public int idCheck(MemberVO memberVO) throws Exception;
+	
+	// 엑셀파일 목록
+	public List<MemberVO> getExcelList() throws Exception;
+	
+	// 엑셀파일 다운로드
+	public SXSSFWorkbook excelFileDownloadProcess(List<MemberVO> list) throws Exception;
+	
+	// 엑셀파일 업로드
+	public List<MemberVO> excelFilUploadProcess(MultipartFile attach) throws Exception;
  
 }

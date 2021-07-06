@@ -51,7 +51,7 @@ public class CommentRestController {
 		try {
 			service.insert(commentVO);
 			// 코멘트갯수 업데이트 
-			bservice.getCommentCount(commentVO.getBoard_idx());
+			// bservice.getCommentCount(commentVO.getBoard_idx());
 			
 			entity = new ResponseEntity<>("insertSuccess", HttpStatus.OK);
 		} catch (Exception e) {

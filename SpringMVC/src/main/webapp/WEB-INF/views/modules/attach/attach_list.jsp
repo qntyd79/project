@@ -70,13 +70,12 @@
 											<colgroup>
 												<col width="5%" />
 												<col width="5%" />
-												<col width="30%" />
-												<col width="10%" />
-												<col width="15%" />
+												<col width="40%" />
 												<col width="10%" />
 												<col width="10%" />
 												<col width="10%" />
-												<col width="5%" />
+												<col width="10%" />
+												<col width="10%" />
 											</colgroup>
 											<thead>
 												<tr class="tline">
@@ -84,7 +83,6 @@
 													<th scope="col"><spring:message code="bbs.list.no" /></th>
 													<th scope="col">파일명</th>
 													<th scope="col">파일사이즈</th>
-													<th scope="col">파일타입</th>
 													<th scope="col">파일확장자</th>
 													<th scope="col">등록일</th>
 													<th scope="col">다운로드</th>
@@ -95,7 +93,7 @@
 												<c:choose>
 													<c:when test="${fn:length(list) == 0}">
 														<tr>
-															<td colspan="9"><spring:message code="info.nodata.msg" /></td>
+															<td colspan="8"><spring:message code="info.nodata.msg" /></td>
 														</tr>
 													</c:when>
 													<c:otherwise>
@@ -105,14 +103,13 @@
 																<td><strong>${status.index+1}</strong></td>
 																<td class="text-left">${row.file_name}</td>
 																<td><fmt:formatNumber value="${row.file_size}" type="number" />KB</td>
-																<td>${row.file_type}</td>
 																<td>${row.file_ext}</td>
 																<td>
 																	<fmt:parseDate var="dateString"	value="${row.regdate}" pattern="yyyy-MM-dd" />
 																 	<fmt:formatDate	value="${dateString}" pattern="yyyy-MM-dd" />
 																</td>
 																<td>클릭</td>
-																<td><a href="delete.do?filename=<c:out value="${row.file_hash_name}"/>&file_idx=<c:out value="${row.file_idx}"/>">D</a></td>
+																<td><a href="delete.do?filename=<c:out value="${row.file_hash_name}"/>&file_idx=<c:out value="${row.file_idx}"/>">삭제</a></td>
 															</tr>
 														</c:forEach>
 													</c:otherwise>

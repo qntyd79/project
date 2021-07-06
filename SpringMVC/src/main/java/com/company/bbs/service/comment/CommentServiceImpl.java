@@ -49,6 +49,7 @@ public class CommentServiceImpl implements CommentService {
 		int sortno = commentVO.getSortno();
 		String del = commentVO.getDel();
 		int board_idx = commentVO.getBoard_idx();
+		
 		String pass = commentVO.getPass();
 		// int number = 0;
 		
@@ -86,6 +87,7 @@ public class CommentServiceImpl implements CommentService {
 			depth = depth + 1;
 			sortno = sortno + 1;
 			del = "N";
+			board_idx = dao.getBoard_idx(comment_idx);
 		} else { // 새글일경우
 			parent = number;
 			depth = 0;
@@ -101,8 +103,8 @@ public class CommentServiceImpl implements CommentService {
 		commentVO.setRegdate(regdate);
 		commentVO.setDel(del);
 		commentVO.setContent(content);
-		commentVO.setBoard_idx(board_idx);
 		commentVO.setPass(pwdBycrypt);
+		commentVO.setBoard_idx(board_idx);
 		// dto.setTitle(i + "번쨰 제목입니다.");
 
 		dao.insert(commentVO);

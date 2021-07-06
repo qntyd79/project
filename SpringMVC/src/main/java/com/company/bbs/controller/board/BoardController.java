@@ -74,9 +74,7 @@ public class BoardController {
 
 	// 글목록 (Model)
 	@RequestMapping(value = "list.do")
-	public String List(Model model, @ModelAttribute Criteria criteria,
-			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "1") int kind)
-			throws Exception {
+	public String List(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("글목록");
 
@@ -89,19 +87,16 @@ public class BoardController {
 		model.addAttribute("list", service.getList(criteria));
 		model.addAttribute("noticelist", service.getNoticeList(criteria));
 		model.addAttribute("categoryname", service.getCategory());
-		model.addAttribute("categorylist", service.getCategoryList(kind));
-		model.addAttribute("categoryselect", category_idx);
+		model.addAttribute("categorylist", service.getCategoryList());
+		model.addAttribute("categoryselect", criteria.getCategory_idx());
 		model.addAttribute("pageMaker", pageMaker);
-		// model.addAttribute("searchField", searchField);
-		// model.addAttribute("searchWord", searchWord);
 
 		return "modules/board/board_list";
 	}
 
 	// 글목록 (ModelAndView)
 	@RequestMapping(value = "mvlist.do")
-	public ModelAndView List(@ModelAttribute Criteria criteria, @RequestParam(defaultValue = "0") int category_idx,
-			@RequestParam(defaultValue = "1") int kind) throws Exception {
+	public ModelAndView List(@ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("글목록");
 
@@ -116,11 +111,10 @@ public class BoardController {
 		mav.addObject("list", service.getList(criteria));
 		mav.addObject("noticelist", service.getNoticeList(criteria));
 		mav.addObject("categoryname", service.getCategory());
-		mav.addObject("categorylist", service.getCategoryList(kind));
-		mav.addObject("categoryselect", category_idx);
+		mav.addObject("categorylist", service.getCategoryList());
+		mav.addObject("categoryselect", criteria.getCategory_idx());
 		mav.addObject("pageMaker", pageMaker);
-		// mav.addObject("searchField", searchField);
-		// mav.addObject("searchWord", searchWord);
+
 		mav.setViewName("modules/board/board_list");
 
 		return mav;
@@ -128,9 +122,7 @@ public class BoardController {
 
 	// 글목록 (Map)
 	@RequestMapping(value = "mlist.do")
-	public String List1(Model model, @ModelAttribute Criteria criteria,
-			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "1") int kind)
-			throws Exception {
+	public String List1(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("글목록");
 
@@ -145,11 +137,10 @@ public class BoardController {
 		map.put("list", service.getList(criteria));
 		map.put("noticelist", service.getNoticeList(criteria));
 		map.put("categoryname", service.getCategory());
-		map.put("categorylist", service.getCategoryList(kind));
-		map.put("categoryselect", category_idx);
+		map.put("categorylist", service.getCategoryList());
+		map.put("categoryselect", criteria.getCategory_idx());
 		map.put("pageMaker", pageMaker);
-		// map.put("searchField", searchField);
-		// map.put("searchWord", searchWord);
+
 		model.addAllAttributes(map);
 
 		return "modules/board/board_list";
@@ -157,28 +148,27 @@ public class BoardController {
 
 	// 글등록폼
 	@RequestMapping(value = "write.do", method = RequestMethod.GET)
-	public String Write(Model model, @ModelAttribute BoardVO boardVO, @RequestParam(defaultValue = "1") int kind)
+	public String Write(Model model, @ModelAttribute Criteria criteria, @ModelAttribute BoardVO boardVO)
 			throws Exception {
 
 		logger.info("글쓰기");
 
 		model.addAttribute("boardVO", boardVO);
-		model.addAttribute("categorylist", service.getCategoryList(kind));
+		model.addAttribute("categorylist", service.getCategoryList());
 
 		return "modules/board/board_write";
 	}
 
 	// 답글쓰기
 	@RequestMapping(value = "reply.do", method = RequestMethod.GET)
-	public ModelAndView Reply(@RequestParam int board_idx, @ModelAttribute Criteria criteria,
-			@RequestParam(defaultValue = "1") int kind) throws Exception {
+	public ModelAndView Reply(@ModelAttribute Criteria criteria, @RequestParam int board_idx) throws Exception {
 
 		logger.info("답글쓰기");
 
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("boardVO", service.getView(board_idx));
-		mav.addObject("categorylist", service.getCategoryList(kind));
+		mav.addObject("categorylist", service.getCategoryList());
 		mav.setViewName("modules/board/board_reply");
 
 		return mav;
@@ -186,8 +176,8 @@ public class BoardController {
 
 	// 글저장
 	@RequestMapping(value = "insert.do", method = { RequestMethod.POST, RequestMethod.GET })
-	public String Insert(Model model, @ModelAttribute BoardVO boardVO, BindingResult bindingResult,
-			@RequestParam(defaultValue = "1") int kind, HttpServletRequest request) throws Exception {
+	public String Insert(Model model, @ModelAttribute Criteria criteria, @ModelAttribute BoardVO boardVO,
+			BindingResult bindingResult, HttpServletRequest request) throws Exception {
 
 		logger.info("글저장처리");
 
@@ -198,10 +188,13 @@ public class BoardController {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("boardVO", boardVO);
 			model.addAttribute("categoryname", service.getCategory());
-			model.addAttribute("categorylist", service.getCategoryList(kind));
+			model.addAttribute("categorylist", service.getCategoryList());
+			
 			if (boardVO.getBoard_idx() != 0) {
+				// 새글이 아니면 답글폼 출력 
 				return "modules/board/board_reply";
 			} else {
+				// 새글이면 새글등록폼 출력 
 				return "modules/board/board_write";
 			}
 		}
@@ -215,13 +208,11 @@ public class BoardController {
 			service.insert(boardVO);
 
 			model.addAttribute("msg", "InsertSuccess");
-			model.addAttribute("url", "list.do?kind=1");
-
-			return "/modules/common/common_message";
+			model.addAttribute("url", "list.do");
 
 		} else {
+			
 			model.addAttribute("msg", "CaptchaFailed");
-
 			if (boardVO.getBoard_idx() != 0) {
 				model.addAttribute("url", "reply.do");
 				return "modules/board/board_reply";
@@ -230,13 +221,13 @@ public class BoardController {
 				return "modules/board/board_write";
 			}
 		}
+
+		return "/modules/common/common_message";
 	}
 
 	// 글보기
 	@RequestMapping(value = "read.do", method = RequestMethod.GET)
-	public String Read(Model model, @ModelAttribute Criteria criteria, @RequestParam int board_idx,
-			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "1") int kind)
-			throws Exception {
+	public String Read(Model model, @ModelAttribute Criteria criteria, @RequestParam int board_idx) throws Exception {
 
 		logger.info("글보기");
 
@@ -246,17 +237,15 @@ public class BoardController {
 		model.addAttribute("prenum", service.getPrevNum(board_idx));
 		model.addAttribute("nextnum", service.getNextNum(board_idx));
 		model.addAttribute("categoryname", service.getCategory());
-		model.addAttribute("categorylist", service.getCategoryList(kind));
-		model.addAttribute("list", service.getFileList(board_idx));
+		model.addAttribute("categorylist", service.getCategoryList());
+		model.addAttribute("filelist", service.getFileList(board_idx));
 
 		return "modules/board/board_view";
 	}
 
 	// 글보기
 	@RequestMapping(value = "mvread.do", method = RequestMethod.GET)
-	public ModelAndView Read(@ModelAttribute Criteria criteria, @RequestParam int board_idx,
-			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "1") int kind)
-			throws Exception {
+	public ModelAndView Read(@ModelAttribute Criteria criteria, @RequestParam int board_idx) throws Exception {
 
 		logger.info("글보기");
 
@@ -268,33 +257,31 @@ public class BoardController {
 		mav.addObject("prenum", service.getPrevNum(board_idx));
 		mav.addObject("nextnum", service.getNextNum(board_idx));
 		mav.addObject("categoryname", service.getCategory());
-		mav.addObject("categorylist", service.getCategoryList(kind));
+		mav.addObject("categorylist", service.getCategoryList());
 		mav.setViewName("modules/board/board_view");
 
 		return mav;
 	}
 
 	// 글수정폼
-	@RequestMapping(value = "modify.do", method = RequestMethod.GET)
-	public String Modify(Model model, @ModelAttribute Criteria criteria, @RequestParam int board_idx,
-			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "1") int kind)
-			throws Exception {
+	@RequestMapping(value = "edit.do", method = RequestMethod.GET)
+	public String Edit(Model model, @ModelAttribute Criteria criteria, @RequestParam int board_idx) throws Exception {
 
 		logger.info("글수정");
 
 		model.addAttribute("boardVO", service.getView(board_idx));
 		model.addAttribute("categoryname", service.getCategory());
-		model.addAttribute("categorylist", service.getCategoryList(kind));
-		model.addAttribute("categoryselect", category_idx);
+		model.addAttribute("categorylist", service.getCategoryList());
+		model.addAttribute("categoryselect", criteria.getCategory_idx());
+		model.addAttribute("filelist", service.getFileList(board_idx));
 
 		return "modules/board/board_edit";
 	}
 
 	// 글수정처리
 	@RequestMapping(value = "update.do", method = RequestMethod.POST)
-	public String Modify(Model model, @ModelAttribute Criteria criteria, @ModelAttribute BoardVO boardVO,
-			@RequestParam String pass, BindingResult bindingResult
-	) throws Exception {
+	public String Update(Model model, @ModelAttribute Criteria criteria, @ModelAttribute BoardVO boardVO,
+			@RequestParam String pass, BindingResult bindingResult) throws Exception {
 
 		logger.info("글수정처리");
 
@@ -310,10 +297,10 @@ public class BoardController {
 		String rawPassword = boardVO.getPass();
 		String encodedPassword = service.getPassword(boardVO.getBoard_idx());
 
-		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin@1234")) {
+		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin!@1234")) {
 			service.update(boardVO);
 			model.addAttribute("msg", "UpdateSuccess");
-			model.addAttribute("url", "list.do?kind=1");
+			model.addAttribute("url", "list.do");
 		} else {
 			model.addAttribute("msg", "PassFailed");
 			model.addAttribute("url",
@@ -346,11 +333,12 @@ public class BoardController {
 		String rawPassword = boardVO.getPass();
 		String encodedPassword = service.getPassword(boardVO.getBoard_idx());
 
-		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin@1234")) {
+		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin!@1234")) {
+			
 			service.delete(boardVO.getBoard_idx());
 
 			model.addAttribute("msg", "DeleteSuccess");
-			model.addAttribute("url", "list.do?kind=1");
+			model.addAttribute("url", "list.do");
 		} else {
 			model.addAttribute("msg", "PassFailed");
 			model.addAttribute("url", "delete.do?board_idx=" + boardVO.getBoard_idx());

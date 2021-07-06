@@ -154,6 +154,11 @@ public class MemberDaoImpl implements MemberDao {
 		int result = sqlSession.selectOne("member.idCheck", memberVO);
 		return result;
 	}
+
+	@Override
+	public List<MemberVO> getExcelList() throws Exception {
+		return sqlSession.selectList("member.getExcelList");
+	}
 	
 
 }

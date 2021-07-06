@@ -65,8 +65,7 @@ public class CategoryController {
 
 	// 글목록 (Model)
 	@RequestMapping(value = "list.do")
-	public String List(Model model, @ModelAttribute Criteria criteria,
-			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "1") int kind)
+	public String List(Model model, @ModelAttribute Criteria criteria)
 			throws Exception {
 
 		logger.info("글목록");
@@ -77,8 +76,8 @@ public class CategoryController {
 		pageMaker.setTotalCount(service.getCount(criteria));
 
 		model.addAttribute("list", service.getList(criteria));
-		model.addAttribute("categorylist", service.getCategoryList(kind));
-		model.addAttribute("categoryselect", category_idx);
+		model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
+		model.addAttribute("categoryselect", criteria.getCategory_idx());
 		model.addAttribute("pageMaker", pageMaker);
 		// model.addAttribute("searchField", searchField);
 		// model.addAttribute("searchWord", searchWord);
@@ -88,8 +87,7 @@ public class CategoryController {
 
 	// 글목록 (ModelAndView)
 	@RequestMapping(value = "mvlist.do")
-	public ModelAndView List(@ModelAttribute Criteria criteria, @RequestParam(defaultValue = "0") int category_idx,
-			@RequestParam(defaultValue = "1") int kind) throws Exception {
+	public ModelAndView List(@ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("글목록");
 
@@ -101,11 +99,9 @@ public class CategoryController {
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("list", service.getList(criteria));
-		mav.addObject("categorylist", service.getCategoryList(kind));
-		mav.addObject("categoryselect", category_idx);
+		mav.addObject("categorylist", service.getCategoryList(criteria.getKind()));
+		mav.addObject("categoryselect", criteria.getCategory_idx());
 		mav.addObject("pageMaker", pageMaker);
-		// mav.addObject("searchField", searchField);
-		// mav.addObject("searchWord", searchWord);
 		mav.setViewName("modules/category/category_list");
 
 		return mav;
@@ -113,8 +109,7 @@ public class CategoryController {
 
 	// 글목록 (Map)
 	@RequestMapping(value = "mlist.do")
-	public String List1(Model model, @ModelAttribute Criteria criteria,
-			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "1") int kind)
+	public String List1(Model model, @ModelAttribute Criteria criteria)
 			throws Exception {
 
 		logger.info("글목록");
@@ -127,11 +122,9 @@ public class CategoryController {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		map.put("list", service.getList(criteria));
-		map.put("categorylist", service.getCategoryList(kind));
-		map.put("categoryselect", category_idx);
+		map.put("categorylist", service.getCategoryList(criteria.getKind()));
+		map.put("categoryselect", criteria.getCategory_idx());
 		map.put("pageMaker", pageMaker);
-		// map.put("searchField", searchField);
-		// map.put("searchWord", searchWord);
 		model.addAllAttributes(map);
 
 		return "modules/category/category_list";
@@ -139,28 +132,27 @@ public class CategoryController {
 
 	// 글등록
 	@RequestMapping(value = "write.do", method = RequestMethod.GET)
-	public String Write(Model model, @ModelAttribute CategoryVO categoryVO, @RequestParam(defaultValue = "1") int kind)
+	public String Write(Model model, @ModelAttribute Criteria criteria, @ModelAttribute CategoryVO categoryVO)
 			throws Exception {
 
 		logger.info("글쓰기");
 
 		model.addAttribute("categoryVO", categoryVO);
-		model.addAttribute("categorylist", service.getCategoryList(kind));
+		model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
 
 		return "modules/category/category_write";
 	}
 
 	// 답글쓰기
 	@RequestMapping(value = "reply.do", method = RequestMethod.GET)
-	public ModelAndView Reply(@RequestParam int category_idx, @ModelAttribute Criteria criteria,
-			@RequestParam(defaultValue = "1") int kind) throws Exception {
+	public ModelAndView Reply(@ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("답글쓰기");
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("categoryVO", service.getView(category_idx));
-		mav.addObject("categorylist", service.getCategoryList(kind));
+		mav.addObject("categoryVO", service.getView(criteria.getCategory_idx()));
+		mav.addObject("categorylist", service.getCategoryList(criteria.getKind()));
 		mav.setViewName("modules/category/category_reply");
 
 		return mav;
@@ -168,7 +160,7 @@ public class CategoryController {
 
 	// 글저장
 	@RequestMapping(value = "insert.do", method = { RequestMethod.POST, RequestMethod.GET })
-	public String Insert(Model model, @ModelAttribute CategoryVO categoryVO, @RequestParam(defaultValue = "1") int kind,
+	public String Insert(Model model, @ModelAttribute Criteria criteria, @ModelAttribute CategoryVO categoryVO, 
 			BindingResult bindingResult, HttpServletRequest request) throws Exception {
 
 		logger.info("글저장처리");
@@ -179,7 +171,7 @@ public class CategoryController {
 		// 서버측 유효성검증 후 에러가 발생할 경우 등록폼 출력
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("categoryVO", categoryVO);
-			model.addAttribute("categorylist", service.getCategoryList(kind));
+			model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
 			if (categoryVO.getCategory_idx() != 0) {
 				return "modules/category/category_reply";
 			} else {
@@ -195,9 +187,7 @@ public class CategoryController {
 			service.insert(categoryVO);
 
 			model.addAttribute("msg", "InsertSuccess");
-			model.addAttribute("url", "list.do?kind=" + kind);
-
-			return "/modules/common/common_message";
+			model.addAttribute("url", "list.do?kind=" + criteria.getKind());
 
 		} else {
 			model.addAttribute("msg", "CaptchaFailed");
@@ -209,68 +199,63 @@ public class CategoryController {
 				model.addAttribute("url", "write.do");
 				return "modules/category/category_write";
 			}
-		}
+		}		
+
+		return "/modules/common/common_message";
 	}
 
 	// 글보기
 	@RequestMapping(value = "read.do", method = RequestMethod.GET)
-	public String Read(Model model, @ModelAttribute Criteria criteria, @RequestParam int category_idx,
-			// @RequestParam(defaultValue = "0") int category_idx,
-			@RequestParam(defaultValue = "1") int kind) throws Exception {
+	public String Read(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("글보기");
 
-		service.increaseCnt(category_idx);
+		service.increaseCnt(criteria.getCategory_idx());
 
-		model.addAttribute("categoryVO", service.getView(category_idx));
-		model.addAttribute("prenum", service.getPrevNum(category_idx));
-		model.addAttribute("nextnum", service.getNextNum(category_idx));
-		model.addAttribute("categorylist", service.getCategoryList(kind));
+		model.addAttribute("categoryVO", service.getView(criteria.getCategory_idx()));
+		model.addAttribute("prenum", service.getPrevNum(criteria.getCategory_idx()));
+		model.addAttribute("nextnum", service.getNextNum(criteria.getCategory_idx()));
+		model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
 
 		return "modules/category/category_view";
 	}
 
 	// 글보기
 	@RequestMapping(value = "mvread.do", method = RequestMethod.GET)
-	public ModelAndView Read(@ModelAttribute Criteria criteria, @RequestParam int category_idx,
-			// @RequestParam(defaultValue = "0") int category_idx,
-			@RequestParam(defaultValue = "1") int kind) throws Exception {
+	public ModelAndView Read(@ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("글보기");
 
-		service.increaseCnt(category_idx);
+		service.increaseCnt(criteria.getCategory_idx());
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("categoryVO", service.getView(category_idx));
-		mav.addObject("prenum", service.getPrevNum(category_idx));
-		mav.addObject("nextnum", service.getNextNum(category_idx));
-		mav.addObject("categorylist", service.getCategoryList(kind));
+		mav.addObject("categoryVO", service.getView(criteria.getCategory_idx()));
+		mav.addObject("prenum", service.getPrevNum(criteria.getCategory_idx()));
+		mav.addObject("nextnum", service.getNextNum(criteria.getCategory_idx()));
+		mav.addObject("categorylist", service.getCategoryList(criteria.getKind()));
 		mav.setViewName("modules/category/category_view");
 
 		return mav;
 	}
 
 	// 글수정폼
-	@RequestMapping(value = "modify.do", method = RequestMethod.GET)
-	public String Modify(Model model, @ModelAttribute Criteria criteria, @RequestParam int category_idx,
-			// @RequestParam(defaultValue = "0") int category_idx,
-			@RequestParam(defaultValue = "1") int kind) throws Exception {
+	@RequestMapping(value = "edit.do", method = RequestMethod.GET)
+	public String Edit(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("글수정");
 
-		model.addAttribute("categoryVO", service.getView(category_idx));
-		model.addAttribute("categorylist", service.getCategoryList(kind));
-		model.addAttribute("categoryselect", category_idx);
+		model.addAttribute("categoryVO", service.getView(criteria.getCategory_idx()));
+		model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
+		model.addAttribute("categoryselect", criteria.getCategory_idx());
 
 		return "modules/category/category_edit";
 	}
 
 	// 글수정처리
 	@RequestMapping(value = "update.do", method = RequestMethod.POST)
-	public String Modify(Model model, @ModelAttribute Criteria criteria, @ModelAttribute CategoryVO categoryVO,
+	public String Update(Model model, @ModelAttribute Criteria criteria, @ModelAttribute CategoryVO categoryVO,
 			@RequestParam String pass, BindingResult bindingResult
-	/* RedirectAttributes redirectAttributes */
 	) throws Exception {
 
 		logger.info("글수정처리");
@@ -283,12 +268,15 @@ public class CategoryController {
 			model.addAttribute("categoryVO", categoryVO);
 			return "modules/category/category_edit";
 		}
-
-		String rawPassword = categoryVO.getPass();
+		
+				
+		String rawPassword = categoryVO.getPass();		
 		String encodedPassword = service.getPassword(categoryVO.getCategory_idx());
-
-		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin@1234")) {
+				
+		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin!@1234")) {	
+			
 			service.update(categoryVO);
+			
 			model.addAttribute("msg", "UpdateSuccess");
 			model.addAttribute("url", "list.do");
 		} else {
@@ -301,12 +289,12 @@ public class CategoryController {
 
 	// 글삭제
 	@RequestMapping(value = "delete.do", method = RequestMethod.GET)
-	public String Delete(Model model, @ModelAttribute Criteria criteria, @RequestParam int category_idx)
+	public String Delete(Model model, @ModelAttribute Criteria criteria)
 			throws Exception {
 
 		logger.info("글삭제");
 
-		model.addAttribute("categoryVO", service.getView(category_idx));
+		model.addAttribute("categoryVO", service.getView(criteria.getCategory_idx()));
 
 		return "modules/category/category_delete";
 	}
@@ -315,7 +303,6 @@ public class CategoryController {
 	@RequestMapping(value = "delete.do", method = RequestMethod.POST)
 	public String Delete(Model model, @ModelAttribute Criteria criteria, @ModelAttribute CategoryVO categoryVO,
 			@RequestParam String pass, BindingResult bindingResult
-	/* RedirectAttributes redirectAttributes */
 	) throws Exception {
 
 		logger.info("글삭제처리");
@@ -323,7 +310,7 @@ public class CategoryController {
 		String rawPassword = categoryVO.getPass();
 		String encodedPassword = service.getPassword(categoryVO.getCategory_idx());
 
-		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin@1234")) {
+		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin!@1234")) {
 			service.delete(categoryVO.getCategory_idx());
 
 			model.addAttribute("msg", "DeleteSuccess");

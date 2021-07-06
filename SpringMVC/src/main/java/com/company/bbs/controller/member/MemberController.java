@@ -1,6 +1,6 @@
 package com.company.bbs.controller.member;
 
-import java.io.PrintWriter;
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -8,16 +8,25 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +40,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springmodules.validation.commons.DefaultBeanValidator;
@@ -77,6 +88,43 @@ public class MemberController {
 	@RequestMapping(value = "validator.do")
 	protected String getValidator() throws Exception {
 		return "modules/member/validator";
+	}
+
+	// 회원목록 엑셀다운로드
+	@RequestMapping(value = "excelDownload.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String excelDownload(Model model, @ModelAttribute Criteria criteria) throws Exception {
+		logger.info("다운로드폼");
+
+		// 회원목록 가져오기
+		List<MemberVO> list = service.getExcelList();
+
+		// 회원목록 엑셀다운로드
+		SXSSFWorkbook workbook = service.excelFileDownloadProcess(list);
+
+		model.addAttribute("locale", Locale.KOREA);
+		model.addAttribute("workbook", workbook);
+		model.addAttribute("workbookName", "회원목록");
+
+		// 스프링설정 context-file에서 빈설정
+		return "excelDownloadView";
+	}
+
+	// 회원목록 엑셀파일 업로드
+	@RequestMapping(value = "excelUpload.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String excelUpload(Model model, @RequestParam("attach") MultipartFile attach) throws Exception {
+
+		List<MemberVO> list = service.excelFilUploadProcess(attach);
+
+		if (list != null) {
+			model.addAttribute("msg", "LoginSuccess");
+			model.addAttribute("url", "list.do");
+		} else {
+			model.addAttribute("msg", "LoginFailed");
+			model.addAttribute("url", "list.do");
+		}
+
+		return "/modules/common/common_message";
+
 	}
 
 	// 로그인폼
@@ -132,20 +180,19 @@ public class MemberController {
 
 		service.logout(session);
 		model.addAttribute("msg", "LogoutSuccess");
-		model.addAttribute("url", "login.do?kind=2");
+		model.addAttribute("url", "login.do");
 		return "/modules/common/common_message";
 	}
 
 	// 아이디중복확인
-	@SuppressWarnings("null")
 	@RequestMapping(value = "idCheck.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public int idCheck(MemberVO memberVO, HttpServletResponse response) throws Exception {
-		
+
 		logger.info("아이디중복확인");
-		
+
 		int result = service.idCheck(memberVO);
-		
+
 		// 1이면 중복된 아이디 0이면 사용가능한 아이디
 		return result;
 	}
@@ -205,9 +252,7 @@ public class MemberController {
 
 	// 회원목록 (Model)
 	@RequestMapping(value = "list.do")
-	public String List(Model model, @ModelAttribute Criteria criteria,
-			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "2") int kind)
-			throws Exception {
+	public String List(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("목록");
 
@@ -218,19 +263,16 @@ public class MemberController {
 
 		model.addAttribute("list", service.getList(criteria));
 		model.addAttribute("categoryname", service.getCategory());
-		model.addAttribute("categorylist", service.getCategoryList(kind));
-		model.addAttribute("categoryselect", category_idx);
+		model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
+		model.addAttribute("categoryselect", criteria.getCategory_idx());
 		model.addAttribute("pageMaker", pageMaker);
-		// model.addAttribute("searchField", searchField);
-		// model.addAttribute("searchWord", searchWord);
 
 		return "modules/member/member_list";
 	}
 
 	// 회원목록 (ModelAndView)
 	@RequestMapping(value = "mvlist.do")
-	public ModelAndView List(@ModelAttribute Criteria criteria, @RequestParam(defaultValue = "0") int category_idx,
-			@RequestParam(defaultValue = "2") int kind) throws Exception {
+	public ModelAndView List(@ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("회원목록");
 
@@ -243,11 +285,9 @@ public class MemberController {
 
 		mav.addObject("list", service.getList(criteria));
 		mav.addObject("categoryname", service.getCategory());
-		mav.addObject("categorylist", service.getCategoryList(kind));
-		mav.addObject("categoryselect", category_idx);
+		mav.addObject("categorylist", service.getCategoryList(criteria.getKind()));
+		mav.addObject("categoryselect", criteria.getCategory_idx());
 		mav.addObject("pageMaker", pageMaker);
-		// mav.addObject("searchField", searchField);
-		// mav.addObject("searchWord", searchWord);
 		mav.setViewName("modules/member/member_list");
 
 		return mav;
@@ -255,9 +295,7 @@ public class MemberController {
 
 	// 회원목록 (Map)
 	@RequestMapping(value = "mlist.do")
-	public String List1(Model model, @ModelAttribute Criteria criteria,
-			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "2") int kind)
-			throws Exception {
+	public String List1(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("회원목록");
 
@@ -269,11 +307,9 @@ public class MemberController {
 
 		map.put("list", service.getList(criteria));
 		map.put("categoryname", service.getCategory());
-		map.put("categorylist", service.getCategoryList(kind));
-		map.put("categoryselect", category_idx);
+		map.put("categorylist", service.getCategoryList(criteria.getKind()));
+		map.put("categoryselect", criteria.getCategory_idx());
 		map.put("pageMaker", pageMaker);
-		// map.put("searchField", searchField);
-		// map.put("searchWord", searchWord);
 
 		model.addAllAttributes(map);
 
@@ -282,34 +318,34 @@ public class MemberController {
 
 	// 회원등록폼
 	@RequestMapping(value = "write.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String Write(Model model, @ModelAttribute MemberVO memberVO, @RequestParam(defaultValue = "2") int kind)
+	public String Write(Model model, @ModelAttribute Criteria criteria, @ModelAttribute MemberVO memberVO)
 			throws Exception {
 
 		logger.info("회원쓰기");
 
 		model.addAttribute("memberVO", memberVO);
-		model.addAttribute("categorylist", service.getCategoryList(kind));
+		model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
 
 		return "modules/member/member_write";
 	}
 
 	// 회원그룹등록폼
 	@RequestMapping(value = "write_group.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String Writegroup(Model model, @ModelAttribute MemberVO memberVO, @RequestParam(defaultValue = "2") int kind)
+	public String Writegroup(Model model, @ModelAttribute Criteria criteria, @ModelAttribute MemberVO memberVO)
 			throws Exception {
 
 		logger.info("회원쓰기");
 
 		model.addAttribute("memberVO", memberVO);
-		model.addAttribute("categorylist", service.getCategoryList(kind));
+		model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
 
 		return "modules/member/member_write_group";
 	}
 
 	// 회원저장
 	@RequestMapping(value = "insert.do", method = { RequestMethod.POST, RequestMethod.GET })
-	public String Insert(Model model, @ModelAttribute MemberVO memberVO, BindingResult bindingResult,
-			@RequestParam(defaultValue = "2") int kind, HttpServletRequest request) throws Exception {
+	public String Insert(Model model, @ModelAttribute Criteria criteria, @ModelAttribute MemberVO memberVO,
+			BindingResult bindingResult, HttpServletRequest request) throws Exception {
 
 		logger.info("회원저장처리");
 
@@ -320,7 +356,7 @@ public class MemberController {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("memberVO", memberVO);
 			model.addAttribute("categoryname", service.getCategory());
-			model.addAttribute("categorylist", service.getCategoryList(kind));
+			model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
 
 			return "modules/member/member_write";
 		}
@@ -330,11 +366,11 @@ public class MemberController {
 		String answer = request.getParameter("answer");
 
 		if (getAnswer.equals(answer)) {
-			
+
 			service.insert(memberVO);
 
 			model.addAttribute("msg", "InsertSuccess");
-			model.addAttribute("url", "list.do?kind=2");
+			model.addAttribute("url", "list.do?criteria.getKind()=2");
 		} else {
 			model.addAttribute("msg", "CaptchaFailed");
 			model.addAttribute("url", "write.do");
@@ -345,9 +381,7 @@ public class MemberController {
 
 	// 회원보기
 	@RequestMapping(value = "read.do", method = RequestMethod.GET)
-	public String Read(Model model, @ModelAttribute Criteria criteria, @RequestParam int member_idx,
-			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "2") int kind)
-			throws Exception {
+	public String Read(Model model, @ModelAttribute Criteria criteria, @RequestParam int member_idx) throws Exception {
 
 		logger.info("회원보기");
 
@@ -355,17 +389,15 @@ public class MemberController {
 		model.addAttribute("prenum", service.getPrevNum(member_idx));
 		model.addAttribute("nextnum", service.getNextNum(member_idx));
 		model.addAttribute("categoryname", service.getCategory());
-		model.addAttribute("categorylist", service.getCategoryList(kind));
-		model.addAttribute("list", service.getFileList(member_idx));
+		model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
+		model.addAttribute("filelist", service.getFileList(member_idx));
 
 		return "modules/member/member_view";
 	}
 
 	// 회원보기
 	@RequestMapping(value = "mvread.do", method = RequestMethod.GET)
-	public ModelAndView Read(@ModelAttribute Criteria criteria, @RequestParam int member_idx,
-			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "2") int kind)
-			throws Exception {
+	public ModelAndView Read(@ModelAttribute Criteria criteria, @RequestParam int member_idx) throws Exception {
 
 		logger.info("회원보기");
 
@@ -377,7 +409,7 @@ public class MemberController {
 		mav.addObject("prenum", service.getPrevNum(member_idx));
 		mav.addObject("nextnum", service.getNextNum(member_idx));
 		mav.addObject("categoryname", service.getCategory());
-		mav.addObject("categorylist", service.getCategoryList(kind));
+		mav.addObject("categorylist", service.getCategoryList(criteria.getKind()));
 		mav.setViewName("modules/member/member_view");
 
 		return mav;
@@ -385,16 +417,15 @@ public class MemberController {
 
 	// 회원수정
 	@RequestMapping(value = "modify.do", method = RequestMethod.GET)
-	public String Modify(Model model, @ModelAttribute Criteria criteria, @RequestParam int member_idx,
-			@RequestParam(defaultValue = "0") int category_idx, @RequestParam(defaultValue = "2") int kind)
+	public String Modify(Model model, @ModelAttribute Criteria criteria, @RequestParam int member_idx)
 			throws Exception {
 
 		logger.info("회원수정");
 
 		model.addAttribute("memberVO", service.getView(member_idx));
 		model.addAttribute("categoryname", service.getCategory());
-		model.addAttribute("categorylist", service.getCategoryList(kind));
-		model.addAttribute("categoryselect", category_idx);
+		model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
+		model.addAttribute("categoryselect", criteria.getCategory_idx());
 
 		return "modules/member/member_edit";
 	}
@@ -421,7 +452,7 @@ public class MemberController {
 		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin@1234")) {
 			service.update(memberVO);
 			model.addAttribute("msg", "UpdateSuccess");
-			model.addAttribute("url", "list.do?kind=2");
+			model.addAttribute("url", "list.do");
 		} else {
 			model.addAttribute("msg", "PassFailed");
 			model.addAttribute("url",
@@ -457,7 +488,7 @@ public class MemberController {
 			service.delete(memberVO.getMember_idx());
 
 			model.addAttribute("msg", "DeleteSuccess");
-			model.addAttribute("url", "list.do?kind=2");
+			model.addAttribute("url", "list.do?criteria.getKind()=2");
 		} else {
 			model.addAttribute("msg", "PassFailed");
 			model.addAttribute("url", "delete.do?member_idx=" + memberVO.getMember_idx());
