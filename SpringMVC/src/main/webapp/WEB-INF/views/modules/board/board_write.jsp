@@ -67,22 +67,25 @@
                                                         -->
                                                     </td>
                                                 </tr>
+                               					<c:if test="${sessionScope.isAdmin == null}">
                                                 <tr>
                                                     <th><label for="userid"><spring:message code="label.userid"/></label></th>
-                                                    <td class="text-left"><form:input path="userid" type="text" placeholder="UserID" class="wfull"/> <form:errors path="userid" /> </td>
+                                                    <td class="text-left"><form:input path="userid" type="text" placeholder="UserID" class="wfull" /> <form:errors path="userid" /> </td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="name"><spring:message code="label.name"/></label></th>
-                                                    <td class="text-left"><form:input path="name" type="text"  placeholder="Name" class="wfull"/> <form:errors path="name" /> </td>
+                                                    <td class="text-left"><form:input path="name" type="text"  placeholder="Name" class="wfull" /> <form:errors path="name" /> </td>
                                                 </tr>
+                                                </c:if>                                               
                                                 <tr>
                                                     <th><label for="pass"><spring:message code="label.pass"/></label></th>
-                                                    <td class="text-left"><form:input path="pass" type="password" placeholder="Password" class="wfull"/> <form:errors path="pass" /> </td>
-                                                </tr>                                               
+                                                    <td class="text-left"><form:input path="pass" type="password" placeholder="Password" class="wfull" /> <form:errors path="pass" /> </td>
+                                                </tr> 
+                                                <c:if test="${sessionScope.isAdmin == null}">                                              
                                                 <tr>
                                                     <th><label for="email"><spring:message code="label.email"/></label></th>
                                                     <td class="text-left">
-                                                        <form:input path="email" type="text" placeholder="Email" class="wfull"/>
+                                                        <form:input path="email" type="text" placeholder="Email" class="wfull" />
                                                         <!-- <input type="text" name="email2" />
                                                         <select id="selectEmail">
                                                             <option value="1" selected="selected">직접입력</option>
@@ -113,6 +116,7 @@
                                                     	<form:input path="homepage" type="text" placeholder="Homepage" class="wfull"/> <form:errors path="homepage" />
                                                     </td>
                                                 </tr>
+                                                </c:if>
                                                 <tr>
                                                     <th><label for="title"><spring:message code="label.title"/></label></th>
                                                     <td class="text-left">

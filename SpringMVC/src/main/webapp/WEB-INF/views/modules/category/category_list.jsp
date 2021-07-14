@@ -60,23 +60,31 @@
                                         <table summary="<spring:message code="bbs.table.summary.list"/>">
                                             <caption><spring:message code="bbs.table.caption"/></caption>
                                             <colgroup>
+												<c:if test="${sessionScope.isAdmin != null}">
 												<col width="5%" />
+												</c:if>
 												<col width="5%" />
 												<col width="50%" />
 												<col width="10%" />
 												<col width="10%" />
+												<c:if test="${sessionScope.isAdmin != null}">	
 												<col width="10%" />
 												<col width="10%" />
+												</c:if>
 											</colgroup>
                                             <thead>
                                                 <tr class="tline">
+                                                	<c:if test="${sessionScope.isAdmin != null}">	
                                                     <th scope="col"><input type="checkbox" class="allCheck" name="allCheck" /></th>
+                                                    </c:if>
                                                     <th scope="col"><spring:message code="bbs.list.no"/></th>
                                                     <th scope="col"><spring:message code="bbs.list.title"/></th>
                                                     <th scope="col"><spring:message code="bbs.list.name"/></th>
-                                                    <th scope="col"><spring:message code="bbs.list.regdate"/></th>                                     
+                                                    <th scope="col"><spring:message code="bbs.list.regdate"/></th>  
+                                                    <c:if test="${sessionScope.isAdmin != null}">	                                   
                                                     <th scope="col"><spring:message code="bbs.list.edit"/></th>
                                                     <th scope="col"><spring:message code="bbs.list.del"/></th>
+                                                    </c:if>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -89,7 +97,9 @@
                                                     <c:otherwise>                                                        
                                                         <c:forEach varStatus="status" var="row" items="${list}">
                                                             <tr>
+                                                            	<c:if test="${sessionScope.isAdmin != null}">	
                                                                 <td><label><input type="checkbox" name="check" /></label></td>
+                                                                </c:if>
                                                                 <td><strong>${pageMaker.curNum-status.index}</strong></td>                                                                
                                                                 <td class="text-left">
                                                                     <c:if test="${row.depth > 0}">
@@ -109,9 +119,11 @@
                                                                 <td>
                                                                 	<fmt:parseDate var="dateString" value="${row.regdate}" pattern="yyyy-MM-dd" />                                                               
 	                                                                <fmt:formatDate value="${dateString}" pattern="yyyy-MM-dd"/>
-	                                                            </td>                                                                
+	                                                            </td> 
+	                                                            <c:if test="${sessionScope.isAdmin != null}">	                                                               
                                                                 <td><a href="modify.do${pageMaker.makeSearch(pageMaker.criteria.page)}&category_idx=<c:out value="${row.category_idx}"/>">수정</a></td>
                                                                 <td><a href="delete.do${pageMaker.makeSearch(pageMaker.criteria.page)}&category_idx=<c:out value="${row.category_idx}"/>">삭제</a></td>
+                                                                </c:if>
                                                             </tr>
                                                         </c:forEach>
                                                     </c:otherwise>
@@ -138,17 +150,18 @@
                                             </ul>
                                         </nav>
                                         <nav class="btn-group">
-											<ul>												
+											<ul>
+												<c:if test="${sessionScope.isAdmin != null}">													
 												<li><input type="button" value="<spring:message code="button.allselect"/>" class="btnallCheck"/></li>
 												<li><input type="button" value="<spring:message code="button.selectreverse"/>" class="reversalallCheck"/></li>
 												<li><input type="button" value="<spring:message code="button.selectcancle"/>" class="unallCheck"/></li>
-												<li><input type="button" value="<spring:message code="button.selectdelete"/>" onClick="location.href='delete.do'"/></li>	
+												<li><input type="button" value="<spring:message code="button.selectdelete"/>" onClick="location.href='delete.do'"/></li>
+												</c:if>	
 												<li><input type="button" value="<spring:message code="button.list"/>" onClick="location.href='list.do?kind=${criteria.kind}"/></li>
 												<li><input type="button" value="<spring:message code="button.create"/>" onClick="location.href='write.do'"/></li>											
 											</ul>
 										</nav>
-                                        <!--<c:import url="/WEB-INF/views/modules/common/common_btn.jsp"/>-->
-                                    </fieldset>
+         	                       </fieldset>
                                 </form>
                                 
                                 

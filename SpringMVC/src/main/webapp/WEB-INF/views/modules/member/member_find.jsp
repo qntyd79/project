@@ -4,60 +4,65 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="validator" uri="http://www.springmodules.org/tags/commons-validator" %>
+<script type="text/javascript" src="<c:url value="validator.do"/>"></script>
+<validator:javascript formName="memberVO" staticJavascript="false" xhtml="true" cdata="false"/>
 
-<div class="modal-box">
-    <div class="modal-header">
-        <h2>아이디/비밀번호찾기</h2>
-    </div>
-    <div class="modal-content">
-        <article>
-            <div class="row">
-                <div class="col-md-12">
-                    <form>
-                        <fieldset>
-                            <legend>Member Write Form</legend>
-                            <table summary="회원가입폼을 보여주고 있습니다." class="table">
-                                <colgroup>
-                                    <col width="50%" />
-                                    <col width="50%" />
-                                </colgroup>
-                                <tr>
-                                    <td scope="row">
-                                        <div class="test-box last-child">
-                                            <div class="panel">
-                                                <p class="icon-top"><i class="fas fa-address-card"></i></p>
-                                                <h1 class="title">아이디찾기</h1>
-                                                <h2 class="subtitle">Technical Architecture 컨설팅 시스템 구축 및 운영 지원 지속적인 제품, 서비스 지원을 약속드립니다.</h2>
-                                                <div class="btn-group"><input type="button" value="아이디찾기"></div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="test-box last-child">
-                                            <div class="panel">
-                                                <p class="icon-top"><i class="fas fa-lock-open"></i></p>
-                                                <h1 class="title">비밀번호찾기</h1>
-                                                <h2 class="subtitle">Technical Architecture 컨설팅 시스템 구축 및 운영 지원 지속적인 제품, 서비스 지원을 약속드립니다.</h2>
-                                                <div class="btn-group"><input type="button" value="비밀번호찾기"></div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <nav class="btn-group">
-                                <ul>
-                                    <li><input type="button" value="회원가입" onclick="location.href='agree.do'"></li>
-                                    <li><input type="button" value="로그인" onclick="location.href='login.do'"></li>
-                                </ul>
-                            </nav>
-                        </fieldset>
-                    </form>
-                </div>
+<c:import url="/WEB-INF/views/include/head.jsp"/>
+
+<div id="container-wrap">
+    <div class="clearfix">
+        <div class="content-box">
+            <div class="content-full-img01"></div>
+            <div class="div-center-box-bg-hidden">
+                <section class="content">
+                    <article>
+                    
+                    	
+                    	<form method="post" id="loginForm" name="loginForm"	enctype="multipart/form-data">
+							<input type="hidden" name="msgStr" value="<c:out value="${msg}"/> ">	
+							<div class="row">
+								<div class="col-md-12">
+									<div class="div-vcenter">
+										<h1 class="text-center">아이디/비밀번호 찾기</h1>
+										<div class="tabs-box">
+											<ul class="tabs">
+												<li rel="tab1" id="idfind" style="width: 50%;">아이디찾기</li>
+												<li rel="tab2" id="passfind" style="width: 50%;">비밀번호찾기</li>
+											</ul>
+											<div class="tab-container">			
+												<div id="tab1" class="tab-content"></div>
+												<div id="tab2" class="tab-content"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						
+						
+					</article>
+                </section>
             </div>
-        </article>
-    </div>
-    <div class="modal-footer">
-        <div class="modal-close-btn">닫기</div>
+        </div>
     </div>
 </div>
-<div class="modal-back"></div>
+
+<script type="text/javascript">
+	// https://ggmouse.tistory.com/95
+	$(document).ready(function() {
+
+		$("#tab1").load('idfind.do');
+			
+		$("#idfind").on("click",function(){	 
+			$("#tab1").load('idfind.do');
+			$("#tab2 *").remove();
+		});
+
+		$("#passfind").on("click",function(){	 
+			$("#tab2").load('passfind.do');
+			$("#tab1 *").remove();
+		});
+		
+	});
+</script>

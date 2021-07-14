@@ -18,6 +18,8 @@
                 <section class="content">
                     <c:import url="/WEB-INF/views/include/content_header.jsp"/>
                     <article>
+                    
+                    
                         <h2>회원로그인</h2>
                         <form method="post" id="loginForm" name="loginForm" enctype="multipart/form-data" action="loginCheck.do">
                             <input type="hidden" name="msgStr" value="<c:out value="${msg}"/> ">
@@ -29,8 +31,7 @@
                                             <ul class="content-data-2">
                                                 <li>
                                                     <div class="panel">
-                                                        <h1 class="logo-box"><a href="${path}/index.do"><img src="${path}/resources/images/logo/logo.png" /></a></h1>
-                                                        <div class="form-group">
+                                                       <div class="form-group">
                                                             <label for="userid"><spring:message code="label.userid"/></label>
                                                             <input name="userid" type="text" class="btn-block" placeholder="UserID"/> <form:errors path="userid" />
                                                         </div>
@@ -42,6 +43,7 @@
                                                         <div class="btn-group-m">
                                                             <input type="button" value="Login" class="btn-block danger" style="font-size:20px; height:57px;" onClick="$(this.form).submit();"/>
                                                         </div>
+                                                        <!--
                                                         <div class="social-box">
                                                             <a href="#"><i class="fab fa-facebook"></i></a>
                                                             <a href="#"><i class="fab fa-google"></i></a>
@@ -50,20 +52,21 @@
                                                             <a href="#"><i class="fab fa-yahoo"></i></a>
                                                             <a href="#"><i class="fab fa-snapchat-ghost"></i></a>
                                                         </div>
+                                                        -->
                                                         <div class="btn-group-m">
                                                             <input type="button" value="홈" onclick="location.href='index.do'" />
                                                             <input type="button" value="회원가입" onclick="location.href='agree.do'">
                                                             <input type="button" value="아이디/비밀번호찾기" class="modal-open-btn">
                                                         </div>
                                                     </div>
-                                                </li>
+                                                </li>                                                
                                                 <li>
                                                     <div class="panel">
                                                         <div class="thumbnail">
                                                             <img src="${path}/resources/images/add/s02.jpg" />
                                                         </div>
                                                     </div>
-                                                </li>
+                                                </li>                                               
                                             </ul>
                                         </div>
                                     </div>
@@ -71,6 +74,8 @@
                             </fieldset>
                         </form>
                     </article>
+                    
+                    
                 </section>
             </div>
         </div>

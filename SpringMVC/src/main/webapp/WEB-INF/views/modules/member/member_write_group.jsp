@@ -17,10 +17,12 @@
             <div class="content-full-bg01-hidden">
                 <section class="content">
                     <c:import url="/WEB-INF/views/include/content_header.jsp"/>
+                    
+                    
                     <article>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="div-hcenter" style="width:700px;">
+                                <div class="div-hcenter" style="width:600px;">
                                     <h2>회원가입</h2>
                                     <form>
                                         <fieldset>
@@ -159,6 +161,8 @@
                             </div>
                         </div>                        
                 	</article>
+                	
+                	
                 </section>
             </div>
         </div>

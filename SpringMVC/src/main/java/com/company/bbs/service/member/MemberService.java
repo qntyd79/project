@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.company.bbs.utill.Criteria;
+import com.company.bbs.vo.email.EmailVO;
 import com.company.bbs.vo.member.MemberVO;
 
 @Service
@@ -88,5 +89,11 @@ public interface MemberService {
 	
 	// 엑셀파일 업로드
 	public List<MemberVO> excelFilUploadProcess(MultipartFile attach) throws Exception;
- 
+	
+	// 아이디찾기
+	public MemberVO idSearch(MemberVO memberVO) throws Exception;
+	
+	// 비밀번호찾기
+	public MemberVO passSearch(MemberVO memberVO) throws Exception;
+	 
 }

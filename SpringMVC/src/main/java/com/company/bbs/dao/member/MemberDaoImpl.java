@@ -154,10 +154,29 @@ public class MemberDaoImpl implements MemberDao {
 		int result = sqlSession.selectOne("member.idCheck", memberVO);
 		return result;
 	}
-
+	
+	// 엑셀목록 
 	@Override
 	public List<MemberVO> getExcelList() throws Exception {
 		return sqlSession.selectList("member.getExcelList");
+	}	
+	
+	// 아이디찾기
+	@Override
+	public MemberVO idSearch(MemberVO memberVO) throws Exception {
+		return sqlSession.selectOne("member.idSearch", memberVO);
+	}
+	
+	// 비밀번호찾기
+	@Override
+	public MemberVO passSearch(MemberVO memberVO) throws Exception {
+		return sqlSession.selectOne("member.passSearch", memberVO);
+	}	
+	
+	// 임시 비밀번호 업데이트
+	@Override
+	public int updatePass(MemberVO memberVO) throws Exception {
+		return sqlSession.update("member.updatePass" , memberVO);
 	}
 	
 

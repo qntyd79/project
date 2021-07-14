@@ -1,6 +1,5 @@
 package com.company.bbs.controller.member;
 
-import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -8,7 +7,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -19,14 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FilenameUtils;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,12 +27,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springmodules.validation.commons.DefaultBeanValidator;
@@ -52,6 +43,7 @@ import com.company.bbs.utill.Criteria;
 import com.company.bbs.utill.PageMaker;
 import com.company.bbs.utill.UploadFileUtils;
 import com.company.bbs.vo.attach.AttachVO;
+import com.company.bbs.vo.email.EmailVO;
 import com.company.bbs.vo.member.MemberVO;
 
 @SuppressWarnings("unused")
@@ -93,6 +85,7 @@ public class MemberController {
 	// 회원목록 엑셀다운로드
 	@RequestMapping(value = "excelDownload.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String excelDownload(Model model, @ModelAttribute Criteria criteria) throws Exception {
+
 		logger.info("다운로드폼");
 
 		// 회원목록 가져오기
@@ -113,6 +106,8 @@ public class MemberController {
 	@RequestMapping(value = "excelUpload.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String excelUpload(Model model, @RequestParam("attach") MultipartFile attach) throws Exception {
 
+		logger.info("엑셀파일 업로드");
+
 		List<MemberVO> list = service.excelFilUploadProcess(attach);
 
 		if (list != null) {
@@ -130,11 +125,12 @@ public class MemberController {
 	// 로그인폼
 	@RequestMapping(value = "login.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(Model model, @ModelAttribute MemberVO memberVO) throws Exception {
+
 		logger.info("회원로그인폼");
 
 		model.addAttribute("memberVO", memberVO);
 
-		return "modules/member/member_login";
+		return "modules/member/member_loginfull";
 	}
 
 	// 로그인처리
@@ -150,14 +146,12 @@ public class MemberController {
 		logger.info("DB 비밀번호 " + encodedPassword);
 
 		boolean passMatch = passwordEncoder.matches(rawPassword, encodedPassword);
-
-		service.getLoginPassword(memberVO.getUserid());
 		memberVO.setPass(encodedPassword);
 
 		boolean result = service.loginCheck(memberVO, session);
 
 		if (result == true && passMatch == true) {
-			model.addAttribute("member", null);
+			model.addAttribute("isAdmin", null);
 			model.addAttribute("msg", "LoginSuccess");
 			model.addAttribute("url", "../../index.do");
 		} else {
@@ -171,6 +165,7 @@ public class MemberController {
 	// 로그인풀화면폼
 	@RequestMapping(value = "loginfull.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String loginfull() throws Exception {
+
 		return "modules/member/loginfull";
 	}
 
@@ -185,9 +180,9 @@ public class MemberController {
 	}
 
 	// 아이디중복확인
-	@RequestMapping(value = "idCheck.do", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
-	public int idCheck(MemberVO memberVO, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "idCheck.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public int idCheck(@ModelAttribute MemberVO memberVO, HttpServletResponse response) throws Exception {
 
 		logger.info("아이디중복확인");
 
@@ -197,15 +192,118 @@ public class MemberController {
 		return result;
 	}
 
-	// 아이디/비밀번호찾기
+	// 아이디/비밀번호찾기폼
 	@RequestMapping(value = "find.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String find() throws Exception {
+	public String find(Model model, @ModelAttribute MemberVO memberVO) throws Exception {
+
+		logger.info("아이디/비밀번호찾기폼");
+
+		model.addAttribute("memberVO", memberVO);
+
 		return "modules/member/member_find";
+	}
+
+	// 아이디찾기폼
+	@RequestMapping(value = "idfind.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String idfind(Model model, @ModelAttribute MemberVO memberVO) throws Exception {
+
+		logger.info("아이디찾기폼");
+
+		model.addAttribute("memberVO", memberVO);
+
+		return "modules/member/member_idfind";
+	}
+
+	// 아이디찾기
+	@ResponseBody
+	@RequestMapping(value = "idfindcheck.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public Map<String, Object> idfindcheck(Model model, @RequestBody MemberVO memberVO) throws Exception {
+
+		logger.info("아이디찾기 결과화면");
+
+		MemberVO result = service.idSearch(memberVO);		
+		System.out.println(result);		
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		// 아이디가 존재하지 않으면
+		if (result == null) {
+			
+			map.put("check", 0);
+			
+		} else { // 아이디가 존재하면
+
+			// 마지막 2자리 **표시
+			String getid = result.getUserid();
+
+			int length = getid.length();
+			length = length - 2;
+
+			String maskid = getid.substring(0, length);
+			maskid = maskid + "**";
+
+			map.put("check", 1);
+			map.put("id", maskid);
+		}
+
+		return map;
+	}
+
+	// 비밀번호찾기폼
+	@RequestMapping(value = "passfind.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String passfind(Model model, @ModelAttribute MemberVO memberVO) throws Exception {
+
+		logger.info("비밀번호찾기폼");
+
+		model.addAttribute("memberVO", memberVO);
+
+		return "modules/member/member_passfind";
+	}
+
+	// 비밀번호찾기
+	@ResponseBody
+	@RequestMapping(value = "passfindcheck.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public Map<String, Object> passfindcheck(Model model, @RequestBody MemberVO memberVO) throws Exception {
+
+		logger.info("비밀번호찾기 결과화면");
+		
+		MemberVO result = service.passSearch(memberVO);
+		System.out.println(result);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		// 비밀번호가 존재하지 않으면
+		if (result == null) {
+			
+			map.put("check", 0);
+			
+		} else { // 비밀번호가 존재하면
+
+			// 마지막 4자리 ****표시
+			String getpass = result.getPass();
+			String getemail = result.getEmail();
+
+			int length = getpass.length();
+			length = length - 4;
+
+			String maskpass = getpass.substring(0, length);
+			maskpass = maskpass + "****";
+			System.out.println(maskpass);
+			
+			map.put("check", 1);
+			map.put("pass", maskpass);
+			map.put("email", getemail);		
+			
+		}
+
+		return map;
 	}
 
 	// 회원인증폼
 	@RequestMapping(value = "auth.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String auth() throws Exception {
+
+		logger.info("회원인증폼");
+
 		return "modules/member/member_auth";
 	}
 
@@ -254,7 +352,7 @@ public class MemberController {
 	@RequestMapping(value = "list.do")
 	public String List(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
-		logger.info("목록");
+		logger.info("회원목록");
 
 		PageMaker pageMaker = new PageMaker();
 
@@ -321,7 +419,7 @@ public class MemberController {
 	public String Write(Model model, @ModelAttribute Criteria criteria, @ModelAttribute MemberVO memberVO)
 			throws Exception {
 
-		logger.info("회원쓰기");
+		logger.info("회원등록폼");
 
 		model.addAttribute("memberVO", memberVO);
 		model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
@@ -334,7 +432,7 @@ public class MemberController {
 	public String Writegroup(Model model, @ModelAttribute Criteria criteria, @ModelAttribute MemberVO memberVO)
 			throws Exception {
 
-		logger.info("회원쓰기");
+		logger.info("회원그룹등록폼 ");
 
 		model.addAttribute("memberVO", memberVO);
 		model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
@@ -455,8 +553,7 @@ public class MemberController {
 			model.addAttribute("url", "list.do");
 		} else {
 			model.addAttribute("msg", "PassFailed");
-			model.addAttribute("url",
-					"modify.do?member_idx=" + memberVO.getMember_idx() + "&category_idx=" + memberVO.getCategory_idx());
+			model.addAttribute("url", "read.do?member_idx=" + memberVO.getMember_idx() + "&category_idx=" + memberVO.getCategory_idx());
 		}
 
 		return "/modules/common/common_message";

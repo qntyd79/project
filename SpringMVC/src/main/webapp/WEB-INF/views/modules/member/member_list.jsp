@@ -173,11 +173,13 @@
 											</ul>
 										</nav>
                                         <nav class="btn-group">
-											<ul>												
+											<ul>	
+												<c:if test="${sessionScope.isAdmin == null}">												
 												<li><input type="button" value="<spring:message code="button.allselect"/>" class="btnallCheck"/></li>
 												<li><input type="button" value="<spring:message code="button.selectreverse"/>" class="reversalallCheck"/></li>
 												<li><input type="button" value="<spring:message code="button.selectcancle"/>" class="unallCheck"/></li>
-												<li><input type="button" value="<spring:message code="button.selectdelete"/>" onClick="location.href='delete.do'"/></li>	
+												<li><input type="button" value="<spring:message code="button.selectdelete"/>" onClick="location.href='delete.do'"/></li>
+												</c:if>	
 												<li><input type="button" value="<spring:message code="button.list"/>" onClick="location.href='list.do'"/></li>
 												<li><input type="button" value="<spring:message code="button.create"/>" onClick="location.href='write.do'"/></li>											
 											</ul>

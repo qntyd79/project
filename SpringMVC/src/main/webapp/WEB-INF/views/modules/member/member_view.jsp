@@ -29,7 +29,8 @@
                                     <input type="hidden" name="perPageNum" value="<c:out value="${criteria.perPageNum}"/>" >
                                     <input type="hidden" name="searchField" value="<c:out value="${criteria.searchField}"/>" >
                                     <input type="hidden" name="keyWord" value="<c:out value="${criteria.keyWord}"/>" >
-                                    <input type="hidden" name="msgStr" value="<c:out value="${msg}"/>" >  
+                                    <input type="hidden" name="msgStr" value="<c:out value="${msg}"/>" > 
+                                    <input type="hidden" id="me_id_yn" name="me_id_yn" value="Y"/> 
                                     <fieldset>
                                     	<legend><spring:message code="bbs.table.legend"/></legend>
                                         <div class="panel-box">                                            
@@ -67,8 +68,10 @@
                                                 </tr>
                                                 <tr>
                                                     <th><label for="pass"><spring:message code="label.pass"/></label></th>
-                                                   	<td class="text-left"><input name="pass" type="password" placeholder="Password" class="wfull"/> 
-                                                   	<form:errors path="pass" /> </td>
+                                                   	<td class="text-left"><input name="pass" type="password" placeholder="Password" />                                                    	
+                                                    <input type="button" value="비밀번호 변경하기" id="passChangeBtn" />
+                                                    <form:errors path="pass" />                                                   
+                                                   	</td>
                                                 </tr>                                               
                                                 <tr>
                                                     <th><label for="pass_ask"><spring:message code="label.pass_ask"/></label></th>
@@ -278,17 +281,7 @@
                                                             <input type="button" id="addItemBtn" value="<spring:message code="button.fileadd"/>" /> 첨부파일은 최대5개까지 첨부가능합니다.
                                                         </div>
                                                     </td>
-                                                </tr>
-                                                 <tr>
-                                                    <th><label for="code"><spring:message code="label.code"/></label></th>
-                                                    <td class="text-left">
-                                                        <img id="captchaImg" src="${path}/modules/board/captchaImg.do" />
-                                                        <div id="captchaAudio" style="display:none;"></div>                                                       
-                                                        <input type="button" id="refreshBtn" value="<spring:message code="button.refresh"/>" >
-                                                        <input type="button" id="audio" value="<spring:message code="button.voice"/>" >  
-                                                        <input type="text" id="answer" name="answer" placeholder="CaptchaCode"/> 
-                                                    </td>
-                                                </tr>
+                                                </tr>                                                
                                             </table>
                                             <hr>
                                             <div class="panel-header">
@@ -341,55 +334,102 @@
 </div>                       
 <c:import url="/WEB-INF/views/include/footer.jsp"/>
 
-<c:import url="/WEB-INF/views/include/modal.jsp"/>
-
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-    function findzipcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var addr = ''; // 주소 변수
-                var extraAddr = ''; // 참고항목 변수
+<script type="text/javascript">
 
-                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    addr = data.jibunAddress;
-                }
+	$(document).ready(function() {	
+	
+		// 우편번호검색
+		$("#findzipcode").on("click",function(){	
+			
+	    	new daum.Postcode({
+	            oncomplete: function(data) {
+	            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+	
+	            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	            var addr = ''; // 주소 변수
+	            var extraAddr = ''; // 참고항목 변수
+	
+	            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	        	    addr = data.roadAddress;
+	            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                addr = data.jibunAddress;
+	            }
+	
+	            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+	            if(data.userSelectedType === 'R'){
+	            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	            	extraAddr += data.bname;
+	                    }
+	                    // 건물명이 있고, 공동주택일 경우 추가한다.
+	                    if(data.buildingName !== '' && data.apartment === 'Y'){
+	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                    }
+	                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	                    if(extraAddr !== ''){
+	                        extraAddr = '(' + extraAddr + ')';
+	                    }
+	                    // 조합된 참고항목을 해당 필드에 넣는다.
+	                    document.getElementById("extraAddress").value = extraAddr;
+	                
+	                } else {
+	                    document.getElementById("extraAddress").value = '';
+	                }
+	
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                document.getElementById('zipcode').value = data.zonecode;
+	                document.getElementById("address").value = addr;
+	                // 커서를 상세주소 필드로 이동한다.
+	                document.getElementById("detailAddress").focus();
 
-                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-                if(data.userSelectedType === 'R'){
-                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                        extraAddr += data.bname;
-                    }
-                    // 건물명이 있고, 공동주택일 경우 추가한다.
-                    if(data.buildingName !== '' && data.apartment === 'Y'){
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                    if(extraAddr !== ''){
-                        extraAddr = '(' + extraAddr + ')';
-                    }
-                    // 조합된 참고항목을 해당 필드에 넣는다.
-                    document.getElementById("extraAddress").value = extraAddr;
-                
-                } else {
-                    document.getElementById("extraAddress").value = '';
-                }
+					// 추가부분 jquery validate 값이 들어가 있으면 보더색깔 변경
+	                if(document.getElementById('zipcode').value != ''){
+	    	    		document.getElementById('zipcode').style.borderColor = '#e6e6e6';
+	    	    		document.getElementById('zipcode-error').style = 'display:none';
+	    	    		document.getElementById("address").style.borderColor = '#e6e6e6';
+	    	    		document.getElementById('address-error').style = 'display:none';
+	    		    }
+	            }
+	        }).open();	        
+		}); 
 
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('zipcode').value = data.zonecode;
-                document.getElementById("address").value = addr;
-                // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("detailAddress").focus();
-            }
-        }).open();
-    }
+	    // 아이디중복체크  	
+		$("#passChangeBtn").on("click",function(){		
+			var userid = $("#userid").val();
+
+			if (userid == '') {
+			      alert('아이디를 입력해주세요.')
+			      $("#userid").focus();
+			      return;
+			}
+
+			var query = {userid : userid};
+			
+		    $.ajax({
+				type : "POST", //전송방식을 지정한다 (POST,GET)
+				url : "${path}/modules/member/idCheck.do",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
+				dataType : "text",
+				data: query,
+				success : function(result) {
+					//서비스 성공 시 처리 할 내용
+				    if (result == "1") {					    
+				    	alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");	
+				    } else if (result == "0") {
+				    	alert("사용가능한 아이디입니다.");
+				    	// 중복체크 버튼 클릭 유무를 위한 value값 속성 변경 
+				    	$("#me_id_yn").attr("value","Y");
+					}
+				},
+				error : function(error) {
+	                alert("error : " + error);
+	            }
+			});
+		});	
+		
+	});
 </script>

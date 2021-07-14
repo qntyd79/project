@@ -6,8 +6,7 @@
 	
 	
 	<!-- 회원목록 -->
-	<select id="getList"
-		resultType="com.company.bbs.vo.member.MemberVO">
+	<select id="getList" resultType="com.company.bbs.vo.member.MemberVO">
 	<![CDATA[ 
 	select * from jhbbs_member where member_idx > 0 and del = 'N'
 	]]>
@@ -40,8 +39,7 @@
 	</select>
 
 	<!-- 회원저장 -->
-	<insert id="insert"
-		parameterType="com.company.bbs.vo.member.MemberVO">
+	<insert id="insert"	parameterType="com.company.bbs.vo.member.MemberVO">
 		INSERT INTO jhbbs_member (
 		userid, pass, pass_ask, pass_account, name,
 		nickname, <!-- jumin1, jumin2, -->
@@ -89,7 +87,7 @@
 		)
 	</insert>
 	
-	<!-- 글수정 -->
+	<!-- 첨부파일 수정 -->
 	<update id="attachUpdate">
 		update jhbbs_file set
 		file_name=#{file_name},
@@ -160,7 +158,7 @@
 	]]>
 	</select>
 
-	<!-- 글최고값 -->
+	<!-- 회원 member_idx 최고값 -->
 	<select id="getMaxNum" resultType="int">
 	<![CDATA[ 
 		select max(member_idx) from jhbbs_member
@@ -168,7 +166,7 @@
 		<include refid="search"></include>
 	</select>
 
-	<!-- 글갯수 -->
+	<!-- 회원갯수 -->
 	<select id="getCount" resultType="int">
 	<![CDATA[ 
 	select count(member_idx) from jhbbs_member where member_idx > 0 and del = 'N'
@@ -177,7 +175,7 @@
 		<include refid="search"></include>
 	</select>
 	
-	<!-- 글비밀번호리턴 -->
+	<!-- 비밀번호리턴 -->
 	<select id="getPassword" resultType="String">
 	<![CDATA[ 
 	select pass from jhbbs_member where member_idx = #{member_idx} and del = 'N'
@@ -206,8 +204,7 @@
 	</select>
 	
 	<!-- 회원엑셀목록 -->
-	<select id="getExcelList" fetchSize="100" 
-		resultType="com.company.bbs.vo.member.MemberVO">
+	<select id="getExcelList" fetchSize="100" resultType="com.company.bbs.vo.member.MemberVO">
 	<![CDATA[ 
 	select * from jhbbs_member where member_idx > 0 and del = 'N'
 	]]>
@@ -224,7 +221,29 @@
 		SELECT COUNT(*) FROM jhbbs_member WHERE userid = #{userid} AND del = 'N'
 	]]>	
 	</select>
-
+	
+	<!-- 아이디찾기-->
+	<select id="idSearch" resultType="com.company.bbs.vo.member.MemberVO">
+	<![CDATA[ 
+		SELECT userid FROM jhbbs_member WHERE name = #{name} AND email = #{email} AND del = 'N'
+	]]>	
+	</select>
+	
+	<!-- 비밀번호찾기 -->
+	<select id="passSearch" resultType="com.company.bbs.vo.member.MemberVO">
+	<![CDATA[ 
+		SELECT pass, email FROM jhbbs_member WHERE userid = #{userid} AND email = #{email} AND del = 'N'
+	]]>	
+	</select>
+	
+	<!-- 임시 비밀번호 업데이트 -->
+	
+	<update id="updatePass">
+	<![CDATA[ 
+		update jhbbs_member set pass = #{pass} where userid = #{userid}
+	]]>	
+	</update>
+	
 	<sql id="category">
 		<if test="category_idx > 0">
 			AND category_idx = ${category_idx}
@@ -233,7 +252,7 @@
 			AND category_idx > 0
 		</if>
 	</sql>
-
+	
 	<sql id="search">
 		<if test="searchField != null">
 			<if test="searchField == 'n'.toString()">

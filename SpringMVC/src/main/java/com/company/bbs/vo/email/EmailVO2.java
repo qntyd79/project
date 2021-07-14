@@ -1,6 +1,6 @@
 package com.company.bbs.vo.email;
 
-public class Emaild {
+public class EmailVO2 {
 	
 	private String tomail;
 	private String sendmail;

@@ -511,7 +511,7 @@ $(document).ready(function() {
         rules: {
             userid: {
                 required: true,
-                minlength: 2,
+                rangelength: [4,15],
                 alphanumeric: true
                 /*
                 remote : {
@@ -583,7 +583,7 @@ $(document).ready(function() {
         messages: { //규칙체크 실패시 출력될 메시지 설정
             userid: {
                 required: "아이디를 입력하세요.",
-                minlength: $.validator.format("아이디는 최소{0}글자 이상 입력하세요."),
+                rangelength: $.validator.format("아이디는 최소{0}글자 이상 {1}글자 이하로 입력하세요."),
                 alphanumeric: "알파벳과 숫자만 사용 가능합니다.",
                 remote: "존재하는 아이디입니다."
             },
@@ -775,7 +775,7 @@ $(document).ready(function() {
         },
         messages: {
              pass: {
-                required: "비밀번호를 입력하세요",
+                required: "비밀번호를 입력하세요.",
                 rangelength: $.validator.format("패스워드는 최소{0}글자 이상 {1}글자 이하로 입력하세요."),
                 passwordck: "비밀번호는 영문대소문자,숫자,특수문자를 반드시 입력해주시기 바랍니다."
             }
@@ -940,10 +940,11 @@ $(document).ready(function() {
             }
         },
         submitHandler: function(form) {  
+
 			if ($("#me_id_yn").val() != "Y") {			
 				alert("아이디 중복체크를 눌러주세요.");		
 				return false;			
-			}  	
+			}  
 					
 			form.submit();
         }
@@ -954,30 +955,47 @@ $(document).ready(function() {
     	ignore : '*:not([name])',
         debug : false,
         onfocusout : false,
-		onkeyup : false,
         // 규칙설정
         rules: {
             userid: {
                 required: true,
-                minlength: 2,
-                alphanumeric: true                
-            },
+                rangelength: [4,15],
+                alphanumeric: true        
+            },			
 			pass: {
                 required: true,
                 rangelength: [4,15],
                 passwordck: true
+            },
+			name: {
+                required: true,
+                minlength: 2
+            },
+			email: {
+                required: true,				
+                emailck: true,
+				minlength: 2
             }        
         },
         messages: { //규칙체크 실패시 출력될 메시지 설정
             userid: {
                 required: "아이디를 입력하세요.",
-                minlength: $.validator.format("아이디는 최소{0}글자 이상 입력하세요."),
+                rangelength: $.validator.format("아이디는 최소{0}글자 이상 {1}글자 이하로 입력하세요."),
                 alphanumeric: "알파벳과 숫자만 사용 가능합니다.",
             },            
             pass: {
                 required: "비밀번호를 입력하세요.",
                 rangelength: $.validator.format("패스워드는 최소{0}글자 이상 {1}글자 이하로 입력하세요."),
                 passwordck: "비밀번호는 영문대소문자,숫자,특수문자를 반드시 입력해주시기 바랍니다."
+            },
+			name: {
+                required: "이름을 입력하세요.",
+                minlength: $.validator.format("이름은 최소{0}글자 이상 입력하세요.")
+            },
+			email: {
+                required: "이메일을 입력하세요.",
+                minlength: $.validator.format("이메일은 최소{0}글자 이상 입력하세요."),
+                emailck: "올바른 이메일 주소가 아닙니다."
             }
         },
 		// 아이디중복버튼 옆에 메세지 출력 
@@ -1673,7 +1691,6 @@ $(document).ready(function() {
         $('#captchaAudio').hmtl('<bgsound src=" ' + objUrl + '">');
     }
     
-	
 	
 	// 회원가입 동의 체크박스 전체 선택
 	$(document).on("click", "#allagree", function () {

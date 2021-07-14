@@ -5,14 +5,14 @@
     <nav class="gnb">
         <ul>
         	<c:choose>
-	        	<c:when test="${sessionScope.userid == null}">
+	        	<c:when test="${sessionScope.isAdmin == null}">
 		            <li><a href="${path}/modules/member/login.do"><i class="fas fa-user-lock"></i> 로그인</a></li>
 		            <li><a href="${path}/modules/member/auth.do"><i class="fas fa-address-card"></i> 회원가입</a></li>
-		            <li><a href="${path}/modules/member/find.do"><i class="fas fa-address-card"></i>아이디/비밀번호찾기</a></li>
+		            <li><a href="${path}/modules/member/find.do"><i class="fas fa-address-card"></i> 아이디/비밀번호찾기</a></li>
 	            </c:when>
 	            <c:otherwise>
-		            <li><a href="${path}/modules/member/login.do"> ${sessionScope.name} </a></li>
-		            <li><a href="${path}/index.do"><i class="fas fa-desktop"></i>회원정보</a></li>
+		            <li><a href="${path}/modules/member/login.do"> ${sessionScope.isAdmin.userid}님 환영합니다.</a></li>
+		            <li><a href="${path}/modules/member/read.do?member_idx=${sessionScope.isAdmin.member_idx}"><i class="fas fa-desktop"></i> 회원정보</a></li>
 		            <li><a href="${path}/modules/member/logout.do"><i class="fas fa-user-lock"></i> 로그아웃 </a></li>
 	            </c:otherwise>
             </c:choose>

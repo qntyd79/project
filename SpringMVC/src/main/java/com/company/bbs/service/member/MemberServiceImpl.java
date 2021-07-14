@@ -24,13 +24,13 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,10 +39,14 @@ import org.springframework.web.multipart.MultipartFile;
 import com.company.bbs.controller.member.MemberController;
 import com.company.bbs.dao.member.MemberDao;
 import com.company.bbs.utill.Criteria;
+import com.company.bbs.utill.MailSendUtils;
 import com.company.bbs.utill.UploadFileUtils;
 import com.company.bbs.vo.attach.AttachVO;
+import com.company.bbs.vo.board.BoardVO;
+import com.company.bbs.vo.email.EmailVO;
 import com.company.bbs.vo.member.MemberVO;
 
+@SuppressWarnings("unused")
 @Service
 public class MemberServiceImpl implements MemberService {
 
@@ -55,6 +59,9 @@ public class MemberServiceImpl implements MemberService {
 	// 암호화 설정
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
+
+	@Autowired
+	JavaMailSenderImpl mailSender;
 
 	@Resource(name = "uploadPath")
 	private String uploadPath;
@@ -81,8 +88,8 @@ public class MemberServiceImpl implements MemberService {
 		int rowIdx = 0;
 		int cellIdx = 0;
 
-		String[] title = { "번호", "회원아이디", "비밀번호", "비밀번호 분실시 질문", "답변", "이름", "닉네임", 
-				"이메일", "홈페이지", "우편번호", "주소", "상세주소", "여분주소", "전화번호", "휴대폰번호", "직업", "로그인아이피", "삭제여부", "분류" };
+		String[] title = { "번호", "회원아이디", "비밀번호", "비밀번호 분실시 질문", "답변", "이름", "닉네임", "이메일", "홈페이지", "우편번호", "주소", "상세주소",
+				"여분주소", "전화번호", "휴대폰번호", "직업", "로그인아이피", "삭제여부", "분류" };
 
 		// 타이틀 출력
 		row = sheet.createRow(rowIdx++);
@@ -97,82 +104,82 @@ public class MemberServiceImpl implements MemberService {
 		for (MemberVO memberVO : list) {
 			row = sheet.createRow(rowIdx++); // row : 데이터의 다음 행 생성.
 			cell = row.createCell(cellIdx++); // cell : 데이터의 다음 열 생성.
-			
+
 			cell.setCellValue(memberVO.getMember_idx()); // value : 값 저장
 			cell.setCellStyle(cellStyle(workbook, "data")); // style : 셀 스타일 설정"
 			cell = row.createCell(cellIdx++);
-			
+
 			cell.setCellValue(memberVO.getUserid());
 			cell.setCellStyle(cellStyle(workbook, "data"));
 			cell = row.createCell(cellIdx++);
-			
+
 			cell.setCellValue(memberVO.getPass());
 			cell.setCellStyle(cellStyle(workbook, "data"));
 			cell = row.createCell(cellIdx++);
-			
+
 			cell.setCellValue(memberVO.getPass_ask());
 			cell.setCellStyle(cellStyle(workbook, "data"));
 			cell = row.createCell(cellIdx++);
-			
+
 			cell.setCellValue(memberVO.getPass_account());
 			cell.setCellStyle(cellStyle(workbook, "data"));
 			cell = row.createCell(cellIdx++);
-			
+
 			cell.setCellValue(memberVO.getName());
 			cell.setCellStyle(cellStyle(workbook, "data"));
 			cell = row.createCell(cellIdx++);
-			
+
 			cell.setCellValue(memberVO.getNickname());
 			cell.setCellStyle(cellStyle(workbook, "data"));
 			cell = row.createCell(cellIdx++);
-			
+
 			cell.setCellValue(memberVO.getEmail());
 			cell.setCellStyle(cellStyle(workbook, "data"));
 			cell = row.createCell(cellIdx++);
-			
+
 			cell.setCellValue(memberVO.getHomepage());
 			cell.setCellStyle(cellStyle(workbook, "data"));
 			cell = row.createCell(cellIdx++);
-			
+
 			cell.setCellValue(memberVO.getZipcode());
 			cell.setCellStyle(cellStyle(workbook, "data"));
 			cell = row.createCell(cellIdx++);
-			
+
 			cell.setCellValue(memberVO.getAddress());
 			cell.setCellStyle(cellStyle(workbook, "data"));
 			cell = row.createCell(cellIdx++);
-			
+
 			cell.setCellValue(memberVO.getDetailaddress());
 			cell.setCellStyle(cellStyle(workbook, "data"));
 			cell = row.createCell(cellIdx++);
-			
+
 			cell.setCellValue(memberVO.getExtraaddress());
 			cell.setCellStyle(cellStyle(workbook, "data"));
 			cell = row.createCell(cellIdx++);
-			
+
 			cell.setCellValue(memberVO.getPhone());
-			cell.setCellStyle(cellStyle(workbook, "data")); 
+			cell.setCellStyle(cellStyle(workbook, "data"));
 			cell = row.createCell(cellIdx++);
-			
+
 			cell.setCellValue(memberVO.getHphone());
 			cell.setCellStyle(cellStyle(workbook, "data"));
 			cell = row.createCell(cellIdx++);
-			
+
 			cell.setCellValue(memberVO.getJob());
 			cell.setCellStyle(cellStyle(workbook, "data"));
 			cell = row.createCell(cellIdx++);
-			
+
 			cell.setCellValue(memberVO.getLogin_ip());
 			cell.setCellStyle(cellStyle(workbook, "data"));
 			cell = row.createCell(cellIdx++);
-						
+
 			cell.setCellValue(memberVO.getDel());
 			cell.setCellStyle(cellStyle(workbook, "data"));
 			cell = row.createCell(cellIdx++);
-			
+
 			cell.setCellValue(memberVO.getCategory_idx());
 			cell.setCellStyle(cellStyle(workbook, "data"));
-			
+
 			cellIdx = 0;
 		}
 
@@ -311,21 +318,20 @@ public class MemberServiceImpl implements MemberService {
 
 		// https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=hyoun1202&logNo=220245067954
 		String finalFilePath = uploadPath + "/" + attach.getOriginalFilename();
-		
+
 		System.out.println("finalFilePath : " + finalFilePath);
-		
+
 		File destFile = new File(finalFilePath);
-		
+
 		try {
 			attach.transferTo(destFile);
 		} catch (IllegalStateException | IOException e) {
 			throw new RuntimeException(e.getMessage(), e);
 		}
 
-		
 		InputStream file = new FileInputStream(finalFilePath);
+		@SuppressWarnings("resource")
 		XSSFWorkbook workbook = new XSSFWorkbook(file);
-
 
 		Sheet worksheet = workbook.getSheetAt(0);
 
@@ -350,23 +356,23 @@ public class MemberServiceImpl implements MemberService {
 				Cell cell = row.getCell(1);
 				if (null != cell)
 					memberVO.setUserid(cell.getStringCellValue());
-				
+
 				cell = row.getCell(2);
 				if (null != cell)
 					memberVO.setPass(cell.getStringCellValue());
-				
+
 				cell = row.getCell(3);
 				if (null != cell)
 					memberVO.setPass_ask(cell.getStringCellValue());
-				
+
 				cell = row.getCell(4);
 				if (null != cell)
-					memberVO.setPass_account(cell.getStringCellValue());				
-				
+					memberVO.setPass_account(cell.getStringCellValue());
+
 				cell = row.getCell(5);
 				if (null != cell)
 					memberVO.setName(cell.getStringCellValue());
-				
+
 				cell = row.getCell(6);
 				if (null != cell)
 					memberVO.setNickname(cell.getStringCellValue());
@@ -374,7 +380,7 @@ public class MemberServiceImpl implements MemberService {
 				cell = row.getCell(7);
 				if (null != cell)
 					memberVO.setEmail(cell.getStringCellValue());
-				
+
 				cell = row.getCell(8);
 				if (null != cell)
 					memberVO.setHomepage(cell.getStringCellValue());
@@ -390,7 +396,7 @@ public class MemberServiceImpl implements MemberService {
 				cell = row.getCell(11);
 				if (null != cell)
 					memberVO.setDetailaddress(cell.getStringCellValue());
-				
+
 				cell = row.getCell(12);
 				if (null != cell)
 					memberVO.setExtraaddress(cell.getStringCellValue());
@@ -406,15 +412,15 @@ public class MemberServiceImpl implements MemberService {
 				cell = row.getCell(15);
 				if (null != cell)
 					memberVO.setJob(cell.getStringCellValue());
-				
+
 				cell = row.getCell(16);
 				if (null != cell)
 					memberVO.setLogin_ip(cell.getStringCellValue());
-				
+
 				cell = row.getCell(17);
 				if (null != cell)
 					memberVO.setDel(cell.getStringCellValue());
-				
+
 				cell = row.getCell(18);
 				if (null != cell)
 					memberVO.setCategory_idx((int) cell.getNumericCellValue());
@@ -449,9 +455,9 @@ public class MemberServiceImpl implements MemberService {
 		String pass = memberVO.getPass();
 		int level = 10;
 		int point = 100;
-		int approval = 0;
+		int approval = 0; // 승인:1 비승인:0
 		int login_cnt = 0;
-		int user_leave = 1;
+		int user_leave = 0; // 탈퇴:1 비탈퇴:0
 
 		// 비밀번호 암호화
 		String pwdBycrypt = passwordEncoder.encode(pass);
@@ -507,7 +513,9 @@ public class MemberServiceImpl implements MemberService {
 	@Transactional
 	@Override
 	public void fileinsert(MemberVO memberVO) throws Exception {
+
 		AttachVO attachVO = new AttachVO();
+
 		MultipartFile[] attach = memberVO.getAttach(); // 첨부파일 배열
 
 		if (attach == null)
@@ -648,17 +656,34 @@ public class MemberServiceImpl implements MemberService {
 		if (result) {
 			MemberVO memberVO2 = getViewMember(memberVO);
 
-			session.setAttribute("userid", memberVO2.getUserid());
-			session.setAttribute("name", memberVO2.getName());
+			// 세션 유지시간 설정(초단위) 60초 유지
+			session.setMaxInactiveInterval(1 * 300);
+
+			// 세션저장
+			session.setAttribute("isAdmin", memberVO2);
+
+			BoardVO boardVO = new BoardVO();
+
+			boardVO.setUserid(memberVO2.getUserid());
+			boardVO.setName(memberVO2.getName());
+			boardVO.setEmail(memberVO2.getEmail());
+			boardVO.setHomepage(memberVO2.getHomepage());
+
+			session.setAttribute("boardVO", boardVO);
 		}
+
 		return result;
 	}
 
 	// 회원로그아웃
 	@Override
 	public void logout(HttpSession session) throws Exception {
+
+		// 세션삭제
 		// session.removeAttribute("userid"); 세션변수 개별삭제
-		session.invalidate(); // 세션정보 초기화
+
+		// 세션정보 초기화
+		session.invalidate();
 	}
 
 	// 회원보기
@@ -676,13 +701,80 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int idCheck(MemberVO memberVO) throws Exception {
 		int result = dao.idCheck(memberVO);
-		System.out.println(result);
 		return result;
 	}
 
+	// 엑셀목록
 	@Override
 	public List<MemberVO> getExcelList() throws Exception {
 		return dao.getExcelList();
+	}
+
+	// 아이디찾기
+	@Override
+	public MemberVO idSearch(MemberVO memberVO) throws Exception {
+		return dao.idSearch(memberVO);
+	}
+
+	// 비밀번호찾기
+	@Override
+	public MemberVO passSearch(MemberVO memberVO) throws Exception {
+
+		// 이메일 임시비밀번호 발송
+		MailSendUtils mailSendUtils = new MailSendUtils(mailSender);
+
+		// 임시비밀번호 생성
+		memberVO.setPass(randomPw());
+
+		// 비밀번호 변경 메일 발송
+		EmailVO emailVO = new EmailVO();
+
+		String content = "";
+		content += "<div align='center' style='border:1px solid black; font-family:verdana'>";
+		content += "<h3 style='color: blue;'>";
+		content += memberVO.getUserid() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
+		content += "<p>임시 비밀번호 : ";
+		content += memberVO.getPass() + "</p></div>";
+
+		emailVO.setTitle("노라조 임시 비밀번호 입니다.");
+		emailVO.setToemail(memberVO.getEmail());
+		emailVO.setSendemail("ojh@engit.com");
+		emailVO.setContent(content);
+
+		mailSendUtils.sendMailing(emailVO, uploadPath);
+
+		// 비밀번호 암호화
+		String pass = memberVO.getPass();
+		String pwdBycrypt = passwordEncoder.encode(pass);
+
+		memberVO.setPass(pwdBycrypt);
+
+		// 비밀번호 변경
+		dao.updatePass(memberVO);
+
+		return dao.passSearch(memberVO);
+	}
+
+	// 임시 비빌번호 랜덤생성 출처: https://bbaksae.tistory.com/5 [QRD]
+	public static String randomPw() {
+		char pwCollectionSpCha[] = new char[] { '!', '@', '#', '$', '%', '^', '&', '*', '(', ')' };
+		char pwCollectionNum[] = new char[] { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', };
+		char pwCollectionAll[] = new char[] { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'A', 'B', 'C', 'D', 'E',
+				'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+				'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+				'v', 'w', 'x', 'y', 'z', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')' };
+		
+		return getRandPw(1, pwCollectionSpCha) + getRandPw(8, pwCollectionAll) + getRandPw(1, pwCollectionNum);
+	}
+
+	public static String getRandPw(int size, char[] pwCollection) {
+		String ranPw = "";
+		for (int i = 0; i < size; i++) {
+			int selectRandomPw = (int) (Math.random() * (pwCollection.length));
+			ranPw += pwCollection[selectRandomPw];
+		}
+		
+		return ranPw;
 	}
 
 }

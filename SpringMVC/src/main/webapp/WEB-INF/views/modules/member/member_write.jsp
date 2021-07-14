@@ -357,10 +357,7 @@
 	    	    		document.getElementById('address-error').style = 'display:none';
 	    		    }
 	            }
-	        }).open();
-
-	    	
-	        
+	        }).open();	        
 		}); 
 
 	    // 아이디중복체크  	

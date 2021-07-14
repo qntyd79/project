@@ -163,7 +163,7 @@ com_fax			VARCHAR(20),
 */
 level			INT(10) NOT NULL DEFAULT '10',
 point			INT(10) NOT NULL DEFAULT '100',
-approval		INT(10) NOT NULL DEFAULT '2',
+approval		INT(10) NOT NULL DEFAULT '0',
 join_date		DATETIME DEFAULT CURRENT_TIMESTAMP,
 login_last		VARCHAR(30) DEFAULT '127.0.0.1',
 login_cnt		INT(10) DEFAULT '0',

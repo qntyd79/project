@@ -72,12 +72,26 @@ public interface MemberDao {
 
 	// 회원로그인정보
 	public MemberVO getViewMember(MemberVO memberVO)throws Exception;
-
+	
+	// 회원회원 비밀번호 가져오기
 	public String getLoginPassword(String userid) throws Exception;
 	
 	// 아이디중복체크
 	public int idCheck(MemberVO memberVO) throws Exception;
-
+	
+	// 엑셀목록
 	public List<MemberVO> getExcelList() throws Exception;
+	
+	// 아이디찾기
+	public MemberVO idSearch(MemberVO memberVO) throws Exception;
+	
+	// 비밀번호찾기 
+	public MemberVO passSearch(MemberVO memberVO) throws Exception;
+		
+	// 임시비밀번호 업데이트
+	public int updatePass(MemberVO memberVO) throws Exception;
 
-}
+	
+	
+
+	}

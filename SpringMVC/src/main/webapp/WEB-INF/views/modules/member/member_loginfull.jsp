@@ -4,47 +4,46 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="validator" uri="http://www.springmodules.org/tags/commons-validator" %>
+<script type="text/javascript" src="<c:url value="validator.do"/>"></script>
+<validator:javascript formName="memberVO" staticJavascript="false" xhtml="true" cdata="false"/>
 
 <c:import url="/WEB-INF/views/include/head.jsp"/>
 
 <div id="container-wrap">
     <div class="clearfix">
         <div class="content-box">
-            <div class="content-full-img01-hedden"></div>
-            <div class="div-center-box-bg">
+            <div class="content-full-img01-hidden"></div>
+            <div class="div-center-box-bg-hidden">
                 <section class="content">
                     <article>
-                        <form>
+                    
+                    
+                    
+                        <form method="post" id="loginForm" name="loginForm" enctype="multipart/form-data" action="loginCheck.do">
+                            <input type="hidden" name="msgStr" value="<c:out value="${msg}"/> ">
                             <fieldset>
                                 <legend>Member Login Form</legend>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="div-vcenter">
-                                            <div class="div-title">
-                                            	<!--
-                                                <h2 class="title">Capturing reality in minutes using photogrammetric modeling</h2>                                               
-                                                <h3 class="desc">Desktop and cloud image processing</h3>
-                                        		<h4 class="summary">The leading photogrammetry software for professional drone mapping Try for free</h4>
-                                        		-->
-                                            </div>
-                                            <ul class="content-data-1" style="border:none;">
-                                                <li style="border:none;">
+                                        <div class="div-vcenter">                                            
+                                            <ul class="content-data-1">
+                                                <li>
                                                     <div class="panel">
                                                         <div class="logo-box">
                                                             <a href="/index.do"><img src="/resources/images/logo/logo.png" /></a>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="name">회원아이디</label>
-                                                            <input type="text" id="name" name="name" class="btn-block" placeholder="아이디를 입력해주세요"/>
+                                                            <label for="userid"><spring:message code="label.userid"/></label>
+                                                            <input name="userid" type="text" class="btn-block" placeholder="UserID"/> <form:errors path="userid" />
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="pw">비밀번호</label>
-                                                            <input type="password" id="pass" name="pass" class="btn-block" placeholder="비밀번호를 입력해주세요"/>
+                                                            <label for="pass"><spring:message code="label.pass"/></label>
+                                                            <input name="pass" type="password" class="btn-block" placeholder="Password"/> <form:errors path="pass" />
                                                         </div>
-                                                        <div class="text-left"><input type="checkbox" name="state" value="1" id="state">로그인 상태유지</div>
+                                                        <div class="text-left"><input type="checkbox" name="state" value="1" id="state"> 로그인 상태유지</div>
                                                         <div class="btn-group-m">
-                                                            <input type="button" value="Login" onclick="location.href='../../modules/login/member_login.html'" 
-                                                            class="btn-large btn-block danger" style="font-size:20px; height:57px;">
+                                                            <input type="button" value="Login" class="btn-block danger" style="font-size:20px; height:57px;" onClick="$(this.form).submit();"/>
                                                         </div>
                                                         <div class="social-box">
                                                             <a href="#"><i class="fab fa-facebook"></i></a>
@@ -55,11 +54,14 @@
                                                             <a href="#"><i class="fab fa-snapchat-ghost"></i></a>
                                                         </div>
                                                         <div class="btn-group-m">
-                                                            <input type="button" value="홈" onclick="location.href='../../index.html'" />
-                                                            <input type="button" value="회원가입" onclick="location.href='../../modules/member/member_agree.html'">
-                                                            <input type="button" value="아이디/비밀번호찾기" class="modal-open-btn">
+                                                            <a href="#" onclick="location.href='../../index.do'" >홈&nbsp; &nbsp; </a> 
+                                                            <a href="#" onclick="location.href='agree.do'">회원가입&nbsp; &nbsp; </a> 
+                                                            <a href="#" onclick="location.href='find.do'">아이디/비밀번호 찾기</a>                                            
                                                         </div>
                                                     </div>
+                                                </li>
+                                                <li>
+                                                	<img src="${path}/resources/images/add/s02.jpg" />
                                                 </li>
                                             </ul>
                                         </div>
@@ -67,11 +69,11 @@
                                 </div>
                             </fieldset>
                         </form>
+                        
+                        
                     </article>
                 </section>
             </div>
         </div>
     </div>
 </div>
-
-<c:import url="/WEB-INF/views/modules/member/find.jsp"/>

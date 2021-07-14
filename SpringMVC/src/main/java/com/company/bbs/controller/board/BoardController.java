@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
@@ -38,6 +41,7 @@ import com.company.bbs.vo.board.BoardVO;
 
 @SuppressWarnings("unused")
 @Controller
+@SessionAttributes("boardVO")
 @RequestMapping("modules/board/*")
 public class BoardController {
 
@@ -71,6 +75,12 @@ public class BoardController {
 	protected String getValidator() throws Exception {
 		return "modules/board/validator";
 	}
+	
+	@ModelAttribute("boardVO")
+	public BoardVO setEmpyt() {
+		return new BoardVO();
+	}
+
 
 	// 글목록 (Model)
 	@RequestMapping(value = "list.do")
@@ -148,13 +158,18 @@ public class BoardController {
 
 	// 글등록폼
 	@RequestMapping(value = "write.do", method = RequestMethod.GET)
-	public String Write(Model model, @ModelAttribute Criteria criteria, @ModelAttribute BoardVO boardVO)
+	public String Write(Model model, @ModelAttribute Criteria criteria, @ModelAttribute("boardVO") BoardVO boardVO)
 			throws Exception {
 
 		logger.info("글쓰기");
-
+		
 		model.addAttribute("boardVO", boardVO);
 		model.addAttribute("categorylist", service.getCategoryList());
+		
+		System.out.println("아이디 " + boardVO.getUserid());
+		System.out.println("이름 " + boardVO.getName());
+		System.out.println("이메일 " + boardVO.getEmail());
+		System.out.println("홈페이지 " + boardVO.getHomepage());
 
 		return "modules/board/board_write";
 	}
@@ -176,8 +191,8 @@ public class BoardController {
 
 	// 글저장
 	@RequestMapping(value = "insert.do", method = { RequestMethod.POST, RequestMethod.GET })
-	public String Insert(Model model, @ModelAttribute Criteria criteria, @ModelAttribute BoardVO boardVO,
-			BindingResult bindingResult, HttpServletRequest request) throws Exception {
+	public String Insert(Model model, @ModelAttribute Criteria criteria, @ModelAttribute("boardVO") BoardVO boardVO,
+			SessionStatus sessionStatus, BindingResult bindingResult, HttpServletRequest request) throws Exception {
 
 		logger.info("글저장처리");
 
@@ -189,12 +204,12 @@ public class BoardController {
 			model.addAttribute("boardVO", boardVO);
 			model.addAttribute("categoryname", service.getCategory());
 			model.addAttribute("categorylist", service.getCategoryList());
-			
+
 			if (boardVO.getBoard_idx() != 0) {
-				// 새글이 아니면 답글폼 출력 
+				// 새글이 아니면 답글폼 출력
 				return "modules/board/board_reply";
 			} else {
-				// 새글이면 새글등록폼 출력 
+				// 새글이면 새글등록폼 출력
 				return "modules/board/board_write";
 			}
 		}
@@ -211,7 +226,7 @@ public class BoardController {
 			model.addAttribute("url", "list.do");
 
 		} else {
-			
+
 			model.addAttribute("msg", "CaptchaFailed");
 			if (boardVO.getBoard_idx() != 0) {
 				model.addAttribute("url", "reply.do");
@@ -221,6 +236,9 @@ public class BoardController {
 				return "modules/board/board_write";
 			}
 		}
+
+		// 세션에서 지운다.
+		sessionStatus.setComplete();
 
 		return "/modules/common/common_message";
 	}
@@ -280,8 +298,8 @@ public class BoardController {
 
 	// 글수정처리
 	@RequestMapping(value = "update.do", method = RequestMethod.POST)
-	public String Update(Model model, @ModelAttribute Criteria criteria, @ModelAttribute BoardVO boardVO,
-			@RequestParam String pass, BindingResult bindingResult) throws Exception {
+	public String Update(Model model, @ModelAttribute Criteria criteria, @ModelAttribute("isAdmin") BoardVO boardVO,
+			SessionStatus sessionStatus, @RequestParam String pass, BindingResult bindingResult) throws Exception {
 
 		logger.info("글수정처리");
 
@@ -307,7 +325,11 @@ public class BoardController {
 					"modify.do?board_idx=" + boardVO.getBoard_idx() + "&category_idx=" + boardVO.getCategory_idx());
 		}
 
+		// 세션에서 지운다.
+		sessionStatus.setComplete();
+
 		return "/modules/common/common_message";
+
 	}
 
 	// 글삭제폼
@@ -323,10 +345,8 @@ public class BoardController {
 
 	// 글삭제처리
 	@RequestMapping(value = "delete.do", method = RequestMethod.POST)
-	public String Delete(Model model, @ModelAttribute Criteria criteria, @ModelAttribute BoardVO boardVO,
-			@RequestParam String pass, BindingResult bindingResult
-	/* RedirectAttributes redirectAttributes */
-	) throws Exception {
+	public String Delete(Model model, @ModelAttribute Criteria criteria, @ModelAttribute("isAdmin") BoardVO boardVO,
+			SessionStatus sessionStatus, @RequestParam String pass, BindingResult bindingResult) throws Exception {
 
 		logger.info("글삭제처리");
 
@@ -334,7 +354,7 @@ public class BoardController {
 		String encodedPassword = service.getPassword(boardVO.getBoard_idx());
 
 		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin!@1234")) {
-			
+
 			service.delete(boardVO.getBoard_idx());
 
 			model.addAttribute("msg", "DeleteSuccess");
@@ -343,6 +363,9 @@ public class BoardController {
 			model.addAttribute("msg", "PassFailed");
 			model.addAttribute("url", "delete.do?board_idx=" + boardVO.getBoard_idx());
 		}
+
+		// 세션에서 지운다.
+		sessionStatus.setComplete();
 
 		return "/modules/common/common_message";
 	}
