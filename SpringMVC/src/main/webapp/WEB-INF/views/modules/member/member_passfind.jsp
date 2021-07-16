@@ -1,32 +1,34 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-								
-	
-												<div class="panel">
-													<div class="form-group">
-														<div class="test-box">
-															<p class="icon-top"><i class="fas fa-address-card"></i></p>
-															<h1 class="title">비밀번호찾기</h1>
-															<h2 class="subtitle">가입하신 아이디와 이메일로 비밀번호찾기가 가능합니다.</h2>
-															<h2 class="subtitle"><span id="result"></span></h2>															
-														</div>
-													</div>
-													<div class="form-group">
-														<label for="userid"><spring:message code="label.userid" /></label> 
-														<input name="userid" id="userid" type="text" class="btn-block" placeholder="UserID" />
-														<form:errors path="userid" />
-													</div>
-													<div class="form-group">
-														<label for="email"><spring:message code="label.email" /></label> 
-														<input name="email" id="email" type="text" class="btn-block" placeholder="Email" />
-														<form:errors path="email" />
-													</div>
-													<div class="btn-group">
-														<input type="button" id="passfindBtn" value="확인" class="btn-block danger" style="height: 45px; margin-bottom: 15px;" />
-														<input type="button" value="로그인" class="btn-block info"	style="height: 45px;" onclick="location.href='login.do'" />
-													</div>
-												</div>
-							
+<div class="panel">
+	<div class="form-group">
+		<div class="test-box">
+			<p class="icon-top"><i class="fas fa-address-card"></i></p>
+			<h1 class="title">비밀번호찾기</h1>
+			<h2 class="subtitle">가입하신 아이디와 이메일로 비밀번호찾기가 가능합니다.</h2>
+			<h2 class="subtitle"><span id="result"></span></h2>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="userid"><spring:message code="label.userid" /></label>
+		<input name="userid" id="userid" type="text" class="btn-block" placeholder="UserID" />
+		<form:errors path="userid" />
+	</div>
+	<div class="form-group">
+		<label for="email"><spring:message code="label.email" /></label>
+		<input name="email" id="email" type="text" class="btn-block" placeholder="Email" />
+		<form:errors path="email" />
+	</div>
+	<div class="btn-group">
+		<input type="button" id="passfindBtn" value="확인" class="btn-block danger" style="height: 45px; margin-bottom: 15px;" />
+		<input type="button" value="로그인" class="btn-block info" style="height: 45px;" onclick="location.href='login.do'" />
+	</div>
+</div>
 
 <script type="text/javascript">
 	$(document).ready(function() {

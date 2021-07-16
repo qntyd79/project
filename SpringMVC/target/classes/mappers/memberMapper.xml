@@ -236,13 +236,26 @@
 	]]>	
 	</select>
 	
-	<!-- 임시 비밀번호 업데이트 -->
+	<!-- 비밀번호 확인 -->	
+	<select id="passCheck" resultType="com.company.bbs.vo.member.MemberVO">
+	<![CDATA[ 
+		SELECT pass FROM jhbbs_member WHERE userid = #{userid} AND del = 'N'
+	]]>	
+	</select>	
 	
+	<!-- 임시 비밀번호 업데이트 -->	
 	<update id="updatePass">
 	<![CDATA[ 
 		update jhbbs_member set pass = #{pass} where userid = #{userid}
 	]]>	
 	</update>
+	
+	<!-- 로그인 -->	
+	<select id="login" resultType="com.company.bbs.vo.member.MemberVO">
+	<![CDATA[ 
+		SELECT * FROM jhbbs_member WHERE userid = #{userid} AND del = 'N'
+	]]>	
+	</select>	
 	
 	<sql id="category">
 		<if test="category_idx > 0">

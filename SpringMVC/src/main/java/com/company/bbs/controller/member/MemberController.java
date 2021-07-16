@@ -8,16 +8,13 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +29,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springmodules.validation.commons.DefaultBeanValidator;
@@ -43,10 +39,8 @@ import com.company.bbs.utill.Criteria;
 import com.company.bbs.utill.PageMaker;
 import com.company.bbs.utill.UploadFileUtils;
 import com.company.bbs.vo.attach.AttachVO;
-import com.company.bbs.vo.email.EmailVO;
 import com.company.bbs.vo.member.MemberVO;
 
-@SuppressWarnings("unused")
 @Controller
 @RequestMapping("modules/member/*")
 public class MemberController {
@@ -82,104 +76,7 @@ public class MemberController {
 		return "modules/member/validator";
 	}
 
-	// 회원목록 엑셀다운로드
-	@RequestMapping(value = "excelDownload.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String excelDownload(Model model, @ModelAttribute Criteria criteria) throws Exception {
-
-		logger.info("다운로드폼");
-
-		// 회원목록 가져오기
-		List<MemberVO> list = service.getExcelList();
-
-		// 회원목록 엑셀다운로드
-		SXSSFWorkbook workbook = service.excelFileDownloadProcess(list);
-
-		model.addAttribute("locale", Locale.KOREA);
-		model.addAttribute("workbook", workbook);
-		model.addAttribute("workbookName", "회원목록");
-
-		// 스프링설정 context-file에서 빈설정
-		return "excelDownloadView";
-	}
-
-	// 회원목록 엑셀파일 업로드
-	@RequestMapping(value = "excelUpload.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String excelUpload(Model model, @RequestParam("attach") MultipartFile attach) throws Exception {
-
-		logger.info("엑셀파일 업로드");
-
-		List<MemberVO> list = service.excelFilUploadProcess(attach);
-
-		if (list != null) {
-			model.addAttribute("msg", "LoginSuccess");
-			model.addAttribute("url", "list.do");
-		} else {
-			model.addAttribute("msg", "LoginFailed");
-			model.addAttribute("url", "list.do");
-		}
-
-		return "/modules/common/common_message";
-
-	}
-
-	// 로그인폼
-	@RequestMapping(value = "login.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String login(Model model, @ModelAttribute MemberVO memberVO) throws Exception {
-
-		logger.info("회원로그인폼");
-
-		model.addAttribute("memberVO", memberVO);
-
-		return "modules/member/member_loginfull";
-	}
-
-	// 로그인처리
-	@RequestMapping(value = "loginCheck.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String login(Model model, @ModelAttribute MemberVO memberVO, HttpSession session) throws Exception {
-
-		logger.info("회원로그인처리");
-
-		String rawPassword = memberVO.getPass();
-		logger.info("로그인폼 비밀번호 " + rawPassword);
-
-		String encodedPassword = service.getLoginPassword(memberVO.getUserid());
-		logger.info("DB 비밀번호 " + encodedPassword);
-
-		boolean passMatch = passwordEncoder.matches(rawPassword, encodedPassword);
-		memberVO.setPass(encodedPassword);
-
-		boolean result = service.loginCheck(memberVO, session);
-
-		if (result == true && passMatch == true) {
-			model.addAttribute("isAdmin", null);
-			model.addAttribute("msg", "LoginSuccess");
-			model.addAttribute("url", "../../index.do");
-		} else {
-			model.addAttribute("msg", "LoginFailed");
-			model.addAttribute("url", "login.do");
-		}
-
-		return "/modules/common/common_message";
-	}
-
-	// 로그인풀화면폼
-	@RequestMapping(value = "loginfull.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String loginfull() throws Exception {
-
-		return "modules/member/loginfull";
-	}
-
-	// 회원로그아웃
-	@RequestMapping(value = "logout.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String logout(Model model, HttpSession session) throws Exception {
-
-		service.logout(session);
-		model.addAttribute("msg", "LogoutSuccess");
-		model.addAttribute("url", "login.do");
-		return "/modules/common/common_message";
-	}
-
-	// 아이디중복확인
+	// 회원아이디 중복확인
 	@ResponseBody
 	@RequestMapping(value = "idCheck.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public int idCheck(@ModelAttribute MemberVO memberVO, HttpServletResponse response) throws Exception {
@@ -192,7 +89,7 @@ public class MemberController {
 		return result;
 	}
 
-	// 아이디/비밀번호찾기폼
+	// 회원아이디/비밀번호찾기폼
 	@RequestMapping(value = "find.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String find(Model model, @ModelAttribute MemberVO memberVO) throws Exception {
 
@@ -203,7 +100,7 @@ public class MemberController {
 		return "modules/member/member_find";
 	}
 
-	// 아이디찾기폼
+	// 회원아이디찾기폼
 	@RequestMapping(value = "idfind.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String idfind(Model model, @ModelAttribute MemberVO memberVO) throws Exception {
 
@@ -214,22 +111,22 @@ public class MemberController {
 		return "modules/member/member_idfind";
 	}
 
-	// 아이디찾기
+	// 회원아이디찾기 처리
 	@ResponseBody
 	@RequestMapping(value = "idfindcheck.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public Map<String, Object> idfindcheck(Model model, @RequestBody MemberVO memberVO) throws Exception {
 
 		logger.info("아이디찾기 결과화면");
 
-		MemberVO result = service.idSearch(memberVO);		
-		System.out.println(result);		
+		MemberVO result = service.idSearch(memberVO);
+		System.out.println(result);
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		// 아이디가 존재하지 않으면
 		if (result == null) {
-			
+
 			map.put("check", 0);
-			
+
 		} else { // 아이디가 존재하면
 
 			// 마지막 2자리 **표시
@@ -248,7 +145,7 @@ public class MemberController {
 		return map;
 	}
 
-	// 비밀번호찾기폼
+	// 회원비밀번호찾기폼
 	@RequestMapping(value = "passfind.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String passfind(Model model, @ModelAttribute MemberVO memberVO) throws Exception {
 
@@ -259,13 +156,13 @@ public class MemberController {
 		return "modules/member/member_passfind";
 	}
 
-	// 비밀번호찾기
+	// 회원비밀번호찾기 처리
 	@ResponseBody
 	@RequestMapping(value = "passfindcheck.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public Map<String, Object> passfindcheck(Model model, @RequestBody MemberVO memberVO) throws Exception {
 
 		logger.info("비밀번호찾기 결과화면");
-		
+
 		MemberVO result = service.passSearch(memberVO);
 		System.out.println(result);
 
@@ -273,9 +170,9 @@ public class MemberController {
 
 		// 비밀번호가 존재하지 않으면
 		if (result == null) {
-			
+
 			map.put("check", 0);
-			
+
 		} else { // 비밀번호가 존재하면
 
 			// 마지막 4자리 ****표시
@@ -288,14 +185,59 @@ public class MemberController {
 			String maskpass = getpass.substring(0, length);
 			maskpass = maskpass + "****";
 			System.out.println(maskpass);
-			
+
 			map.put("check", 1);
 			map.put("pass", maskpass);
-			map.put("email", getemail);		
-			
+			map.put("email", getemail);
+
 		}
 
 		return map;
+	}
+
+	// 회원비밀번호 확인 처리
+	@ResponseBody
+	@RequestMapping(value = "passchangecheck.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public Map<String, Object> passchangecheck(Model model, @RequestBody MemberVO memberVO) throws Exception {
+
+		logger.info("비밀번호 확인");
+
+		MemberVO result = service.passChangeCheck(memberVO);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		// DB비밀번호
+		String rawPassword = memberVO.getPass();
+		logger.info("폼에서 받아온 비밀번호 " + rawPassword);
+
+		String encodedPassword = service.getLoginPassword(memberVO.getUserid());
+		logger.info("DB비밀번호 " + encodedPassword);
+			
+		// 비밀번호가 일치하면 1 반환 / 비밀번호가 일치하지 않으면 0 반환
+		if (passwordEncoder.matches(rawPassword, encodedPassword)) {		
+			map.put("check", 1);
+			map.put("userid", memberVO.getUserid());
+			
+			logger.info("넘어갈 아이디 " + memberVO.getUserid());
+		} else {			
+			map.put("check", 0);
+		}
+
+		return map;
+	}
+
+	// 회원비밀번호 변경 처리
+	@ResponseBody
+	@RequestMapping(value = "passchange.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public int passchange(@RequestBody MemberVO memberVO) throws Exception {
+
+		logger.info("비밀번호 변경 결과");
+		
+		int result = service.updatePass(memberVO);
+		
+		System.out.println(result);
+		
+		return result;
 	}
 
 	// 회원인증폼
@@ -553,7 +495,8 @@ public class MemberController {
 			model.addAttribute("url", "list.do");
 		} else {
 			model.addAttribute("msg", "PassFailed");
-			model.addAttribute("url", "read.do?member_idx=" + memberVO.getMember_idx() + "&category_idx=" + memberVO.getCategory_idx());
+			model.addAttribute("url",
+					"read.do?member_idx=" + memberVO.getMember_idx() + "&category_idx=" + memberVO.getCategory_idx());
 		}
 
 		return "/modules/common/common_message";

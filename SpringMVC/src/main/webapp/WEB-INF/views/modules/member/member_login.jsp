@@ -41,7 +41,7 @@
                                                         </div>
                                                         <div class="text-left"><input type="checkbox" name="state" value="1" id="state"> 로그인 상태유지</div>
                                                         <div class="btn-group-m">
-                                                            <input type="button" value="Login" class="btn-block danger" style="font-size:20px; height:57px;" onClick="$(this.form).submit();"/>
+                                                            <input type="button" value="Login" class="btn-block danger" style="height: 45px;" onClick="$(this.form).submit();"/>
                                                         </div>
                                                         <!--
                                                         <div class="social-box">

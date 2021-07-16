@@ -657,7 +657,7 @@ public class MemberServiceImpl implements MemberService {
 			MemberVO memberVO2 = getViewMember(memberVO);
 
 			// 세션 유지시간 설정(초단위) 60초 유지
-			session.setMaxInactiveInterval(1 * 300);
+			//session.setMaxInactiveInterval(1 * 300);
 
 			// 세션저장
 			session.setAttribute("isAdmin", memberVO2);
@@ -763,7 +763,7 @@ public class MemberServiceImpl implements MemberService {
 				'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
 				'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
 				'v', 'w', 'x', 'y', 'z', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')' };
-		
+
 		return getRandPw(1, pwCollectionSpCha) + getRandPw(8, pwCollectionAll) + getRandPw(1, pwCollectionNum);
 	}
 
@@ -773,8 +773,29 @@ public class MemberServiceImpl implements MemberService {
 			int selectRandomPw = (int) (Math.random() * (pwCollection.length));
 			ranPw += pwCollection[selectRandomPw];
 		}
-		
+
 		return ranPw;
+	}
+
+	// 비밀번호 확인
+	@Override
+	public MemberVO passChangeCheck(MemberVO memberVO) throws Exception {
+		return dao.passChangeCheck(memberVO);
+	}
+
+	// 임시비밀번호 업데이트
+	@Override
+	public int updatePass(MemberVO memberVO) throws Exception {
+
+		// 변경 비밀번호 암호화
+		String pass = memberVO.getPass();
+		String pwdBycrypt = passwordEncoder.encode(pass);	
+	
+		memberVO.setPass(pwdBycrypt);
+		
+		int result = dao.updatePass(memberVO);
+		
+		return result;
 	}
 
 }

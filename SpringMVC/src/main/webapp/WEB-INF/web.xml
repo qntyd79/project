@@ -99,4 +99,9 @@
     -->
  	<!-- 에러페이지 설정 종료 -->
  	
+ 	<!-- 세션 유지시간 설정 기본값 30분 -->
+ 	<session-config>
+  		<session-timeout>30</session-timeout>
+	</session-config>
+ 
 </web-app>

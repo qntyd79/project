@@ -41,7 +41,7 @@ import com.company.bbs.vo.board.BoardVO;
 
 @SuppressWarnings("unused")
 @Controller
-@SessionAttributes("boardVO")
+@SessionAttributes("memberVO")
 @RequestMapping("modules/board/*")
 public class BoardController {
 

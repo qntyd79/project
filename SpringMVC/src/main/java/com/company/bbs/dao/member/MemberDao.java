@@ -86,11 +86,14 @@ public interface MemberDao {
 	public MemberVO idSearch(MemberVO memberVO) throws Exception;
 	
 	// 비밀번호찾기 
-	public MemberVO passSearch(MemberVO memberVO) throws Exception;
-		
+	public MemberVO passSearch(MemberVO memberVO) throws Exception;	
+
+	// 비밀번화 확인
+	public MemberVO passChangeCheck(MemberVO memberVO) throws Exception;
+			
 	// 임시비밀번호 업데이트
 	public int updatePass(MemberVO memberVO) throws Exception;
-
+	
 	
 	
 

@@ -31,7 +31,7 @@
                                                 <li>
                                                     <div class="panel">
                                                         <div class="logo-box">
-                                                            <a href="/index.do"><img src="/resources/images/logo/logo.png" /></a>
+                                                            <a href="${path}/index.do"><img src="/resources/images/logo/logo.png" /></a>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="userid"><spring:message code="label.userid"/></label>
@@ -41,9 +41,9 @@
                                                             <label for="pass"><spring:message code="label.pass"/></label>
                                                             <input name="pass" type="password" class="btn-block" placeholder="Password"/> <form:errors path="pass" />
                                                         </div>
-                                                        <div class="text-left"><input type="checkbox" name="state" value="1" id="state"> 로그인 상태유지</div>
+                                                        <div class="text-left"><input type="checkbox" name="usecookie"> 로그인 상태유지</div>
                                                         <div class="btn-group-m">
-                                                            <input type="button" value="Login" class="btn-block danger" style="font-size:20px; height:57px;" onClick="$(this.form).submit();"/>
+                                                            <input type="button" value="Login" class="btn-block danger" style="height:45px;" onClick="$(this.form).submit();"/>
                                                         </div>
                                                         <div class="social-box">
                                                             <a href="#"><i class="fab fa-facebook"></i></a>
@@ -60,9 +60,12 @@
                                                         </div>
                                                     </div>
                                                 </li>
+                                                <!--
                                                 <li>
+                                                
                                                 	<img src="${path}/resources/images/add/s02.jpg" />
                                                 </li>
+                                                -->
                                             </ul>
                                         </div>
                                     </div>

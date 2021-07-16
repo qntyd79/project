@@ -69,7 +69,7 @@
                                                 <tr>
                                                     <th><label for="pass"><spring:message code="label.pass"/></label></th>
                                                    	<td class="text-left"><input name="pass" type="password" placeholder="Password" />                                                    	
-                                                    <input type="button" value="비밀번호 변경하기" id="passChangeBtn" />
+                                                    <input type="button" value="비밀번호 변경하기" class="modal-open-btn"/>
                                                     <form:errors path="pass" />                                                   
                                                    	</td>
                                                 </tr>                                               
@@ -116,7 +116,7 @@
                                                     <th><label for="zipcode"><spring:message code="label.zipcode"/></label></th>
                                                     <td class="text-left">
                                                         <form:input path="zipcode" type="text" id="zipcode" placeholder="Zipcode" readonly="readonly"/>
-                                                        <input type="button" onclick="findzipcode()" value="우편번호찾기" />
+                                                       <input type="button" id="findzipcode" class="findzipcode" value="우편번호찾기" />
                                                         <form:errors path="zipcode" />
                                                     </td> 
                                                 </tr>
@@ -334,6 +334,9 @@
 </div>                       
 <c:import url="/WEB-INF/views/include/footer.jsp"/>
 
+<c:import url="/WEB-INF/views/modules/member/member_passchange.jsp"/>
+
+
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script type="text/javascript">
@@ -398,38 +401,7 @@
 	        }).open();	        
 		}); 
 
-	    // 아이디중복체크  	
-		$("#passChangeBtn").on("click",function(){		
-			var userid = $("#userid").val();
-
-			if (userid == '') {
-			      alert('아이디를 입력해주세요.')
-			      $("#userid").focus();
-			      return;
-			}
-
-			var query = {userid : userid};
-			
-		    $.ajax({
-				type : "POST", //전송방식을 지정한다 (POST,GET)
-				url : "${path}/modules/member/idCheck.do",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
-				dataType : "text",
-				data: query,
-				success : function(result) {
-					//서비스 성공 시 처리 할 내용
-				    if (result == "1") {					    
-				    	alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");	
-				    } else if (result == "0") {
-				    	alert("사용가능한 아이디입니다.");
-				    	// 중복체크 버튼 클릭 유무를 위한 value값 속성 변경 
-				    	$("#me_id_yn").attr("value","Y");
-					}
-				},
-				error : function(error) {
-	                alert("error : " + error);
-	            }
-			});
-		});	
+	    
 		
 	});
 </script>

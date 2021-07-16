@@ -16,7 +16,7 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Inject
 	SqlSession sqlSession;
-		
+
 	// 회원목록
 	@Override
 	public List<MemberVO> getList(Criteria criteria) throws Exception {
@@ -82,13 +82,13 @@ public class MemberDaoImpl implements MemberDao {
 	public String getPassword(int member_idx) throws Exception {
 		return sqlSession.selectOne("member.getPassword", member_idx);
 	}
-	
+
 	// 카테고리명
 	@Override
 	public List<Object> getCategory() throws Exception {
 		return sqlSession.selectList("member.getCategory");
 	}
-	
+
 	// 카테고리목록
 	@Override
 	public List<Object> getCategoryList(int kind) throws Exception {
@@ -127,16 +127,16 @@ public class MemberDaoImpl implements MemberDao {
 	// 회원로그인체크
 	@Override
 	public boolean loginCheck(MemberVO memberVO) throws Exception {
-		String name = sqlSession.selectOne("member.loginCheck", memberVO);	
+		String name = sqlSession.selectOne("member.loginCheck", memberVO);
 		return (name == null) ? false : true;
 	}
-	
+
 	// 회원로그아웃
 	@Override
 	public void logout(HttpSession session) throws Exception {
 
 	}
-	
+
 	// 회원로그인정보
 	@Override
 	public MemberVO getViewMember(MemberVO memberVO) throws Exception {
@@ -147,37 +147,42 @@ public class MemberDaoImpl implements MemberDao {
 	public String getLoginPassword(String userid) throws Exception {
 		return sqlSession.selectOne("member.getLoginPassword", userid);
 	}
-	
+
 	// 아이디중복확인
 	@Override
 	public int idCheck(MemberVO memberVO) throws Exception {
 		int result = sqlSession.selectOne("member.idCheck", memberVO);
 		return result;
 	}
-	
-	// 엑셀목록 
+
+	// 엑셀목록
 	@Override
 	public List<MemberVO> getExcelList() throws Exception {
 		return sqlSession.selectList("member.getExcelList");
-	}	
-	
+	}
+
 	// 아이디찾기
 	@Override
 	public MemberVO idSearch(MemberVO memberVO) throws Exception {
 		return sqlSession.selectOne("member.idSearch", memberVO);
 	}
-	
+
 	// 비밀번호찾기
 	@Override
 	public MemberVO passSearch(MemberVO memberVO) throws Exception {
 		return sqlSession.selectOne("member.passSearch", memberVO);
-	}	
-	
+	}
+
+	// 비밀번호 확인
+	@Override
+	public MemberVO passChangeCheck(MemberVO memberVO) throws Exception {
+		return sqlSession.selectOne("member.passCheck", memberVO);
+	}
+
 	// 임시 비밀번호 업데이트
 	@Override
 	public int updatePass(MemberVO memberVO) throws Exception {
-		return sqlSession.update("member.updatePass" , memberVO);
+		return sqlSession.update("member.updatePass", memberVO);
 	}
-	
 
 }
