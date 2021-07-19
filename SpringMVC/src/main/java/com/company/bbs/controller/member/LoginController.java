@@ -37,7 +37,7 @@ public class LoginController {
 
 		model.addAttribute("memberVO", memberVO);
 
-		return "modules/member/member_loginfull";
+		return "modules/member/member_login";
 	}
 
 	// 로그인처리
@@ -73,7 +73,7 @@ public class LoginController {
 	@RequestMapping(value = "loginfull.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String loginfull() throws Exception {
 
-		return "modules/member/loginfull";
+		return "modules/member/member_loginfull";
 	}
 
 	// 로그아웃

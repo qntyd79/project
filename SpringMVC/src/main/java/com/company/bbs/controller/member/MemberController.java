@@ -455,9 +455,9 @@ public class MemberController {
 		return mav;
 	}
 
-	// 회원수정
-	@RequestMapping(value = "modify.do", method = RequestMethod.GET)
-	public String Modify(Model model, @ModelAttribute Criteria criteria, @RequestParam int member_idx)
+	// 회원수정폼
+	@RequestMapping(value = "edit.do", method = RequestMethod.GET)
+	public String Edit(Model model, @ModelAttribute Criteria criteria, @RequestParam int member_idx)
 			throws Exception {
 
 		logger.info("회원수정");
@@ -472,7 +472,7 @@ public class MemberController {
 
 	// 회원수정처리
 	@RequestMapping(value = "update.do", method = RequestMethod.POST)
-	public String Modify(Model model, @ModelAttribute MemberVO memberVO, @ModelAttribute Criteria criteria,
+	public String Update(Model model, @ModelAttribute MemberVO memberVO, @ModelAttribute Criteria criteria,
 			@RequestParam String pass, BindingResult bindingResult) throws Exception {
 
 		logger.info("회원수정처리");

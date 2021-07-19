@@ -25,7 +25,7 @@
                                         <div class="thumbnail">
                                             <img src="<c:url value="/resources/images/thumbnail/post-1-thumb.jpg" />"/>
                                             <h1 class="title">UAV형 항공영상 수집</h1>
-                                            <h2 class="subtitle">너 ~ 지 않아?</h2>
+                                            <h2 class="subtitle">4K해상도 지원 항공사진 촬영</h2>
                                             <ul class="list">
                                                 <li>예문</li>
                                                 <li>예문</li>

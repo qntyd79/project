@@ -18,12 +18,13 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 
 		HttpSession session = request.getSession();
+		
+		Object obj = session.getAttribute("isAdmin");
+		System.out.println(obj);
 
-		String result = (String) session.getAttribute("isAdmin");
-
-		if (result == null) {
-			response.sendRedirect("/modules/member/login.do");
-			return false;
+		if (obj == null) {			
+			response.sendRedirect("/modules/member/login.do");			
+			return false;			
 		} 
 		
 		return true;
@@ -32,7 +33,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		      
+
+		super.postHandle(request, response, handler, modelAndView);
 	}
 
 	@Override

@@ -72,7 +72,7 @@
                                         <li><a href="${path}/contents/content03.do">컨텐츠폼03</a></li>
                                         <li><a href="${path}/contents/content04.do">컨텐츠폼04</a></li>
                                         <li><a href="${path}/contents/content05.do">컨텐츠폼05</a></li>
-                                        <li><a href="${path}/contents/content06.do">영어기초회화</a></li>
+                                        <li><a href="${path}/contents/content06.do">컨텐츠폼06</a></li>
                                         <li><a href="#">메뉴추가</a></li>
                                         <li><a href="#">메뉴추가</a></li>
                                     </ul>

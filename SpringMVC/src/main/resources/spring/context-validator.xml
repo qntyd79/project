@@ -18,6 +18,7 @@
     <bean id="beanValidator" class="org.springmodules.validation.commons.DefaultBeanValidator">
     	<property name="validatorFactory" ref="validatorFactory"/>
 	</bean>
+	
     <bean id="validatorFactory" class="org.springmodules.validation.commons.DefaultValidatorFactory">
     	<property name="validationConfigLocations">
 			<list>

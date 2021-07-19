@@ -657,7 +657,7 @@ public class MemberServiceImpl implements MemberService {
 			MemberVO memberVO2 = getViewMember(memberVO);
 
 			// 세션 유지시간 설정(초단위) 60초 유지
-			//session.setMaxInactiveInterval(1 * 300);
+			session.setMaxInactiveInterval(1 * 300);
 
 			// 세션저장
 			session.setAttribute("isAdmin", memberVO2);

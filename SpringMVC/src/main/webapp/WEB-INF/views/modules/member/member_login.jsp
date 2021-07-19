@@ -27,8 +27,8 @@
                                 <legend>Member Login Form</legend>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="div-hcenter">
-                                            <ul class="content-data-2">
+                                        <div class="div-hcenter" >
+                                            <ul class="content-data-1" style="width:400px;">
                                                 <li>
                                                     <div class="panel">
                                                        <div class="form-group">
@@ -54,19 +54,21 @@
                                                         </div>
                                                         -->
                                                         <div class="btn-group-m">
-                                                            <input type="button" value="홈" onclick="location.href='index.do'" />
-                                                            <input type="button" value="회원가입" onclick="location.href='agree.do'">
-                                                            <input type="button" value="아이디/비밀번호찾기" class="modal-open-btn">
+                                                            <a href="#" onclick="location.href='../../index.do'" >홈&nbsp; &nbsp; </a> 
+                                                            <a href="#" onclick="location.href='agree.do'">회원가입&nbsp; &nbsp; </a> 
+                                                            <a href="#" onclick="location.href='find.do'">아이디/비밀번호 찾기</a>
                                                         </div>
                                                     </div>
-                                                </li>                                                
+                                                </li> 
+                                                <!--                                          
                                                 <li>
                                                     <div class="panel">
                                                         <div class="thumbnail">
                                                             <img src="${path}/resources/images/add/s02.jpg" />
                                                         </div>
                                                     </div>
-                                                </li>                                               
+                                                </li>  
+                                               -->                                                  
                                             </ul>
                                         </div>
                                     </div>
@@ -83,4 +85,3 @@
 </div>
 
 <c:import url="/WEB-INF/views/include/footer.jsp"/>
-<c:import url="/WEB-INF/views/modules/member/member_find.jsp"/>

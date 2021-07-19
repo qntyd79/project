@@ -39,45 +39,7 @@
 	<context:component-scan base-package="com.*"/>    	
 	
 	<!-- aop의 설정으로 Proxy 객체를 자동으로 생성 -->
-	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>		
-	
-	<!-- 지역언어변경 인터셉터 설정 -->
-	<mvc:interceptors>
-		<beans:bean	id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-			<beans:property name="paramName" value="lang" />
-		</beans:bean>
-	</mvc:interceptors>
-	
-	<!-- 로그인 세션 인터셉터 설정 -->
-	<mvc:interceptors>
-        <mvc:interceptor>
-        	<!-- 인터셉터 설정 -->
-            <mvc:mapping path="/**"/>
-            
-            <!-- 인터셉터 제외설정 -->
-            <mvc:exclude-mapping path="/resources/**"/>
-            <mvc:exclude-mapping path="/modules/member/logout.do"/>
-            <mvc:exclude-mapping path="/modules/member/login.do"/>
-            <mvc:exclude-mapping path="/modules/member/loginCheck.do"/>
-            <mvc:exclude-mapping path="/index.do" />
-            <beans:bean id="LoginInterceptor" class="com.company.bbs.utill.LoginInterceptor"/>
-        </mvc:interceptor>
-    </mvc:interceptors>	
-    
-    <!-- 접근권한 인터셉터 설정 -->
-	<mvc:interceptors>
-        <mvc:interceptor>
-         	<!-- 인터셉터 설정 -->
-         	<mvc:mapping path="/**"/>
-                       
-            <!-- 인터셉터 제외설정 -->
-            <mvc:exclude-mapping path="/resources/**"/>
-            <mvc:exclude-mapping path="/modules/board/list.do"/>
-            <beans:bean id="AuthInterceptor" class="com.company.bbs.utill.AuthInterceptor"/>
-        </mvc:interceptor>
-    </mvc:interceptors>	
-    
-    
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>	
 
     
 </beans:beans>

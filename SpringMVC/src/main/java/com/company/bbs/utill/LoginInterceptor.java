@@ -19,14 +19,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
 		HttpSession session = request.getSession();
 		
-		String result = (String) session.getAttribute("isAdmin");
+		Object obj = session.getAttribute("isAdmin");
+		System.out.println(obj);
 
-		if (result == null) {			
+		if (obj == null) {			
 			response.sendRedirect("/modules/member/login.do");			
 			return false;			
-		} else {
-			response.sendRedirect("/index.do");
-		}
+		} 
 		
 		return true;
 	}
@@ -35,9 +34,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("===================        END        ===================\n");
-		}
+		super.postHandle(request, response, handler, modelAndView);
 	}
 
 	@Override
