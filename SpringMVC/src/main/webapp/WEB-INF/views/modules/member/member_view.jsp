@@ -315,7 +315,10 @@
                                             
                                             <nav class="btn-group">
 												<ul>
+													<c:if test="${sessionScope.isAdmin == null}">	
 													<li><input type="button" value="<spring:message code="button.list"/>" onClick="location.href='list.do'"/></li>
+													</c:if>
+													<li><input type="button" value="<spring:message code="button.home"/>" onClick="location.href='../../index.do'"/></li>
 													<li><input type="button" value="<spring:message code="button.update"/>" onClick="$(this.form).submit();"/></li>												
 												</ul>
 											</nav>

@@ -49,8 +49,7 @@
 <div class="modal-back"></div>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		
+	$(document).ready(function() {		
 		 
 		// 다음에 변경하기 
 		$("#nextChangeBtn").on("click",function(){
@@ -99,9 +98,15 @@
 							    success: function(data) {
 									if(data === 1){
 										alert("비밀번호가 변경되었습니다.");	
+
+										// 비밀번호 정상적으로 변경되면 모달창 닫기
+										$('.modal-box').removeClass('modal-on');
+							            $('.modal-back').removeClass('back-on');
+							            $('body').removeClass('body-lock');
+							            
 									} else {
 										alert("입력정보를 다시 확인하세요.");	
-									}
+									}	
 							    },
 							    error: function(request, status, error) {
 							        // 서비스 실패 시 처리 할 내용

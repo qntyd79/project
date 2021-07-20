@@ -45,12 +45,12 @@
                                     <a href="${path}/modules/member/agree.do"> 회원가입폼</a>
                                     <ul class="dropdown-submenu">
                                         <li><a href="${path}/modules/member/write_group.do">회원가입폼(그룹)</a></li>
-                                        <li><a href="${path}/modules/member/agree.do">개인정보동의</a></li>
-                                        <li><a href="${path}/modules/member/write.do">회원가입</a></li>
-                                        <li><a href="${path}/modules/member/read.do">회원정보</a></li>
-                                        <li><a href="${path}/modules/member/edit.do">회원수정</a></li>
-                                        <li><a href="${path}/modules/member/list.do">회원목록</a></li>
-                                        <li><a href="${path}/modules/member/delete.do">회원삭제</a></li>
+                                        <li><a href="#">메뉴추가</a></li>
+                                        <li><a href="#">메뉴추가</a></li>
+                                        <li><a href="#">메뉴추가</a></li>
+                                        <li><a href="#">메뉴추가</a></li>
+                                        <li><a href="#">메뉴추가</a></li>
+                                        <li><a href="#">메뉴추가</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown">

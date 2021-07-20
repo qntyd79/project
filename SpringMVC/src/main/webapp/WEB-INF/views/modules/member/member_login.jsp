@@ -20,7 +20,7 @@
                     <article>
                     
                     
-                        <h2>회원로그인</h2>
+                        
                         <form method="post" id="loginForm" name="loginForm" enctype="multipart/form-data" action="loginCheck.do">
                             <input type="hidden" name="msgStr" value="<c:out value="${msg}"/> ">
                             <fieldset>
@@ -28,6 +28,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="div-hcenter" >
+                                        <h2>회원로그인</h2>
                                             <ul class="content-data-1" style="width:400px;">
                                                 <li>
                                                     <div class="panel">

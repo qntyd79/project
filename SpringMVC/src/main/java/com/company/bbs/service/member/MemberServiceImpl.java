@@ -8,6 +8,7 @@ import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -39,6 +40,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.company.bbs.controller.member.MemberController;
 import com.company.bbs.dao.member.MemberDao;
 import com.company.bbs.utill.Criteria;
+import com.company.bbs.utill.FileReadUtils;
 import com.company.bbs.utill.MailSendUtils;
 import com.company.bbs.utill.UploadFileUtils;
 import com.company.bbs.vo.attach.AttachVO;
@@ -221,21 +223,6 @@ public class MemberServiceImpl implements MemberService {
 		bodyStyle.setBorderBottom(BorderStyle.THIN);
 		bodyStyle.setBorderLeft(BorderStyle.THIN);
 		bodyStyle.setBorderRight(BorderStyle.THIN);
-
-		/*
-		 * // 타이틀 출력 Row headerRow = sheet.createRow(0);
-		 * 
-		 * headerCell = headerRow.createCell(0); headerCell.setCellValue("번호");
-		 * 
-		 * // 데이터 출력 Row bodyRow = null; Cell bodyCell = null;
-		 * 
-		 * for (int i = 0; i < list.size(); i++) {
-		 * 
-		 * MemberVO fruit = list.get(i);
-		 * 
-		 * bodyRow = sheet.createRow(i + 1); bodyCell = bodyRow.createCell(0);
-		 * bodyCell.setCellValue(i + 1); bodyCell = bodyRow.createCell(1); }
-		 */
 
 		// 시트 열 너비 설정
 		// setColumWidth(해당 열, 폭)
@@ -728,19 +715,39 @@ public class MemberServiceImpl implements MemberService {
 
 		// 비밀번호 변경 메일 발송
 		EmailVO emailVO = new EmailVO();
-
+		
+		
 		String content = "";
+		/*
 		content += "<div align='center' style='border:1px solid black; font-family:verdana'>";
 		content += "<h3 style='color: blue;'>";
 		content += memberVO.getUserid() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
 		content += "<p>임시 비밀번호 : ";
-		content += memberVO.getPass() + "</p></div>";
-
+		content += memberVO.getPass() + "</p></div>";	
+		*/	
+		
 		emailVO.setTitle("노라조 임시 비밀번호 입니다.");
 		emailVO.setToemail(memberVO.getEmail());
 		emailVO.setSendemail("ojh@engit.com");
-		emailVO.setContent(content);
+		//emailVO.setContent(content);
+		
+		HashMap<String, String> mailParamMap = new HashMap<String, String>();
+		
+		mailParamMap.put("title", "임시 비밀번호 발급 안내입니다.");
+		mailParamMap.put("userid", memberVO.getUserid());
+		mailParamMap.put("pass", memberVO.getPass());
+	    mailParamMap.put("content", content);
 
+		// 템플릿 불러오기
+		FileReadUtils fileReadUtils = new FileReadUtils();
+		
+		String filename = "/Users/ojeonghwan/git/project/SpringMVC/src/main/webapp/resources/template/" + "emailtemplate1.html";
+		
+		String templateString = fileReadUtils.readFile(filename);
+		
+		String mailContents = fileReadUtils.changeContents(mailParamMap, templateString);
+		
+		emailVO.setContent(mailContents);
 		mailSendUtils.sendMailing(emailVO, uploadPath);
 
 		// 비밀번호 암호화

@@ -14,7 +14,7 @@
                 <section class="content">
                    <%@ include file="../include/content_header.jsp"%>
                     <article>
-                        <h2>영어기초회화</h2>
+                        <h2>UAV형 항공영상</h2>
                         <div class="lead">샘플로 제공되는 데이터베이스를 보실 수 있습니다.</div>
                     </article>
                     <article>

@@ -259,6 +259,15 @@
             <artifactId>spring-security-taglibs</artifactId>
             <version>5.0.3.RELEASE</version> 
         </dependency>
+        
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-text -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-text</artifactId>
+		    <version>1.9</version>
+		</dependency>
+
+
 
 		<!-- 기본설정 -->
 		<!-- Spring -->

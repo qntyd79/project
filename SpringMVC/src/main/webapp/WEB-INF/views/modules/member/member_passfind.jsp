@@ -57,7 +57,8 @@
 
 						// 아이디가 존재하면 1
 						if(data.check == 1) {
-				    		$('#result').text("임시 비밀번호를 " + data.email + " 로 발송하였습니다.");
+							alert("임시 비밀번호를 " + data.email + " 로 발송하였습니다.");
+				    		//$('#result').text("임시 비밀번호를 " + data.email + " 로 발송하였습니다.");
 				    		//$('#result').append(data.pass);
 						} else { // 아이디가 존재하지 않으면 0
 							$('#result').text("일치하는 정보가 존재하지 않습니다.");
