@@ -29,7 +29,7 @@
                                     <div class="col-md-12">
                                         <div class="div-hcenter" >
                                         <h2>회원로그인</h2>
-                                            <ul class="content-data-1" style="width:400px;">
+                                            <ul class="content-data-1" style="width:335px;">
                                                 <li>
                                                     <div class="panel">
                                                        <div class="form-group">
@@ -43,6 +43,12 @@
                                                         <div class="text-left"><input type="checkbox" name="state" value="1" id="state"> 로그인 상태유지</div>
                                                         <div class="btn-group-m">
                                                             <input type="button" value="Login" class="btn-block danger" style="height: 45px;" onClick="$(this.form).submit();"/>
+                                                        </div>
+                                                        <div class="btn-group-m">
+                                                            <!--  <input type="button" value="Login" class="btn-block danger" style="height: 45px;" onClick="$(this.form).submit();"/>-->
+                                                            <a href="kakaoLogin.do">
+    															<img src="${path}/resources/images/btn/kakaologinbtn.png"/>
+															</a>                                                            
                                                         </div>
                                                         <!--
                                                         <div class="social-box">

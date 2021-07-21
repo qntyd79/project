@@ -1,10 +1,16 @@
 package com.company.bbs.service.member;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.InetAddress;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,8 +53,10 @@ import com.company.bbs.vo.attach.AttachVO;
 import com.company.bbs.vo.board.BoardVO;
 import com.company.bbs.vo.email.EmailVO;
 import com.company.bbs.vo.member.MemberVO;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
-@SuppressWarnings("unused")
 @Service
 public class MemberServiceImpl implements MemberService {
 
@@ -715,38 +723,38 @@ public class MemberServiceImpl implements MemberService {
 
 		// 비밀번호 변경 메일 발송
 		EmailVO emailVO = new EmailVO();
-		
-		
+
 		String content = "";
 		/*
-		content += "<div align='center' style='border:1px solid black; font-family:verdana'>";
-		content += "<h3 style='color: blue;'>";
-		content += memberVO.getUserid() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
-		content += "<p>임시 비밀번호 : ";
-		content += memberVO.getPass() + "</p></div>";	
-		*/	
-		
+		 * content +=
+		 * "<div align='center' style='border:1px solid black; font-family:verdana'>";
+		 * content += "<h3 style='color: blue;'>"; content += memberVO.getUserid() +
+		 * "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>"; content += "<p>임시 비밀번호 : "; content
+		 * += memberVO.getPass() + "</p></div>";
+		 */
+
 		emailVO.setTitle("노라조 임시 비밀번호 입니다.");
 		emailVO.setToemail(memberVO.getEmail());
 		emailVO.setSendemail("ojh@engit.com");
-		//emailVO.setContent(content);
-		
+		// emailVO.setContent(content);
+
 		HashMap<String, String> mailParamMap = new HashMap<String, String>();
-		
+
 		mailParamMap.put("title", "임시 비밀번호 발급 안내입니다.");
 		mailParamMap.put("userid", memberVO.getUserid());
 		mailParamMap.put("pass", memberVO.getPass());
-	    mailParamMap.put("content", content);
+		mailParamMap.put("content", content);
 
 		// 템플릿 불러오기
 		FileReadUtils fileReadUtils = new FileReadUtils();
-		
-		String filename = "/Users/ojeonghwan/git/project/SpringMVC/src/main/webapp/resources/template/" + "emailtemplate1.html";
-		
+
+		String filename = "/Users/ojeonghwan/git/project/SpringMVC/src/main/webapp/resources/template/"
+				+ "emailtemplate1.html";
+
 		String templateString = fileReadUtils.readFile(filename);
-		
+
 		String mailContents = fileReadUtils.changeContents(mailParamMap, templateString);
-		
+
 		emailVO.setContent(mailContents);
 		mailSendUtils.sendMailing(emailVO, uploadPath);
 
@@ -796,13 +804,159 @@ public class MemberServiceImpl implements MemberService {
 
 		// 변경 비밀번호 암호화
 		String pass = memberVO.getPass();
-		String pwdBycrypt = passwordEncoder.encode(pass);	
-	
+		String pwdBycrypt = passwordEncoder.encode(pass);
+
 		memberVO.setPass(pwdBycrypt);
-		
+
 		int result = dao.updatePass(memberVO);
-		
+
 		return result;
+	}
+
+	// 카카오계정 로그인
+	@Override
+	public String getReturnAccessToken(String code) {
+
+		String access_token = "";
+		String refresh_token = "";
+		String reqURL = "https://kauth.kakao.com/oauth/token";
+
+		try {
+			URL url = new URL(reqURL);
+
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+			// HttpURLConnection 설정 값 셋팅
+			conn.setRequestMethod("POST");
+			conn.setDoOutput(true);
+
+			// buffer 스트림 객체 값 셋팅 후 요청
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+			StringBuilder sb = new StringBuilder();
+			sb.append("grant_type=authorization_code");
+			sb.append("&client_id=fb9baa40fdf2fd4b68931ad19a07a720"); // 앱 KEY VALUE
+			sb.append("&redirect_uri=http://localhost:8090/modules/member/kakaocallback"); // 앱 CALLBACK 경로
+			sb.append("&code=" + code);
+			bw.write(sb.toString());
+			bw.flush();
+
+			// 결과 코드가 200이라면 성공
+			int responseCode = conn.getResponseCode();
+			System.out.println("responseCode : " + responseCode);
+
+			// RETURN 값 result 변수에 저장
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String line = "";
+			String result = "";
+
+			while ((line = br.readLine()) != null) {
+				result += line;
+			}
+
+			// Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
+			JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(result);
+
+			// 토큰 값 저장 및 리턴
+			access_token = element.getAsJsonObject().get("access_token").getAsString();
+			refresh_token = element.getAsJsonObject().get("refresh_token").getAsString();
+
+			System.out.println("access_token : " + access_token);
+			System.out.println("refresh_token : " + refresh_token);
+
+			br.close();
+			bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return access_token;
+	}
+
+	// 카카오계정 사용자정보 가져오기
+	@Override
+	public HashMap<String, Object> getUserInfo(String access_token) {
+
+		HashMap<String, Object> userInfo = new HashMap<>();
+
+		String reqURL = "https://kapi.kakao.com/v2/user/me";
+
+		try {
+			URL url = new URL(reqURL);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST");
+
+			// 요청에 필요한 Header에 포함될 내용
+			conn.setRequestProperty("Authorization", "Bearer " + access_token);
+
+			int responseCode = conn.getResponseCode();
+			System.out.println("responseCode : " + responseCode);
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+			String line = "";
+			String result = "";
+
+			while ((line = br.readLine()) != null) {
+				result += line;
+			}
+			
+			System.out.println("response : " + result);
+
+			// Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
+			JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(result);
+
+			JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
+			JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
+
+			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
+			String profile_image = properties.getAsJsonObject().get("profile_image").getAsString();
+			String email = kakao_account.getAsJsonObject().get("email").getAsString();
+
+
+			userInfo.put("nickname", nickname);
+			userInfo.put("email", email);
+			userInfo.put("profile_image", profile_image);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return userInfo;
+	}
+
+	// 카카오계정 로그아웃
+	@Override
+	public void getLogout(String access_token) {
+
+		String reqURL = "https://kapi.kakao.com/v1/user/logout";
+
+		try {
+			URL url = new URL(reqURL);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Authorization", "Bearer " + access_token);
+			
+			int responseCode = conn.getResponseCode();
+			System.out.println("로그아웃 responseCode : " + responseCode);
+
+			if (responseCode == 400)
+				throw new RuntimeException("카카오 로그아웃 도중 오류 발생");
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+			String line = "";
+			String result = "";
+			while ((line = br.readLine()) != null) {
+				result += line;
+			}
+
+			System.out.println(result);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

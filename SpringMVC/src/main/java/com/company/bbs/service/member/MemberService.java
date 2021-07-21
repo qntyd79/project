@@ -1,6 +1,8 @@
 package com.company.bbs.service.member;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -101,4 +103,15 @@ public interface MemberService {
 	
 	// 임시비밀번호 업데이트
 	public int updatePass(MemberVO memberVO) throws Exception;
+	
+	// 카카오계정 로그인
+	public String getReturnAccessToken(String code) throws Exception;
+	
+	// 카카오계정 사용자정보 가져오기
+	public HashMap<String, Object> getUserInfo(String access_token) throws Exception;
+	
+	// 카카오계쩡 로그아웃
+	public void getLogout(String access_token) throws Exception;
+	
+
 }
