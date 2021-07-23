@@ -27,7 +27,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="div-vcenter">                                            
-                                            <ul class="content-data-1">
+                                            <ul class="content-data-1" style="width:330px;">
                                                 <li>
                                                     <div class="panel">
                                                         <div class="logo-box">
@@ -43,8 +43,36 @@
                                                         </div>
                                                         <div class="text-left"><input type="checkbox" name="usecookie"> 로그인 상태유지</div>
                                                         <div class="btn-group-m">
-                                                            <input type="button" value="Login" class="btn-block danger" style="height:45px;" onClick="$(this.form).submit();"/>
+                                                            <input type="button" value="로그인" class="btn-block danger" style="height:55px;" onClick="$(this.form).submit();"/>
                                                         </div>
+                                                         <div class="btn-group-m">
+                                                            <a href="kakaologin">
+    															<img src="${path}/resources/images/btn/kakaologinbtn.png" style="width:298px;"/>
+															</a>                                                            
+                                                        </div>
+                                                        <div class="btn-group-m">
+                                                            <a href="naverlogin">
+    															<img src="${path}/resources/images/btn/naverloginbtn.png" style="width:298px;"/>
+															</a>                                                            
+                                                        </div>
+                                                        <div class="btn-group-m">
+                                                            <a href="googlelogin">
+    															<img src="${path}/resources/images/btn/googleloginbtn.png" style="width:298px;"/>
+															</a>                                                            
+                                                        </div>
+                                                        <!--
+                                                         <div class="btn-group-m">
+                                                            <a href="facebooklogin">
+    															<img src="${path}/resources/images/btn/facebookloginbtn.png" style="width:298px;"/>
+															</a>                                                            
+                                                        </div>
+                                                         <div class="btn-group-m">
+                                                            <a href="emaillogin">
+    															<img src="${path}/resources/images/btn/emailloginbtn.png" style="width:298px;"/>
+															</a>                                                            
+                                                        </div>
+                                                        -->
+                                                       	<!--
                                                         <div class="social-box">
                                                             <a href="#"><i class="fab fa-facebook"></i></a>
                                                             <a href="#"><i class="fab fa-google"></i></a>
@@ -53,6 +81,7 @@
                                                             <a href="#"><i class="fab fa-yahoo"></i></a>
                                                             <a href="#"><i class="fab fa-snapchat-ghost"></i></a>
                                                         </div>
+                                                        -->
                                                         <div class="btn-group-m">
                                                             <a href="#" onclick="location.href='../../index.do'" >홈&nbsp; &nbsp; </a> 
                                                             <a href="#" onclick="location.href='agree.do'">회원가입&nbsp; &nbsp; </a> 

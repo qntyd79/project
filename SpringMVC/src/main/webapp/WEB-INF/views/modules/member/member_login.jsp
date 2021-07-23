@@ -29,7 +29,7 @@
                                     <div class="col-md-12">
                                         <div class="div-hcenter" >
                                         <h2>회원로그인</h2>
-                                            <ul class="content-data-1" style="width:335px;">
+                                            <ul class="content-data-1" style="width:330px;">
                                                 <li>
                                                     <div class="panel">
                                                        <div class="form-group">
@@ -42,14 +42,35 @@
                                                         </div>
                                                         <div class="text-left"><input type="checkbox" name="state" value="1" id="state"> 로그인 상태유지</div>
                                                         <div class="btn-group-m">
-                                                            <input type="button" value="Login" class="btn-block danger" style="height: 45px;" onClick="$(this.form).submit();"/>
+                                                            <input type="button" value="로그인" class="btn-block danger" style="height:55px;" onClick="$(this.form).submit();"/>
                                                         </div>
                                                         <div class="btn-group-m">
-                                                            <!--  <input type="button" value="Login" class="btn-block danger" style="height: 45px;" onClick="$(this.form).submit();"/>-->
-                                                            <a href="kakaoLogin.do">
-    															<img src="${path}/resources/images/btn/kakaologinbtn.png"/>
+                                                            <a href="kakaologin">
+    															<img src="${path}/resources/images/btn/kakaologinbtn.png" style="width:298px;"/>
 															</a>                                                            
                                                         </div>
+                                                        <div class="btn-group-m">
+                                                            <a href="naverlogin">
+    															<img src="${path}/resources/images/btn/naverloginbtn.png" style="width:298px;"/>
+															</a>                                                            
+                                                        </div>
+                                                        <div class="btn-group-m">
+                                                            <a href="googlelogin">
+    															<img src="${path}/resources/images/btn/googleloginbtn.png" style="width:298px;"/>
+															</a>                                                            
+                                                        </div>
+                                                        <!--
+                                                         <div class="btn-group-m">
+                                                            <a href="facebooklogin">
+    															<img src="${path}/resources/images/btn/facebookloginbtn.png" style="width:298px;"/>
+															</a>                                                            
+                                                        </div>
+                                                         <div class="btn-group-m">
+                                                            <a href="emaillogin">
+    															<img src="${path}/resources/images/btn/emailloginbtn.png" style="width:298px;"/>
+															</a>                                                            
+                                                        </div>
+                                                         -->
                                                         <!--
                                                         <div class="social-box">
                                                             <a href="#"><i class="fab fa-facebook"></i></a>
