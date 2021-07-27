@@ -42,36 +42,17 @@
                                                         </div>
                                                         <div class="text-left"><input type="checkbox" name="state" value="1" id="state"> 로그인 상태유지</div>
                                                         <div class="btn-group-m">
-                                                            <input type="button" value="로그인" class="btn-block danger" style="height:55px;" onClick="$(this.form).submit();"/>
+                                                            <input type="button" value="이메일 로그인" class="btn-block danger"  onClick="$(this.form).submit();"/>
                                                         </div>
                                                         <div class="btn-group-m">
-                                                            <a href="kakaologin">
-    															<img src="${path}/resources/images/btn/kakaologinbtn.png" style="width:298px;"/>
-															</a>                                                            
+    														<input type="button" value="카카오톡 로그인" class="btn-block kakao" onclick="location.href='kakaologin'" >/>
                                                         </div>
                                                         <div class="btn-group-m">
-                                                            <a href="naverlogin">
-    															<img src="${path}/resources/images/btn/naverloginbtn.png" style="width:298px;"/>
-															</a>                                                            
+    														<input type="button" value="네이버 로그인" class="btn-block naver"  onclick="location.href='naverlogin'" >/>
                                                         </div>
                                                         <div class="btn-group-m">
-                                                            <a href="googlelogin">
-    															<img src="${path}/resources/images/btn/googleloginbtn.png" style="width:298px;"/>
-															</a>                                                            
-                                                        </div>
-                                                        <!--
-                                                         <div class="btn-group-m">
-                                                            <a href="facebooklogin">
-    															<img src="${path}/resources/images/btn/facebookloginbtn.png" style="width:298px;"/>
-															</a>                                                            
-                                                        </div>
-                                                         <div class="btn-group-m">
-                                                            <a href="emaillogin">
-    															<img src="${path}/resources/images/btn/emailloginbtn.png" style="width:298px;"/>
-															</a>                                                            
-                                                        </div>
-                                                         -->
-                                                        <!--
+    														<input type="button" value="구글 로그인" class="btn-block google"  onclick="location.href='googlelogin'" >/>
+                                                         </div>                                                                                                               <!--
                                                         <div class="social-box">
                                                             <a href="#"><i class="fab fa-facebook"></i></a>
                                                             <a href="#"><i class="fab fa-google"></i></a>

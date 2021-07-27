@@ -41,25 +41,19 @@
                                                             <label for="pass"><spring:message code="label.pass"/></label>
                                                             <input name="pass" type="password" class="btn-block" placeholder="Password"/> <form:errors path="pass" />
                                                         </div>
-                                                        <div class="text-left"><input type="checkbox" name="usecookie"> 로그인 상태유지</div>
+                                                        <div class="text-left"><input type="checkbox" name="usecookie"> 로그인 상태유지</div>                                                        
                                                         <div class="btn-group-m">
-                                                            <input type="button" value="로그인" class="btn-block danger" style="height:55px;" onClick="$(this.form).submit();"/>
-                                                        </div>
-                                                         <div class="btn-group-m">
-                                                            <a href="kakaologin">
-    															<img src="${path}/resources/images/btn/kakaologinbtn.png" style="width:298px;"/>
-															</a>                                                            
+                                                            <input type="button" value="이메일 로그인" class="btn-block danger"  onClick="$(this.form).submit();"/>
                                                         </div>
                                                         <div class="btn-group-m">
-                                                            <a href="naverlogin">
-    															<img src="${path}/resources/images/btn/naverloginbtn.png" style="width:298px;"/>
-															</a>                                                            
+    														<input type="button" value="카카오톡 로그인" class="btn-block kakao"  onclick="location.href='kakaologin'" >
                                                         </div>
                                                         <div class="btn-group-m">
-                                                            <a href="googlelogin">
-    															<img src="${path}/resources/images/btn/googleloginbtn.png" style="width:298px;"/>
-															</a>                                                            
+    														<input type="button" value="네이버 로그인" class="btn-block naver" onclick="location.href='naverlogin'" >
                                                         </div>
+                                                        <div class="btn-group-m">
+    														<input type="button" value="구글 로그인" class="btn-block google" onclick="location.href='googlelogin'" >
+                                                         </div>
                                                         <!--
                                                          <div class="btn-group-m">
                                                             <a href="facebooklogin">
