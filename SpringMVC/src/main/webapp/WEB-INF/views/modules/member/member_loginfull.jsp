@@ -77,7 +77,7 @@
                                                         </div>
                                                         -->
                                                         <div class="btn-group-m">
-                                                            <a href="#" onclick="location.href='../../index.do'" >홈&nbsp; &nbsp; </a> 
+                                                            <a href="#" onclick="location.href='${path}/index.do'" >홈&nbsp; &nbsp; </a> 
                                                             <a href="#" onclick="location.href='agree.do'">회원가입&nbsp; &nbsp; </a> 
                                                             <a href="#" onclick="location.href='find.do'">아이디/비밀번호 찾기</a>                                            
                                                         </div>

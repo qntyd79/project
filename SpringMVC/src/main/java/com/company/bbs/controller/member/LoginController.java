@@ -40,7 +40,7 @@ public class LoginController {
 
 		model.addAttribute("memberVO", memberVO);
 
-		return "modules/member/member_login";
+		return "modules/member/member_loginfull";
 	}
 
 	// 로그인처리
@@ -60,13 +60,13 @@ public class LoginController {
 
 		boolean result = service.loginCheck(memberVO, session);
 
-		if (result == true && passMatch == true) {
+		if (result != true && passMatch != true) {
 			model.addAttribute("isAdmin", null);
-			model.addAttribute("msg", "LoginSuccess");
-			model.addAttribute("url", "../../index.do");
-		} else {
 			model.addAttribute("msg", "LoginFailed");
-			model.addAttribute("url", "login.do");
+			model.addAttribute("url", "login.do");			
+		} else {
+			model.addAttribute("msg", "LoginSuccess");
+			model.addAttribute("url", "../../index.do");	
 		}
 
 		return "/modules/common/common_message";

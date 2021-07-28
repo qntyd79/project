@@ -45,13 +45,13 @@
                                                             <input type="button" value="이메일 로그인" class="btn-block danger"  onClick="$(this.form).submit();"/>
                                                         </div>
                                                         <div class="btn-group-m">
-    														<input type="button" value="카카오톡 로그인" class="btn-block kakao" onclick="location.href='kakaologin'" >/>
+    														<input type="button" value="카카오톡 로그인" class="btn-block kakao" onclick="location.href='kakaologin'" >
                                                         </div>
                                                         <div class="btn-group-m">
-    														<input type="button" value="네이버 로그인" class="btn-block naver"  onclick="location.href='naverlogin'" >/>
+    														<input type="button" value="네이버 로그인" class="btn-block naver"  onclick="location.href='naverlogin'" >
                                                         </div>
                                                         <div class="btn-group-m">
-    														<input type="button" value="구글 로그인" class="btn-block google"  onclick="location.href='googlelogin'" >/>
+    														<input type="button" value="구글 로그인" class="btn-block google"  onclick="location.href='googlelogin'" >
                                                          </div>                                                                                                               <!--
                                                         <div class="social-box">
                                                             <a href="#"><i class="fab fa-facebook"></i></a>

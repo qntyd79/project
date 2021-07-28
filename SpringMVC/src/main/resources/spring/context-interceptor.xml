@@ -49,12 +49,14 @@
             <mvc:exclude-mapping path="/"/>
             <mvc:exclude-mapping path="/resources/**"/>
             <mvc:exclude-mapping path="/contents/**"/>
+            <mvc:exclude-mapping path="/index.do"/>
             <mvc:exclude-mapping path="/modules/attach/**"/>
             <mvc:exclude-mapping path="/modules/board/**"/>
             <mvc:exclude-mapping path="/modules/category/**"/>
             <mvc:exclude-mapping path="/modules/comment/**"/>
             <mvc:exclude-mapping path="/modules/email/**"/>
 			<mvc:exclude-mapping path="/modules/member/**"/>
+			
             <bean id="AuthInterceptor" class="com.company.bbs.utill.AuthInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>	

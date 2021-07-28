@@ -7,36 +7,33 @@
 		<ul>
 			<c:if test="${sessionScope.isAdmin == null && kakaoinfo == null && naverinfo == null && googleinfo == null}">
 				<li><a href="${path}/modules/member/loginfull.do"><i class="fas fa-user-lock"></i> 로그인</a></li>
-				<li><a href="${path}/modules/member/auth.do"><i	class="fas fa-address-card"></i> 회원가입</a></li>
+				<li><a href="${path}/modules/member/agree.do"><i	class="fas fa-address-card"></i> 회원가입</a></li>
 				<li><a href="${path}/modules/member/find.do"><i class="fas fa-address-card"></i> 아이디/비밀번호찾기</a></li>
 			</c:if>
 			<!-- 사이트 로그인 -->
-			<c:if test="${sessionScope.isAdmin ne null}">
-				<li><a href="${path}/modules/member/loginfull.do">${sessionScope.isAdmin.name}님 환영합니다.</a></li>
-				<li><a href="${path}/modules/member/read.do?member_idx=${sessionScope.isAdmin.member_idx}"><i class="fas fa-desktop"></i> 회원정보</a></li>
+			<c:if test="${sessionScope.isAdmin != null}">
+				<li><a href="#" class="cursornone">${sessionScope.isAdmin.name}님 환영합니다.</a></li>
+				<li><a href="${path}/modules/member/read.do?member_idx=${sessionScope.isAdmin.member_idx}"> <i class="fas fa-desktop"></i> 회원정보</a></li>
 				<li><a href="${path}/modules/member/logout.do"><i class="fas fa-user-lock"></i> 로그아웃 </a></li>
 			</c:if>
 			<!-- 카카오 로그인 -->
-			<c:if test="${kakaoinfo ne null}">
-				<li><a href="${path}/modules/member/loginfull"> 
-				<img src="${path}/resources/images/icon/kakaoicon.png" width="20px"/> ${name}님 환영합니다.</a>				
+			<c:if test="${kakaoinfo != null}">
+				<li><a href="#" class="cursornone"> <img src="${path}/resources/images/icon/kakaoicon.png" width="20px"/> ${name}님 환영합니다.</a>				
 				</li>
-				<li><a href="${path}/modules/member/read.do?member_idx=${sessionScope.isAdmin.member_idx}"><i class="fas fa-desktop"></i> 회원정보</a></li>
+				<li><a href="${path}/modules/member/read.do?member_idx=${sessionScope.isAdmin.member_idx}"> <i class="fas fa-desktop"></i> 회원정보</a></li>
 				<li><a href="${path}/modules/member/kakaologout"><i class="fas fa-user-lock"></i> 로그아웃 </a><li>
 			</c:if>
 			<!-- 네이버 로그인 -->
-			<c:if test="${naverinfo ne null}">
-				<li><a href="${path}/modules/member/loginfull"> 
-				<img src="${path}/resources/images/icon/navericon.png" width="20px"/> ${name}님 환영합니다.</a>				
+			<c:if test="${naverinfo != null}">
+				<li><a href="#" class="cursornone"> <img src="${path}/resources/images/icon/navericon.png" width="20px"/> ${name}님 환영합니다.</a>				
 				</li>
-				<li><a href="${path}/modules/member/read.do?member_idx=${sessionScope.isAdmin.member_idx}"><i class="fas fa-desktop"></i> 회원정보</a></li>
+				<li><a href="${path}/modules/member/read.do?member_idx=${sessionScope.isAdmin.member_idx}"> <i class="fas fa-desktop"></i> 회원정보</a></li>
 				<li><a href="${path}/modules/member/naverlogout"><i class="fas fa-user-lock"></i> 로그아웃 </a><li>
 			</c:if>
-			<c:if test="${googleinfo ne null}">
-				<li><a href="${path}/modules/member/loginfull"> 
-				<img src="${path}/resources/images/icon/googleicon.png" width="20px"/> ${name}님 환영합니다.</a>				
+			<c:if test="${googleinfo != null}">
+				<li><a href="#" class="cursornone"> <img src="${path}/resources/images/icon/googleicon.png" width="20px"/> ${name}님 환영합니다.</a>				
 				</li>
-				<li><a href="${path}/modules/member/read.do?member_idx=${sessionScope.isAdmin.member_idx}"><i class="fas fa-desktop"></i> 회원정보</a></li>
+				<li><a href="${path}/modules/member/read.do?member_idx=${sessionScope.isAdmin.member_idx}"> <i class="fas fa-desktop"></i> 회원정보</a></li>
 				<li><a href="${path}/modules/member/googlelogout"><i class="fas fa-user-lock"></i> 로그아웃 </a><li>
 			</c:if>
 			<li><a href="${path}/contents/sitemap.do"><i class="fas fa-sitemap"></i> 사이트맵</a></li>

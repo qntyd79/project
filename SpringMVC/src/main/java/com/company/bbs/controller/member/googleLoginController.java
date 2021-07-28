@@ -110,9 +110,12 @@ public class googleLoginController {
 			session.removeAttribute("email");
 			session.removeAttribute("profile_image");
 			session.removeAttribute("accessToken");
-		} else {
-			System.out.println("로그아웃 정상종료");
-		}
+			
+			model.addAttribute("msg", "LogoutSuccess");
+			model.addAttribute("url", "../../index.do");
+
+			return "/modules/common/common_message";			
+		} 
 
 		return "redirect:/";
 	}

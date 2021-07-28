@@ -641,13 +641,13 @@ article {
         .slider {
             .layout;
             position: relative;
-            max-height: 840px;
+            max-height: 760px;
             .text-center;
 
             .slider-item {
 
                 article {
-                    margin-top: 20px !important;
+                    margin-top: 40px !important;
                 }
 
                 .slider-img>img {
@@ -671,7 +671,7 @@ article {
                 .slider-caption {
                     .layout(@fixed-width);
                     position: absolute;
-                    top: 50px;
+                    top: 20px;
                     left: 50%;
                     transform: translateX(-50%);
                     z-index: 6;
@@ -1440,7 +1440,6 @@ dl {
         li {
             .float-left;
             width: 16.665%;
-
             //border-right: 1px solid #777777;
             //border-bottom: 1px solid #777777;
             a {
@@ -1451,6 +1450,10 @@ dl {
                 &:hover {
                     .background(#111);
                 }
+				.cursornone {
+					pointer-events: none;
+					cursor: default;
+				}
             }
         }
     }

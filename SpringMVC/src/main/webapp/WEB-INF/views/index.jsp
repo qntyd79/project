@@ -79,7 +79,7 @@
                                                     <h1 class="title">고정밀 모바일 매핑 기반 DATA 구축</h1>
                                                     <h2 class="subtitle">차량용 수집장비 및 실내용 수집장비로 수집한 데이터를 활용하여 후처리 프로세싱을 거쳐 영상정보, 점군정보, 위치정보 기반 데이터를 구축할수 있습니다.</h2>
                                                     <h3 class="desc"></h3>
-                                                    <h4 class="summary summary-last-child"><a href="<c:url value="/contents/solution06.dol"/>">자세히보기</a>></h4>
+                                                    <h4 class="summary summary-last-child"><a href="<c:url value="/contents/solution06.dol"/>">자세히보기</a></h4>
                                                 </div>
                                             </li>
                                         </ul>
@@ -89,10 +89,11 @@
                         </section>
                     </div>
                     <div class="slider-img">
-                        <img src="<c:url value="/resources/images/slide/slide01.jpg"/> "/>
+                        <img src="/resources/images/slide/slide03.jpg"/>
                     </div>
                 </div>
                 <div class="slider-item">
+   
                     <div class='slider-caption'>
                         <h2 class="slider-title">Index Plan and control drone flights using only your mobile</h2>
                         <h3 class="slider-desc">Pix4Dcapture flies the biggest brands in the market
@@ -166,11 +167,12 @@
                                         </ul>
                                     </div>
                                 </div>
+                                  -->
                             </article>
                         </section>
                     </div>
                     <div class="slider-img">
-                       <img src="<c:url value="/resources/images/slide/slide02.jpg"/> "/>
+                       <img src="/resources/images/slide/slide05.jpg"/>
                     </div>
                 </div>
             </div>
@@ -207,7 +209,7 @@
                     <div class="modal-back"></div>
                 </section>
                 <div class="toggle-box">
-                    <button class="toggle-btn"><i class="fa fa-chevron-down" aria-hidden="true"></i></button>
+                    <button class="toggle-btn"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
                     <article class="toggle-content">
                         <h2>Welcome to Innomaps</h2>
                         <div class="row">
@@ -323,6 +325,7 @@
                                 </div>
                             </div>
                         </div>
+                       
                     </article>
                 </div>
             </div>

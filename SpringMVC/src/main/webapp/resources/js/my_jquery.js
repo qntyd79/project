@@ -1,4 +1,27 @@
 $(document).ready(function() {
+		
+    // 메인슬라이드  
+    $('.bxslider').bxSlider({
+        //slideWidth: 1920,
+        mode: 'fade',
+        captions: true,
+        auto: true,
+		responsive:true
+        //autoControls: true
+    });
+
+
+    // 푸터배너
+    $('.banner-slider').bxSlider({
+        slideWidth: 163.9,
+        minSlides: 2,
+        maxSlides: 10,
+        moveSlides: 1,
+        slideMargin: 9,
+        autoControls: true,
+        auto: true
+    });
+
     // 2020.02.05
 
     // 상단고정 스크롤 시 메뉴 보이기/사라지기 / https://webdir.tistory.com/481
@@ -106,7 +129,7 @@ $(document).ready(function() {
         var content = area.find('.toggle-content');
         var button = area.find('.toggle-btn');
 		// 처음 로딩시 보여지는 부분(show/hide)
-        content.hide();
+        content.show();
         //$content.slideToggle(500);
         //$(this)는 이벤트가 발생한 시점의 $content를 가리킴
         button.click(function() {
@@ -114,7 +137,9 @@ $(document).ready(function() {
 
                 if ($(this).css('display') != 'none') {
                     button.html('<i class="fa fa-chevron-up" aria-hidden="true"></i>');
-                } else {                   
+					//button.html('<i class="fa fa-chevron-down" aria-hidden="true"></i>');
+                } else { 
+	 				//button.html('<i class="fa fa-chevron-up" aria-hidden="true"></i>');                  
 					button.html('<i class="fa fa-chevron-down" aria-hidden="true"></i>');
                 }
 
@@ -373,28 +398,6 @@ $(document).ready(function() {
         //$(this).next(".accordion-content").slideToggle(500);
         accordion_content.not($(this).next(".accordion-content").slideToggle(500)).slideUp();
         $(this).toggleClass("active"); //+,-아이콘토글
-    });
-
-
-    // 메인슬라이드  
-    $('.bxslider').bxSlider({
-        //slideWidth: 1920,
-        mode: 'fade',
-        captions: true,
-        auto: true
-        //autoControls: true
-    });
-
-
-    // 푸터배너
-    $('.banner-slider').bxSlider({
-        slideWidth: 163.9,
-        minSlides: 2,
-        maxSlides: 10,
-        moveSlides: 1,
-        slideMargin: 9,
-        autoControls: true,
-        auto: true
     });
 
 

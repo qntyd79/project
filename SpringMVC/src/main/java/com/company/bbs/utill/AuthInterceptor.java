@@ -20,7 +20,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		
 		Object obj = session.getAttribute("isAdmin");
-		System.out.println(obj);
+		System.out.println("isAdmin : " + obj);
 
 		if (obj == null) {			
 			response.sendRedirect("/modules/member/login.do");			
