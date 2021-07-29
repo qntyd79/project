@@ -10,7 +10,6 @@ $(document).ready(function() {
         //autoControls: true
     });
 
-
     // 푸터배너
     $('.banner-slider').bxSlider({
         slideWidth: 163.9,

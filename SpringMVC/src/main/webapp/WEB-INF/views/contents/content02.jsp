@@ -322,7 +322,7 @@
                                 <ul class="content-panel-4">
                                     <li>
                                         <div class="thumbnail">
-                                            <img src="<c:url value="http://takamado.progressionstudios.com/wp-content/uploads/2014/11/shutterstock_115503586-900x500.jpg" />"/>
+                                            <img src="<c:url value="/resources/images/portfolio/portfolios_0001.jpg" />"/>
                                             <h1 class="title">채용문의1</h1>
                                             <h2 class="subtitle">Technical Architecture 컨설팅 시스템 구축 및 운영 지원 지속적인 제품, 서비스 지원</h2>
                                             <div class="btn-group">
@@ -333,7 +333,7 @@
                                     </li>
                                     <li>
                                         <div class="thumbnail">
-                                            <img src="<c:url value="http://takamado.progressionstudios.com/wp-content/uploads/2014/11/shutterstock_64039774-900x500.jpg" />"/>
+                                            <img src="<c:url value="/resources/images/portfolio/portfolios_0004.jpg" />"/>
                                             <h1 class="title">채용문의1</h1>
                                             <h2 class="subtitle">Technical Architecture 컨설팅 시스템 구축 및 운영 지원 지속적인 제품, 서비스 지원</h2>
                                             <div class="btn-group">
@@ -344,7 +344,7 @@
                                     </li>
                                     <li>
                                         <div class="thumbnail">
-                                            <img src="<c:url value="http://takamado.progressionstudios.com/wp-content/uploads/2014/11/delux-room-900x500.jpg" />"/>
+                                            <img src="<c:url value="/resources/images/portfolio/portfolios_0006.jpg" />"/>
                                             <h1 class="title">채용문의1</h1>
                                             <h2 class="subtitle">Technical Architecture 컨설팅 시스템 구축 및 운영 지원 지속적인 제품, 서비스 지원</h2>
                                             <div class="btn-group">
@@ -355,7 +355,7 @@
                                     </li>
                                     <li>
                                         <div class="thumbnail">
-                                            <img src="<c:url value="http://takamado.progressionstudios.com/wp-content/uploads/2014/11/delux-room-900x500.jpg" />"/>
+                                            <img src="<c:url value="/resources/images/portfolio/portfolios_0002.jpg" />"/>
                                             <h1 class="title">채용문의1</h1>
                                             <h2 class="subtitle">Technical Architecture 컨설팅 시스템 구축 및 운영 지원 지속적인 제품, 서비스 지원</h2>
                                             <div class="btn-group">
@@ -366,7 +366,7 @@
                                     </li>
                                     <li>
                                         <div class="thumbnail">
-                                            <img src="<c:url value="http://takamado.progressionstudios.com/wp-content/uploads/2014/11/delux-room-900x500.jpg" />"/>
+                                            <img src="<c:url value="/resources/images/portfolio/portfolios_0005.jpg" />"/>
                                             <h1 class="title">채용문의1</h1>
                                             <h2 class="subtitle">Technical Architecture 컨설팅 시스템 구축 및 운영 지원 지속적인 제품, 서비스 지원</h2>
                                             <div class="btn-group">
@@ -375,7 +375,7 @@
                                     </li>
                                     <li>
                                         <div class="thumbnail">
-                                            <img src="<c:url value="http://takamado.progressionstudios.com/wp-content/uploads/2014/11/delux-room-900x500.jpg" />"/>
+                                            <img src="<c:url value="/resources/images/portfolio/portfolios_0008.jpg" />"/>
                                             <h1 class="title">채용문의1</h1>
                                             <h2 class="subtitle">Technical Architecture 컨설팅 시스템 구축 및 운영 지원 지속적인 제품, 서비스 지원</h2>
                                             <div class="btn-group">
@@ -384,7 +384,7 @@
                                     </li>
                                     <li>
                                         <div class="thumbnail">
-                                            <img src="<c:url value="http://takamado.progressionstudios.com/wp-content/uploads/2014/11/delux-room-900x500.jpg" />"/>
+                                            <img src="<c:url value="/resources/images/portfolio/portfolios_0004.jpg" />"/>
                                             <h1 class="title">채용문의1</h1>
                                             <h2 class="subtitle">Technical Architecture 컨설팅 시스템 구축 및 운영 지원 지속적인 제품, 서비스 지원</h2>
                                             <div class="btn-group">
@@ -393,7 +393,7 @@
                                     </li>
                                     <li>
                                         <div class="thumbnail">
-                                            <img src="<c:url value="http://takamado.progressionstudios.com/wp-content/uploads/2014/11/delux-room-900x500.jpg" />"/>
+                                            <img src="<c:url value="/resources/images/portfolio/portfolios_0011.jpg" />"/>
                                             <h1 class="title">채용문의1</h1>
                                             <h2 class="subtitle">Technical Architecture 컨설팅 시스템 구축 및 운영 지원 지속적인 제품, 서비스 지원</h2>
                                             <div class="btn-group">

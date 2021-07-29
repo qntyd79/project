@@ -9,10 +9,11 @@
             <div class="slider-left-btn">
                 <a href="#"><i class="fas fa-angle-left fa-2x"></i></a>
             </div>
+            
             <div class="bxslider">
                 <div class="slider-item">
                     <div class='slider-caption'>
-                        <h2 class="slider-title">Index Capturing reality in minutes using photogrammetric modeling</h2>
+                        <h2 class="slider-title">Index Capturing reality in minutes using photogrammetric</h2>
                         <h3 class="slider-desc">Desktop and cloud image processing</h3>
                         <h4 class="slider-summary">The leading photogrammetry software for professional drone mapping Try for free</h4>
                         <section>
@@ -87,12 +88,12 @@
                         </section>
                     </div>
                     <div class="slider-img">
-                        <img src="<c:url value="/resources/images/slide/slide01.jpg"/> "/>
+                        <img src="/resources/images/slide/slide01.jpg">
                     </div>
                 </div>
                 <div class="slider-item">
                     <div class='slider-caption'>
-                        <h2 class="slider-title">Index Plan and control drone flights using only your mobile phone</h2>
+                        <h2 class="slider-title">Index Plan and control drone flights using only your mobile</h2>
                         <h3 class="slider-desc">Pix4Dcapture flies the biggest brands in the market
                         </h3>
                         <h4 class="slider-summary">Free drone flight planning app for optimal 3D mapping and modeling</h4>
@@ -168,10 +169,11 @@
                         </section>
                     </div>
                     <div class="slider-img">
-                       <img src="<c:url value="/resources/images/slide/slide02.jpg"/> "/>
+                       <img src="/resources/images/slide/slide02.jpg""/>
                     </div>
                 </div>
             </div>
+            
             <div class="slider-right-btn">
                 <a href="#"><i class="fas fa-angle-right fa-2x"></i></a>
             </div>

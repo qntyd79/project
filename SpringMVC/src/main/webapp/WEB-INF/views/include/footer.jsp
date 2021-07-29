@@ -220,6 +220,19 @@
     </div>
 </div>
 <!--#wrap-->
+<script>
+// bxslider heiht 0 처리
+document.documentElement.addEventListener('DOMContentLoaded', function(event)  {
+    var $tgt = $('.bx-viewport')[0];
+    var tgt = document.querySelector('.bx-viewport');
+    tgt.style.height = ""
+    tgt.removeAttribute('height');
+    tgt.style.removeProperty('height');
+    $tgt.css('height', '');
+    $tgt.removeAttr('height');
+
+}, false);
+</script>
 </body>
 
 </html>

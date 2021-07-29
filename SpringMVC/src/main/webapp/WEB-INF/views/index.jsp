@@ -5,12 +5,14 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:import url="/WEB-INF/views/include/header.jsp"/>
+
 <div id="slider-wrap">
     <div class="slider-box">
         <div class="slider">
             <div class="slider-left-btn">
                 <a href="#"><i class="fas fa-angle-left fa-2x"></i></a>
             </div>
+            
             <div class="bxslider">
                 <div class="slider-item">
                     <div class='slider-caption'>
@@ -92,8 +94,7 @@
                         <img src="/resources/images/slide/slide03.jpg"/>
                     </div>
                 </div>
-                <div class="slider-item">
-   
+                <div class="slider-item">   
                     <div class='slider-caption'>
                         <h2 class="slider-title">Index Plan and control drone flights using only your mobile</h2>
                         <h3 class="slider-desc">Pix4Dcapture flies the biggest brands in the market
@@ -176,6 +177,7 @@
                     </div>
                 </div>
             </div>
+            
             <div class="slider-right-btn">
                 <a href="#"><i class="fas fa-angle-right fa-2x"></i></a>
             </div>
@@ -332,4 +334,5 @@
         </div>
     </div>
 </div>
+
 <c:import url="/WEB-INF/views/include/footer.jsp"/>
