@@ -23,7 +23,7 @@
                                         <li><a href="${path}/contents/video.do">동영상인덱스</a></li>
                                         <li><a href="${path}/contents/div-center.do">가운데정렬</a></li>
                                         <li><a href="${path}/contents/table.do"> 테이블폼</a></li>
-                                        <li><a href="#">메뉴추가</a></li>
+                                        <li><a href="https://github.com/" target="_blank">github</a></li>
                                         <li><a href="#">메뉴추가</a></li>
                                         <li><a href="#">메뉴추가</a></li>
                                         <li><a href="#">메뉴추가</a></li>
