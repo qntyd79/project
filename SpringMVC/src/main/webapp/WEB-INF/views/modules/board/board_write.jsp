@@ -67,7 +67,7 @@
                                                         -->
                                                     </td>
                                                 </tr>
-                               					<c:if test="${sessionScope.isAdmin == null}">
+                               					<c:if test="${sessionScope.isAdmin == null && kakaoinfo == null && naverinfo == null && googleinfo == null}">
                                                 <tr>
                                                     <th><label for="userid"><spring:message code="label.userid"/></label></th>
                                                     <td class="text-left"><form:input path="userid" type="text" placeholder="UserID" class="wfull" /> <form:errors path="userid" /> </td>
@@ -81,7 +81,7 @@
                                                     <th><label for="pass"><spring:message code="label.pass"/></label></th>
                                                     <td class="text-left"><form:input path="pass" type="password" placeholder="Password" class="wfull" /> <form:errors path="pass" /> </td>
                                                 </tr> 
-                                                <c:if test="${sessionScope.isAdmin == null}">                                              
+                                                <c:if test="${sessionScope.isAdmin == null && kakaoinfo == null && naverinfo == null && googleinfo == null}">                                              
                                                 <tr>
                                                     <th><label for="email"><spring:message code="label.email"/></label></th>
                                                     <td class="text-left">
@@ -234,3 +234,4 @@
 </div>
 
 <c:import url="/WEB-INF/views/include/footer.jsp"/>
+

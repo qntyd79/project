@@ -3,6 +3,7 @@ package com.company.bbs.controller.board;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
@@ -39,9 +41,8 @@ import com.company.bbs.utill.UploadFileUtils;
 import com.company.bbs.vo.attach.AttachVO;
 import com.company.bbs.vo.board.BoardVO;
 
-@SuppressWarnings("unused")
 @Controller
-@SessionAttributes("memberVO")
+@SessionAttributes("boardVO")
 @RequestMapping("modules/board/*")
 public class BoardController {
 
@@ -75,12 +76,11 @@ public class BoardController {
 	protected String getValidator() throws Exception {
 		return "modules/board/validator";
 	}
-	
+
 	@ModelAttribute("boardVO")
 	public BoardVO setEmpyt() {
 		return new BoardVO();
 	}
-
 
 	// 글목록 (Model)
 	@RequestMapping(value = "list.do")
@@ -162,10 +162,10 @@ public class BoardController {
 			throws Exception {
 
 		logger.info("글쓰기");
-		
+
 		model.addAttribute("boardVO", boardVO);
 		model.addAttribute("categorylist", service.getCategoryList());
-		
+
 		System.out.println("아이디 " + boardVO.getUserid());
 		System.out.println("이름 " + boardVO.getName());
 		System.out.println("이메일 " + boardVO.getEmail());
@@ -370,6 +370,30 @@ public class BoardController {
 		return "/modules/common/common_message";
 	}
 
+	// 체크박글삭제처리(ajax)
+	@ResponseBody
+	@RequestMapping(value = "checkdelete.do", method = RequestMethod.POST)
+	public int checkDelete(Model model, @ModelAttribute Criteria criteria,
+			@ModelAttribute("isAdmin") BoardVO boardVO, @RequestParam(value = "check[]") List<String> valueArr)
+			throws Exception {
+
+		logger.info("체글삭제처리");
+		
+		int result = 0;
+		int checkNum = 0;
+
+		for (String i : valueArr) {
+			checkNum = Integer.parseInt(i);
+			boardVO.setBoard_idx(checkNum);
+			service.delete(boardVO.getBoard_idx());
+
+		}
+		
+		result = 1;
+		
+		return result;
+	}
+	
 	// 첨부파일삭제처리
 	@RequestMapping(value = "attachDelete.do", method = RequestMethod.GET)
 	public String attachDelete(Model model, @ModelAttribute Criteria criteria, @ModelAttribute AttachVO attachVO,

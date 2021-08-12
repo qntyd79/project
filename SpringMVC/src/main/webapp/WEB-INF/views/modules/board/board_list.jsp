@@ -107,7 +107,7 @@
                                                         <c:forEach varStatus="status" var="row1" items="${noticelist}">
                                                             <tr>
                                                             	<c:if test="${sessionScope.isAdmin != null}">
-                                                                <td><label><input type="checkbox" name="check" /></label></td>
+                                                                <td><label><input type="checkbox" name="check" value="${row1.board_idx}"/></label></td>
                                                                 </c:if>
                                                                 <td><span><spring:message code="bbs.list.notice"/></span></td>
                                                                 <td>
@@ -137,7 +137,7 @@
                                                         <c:forEach varStatus="status" var="row" items="${list}">
                                                             <tr>
                                                             	<c:if test="${sessionScope.isAdmin != null}">
-                                                                <td><label><input type="checkbox" name="check" /></label></td>
+                                                                <td><label><input type="checkbox" name="check" value="${row.board_idx}"/></label></td>
                                                                 </c:if>
                                                                 <td><strong><c:if test="${row.notice == 0}">${(pageMaker.curNum-status.index)-(pageMaker.noticeCount)}</c:if></strong></td>
                                                                 <td>
@@ -201,7 +201,7 @@
 												<li><input type="button" value="<spring:message code="button.allselect"/>" class="btnallCheck"/></li>
 												<li><input type="button" value="<spring:message code="button.selectreverse"/>" class="reversalallCheck"/></li>
 												<li><input type="button" value="<spring:message code="button.selectcancle"/>" class="unallCheck"/></li>
-												<li><input type="button" value="<spring:message code="button.selectdelete"/>" onClick="location.href='delete.do'"/></li>
+												<li><input type="button" value="<spring:message code="button.selectdelete"/>" class="checkDeleteBtn"/></li>
 												</c:if>	
 												<li><input type="button" value="<spring:message code="button.list"/>" onClick="location.href='list.do'"/></li>
 												<li><input type="button" value="<spring:message code="button.create"/>" onClick="location.href='write.do'"/></li>											
@@ -221,3 +221,46 @@
 </div>
 
 <c:import url="/WEB-INF/views/include/footer.jsp"/>
+
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$(".checkDeleteBtn").on("click",function(){
+		
+	    var list = $("input[name='check']:checked").length;
+	    var valueArr = new Array();
+	    
+	    $("input[name='check']:checked").each(function() {
+	    	valueArr.push($(this).attr('value'));
+        });
+	    
+	    if(valueArr == 0){
+	        alert("선택된 글이 없습니다.");
+	    } else {
+		    var chk = confirm("정말 삭제하시겠습니까?");
+		    
+	    	$.ajax({
+	            type: "POST",
+	            url: "${path}/modules/board/checkdelete.do",
+		        data: { 
+			        check : valueArr
+				},
+	       		success: function(result){
+			        if(result == 1) {
+				       alert("정상적으로 삭제되었습니다.");
+				       location.href="${path}/modules/board/list.do";
+			        }
+		       	},
+		       	error: function(request, status, error){
+			        alert("서버통신 오류");
+			    }
+	   		}); //ajax
+	  } //if
+	  
+	});
+
+});
+
+</script>
