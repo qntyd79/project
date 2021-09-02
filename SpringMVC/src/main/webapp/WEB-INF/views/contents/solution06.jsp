@@ -12,17 +12,18 @@
             <div class="content-full-img01"></div>
             <div class="content-full-bg01-hidden">
                 <section class="content">
-                   <%@ include file="../include/content_header.jsp"%>
+                   <%@ include file="/WEB-INF/views/include/content_header.jsp"%>
+                   
                     <article>
                         <div class="gnb-box">
                            <nav class="gnb">
-                                <ul>
-                                     <li><a href="<c:url value="/contents/solution01.do"/>"><i class="fas fa-user-lock"></i> nebula-DSLR</a></li>
-                                    <li><a href="<c:url value="/contents/solution02.do"/>"><i class="fas fa-address-card"></i> nebula-LP</a></li>
-                                    <li><a href="<c:url value="/contents/solution03.do"/>"><i class="fas fa-desktop"></i> nebula-AP+</a></li>
-                                    <li><a href="<c:url value="/contents/solution04.do"/>"><i class="fas fa-sitemap"></i> WingtraOne</a></li>
-                                    <li><a href="<c:url value="/contents/solution05.do"/>"><i class="fas fa-users"></i> TIMMS</a></li>
-                                    <li><a href="<c:url value="/contents/solution06.do"/>"><i class="fas fa-map"></i> Orbit</a></li>
+                               <ul>
+                                    <li><a href="<c:url value="${path}/contents/solution01.do"/>"><i class="fas fa-user-lock"></i> nebula-DSLR</a></li>
+                                    <li><a href="<c:url value="${path}/contents/solution02.do"/>"><i class="fas fa-address-card"></i> nebula-LP</a></li>
+                                    <li><a href="<c:url value="${path}/contents/solution03.do"/>"><i class="fas fa-desktop"></i> nebula-AP+</a></li>
+                                    <li><a href="<c:url value="${path}/contents/solution04.do"/>"><i class="fas fa-sitemap"></i> WingtraOne</a></li>
+                                    <li><a href="<c:url value="${path}/contents/solution05.do"/>"><i class="fas fa-users"></i> TIMMS</a></li>
+                                    <li><a href="<c:url value="${path}/contents/solution06.do"/>"><i class="fas fa-map"></i> Orbit</a></li>
                                 </ul>
                             </nav>
                         </div>
