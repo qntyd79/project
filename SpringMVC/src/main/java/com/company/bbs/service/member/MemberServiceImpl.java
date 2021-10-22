@@ -650,6 +650,7 @@ public class MemberServiceImpl implements MemberService {
 
 		if (result) {
 			MemberVO memberVO2 = getViewMember(memberVO);
+			System.out.println("memberVO2 :" + memberVO2);
 
 			// 세션 유지시간 설정(초단위) 60초 유지
 			session.setMaxInactiveInterval(1 * 300);
@@ -665,6 +666,7 @@ public class MemberServiceImpl implements MemberService {
 			boardVO.setHomepage(memberVO2.getHomepage());
 
 			session.setAttribute("boardVO", boardVO);
+			
 		}
 
 		return result;

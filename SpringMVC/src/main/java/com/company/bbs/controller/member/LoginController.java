@@ -54,13 +54,17 @@ public class LoginController {
 
 		String encodedPassword = service.getLoginPassword(memberVO.getUserid());
 		logger.info("DB 비밀번호 " + encodedPassword);
-
+		
 		boolean passMatch = passwordEncoder.matches(rawPassword, encodedPassword);
 		memberVO.setPass(encodedPassword);
 
 		boolean result = service.loginCheck(memberVO, session);
+		
 
-		if (result != true && passMatch != true) {
+		if (result != true && encodedPassword == null ) {
+			model.addAttribute("msg", "UserFailed");
+			model.addAttribute("url", "login.do");		
+		} else if (result != true && passMatch != true) {
 			model.addAttribute("isAdmin", null);
 			model.addAttribute("msg", "LoginFailed");
 			model.addAttribute("url", "login.do");			

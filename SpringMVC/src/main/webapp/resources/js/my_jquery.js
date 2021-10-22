@@ -12,7 +12,7 @@ $(document).ready(function() {
 
     // 푸터배너
     $('.banner-slider').bxSlider({
-        slideWidth: 163.9,
+        slideWidth: 172,
         minSlides: 2,
         maxSlides: 10,
         moveSlides: 1,

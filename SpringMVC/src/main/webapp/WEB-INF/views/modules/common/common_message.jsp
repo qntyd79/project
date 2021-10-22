@@ -16,8 +16,11 @@
 	} else if (message == "LoginFailed") {
 	    alert("로그인정보가 일치하지 않습니다.");
 	    location.href = url;
+	} else if (message == "UserFailed") {
+	    alert("회원정보가 존재하지 않습니다. 회원가입을 해주시기 바랍니다.");
+	    location.href = url;
 	} else if (message == "LogoutSuccess") {
-	    alert("로그아웃 되었습니다.");
+	    alert("정상적으로 로그아웃 되었습니다.");
 	    location.href = url;
 	} else if (message == "InsertSuccess") {
 		alert("정상적으로 등록되었습니다.");

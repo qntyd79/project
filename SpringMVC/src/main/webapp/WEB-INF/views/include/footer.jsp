@@ -3,7 +3,7 @@
 
 <div id="footer-wrap">
         <div class="footer-box">
-            <button class="toggle-btn"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+            <button class="toggle-btn"><i class="fa fa-chevron-down" aria-hidden="true"></i></button>
             <footer class="footer toggle-content">
                 <article>
                     <h2>통합메뉴안내</h2>
@@ -220,19 +220,20 @@
     </div>
 </div>
 <!--#wrap-->
+<!-- 
 <script>
-// bxslider heiht 0 처리
-document.documentElement.addEventListener('DOMContentLoaded', function(event)  {
-    var $tgt = $('.bx-viewport')[0];
-    var tgt = document.querySelector('.bx-viewport');
-    tgt.style.height = ""
-    tgt.removeAttribute('height');
-    tgt.style.removeProperty('height');
-    $tgt.css('height', '');
-    $tgt.removeAttr('height');
-
-}, false);
+	// bxslider heiht 0 처리
+	document.documentElement.addEventListener('DOMContentLoaded', function(event)  {
+	    var $tgt = $('.bx-viewport')[0];
+	    var tgt = document.querySelector('.bx-viewport');
+	    tgt.style.height = ""
+	    tgt.removeAttribute('height');
+	    tgt.style.removeProperty('height');
+	    $tgt.css('height', '');
+	    $tgt.removeAttr('height');
+	}, false);
 </script>
+-->
 </body>
 
 </html>

@@ -21,7 +21,7 @@
                                 <div class="lead">㈜이노맵스에서 자체 개발한 DCK-SP는 Nikon D810과 D850 카메라에 대응하는 거리뷰 촬영 시스템으로 Stitching Error를 최소화한 카메라 배열이 특징<br>
                                     Applanix AP-20E(LV-210 OEM Ver)의 고정밀 항법장치 탑재와 카메라에 지식이 없는 비전문가가 차량운행만으로 운용할 수 있는 운전자 중심의 거리뷰 촬영 SW 제공</div>
                                 <div class="thumbnail">
-                                   <img src="<c:url value="http://ipsumimage.appspot.com/1400x600" />"/>
+                                   <img src="<c:url value="http://via.placeholder.com/1400x600" />"/>
                                 </div>
                             </div>
                         </div>
@@ -33,7 +33,7 @@
                                     유효화소수 4575만 화소인 Nikon D850 DSLR 카메라를 이용한 8256×5504px 사이즈의 고화질과 적정노출의 안정적 원본
                                     데이터 취득을 위한 조도센서 기반의 자동 카메라 제어</div>
                                 <div class="thumbnail">
-                                   <img src="<c:url value="http://ipsumimage.appspot.com/1400x600" />"/>
+                                   <img src="<c:url value="http://via.placeholder.com/1400x600" />"/>
                                 </div>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                                     최소 경력 3년 이상으로 다양한 거리뷰/실내뷰 촬영 경험과 고퀄리티의 영상편집이 가능한 인력 투입<br>
                                     주 5일간 지속적인 도보촬영은 촬영자의 피로도와 불만을 유발하는 요소로 2일(촬영)/1일(휴식)/2일(촬영)으로 주 4일 촬영</div>
                                 <div class="thumbnail">
-                                    <img src="<c:url value="http://ipsumimage.appspot.com/1400x600" />"/>
+                                    <img src="<c:url value="http://via.placeholder.com/1400x600" />"/>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                                     휴대용 고정밀 GNSS를 사용하여 위도, 경도, 고도 등의 위치정보만 취득<br>
                                     Nikon D850과 다양한 초점거리의 렌즈를 사용하여 최대 26000px의 고화질 거리뷰 촬영이 가능하며, HDR 기술의 구현으로 자연스러운 영상 구현이 가능</div>
                                 <div class="thumbnail">
-                                    <img src="<c:url value="http://ipsumimage.appspot.com/1400x600" />"/>
+                                    <img src="<c:url value="http://via.placeholder.com/1400x600" />"/>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                                     Nikon D850과 다양한 초점거리의 렌즈를 사용하여 최대 26000px의 고화질 거리뷰 촬영이 가능하며, HDR 기술의 구현으로
                                     자연스러운 영상 구현이 가능</div>
                                 <div class="thumbnail">
-                                    <img src="<c:url value="http://ipsumimage.appspot.com/1400x600" />"/>
+                                    <img src="<c:url value="http://via.placeholder.com/1400x600" />"/>
                                 </div>
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                                     활용하여 항공뷰가 필요한 특정지역을 고도 100m 전후로 1회 비행으로 3노드 내외 촬영<br>
                                     기존 6,656px의 항공뷰보다 해상도가 높은 8,000px ~ 22,000px의 항공뷰 구축</div>
                                 <div class="thumbnail">
-                                    <img src="<c:url value="http://ipsumimage.appspot.com/1400x600" />"/>
+                                    <img src="<c:url value="http://via.placeholder.com/1400x600" />"/>
                                 </div>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                                     UAV는 유인헬기에서는 불가능한 다중노출 촬영으로 HDR 구현이 가능하며, 저고도 고화질의 섬세한 정보제공, 저비용과
                                     간편한 비행계획 수립으로 Coverage 확대를 극대화할 수 있음</div>
                                 <div class="thumbnail">
-                                    <img src="<c:url value="http://ipsumimage.appspot.com/1400x600" />"/>
+                                    <img src="<c:url value="http://via.placeholder.com/1400x600" />"/>
                                 </div>
                             </div>
                         </div>
@@ -111,7 +111,7 @@
                                     최대 55분의 비행시간과 최소 GSD 0.7cm/px급의 정사영상을 확보할 수 있으며, GSD 3cm/px급으로 최대 4.0㎢의 면적 촬영<br>
                                     위치정확도 향상을 위하여 VRS GPS를 활용한 지상기준점 설치</div>
                                 <div class="thumbnail">
-                                    <img src="<c:url value="http://ipsumimage.appspot.com/1400x600" />"/>
+                                    <img src="<c:url value="http://via.placeholder.com/1400x600" />"/>
                                 </div>
                             </div>
                         </div>
@@ -122,7 +122,7 @@
                                     >Sony 4200만 화소의 미러리스 카메라와 1회 55분 비행으로 GSD 3㎝급으로 4㎢의 넓은 면적 촬영이 가능하며, 필요 시 GPS 측량 기반의 대공표지 설치로 정확도 향상
                                 </div>
                                 <div class="thumbnail">
-                                    <img src="<c:url value="http://ipsumimage.appspot.com/1400x600" />"/>
+                                    <img src="<c:url value="http://via.placeholder.com/1400x600" />"/>
                                 </div>
                             </div>
                         </div>
@@ -132,7 +132,7 @@
                                 <div class="lead">2018년 2월 1일 연세대학교를 촬영한 정사영상으로 Orthomosaic Map을 제작하여 네이버 위성지도에 시험 적용<br>
                                     GSD 1.7㎝, 촬영면적 0.8㎢, 종횡중복도 85%, 대공표지 50EA 설치</div>
                                 <div class="thumbnail">
-                                    <img src="<c:url value="http://ipsumimage.appspot.com/1400x600" />"/>
+                                    <img src="<c:url value="http://via.placeholder.com/1400x600" />"/>
                                 </div>
                             </div>
                         </div>
@@ -147,7 +147,7 @@
                                     멀티 센서의 동기화 모듈과 데이터 수집용 연산모듈을 내장하고 있으며, Wifi를 통한 컨트롤 기능 제공<br>
                                     DCK-SP와 Integration하여 전방위 영상, Cloud Points를 동시 취득이 가능</div>
                                 <div class="thumbnail">
-                                    <img src="<c:url value="http://ipsumimage.appspot.com/1400x600" />"/>
+                                    <img src="<c:url value="http://via.placeholder.com/1400x600" />"/>
                                 </div>
                             </div>
                         </div>
@@ -158,7 +158,7 @@
                                     실험용 Point Cloud Data 동시 취득하여 네이버랩스에 제공<br>
                                     네이버랩스에서 보유하고 있는 Velodyne HDL-32 LiDAR로 Customizing하여 Point Cloud 취득 가능</div>
                                 <div class="thumbnail">
-                                    <img src="<c:url value="http://ipsumimage.appspot.com/1400x600" />"/>
+                                    <img src="<c:url value="http://via.placeholder.com/1400x600" />"/>
                                 </div>
                             </div>
                         </div>
@@ -168,7 +168,7 @@
                                 <div class="lead">제안사는 ㎝수준의 정확도와 3차원 정밀지도 구축을 목표로 하고 있으며, 고정밀지도 정확도 향상에 있어 국내 유일의 기술을 보유<br>
                                     제안사인 ㈜이노맵스는 전국단위의 Raw Data 취득하고 고정밀 지도 구축 자동화 시스템 개발 추진</div>
                                 <div class="thumbnail">
-                                   <img src="<c:url value="http://ipsumimage.appspot.com/1400x600" />"/>
+                                   <img src="<c:url value="http://via.placeholder.com/1400x600" />"/>
                                 </div>
                             </div>
                         </div>
@@ -183,7 +183,7 @@
                                     LiDAR와 360도 파노라마 이미지를 모두 제공하며 실제 환경에 가까운 모델 생성이 가능<br>
                                     TIMMS의 제작사인 Applanix 사로부터 국내 유일하게 공인교육을 받은 전문 인력을 보유, 전문적인 TIMMS의 운용 및 지원</div>
                                 <div class="thumbnail">
-                                    <img src="<c:url value="http://ipsumimage.appspot.com/1400x600" />"/>
+                                    <img src="<c:url value="http://via.placeholder.com/1400x600" />"/>
                                 </div>
                             </div>
                         </div>
@@ -194,7 +194,7 @@
                                     제안사는 Applanix社의 Indoor Mapping Solution인 TIMMS를 보유하고 있어 적은 비용으로 쉽고 빠르게 정밀한 실내 지도를
                                     구축할 수 있는 Point Cloud와 Mapping용 전방위 영상의 동시 취득이 가능</div>
                                 <div class="thumbnail">
-                                    <img src="<c:url value="http://ipsumimage.appspot.com/1400x600" />"/>
+                                    <img src="<c:url value="http://via.placeholder.com/1400x600" />"/>
                                 </div>
                             </div>
                         </div>
