@@ -76,11 +76,8 @@ public class MailSendUtils {
 						
 						FileSystemResource file1 = new FileSystemResource(new File(uploadPath + savedName));
 						helper.addAttachment(file.getOriginalFilename(), file1);
-					}
-
-					
-				}	
-				
+					}					
+				}					
 			}
 		};
 

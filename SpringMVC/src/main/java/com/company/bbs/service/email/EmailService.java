@@ -22,9 +22,6 @@ public interface EmailService {
 	// 글삭제
 	public void delete(int email_idx) throws Exception; 
 
-	// 글조회수
-	public void increaseCnt(int email_idx) throws Exception;
-
 	// 글이전값 
 	public EmailVO getPrevNum(int email_idx) throws Exception;
 

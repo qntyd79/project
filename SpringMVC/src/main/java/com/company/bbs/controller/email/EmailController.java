@@ -214,9 +214,7 @@ public class EmailController {
 	public String Read(Model model, @ModelAttribute Criteria criteria, @RequestParam int email_idx) throws Exception {
 
 		logger.info("글보기");
-
-		service.increaseCnt(email_idx);
-
+		
 		model.addAttribute("emailVO", service.getView(email_idx));
 		model.addAttribute("prenum", service.getPrevNum(email_idx));
 		model.addAttribute("nextnum", service.getNextNum(email_idx));
@@ -232,8 +230,6 @@ public class EmailController {
 	public ModelAndView Read(@ModelAttribute Criteria criteria, @RequestParam int email_idx) throws Exception {
 
 		logger.info("글보기");
-
-		service.increaseCnt(email_idx);
 
 		ModelAndView mav = new ModelAndView();
 

@@ -108,7 +108,6 @@ public class EmailServiceImpl implements EmailService {
 		sendMail(emailVO, uploadPath);
 		
 		fileinsert(emailVO);
-
 	}
 
 	// 첨부파일 처리
@@ -149,14 +148,10 @@ public class EmailServiceImpl implements EmailService {
 				attachVO.setRegdate(emailVO.getRegdate());
 				attachVO.setDel(emailVO.getDel());
 				attachVO.setEmail_idx(emailVO.getEmail_idx());
-
 			}
 
 			dao.insert(attachVO);
 		}
-
-	
-
 	}
 
 	// 메일발송 유틸사용
@@ -177,27 +172,27 @@ public class EmailServiceImpl implements EmailService {
 	}
 
 	// 글수정
+	@Transactional
 	@Override
 	public void update(EmailVO emailVO) throws Exception {
 
 		// 접속아이피
 		String cipp = InetAddress.getLocalHost().getHostAddress();
 		emailVO.setCipp(cipp);
-
 		dao.update(emailVO);
+		
+		// 메일발
+		sendMail(emailVO, uploadPath);	
+		
+		// 첨부파일등록
+		fileinsert(emailVO);		
 	}
 
 	// 글삭제
-	@Transactional // 추가
+	@Transactional
 	@Override
 	public void delete(int email_idx) throws Exception {
 		dao.delete(email_idx);
-	}
-
-	// 글조회수
-	@Override
-	public void increaseCnt(int email_idx) throws Exception {
-		dao.increaseCnt(email_idx);
 	}
 
 	// 글이전값
