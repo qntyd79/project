@@ -4,6 +4,7 @@ import java.util.List;
 import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.company.bbs.utill.Criteria;
 import com.company.bbs.vo.attach.AttachVO;
@@ -21,7 +22,7 @@ public class EmailDaoImpl implements EmailDao {
 		return sqlSession.selectList("email.getList", criteria);
 	}
 		
-	// 글저장 
+	// 글저장
 	@Override
 	public void insert(EmailVO emailVO) throws Exception {
 		sqlSession.insert("email.insert", emailVO);

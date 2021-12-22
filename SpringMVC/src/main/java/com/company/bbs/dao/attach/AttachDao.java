@@ -52,4 +52,7 @@ public interface AttachDao {
 	// 첨부파일갯수
 	public int getFileCount(Criteria criteria) throws Exception;
 	
+	// 게시물번호 가져오기
+	public int getBoard_idx(int file_idx) throws Exception;
+	
 }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.company.bbs.utill.Criteria;
 import com.company.bbs.vo.board.BoardVO;
-import com.company.bbs.vo.email.EmailVO;
 
 public interface BoardService {
 
@@ -30,7 +29,7 @@ public interface BoardService {
 	public void delete(int board_idx) throws Exception; 
 
 	// 글조회수
-	public void increaseCnt(int board_idx) throws Exception;
+	//public void increaseCnt(int board_idx) throws Exception;
 
 	// 글이전값 
 	public BoardVO getPrevNum(int board_idx) throws Exception;
@@ -62,12 +61,15 @@ public interface BoardService {
 	// 첨부파일삭제
 	public void attachDelete(int file_idx) throws Exception;
 	
+	// 첨부파일등록
+	public void fileinsert(BoardVO boardVO) throws Exception;
+	
+	// 첨부파일갯수
+	public int getAttachCount(int board_idx) throws Exception;
+	
 	// 코멘트갯수 
 	public void getCommentCount(int board_idx)throws Exception;
 
-	// 첨부파일등록
-	public void fileinsert(BoardVO boardVO) throws Exception;
-
-	public int getAttachCount(int board_idx) throws Exception;
-
+	// 코멘트갯수 
+	public void updateCommentCount(int board_idx) throws Exception;
 }

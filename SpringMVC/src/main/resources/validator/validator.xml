@@ -5,7 +5,7 @@
 
 <form-validation>
     <formset>
-        <form name="boardVO">        	      	
+        <form name="">        	      	
         	<field property="userid" depends="required">
         		<arg0 key="label.userid" />
 			</field>

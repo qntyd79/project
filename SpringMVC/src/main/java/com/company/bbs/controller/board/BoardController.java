@@ -1,7 +1,6 @@
 package com.company.bbs.controller.board;
 
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.List;
 
@@ -9,14 +8,12 @@ import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,13 +24,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
 import com.company.bbs.service.board.BoardService;
-import com.company.bbs.service.comment.CommentService;
 import com.company.bbs.utill.CaptchaUtil;
 import com.company.bbs.utill.Criteria;
 import com.company.bbs.utill.PageMaker;
@@ -42,7 +37,7 @@ import com.company.bbs.vo.attach.AttachVO;
 import com.company.bbs.vo.board.BoardVO;
 
 @Controller
-@SessionAttributes("boardVO")
+@SessionAttributes("memberVO")
 @RequestMapping("modules/board/*")
 public class BoardController {
 
@@ -60,10 +55,12 @@ public class BoardController {
 	BCryptPasswordEncoder passwordEncoder;
 
 	// 다국어 지역세션설정
+	@SuppressWarnings("unused")
 	@Autowired
 	private SessionLocaleResolver localeResolver;
 
 	// 다국어 설정
+	@SuppressWarnings("unused")
 	@Autowired
 	private MessageSource messageSource;
 
@@ -108,7 +105,7 @@ public class BoardController {
 	@RequestMapping(value = "mvlist.do")
 	public ModelAndView List(@ModelAttribute Criteria criteria) throws Exception {
 
-		logger.info("글목록");
+		//logger.info("글목록");
 
 		PageMaker pageMaker = new PageMaker();
 
@@ -166,11 +163,10 @@ public class BoardController {
 		model.addAttribute("boardVO", boardVO);
 		model.addAttribute("categorylist", service.getCategoryList());
 
-		System.out.println("아이디 " + boardVO.getUserid());
-		System.out.println("이름 " + boardVO.getName());
-		System.out.println("이메일 " + boardVO.getEmail());
-		System.out.println("홈페이지 " + boardVO.getHomepage());
-
+		System.out.println("아이디1 " + boardVO.getUserid());
+		System.out.println("이름1 " + boardVO.getName());
+		System.out.println("이메일1 " + boardVO.getEmail());
+	
 		return "modules/board/board_write";
 	}
 
@@ -248,9 +244,7 @@ public class BoardController {
 	public String Read(Model model, @ModelAttribute Criteria criteria, @RequestParam int board_idx) throws Exception {
 
 		logger.info("글보기");
-
-		service.increaseCnt(board_idx);
-
+		
 		model.addAttribute("boardVO", service.getView(board_idx));
 		model.addAttribute("prenum", service.getPrevNum(board_idx));
 		model.addAttribute("nextnum", service.getNextNum(board_idx));
@@ -266,8 +260,6 @@ public class BoardController {
 	public ModelAndView Read(@ModelAttribute Criteria criteria, @RequestParam int board_idx) throws Exception {
 
 		logger.info("글보기");
-
-		service.increaseCnt(board_idx);
 
 		ModelAndView mav = new ModelAndView();
 
@@ -370,14 +362,14 @@ public class BoardController {
 		return "/modules/common/common_message";
 	}
 
-	// 체크박글삭제처리(ajax)
+	// 체크박스글삭제처리(ajax)
 	@ResponseBody
 	@RequestMapping(value = "checkdelete.do", method = RequestMethod.POST)
 	public int checkDelete(Model model, @ModelAttribute Criteria criteria,
 			@ModelAttribute("isAdmin") BoardVO boardVO, @RequestParam(value = "check[]") List<String> valueArr)
 			throws Exception {
 
-		logger.info("체글삭제처리");
+		logger.info("체크박스글삭제처리");
 		
 		int result = 0;
 		int checkNum = 0;

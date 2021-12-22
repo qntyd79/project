@@ -1,7 +1,12 @@
 package com.company.bbs.dao.board;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
+
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -123,6 +128,18 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectOne("board.getAttachCount", board_idx);
 	}
 	
+	// 첨부파일 업데이트 갯수 
+	@Override
+	public void updateAttachCnt(int board_idx, int amount) throws Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("board_idx", board_idx);
+		paramMap.put("amount", amount);
+		
+		//System.out.println("key 출력>>>" + paramMap.keySet()); // [이름, 나이, 직업]
+		
+		sqlSession.update("board.updateCommentCnt", paramMap);
+	}
+	
 	// 첨부파일목록 
 	@Override
 	public List<Object> getFileList(int board_idx) throws Exception {
@@ -139,6 +156,17 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public void getCommentCount(int board_idx) throws Exception {
 		sqlSession.selectOne("board.getCommentCount", board_idx);
+	}	
+
+	// 코멘트갯수 업데이트
+	@Override
+	public void updateCommentCnt(int board_idx, int amount) throws Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("board_idx", board_idx);
+		paramMap.put("amount", amount);
+		
+		sqlSession.update("board.updateCommentCnt", paramMap);
 	}
+
 
 }

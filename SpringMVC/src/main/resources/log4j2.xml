@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<Configuration status="warn" >
+	<!-- 참고사이트 https://tlatmsrud.tistory.com/32 -->
+	<Properties>
+		<Property name="logNm">log4j2</Property>
+		<Property name="layoutPattern">%style{%d{yyyy/MM/dd HH:mm:ss,SSS}}{cyan} %highlight{[%-5p]}{FATAL=bg_red, 
+		ERROR=red,INFO=green, DEBUG=blue}  [%C] %style{[%t]}{yellow} - %m%n -</Property>
+		<Property name="Patternlayout">%d{yyyy-MM-dd HH:mm:ss} %5p [%c] %m%n</Property>
+	</Properties>
+	
+	<!-- Appenders -->
+	<Appenders>
+		<!-- 콘솔로그 -->
+  		<Console name="console" target="SYSTEM_OUT">
+   			<PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n" />
+  		</Console>  		
+  		<!-- 파일로그 -->
+  		<RollingFile name="RollingFile">
+  			<FileName>/Users/ojeonghwan/git/project/SpringMVC/src/main/webapp/WEB-INF/logs/${logNm}.log</FileName>
+  			<FilePattern>/Users/ojeonghwan/git/project/SpringMVC/src/main/webapp/WEB-INF/logs/${logNm}_%d{yyyy-MM-dd}_%i.log.gz</FilePattern>
+  			<PatternLayout>
+			    <Pattern>%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n</Pattern>
+			</PatternLayout>
+   			<Policies>
+   			 	<!-- 10MB 용량이 초과시 DefaultRolloverStrategy 정책만큼 넘버링 -->
+   			 	<SizeBasedTriggeringPolicy size="2MB"/>
+		    	<!-- 일별 로그 파일 생성-->
+		    	<TimeBasedTriggeringPolicy modulate="true" interval="1" />
+   			</Policies>
+   			<!-- 롤링 파일 500개 까지 생성 -->
+   			<DefaultRolloverStrategy max="500" fileIndex="min"/>
+  		</RollingFile>
+  		<!-- 에러파일로그 -->
+  		<RollingFile name="RollingFileError">
+  			<FileName>/Users/ojeonghwan/git/project/SpringMVC/src/main/webapp/WEB-INF/logs/${logNm}_error.log</FileName>
+  			<FilePattern>/Users/ojeonghwan/git/project/SpringMVC/src/main/webapp/WEB-INF/logs/${logNm}_%d{yyyy-MM-dd}_%i.log_error.gz</FilePattern>
+  			<PatternLayout>
+    			<Pattern>%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n</Pattern>
+  			</PatternLayout>
+            <Policies>
+           		<!-- 10MB 용량이 초과시 DefaultRolloverStrategy 정책만큼 넘버링 -->
+   			 	<SizeBasedTriggeringPolicy size="2MB" />
+		    	<!-- 일별 로그 파일 생성-->
+                <TimeBasedTriggeringPolicy modulate = "true" interval = "1" />                
+            </Policies>
+            <!-- 롤링 파일 500개 까지 생성 -->
+   			<DefaultRolloverStrategy max="500" fileIndex="min"/> 
+        </RollingFile>
+ 	</Appenders>
+ 	
+	<Loggers>	
+		<Root level="debug">
+	   		<AppenderRef ref="console" />
+	   		<AppenderRef ref="RollingFile" />
+		</Root>
+		 
+		<!-- Application Loggers -->
+		<logger name="com.company.bbs" level="INFO" additivity="false">
+			<AppenderRef ref="console" />
+	   		<AppenderRef ref="RollingFile" level="debug"/>
+	   		<AppenderRef ref="RollingFileError" level="error"/>
+		</logger>
+	
+		<!-- 3rdparty Loggers -->
+		<logger name="org.springframework.core" level="INFO" additivity="false"/>		
+		<logger name="org.springframework.beans" level="INFO" additivity="false"/>		
+		<logger name="org.springframework.context" level="INFO" additivity="false"/>	
+		<logger name="org.springframework.web" level="INFO" additivity="false"/>
+		
+		<!-- SQL 연결 상태 출력 -->
+        <Logger name="jdbc.connection" level="WARN" additivity="false">
+        </Logger>
+        
+        <!-- SQL 출력 -->
+        <Logger name="jdbc.sqlonly" level="WARN" additivity="false">
+        </Logger>
+        
+        <!-- SQL과 경과 시간을 함께 출력 -->
+        <Logger name="jdbc.sqltiming" level="WARN" additivity="false">
+        </Logger>
+        
+        <!-- SQL결과 상세하기 -->
+        <Logger name="jdbc.audit" level="WARN" additivity="false">
+        </Logger>
+        
+        <!-- SQL결과 상세하게 -->
+        <Logger name="jdbc.resultset" level="WARN" additivity="false">
+       		<AppenderRef ref="RollingFileError" />
+        </Logger>
+        
+        <!-- 결과 TABLE 형태로 출력 -->
+        <Logger name="jdbc.resultsettable" level="WARN" additivity="false">
+        	<AppenderRef ref="RollingFileError" />
+        </Logger>
+	</Loggers>
+
+</Configuration>

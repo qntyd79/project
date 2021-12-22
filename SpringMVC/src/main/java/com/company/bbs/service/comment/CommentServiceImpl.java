@@ -10,7 +10,9 @@ import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.company.bbs.dao.board.BoardDao;
 import com.company.bbs.dao.comment.CommentDao;
 import com.company.bbs.utill.Criteria;
 import com.company.bbs.vo.comment.CommentVO;
@@ -21,6 +23,9 @@ public class CommentServiceImpl implements CommentService {
 	@Inject
 	CommentDao dao;
 	Criteria criteria;
+	
+	@Inject
+	BoardDao bdao;
 	
 	// 암호화 설정 
 	@Autowired
@@ -38,6 +43,7 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	// 글저장
+	@Transactional
 	@Override
 	public void insert(CommentVO commentVO) throws Exception {
 
@@ -108,6 +114,9 @@ public class CommentServiceImpl implements CommentService {
 		// dto.setTitle(i + "번쨰 제목입니다.");
 
 		dao.insert(commentVO);
+		
+		// 게시물 댓글 수량 업데이트 		
+		bdao.updateCommentCnt(commentVO.getBoard_idx(), 1);
 		// }
 	}
 
@@ -134,9 +143,14 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	// 글삭제
+	@Transactional
 	@Override
-	public void delete(int comment_idx) throws Exception {
-		dao.delete(comment_idx);
+	public void delete(int comment_idx) throws Exception {	
+		
+		int board_idx = dao.getBoard_idx(comment_idx);
+		dao.delete(comment_idx);		
+		// 게시물 댓글 수량 업데이트 
+		bdao.updateCommentCnt(board_idx, -1);
 	}
 
 	// 글조회수

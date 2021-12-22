@@ -77,7 +77,26 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
-		<!-- AOP 관련 라이브러리 -->
+		<!-- AOP,트랜잭션 관련 라이브러리 -->
+		<dependency> 
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-aop</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${org.aspectj-version}</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
@@ -224,13 +243,6 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.12.3</version>
 		</dependency>
-
-		<!-- logback 로깅 관련 라이브러리 -->
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.2.3</version>
-		</dependency>
  
 		<!--스프링시큐리티 web 라이브러리-->                          
         <dependency>
@@ -300,36 +312,34 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-
-		<!-- AspectJ -->
+		
+		<!-- logback 로깅 관련 라이브러리 -->
 		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>${org.aspectj-version}</version>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.3</version>
 		</dependency>
 
-		<!-- Logging -->
+		<!-- log4j2 로깅 관련 라이브러리 -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${org.slf4j-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
+	        <groupId>org.apache.logging.log4j</groupId>
+	        <artifactId>log4j-api</artifactId>
+	        <version>2.16.0</version>
+      	</dependency>
+      	<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>2.16.0</version>
 		</dependency>
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
+			<groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-core</artifactId>
+		    <version>2.16.0</version>
 			<exclusions>
 				<exclusion>
 					<groupId>javax.mail</groupId>
@@ -346,11 +356,18 @@
 				<exclusion>
 					<groupId>com.sun.jmx</groupId>
 					<artifactId>jmxri</artifactId>
-				</exclusion>
+				</exclusion>				
 			</exclusions>
 			<scope>runtime</scope>
-		</dependency>
-
+		</dependency>		
+		
+		<!-- AspectJ -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${org.aspectj-version}</version>
+		</dependency>		
+		
 		<!-- @Inject -->
 		<dependency>
 			<groupId>javax.inject</groupId>

@@ -10,8 +10,10 @@ import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.company.bbs.dao.attach.AttachDao;
+import com.company.bbs.dao.board.BoardDao;
 import com.company.bbs.utill.Criteria;
 import com.company.bbs.vo.attach.AttachVO;
 
@@ -21,6 +23,9 @@ public class AttachServiceImpl implements AttachService {
 	@Inject
 	AttachDao dao;
 	Criteria criteria;	
+	
+	@Inject
+	BoardDao bdao;
 	
 	// 암호화 설정 
 	@Autowired
@@ -38,7 +43,8 @@ public class AttachServiceImpl implements AttachService {
 		return dao.getFileList(board_idx);
 	}
 
-	// 글저장 
+	// 글저장
+	@Transactional
 	@Override
 	public void insert(AttachVO attachVO) throws Exception {
 
@@ -78,6 +84,9 @@ public class AttachServiceImpl implements AttachService {
 		//attachVO.setPass(pwdBycrypt);
 		
 		dao.insert(attachVO);
+		
+		// 게시물 파일 수량 업데이트 		
+		bdao.updateAttachCnt(attachVO.getBoard_idx(), 1);
 		//}
 	}
 	
@@ -99,9 +108,13 @@ public class AttachServiceImpl implements AttachService {
 	}
 
 	// 글삭제 
+	@Transactional
 	@Override
 	public void delete(int file_idx) throws Exception {
-		dao.delete(file_idx);
+		dao.delete(file_idx);		
+		// 게시물 파일 수량 업데이트 	
+		int board_idx = dao.getBoard_idx(file_idx);	
+		bdao.updateAttachCnt(file_idx, -1);
 	}
 
 	// 글조회수 

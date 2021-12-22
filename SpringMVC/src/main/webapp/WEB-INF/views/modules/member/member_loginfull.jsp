@@ -85,7 +85,6 @@
                                                 </li>
                                                 <!--
                                                 <li>
-                                                
                                                 	<img src="${path}/resources/images/add/s02.jpg" />
                                                 </li>
                                                 -->

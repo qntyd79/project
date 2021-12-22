@@ -105,4 +105,9 @@ public class AttachDaoImpl implements AttachDao {
 		return sqlSession.selectOne("attach.getFileCount", criteria);
 	}
 
+	@Override
+	public int getBoard_idx(int file_idx) throws Exception {
+		return sqlSession.selectOne("attach.getBoard_idx", file_idx);
+	}
+
 }

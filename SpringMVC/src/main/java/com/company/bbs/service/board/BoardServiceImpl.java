@@ -3,7 +3,9 @@ package com.company.bbs.service.board;
 import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -13,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -120,6 +123,7 @@ public class BoardServiceImpl implements BoardService {
 
 		dao.insert(boardVO);
 		// }
+		// 첨부파일 등록
 		fileinsert(boardVO);
 	}
 
@@ -168,7 +172,7 @@ public class BoardServiceImpl implements BoardService {
 		}	
 		
 		// 첨부파일 등록 후 board테이블 filecnt(파일갯수) 업데이트
-		//dao.getAttachCount(attachVO.getBoard_idx());
+		dao.updateAttachCnt(attachVO.getBoard_idx(),1);
 	}
 
 	// 답글업데이트
@@ -178,8 +182,11 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	// 글보기
+	@Transactional(isolation = Isolation.READ_COMMITTED)
 	@Override
-	public BoardVO getView(int board_idx) throws Exception {			
+	public BoardVO getView(int board_idx) throws Exception {
+		// 글조회수 업데이트
+		dao.increaseCnt(board_idx);
 		return dao.getView(board_idx);			
 	}
 
@@ -195,17 +202,17 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	// 글삭제
-	@Transactional  //추가
+	@Transactional
 	@Override
-	public void delete(int board_idx) throws Exception {
+	public void delete(int board_idx) throws Exception {		
 		dao.delete(board_idx);
 	}
 
-	// 글조회수
+	/*// 글조회수
 	@Override
 	public void increaseCnt(int board_idx) throws Exception {
 		dao.increaseCnt(board_idx);
-	}
+	}*/
 
 	// 글이전값
 	@Override
@@ -261,6 +268,12 @@ public class BoardServiceImpl implements BoardService {
 		return dao.getFileList(board_idx);
 	}
 	
+	// 첨부파일갯수
+	@Override
+	public int getAttachCount(int board_idx) throws Exception {
+		return dao.getAttachCount(board_idx);
+	}
+
 	// 첨부파일삭제 
 	@Transactional 
 	@Override
@@ -275,8 +288,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int getAttachCount(int board_idx) throws Exception {
-		return dao.getAttachCount(board_idx);
+	public void updateCommentCount(int board_idx) throws Exception {
+		dao.getCommentCount(board_idx);			
 	}
-
+	
 }

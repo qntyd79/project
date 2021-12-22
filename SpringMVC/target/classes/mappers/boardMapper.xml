@@ -114,9 +114,7 @@
 	
 	<!-- 답글업데이트 -->
 	<update id="getReply">
-	<![CDATA[
 		update jhbbs_board set sortno = sortno+1 where parent=#{parent} and sortno > #{sortno}
-	]]>
 	</update>
 
 	<!-- 글보기 -->
@@ -159,7 +157,7 @@
 
 	<!-- 글조회수 -->
 	<update id="increaseCnt">
-		update jhbbs_board set hit= hit + 1 where board_idx = #{board_idx} and del = 'N'
+		update jhbbs_board set hit = hit + 1 where board_idx = #{board_idx} and del = 'N'
 	</update>
 
 	<!-- 글이전값 -->
@@ -193,17 +191,20 @@
 		<include refid="search"></include>
 	</select>
 	
-	<!-- 코멘트갯수
-	<update id="getCommentCount" parameterType="int">
-	<![CDATA[ 
-	update jhbbs_board b
-	set b.commentcnt = (select count(comment_idx) from jhbbs_comment where board_idx = #{board_idx} and comment_idx > 0 and del = 'N')
-	where b.board_idx = #{board_idx};
-	]]>
+	<!-- 목록 코멘트갯수 업데이트
+	<update id="updateCommentCount" parameterType="int">
+		update jhbbs_board b
+		set b.commentcnt = (select count(comment_idx) from jhbbs_comment where board_idx = #{board_idx} and comment_idx > 0 and del = 'N')
+		where b.board_idx = #{board_idx}
 	</update>
-	-->
+	 -->
+	 
+	<!-- 코멘트갯수 업데이트 -->
+	<update id="updateCommentCnt">
+		update jhbbs_board set commentcnt = commentcnt + #{amount} where board_idx = #{board_idx} and del = 'N'
+	</update>
 	
-	<!-- 코멘트갯수 -->
+	<!-- 코멘트갯수 가져오기 -->
 	<select id="getCommentCount" parameterType="int">
 	<![CDATA[ 
 	select count(comment_idx) from jhbbs_comment where board_idx = #{board_idx} and comment_idx > 0 and del = 'N'
@@ -212,13 +213,16 @@
 	 
 	<!-- 첨부파일 갯수
 	<update id="getAttachCount" parameterType="int">
-	<![CDATA[ 
-	update jhbbs_board b
-	set b.filecnt = (select count(file_idx) from JHBBS_file where board_idx = #{board_idx} and file_idx > 0 and del = 'N') 
-	where b.board_idx = #{board_idx};  
-	]]>   
+		update jhbbs_board b
+		set b.filecnt = (select count(file_idx) from JHBBS_file where board_idx = #{board_idx} and file_idx > 0 and del = 'N') 
+		where b.board_idx = #{board_idx} 
 	</update>
 	-->
+	
+	<!-- 첨부파일갯수 업데이트 -->
+	<update id="updateAttahCnt">
+		update jhbbs_board set filecnt = filecnt + #{amount} where board_idx = #{board_idx} and del = 'N'
+	</update>
 	
 	<select id="getAttachCount" parameterType="int">
 	<![CDATA[ 

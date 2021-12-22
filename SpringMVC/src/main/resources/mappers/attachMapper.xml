@@ -145,6 +145,14 @@
 			AND category_idx > 0
 		</if>
 	</sql>
+	
+	<!-- 글번호 가져오기 -->
+	<select id="getBoard_idx" resultType="int">
+	<![CDATA[ 
+		select board_idx from
+		jhbbs_file where file_idx = #{file_idx} and del = 'N'
+	]]>
+	</select>
 
 	<sql id="search">
 		<if test="searchField != null">

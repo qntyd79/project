@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+   
+    <Properties>
+		<Property name="logNm">logback</Property>
+		<Property name="layoutPattern">%style{%d{yyyy/MM/dd HH:mm:ss,SSS}}{cyan} %highlight{[%-5p]}{FATAL=bg_red, ERROR=red,INFO=green, DEBUG=blue}  [%C] %style{[%t]}{yellow} - %m%n -</Property>
+	</Properties>
+	
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-4level [%logger.%method:%line]-%msg%n</pattern>
+		</layout>
+	</appender>
+	<appender name="file"	class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/Users/ojeonghwan/git/project/SpringMVC/src/main/webapp/WEB-INF/logs/logback.log</file>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-4level [%logger.%method:%line]- %msg%n</pattern>
+		</encoder>
+		<!-- 로그를 남기는 파일의 용량이 100MB가 넘으면 이를 압축 파일로 만들고 새로 로그 파일로 만들라는 정책 -->
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/Users/ojeonghwan/git/project/SpringMVC/src/main/webapp/WEB-INF/logs/${logNm}_%d{yyyy-MM-dd}_%i.log.gz</fileNamePattern>
+			<!-- 30일 지난 파일은 삭제한다. -->
+			<maxHistory>30</maxHistory>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+	</appender>
+
+	<!-- 로그의 레벨( 지정된 로그 레벨 이상만 수집 ) : DEBUG < INFO < WARN < ERROR < FATAL -->
+	<logger name="com.company.bbs" level="INFO" additivity="false">
+		<appender-ref ref="console" />
+		<appender-ref ref="file" />
+	</logger>
+	
+	 <!-- log4jdbc-log4j2 -->
+	<logger name="jdbc.sqlonly"        level="DEBUG" additivity="false"/>
+    <logger name="jdbc.sqltiming"      level="INFO" additivity="false"/>
+    <logger name="jdbc.audit"          level="WARN" additivity="false"/>
+    <logger name="jdbc.resultset"      level="ERROR" additivity="false"/>
+    <logger name="jdbc.resultsettable" level="ERROR" additivity="false"/>
+    <logger name="jdbc.connection"     level="INFO" additivity="false"/>
+    
+	<root level="INFO">
+		<appender-ref ref="console" />
+	</root>
+
+</configuration>

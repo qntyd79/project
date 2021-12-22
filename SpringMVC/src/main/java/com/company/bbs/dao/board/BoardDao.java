@@ -2,6 +2,8 @@ package com.company.bbs.dao.board;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.company.bbs.utill.Criteria;
 import com.company.bbs.vo.attach.AttachVO;
 import com.company.bbs.vo.board.BoardVO;
@@ -62,6 +64,9 @@ public interface BoardDao {
 	// 첨부파일갯수
 	public int getAttachCount(int board_idx) throws Exception;
 	
+	// 첨부파일 업데이트 갯수 
+	public void updateAttachCnt(int board_idx, int amount) throws Exception;			
+	
 	// 첨부파일목록
 	public List<Object> getFileList(int board_idx) throws Exception;
 	
@@ -70,4 +75,8 @@ public interface BoardDao {
 	
 	// 코멘트갯수 
 	public void getCommentCount(int board_idx) throws Exception;
+	
+	// 코멘트 업데이트 업데이트 
+	public void updateCommentCnt(int board_idx, int amount) throws Exception;
+
 }

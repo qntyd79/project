@@ -44,9 +44,7 @@
 
 	<!-- 답글업데이트 -->
 	<update id="getReply">
-	<![CDATA[
-	update jhbbs_comment set sortno = sortno+1 where parent=#{parent} and sortno > #{sortno}
-	]]>
+		update jhbbs_comment set sortno = sortno+1 where parent=#{parent} and sortno > #{sortno}
 	</update>
 
 	<!-- 글보기 -->
@@ -120,14 +118,18 @@
 
 	<!-- 글비밀번호리턴 -->
 	<select id="getPassword" resultType="String">
+	<![CDATA[ 
 		select pass from
 		jhbbs_comment where comment_idx = #{comment_idx} and del = 'N'
+	]]>
 	</select>
 	
 	<!-- 글번호 가져오기 -->
 	<select id="getBoard_idx" resultType="int">
+	<![CDATA[ 
 		select board_idx from
 		jhbbs_comment where comment_idx = #{comment_idx} and del = 'N'
+	]]>
 	</select>
 
 	<sql id="search">

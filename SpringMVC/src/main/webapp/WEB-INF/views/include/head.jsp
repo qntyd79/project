@@ -45,7 +45,7 @@
     
     <!--  plugin -->
     <!-- <script src="<c:url value="/resources/plugin/ckeditor4/basic/ckeditor.js" />"type="text/javascript" charset="UTF-8"></script>-->
-    <script src="<c:url value="/resources/plugin/ckeditor4/full/ckeditor.js" />"type="text/javascript" charset="UTF-8"></script>
+    <script src="<c:url value="/resources/plugin/ckeditor4/full/ckeditor.js" />" type="text/javascript" charset="UTF-8"></script>
     <script src="<c:url value="/resources/plugin/syntaxhighlighter/scripts/shCore.js"/>" type="text/javascript" charset="UTF-8"></script> 
     <script src="<c:url value="/resources/plugin/syntaxhighlighter/scripts/shBrushJava.js"/>" type="text/javascript" charset="UTF-8"></script> 
     <script type="text/javascript">SyntaxHighlighter.all();</script>

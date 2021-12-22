@@ -18,6 +18,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -152,7 +153,6 @@ public class EmailServiceImpl implements EmailService {
 			}
 
 			dao.insert(attachVO);
-
 		}
 
 	
@@ -169,8 +169,10 @@ public class EmailServiceImpl implements EmailService {
 	}
 
 	// 글보기
+	@Transactional(isolation = Isolation.READ_COMMITTED)
 	@Override
 	public EmailVO getView(int email_idx) throws Exception {
+		dao.increaseCnt(email_idx);
 		return dao.getView(email_idx);
 	}
 

@@ -211,7 +211,7 @@
                     <div class="modal-back"></div>
                 </section>
                 <div class="toggle-box">
-                    <button class="toggle-btn"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+                    <button class="toggle-btn"><i class="fa fa-chevron-down" aria-hidden="true"></i></button>
                     <article class="toggle-content">
                         <h2>Welcome to Innomaps</h2>
                         <div class="row">
