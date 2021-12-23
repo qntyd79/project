@@ -142,7 +142,8 @@ public class MemberDaoImpl implements MemberDao {
 	public MemberVO getViewMember(MemberVO memberVO) throws Exception {
 		return sqlSession.selectOne("member.getViewMember", memberVO);
 	}
-
+	
+	// 회원로그인 비밀번호 가져오기
 	@Override
 	public String getLoginPassword(String userid) throws Exception {
 		return sqlSession.selectOne("member.getLoginPassword", userid);

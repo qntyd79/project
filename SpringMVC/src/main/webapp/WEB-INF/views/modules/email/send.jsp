@@ -83,8 +83,8 @@
                                                     <td colspan="10" class="text-left">
                                                         <textarea name="content" id="editor" placeholder="Content">내용을 입력해주세요</textarea>
                                                         <script>
-                                                            CKEDITOR.replace('editor',{customConfig: '${path}/plugin/ckeditor4/full/custom-config.js'});
-                                                        </script>
+                                                            CKEDITOR.replace('content');                    
+                                                        </script> 
                                                     </td>
                                                 </tr>
                                                 <tr>

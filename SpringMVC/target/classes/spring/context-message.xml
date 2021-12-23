@@ -37,9 +37,4 @@
 	</bean>
 	-->	
 	
-    <!-- 지역언어변경 인터셉터 설정 -->
-	<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-		<property name="paramName" value="lang" />
-	</bean>
-	
 </beans>

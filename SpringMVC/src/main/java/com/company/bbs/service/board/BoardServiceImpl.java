@@ -131,6 +131,7 @@ public class BoardServiceImpl implements BoardService {
 	@Transactional
 	@Override
 	public void fileinsert(BoardVO boardVO) throws Exception {
+		
 		// 첨부파일 처리
 		AttachVO attachVO = new AttachVO();
 		MultipartFile[] attach = boardVO.getAttach(); // 첨부파일 배열
@@ -166,6 +167,8 @@ public class BoardServiceImpl implements BoardService {
 				attachVO.setRegdate(boardVO.getRegdate());
 				attachVO.setDel(boardVO.getDel());
 				attachVO.setBoard_idx(boardVO.getBoard_idx());
+				
+				System.out.println(boardVO.getBoard_idx());
 			}
 
 			dao.insert(attachVO);
@@ -185,7 +188,6 @@ public class BoardServiceImpl implements BoardService {
 	@Transactional(isolation = Isolation.READ_COMMITTED)
 	@Override
 	public BoardVO getView(int board_idx) throws Exception {
-		// 글조회수 업데이트
 		dao.increaseCnt(board_idx);
 		return dao.getView(board_idx);			
 	}
@@ -204,15 +206,20 @@ public class BoardServiceImpl implements BoardService {
 	// 글삭제
 	@Transactional
 	@Override
-	public void delete(int board_idx) throws Exception {		
-		dao.delete(board_idx);
+	public void delete(int board_idx) throws Exception {
+		
+		// 게시물연동 첨부파일 삭제
+		dao.attachDeleteList(board_idx);
+		
+		// 게시물 삭제
+		dao.delete(board_idx);			
 	}
 
-	/*// 글조회수
+	// 글조회수
 	@Override
 	public void increaseCnt(int board_idx) throws Exception {
 		dao.increaseCnt(board_idx);
-	}*/
+	}
 
 	// 글이전값
 	@Override
@@ -274,12 +281,6 @@ public class BoardServiceImpl implements BoardService {
 		return dao.getAttachCount(board_idx);
 	}
 
-	// 첨부파일삭제 
-	@Transactional 
-	@Override
-	public void attachDelete(int file_idx) throws Exception {		
-		dao.attachDelete(file_idx);
-	}
 	
 	// 코멘트갯수
 	@Override
@@ -290,6 +291,16 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void updateCommentCount(int board_idx) throws Exception {
 		dao.getCommentCount(board_idx);			
+	}
+
+	@Override
+	public void attachDelete(int file_idx) throws Exception {
+		dao.attachDelete(file_idx);		
+	}
+
+	@Override
+	public List<Object> attachDeleteList(int board_idx) throws Exception {
+		return dao.attachDeleteList(board_idx);
 	}
 	
 }

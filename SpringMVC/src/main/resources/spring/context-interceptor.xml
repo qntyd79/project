@@ -30,11 +30,9 @@
             <!-- 인터셉터 제외설정 -->
             <mvc:exclude-mapping path="/"/>
             <mvc:exclude-mapping path="/resources/**"/>
-            
-            <mvc:exclude-mapping path="/modules/member/logout.do"/>
             <mvc:exclude-mapping path="/modules/member/login.do"/>
             <mvc:exclude-mapping path="/modules/member/loginCheck.do"/>
-
+            <mvc:exclude-mapping path="/modules/member/logout.do"/>
             <bean id="LoginInterceptor" class="com.company.bbs.utill.LoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>	
@@ -55,36 +53,9 @@
             <mvc:exclude-mapping path="/modules/category/**"/>
             <mvc:exclude-mapping path="/modules/comment/**"/>
             <mvc:exclude-mapping path="/modules/email/**"/>
-			<mvc:exclude-mapping path="/modules/member/**"/>
-			
+			<mvc:exclude-mapping path="/modules/member/**"/>			
             <bean id="AuthInterceptor" class="com.company.bbs.utill.AuthInterceptor"/>
         </mvc:interceptor>
-    </mvc:interceptors>	
-    
-	<!-- 인터셉터 호출을 위한 url mapping 
-	<interceptors>
-		<interceptor> 
-			<mapping path="/shop/**" /> 
-			<ref bean="sampleInterceptor" /> 
-		</interceptor> 
-		<interceptor> 
-			<mapping path="/board/write.do" /> 
-			<mapping path="/board/insert.do" /> 
-			<mapping path="/board/update.do" /> 
-			<mapping path="/board/delete.do" /> 
-			<mapping path="/shop/cart/list.do" /> 
-			<mapping path="/shop/cart/insert.do" /> 
-			<ref bean="loginInterceptor" /> 
-		</interceptor> 
-		<interceptor> 
-			<mapping path="/pdf/list.do" /> 
-			<mapping path="/shop/product/write.do" /> 
-			<mapping path="/shop/product/insert.do" /> 
-			<mapping path="/chart/**" /> 
-			<mapping path="/jchart/**" /> 
-			<ref bean="adminInterceptor" /> 
-		</interceptor> 
-	</interceptors>
-	--> 		
+    </mvc:interceptors>	    
    
 </beans>

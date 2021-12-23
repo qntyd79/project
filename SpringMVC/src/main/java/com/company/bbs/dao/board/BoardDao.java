@@ -60,6 +60,9 @@ public interface BoardDao {
 	
 	// 카테고리목록
 	public List<Object> getCategoryList() throws Exception;
+	
+	// 첨부파일가져오기
+	public List<Object> getFile_idx(List<Object> board_idx) throws Exception;
 
 	// 첨부파일갯수
 	public int getAttachCount(int board_idx) throws Exception;
@@ -70,13 +73,16 @@ public interface BoardDao {
 	// 첨부파일목록
 	public List<Object> getFileList(int board_idx) throws Exception;
 	
-	// 첨부파일삭제
-	public void attachDelete(int file_idx) throws Exception;
+	// 첨부파일목록삭제
+	public List<Object> attachDeleteList(int board_idx) throws Exception;
 	
 	// 코멘트갯수 
 	public void getCommentCount(int board_idx) throws Exception;
 	
 	// 코멘트 업데이트 업데이트 
 	public void updateCommentCnt(int board_idx, int amount) throws Exception;
+	
+	// 첨부파일개별삭제
+	void attachDelete(int file_idx) throws Exception;
 
 }

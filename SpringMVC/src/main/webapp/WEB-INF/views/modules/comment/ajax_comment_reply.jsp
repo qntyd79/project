@@ -52,10 +52,27 @@
                                                     <td colspan="10" class="text-left">
                                                         <textarea name="content" id="content" placeholder="Content"></textarea><form:errors path="content"/>
                                                         <script>
-                                                            CKEDITOR.replace('content',{height:150, customConfig: '${path}/plugin/ckeditor4/full/custom-config.js'});
-                                                           	<!--CKEDITOR.instances.content.updateElement();-->
-                                                        </script>
-                                                        <!--<label for="content"><spring:message code="label.content"/></label>-->   
+                                                            CKEDITOR.replace('content',{
+                                                            	height:150,
+                                                            	toolbarGroups : [
+                                                            		{ name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+                                                            		{ name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+                                                            		{ name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
+                                                            		{ name: 'forms', groups: [ 'forms' ] },
+                                                            		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+                                                            		{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+                                                            		{ name: 'links', groups: [ 'links' ] },
+                                                            		{ name: 'insert', groups: [ 'insert' ] },
+                                                            		{ name: 'styles', groups: [ 'styles' ] },
+                                                            		{ name: 'colors', groups: [ 'colors' ] },
+                                                            		{ name: 'tools', groups: [ 'tools' ] },
+                                                            		{ name: 'others', groups: [ 'others' ] },
+                                                            		{ name: 'about', groups: [ 'about' ] }
+                                                            	],
+                                                            	
+                                                            	removeButtons : 'Source,Save,NewPage,ExportPdf,Preview,Print,Templates,Find,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Replace,PasteText,PasteFromWord,Image,Table,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe,CopyFormatting,RemoveFormat,Blockquote,CreateDiv,JustifyLeft,JustifyCenter,JustifyRight,JustifyBlock,BidiLtr,BidiRtl,Language,Styles,TextColor,BGColor,ShowBlocks,Maximize,Format,Font,FontSize'
+                                                            });
+                                                        </script>  
                                                      </td>
                                                 </tr>                                               
                                                 <tr>

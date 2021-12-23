@@ -147,8 +147,7 @@
                                                     <td colspan="10" class="text-left">
                                                         <form:textarea  path="content" id="content" placeholder="Content"/> <form:errors path="content"/>
                                                         <script>
-                                                            CKEDITOR.replace('content',{customConfig: '${path}/plugin/ckeditor4/full/custom-config.js'});
-                                                           	<!--CKEDITOR.instances.content.updateElement();-->
+                                                            CKEDITOR.replace('content');                    
                                                         </script>
                                                         <!--<label for="content"><spring:message code="label.content"/></label>-->   
                                                      </td>

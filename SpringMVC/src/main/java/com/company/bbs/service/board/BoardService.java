@@ -29,7 +29,7 @@ public interface BoardService {
 	public void delete(int board_idx) throws Exception; 
 
 	// 글조회수
-	//public void increaseCnt(int board_idx) throws Exception;
+	public void increaseCnt(int board_idx) throws Exception;
 
 	// 글이전값 
 	public BoardVO getPrevNum(int board_idx) throws Exception;
@@ -58,7 +58,7 @@ public interface BoardService {
 	// 첨부파일조회 
 	public List<Object> getFileList(int board_idx) throws Exception;
 	
-	// 첨부파일삭제
+	// 첨부파일개별삭제
 	public void attachDelete(int file_idx) throws Exception;
 	
 	// 첨부파일등록
@@ -71,5 +71,8 @@ public interface BoardService {
 	public void getCommentCount(int board_idx)throws Exception;
 
 	// 코멘트갯수 
-	public void updateCommentCount(int board_idx) throws Exception;
+	public void updateCommentCount(int board_idx) throws Exception;	
+	
+	// 첨부파일목록삭제
+	public List<Object> attachDeleteList(int board_idx) throws Exception;
 }

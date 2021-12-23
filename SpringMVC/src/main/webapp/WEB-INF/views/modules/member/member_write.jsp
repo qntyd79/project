@@ -183,7 +183,7 @@
                                                     <td colspan="2" class="text-left">
                                                         <form:textarea  path="message" id="message" placeholder="Message"/> <form:errors path="message"/>
                                                         <script>
-                                                            CKEDITOR.replace('message',{height:150, customConfig:'${path}/plugin/ckeditor4/full/custom-config.js'});
+                                                            CKEDITOR.replace('message',{height:150});
                                                         </script>
                                                     </td>
                                                 </tr>
@@ -259,7 +259,7 @@
                                                         <textarea name="etc" id="etc" placeholder="Etc"></textarea> 
                                                         <form:errors path="Etc"/>
                                                         <script>
-                                                            CKEDITOR.replace('etc',{height:150, customConfig:'${path}/plugin/ckeditor4/full/custom-config.js'});
+                                                            CKEDITOR.replace('etc',{height:150});
                                                         </script>
                                                     </td>
                                                 </tr>

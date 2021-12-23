@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="attachback">
+
+	<!-- 글목록 -->
+	<select id="getList" resultType="com.company.bbs.vo.attach.AttachVO">
+	<![CDATA[ 
+	select * from jhbbs_attach where file_idx > 0 and del = 'N'
+	]]>
+		<include refid="category"></include>
+		<include refid="search"></include>
+	<![CDATA[ 
+	order by regdate desc limit #{pageStart}, ${perPageNum}
+	]]>
+	</select>
+	
+	<!-- 파일목록 -->
+	<select id="getFileList" resultType="com.company.bbs.vo.attach.AttachVO">
+	<![CDATA[ 
+	select * from jhbbs_attach where file_idx > 0 and del = 'N' and board_idx = #{board_idx}
+	]]>
+	<![CDATA[ 
+	order by regdate DESC
+	]]>
+	</select>
+	
+	<!-- 카테고리명 -->
+	<select id="getCategory" resultType="com.company.bbs.vo.category.CategoryVO">
+	<![CDATA[ 
+	select category_idx, title from jhbbs_category where del = 'N'
+	]]>
+	<![CDATA[ 
+	order by category_idx DESC
+	]]>
+	</select>
+	
+	<!-- 카테고리목록 -->
+	<select id="getCategoryList" resultType="com.company.bbs.vo.category.CategoryVO">
+	<![CDATA[ 
+	select * from jhbbs_category where kind=#{kind} and del = 'N'
+	]]>
+	<![CDATA[ 
+	order by category_idx DESC
+	]]>
+	</select>
+	
+	<!-- 글저장 -->
+	<insert id="insert"  parameterType="com.company.bbs.vo.attach.AttachVO">
+		INSERT INTO jhbbs_attach (
+		file_name, file_hash_name,
+		file_size, file_type, file_ext, file_index,
+		download, userid, name, pass, title,
+		content, hit, cipp, vote, regdate, del,
+		category_idx, board_idx
+		) VALUES (
+		#{file_name}, #{file_hash_name}, 
+		#{file_size}, #{file_type}, #{file_ext}, #{file_index},
+		#{download}, #{userid}, #{name}, #{pass}, #{title}, 
+		#{content}, #{hit}, #{cipp}, #{vote}, #{regdate}, #{del}, 
+		#{category_idx}, #{board_idx}
+		)
+	</insert>
+
+	<!-- 글보기 -->
+	<select id="getView" resultType="com.company.bbs.vo.attach.AttachVO">
+		select * from jhbbs_attach where file_idx =	#{file_idx} and del = 'N'
+	</select>
+
+	<!-- 글수정 -->
+	<update id="update">
+		update jhbbs_attach set
+		file_name=#{file_name},
+		file_hash_name=#{file_hash_name},
+		file_size=#{file_size},
+		file_type=#{file_type},
+		file_ext=#{file_ext},
+		file_index=#{file_index},
+		title=#{title},
+		content=#{content},
+		cipp=#{cipp},
+		category_idx=#{category_idx},
+		board_idx=#{board_idx}
+		where
+		file_idx=#{file_idx}
+	</update>
+
+	<!-- 글삭제 <delete id="delete"> delete from jhbbs_bbs_attach where file_idx 
+		= #{file_idx} </delete> -->
+
+	<!-- 글삭제 update처리 -->
+	<update id="delete">
+		update jhbbs_attach set del = 'Y' where file_idx =
+		#{file_idx}
+	</update>
+
+	<!-- 글조회수 -->
+	<update id="increaseCnt">
+		update jhbbs_attach set hit= hit + 1 where file_idx =
+		#{file_idx} and del = 'N'
+	</update>
+
+	<!-- 글이전값 -->
+	<select id="getPrevNum" resultType="com.company.bbs.vo.attach.AttachVO">
+	<![CDATA[ 
+	select * from jhbbs_attach where file_idx > #{file_idx} and del = 'N' order by file_idx asc limit 1
+	]]>
+	</select>
+
+	<!-- 글다음값 -->
+	<select id="getNextNum" resultType="com.company.bbs.vo.attach.AttachVO">
+	<![CDATA[
+	select * from jhbbs_attach where file_idx < #{file_idx} and del = 'N' order by file_idx desc limit 1
+	]]>
+	</select>
+
+	<!-- 글최고값 -->
+	<select id="getMaxNum" resultType="int">
+		select max(file_idx) from jhbbs_attach
+		<include refid="search"></include>
+	</select>
+
+	<!-- 글갯수 -->
+	<select id="getCount" resultType="int">
+	<![CDATA[ 
+	select count(file_idx) from jhbbs_attach where file_idx > 0 and del = 'N'
+	]]>
+		<include refid="search"></include>
+	</select>
+
+	<!-- 글비밀번호리턴 -->
+	<select id="getPassword" resultType="String">
+		select pass from
+		jhbbs_attach where file_idx = #{file_idx} and del = 'N'
+	</select>
+	
+	<!-- 첨부파일갯수 -->
+	<select id="getFileCount" resultType="int">
+	<![CDATA[ 
+	select count(file_idx) from jhbbs_attach where file_idx > 0 and del = 'N'
+	]]>
+		<include refid="search"></include>
+	</select>
+	
+	<sql id="category">
+		<if test="category_idx > 0">
+			AND category_idx = ${category_idx}
+		</if>
+		<if test="category_idx == 0">
+			AND category_idx > 0
+		</if>
+	</sql>
+
+	<sql id="search">
+		<if test="searchField != null">
+			<if test="searchField == 'n'.toString()">
+				AND (title LIKE CONCAT('%',#{keyWord},'%') OR content LIKE CONCAT('%',#{keyWord},'%') OR name LIKE CONCAT('%',#{keyWord},'%'))
+			</if>
+			<if test="searchField == 't'.toString()">
+				AND title LIKE CONCAT('%',#{keyWord},'%')
+			</if>
+			<if test="searchField == 'c'.toString()">
+				AND content LIKE CONCAT('%',#{keyWord},'%')
+			</if>
+			<if test="searchField == 'w'.toString()">
+				AND name LIKE CONCAT('%',#{keyWord},'%')
+			</if>
+			<if test="searchField == 'tc'.toString()">
+				AND (title LIKE CONCAT('%',#{keyWord},'%') OR content LIKE CONCAT('%',#{keyWord},'%'))
+			</if>
+			<if test="searchField == 'cw'.toString()">
+				AND (content LIKE CONCAT('%',#{keyWord},'%') OR name LIKE CONCAT('%',#{keyWord},'%'))
+			</if>
+			<if test="searchField == 'tcw'.toString()">
+				AND (title LIKE CONCAT('%',#{keyWord},'%') OR content LIKE CONCAT('%',#{keyWord},'%') OR name LIKE CONCAT('%',#{keyWord},'%'))
+			</if>
+		</if>
+	</sql>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

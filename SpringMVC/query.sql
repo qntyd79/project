@@ -57,13 +57,13 @@ DELETE FROM `mydb`.`JHBBS_board` WHERE `board_idx`='7';
 
 /* 테이블 초기화 */
 SET FOREIGN_KEY_CHECKS = 0; -- Disable foreign key checking.
-truncate mydb.jhbbs_member;
+truncate mydb.jhbbs_board;
 ALTER TABLE `mydb`.`JHBBS_category` CHANGE COLUMN `idx` `kind` INT(10) NULL DEFAULT NULL ;
 
 UPDATE `mydb`.`JHBBS_comment` SET `email` = 'qntyd79@naver.com' WHERE (`comment_idx` = '4');
 
 /* 외래키 설정 */
-ALTER TABLE `mydb`.`JHBBS_file` ADD CONSTRAINT `fk_board_idx` FOREIGN KEY (`board_idx`) REFERENCES `mydb`.`JHBBS_board` (`board_idx`);
+/*ALTER TABLE `mydb`.`JHBBS_file` ADD CONSTRAINT `fk_board_idx` FOREIGN KEY (`board_idx`) REFERENCES `mydb`.`JHBBS_board` (`board_idx`);
 ALTER TABLE `mydb`.`JHBBS_file` ADD CONSTRAINT `fk_member_idx` FOREIGN KEY (`member_idx`) REFERENCES `mydb`.`JHBBS_member` (`member_idx`);
-ALTER TABLE `mydb`.`JHBBS_file` ADD CONSTRAINT `fk_email_idx` FOREIGN KEY (`email_idx`) REFERENCES `mydb`.`JHBBS_email` (`email_idx`);
+ALTER TABLE `mydb`.`JHBBS_file` ADD CONSTRAINT `fk_email_idx` FOREIGN KEY (`email_idx`) REFERENCES `mydb`.`JHBBS_email` (`email_idx`);*/
 ALTER TABLE `mydb`.`JHBBS_comment` ADD CONSTRAINT `fk_comment_idx` FOREIGN KEY (`board_idx`) REFERENCES `mydb`.`JHBBS_board` (`board_idx`);

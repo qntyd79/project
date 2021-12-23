@@ -163,9 +163,9 @@ public class BoardController {
 		model.addAttribute("boardVO", boardVO);
 		model.addAttribute("categorylist", service.getCategoryList());
 
-		System.out.println("아이디1 " + boardVO.getUserid());
-		System.out.println("이름1 " + boardVO.getName());
-		System.out.println("이메일1 " + boardVO.getEmail());
+		logger.info("아이디 : " + boardVO.getUserid());
+		logger.info("이름 : " + boardVO.getName());
+		logger.info("이메일 : " + boardVO.getEmail());
 	
 		return "modules/board/board_write";
 	}
@@ -378,7 +378,6 @@ public class BoardController {
 			checkNum = Integer.parseInt(i);
 			boardVO.setBoard_idx(checkNum);
 			service.delete(boardVO.getBoard_idx());
-
 		}
 		
 		result = 1;

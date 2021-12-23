@@ -116,6 +116,12 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectList("board.getCategoryList");
 	}
 	
+	// 첨부파일가져오기
+	@Override
+	public List<Object> getFile_idx(List<Object> board_idx) throws Exception {
+		return sqlSession.selectList("board.getFile_idx", board_idx);
+	}
+		
 	// 첨부파일 저장
 	@Override
 	public void insert(AttachVO attachVO) throws Exception {
@@ -137,7 +143,7 @@ public class BoardDaoImpl implements BoardDao {
 		
 		//System.out.println("key 출력>>>" + paramMap.keySet()); // [이름, 나이, 직업]
 		
-		sqlSession.update("board.updateCommentCnt", paramMap);
+		sqlSession.update("board.updateAttachCnt", paramMap);
 	}
 	
 	// 첨부파일목록 
@@ -146,7 +152,7 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectList("board.getFileList", board_idx);
 	}
 	
-	// 첨부파일삭제
+	// 첨부파일개별삭제
 	@Override
 	public void attachDelete(int file_idx) throws Exception {
 		sqlSession.selectOne("board.attachDelete", file_idx);		
@@ -167,6 +173,13 @@ public class BoardDaoImpl implements BoardDao {
 		
 		sqlSession.update("board.updateCommentCnt", paramMap);
 	}
+
+	@Override
+	public List<Object> attachDeleteList(int board_idx) throws Exception {
+		return sqlSession.selectList("board.attachDeleteList", board_idx);		
+	}
+	
+	
 
 
 }

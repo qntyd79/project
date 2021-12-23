@@ -128,18 +128,18 @@ $(document).ready(function() {
         var content = area.find('.toggle-content');
         var button = area.find('.toggle-btn');
 		// 처음 로딩시 보여지는 부분(show/hide)
-        content.show();
+        content.hide();
         //$content.slideToggle(500);
         //$(this)는 이벤트가 발생한 시점의 $content를 가리킴
         button.click(function() {
             content.slideToggle("slow", function() {
 
-                if ($(this).css('display') != 'none') {
-                    button.html('<i class="fa fa-chevron-up" aria-hidden="true"></i>');
+                if ($(this).css('display') == 'none') {
+                    button.html('<i class="fa fa-chevron-down" aria-hidden="true"></i>');
 					//button.html('<i class="fa fa-chevron-down" aria-hidden="true"></i>');
                 } else { 
 	 				//button.html('<i class="fa fa-chevron-up" aria-hidden="true"></i>');                  
-					button.html('<i class="fa fa-chevron-down" aria-hidden="true"></i>');
+					button.html('<i class="fa fa-chevron-up" aria-hidden="true"></i>');
                 }
 
                 /*// 조건문에서만 사용 hasClass true/false

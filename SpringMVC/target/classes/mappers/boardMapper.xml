@@ -107,9 +107,14 @@
 		file_idx=#{file_idx}
 	</update>
 	
-	<!-- 글삭제 update처리 -->
+	<!-- 글삭제 첨부파일 update처리 -->
 	<update id="attachDelete">
 		update jhbbs_file set del = 'Y' where file_idx = #{file_idx}
+	</update>
+	
+	<!-- 글삭제 첨부파일 update처리 -->
+	<update id="attachDeleteList">
+		update jhbbs_file set del = 'Y' where board_idx = #{board_idx}
 	</update>
 	
 	<!-- 답글업데이트 -->
@@ -150,7 +155,7 @@
 		update jhbbs_board set del = 'Y' where board_idx =	#{board_idx}
 	</update>
 	
-	<!-- 체글삭제 update처리 -->
+	<!-- 체크박스글삭제 update처리 -->
 	<update id="checkdelete">
 		update jhbbs_board set del = 'Y' where board_idx =	#{board_idx}
 	</update>
@@ -219,8 +224,15 @@
 	</update>
 	-->
 	
+	<!-- 첨부파일가져오기 -->
+	<select id="getFile_idx" resultType="int">
+	<![CDATA[ 
+	select file_idx from jhbbs_file where board_idx = #{board_idx} and del = 'N'
+	]]>
+	</select>
+	
 	<!-- 첨부파일갯수 업데이트 -->
-	<update id="updateAttahCnt">
+	<update id="updateAttachCnt">
 		update jhbbs_board set filecnt = filecnt + #{amount} where board_idx = #{board_idx} and del = 'N'
 	</update>
 	

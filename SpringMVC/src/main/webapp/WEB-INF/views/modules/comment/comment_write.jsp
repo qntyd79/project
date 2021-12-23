@@ -52,10 +52,8 @@
                                                     <td colspan="10" class="text-left">
                                                         <form:textarea  path="content" id="content" placeholder="Content"/> <form:errors path="content"/>
                                                         <script>
-                                                            CKEDITOR.replace('content',{customConfig: '${path}/plugin/ckeditor4/full/custom-config.js'});
-                                                           	<!--CKEDITOR.instances.content.updateElement();-->
-                                                        </script>
-                                                        <!--<label for="content"><spring:message code="label.content"/></label>-->   
+                                                            CKEDITOR.replace('content');                    
+                                                        </script>  
                                                      </td>
                                                 </tr>
                                                 <tr>
