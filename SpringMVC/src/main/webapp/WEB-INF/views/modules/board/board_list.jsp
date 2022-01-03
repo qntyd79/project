@@ -10,10 +10,14 @@
 <div id="container-wrap">
     <div class="clearfix">
         <div class="content-box">
-            <div class="content-full-img02"></div>
+            <div class="content-full-img02">
+            	<div class="bgtitle">
+                	<c:import url="/WEB-INF/views/include/content_header.jsp"/>
+                </div>
+            </div>
             <div class="content-full-bg02-hidden">
                 <section class="content">
-                    <c:import url="/WEB-INF/views/include/content_header.jsp"/>
+                	
                     <article>                    
                         <div class="row">
                             <div class="col-md-12">

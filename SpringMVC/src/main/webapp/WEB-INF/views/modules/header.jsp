@@ -10,7 +10,7 @@
 	<div id="container-wrap">
 	    <div class="clearfix">
 	        <div class="content-box">
-	            <!-- <div class="content-full-img01"></div> -->
+	            <div class="content-full-img01"></div>
 	            <div class="content-full-bg01-hidden">
 	                <section class="content">
 	                    <article>

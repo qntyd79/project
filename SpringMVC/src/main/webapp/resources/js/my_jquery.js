@@ -12,7 +12,7 @@ $(document).ready(function() {
 
     // 푸터배너
     $('.banner-slider').bxSlider({
-        slideWidth: 172,
+        slideWidth: 174,
         minSlides: 2,
         maxSlides: 10,
         moveSlides: 1,
@@ -20,8 +20,6 @@ $(document).ready(function() {
         autoControls: true,
         auto: true
     });
-
-    // 2020.02.05
 
     // 상단고정 스크롤 시 메뉴 보이기/사라지기 / https://webdir.tistory.com/481
     var didScroll;

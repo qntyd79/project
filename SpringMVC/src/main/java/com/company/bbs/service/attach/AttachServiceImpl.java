@@ -1,6 +1,5 @@
 package com.company.bbs.service.attach;
 
-import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -49,7 +48,7 @@ public class AttachServiceImpl implements AttachService {
 	public void insert(AttachVO attachVO) throws Exception {
 
 		//for(int i=1; i <=200; i++) {
-		int file_idx = attachVO.getFile_idx();		
+		//int file_idx = attachVO.getFile_idx();		
 		//String title = attachVO.getTitle();
 		//String content = attachVO.getContent();
 		String del = attachVO.getDel(); 
@@ -98,12 +97,7 @@ public class AttachServiceImpl implements AttachService {
 
 	// 글수정
 	@Override
-	public void update(AttachVO attachVO) throws Exception {
-						
-		// 접속아이피
-		String cipp = InetAddress.getLocalHost().getHostAddress();
-		//attachVO.setCipp(cipp);
-				
+	public void update(AttachVO attachVO) throws Exception {		
 		dao.update(attachVO);
 	}
 
@@ -113,7 +107,7 @@ public class AttachServiceImpl implements AttachService {
 	public void delete(int file_idx) throws Exception {
 		dao.delete(file_idx);		
 		// 게시물 파일 수량 업데이트 	
-		int board_idx = dao.getBoard_idx(file_idx);	
+		//int board_idx = dao.getBoard_idx(file_idx);	
 		bdao.updateAttachCnt(file_idx, -1);
 	}
 

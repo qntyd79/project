@@ -22,7 +22,8 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'others', groups: [ 'others' ] },
 		{ name: 'about', groups: [ 'about' ] }
 	];
-
+	
+	// 기본설정
 	config.language = 'ko';
 	config.uiColor = '#e1e1e1';
 	config.width = 500;     // 500 pixels wide.
@@ -36,4 +37,12 @@ CKEDITOR.editorConfig = function( config ) {
 	config.extraAllowedContent = '*(*);*{*}';
 	config.fillEmptyBlocks = false;
 	config.allowedContent = true;
+    config.filebrowserUploadMethod='form';
+	
+	// 업로드설정
+    config.filebrowserUploadUrl      = '/modules/attach/ckUpload.do',
+    config.filebrowserImageUploadUrl = '/modules/attach/ckUpload.do',
+    config.filebrowserWindowWidth = '640',
+    config.filebrowserWindowHeight= '480'
 };
+

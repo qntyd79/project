@@ -6,7 +6,7 @@
         <div class="content-box">
             <div class="content-full-img01">
                 <div class="bgtitle">
-               <%@ include file="../include/content_header.jsp"%>
+                	<c:import url="/WEB-INF/views/include/content_header.jsp"/>
                 </div>
             </div>
             <div class="content-full-bg01-hidden">
@@ -284,7 +284,7 @@
             </div>
             <div class="content-full-img03">
                 <div class="bgtitle">
-               <%@ include file="../include/content_header.jsp"%>
+                	<c:import url="/WEB-INF/views/include/content_header.jsp"/>
                 </div>
             </div>
             <div class="content-full-bg03-hidden">
@@ -479,7 +479,11 @@
                     </article>
                 </section>
             </div>
-            <div class="content-full-img04"></div>
+            <div class="content-full-img04">
+            	<div class="bgtitle">
+                	<c:import url="/WEB-INF/views/include/content_header.jsp"/>
+                </div>
+            </div>
             <div class="content-full-bg04-hidden">
                 <section class="content">
                     <article>

@@ -21,6 +21,7 @@
 
 	<bean id="uploadPath" class="java.lang.String"> 
 		<constructor-arg value="/Users/ojeonghwan/git/project/SpringMVC/src/main/webapp/resources/upload"/> 
+		<!-- <constructor-arg value="Users/ojeonghwan/OneDrive/Web-Project/WEB_app/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/SpringMVC/resources/upload"/>-->
 	</bean>	
 	
 	<bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">

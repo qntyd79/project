@@ -1,6 +1,6 @@
 .bx-wrapper {
     position: relative;
-    //margin-bottom: 550px;
+    /*margin-bottom: 550px;*/
     padding: 0;
     -ms-touch-action: pan-y;
     touch-action: pan-y;
@@ -8,8 +8,8 @@
     _-webkit-box-shadow: 0 0 5px #ccc;
     _box-shadow: 0 0 5px #ccc;
     _border: 5px solid #fff;
-    //background: #fff;
-    margin: 0 auto; //가운데정렬 추가
+    /*background: #fff;*/
+    margin: 0 auto; /*가운데정렬 추가*/
 }
 
 
@@ -41,7 +41,7 @@ ul.bxslider {
 
 .bx-wrapper .bx-loading {
     min-height: 50px;
-    background: url(http://qntyd7979.godohosting.com/jhbbs/common/js/bxslider/images/bx_loader.gif) center center no-repeat #fff;
+    /*background: url(http://qntyd7979.godohosting.com/jhbbs/common/js/bxslider/images/bx_loader.gif) center center no-repeat #fff;*/
     height: 100%;
     width: 100%;
     position: absolute;
@@ -92,7 +92,7 @@ ul.bxslider {
 .bx-wrapper .bx-prev {
     display:none;
     left: -55px;
-    background: url(http://qntyd7979.godohosting.com/jhbbs/common/js/bxslider/images/controls.png) 0 -32px no-repeat
+    /*background: url(http://qntyd7979.godohosting.com/jhbbs/common/js/bxslider/images/controls.png) 0 -32px no-repeat*/
 }
 
 .bx-wrapper .bx-prev:focus,
@@ -103,7 +103,7 @@ ul.bxslider {
 .bx-wrapper .bx-next {
     display:none;
     right: -55px;
-    background: url(http://qntyd7979.godohosting.com/jhbbs/common/js/bxslider/images/controls.png) -43px -32px no-repeat
+    /*background: url(http://qntyd7979.godohosting.com/jhbbs/common/js/bxslider/images/controls.png) -43px -32px no-repeat*/
 }
 
 .bx-wrapper .bx-next:focus,
@@ -136,7 +136,7 @@ ul.bxslider {
     width: 10px;
     height: 11px;
     outline: 0;
-    background: url(http://qntyd7979.godohosting.com/jhbbs/common/js/bxslider/images/controls.png) -86px -11px no-repeat;
+    /*background: url(http://qntyd7979.godohosting.com/jhbbs/common/js/bxslider/images/controls.png) -86px -11px no-repeat;*/
     margin: 0 3px
 }
 
@@ -152,7 +152,7 @@ ul.bxslider {
     width: 9px;
     height: 11px;
     outline: 0;
-    background: url(http://qntyd7979.godohosting.com/jhbbs/common/js/bxslider/images/controls.png) -86px -44px no-repeat;
+    /*background: url(http://qntyd7979.godohosting.com/jhbbs/common/js/bxslider/images/controls.png) -86px -44px no-repeat;*/
     margin: 0 3px
 }
 

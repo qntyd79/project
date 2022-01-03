@@ -4,7 +4,7 @@
 <div id="footer-wrap">
         <div class="footer-box">
             <button class="toggle-btn"><i class="fa fa-chevron-down" aria-hidden="true"></i></button>
-            <footer class="footer toggle-content" style="display: none;">
+            <footer class="footer toggle-content">
                 <article>
                     <h2>통합메뉴안내</h2>
                     <nav class="fnb">
