@@ -67,8 +67,9 @@
                                                             		{ name: 'about', groups: [ 'about' ] }
                                                             	],
                                                             	
-                                                            	removeButtons : 'Source,Save,NewPage,ExportPdf,Preview,Print,Templates,Find,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Replace,PasteText,PasteFromWord,Image,Table,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe,CopyFormatting,RemoveFormat,Blockquote,CreateDiv,JustifyLeft,JustifyCenter,JustifyRight,JustifyBlock,BidiLtr,BidiRtl,Language,Styles,TextColor,BGColor,ShowBlocks,Maximize,Format,Font,FontSize'
-                                                            });
+                                                            	removeButtons : 'Source,Save,NewPage,ExportPdf,Preview,Print,Templates,Find,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Replace,PasteText,PasteFromWord,Image,Table,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe,CopyFormatting,RemoveFormat,Blockquote,CreateDiv,JustifyLeft,JustifyCenter,JustifyRight,JustifyBlock,BidiLtr,BidiRtl,Language,Styles,TextColor,BGColor,ShowBlocks,Maximize,Format,Font,FontSize',
+                                                            		removePlugins : "exportpdf"
+                                                            		});
                                                         </script>
                                                      </td>
                                                 </tr>                                               
@@ -269,8 +270,7 @@
 					    $("#name").val("");
 					    $("#email").val("");
 					    $("#answer").val("");           
-					    CKreset(); 
-	
+					    CKreset(); 	
 				    },
 				    error: function(request, status, error) {
 				        // 서비스 실패 시 처리 할 내용
@@ -279,8 +279,7 @@
 				}); //ajax종료 	
 	
 				return false;
-		   } 
-	
+		   } 	
 		});
 
 		 //댓글목록에서 수정하기 버튼 클릭시 - window.open실행 
@@ -303,43 +302,7 @@
 	     
 	        window.open('/modules/comment/ajaxmodify.do?comment_idx=' + comment_idx + '', '댓글수정', 'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top +', location=no, resizable=no' );
 	    }
-	
-	    //댓글목록에서 수정하기 버튼 클릭시 - 모달창 실행 
-	    /*
-	    $("#replies").on("click", "#modifyBtn", function() {
-			
-	        // 모달창 뛰우기 
-	        $('.modal-box').addClass('modal-on');
-	        $('.modal-back').addClass('back-on');
-	        $('body').addClass('body-lock');
-	
-	        var comment = $(this).parent().parent();
-	        var comment_idx = comment.attr("data-rno");
-	
-	        //ajax통신
-	        $.ajax({
-	            type: "GET",
-	            url: "${path}/modules/comment/ajaxlist/read/" + comment_idx,
-	            headers: { "Content-Type": "application/json", "X-HTTP-Method-Override": "GET" },
-	            dataType: "json",
-	            success: function(result) {	
-	                //서비스 성공 시 처리 할 내용                  
-	                $("#replycomment_idx").val(result.comment_idx);
-	                $("#replyuserid").val(result.userid);
-	                $("#replypass").val(result.pass);
-	                $("#replyname").val(result.name);
-	                $("#replyemail").val(result.email);
-	                var html = $("#replyeditor").val(result.content);
-	                CKEDITOR.instances['replyeditor'].setData(html);
-	            },
-	            error: function(request, status, error) {	
-	                //서비스 실패 시 처리 할 내용              
-	                alert("댓글보기 실패");
-	            }
-	        });
-	    });
-	    */
-	
+		
 	    //모달창에서 수정버튼 클릭시 수정 처리 
 	    $("#modifyBtn").on("click", function() {
 	    	    	
@@ -385,6 +348,63 @@
 	        	return false;
 			} 
 	    });
+	    
+	    //댓글목록에서 수정하기 버튼 클릭시 - 모달창 실행 
+	    /*
+	    $("#replies").on("click", "#modifyBtn", function() {
+			
+	        // 모달창 뛰우기 
+	        $('.modal-box').addClass('modal-on');
+	        $('.modal-back').addClass('back-on');
+	        $('body').addClass('body-lock');
+	
+	        var comment = $(this).parent().parent();
+	        var comment_idx = comment.attr("data-rno");
+	
+	        //ajax통신
+	        $.ajax({
+	            type: "GET",
+	            url: "${path}/modules/comment/ajaxlist/read/" + comment_idx,
+	            headers: { "Content-Type": "application/json", "X-HTTP-Method-Override": "GET" },
+	            dataType: "json",
+	            success: function(result) {	
+	                //서비스 성공 시 처리 할 내용                  
+	                $("#replycomment_idx").val(result.comment_idx);
+	                $("#replyuserid").val(result.userid);
+	                $("#replypass").val(result.pass);
+	                $("#replyname").val(result.name);
+	                $("#replyemail").val(result.email);
+	                var html = $("#replyeditor").val(result.content);
+	                CKEDITOR.instances['replyeditor'].setData(html);
+	            },
+	            error: function(request, status, error) {	
+	                //서비스 실패 시 처리 할 내용              
+	                alert("댓글보기 실패");
+	            }
+	        });
+	    });
+	    */
+	    
+		//댓글목록에서 답글하기 버튼 클릭시 답글등록창 실행 - window.open 실행 
+	    $("#replies").on("click", "#replyBtn", function() {
+	    	//화면입력값 변수처리
+	        var comment = $(this).parent().parent();
+	        var comment_idx = comment.attr("data-rno");
+	    	//console.log(comment_idx);
+			openReply(comment_idx);
+	    });
+	    
+	    function openReply(val) {	
+		    var comment_idx = val;    	 
+	        var _width = '910';
+	        var _height = '550';
+	     
+	        // 팝업을 가운데 위치시키기 위해 아래와 같이 값 구하기
+	        var _left = Math.ceil(( window.screen.width - _width )/2);
+	        var _top = Math.ceil(( window.screen.height - _height )/2); 
+	     
+	        window.open('/modules/comment/ajaxreply.do?comment_idx=' + comment_idx + '', '답글등록', 'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top +', location=no, resizable=no' );    
+	    }
 	
 	    //댓글목록에서 삭제버튼 클릭 시 삭제처리  
 	    $("#replies").on("click", "#deleteBtn", function() {
@@ -416,27 +436,6 @@
 	            }
 	        });
 	    });
-
-	  	//댓글목록에서 답글하기 버튼 클릭시 답글등록창 실행 - window.open 실행 
-	    $("#replies").on("click", "#replyBtn", function() {
-	    	//화면입력값 변수처리
-	        var comment = $(this).parent().parent();
-	        var comment_idx = comment.attr("data-rno");
-	    	//console.log(comment_idx);
-			openReply(comment_idx);
-	    });
-	    
-	    function openReply(val) {	
-		    var comment_idx = val;    	 
-	        var _width = '910';
-	        var _height = '550';
-	     
-	        // 팝업을 가운데 위치시키기 위해 아래와 같이 값 구하기
-	        var _left = Math.ceil(( window.screen.width - _width )/2);
-	        var _top = Math.ceil(( window.screen.height - _height )/2); 
-	     
-	        window.open('/modules/comment/ajaxreply.do?comment_idx=' + comment_idx + '', '답글등록', 'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top +', location=no, resizable=no' );    
-	    }
 	    
 	    //댓글목록에서 답글하기 버튼 클릭시 답글등록창 실행 - 모달창 실행 
 	   	/*

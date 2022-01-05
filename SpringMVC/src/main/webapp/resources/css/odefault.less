@@ -650,7 +650,7 @@ article {
                 .slider-img>img {
                     .layout;
 					width: auto;
-                    height: auto;                 
+                    height: 1280px;                 
                 }
 
                 .slider-video>video {
@@ -1974,7 +1974,7 @@ ul.breadcrumb li a:hover {
     .footer-box {
         .layout;
 
-        .toggle-btn {
+        .toggle-btn1 {
             .layout;
             height: 30px;
             display: inline-block;
@@ -1983,6 +1983,11 @@ ul.breadcrumb li a:hover {
             .background(#666);
             border-radius: 0px;
         }
+        
+        .toggle-content1 {
+        .layout(@fixed-width);
+        	display: none;
+    	}
 
         .footer {
             .layout(@fixed-width);
@@ -2174,13 +2179,14 @@ ul.breadcrumb li a:hover {
 .banner-box {
     .layout(@fixed-width);
     .background(#fff);
-
     .banner-slider {
         a img {
             text-align: center;
             .border;
             display: block;
             margin: 0px auto;
+            width:auto;
+            height:auto;
         }
     }
 }

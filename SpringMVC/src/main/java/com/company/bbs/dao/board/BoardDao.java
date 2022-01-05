@@ -20,7 +20,7 @@ public interface BoardDao {
 	public void insert(BoardVO boardVO) throws Exception;
 	
 	// 첨부파일 저장 
-	public void insert(AttachVO attachVO) throws Exception;
+	public void fileinsert(AttachVO attachVO) throws Exception;
 	
 	// 답글업데이트 
 	public void getReply(BoardVO boardVO) throws Exception;

@@ -21,8 +21,9 @@ CKEDITOR.editorConfig = function( config ) {
     { name: 'about', groups: [ 'about' ] }
     ];
     
-    config.emoveButtons = 'Source,Save,NewPage,ExportPdf,Preview,Print,Templates,Find,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Replace,PasteText,PasteFromWord,Image,Table,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe,CopyFormatting,RemoveFormat,Blockquote,CreateDiv,JustifyLeft,JustifyCenter,JustifyRight,JustifyBlock,BidiLtr,BidiRtl,Language,Styles,TextColor,BGColor,ShowBlocks,Maximize,Format,Font,FontSize';
+    config.removeButtons = 'Source,Save,NewPage,ExportPdf,Preview,Print,Templates,Find,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Replace,PasteText,PasteFromWord,Image,Table,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe,CopyFormatting,RemoveFormat,Blockquote,CreateDiv,JustifyLeft,JustifyCenter,JustifyRight,JustifyBlock,BidiLtr,BidiRtl,Language,Styles,TextColor,BGColor,ShowBlocks,Maximize,Format,Font,FontSize';
 
+		// 기본설정
 	config.language = 'ko';
 	config.uiColor = '#e1e1e1';
 	config.width = 500;     // 500 pixels wide.
@@ -36,4 +37,11 @@ CKEDITOR.editorConfig = function( config ) {
 	config.extraAllowedContent = '*(*);*{*}';
 	config.fillEmptyBlocks = false;
 	config.allowedContent = true;
+    config.filebrowserUploadMethod='form';
+	
+	// 업로드설정
+    config.filebrowserUploadUrl      = '/modules/attach/ckUpload.do',
+    config.filebrowserImageUploadUrl = '/modules/attach/ckUpload.do',
+    config.filebrowserWindowWidth = '640',
+    config.filebrowserWindowHeight= '480'
 };

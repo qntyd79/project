@@ -22,6 +22,8 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'others', groups: [ 'others' ] },
 		{ name: 'about', groups: [ 'about' ] }
 	];
+
+	config.removeButtons = 'ExportPdf';
 	
 	// 기본설정
 	config.language = 'ko';

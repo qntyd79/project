@@ -56,7 +56,7 @@
 										</fieldset>
 									</div>
 								</form>
-								<div class="articles">전체글 : <span>${pageMaker.totalCount}</span> 개 | 현재페이지 : <span>${pageMaker.criteria.page}</span>| 총페이지 : <span>${pageMaker.totalPage}</span></div>
+								<div class="articles">전체글 : <span>${pageMaker.totalCount}</span> 개 | 현재페이지 : <span>${pageMaker.criteria.page}</span> | 총페이지 : <span>${pageMaker.totalPage}</span></div>
 								<form name="listForm" method="post"	enctype="multipart/form-data" action="list.do">
 									<fieldset>
 										<legend>

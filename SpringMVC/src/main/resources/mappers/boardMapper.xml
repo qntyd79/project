@@ -233,10 +233,11 @@
 	
 	<!-- 첨부파일갯수 업데이트 -->
 	<update id="updateAttachCnt">
-		update jhbbs_board set filecnt = filecnt + #{amount} where board_idx = #{board_idx} and del = 'N'
+		update jhbbs_board set filecnt = #{amount} where board_idx = #{board_idx} and del = 'N'
 	</update>
 	
-	<select id="getAttachCount" parameterType="int">
+	<!-- board_idx의 첨부파일 갯수가져오기 -->
+	<select id="getAttachCount" resultType="int">
 	<![CDATA[ 
 	select count(file_idx) from JHBBS_file where board_idx = #{board_idx} and file_idx > 0 and del = 'N'
 	]]>   

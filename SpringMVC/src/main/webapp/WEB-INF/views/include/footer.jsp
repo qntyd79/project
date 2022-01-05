@@ -3,8 +3,8 @@
 
 <div id="footer-wrap">
         <div class="footer-box">
-            <button class="toggle-btn"><i class="fa fa-chevron-down" aria-hidden="true"></i></button>
-            <footer class="footer toggle-content">
+            <button class="toggle-btn1"><i class="fa fa-chevron-down" aria-hidden="true"></i></button>
+            <footer class="footer toggle-content1">
                 <article>
                     <h2>통합메뉴안내</h2>
                     <nav class="fnb">
@@ -144,7 +144,6 @@
                                     <li><a href="#"><i class="fab fa-flickr"></i></a></li>
                                     <li><a href="#"><i class="fab fa-yahoo"></i></a></li>
                                     <li><a href="#"><i class="fab fa-reddit"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-rss"></i></a></li>
                                     <li><a href="#"><i class="fab fa-android"></i></a></li>
                                 </ul>
                             </nav>
@@ -156,7 +155,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="banner-box">
-                                <div class="banner-slider">
+                                <div id="banner-slider" class="banner-slider">
                                     <a href="#"><img src="<c:url value="/resources/images/clients/pages_0001.jpg"/>"/></a>
                                     <a href="#"><img src="<c:url value="/resources/images/clients/pages_0002.jpg"/>"/></a>
                                     <a href="#"><img src="<c:url value="/resources/images/clients/pages_0003.jpg"/>"/></a>
@@ -220,9 +219,8 @@
     </div>
 </div>
 <!--#wrap-->
-<!-- 
 <script>
-	// bxslider heiht 0 처리
+	//bxslider heiht 0 처리
 	document.documentElement.addEventListener('DOMContentLoaded', function(event)  {
 	    var $tgt = $('.bx-viewport')[0];
 	    var tgt = document.querySelector('.bx-viewport');
@@ -233,7 +231,7 @@
 	    $tgt.removeAttr('height');
 	}, false);
 </script>
--->
+
 </body>
 
 </html>

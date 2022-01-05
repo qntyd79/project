@@ -107,8 +107,8 @@ public class AttachServiceImpl implements AttachService {
 	public void delete(int file_idx) throws Exception {
 		dao.delete(file_idx);		
 		// 게시물 파일 수량 업데이트 	
-		//int board_idx = dao.getBoard_idx(file_idx);	
-		bdao.updateAttachCnt(file_idx, -1);
+		int board_idx = dao.getBoard_idx(file_idx);	
+		bdao.updateAttachCnt(board_idx, -1);
 	}
 
 	// 글조회수 

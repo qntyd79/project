@@ -124,7 +124,7 @@ public class BoardDaoImpl implements BoardDao {
 		
 	// 첨부파일 저장
 	@Override
-	public void insert(AttachVO attachVO) throws Exception {
+	public void fileinsert(AttachVO attachVO) throws Exception {
 		sqlSession.insert("board.attachInsert", attachVO);
 	}
 		

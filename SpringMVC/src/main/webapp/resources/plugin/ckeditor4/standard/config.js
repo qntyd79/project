@@ -24,6 +24,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 	config.removeButtons = 'Save,NewPage,ExportPdf,Preview,Print,Templates,PasteFromWord,Find,Replace,SelectAll,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,PageBreak,Iframe,CopyFormatting,JustifyLeft,JustifyCenter,JustifyRight,JustifyBlock,BidiLtr,BidiRtl,Language,CreateDiv,Font,FontSize,TextColor,BGColor,Maximize,ShowBlocks,Smiley';
 
+		// 기본설정
 	config.language = 'ko';
 	config.uiColor = '#e1e1e1';
 	config.width = 500;     // 500 pixels wide.
@@ -37,4 +38,11 @@ CKEDITOR.editorConfig = function( config ) {
 	config.extraAllowedContent = '*(*);*{*}';
 	config.fillEmptyBlocks = false;
 	config.allowedContent = true;
+    config.filebrowserUploadMethod='form';
+	
+	// 업로드설정
+    config.filebrowserUploadUrl      = '/modules/attach/ckUpload.do',
+    config.filebrowserImageUploadUrl = '/modules/attach/ckUpload.do',
+    config.filebrowserWindowWidth = '640',
+    config.filebrowserWindowHeight= '480'
 };

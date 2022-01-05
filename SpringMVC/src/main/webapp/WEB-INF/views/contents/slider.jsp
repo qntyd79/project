@@ -10,7 +10,7 @@
                 <a href="#"><i class="fas fa-angle-left fa-2x"></i></a>
             </div>
             
-            <div class="bxslider">
+            <div id="bxslider" class="bxslider">
                 <div class="slider-item">
                     <div class='slider-caption'>
                         <h2 class="slider-title">Index Capturing reality in minutes using photogrammetric</h2>
@@ -88,7 +88,7 @@
                         </section>
                     </div>
                     <div class="slider-img">
-                        <img src="/resources/images/slide/slide01.jpg">
+                        <img src="/resources/images/slide/slide03.jpg">
                     </div>
                 </div>
                 <div class="slider-item">
@@ -169,7 +169,7 @@
                         </section>
                     </div>
                     <div class="slider-img">
-                       <img src="/resources/images/slide/slide02.jpg""/>
+                       <img src="/resources/images/slide/slide05.jpg"/>
                     </div>
                 </div>
             </div>

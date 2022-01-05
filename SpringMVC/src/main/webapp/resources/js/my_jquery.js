@@ -1,25 +1,45 @@
 $(document).ready(function() {
 		
     // 메인슬라이드  
-    $('.bxslider').bxSlider({
+    $('#bxslider').bxSlider({
         //slideWidth: 1920,
         mode: 'fade',
         captions: true,
         auto: true,
-		responsive:true
-        //autoControls: true
+		responsive:true,
+        autoControls: true       
     });
+   
 
     // 푸터배너
-    $('.banner-slider').bxSlider({
+    mySlider1 = $('#banner-slider').bxSlider({
         slideWidth: 174,
         minSlides: 2,
         maxSlides: 10,
         moveSlides: 1,
         slideMargin: 9,
+        stopAutoOnClick: true,
         autoControls: true,
-        auto: true
+        auto: true,
+        controls: true,
+        pager: true 
     });
+    
+    // DIV that contain SLIDER
+    $(".toggle-btn1").click(function() {
+   		$(".toggle-content1").slideToggle("slow", function() {
+
+        	if ($(this).css('display') != 'none') {
+            	$(".toggle-btn1").html('<i class="fa fa-chevron-up" aria-hidden="true"></i>');
+				//$(".toggle-btn1").html('<i class="fa fa-chevron-down" aria-hidden="true"></i>');
+                } else { 
+	 			$(".toggle-btn1").html('<i class="fa fa-chevron-down" aria-hidden="true"></i>');                  
+				//	$(".toggle-btn1").html('<i class="fa fa-chevron-up" aria-hidden="true"></i>');
+                }
+        });
+        mySlider1.reloadSlider();        // Reloads the slideshow (bxSlider API function)
+    });
+   
 
     // 상단고정 스크롤 시 메뉴 보이기/사라지기 / https://webdir.tistory.com/481
     var didScroll;
@@ -27,7 +47,7 @@ $(document).ready(function() {
     var delta = 5;
     var navbarHeight = $('.header').outerHeight();
 
-    $(window).scroll(function(event) {
+    $(window).scroll(function() {
         didScroll = true;
     });
 
@@ -113,13 +133,13 @@ $(document).ready(function() {
         });
 
     // 슬라이드 토글(메인) / 유튜브 바위처럼의 Ezweb
-    var area = $('.toggle-box');
-    slideToggle(area);
+    var mainarea = $('.toggle-box');
+    slideToggle(mainarea);
 
 
     // 슬라이드 토글(푸터) / 유튜브 바위처럼의 Ezweb
-    var area = $('.footer-box');
-    slideToggle(area);
+    var footerarea = $('.footer-box');
+    slideToggle(footerarea);
 
     function slideToggle(str) {
         var area = str;
@@ -132,12 +152,12 @@ $(document).ready(function() {
         button.click(function() {
             content.slideToggle("slow", function() {
 
-                if ($(this).css('display') == 'none') {
-                    button.html('<i class="fa fa-chevron-down" aria-hidden="true"></i>');
+                if ($(this).css('display') != 'none') {
+                    button.html('<i class="fa fa-chevron-up" aria-hidden="true"></i>');
 					//button.html('<i class="fa fa-chevron-down" aria-hidden="true"></i>');
                 } else { 
-	 				//button.html('<i class="fa fa-chevron-up" aria-hidden="true"></i>');                  
-					button.html('<i class="fa fa-chevron-up" aria-hidden="true"></i>');
+	 				button.html('<i class="fa fa-chevron-down" aria-hidden="true"></i>');                  
+					//button.html('<i class="fa fa-chevron-up" aria-hidden="true"></i>');
                 }
 
                 /*// 조건문에서만 사용 hasClass true/false
@@ -153,16 +173,16 @@ $(document).ready(function() {
     }
 
     // 슬라이드 토글(지도) / 유튜브 바위처럼의 Ezweb
-    var area = $('#aside-wrap');
-    var button = area.find('.toggle-btn');
+    var maparea = $('#aside-wrap');
+    var button = maparea.find('.toggle-btn');
 
     button.click(function() {
-        if (area.hasClass('on')) { //on/off 로딩시 기본값 close
-            area.stop().animate({ left: '0' }, 'slow').removeClass('on');
+        if (maparea.hasClass('on')) { //on/off 로딩시 기본값 close
+            maparea.stop().animate({ left: '0' }, 'slow').removeClass('on');
             //$('#aside-wrap').css({'display':'block','opacity':'1'});
             button.html('<i class="fa fa-chevron-left" aria-hidden="true"></i>');
         } else {
-            area.stop().animate({ left: '-440px' }, 'slow').addClass('on');
+            maparea.stop().animate({ left: '-440px' }, 'slow').addClass('on');
             //$('#aside-wrap').css({'display':'none','transition':'opacity 1s ease-out','opacity':'0'});
             button.html('<i class="fa fa-chevron-right" aria-hidden="true"></i>');
         }
@@ -1226,7 +1246,7 @@ $(document).ready(function() {
 
         var html = "";
         
-        html += "<li style='margin-bottom:3px;'>";
+        html += "<li class='delItemBtn" + formcount + "' style='margin-bottom:3px;'>";
         html += "<input class='upload-name' id='item_" + formcount + "' disabled='disabled'> ";
         html += "<label for='ex_filename_" + formcount + "'>업로드</label> ";
         html += "<input type='file' name='attach' id='ex_filename_" + formcount + "' class='upload-hidden_" + formcount + "'> ";
@@ -1262,7 +1282,7 @@ $(document).ready(function() {
 
             // 파일목록출력
             var count = formcount - 1;
-            //alert("파일목록 카운터 " +" " + count);
+            //alert("파일목록 카운터 " + " " + count);
             var filesArrLen = files.length;
 
             for (var i = 0; i < filesArrLen; i++) {
@@ -1270,19 +1290,14 @@ $(document).ready(function() {
                 var html = "";
                 
                 html +="<tr class='itemt_" + count + "'>";
-                html +="<td>" + filesArrLen++ + "</td>";
+                //html +="<td>" + count + "</td>";
                 html +="<td>" + files[i].files[0].name + "</td>";
                 html +="<td>" + fileUnitCheck(files[i].files[0].size) + "</td>";
                 //html +="<td>" + files[i].files[0].type + "</td>";
 				html +="<td>" + fileExt(files[i].files[0].name) + "</td>";
 				html +="<td>등록일</td>";
-				html +="<td><input type='button' id='delItemBtn1' value='삭제'/></td>";
+				//html +="<td><input type='button' id='delItemBtn' value='삭제'/></td>";
                 html +="</tr>";
-         	
-                /*html += "<li style='margin-bottom:5px;'class='itemt_" + count + "'>";
-                html += "파일명 : " + files[i].files[0].name + " / 파일사이즈 : " + fileUnitCheck(files[i].files[0].size) + " / 파일타입 : " + files[i].files[0].type;
-                //html += " <input type='button' id='delItemBtn1' value='삭제'/>";
-                html += "</li>";*/
 
                 $("#filelist").append(html);
             }
@@ -1291,15 +1306,28 @@ $(document).ready(function() {
         });
 
         // 동적추가 파일폼 내 삭제버튼 이벤트 처리
-        var xidt = "delItemBtn" + formcount
+        /*
+        var xidt = "delItemBtn" + formcount;
         $(document).on("click", "#delItemBtn" + formcount, function() {
 
             $("#filelist>table>tr").remove("#" + xidt);
-            $(this).parent().remove();
+            $(this).parent().parent().remove();  
         });
-
-
+        */
+	 	
+   	 	// 동적파일폼 삭제 
+	    var xidt = "delItemBtn" + formcount;
+		$(document).on("click", "#delItemBtn" + formcount, function() {			
+			
+			// 첨부파일 목록에서 삭제
+			$(".filebox>#example li").remove("." + xidt);	
+		    
+			// 첨부파일등록폼 삭제
+			$("#filelist").find("#" + xidt).remove();
+		});
+    
         formcount++;
+        
 
         // 체크박스 처리 삭제버튼 이벤트 처리
         $(document).on("click", "#del", function() {
@@ -1317,18 +1345,7 @@ $(document).ready(function() {
 
     });
 
-    // 동적파일폼 삭제 
-    $(document).on("click", "#delItemBtn", function() {
-        var now_count = $("#example input[type='file']").length;
-
-        if (now_count == 1) {
-            alert("기본제공 첨부파일폼입니다.");
-            return;
-        }
-
-        $("#example li:last").remove();
-        $("#filelist li:last").remove();
-    });
+   
 
     // 파일사이즈 체크
     function fileSizeCheck(val) {
@@ -1680,7 +1697,7 @@ $(document).ready(function() {
         });
     });
 
-    
+    // 자동등록방지 이미지랜덤
 	$("#refreshBtn").on("click", function() {
         var rand = Math.random();
         var url = "captchaImg.do?rand=" + rand;

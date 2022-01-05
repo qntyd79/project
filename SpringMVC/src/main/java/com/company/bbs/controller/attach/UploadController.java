@@ -149,8 +149,8 @@ public class UploadController {
 		PrintWriter printWriter = null;
 		
 		// 절대경로 webapp폴더 경로설정
-		HttpSession session = req.getSession(); 
-	    String rootPath = session.getServletContext().getRealPath("/"); 
+		//HttpSession session = req.getSession(); 
+	    //String rootPath = session.getServletContext().getRealPath("/"); 
 		//String uploadPath1 = rootPath + "resources/upload";
 		  
 		// 인코딩 
@@ -172,12 +172,18 @@ public class UploadController {
 				logger.info("파일저장 경로 : " + savedName);
 				
 				String callback = req.getParameter("CKEditorFuncNum");
-				printWriter = res.getWriter();
+				
 				String fileName = file.getOriginalFilename();
-				String fileUrl = rootPath + "/resources/upload" + savedName;
 				
-				System.out.println("fileUrl : " + fileUrl);
+				// thumb_삭제
+				savedName = savedName.replace("thumb_","");
+				logger.info("thumb_제거 : " + savedName);
 				
+				String fileUrl = "/resources/upload" + savedName;
+				
+				logger.info("fileUrl : " + fileUrl);
+				
+				printWriter = res.getWriter();
 				// 업로드시 메시지 출력
 				printWriter.println("<script type='text/javascript'>" + "window.parent.CKEDITOR.tools.callFunction(" + callback +",'"+ fileUrl +"','이미지를 업로드하였습니다.')" +"</script>");
 				

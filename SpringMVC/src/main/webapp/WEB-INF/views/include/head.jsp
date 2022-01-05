@@ -46,7 +46,7 @@
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap&subset=korean" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo:400,700,800&display=swap&subset=korean" rel="stylesheet">
     <link href="<c:url value="/resources/css/fontawesome.all.min.css" />" rel="stylesheet" type="text/css" media="all">
-    <link href="<c:url value="/resources/css/jquery.bxslider.min.css" />" rel="stylesheet" type="text/css" media="all">    
+    <link href="<c:url value="/resources/css/jquery.bxslider.css" />" rel="stylesheet" type="text/css" media="all">    
     <link href="<c:url value="/resources/css/jquery-ui.min.css" />" rel="stylesheet" type="text/css" media="all">
     <link href="<c:url value="/resources/css/odefault.less" />" rel="stylesheet/less" type="text/css" media="all" >  
     <link href="<c:url value="/resources/css/ol.css" />" rel="stylesheet" type="text/css" media="all" >

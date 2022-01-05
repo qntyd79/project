@@ -84,7 +84,7 @@
                     </section>
                 </div>
                 <div class="slider-img">
-                    <img src="<c:url value="/resources/images/innomaps/nebula-lp-03.png"/>"/>
+                    <img src="/resources/images/slide/slide05.jpg">
                 </div>
                 <!-- <div class="slider-video">                      
                        <video muted autoplay loop>

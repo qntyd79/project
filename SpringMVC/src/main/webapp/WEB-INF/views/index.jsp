@@ -13,7 +13,7 @@
                 <a href="#"><i class="fas fa-angle-left fa-2x"></i></a>
             </div>
             
-            <div class="bxslider">
+            <div id="bxslider" class="bxslider">
                 <div class="slider-item">
                     <div class='slider-caption'>
                         <h2 class="slider-title">Index Capturing reality in minutes using photogrammetric</h2>

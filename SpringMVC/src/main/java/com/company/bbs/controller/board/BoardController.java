@@ -1,5 +1,7 @@
 package com.company.bbs.controller.board;
 
+import java.io.File;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -9,6 +11,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
+import com.company.bbs.service.attach.AttachService;
 import com.company.bbs.service.board.BoardService;
 import com.company.bbs.utill.CaptchaUtil;
 import com.company.bbs.utill.Criteria;
@@ -45,6 +49,9 @@ public class BoardController {
 
 	@Inject
 	private BoardService service;
+	
+	@Inject
+	private AttachService fservice;
 
 	// 첨부파일 저장경로 설정
 	@Resource(name = "uploadPath")
@@ -52,7 +59,7 @@ public class BoardController {
 
 	// 암호화 설정
 	@Autowired
-	BCryptPasswordEncoder passwordEncoder;
+	private BCryptPasswordEncoder passwordEncoder;
 
 	// 다국어 지역세션설정
 	@SuppressWarnings("unused")
@@ -163,9 +170,9 @@ public class BoardController {
 		model.addAttribute("boardVO", boardVO);
 		model.addAttribute("categorylist", service.getCategoryList());
 
-		logger.info("아이디 : " + boardVO.getUserid());
-		logger.info("이름 : " + boardVO.getName());
-		logger.info("이메일 : " + boardVO.getEmail());
+		//logger.info("아이디 : " + boardVO.getUserid());
+		//logger.info("이름 : " + boardVO.getName());
+		//logger.info("이메일 : " + boardVO.getEmail());
 	
 		return "modules/board/board_write";
 	}
@@ -215,7 +222,8 @@ public class BoardController {
 		String answer = request.getParameter("answer");
 
 		if (getAnswer.equals(answer)) {
-
+			
+			// 글저장프로세스
 			service.insert(boardVO);
 
 			model.addAttribute("msg", "InsertSuccess");
@@ -308,13 +316,14 @@ public class BoardController {
 		String encodedPassword = service.getPassword(boardVO.getBoard_idx());
 
 		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin!@1234")) {
+			//글수정처리프로세스
 			service.update(boardVO);
 			model.addAttribute("msg", "UpdateSuccess");
 			model.addAttribute("url", "list.do");
 		} else {
 			model.addAttribute("msg", "PassFailed");
 			model.addAttribute("url",
-					"modify.do?board_idx=" + boardVO.getBoard_idx() + "&category_idx=" + boardVO.getCategory_idx());
+					"edit.do?board_idx=" + boardVO.getBoard_idx() + "&category_idx=" + boardVO.getCategory_idx());
 		}
 
 		// 세션에서 지운다.
@@ -385,8 +394,8 @@ public class BoardController {
 		return result;
 	}
 	
-	// 첨부파일삭제처리
-	@RequestMapping(value = "attachDelete.do", method = RequestMethod.GET)
+	// 첨부파일 삭제처리
+	@RequestMapping(value = "fileDelete.do", method = RequestMethod.GET)
 	public String attachDelete(Model model, @ModelAttribute Criteria criteria, @ModelAttribute AttachVO attachVO,
 			@RequestParam int board_idx, @RequestParam String filename) throws Exception {
 
@@ -400,6 +409,32 @@ public class BoardController {
 		model.addAttribute("url", "read.do?board_idx=" + board_idx);
 
 		return "/modules/common/common_message";
+	}
+	
+	// 첨부파일 다운로드
+	@RequestMapping(value = "fileDownload.do", method = { RequestMethod.POST, RequestMethod.GET })
+	public void fileDownload(@ModelAttribute AttachVO attachVO, @RequestParam int file_idx, HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		logger.info("파일다운로드");
+		
+		AttachVO file = fservice.getView(file_idx);
+		
+		String saveFileName = file.getFile_hash_name();
+        String originalFileName = file.getFile_name();
+        
+        File downloadFile = new File(uploadPath + saveFileName);
+        
+        byte fileByte[] = FileUtils.readFileToByteArray(downloadFile);
+        
+        response.setContentType("application/octet-stream");
+        response.setContentLength(fileByte.length);
+        
+        response.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(originalFileName,"UTF-8") +"\";");
+        response.setHeader("Content-Transfer-Encoding", "binary");
+        
+        response.getOutputStream().write(fileByte);
+        response.getOutputStream().flush();
+        response.getOutputStream().close();
 	}
 
 	@RequestMapping(value = "captchaImg.do", method = RequestMethod.GET)

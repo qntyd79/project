@@ -85,7 +85,9 @@
 																	<col width="10%" />
 																	<col width="10%" />
 																	<col width="10%" />
+																	<c:if test="${sessionScope.isAdmin != null}">
 																	<col width="10%" />
+																	</c:if>
 																</colgroup>
 																<thead>
 																	<tr class="tline">
@@ -95,7 +97,9 @@
                                                                         <th scope="col"><spring:message code="bbs.list.filetype"/></th>
                                                                         <th scope="col"><spring:message code="bbs.list.regdate"/></th>
                                                                         <th scope="col">다운로드</th>
+                                                                        <c:if test="${sessionScope.isAdmin != null}">
 																		<th scope="col"><spring:message code="bbs.list.del" /></th>
+																		</c:if>
 																	</tr>
 																</thead>
 																<tbody>
@@ -109,14 +113,15 @@
 																			<c:forEach varStatus="status" var="row" items="${filelist}">
 																				<tr>	
 																					<td><strong>${status.index+1}</strong></td>														
-																					<td class="text-left"><a href="read.do${pageMaker.makeSearch(pageMaker.criteria.page)}&file_idx=<c:out value="${row.file_idx}"/>">${row.file_name}</a></td>
+																					<td class="text-left">${row.file_name}</td>
 																					<td><fmt:formatNumber value="${row.file_size}" type="number"/>KB</td>
 																					<td>${row.file_ext}</td>
-																					<td>
-																						<fmt:parseDate var="dateString" value="${row.regdate}" pattern="yyyy-MM-dd"/> 
+																					<td><fmt:parseDate var="dateString" value="${row.regdate}" pattern="yyyy-MM-dd"/> 
 																						<fmt:formatDate	value="${dateString}" pattern="yyyy-MM-dd"/></td>
-																					<td>클릭</td>
-																					<td><a href="attachDelete.do?filename=<c:out value="${row.file_hash_name}"/>&board_idx=<c:out value="${boardVO.board_idx}"/>&file_idx=<c:out value="${row.file_idx}"/>">삭제</a></td>
+																					<td><a href="fileDownload.do?file_idx=<c:out value="${row.file_idx}"/>">다운로드</a></td>
+																					<c:if test="${sessionScope.isAdmin != null}">
+																					<td><a href="fileDelete.do?filename=<c:out value="${row.file_hash_name}"/>&board_idx=<c:out value="${boardVO.board_idx}"/>&file_idx=<c:out value="${row.file_idx}"/>">삭제</a></td>
+																					</c:if>
 																				</tr>
 																			</c:forEach>
 																		</c:otherwise>
