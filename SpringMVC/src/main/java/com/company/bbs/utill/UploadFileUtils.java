@@ -54,18 +54,20 @@ public class UploadFileUtils {
 	public static void removeFile(String uploadPath, String originalName) throws Exception { 
 		// 확장자 추출 
 		String formatName = originalName.substring(originalName.lastIndexOf(".") + 1); 
+		System.out.println(formatName);
 
-		// 이미지 파일일 경우, 원본파일 삭제 
+		// 이미지 파일일 경우 썸네일도 같이 삭제 
 		if (MediaUtils.getMediaType(formatName) != null) { 
 			// 원본 이미지의 경로 + 파일명 추출 
 			// 날짜 경로 추출 
 			String front = originalName.substring(0, 12); 
 			// UUID + 파일명 추출 
-			String end = originalName.substring(14); 
-			// 원본 이미지 파일 삭제(구분자 변환) 
-			new File(uploadPath + (front + end).replace('/', File.separatorChar)).delete();
-		} 
-		// 파일 삭제(일반 파일 or 썸네일 이미지 파일 삭제) 
+			String end = originalName.substring(12); 
+			System.out.println("end : " + end);
+			// 썸네일삭제
+			new File(uploadPath + (front + "thumb_" + end).replace('/', File.separatorChar)).delete();
+		} 	
+		//원본이미지 삭제		
 		new File(uploadPath + originalName.replace('/', File.separatorChar)).delete();
 	}
 

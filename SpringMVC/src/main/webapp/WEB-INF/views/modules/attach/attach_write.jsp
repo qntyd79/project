@@ -23,7 +23,7 @@
                             
                             
                                 <h2><spring:message code="bbs.title.write"/></h2>
-                                <form:form modelAttribute="attachVO" method="post" id="writeForm" name="writeForm" enctype="multipart/form-data" action="insert.do">
+                                <form method="post" id="attachForm" name="attachForm" enctype="multipart/form-data" action="insert.do">
                                 	<input type="hidden" name="msgStr" value="<c:out value="${msg}"/> ">
                                     <fieldset>
                                         <legend><spring:message code="bbs.table.legend"/></legend>
@@ -33,23 +33,7 @@
                                                 <col width="20%" />
                                                 <col width="80%" />
                                             </colgroup>
-                                            <tbody>
-                                                <tr>
-                                                    <th><label for="category_idx"><spring:message code="label.category_idx"/></label></th>
-                                                    <td class="text-left">
-                                                        <form:select path="category_idx" id="category_idx" name="category_idx" >
-                                                            <c:forEach var="item" items="${categorylist}" varStatus="status">
-                                                                <option value="<c:out value='${item.category_idx}'/>"
-	                                                                <c:if test="${item.category_idx == categoryselect}">
-	                                                                    <c:out value="selected=selected" />
-	                                                                </c:if> >
-                                                                	<c:out value="${item.title}" />
-                                                                </option>
-                                                            </c:forEach>
-                                                        </form:select>
-                                                        <form:errors path="category_idx" />                                                        
-                                                    </td>
-                                                </tr>                                              
+                                            <tbody>                                        
                                                 <tr>
                                                     <th><label for="name"><spring:message code="label.file"/></label></th>
                                                     <td class="text-left">
@@ -60,22 +44,22 @@
                                                             <!-- 첨부파일목록 -->
                                                             <table summary="기본게시판 보여주고 있습니다." id="filelist">
                                                                 <caption><spring:message code="bbs.table.caption"/></caption>
-                                                                <colgroup>
-                                                                   <col width="5%" />
-                                                                    <col width="55%" />
+                                                               <colgroup>
+                                                                   	<!--<col width="5%" />-->
+                                                                    <col width="65%" />
                                                                     <col width="10%" />
                                                                     <col width="10%" />
                                                                     <col width="10%" />
-                                                                    <col width="10%" />
+                                                                    <!--<col width="10%" />-->
                                                                 </colgroup>
                                                                 <thead>
                                                                     <tr>
-                                                                        <th scope="col"><spring:message code="bbs.list.no"/></th>
+                                                                        <!--<th scope="col"><spring:message code="bbs.list.no"/></th>-->
                                                                         <th scope="col"><spring:message code="bbs.list.filename"/></th>
                                                                         <th scope="col"><spring:message code="bbs.list.filesize"/></th>
                                                                         <th scope="col"><spring:message code="bbs.list.filetype"/></th>
                                                                         <th scope="col"><spring:message code="bbs.list.regdate"/></th>
-                                                                        <th scope="col"><spring:message code="bbs.list.del"/></th>
+                                                                        <!-- <th scope="col"><spring:message code="bbs.list.del"/></th> -->
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -110,7 +94,7 @@
 										</nav>
 										<!--<c:import url="/WEB-INF/views/modules/common/common_btn.jsp"/>-->
                                         </fieldset>
-                                	</form:form>
+                                	</form>
                                 
                                 
                             </div>

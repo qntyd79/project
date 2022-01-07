@@ -9,7 +9,6 @@
 	<![CDATA[ 
 	select * from jhbbs_file where file_idx > 0 and del = 'N'
 	]]>
-		<include refid="category"></include>
 		<include refid="search"></include>
 	<![CDATA[ 
 	order by regdate desc limit #{pageStart}, ${perPageNum}
@@ -136,6 +135,11 @@
 	]]>
 		<include refid="search"></include>
 	</select>
+	
+	<!-- 글삭제 첨부파일 update처리 -->
+	<update id="attachDelete">
+		update jhbbs_file set del = 'Y' where file_idx = #{file_idx}
+	</update>
 	
 	<sql id="category">
 		<if test="category_idx > 0">

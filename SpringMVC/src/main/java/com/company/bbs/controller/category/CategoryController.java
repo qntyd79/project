@@ -145,13 +145,13 @@ public class CategoryController {
 
 	// 답글쓰기
 	@RequestMapping(value = "reply.do", method = RequestMethod.GET)
-	public ModelAndView Reply(@ModelAttribute Criteria criteria) throws Exception {
+	public ModelAndView Reply(@ModelAttribute Criteria criteria, @RequestParam int category_idx) throws Exception {
 
 		logger.info("답글쓰기");
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("categoryVO", service.getView(criteria.getCategory_idx()));
+		mav.addObject("categoryVO", service.getView(category_idx));
 		mav.addObject("categorylist", service.getCategoryList(criteria.getKind()));
 		mav.setViewName("modules/category/category_reply");
 

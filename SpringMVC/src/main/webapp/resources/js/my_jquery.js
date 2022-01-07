@@ -679,8 +679,43 @@ $(document).ready(function() {
             form.submit(); 
        }
     });	
-	
-	// 카테고리폼 
+    
+	// 파일첨부폼 
+	$("#attachForm").validate({
+    	ignore : '*:not([name])',
+        debug : false,
+        onfocusout : false,
+        // 규칙설정
+        rules: {   
+			answer: {
+				required : true,
+				numeric : true,
+				maxlength : 6
+			}          
+        },
+        messages: { //규칙체크 실패시 출력될 메시지 설정  
+			answer: {
+				required: "자동등록방지를 입력하세요.",
+				numeric: $.validator.format("자동등록방지는 숫자만 입력하세요.")
+			}
+        },		
+		// 에러메세지 표시 설정 : 주석처리하면 에러메세지 보여짐 
+        invalidHandler: function(form, validator) {
+            var errors = validator.numberOfInvalids();
+            if (errors) {
+            	// 팝업알림처리 
+                // alert(validator.errorList[0].message);
+				// 필드아래처리 
+                // validator.errorList[0].element.focus();
+            }
+        },
+        submitHandler: function(form) {   	
+           form.submit();
+           
+        }
+    });	
+    
+	// 카테고리등록폼 
 	$("#categoryForm").validate({
     	ignore : '*:not([name])',
         debug : false,

@@ -24,8 +24,7 @@ public class AttachDaoImpl implements AttachDao {
 	@Override
 	public List<AttachVO> getFileList(int board_idx) throws Exception {
 		return sqlSession.selectList("attach.getFileList", board_idx);
-	}
-		
+	}		
 	
 	// 글저장 
 	@Override
@@ -109,5 +108,13 @@ public class AttachDaoImpl implements AttachDao {
 	public int getBoard_idx(int file_idx) throws Exception {
 		return sqlSession.selectOne("attach.getBoard_idx", file_idx);
 	}
+	
+	// 첨부파일삭제
+	@Override
+	public void attachDelete(int file_idx) throws Exception {
+		sqlSession.selectOne("attach.attachDelete", file_idx);	
+	}
+	
+	
 
 }

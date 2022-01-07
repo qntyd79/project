@@ -55,4 +55,7 @@ public interface AttachDao {
 	// 게시물번호 가져오기
 	public int getBoard_idx(int file_idx) throws Exception;
 	
+	// 첨부파일삭제
+	public void attachDelete(int file_idx) throws Exception;
+	
 }

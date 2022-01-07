@@ -422,6 +422,10 @@ public class BoardController {
 		String saveFileName = file.getFile_hash_name();
         String originalFileName = file.getFile_name();
         
+        // thumb_삭제
+        saveFileName = saveFileName.replace("thumb_","");
+		logger.info("thumb_제거 : " + saveFileName);
+        
         File downloadFile = new File(uploadPath + saveFileName);
         
         byte fileByte[] = FileUtils.readFileToByteArray(downloadFile);

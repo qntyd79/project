@@ -21,7 +21,7 @@
                             
                                 <h2><spring:message code="bbs.title.view"/></h2>
                                 <form name="readForm" method="post" enctype="multipart/form-data">
-                                    <input type="hidden" name="board_idx" value="<c:out value="${categoryVO.board_idx}" />" >
+                                    <input type="hidden" name="category_idx" value="<c:out value="${categoryVO.category_idx}" />" >
                                     <input type="hidden" name="page" value="<c:out value="${criteria.page}"/>" >
                                     <input type="hidden" name="perPageNum" value="<c:out value="${criteria.perPageNum}"/>" >
                                     <input type="hidden" name="searchField" value="<c:out value="${criteria.searchField}"/>" >
@@ -87,9 +87,9 @@
                                         <nav class="btn-group">
 											<ul>												
 												<li><input type="button" value="<spring:message code="button.list"/>" onClick="location.href='list.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&kind=${criteria.kind}'" /></li>
-										        <li><input type="button" value="<spring:message code="button.update"/>" onClick="location.href='edit.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&category_idx=<c:out value="${categoryVO.category_idx}" />&board_idx=<c:out value="${categoryVO.board_idx}" />'" /></li>
-										        <li><input type="button" value="<spring:message code="button.reply"/>" onClick="location.href='reply.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&board_idx=<c:out value="${categoryVO.board_idx}" />'" /></li>
-										        <li><input type="button" value="<spring:message code="button.delete"/>" onClick="location.href='delete.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&board_idx=<c:out value="${categoryVO.board_idx}" />'" /></li>
+										        <li><input type="button" value="<spring:message code="button.edit"/>" onClick="location.href='edit.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&category_idx=<c:out value="${categoryVO.category_idx}" />'" /></li>
+										        <li><input type="button" value="<spring:message code="button.reply"/>" onClick="location.href='reply.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&category_idx=<c:out value="${categoryVO.category_idx}" />'" /></li>
+										        <li><input type="button" value="<spring:message code="button.delete"/>" onClick="location.href='delete.do?page=${criteria.page}&perPageNum=${criteria.perPageNum}&category_idx=<c:out value="${categoryVO.category_idx}" />'" /></li>
 											</ul>
 										</nav>                                       
                                         <!--<c:import url="/WEB-INF/views/modules/common/common_btn.jsp"/> -->                                       

@@ -52,4 +52,7 @@ public interface AttachService {
 	// 첨부파일갯수
 	public int getFileCount(Criteria criteria) throws Exception;
 	
+	// 첨부파일삭제
+	public void attachDelete(int file_idx) throws Exception;
+	
 }

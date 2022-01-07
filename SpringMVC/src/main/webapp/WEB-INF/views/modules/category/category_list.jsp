@@ -64,7 +64,8 @@
 												<col width="5%" />
 												</c:if>
 												<col width="5%" />
-												<col width="50%" />
+												<col width="10%" />
+												<col width="40%" />
 												<col width="10%" />
 												<col width="10%" />
 												<c:if test="${sessionScope.isAdmin != null}">	
@@ -78,7 +79,8 @@
                                                     <th scope="col"><input type="checkbox" class="allCheck" name="allCheck" /></th>
                                                     </c:if>
                                                     <th scope="col"><spring:message code="bbs.list.no"/></th>
-                                                    <th scope="col"><spring:message code="bbs.list.title"/></th>
+                                                    <th scope="col"><spring:message code="bbs.list.kind"/></th>
+                                                    <th scope="col"><spring:message code="bbs.list.kindtitle"/></th>
                                                     <th scope="col"><spring:message code="bbs.list.name"/></th>
                                                     <th scope="col"><spring:message code="bbs.list.regdate"/></th>  
                                                     <c:if test="${sessionScope.isAdmin != null}">	                                   
@@ -100,7 +102,14 @@
                                                             	<c:if test="${sessionScope.isAdmin != null}">	
                                                                 <td><label><input type="checkbox" name="check" /></label></td>
                                                                 </c:if>
-                                                                <td><strong>${pageMaker.curNum-status.index}</strong></td>                                                                
+                                                                <td><strong>${pageMaker.curNum-status.index}</strong></td>
+                                                                <td>
+	                                                                <c:choose>
+		                                                                <c:when test="${row.kind == 1}">게시판서비스 </c:when>
+		                                                                <c:when test="${row.kind == 2}">회원서비스 </c:when>
+		                                                                <c:when test="${row.kind == 3}">메일서비스 </c:when>
+		                                                            </c:choose>
+                                                                </td>                                                                
                                                                 <td class="text-left">
                                                                     <c:if test="${row.depth > 0}">
                                                                         <c:forEach var="i" begin="1" end="${row.depth}">
@@ -121,7 +130,7 @@
 	                                                                <fmt:formatDate value="${dateString}" pattern="yyyy-MM-dd"/>
 	                                                            </td> 
 	                                                            <c:if test="${sessionScope.isAdmin != null}">	                                                               
-                                                                <td><a href="modify.do${pageMaker.makeSearch(pageMaker.criteria.page)}&category_idx=<c:out value="${row.category_idx}"/>">수정</a></td>
+                                                                <td><a href="edit.do${pageMaker.makeSearch(pageMaker.criteria.page)}&category_idx=<c:out value="${row.category_idx}"/>">수정</a></td>
                                                                 <td><a href="delete.do${pageMaker.makeSearch(pageMaker.criteria.page)}&category_idx=<c:out value="${row.category_idx}"/>">삭제</a></td>
                                                                 </c:if>
                                                             </tr>
@@ -135,15 +144,13 @@
                                                 <c:if test="${pageMaker.prev}">
                                                     <li><a href="list.do${pageMaker.makeSearch(1)}"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
                                                     <li><a href="list.do${pageMaker.makeSearch(pageMaker.startPage - 1)}"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
-                                                    <%-- <li><a href="${pageMaker.startPage - 1}"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li> --%>
-                                                </c:if>
+                                                   </c:if>
                                                 <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
                                                     <li>
                                                         <a href="list.do${pageMaker.makeSearch(idx)}" <c:out value="${pageMaker.criteria.page == idx ? 'class=active' : ' '}" /> >${idx}</a>
                                                     </li>
                                                 </c:forEach>
                                                 <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-                                                    <%-- <li><a href="${pageMaker.endPage + 1}"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li> --%>
                                                     <li><a href="list.do${pageMaker.makeSearch(pageMaker.endPage + 1)}"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
                                                     <li><a href="list.do${pageMaker.makeSearch(pageMaker.totalPage)}"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
                                                 </c:if>

@@ -22,17 +22,17 @@
                             <div class="col-md-12">
                             
                             
-                                <h2><spring:message code="bbs.title.write"/></h2>
-                                <form:form modelAttribute="categoryVO" method="post" id="categoryForm" name="categoryForm" enctype="multipart/form-data" action="insert.do">
-                                	<input type="hidden" name="category_idx" value="<c:out value=" ${category.category_idx}"/>" >
-						            <input type="hidden" name="idx" value="<c:out value=" ${category.idx}"/>" >
+                                <h2><spring:message code="bbs.title.reply"/></h2>
+                                <form method="post" id="categoryForm" name="categoryForm" enctype="multipart/form-data" action="insert.do">
+                                	<input type="hidden" name="category_idx" value="<c:out value=" ${categoryVO.category_idx}"/>" >
 						            <input type="hidden" name="page" value="<c:out value="${criteria.page}"/>" >
 						            <input type="hidden" name="perPageNum" value="<c:out value="${criteria.perPageNum}"/>" >
 						            <input type="hidden" name="searchField" value="<c:out value="${criteria.searchField}"/>" >
 						            <input type="hidden" name="keyWord" value="<c:out value="${criteria.keyWord}"/>" >
-						            <input type="hidden" name="parent" value="<c:out value=" ${category.parent}"/>" >
-						            <input type="hidden" name="depth" value="<c:out value=" ${category.depth}"/>" >
-						            <input type="hidden" name="sortno" value="<c:out value=" ${category.sortno}"/>" >
+						            <input type="hidden" name="parent" value="<c:out value=" ${categoryVO.parent}"/>" >
+						            <input type="hidden" name="depth" value="<c:out value=" ${categoryVO.depth}"/>" >
+						            <input type="hidden" name="sortno" value="<c:out value=" ${categoryVO.sortno}"/>" >
+						            
                                     <fieldset>
                                         <legend><spring:message code="bbs.table.legend"/></legend>
                                         <table summary="<spring:message code="bbs.table.summary.write"/>" class="board_detail">
@@ -44,27 +44,28 @@
                                             <tbody>                                                
                                                 <tr>
                                                     <th><label for="name"><spring:message code="label.name"/></label></th>
-                                                    <td class="text-left"><form:input path="name" type="text"  placeholder="Name" class="wfull"/> <form:errors path="name" /> </td>
+                                                    <td class="text-left"><input name="name" type="text"  placeholder="Name" class="wfull"/> <form:errors path="name" /> </td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="pass"><spring:message code="label.pass"/></label></th>
-                                                    <td class="text-left"><form:input path="pass" type="password" placeholder="Password" class="wfull"/> <form:errors path="pass" /> </td>
+                                                    <td class="text-left"><input name="pass" type="password" placeholder="Password" class="wfull"/> <form:errors path="pass" /> </td>
                                                 </tr>                                               
                                                	<tr>
 						                            <th><label for="kind"> <spring:message code="label.kind"/></label></th>
 						                            <td class="text-left">
-						                            	<form:select path="kind" id="kind" name="kind">
-						                            		<option value='0'>분류를 선택해주세요 </option>
-						                                	<option value='1'>게시판에 분류 추가 </option>
-						                                	<option value="2">회원가입에 분류 추가 </option>
-						                           		</form:select>
+						                            	<select name="kind" id="kind" name="kind">
+						                            		<option value=''>분류를 선택해주세요</option>
+						                                	<option value='1'>게시판서비스에 분류추가</option>
+						                                	<option value="2">회원서비스에 분류추가</option>
+						                                	<option value="3">메일서비스에 분류추가</option>
+						                           		</select>
 						                           		<form:errors path="kind" />
 						                        	</td>
 						                        </tr>
                                                 <tr>
                                                     <th><label for="categorytitle"><spring:message code="label.categorytitle"/></label></th>
                                                     <td class="text-left">
-                                                    	<form:input path="title" type="text" placeholder="CategoryName" class="wfull"/> <form:errors path="title" />
+                                                    	<input name="title" type="text" placeholder="CategoryName" class="wfull"/> <form:errors path="title" />
                                                     </td>
                                                 </tr>                                                
                                                 <tr>
@@ -87,7 +88,7 @@
 										</nav>
 										<!--<c:import url="/WEB-INF/views/modules/common/common_btn.jsp"/>-->
                                         </fieldset>
-                                	</form:form>
+                                	</form>
                                 
                                 
                             </div>

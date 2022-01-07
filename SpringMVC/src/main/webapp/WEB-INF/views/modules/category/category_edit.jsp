@@ -53,10 +53,10 @@
 						                            <th><label for="kind"> <spring:message code="label.kind"/></label></th>
 						                            <td class="text-left">
 						                            	<select id="kind" name="kind">
-						                            		<option value='' <c:if test="${categoryVO.kind eq 0}">selected</c:if>>선택된 분류가 없습니다.</option>
-						                                	<option value='1' <c:if test="${categoryVO.kind eq 1}">selected</c:if>>게시판에 분류 추가 </option>
-						                                	<option value="2" <c:if test="${categoryVO.kind eq 2}">selected</c:if>>회원가입에 분류 추가 </option>
-						                                	<option value="3" <c:if test="${categoryVO.kind eq 3}">selected</c:if>>메일링서비스에 분류 추가 </option>
+						                            		<option value='' <c:if test="${categoryVO.kind eq 0}">selected</c:if>>선택된 분류가 없습니다</option>
+						                                	<option value='1' <c:if test="${categoryVO.kind eq 1}">selected</c:if>>게시판서비스에 분류추가</option>
+						                                	<option value="2" <c:if test="${categoryVO.kind eq 2}">selected</c:if>>회원서비스에 분류추가</option>
+						                                	<option value="3" <c:if test="${categoryVO.kind eq 3}">selected</c:if>>메일서비스에 분류추가</option>
 						                           		</select>						                           		
                                                         <form:errors path="kind" />						                           	
 						                        	</td>
@@ -82,7 +82,7 @@
                                         <nav class="btn-group">
 											<ul>
 												<li><input type="button" value="<spring:message code="button.list"/>" onClick="location.href='list.do?kind=1'"/></li>
-												<li><input type="button" value="<spring:message code="button.create"/>" onclick="$(this.form).submit()" /></li>											
+												<li><input type="button" value="<spring:message code="button.edit"/>" onclick="$(this.form).submit()" /></li>											
 											</ul>
 										</nav>
 										<!--<c:import url="/WEB-INF/views/modules/common/common_btn.jsp"/>-->

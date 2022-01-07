@@ -20,42 +20,7 @@
 							<div class="col-md-12">
 
 
-								<h2><spring:message code="bbs.title.list" /></h2>
-								<form name="searchForm" id="searchForm" method="post" enctype="multipart/form-data" action="list.do">
-									<div class="search-form" style="float: right; margin-bottom: 10px;">
-										<fieldset>
-											<select id="searchField" name="searchField"	title="<spring:message code="select.searchCondition"/>">
-												<option value="n" <c:out value="${criteria.searchField == null ? 'selected' : ''}" />>선택해주세요</option>
-												<option value="t" <c:out value="${criteria.searchField eq 't' ? 'selected' : ''}" />>제목</option>
-												<option value="c" <c:out value="${criteria.searchField eq 'c' ? 'selected' : ''}" />>내용</option>
-												<option value="w" <c:out value="${criteria.searchField eq 'w' ? 'selected' : ''}" />>작성자</option>
-												<option value="tc" <c:out value="${criteria.searchField eq 'tc' ? 'selected' : ''}" />>제목+내용</option>
-												<option value="cw" <c:out value="${criteria.searchField eq 'cw' ? 'selected' : ''}" />>내용+작성자</option>
-												<option value="tcw" <c:out value="${criteria.searchField eq 'tcw' ? 'selected' : ''}" />>제목+내용+작성자</option>
-											</select>
-											<input type="search" id="keyWord" name="keyWord" value="<c:out value="${criteria.keyWord}"/>" title="<spring:message code="button.search"/>" />
-											<input type="button" value="<spring:message code="button.search"/>" onclick="$(this.form).submit();" />
-											<input type="button" value="<spring:message code="button.init"/>" onClick="window.location='list.do'" />
-										</fieldset>
-									</div>
-								</form>
-								<form name="categoryForm" id="categoryForm" method="post" enctype="multipart/form-data" action="list.do">
-									<div class="category-form" style="float: right; margin-right: 5px; margin-bottom: 10px;">
-										<fieldset>
-											<select name="category_idx" id="category_idx" form="categoryForm" onChange="$(this.form).submit();">
-												<option value="0" <c:if test="${categoryselect == 0}"><c:out value="selected=selected" /></c:if>>전체목록</option>
-												<c:forEach var="item" items="${categorylist}" varStatus="status">
-													<option value="<c:out value=" ${item.category_idx}" />"
-														<c:if test="${item.category_idx == categoryselect}">
-                                                        	<c:out value="selected=selected" />
-                                                    	</c:if>>
-															<c:out value="${item.title}" />
-													</option>
-												</c:forEach>
-											</select>
-										</fieldset>
-									</div>
-								</form>
+								<h2><spring:message code="bbs.title.list" /></h2>								
 								<div class="articles">전체글 : <span>${pageMaker.totalCount}</span> 개 | 현재페이지 : <span>${pageMaker.criteria.page}</span> | 총페이지 : <span>${pageMaker.totalPage}</span></div>
 								<form name="listForm" method="post"	enctype="multipart/form-data" action="list.do">
 									<fieldset>
@@ -110,7 +75,7 @@
 																<c:if test="${sessionScope.isAdmin != null}">		
 																<td><label><input type="checkbox" name="check" /></label></td>
 																</c:if>
-																<td><strong>${status.index+1}</strong></td>
+																<td><strong>${pageMaker.curNum-status.index}</strong></td>
 																<td class="text-left">${row.file_name}</td>
 																<td><fmt:formatNumber value="${row.file_size}" type="number" />KB</td>
 																<td>${row.file_ext}</td>
@@ -118,10 +83,10 @@
 																	<fmt:parseDate var="dateString"	value="${row.regdate}" pattern="yyyy-MM-dd" />
 																 	<fmt:formatDate	value="${dateString}" pattern="yyyy-MM-dd" />
 																</td>
-																<td>클릭</td>
-																<c:if test="${sessionScope.isAdmin != null}">		
-																<td><a href="delete.do?filename=<c:out value="${row.file_hash_name}"/>&file_idx=<c:out value="${row.file_idx}"/>">삭제</a></td>
-																</c:if>
+																<td><a href="fileDownload.do?file_idx=<c:out value="${row.file_idx}"/>">다운로드</a></td>
+																		
+																<td><a href="fileDelete.do?file_idx=<c:out value="${row.file_idx}"/>">삭제</a></td>
+																
 															</tr>
 														</c:forEach>
 													</c:otherwise>

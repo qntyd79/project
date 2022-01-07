@@ -83,9 +83,6 @@ public class AttachServiceImpl implements AttachService {
 		//attachVO.setPass(pwdBycrypt);
 		
 		dao.insert(attachVO);
-		
-		// 게시물 파일 수량 업데이트 		
-		bdao.updateAttachCnt(attachVO.getBoard_idx(), 1);
 		//}
 	}
 	
@@ -163,6 +160,12 @@ public class AttachServiceImpl implements AttachService {
 	@Override
 	public int getFileCount(Criteria criteria) throws Exception {
 		return dao.getFileCount(criteria);
+	}
+	
+	// 첨부파일삭제
+	@Override
+	public void attachDelete(int file_idx) throws Exception {
+		dao.attachDelete(file_idx);		
 	}
 	
 

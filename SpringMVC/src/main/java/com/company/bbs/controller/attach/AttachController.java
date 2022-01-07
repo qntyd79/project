@@ -1,5 +1,7 @@
 package com.company.bbs.controller.attach;
 
+import java.io.File;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -9,6 +11,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,9 +86,6 @@ public class AttachController {
 		pageMaker.setTotalCount(service.getCount(criteria));
 
 		model.addAttribute("list", service.getList(criteria));
-		model.addAttribute("categoryname", service.getCategory());
-		model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
-		model.addAttribute("categoryselect", criteria.getCategory_idx());
 		model.addAttribute("pageMaker", pageMaker);
 
 		return "modules/attach/attach_list";
@@ -167,22 +167,9 @@ public class AttachController {
 	// 글저장
 	@RequestMapping(value = "insert.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public String Insert(Model model, @ModelAttribute Criteria criteria, @ModelAttribute AttachVO attachVO,
-			BindingResult bindingResult, HttpServletRequest request, @RequestParam("attach") MultipartFile[] attach)
-			throws Exception {
+			HttpServletRequest request, @RequestParam("attach") MultipartFile[] attach) throws Exception {
 
 		logger.info("글저장처리");
-
-		// 서버측 유효성검증
-		beanValidator.validate(attachVO, bindingResult);
-
-		// 서버측 유효성검증 후 에러가 발생할 경우 등록폼 출력
-		if (bindingResult.hasErrors()) {
-			model.addAttribute("attachVO", attachVO);
-			model.addAttribute("categoryname", service.getCategory());
-			model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
-
-			return "modules/attach/attach_write";
-		}
 
 		// 자동등록방지 검증
 		String getAnswer = (String) request.getSession().getAttribute("captcha");
@@ -206,8 +193,13 @@ public class AttachController {
 					logger.info("-------------- file end --------------\n");
 
 					// UploadFileUtils 사용하여 저장
-					String savedName = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(),
-							file.getBytes());
+					String savedName = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(),file.getBytes());
+					
+					// thumb_삭제
+					savedName = savedName.replace("thumb_", "");
+					logger.info("thumb_제거 : " + savedName);
+					
+					// 이미지 썸네일경우 thumb_삭제후 저장
 					attachVO.setFile_name(file.getOriginalFilename());
 					attachVO.setFile_hash_name(savedName);
 					attachVO.setFile_size(file.getSize());
@@ -303,11 +295,11 @@ public class AttachController {
 			model.addAttribute("attchVO", attachVO);
 			return "modules/attach/attach_edit";
 		}
-		
+
 		BoardVO boardVO = new BoardVO();
-		
-		String rawPassword = boardVO.getPass();		
-		//String rawPassword = attachVO.getPass();
+
+		String rawPassword = boardVO.getPass();
+		// String rawPassword = attachVO.getPass();
 		String encodedPassword = service.getPassword(attachVO.getFile_idx());
 
 		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin!@1234")) {
@@ -340,11 +332,11 @@ public class AttachController {
 			@RequestParam String pass, BindingResult bindingResult) throws Exception {
 
 		logger.info("글삭제처리");
-		
+
 		BoardVO boardVO = new BoardVO();
-		
+
 		String rawPassword = boardVO.getPass();
-		//String rawPassword = attachVO.getPass();
+		// String rawPassword = attachVO.getPass();
 		String encodedPassword = service.getPassword(attachVO.getFile_idx());
 
 		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin!@1234")) {
@@ -358,6 +350,57 @@ public class AttachController {
 		}
 
 		return "/modules/common/common_message";
+	}
+
+	// 첨부파일 삭제처리
+	@RequestMapping(value = "fileDelete.do", method = RequestMethod.GET)
+	public String attachDelete(Model model, @ModelAttribute Criteria criteria, @ModelAttribute AttachVO attachVO,
+			@RequestParam int file_idx) throws Exception {
+
+		logger.info("첨부파일삭제처리");
+		
+		AttachVO file = service.getView(file_idx);
+		String filename = file.getFile_hash_name();
+		UploadFileUtils.removeFile(uploadPath, filename);
+
+		service.attachDelete(attachVO.getFile_idx());
+
+		model.addAttribute("msg", "DeleteSuccess");
+		model.addAttribute("url", "list.do");
+
+		return "/modules/common/common_message";
+	}
+
+	// 첨부파일 다운로드
+	@RequestMapping(value = "fileDownload.do", method = { RequestMethod.POST, RequestMethod.GET })
+	public void fileDownload(@ModelAttribute AttachVO attachVO, @RequestParam int file_idx, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		logger.info("파일다운로드");
+
+		AttachVO file = service.getView(file_idx);
+
+		String saveFileName = file.getFile_hash_name();
+		String originalFileName = file.getFile_name();
+
+		// thumb_삭제
+		saveFileName = saveFileName.replace("thumb_", "");
+		logger.info("thumb_제거 : " + saveFileName);
+
+		File downloadFile = new File(uploadPath + saveFileName);
+
+		byte fileByte[] = FileUtils.readFileToByteArray(downloadFile);
+
+		response.setContentType("application/octet-stream");
+		response.setContentLength(fileByte.length);
+
+		response.setHeader("Content-Disposition",
+				"attachment; fileName=\"" + URLEncoder.encode(originalFileName, "UTF-8") + "\";");
+		response.setHeader("Content-Transfer-Encoding", "binary");
+
+		response.getOutputStream().write(fileByte);
+		response.getOutputStream().flush();
+		response.getOutputStream().close();
 	}
 
 	@RequestMapping(value = "captchaImg.do", method = RequestMethod.GET)

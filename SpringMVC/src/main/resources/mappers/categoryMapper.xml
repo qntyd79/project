@@ -5,15 +5,14 @@
 <mapper namespace="category">
 
 	<!-- 글목록 -->
-	<select id="getList"
-		resultType="com.company.bbs.vo.category.CategoryVO">
+	<select id="getList" resultType="com.company.bbs.vo.category.CategoryVO">
 	<![CDATA[ 
 	select * from jhbbs_category where category_idx > 0 and del = 'N'
 	]]>
 		<include refid="category"></include>
 		<include refid="search"></include>
 	<![CDATA[ 
-	order by parent desc, sortno asc limit #{pageStart}, ${perPageNum}
+	order by kind desc, parent desc, sortno asc limit #{pageStart}, ${perPageNum}
 	]]>
 	</select>
 	

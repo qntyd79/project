@@ -147,7 +147,8 @@
                                                     <td colspan="10" class="text-left">
                                                         <textarea name="content" id="content" placeholder="Content"> </textarea><form:errors path="content"/>
                                                         <script>
-                                                            CKEDITOR.replace('content');                    
+                                                            CKEDITOR.replace('content',{"removePlugins": "exportpdf"}); 
+                                                            CKEDITOR.instances.content.setData('<p>This is the editor data.</p>');
                                                         </script>
                                                         <!--<label for="content"><spring:message code="label.content"/></label>-->   
                                                      </td>
