@@ -4,40 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<script type="text/javaScript" language="javascript" defer="defer">
-       
-	/* 수정 화면 function */
-    function fn_egov_select(id)
-	{
-       	document.listForm.selectedId.value = id;
-       	document.listForm.action = "<c:url value='/updateSampleView.do'/>";
-       	document.listForm.submit();
-    }
-        
-    /* 등록 화면 function */
-    function fn_egov_addView()
-    {
-     	document.listForm.action = "<c:url value='insertPermssionUser.do'/>";
-       	document.listForm.submit();
-    }
-        
-    /* 목록 화면 function */
-    function fn_egov_selectList()
-    {
-      	document.listForm.action = "<c:url value='/egovSampleList.do'/>";
-       	document.listForm.submit();
-    }
-        
-    /* pagination 페이지 링크 function */
-    function fn_egov_link_page(pageNo)
-    {
-      	document.listForm.pageIndex.value = pageNo;
-       	document.listForm.action = "<c:url value='/egovSampleList.do'/>";
-      	document.listForm.submit();
-    }
+<%@ taglib prefix="validator" uri="http://www.springmodules.org/tags/commons-validator" %>
+<validator:javascript formName="emailVO" staticJavascript="false" xhtml="true" cdata="false"/>
 
-</script>
 <c:import url="/WEB-INF/views/include/header.jsp"/>
+
 <div id="container-wrap">
     <div class="clearfix">
         <div class="content-box">
@@ -83,8 +54,9 @@
                                                     <td colspan="10" class="text-left">
                                                         <textarea name="content" id="editor" placeholder="Content">내용을 입력해주세요</textarea>
                                                         <script>
-                                                            CKEDITOR.replace('content');                    
-                                                        </script> 
+                                                            CKEDITOR.replace('content',{"removePlugins": "exportpdf"}); 
+                                                            CKEDITOR.instances.content.setData('<p>This is the editor data.</p>');
+                                                        </script>
                                                     </td>
                                                 </tr>
                                                 <tr>
