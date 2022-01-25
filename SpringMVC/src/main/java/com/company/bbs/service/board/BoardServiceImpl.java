@@ -175,7 +175,6 @@ public class BoardServiceImpl implements BoardService {
 	@Transactional(isolation = Isolation.READ_COMMITTED)
 	@Override
 	public BoardVO getView(int board_idx) throws Exception {
-		dao.increaseCnt(board_idx);
 		return dao.getView(board_idx);			
 	}
 
@@ -218,7 +217,7 @@ public class BoardServiceImpl implements BoardService {
 	// 글조회수
 	@Override
 	public void increaseCnt(int board_idx) throws Exception {
-		dao.increaseCnt(board_idx);
+		dao.increaseCnt(board_idx);			
 	}
 
 	// 글이전값

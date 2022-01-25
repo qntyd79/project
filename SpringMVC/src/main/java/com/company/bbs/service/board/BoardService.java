@@ -2,6 +2,10 @@ package com.company.bbs.service.board;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.company.bbs.utill.Criteria;
 import com.company.bbs.vo.board.BoardVO;
 
@@ -75,4 +79,5 @@ public interface BoardService {
 	
 	// 첨부파일목록삭제
 	public List<Object> attachDeleteList(int board_idx) throws Exception;
+
 }

@@ -336,27 +336,28 @@
                                         <input id="visible2" class="visible" type="checkbox" /><span> VworldMap</span>
                                         <fieldset>
                                             <input class="opacity" type="range" min="0" max="1" step="0.01" />
-                                            <!-- <select id="layerSelect">
-                                                        <option value="RoadOnDemand" selected>Road (dynamic)</option>
-                                                        <option value="Road"  >Road (static)</option>                                               
-                                                        <option value="Aerial">Aerial</option>
-                                                        <option value="AerialWithLabels">Aerial with labels</option>                                               
-                                                    </select> -->
+                                            <select id="vworldlayerSelect">
+                                            	<option value="Base" selected>Base</option>
+                                                <option value="Satellite">Satellite</option>                                               
+                                                <option value="Hybrid">Hybrid</option>
+                                                <option value="gray">gray</option> 
+                                                <option value="midnight">midnight</option>                                               
+                                            </select>
                                         </fieldset>
                                     </li>
                                     <li id="layer3">
                                         <input id="visible3" class="visible" type="checkbox" /><span> BaseMapGroup</span>
                                         <fieldset>
                                             <input class="opacity" type="range" min="0" max="1" step="0.01" />
-                                            <!-- <select id="layerSelect">
+                                             <select id="layerSelect1">
                                                         <option value="RoadOnDemand" selected>Road (dynamic)</option>
                                                         <option value="Road"  >Road (static)</option>                                               
                                                         <option value="Aerial">Aerial</option>
                                                         <option value="AerialWithLabels">Aerial with labels</option>                                               
-                                                    </select> -->
+                                                    </select>
                                         </fieldset>
                                     </li>
-                                    <!-- <li id="layer4">
+                                    <li id="layer4" style="height:200px; overflow:scroll;">
                                             <input id="visible4" class="visible"
                                                 type="checkbox" /><span> 주제도</span>
                                                 <fieldset>
@@ -497,7 +498,8 @@
                                                             </fieldset>
                                                         </li>
                                                     </ul>
-                                                </fieldset></li> -->
+                                                </fieldset></li>
+                                                
                                     <li id="layer4"><input id="visible4" class="visible" type="checkbox" /><span> TileGrid</span>
                                         <fieldset>
                                             <input class="opacity" type="range" min="0" max="1" step="0.01" />

@@ -48,7 +48,7 @@
                                                 <tr>
                                                     <td colspan="10" class="text-left">
                                                         <textarea name="content" id="content" placeholder="Content" ><c:out value="${commentVO.content}"/></textarea><form:errors path="content"/>
-                                                        <script>
+                                                       <script>
                                                             CKEDITOR.replace('content',{
                                                             	height:150,
                                                             	toolbarGroups : [
@@ -67,8 +67,9 @@
                                                             		{ name: 'about', groups: [ 'about' ] }
                                                             	],
                                                             	
-                                                            	removeButtons : 'Source,Save,NewPage,ExportPdf,Preview,Print,Templates,Find,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Replace,PasteText,PasteFromWord,Image,Table,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe,CopyFormatting,RemoveFormat,Blockquote,CreateDiv,JustifyLeft,JustifyCenter,JustifyRight,JustifyBlock,BidiLtr,BidiRtl,Language,Styles,TextColor,BGColor,ShowBlocks,Maximize,Format,Font,FontSize'
-                                                            });
+                                                            	removeButtons : 'Source,Save,NewPage,ExportPdf,Preview,Print,Templates,Find,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Replace,PasteText,PasteFromWord,Image,Table,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe,CopyFormatting,RemoveFormat,Blockquote,CreateDiv,JustifyLeft,JustifyCenter,JustifyRight,JustifyBlock,BidiLtr,BidiRtl,Language,Styles,TextColor,BGColor,ShowBlocks,Maximize,Format,Font,FontSize',
+                                                            	removePlugins : "exportpdf"
+                                                            		});
                                                         </script>
                                                      </td>
                                                 </tr>                                               

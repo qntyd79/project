@@ -55,7 +55,7 @@
                                                         <textarea name="content" id="editor" placeholder="Content">내용을 입력해주세요</textarea>
                                                         <script>
                                                             CKEDITOR.replace('content',{"removePlugins": "exportpdf"}); 
-                                                            CKEDITOR.instances.content.setData('<p>This is the editor data.</p>');
+                                                            CKEDITOR.instances.content.setData('This is the editor data.');
                                                         </script>
                                                     </td>
                                                 </tr>

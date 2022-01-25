@@ -267,7 +267,7 @@ public class CommentController {
 			model.addAttribute("url", "list.do");
 		} else {
 			model.addAttribute("msg", "PassFailed");
-			model.addAttribute("url", "modify.do?comment_idx=" + commentVO.getComment_idx());
+			model.addAttribute("url", "edit.do?comment_idx=" + commentVO.getComment_idx());
 		}
 
 		return "/modules/common/common_message";

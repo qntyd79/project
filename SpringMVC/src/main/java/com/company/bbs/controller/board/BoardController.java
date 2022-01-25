@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -249,17 +250,56 @@ public class BoardController {
 
 	// 글보기
 	@RequestMapping(value = "read.do", method = RequestMethod.GET)
-	public String Read(Model model, @ModelAttribute Criteria criteria, @RequestParam int board_idx) throws Exception {
+	public String Read(Model model, @ModelAttribute Criteria criteria, @RequestParam int board_idx, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		logger.info("글보기");
 		
-		model.addAttribute("boardVO", service.getView(board_idx));
+		// 클라이언트가 보낸 쿠키 읽기 (HttpServletRequest에서 읽기)
+		// 쿠키가 없으면 null이 반환됨
+		Cookie[] cookies = request.getCookies();
+		
+		// 비교하기 위해 새로운 쿠키
+        Cookie viewCookie = null;
+ 
+        // 쿠키가 있을 경우 
+        if (cookies != null && cookies.length > 0) {
+            for (int i = 0; i < cookies.length; i++) {
+                // Cookie의 name이 cookie + reviewNo와 일치하는 쿠키를 viewCookie에 넣어줌 
+                if (cookies[i].getName().equals("cookie" + board_idx)) { 
+                    System.out.println("처음 쿠키가 생성한 뒤 들어옴.");
+                    viewCookie = cookies[i];
+                }
+            }
+        }
+        
+        if (viewCookie == null) {    
+            System.out.println("cookie 없음");
+            
+            // 쿠키 생성(이름, 값)
+            Cookie newCookie = new Cookie("cookie" + board_idx, "|" + board_idx + "|"); 
+            
+            // 쿠키 시간 설정(쿠키 유지시간 24시간)
+            newCookie.setMaxAge(60 * 60 * 24);
+            
+            // 쿠키 추가
+            response.addCookie(newCookie);
+            
+            // 쿠키를 추가 시키고 조회수 증가시
+            service.increaseCnt(board_idx);   
+            
+        } else {
+        	// 쿠키 값 받아옴.
+            String value = viewCookie.getValue();
+            System.out.println("cookie 값 : " + value);
+        }
+                
+        model.addAttribute("boardVO", service.getView(board_idx));
 		model.addAttribute("prenum", service.getPrevNum(board_idx));
 		model.addAttribute("nextnum", service.getNextNum(board_idx));
 		model.addAttribute("categoryname", service.getCategory());
 		model.addAttribute("categorylist", service.getCategoryList());
 		model.addAttribute("filelist", service.getFileList(board_idx));
-
+		
 		return "modules/board/board_view";
 	}
 

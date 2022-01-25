@@ -23,11 +23,12 @@ $(document).ready(function() {
     	zIndex : 1    	
     });
         
-    // BingMaps 설정    
+    // BingMaps 설정   
+    var keyValue = 'AoTWblM8Bf48thwSrZ6Y4Bib9qkwA1ikfYBbcMadQdFNI-i1YI9ITnbc4Coz3_NO'
     var Road = new ol.layer.Tile({
     	visible: false,
         source: new ol.source.BingMaps({
-            key: 'AoTWblM8Bf48thwSrZ6Y4Bib9qkwA1ikfYBbcMadQdFNI-i1YI9ITnbc4Coz3_NO',
+            key: keyValue,
             imagerySet: 'Road' 
         }),
         zIndex : 2
@@ -36,7 +37,7 @@ $(document).ready(function() {
     var RoadOnDemand = new ol.layer.Tile({
     	visible: false,
         source: new ol.source.BingMaps({
-            key: 'AoTWblM8Bf48thwSrZ6Y4Bib9qkwA1ikfYBbcMadQdFNI-i1YI9ITnbc4Coz3_NO',
+            key: keyValue,
             imagerySet: 'RoadOnDemand' 
         }),
         zIndex : 2
@@ -45,7 +46,7 @@ $(document).ready(function() {
     var Aerial = new ol.layer.Tile({
     	visible: false,
         source: new ol.source.BingMaps({
-            key: 'AoTWblM8Bf48thwSrZ6Y4Bib9qkwA1ikfYBbcMadQdFNI-i1YI9ITnbc4Coz3_NO',
+            key: keyValue,
             imagerySet: 'Aerial' 
         }),
         zIndex : 2
@@ -54,17 +55,39 @@ $(document).ready(function() {
     var AerialWithLabels = new ol.layer.Tile({
     	visible: false,
         source: new ol.source.BingMaps({
-            key: 'AoTWblM8Bf48thwSrZ6Y4Bib9qkwA1ikfYBbcMadQdFNI-i1YI9ITnbc4Coz3_NO',
+            key: keyValue,
             imagerySet: 'AerialWithLabels' 
         }),
         zIndex : 2
     });    
-   
-    // VWORLD 설정
-    var VwordMap = new ol.layer.Tile({
+    
+    // BingMaps Selectbox 설정
+    var baseStyles = ['Road', 'RoadOnDemand', 'Aerial', 'AerialWithLabels'];
+    var BingMap=[];
+    for (var i = 0, ii = baseStyles.length; i < ii; ++i) {
+    	BingMap.push(new ol.layer.Tile({
+    		visible: false,
+            preload: Infinity,
+            source: new ol.source.BingMaps({
+                key: keyValue,
+                imagerySet : baseStyles[i]   
+            }),
+            zIndex : 2
+        }));
+    }
+       
+    var BingMapGroup = new ol.layer.Group({
+    	visible: false,
+        layers: BingMap
+    });
+    
+
+    // VWORLD Base 설정 WMTS API 사용
+    var url1 = 'http://api.vworld.kr/req/wmts/1.3.0/5638C501-9663-3A53-8DDF-701B190423EE/';
+    var Base = new ol.layer.Tile({
     	visible: false,
         source : new ol.source.XYZ({
-            url : 'http://xdworld.vworld.kr:8080/2d/Base/201802/{z}/{x}/{y}.png',
+            url : url1,
             attributions: [
                 new ol.Attribution({ 
                     html: ['&copy; <a href="http://map.vworld.kr">V-World Map</a>'] 
@@ -74,199 +97,129 @@ $(document).ready(function() {
         zIndex : 3
     });
     
-    // GeoServer 설정        
-    // GIS:bas
-    /*
-    var BaseBas = new ol.layer.Image({
-    	visible: true,
-        source: new ol.source.ImageWMS({
-            url: 'http://localhost:8080/geoserver/GIS/wms',
-            params: {
-                'FORMAT': format,
-                'VERSION': version,
-                'TILED': true,
-                'LAYERS': 'GIS:tl_kodis_bas',
-                STYLES: ''
-            },
-            serverType: 'geoserver'
+    // VWORLD Satellite 설정 
+    var Satellite = new ol.layer.Tile({
+    	visible: false,
+        source : new ol.source.XYZ({
+             url : url1,
+            attributions: [
+                new ol.Attribution({ 
+                    html: ['&copy; <a href="http://map.vworld.kr">V-World Map</a>'] 
+                })
+            ]
         }),
-        zIndex : 4
+        zIndex : 3
     });
     
-    // GIS:ctprvn
-    var BaseCtprvn = new ol.layer.Image({
-    	visible: true,
-        source: new ol.source.ImageWMS({
-            url: 'http://localhost:8080/geoserver/GIS/wms',
-            params: {
-                'FORMAT': format,
-                'VERSION': version,
-                'TILED': true,
-                'LAYERS': 'GIS:tl_scco_ctprvn',
-                STYLES: ''
-            },
-            serverType: 'geoserver'
+    // VWORLD Hybrid 설정 
+    var Hybrid = new ol.layer.Tile({
+    	visible: false,
+        source : new ol.source.XYZ({
+            url : url1,
+            attributions: [
+                new ol.Attribution({ 
+                    html: ['&copy; <a href="http://map.vworld.kr">V-World Map</a>'] 
+                })
+            ]
         }),
-        zIndex : 4
+        zIndex : 3
     });
     
-    // GIS:sig
-    var BaseSig = new ol.layer.Image({
-    	visible: true,
-        source: new ol.source.ImageWMS({
-            url: 'http://localhost:8080/geoserver/GIS/wms',
-            params: {
-                'FORMAT': format,
-                'VERSION': version,
-                'TILED': true,
-                'LAYERS': 'GIS:tl_scco_sig',
-                STYLES: ''
-            },
-            serverType: 'geoserver'
+    // VWORLD Gray 설정 
+    var Gray = new ol.layer.Tile({
+    	visible: false,
+        source : new ol.source.XYZ({
+            url : url1,
+            attributions: [
+                new ol.Attribution({ 
+                    html: ['&copy; <a href="http://map.vworld.kr">V-World Map</a>'] 
+                })
+            ]
         }),
-        zIndex : 4
+        zIndex : 3
     });
     
-    // GIS:emd
-    var BaseEmd = new ol.layer.Image({
-    	visible: true,
-        source: new ol.source.ImageWMS({
-            url: 'http://localhost:8080/geoserver/GIS/wms',
-            params: {
-                'FORMAT': format,
-                'VERSION': version,
-                'TILED': true,
-                'LAYERS': 'GIS:tl_scco_emd',
-                STYLES: ''
-            },
-            serverType: 'geoserver'
+    // VWORLD Midnight 설정 
+    var Midnight = new ol.layer.Tile({
+    	visible: false,
+        source : new ol.source.XYZ({
+            url : url1,
+            attributions: [
+                new ol.Attribution({ 
+                    html: ['&copy; <a href="http://map.vworld.kr">V-World Map</a>'] 
+                })
+            ]
         }),
-        zIndex : 4
+        zIndex : 3
     });
     
-    // GIS:li
-    var Baseli = new ol.layer.Image({
-    	visible: true,
-        source: new ol.source.ImageWMS({
-            url: 'http://localhost:8080/geoserver/GIS/wms',
-            params: {
-                'FORMAT': format,
-                'VERSION': version,
-                'TILED': true,
-                'LAYERS': 'GIS:tl_scco_li',
-                STYLES: ''
-            },
-            serverType: 'geoserver'
-        }),
-        zIndex : 4
+    // VWORLD Selectbox 설정
+    var vbaseStyles = ['Base', 'Satellite', 'Hybrid', 'gray', 'midnight'];
+    var VWORLDMap=[];
+    for (var i = 0, ii = vbaseStyles.length; i < ii; ++i) {
+		if(vbaseStyles[i] === 'Satellite'){ 
+			type = 'jpeg'
+		} else {
+			type = 'png'
+		}
+		
+    	VWORLDMap.push(new ol.layer.Tile({
+    		visible: false,
+            preload: Infinity,
+            source : new ol.source.XYZ({
+            	url : url1 + '/' + vbaseStyles[i] + '/{z}/{y}/{x}.' + type
+            }),
+            zIndex : 3
+        }));
+    }
+       
+    var VWORLDMapGroup = new ol.layer.Group({
+    	visible: false,
+        layers: VWORLDMap
     });
-    
-    // GIS:buld
-    var BaseBuld = new ol.layer.Image({
-    	visible: true,
-        source: new ol.source.ImageWMS({
-            url: 'http://localhost:8080/geoserver/GIS/wms',
-            params: {
-                'FORMAT': format,
-                'VERSION': version,
-                'TILED': true,
-                'LAYERS': 'GIS:tl_spbd_buld',
-                STYLES: ''
-            },
-            serverType: 'geoserver'
+
+   	/*
+    // VWORLD 설정
+    var VwordMap = new ol.layer.Tile({
+    	visible: false,
+        source : new ol.source.XYZ({
+            url : 'http://xdworld.vworld.kr:8080/2d/Base/202002/{z}/{x}/{y}.png',
+            attributions: [
+                new ol.Attribution({ 
+                    html: ['&copy; <a href="http://map.vworld.kr">V-World Map</a>'] 
+                })
+            ]
         }),
-        zIndex : 4
-    });
-    
-    // GIS:eqb
-    var BaseEqb = new ol.layer.Image({
-    	visible: true,
-        source: new ol.source.ImageWMS({
-            url: 'http://localhost:8080/geoserver/GIS/wms',
-            params: {
-                'FORMAT': format,
-                'VERSION': version,
-                'TILED': true,
-                'LAYERS': 'GIS:tl_spbd_eqb',
-                STYLES: ''
-            },
-            serverType: 'geoserver'
-        }),
-        zIndex : 4
-    });
-    
-    // GIS:manage
-    var BaseManage = new ol.layer.Image({
-    	visible: true,
-        source: new ol.source.ImageWMS({
-            url: 'http://localhost:8080/geoserver/GIS/wms',
-            params: {
-                'FORMAT': format,
-                'VERSION': version,
-                'TILED': true,
-                'LAYERS': 'GIS:tl_sprd_manage',
-                STYLES: ''
-            },
-            serverType: 'geoserver'
-        }),
-        zIndex : 4
-    });
-    
-    // GIS:rw
-    var BaseRw = new ol.layer.Image({
-    	visible: true,
-        source: new ol.source.ImageWMS({
-            url: 'http://localhost:8080/geoserver/GIS/wms',
-            params: {
-                'FORMAT': format,
-                'VERSION': version,
-                'TILED': true,
-                'LAYERS': 'GIS:tl_sprd_rw',
-                STYLES: ''
-            },
-            serverType: 'geoserver'
-        }),
-        zIndex : 4
-    });
-    
-    // GIS:background1
-    var BaseBackground1 = new ol.layer.Image({
-    	visible: true,
-        source: new ol.source.ImageWMS({
-            url: 'http://localhost:8080/geoserver/GIS/wms',
-            params: {
-                'FORMAT': format,
-                'VERSION': version,
-                'TILED': true,
-                'LAYERS': 'GIS:background1',
-                STYLES: ''
-            },
-            serverType: 'geoserver'
-        }),
-        zIndex : 4
-    });
-    
-    // GIS:background2
-    var BaseBackground2 = new ol.layer.Image({
-    	visible: true,
-        source: new ol.source.ImageWMS({
-            url: 'http://localhost:8080/geoserver/GIS/wms',
-            params: {
-                'FORMAT': format,
-                'VERSION': version,
-                'TILED': true,
-                'LAYERS': 'GIS:background2',
-                STYLES: ''
-            },
-            serverType: 'geoserver'
-        }),
-        zIndex : 4
+        zIndex : 3
     });
     */
-    
+   
+   /*
+   	var wms_title = '지적도';
+	var wms_val = 'lp_pa_cbnd_bubun';
+
+	var wms_tile = new ol.layer.Tile({
+		name : "WMS_LAYER",
+		source : new ol.source.TileWMS({
+			url : "http://api.vworld.kr/req/wms?",
+			params : {
+				LAYERS : wms_val,
+				STYLES : wms_val,
+				CRS : "EPSG:900913",
+				apikey : "CEB52025-E065-364C-9DBA-44880E3B02B8",
+				DOMAIN : "http://loacalhost:8080",
+				title : wms_title,
+				FORMAT : "image/png",
+				domain : "http://localhost"
+			}
+		})
+	});
+	map.addLayer(wms_tile);
+	*/
+       
     // GIS:base geoserver 백그라운드레이어 그룹명
-    var Base = new ol.layer.Image({
-    	visible: true,
+    var customBase = new ol.layer.Image({
+    	visible: false,
         source: new ol.source.ImageWMS({
             url: 'http://localhost:8080/geoserver/GIS/wms',
             params: {
@@ -280,27 +233,7 @@ $(document).ready(function() {
         }),
         zIndex : 4
     });
-    
-     
-    // BaseMapGroup
-    /*
-    var BaseMapGroup = new ol.layer.Group({
-    	visible: true,
-        layers: [
-        	BaseBas,
-            BaseCtprvn,
-            BaseSig,
-            BaseEmd,
-            Baseli,
-            BaseRw,  
-            BaseEqb,
-            BaseBuld,
-            BaseManage
-         
-        ]        
-    });
-    */
-        
+            
     // OSM TileGrid 설정
     var TileGrid = new ol.layer.Tile({
     	visible: false,
@@ -312,61 +245,7 @@ $(document).ready(function() {
     	}),
     	zIndex : 100
     });  
-    
-    /*
-    var DAEJEON_CITYGAS = new ol.layer.Tile({
-        source: new ol.source.TileWMS({
-        	url: 'http://localhost:8080/geoserver/GIS/wms',
-            params: {
-                'FORMAT': format,
-                'VERSION': version,
-                'TILED': true,
-                'LAYERS': 'daejeon:DAEJEON_CITYGAS',
-                STYLES: ''
-            },
-            serverType: 'geoserver'
-        })
-    });    
-       
-    var seoulLand = new ol.layer.Tile({
-    	visible: false,
-    	opacity:0.9,
-        source: new ol.source.TileWMS({
-        	url: 'http://localhost:8080/geoserver/GIS/wms',
-            params: {
-                'FORMAT': format,
-                'VERSION': version,
-                'TILED': true,
-                'LAYERS': 'GIS:seoulLand',
-                STYLES: ''
-            },
-            serverType: 'geoserver'
-        }),
-        zIndex : 9
-    });
-    */   
-
-    // BingMaps Selectbox 설정
-    var baseStyles = ['Road', 'RoadOnDemand', 'Aerial', 'AerialWithLabels'];
-    var BingMap=[];
-    for (var i = 0, ii = baseStyles.length; i < ii; ++i) {
-    	BingMap.push(new ol.layer.Tile({
-    		visible: false,
-            preload: Infinity,
-            source: new ol.source.BingMaps({
-                key: 'AoTWblM8Bf48thwSrZ6Y4Bib9qkwA1ikfYBbcMadQdFNI-i1YI9ITnbc4Coz3_NO',
-                imagerySet : baseStyles[i]   
-            }),
-            zIndex : 2
-        }));
-    }
-       
-    var BingMapGroup = new ol.layer.Group({
-    	visible: false,
-        layers: BingMap
-    });
-    
-
+   
     // 지도화면설정
     // controls 설정
     var controls = ol.control.defaults({
@@ -377,20 +256,20 @@ $(document).ready(function() {
         new ol.control.FullScreen(),
         new ol.control.ZoomSlider(),
         new ol.control.ScaleLine(),
-        // new ol.control.Zoom(),
-        // new ol.control.Rotate(),
-        // new ol.control.Attribution(),
-        // new ol.control.OverviewMap()
-        // new ol.control.ZoomToExtent()
+        new ol.control.Zoom()
+        //new ol.control.Rotate(),
+        //new ol.control.Attribution(),
+        //new ol.control.OverviewMap(),
+        //new ol.control.ZoomToExtent()
     ]); 
     
     // layers 설정      
-    var addLayers = [OSM, BingMapGroup, VwordMap, Base, TileGrid];
+    var addLayers = [OSM, BingMapGroup, VWORLDMapGroup, customBase, TileGrid];
     
     // view 설정
     var view = new ol.View({
     	projection : 'EPSG:3857',
-    	center : new ol.proj.transform([127.38, 36.35], 'EPSG:4326', 'EPSG:3857'),
+    	center : new ol.proj.transform([128.05, 36.10], 'EPSG:4326', 'EPSG:3857'),
     	zoom : 7, // 초기화면 zoom 레벨
         minZoom : 7, // 최소 zoom 레벨
         maxZoom : 22 // 최대 zoom 레벨
@@ -452,15 +331,7 @@ $(document).ready(function() {
     	});    	   	        
     	map.addLayer(point);
     	return false;      	
-    });
-    
-    /*
-    map.on('singleclick', function(evt) {
-        var coordinate = evt.coordinate;
-        var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326'));
-        content.innerHTML = '<p>You clicked here:</p><code>' + hdms + '</code>';
-        overlay.setPosition(coordinate);
-      });*/
+    });      
        
     // 레이어토글
     $('#layerToggle input[type=radio]').on('change', function() {
@@ -480,11 +351,20 @@ $(document).ready(function() {
     });    
     $('#layerSelect').trigger('change');
     
+    // VWORLDMap SelectBox
+    $('#vworldlayerSelect').on('change', function() {
+    	var style = $(this).find(':selected').val();
+        for (var i = 0, ii = VWORLDMap.length; i < ii; ++i) {
+        	VWORLDMap[i].setVisible(vbaseStyles[i] === style);
+        }
+    });    
+    $('#vworldlayerSelect').trigger('change');
+    
     // 초기화 정상
     $('#resetLocation').on('click', function() {
     	view.animate({
     		center : new ol.proj.transform([127.38,36.35],'EPSG:4326', 'EPSG:3857'),
-    		zoom: 8,
+    		zoom: 7,
     		duration:500
     	});
     });
@@ -544,9 +424,10 @@ $(document).ready(function() {
         }
     });
     
+     // 초기화면 서브메뉴 설정
     $('#layerTree li > span').on('click', function() {
         $(this).siblings('fieldset').toggle();
-    }).siblings('fieldset').hide();
+    }).siblings('fieldset').show();
   
     
 });

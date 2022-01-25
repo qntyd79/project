@@ -56,7 +56,8 @@
                                                     <td colspan="4" class="text-left">
                                                         <form:textarea path="content" id="content" placeholder="Content"/><form:errors path="content"/>
                                                         <script>
-                                                            CKEDITOR.replace('content');                    
+                                                            CKEDITOR.replace('content',{"removePlugins": "exportpdf"}); 
+                                                            CKEDITOR.instances.content.setData('This is the editor data.');
                                                         </script>  
                                                     </td>
                                                 </tr>

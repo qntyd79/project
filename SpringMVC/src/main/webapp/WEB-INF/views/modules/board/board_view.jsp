@@ -67,7 +67,9 @@
                                                             <c:out value="${boardVO.content}" escapeXml="false" />
                                                         </c:if>
                                                         <c:if test="${boardVO.tag == 1}">
-                                                            <pre class="brush:java toolbar:false">${fn:replace(fn:replace(boardVO.content, '<br/>', '') , '&nbsp;', '')}</pre>
+                                                            <pre class="brush:java toolbar:false">
+                                                            	<c:out value="${fn:replace(fn:replace(boardVO.content, '<br/>', '') , '&nbsp;', '')}" />
+                                                            </pre>
                                                         </c:if>
                                                     </td>
                                                 </tr>
