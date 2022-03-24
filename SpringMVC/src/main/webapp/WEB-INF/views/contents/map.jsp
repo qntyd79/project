@@ -11,7 +11,7 @@
     <div id="wrap">
         <div id="header-wrap">
             <div class="header-box">
-                <header class="header" style="height:auto;">
+                <header class="header" style="height:0;">
                     <!-- <? include ('../include/gnb.html');?> -->
                     <!-- <div class="logo-box">
                         <h1 class="logo"><a href="/jhbbs/index.html"><img src="/jhbbs/images/logo/logo.png" width="150px" /></a></h1>
@@ -29,17 +29,17 @@
                                 <li><a><i class="fas fa-chevron-left" aria-hidden="true"></i><br>이전</a></li>
                                 <li><a><i class="fas fa-chevron-right" aria-hidden="true"></i><br>다음</a></li>
                                 <li><a><i class="fas fa-arrows-alt" aria-hidden="true"></i><br>전체보기</a></li>
-                                <li><a id="zoom-in"><i class="fas fa-search-plus" aria-hidden="true"></i><br>확대</a></li>
-                                <li><a id="zoom-out"><i class="fas fa-search-minus" aria-hidden="true"></i><br>축소</a></li>
-                                <li><a id="addLand"><i class="fas fa-info-circle" aria-hidden="true"></i><br>지적도</a></li>
+                                <li><a class="zoom-in"><i class="fas fa-search-plus" aria-hidden="true"></i><br>확대</a></li>
+                                <li><a class="zoom-out"><i class="fas fa-search-minus" aria-hidden="true"></i><br>축소</a></li>
+                                <li><a class="addLand"><i class="fas fa-info-circle" aria-hidden="true"></i><br>지적도</a></li>
                                 <li><a><i class="fas fa-bars" aria-hidden="true"></i><br>거리</a></li>
                                 <li><a><i class="fas fa-object-ungroup" aria-hidden="true"></i><br>면적</a></li>
-                                <li><a id="resetLocation"><i class="fas fa-sync-alt"></i><br>초기화</a></li>
+                                <li><a class="resetLocation"><i class="fas fa-sync-alt"></i><br>초기화</a></li>
                                 <li><a><i class="fas fa-dot-circle"></i><br>도근점</a></li>
                                 <li><a><i class="far fa-dot-circle"></i><br>지적삼각점</a></li>
                                 <li><a><i class="fas fa-plus-circle"></i><br>삼각보조점</a></li>
                                 <li><a><i class="far fa-plus-square"></i><br>복합기준점</a></li>
-                                <li><a id="currentLocation"><i class="fas fa-map-marker" aria-hidden="true"></i><br>내위치</a></li>
+                                <li><a class="currentLocation"><i class="fas fa-map-marker" aria-hidden="true"></i><br>내위치</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -49,18 +49,19 @@
         <div id="content-wrap">
             <div class="clearfix">
                 <div id="aside-wrap">
+                	<button class="toggle-btn" value="open"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
                     <div class="aside-menu-box">
                         <nav class="aside-menu">
                             <ul>
-                                <li><a id="zoom-in"><i class="fas fa-search-plus" aria-hidden="true"></i><br>확대</a></li>
-                                <li><a id="zoom-out"><i class="fas fa-search-minus" aria-hidden="true"></i><br>축소</a></li>
-                                <li><a id="addLand"><i class="fas fa-info-circle" aria-hidden="true"></i><br>지적도</a></li>
-                                <li><a id="resetLocation"><i class="fas fa-sync-alt"></i><br>초기화</a></li>
-                                <li><a id="currentLocation"><i class="fas fa-map-marker" aria-hidden="true"></i><br>내위치</a></li>
+                                <li><a class="zoom-in"><i class="fas fa-search-plus" aria-hidden="true"></i><br>확대</a></li>
+                                <li><a class="zoom-out"><i class="fas fa-search-minus" aria-hidden="true"></i><br>축소</a></li>
+                                <li><a class="addLand"><i class="fas fa-info-circle" aria-hidden="true"></i><br>지적도</a></li>
+                                <li><a class="resetLocation"><i class="fas fa-sync-alt"></i><br>초기화</a></li>
+                                <li><a class="currentLocation"><i class="fas fa-map-marker" aria-hidden="true"></i><br>내위치</a></li>
                             </ul>
                         </nav>
                     </div>
-                    <button class="toggle-btn" value="open"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+                    
                     <div class="aside-box">
                             <div class="row">
                                 <div class="col-md-12">
@@ -349,17 +350,19 @@
                                         <input id="visible3" class="visible" type="checkbox" /><span> BaseMapGroup</span>
                                         <fieldset>
                                             <input class="opacity" type="range" min="0" max="1" step="0.01" />
+                                            <!--
                                              <select id="layerSelect1">
                                                         <option value="RoadOnDemand" selected>Road (dynamic)</option>
                                                         <option value="Road"  >Road (static)</option>                                               
                                                         <option value="Aerial">Aerial</option>
                                                         <option value="AerialWithLabels">Aerial with labels</option>                                               
                                                     </select>
+                                                      -->
                                         </fieldset>
                                     </li>
+                                    <!--
                                     <li id="layer4" style="height:200px; overflow:scroll;">
-                                            <input id="visible4" class="visible"
-                                                type="checkbox" /><span> 주제도</span>
+                                            <input id="visible4" class="visible" type="checkbox" /><span> 주제도</span>
                                                 <fieldset>
                                                     <input class="opacity" type="range" min="0" max="1"
                                                         step="0.01" />
@@ -498,8 +501,9 @@
                                                             </fieldset>
                                                         </li>
                                                     </ul>
-                                                </fieldset></li>
-                                                
+                                                </fieldset>
+                                                </li>
+                                       -->           
                                     <li id="layer4"><input id="visible4" class="visible" type="checkbox" /><span> TileGrid</span>
                                         <fieldset>
                                             <input class="opacity" type="range" min="0" max="1" step="0.01" />

@@ -39,9 +39,17 @@
 			<li><a href="${path}/contents/sitemap.do"><i class="fas fa-sitemap"></i> 사이트맵</a></li>
 			<li><a href="${path}/modules/board/list.do"><i class="fas fa-users"></i> 고객센터</a></li>
 			<li><a href='#'
-				onclick="window.open('/contents/map.do','window','location=yes, directories=yes,resizable=yes,status=yes,toolbar=no,menubar=yes, width=1024,left=0, top=0, scrollbars=yes');return false">
-					<i class="fas fa-map"></i> 지도서비스</a></li>
+				onclick='javascript:openNewMapPanelBrowser();'><i class="fas fa-map"></i> 지도서비스</a></li>
 		</ul>
 		<a href="#" id="pull"><i class="fas fa-bars"></i></a>
 	</nav>
 </div>
+
+<script type="text/javascript">
+
+function openNewMapPanelBrowser(){
+	var sWidth = screen.availWidth;
+	var sHeight = screen.availHeight;
+	window.open('/contents/map.do', '지도서비스', 'width='+sWidth+',height='+sHeight+',left=0,top=0, menubar=no,status=no,directiories=no');
+}
+</script>

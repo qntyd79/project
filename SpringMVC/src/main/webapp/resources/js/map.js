@@ -256,11 +256,11 @@ $(document).ready(function() {
         new ol.control.FullScreen(),
         new ol.control.ZoomSlider(),
         new ol.control.ScaleLine(),
-        new ol.control.Zoom()
-        //new ol.control.Rotate(),
-        //new ol.control.Attribution(),
-        //new ol.control.OverviewMap(),
-        //new ol.control.ZoomToExtent()
+        new ol.control.Zoom(),
+        new ol.control.Rotate(),
+        new ol.control.Attribution(),
+        new ol.control.OverviewMap(),
+        new ol.control.ZoomToExtent()
     ]); 
     
     // layers 설정      
@@ -315,8 +315,9 @@ $(document).ready(function() {
             })
     	})
     });
-            
-    $('#currentLocation').on('click', function() {
+    
+    // 내위치  
+    $('.currentLocation').on('click', function() {
         var position = geolocation.getPosition();      	
         var point = new ol.layer.Vector({
     		source : new ol.source.Vector({
@@ -361,7 +362,7 @@ $(document).ready(function() {
     $('#vworldlayerSelect').trigger('change');
     
     // 초기화 정상
-    $('#resetLocation').on('click', function() {
+    $('.resetLocation').on('click', function() {
     	view.animate({
     		center : new ol.proj.transform([127.38,36.35],'EPSG:4326', 'EPSG:3857'),
     		zoom: 7,
@@ -370,21 +371,21 @@ $(document).ready(function() {
     });
     
     // 확대 정상
-    $('#zoom-in').on('click', function() {
+    $('.zoom-in').on('click', function() {
         var view = map.getView();
         var zoom = view.getZoom();
         view.setZoom(zoom + 1);
     });
 
     // 축소 정상
-    $('#zoom-out').on('click', function() {
+    $('.zoom-out').on('click', function() {
         var view = map.getView();
         var zoom = view.getZoom();
         view.setZoom(zoom - 1);
     });
         
     // 레이어 보이기/숨기기          
-    $('#addLand').on('click', function() {    	
+    $('.addLand').on('click', function() {    	
     	toggleLayer(DAEJEON_LAND);
     });
     

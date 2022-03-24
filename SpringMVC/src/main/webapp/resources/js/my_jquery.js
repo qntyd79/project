@@ -174,15 +174,17 @@ $(document).ready(function() {
 
     // 슬라이드 토글(지도) / 유튜브 바위처럼의 Ezweb
     var maparea = $('#aside-wrap');
+	maparea.css({"left" : "-440px"});
     var button = maparea.find('.toggle-btn');
+   
 
     button.click(function() {
         if (maparea.hasClass('on')) { //on/off 로딩시 기본값 close
-            maparea.stop().animate({ left: '0' }, 'slow').removeClass('on');
+            maparea.stop().animate({ left: '-440px' }, 'slow').removeClass('on');
             //$('#aside-wrap').css({'display':'block','opacity':'1'});
             button.html('<i class="fa fa-chevron-left" aria-hidden="true"></i>');
         } else {
-            maparea.stop().animate({ left: '-440px' }, 'slow').addClass('on');
+            maparea.stop().animate({ left: '0' }, 'slow').addClass('on');
             //$('#aside-wrap').css({'display':'none','transition':'opacity 1s ease-out','opacity':'0'});
             button.html('<i class="fa fa-chevron-right" aria-hidden="true"></i>');
         }
