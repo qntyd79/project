@@ -44,157 +44,199 @@ public class HomeController {
 
 	@RequestMapping(value = "i18n.do", method = RequestMethod.GET) 
 	public String i18n(Locale locale, HttpServletRequest request, Model model) throws Exception { 
+		
 		// RequestMapingHandler로 부터 받은 Locale 객체를 출력해 봅니다. 
 		logger.info("Welcome i18n! The client locale is {}.", locale); 
+		
 		// localeResolver 로부터 Locale 을 출력해 봅니다. 
 		logger.info("Session locale is {}.", localeResolver.resolveLocale(request)); 
 		logger.info("site.title : {}", messageSource.getMessage("site.title", null, "default text", locale)); 
 		logger.info("site.count : {}", messageSource.getMessage("site.count", new String[] {"첫번째"}, "default text", locale)); 
 		logger.info("not.exist : {}", messageSource.getMessage("not.exist", null, "default text", locale)); 
-		//logger.info("not.exist 기본값 없음 : {}", messageSource.getMessage("not.exist", null, locale)); 
-		// JSP 페이지에서 EL 을 사용해서 arguments 를 넣을 수 있도록 값을 보낸다. 
-		model.addAttribute("siteCount", messageSource.getMessage("msg.first", null, locale)); 
+		
+		// RequestMapingHandler로 부터 받은 Locale 객체를 출력해 봅니다.    
+		model.addAttribute("clientLocale", locale);
+		
+		// localeResolver 로부터 Locale 을 출력해 봅니다.    
+		model.addAttribute("sessionLocale", localeResolver.resolveLocale(request));
+		
+		// JSP 페이지에서 EL 을 사용해서 arguments 를 넣을 수 있도록 값을 보낸다.    
+		model.addAttribute("siteCount", messageSource.getMessage("msg.first", null, locale));
+		
 		return "i18n";
 	}
 
 	@RequestMapping(value = "/", method = { RequestMethod.GET, RequestMethod.POST })
-	public String home() throws Exception {
+	public String home(Locale locale) throws Exception {
+		
+		logger.info("Welcome home! The client locale is {}.", locale);
+		
 		return "index";
 	}
 	
 	@RequestMapping(value = "index.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String index() throws Exception {
+	public String index(Locale locale) throws Exception {
+		
+		logger.info("Welcome home! The client locale is {}.", locale);
+		
 		return "index";
 	}
 
 	@RequestMapping(value = "contents/map.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String map() throws Exception {
+		
 		return "contents/map";
 	}
 
 	@RequestMapping(value = "contents/slider.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String slider() throws Exception {
+		
 		return "contents/slider";
 	}
 
 	@RequestMapping(value = "contents/video.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String video() throws Exception {
+		
 		return "contents/video";
 	}
 
-	@RequestMapping(value = "contents/table.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "contents/table.do",
+			method = { RequestMethod.GET, RequestMethod.POST })
 	public String table() throws Exception {
+		
 		return "contents/table";
 	}
 
 	@RequestMapping(value = "contents/div-center.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String divcenter() throws Exception {
+		
 		return "contents/div-center";
 	}
 
 	@RequestMapping(value = "contents/content01.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String content01() throws Exception {
+		
 		return "contents/content01";
 	}
 
 	@RequestMapping(value = "contents/content02.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String content02() throws Exception {
+		
 		return "contents/content02";
 	}
 
 	@RequestMapping(value = "contents/content03.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String content03() throws Exception {
+		
 		return "contents/content03";
 	}
 
 	@RequestMapping(value = "contents/content04.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String content04() throws Exception {
+		
 		return "contents/content04";
 	}
 
 	@RequestMapping(value = "contents/content05.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String content05() throws Exception {
+		
 		return "contents/content05";
 	}
 
 	@RequestMapping(value = "contents/content06.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String content06() throws Exception {
+		
 		return "contents/content06";
 	}
 
 	// html페이지맵핑
 	@RequestMapping(value = "contents/innomaps.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String innomaps() throws Exception {
+		
 		return "contents/innomaps";
 	}
 
 	@RequestMapping(value = "contents/company.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String company() throws Exception {
+		
 		return "contents/company";
 	}
 
 	@RequestMapping(value = "contents/solution.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String soultion() throws Exception {
+		
 		return "contents/solution";
 	}
 
 	@RequestMapping(value = "contents/solution01.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String soultion01() throws Exception {
+		
 		return "contents/solution01";
 	}
 
 	@RequestMapping(value = "contents/solution02.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String soultion02() throws Exception {
+		
 		return "contents/solution02";
 	}
 
 	@RequestMapping(value = "contents/solution03.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String soultion03() throws Exception {
+		
 		return "contents/solution03";
 	}
 
 	@RequestMapping(value = "contents/solution04.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String soultion04() throws Exception {
+		
 		return "contents/solution04";
 	}
 
 	@RequestMapping(value = "contents/solution05.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String soultion05() throws Exception {
+		
 		return "contents/solution05";
 	}
 
 	@RequestMapping(value = "contents/solution06.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String soultion06() throws Exception {
+		
 		return "contents/solution06";
 	}
 
 	@RequestMapping(value = "contents/business.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String business() throws Exception {
+		
 		return "contents/business";
 	}
 
 	@RequestMapping(value = "contents/support.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String support() throws Exception {
+		
 		return "contents/support";
 	}
 
 	@RequestMapping(value = "contents/services.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String services() throws Exception {
+		
 		return "contents/services";
 	}
 
 	@RequestMapping(value = "contents/database.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String database() throws Exception {
+		
 		return "contents/database";
 	}
 
 	@RequestMapping(value = "contents/contact.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String contact() throws Exception {
+		
 		return "contents/contact";
 	}
 
 	@RequestMapping(value = "contents/sitemap.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String sitemap() throws Exception {
+		
 		return "contents/sitemap";
 	}
 

@@ -5,7 +5,32 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="validator" uri="http://www.springmodules.org/tags/commons-validator" %>
+
 <validator:javascript formName="boardVO" staticJavascript="false" xhtml="true" cdata="false"/>
+	
+<!--For Commons Validator Client Side-->
+<script type="text/javaScript" language="javascript" defer="defer">
+	
+	function fn_egov_save() {
+		
+		var frm = document.writeForm;
+		frm.content.value = CKEDITOR.instances['content'].getData();
+		
+	   	if(!validateBoardVO(frm)){
+		    return;
+	    } 
+	   	
+		if(frm.answer.value == ""){
+			alert("자동등록방지는(은) 필수 입력값입니다.")
+				frm.answer.focus();
+			return;
+		} else { 
+	    	frm.submit();
+	    }
+	}	
+
+	
+</script>
 
 <c:import url="/WEB-INF/views/include/header.jsp"/>
 
@@ -66,26 +91,25 @@
                                                         -->
                                                     </td>
                                                 </tr>
-                               					<c:if test="${sessionScope.isAdmin == null && kakaoinfo == null && naverinfo == null && googleinfo == null}">
+                               					<!--<c:if test="${sessionScope.isAdmin == null && kakaoinfo == null && naverinfo == null && googleinfo == null}">-->
                                                 <tr>
                                                     <th><label for="userid"><spring:message code="label.userid"/></label></th>
-                                                    <td class="text-left"><form:input path="userid" type="text" placeholder="UserID" class="wfull" value="test"/> <form:errors path="userid" /> </td>
+                                                    <td class="text-left"><input name="userid" type="text" placeholder="UserID" class="wfull" /> <form:errors path="userid" /> </td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="name"><spring:message code="label.name"/></label></th>
-                                                    <td class="text-left"><form:input path="name" type="text"  placeholder="Name" class="wfull" value="홍길동"/> <form:errors path="name" /> </td>
+                                                    <td class="text-left"><input name="name" type="text"  placeholder="Name" class="wfull" /> <form:errors path="name" /> </td>
                                                 </tr>
-                                                </c:if>                                               
+                                                <!--</c:if>-->                                               
                                                 <tr>
                                                     <th><label for="pass"><spring:message code="label.pass"/></label></th>
                                                     <td class="text-left"><form:input path="pass" type="password" placeholder="Password" class="wfull" value="test!@1234"/> <form:errors path="pass" /> </td>
                                                 </tr> 
-                                                <c:if test="${sessionScope.isAdmin == null && kakaoinfo == null && naverinfo == null && googleinfo == null}">                                              
+                                                <!--<c:if test="${sessionScope.isAdmin == null && kakaoinfo == null && naverinfo == null && googleinfo == null}">-->                                             
                                                 <tr>
                                                     <th><label for="email"><spring:message code="label.email"/></label></th>
-                                                    <td class="text-left">
-                                                        <form:input path="email" type="text" placeholder="Email" class="wfull" value="test@test.com"/>
-                                                        <!-- <input type="text" name="email2" />
+                                                    <td class="text-left"><input name="email" type="text" placeholder="Email"/>
+                                                       <input type="text" name="email2" value="기능업그레이드 예정"/>
                                                         <select id="selectEmail">
                                                             <option value="1" selected="selected">직접입력</option>
                                                             <option value="naver.com">naver.com</option>
@@ -105,7 +129,7 @@
                                                             <option value="korea.com">korea.com</option>
                                                             <option value="lycos.co.kr">lycos.co.kr</option>
                                                             <option value="netian.com">netian.com</option>
-                                                        </select> -->
+                                                        </select>
                                                         <form:errors path="email" />
                                                     </td>
                                                 </tr>
@@ -115,7 +139,7 @@
                                                     	<form:input path="homepage" type="text" placeholder="Homepage" class="wfull" value="test.co.kr"/> <form:errors path="homepage" />
                                                     </td>
                                                 </tr>
-                                                </c:if>
+                                                <!--</c:if>-->
                                                 <tr>
                                                     <th><label for="title"><spring:message code="label.title"/></label></th>
                                                     <td class="text-left">
@@ -144,7 +168,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td colspan="10" class="text-left">
-                                                        <form:textarea  path="content" id="content" placeholder="Content"/><form:errors path="content"/>
+                                                        <form:textarea path="content" id="content" placeholder="Content"/><form:errors path="content"/>
                                                         <script>
                                                             CKEDITOR.replace('content',{"removePlugins": "exportpdf"});
                                                         </script>
@@ -214,12 +238,11 @@
                                         <nav class="btn-group">
 											<ul>
 												<li><input type="button" value="<spring:message code="button.list"/>" onClick="location.href='list.do'"/></li>
-												<li><input type="button" value="<spring:message code="button.create"/>" onClick="$(this.form).submit();"/></li>												
+												<li><input type="button" value="<spring:message code="button.create"/>" onclick="$(this.form).submit()" /></li>												
 											</ul>
 										</nav>
-										<!--<c:import url="/WEB-INF/views/modules/common/common_btn.jsp"/>-->
-                                        </fieldset>
-                                	</form:form>
+									</fieldset>
+                            	</form:form>
                                 
                                 
                             </div>

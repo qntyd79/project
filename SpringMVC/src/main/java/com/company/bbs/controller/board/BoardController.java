@@ -76,7 +76,7 @@ public class BoardController {
 	@Autowired
 	private DefaultBeanValidator beanValidator;
 
-	// 클라이언트측 유효성검증 설정
+	// 클라이언트측 유효성검증 설정 https://web-obj.tistory.com/456 참고
 	@RequestMapping(value = "validator.do")
 	protected String getValidator() throws Exception {
 		return "modules/board/validator";
@@ -167,14 +167,10 @@ public class BoardController {
 			throws Exception {
 
 		logger.info("글쓰기");
-
+	
 		model.addAttribute("boardVO", boardVO);
 		model.addAttribute("categorylist", service.getCategoryList());
 
-		//logger.info("아이디 : " + boardVO.getUserid());
-		//logger.info("이름 : " + boardVO.getName());
-		//logger.info("이메일 : " + boardVO.getEmail());
-	
 		return "modules/board/board_write";
 	}
 
@@ -226,7 +222,7 @@ public class BoardController {
 			
 			// 글저장프로세스
 			service.insert(boardVO);
-
+			
 			model.addAttribute("msg", "InsertSuccess");
 			model.addAttribute("url", "list.do");
 
@@ -235,9 +231,11 @@ public class BoardController {
 			model.addAttribute("msg", "CaptchaFailed");
 			if (boardVO.getBoard_idx() != 0) {
 				model.addAttribute("url", "reply.do");
+			
 				return "modules/board/board_reply";
 			} else {
-				model.addAttribute("url", "write.do");
+				model.addAttribute("url", "write.do");				
+							
 				return "modules/board/board_write";
 			}
 		}

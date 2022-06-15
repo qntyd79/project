@@ -173,7 +173,7 @@
 			<version>4.2</version>
 		</dependency>
 
-		<!-- 데이터베니스 커넥션 관련 라이브러리 -->
+		<!-- 데이터베이스 커넥션 관련 라이브러리 -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
@@ -210,7 +210,15 @@
 			<artifactId>log4jdbc-log4j2-jdbc4</artifactId>
 			<version>1.16</version>
 		</dependency>
-
+		
+		<!-- PostgreSQL 관련 라이브러리 -->
+		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+		<dependency>
+		    <groupId>org.postgresql</groupId>
+		    <artifactId>postgresql</artifactId>
+		    <version>42.3.5</version>
+		</dependency>
+		
 		<!-- Oracle 관련 라이브러리 
 		<dependency> 
 			<groupId>com.oracle</groupId> 

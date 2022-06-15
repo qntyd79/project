@@ -28,8 +28,10 @@
 											</div>
 											<div class="panel-body">
 												<div class="license">
-													
-													
+													<!--  파일리더함수 사용
+													<c:out value="${license}"/>
+													 -->
+													<!---->
 													<h3>제1장 총 칙</h3>
 													<h4>제1조 (목 적)</h4>
 													<p>이 약관은 주식회사 온세텔레콤(이하 "회사")이 제공하는 온세테마샵 웹사이트(이하
@@ -64,7 +66,7 @@
 													<p>6. 서비스 중지 : 정상 이용 중 회사가 정한 일정한 요건에 따라 일정기간 동안 서비스의
 														제공을 중지하는 것을 말합니다. ② 이 약관에서 사용하는 용어의 정의는 제1항에서 정하는 것을 제외하고는
 														관계법령 및 서비스별 안내에서 정하는 바에 의합니다.</p>
-													
+													<!---->
 												</div>
 											</div>
 											<div class="panel-footer">
@@ -176,8 +178,8 @@
 										</div>
 										<nav class="btn-group">
 											<ul>
-												<li><input type="button" value="다음단계" id="agreeBtn" ></li>
 												<li><input type="button" value="이전단계" onclick="location.href='/index.do'"></li>
+												<li><input type="button" value="다음단계" id="agreeBtn" ></li>
 											</ul>
 										</nav>
 									</fieldset>

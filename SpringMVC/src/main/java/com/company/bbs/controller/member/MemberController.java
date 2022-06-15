@@ -59,10 +59,12 @@ public class MemberController {
 	BCryptPasswordEncoder passwordEncoder;
 
 	// 다국어 지역세션설정
+	@SuppressWarnings("unused")
 	@Autowired
 	private SessionLocaleResolver localeResolver;
 
 	// 다국어 설정
+	@SuppressWarnings("unused")
 	@Autowired
 	private MessageSource messageSource;
 
@@ -250,6 +252,7 @@ public class MemberController {
 	}
 
 	// 회원약관동의폼
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "agree.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String agree(Model model) throws Exception {
 

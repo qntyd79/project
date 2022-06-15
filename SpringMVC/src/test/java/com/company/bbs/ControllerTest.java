@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring-config/**/*.xml"})
+@ContextConfiguration(locations = {"classpath:spring/**/context-*.xml"})
 public class ControllerTest {
 
     private static final Logger logger = LoggerFactory.getLogger(ControllerTest.class);

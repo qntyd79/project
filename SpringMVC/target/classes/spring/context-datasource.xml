@@ -25,6 +25,17 @@
 		<property name="password" value="mysql1234" />
 	</bean>	
 	
+	<!-- PostgreSQL -->
+	<bean id="dataSource1" class="org.apache.commons.dbcp.BasicDataSource">
+		<!-- 드라이버 클래스 이름이 변경됨 -->
+		<!-- <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property> -->
+		<property name="driverClassName" value="org.postgresql.Driver"/>
+		<!-- 연결문자열에 log4jdbc가 추가됨 -->
+		<property name="url" value="jdbc:postgresql://localhost:5432/gis" />
+		<property name="username" value="postgres" />
+		<property name="password" value="postgres" />
+	</bean>	
+	
 	<!-- Orcle -->
 	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		드라이버 클래스 이름이 변경됨 

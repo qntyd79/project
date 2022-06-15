@@ -12,7 +12,7 @@ import com.company.bbs.dao.board.BoardDao;
 import com.company.bbs.vo.board.BoardVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
+@ContextConfiguration(locations = {"classpath:spring/**/context-*.xml"})
 public class BoardDaoTest {
 
     private static final Logger logger = LoggerFactory.getLogger(BoardDaoTest.class);
