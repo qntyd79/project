@@ -44,7 +44,7 @@
 	<!-- aop의 설정으로 Proxy 객체를 자동으로 생성 -->
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>	
 	
-	<!-- 지역언어변경 인터셉터 설정 -->
+	<!-- 지역언어변경 인터셉터 설정  -->
 	<interceptors>
 		<beans:bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 			<beans:property name="paramName" value="lang" />

@@ -56,7 +56,7 @@
                                         <nav class="btn-group">
                                             <ul>
                                                 <li><input type="button" value="회원가입" onclick="location.href='agree.do'"></li>
-                                                <li><input type="button" value="로그인" onclick="location.href='/modules/login/login.do'"></li>
+                                                <li><input type="button" value="로그인" onclick="location.href='login.do'"></li>
                                             </ul>
                                         </nav>
                                     </fieldset>

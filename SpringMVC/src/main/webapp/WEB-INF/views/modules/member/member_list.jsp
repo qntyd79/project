@@ -22,20 +22,26 @@
 								
 								    function doExcelUploadProcess(){
 									   
-									var f = new FormData(document.getElementById('excelform'));
-								        $.ajax({
-								            url: "${path}/modules/member/excelUpload.do",
-								            data: f,
-								            processData: false,
-								            contentType: false,
-								            type: "POST",
-								            success: function(data){
-								                console.log(data);
-								                document.getElementById('result').innerHTML = JSON.stringify(data);
-								            }
-								        })
-								    
-								    }
+										var f = new FormData(document.getElementById('excelform'));
+											
+										if(document.excelform.attach.value == ""){
+											alert("업로드할 엑셀파일을 등록해주세요.")
+											return;
+										} else {											
+										    $.ajax({
+										    url: "${path}/modules/member/excelUpload.do",
+										    data: f,
+										    processData: false,
+										    contentType: false,
+										    type: "POST",
+										    success: function(data){
+											    //console.log(data);
+											    document.getElementById('result').innerHTML = JSON.stringify(data);
+											    }
+											})
+										}
+									    
+									}
 								    
 								    function doExcelDownloadProcess(){
 								        var f = document.excelform;

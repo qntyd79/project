@@ -30,11 +30,13 @@ public class LoginController {
 
 	// 로그인폼
 	@RequestMapping(value = "login.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String login(Model model, @ModelAttribute MemberVO memberVO) throws Exception {
-
-		logger.info("회원로그인폼");
-
-		model.addAttribute("memberVO", memberVO);
+	public String login() throws Exception {
+		return "modules/member/member_login";
+	}
+	
+	// 로그인풀화면폼
+	@RequestMapping(value = "loginfull.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String loginfull() throws Exception {
 
 		return "modules/member/member_loginfull";
 	}
@@ -71,14 +73,7 @@ public class LoginController {
 
 		return "/modules/common/common_message";
 	}
-
-	// 로그인풀화면폼
-	@RequestMapping(value = "loginfull.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String loginfull() throws Exception {
-
-		return "modules/member/member_loginfull";
-	}
-
+	
 	// 로그아웃
 	@RequestMapping(value = "logout.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logout(Model model, HttpSession session) throws Exception {

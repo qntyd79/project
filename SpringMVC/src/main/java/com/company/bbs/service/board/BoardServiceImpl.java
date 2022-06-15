@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -37,6 +38,11 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 	
+	// 메일발송 설정
+	@Autowired
+	JavaMailSenderImpl mailSender;
+		
+	// 첨부파일 저장경로 설정
 	@Resource(name = "uploadPath") 
 	private String uploadPath;	
 	

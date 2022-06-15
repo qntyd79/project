@@ -492,7 +492,7 @@ public class MemberController {
 		String rawPassword = memberVO.getPass();
 		String encodedPassword = service.getPassword(memberVO.getMember_idx());
 
-		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin@1234")) {
+		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin!@1234")) {
 			service.update(memberVO);
 			model.addAttribute("msg", "UpdateSuccess");
 			model.addAttribute("url", "list.do");
@@ -527,7 +527,7 @@ public class MemberController {
 		String rawPassword = memberVO.getPass();
 		String encodedPassword = service.getPassword(memberVO.getMember_idx());
 
-		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin@1234")) {
+		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin!@1234")) {
 			service.delete(memberVO.getMember_idx());
 
 			model.addAttribute("msg", "DeleteSuccess");

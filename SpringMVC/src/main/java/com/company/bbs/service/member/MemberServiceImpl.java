@@ -1,16 +1,10 @@
 package com.company.bbs.service.member;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
 import java.net.InetAddress;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -53,9 +47,6 @@ import com.company.bbs.vo.attach.AttachVO;
 import com.company.bbs.vo.board.BoardVO;
 import com.company.bbs.vo.email.EmailVO;
 import com.company.bbs.vo.member.MemberVO;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -69,10 +60,12 @@ public class MemberServiceImpl implements MemberService {
 	// 암호화 설정
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
-
+	
+	// 메일발송 설정
 	@Autowired
 	JavaMailSenderImpl mailSender;
 
+	// 첨부파일 저장경로 설정
 	@Resource(name = "uploadPath")
 	private String uploadPath;
 
@@ -308,13 +301,12 @@ public class MemberServiceImpl implements MemberService {
 			logger.info("-------------- file end --------------\n");
 
 			// UploadFileUtils 사용하여 저장
+			@SuppressWarnings("unused")
 			String savedName = UploadFileUtils.uploadFile(uploadPath, attach.getOriginalFilename(), attach.getBytes());
 		}
 
 		// https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=hyoun1202&logNo=220245067954
 		String finalFilePath = uploadPath + "/" + attach.getOriginalFilename();
-
-		System.out.println("finalFilePath : " + finalFilePath);
 
 		File destFile = new File(finalFilePath);
 
@@ -422,7 +414,8 @@ public class MemberServiceImpl implements MemberService {
 
 				list.add(memberVO);
 
-				dao.insert(memberVO);
+				// 엑셀목록에 등록된 파일 DB저장프로세스 실행
+				insert(memberVO);
 			}
 
 		} catch (Exception e) {
@@ -441,11 +434,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	// 회원저장
+	@SuppressWarnings("unused")
 	@Transactional
 	@Override
 	public void insert(MemberVO memberVO) throws Exception {
 
-		// for(int i=1; i <=200; i++) {
 		int member_idx = memberVO.getMember_idx();
 		String pass = memberVO.getPass();
 		int level = 10;
@@ -497,10 +490,9 @@ public class MemberServiceImpl implements MemberService {
 		memberVO.setRegdate(regdate);
 		memberVO.setDel(del);
 
-		// memberVO.setTitle(i + "번쨰 제목입니다.");
-
 		dao.insert(memberVO);
-		// }
+
+		// 첨부파일저장처리프로세스
 		fileinsert(memberVO);
 	}
 
@@ -544,6 +536,8 @@ public class MemberServiceImpl implements MemberService {
 				attachVO.setRegdate(memberVO.getRegdate());
 				attachVO.setDel(memberVO.getDel());
 				attachVO.setMember_idx(memberVO.getMember_idx());
+				
+				logger.info("회원게시판 member-idx : " + memberVO.getMember_idx());
 			}
 
 			dao.insert(attachVO);
