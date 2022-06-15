@@ -1,0 +1,148 @@
+<? include ('../include/head.html');?>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>글목록</h2>
+                                <form>
+                                    <div class="search-form" style="float:right; margin-bottom:10px;">
+                                        <fieldset>
+                                            <select id="sam001" title="검색카테고리선택" name="type">
+                                                <option value="all">전체</option>
+                                                <option value="title">제목</option>
+                                                <option value="content">내용</option>
+                                                <option value="name">이름</option>
+                                            </select>
+                                            <input type="search" value="" name="key" title="검색어입력" placeholder="Search.." />
+                                            <input type="button" value="검색" />
+                                            <input type="button" value="초기화" onClick="window.location='#'" />
+                                        </fieldset>
+                                    </div>
+                                </form>
+                                <form name="categoryForm" id="categoryForm" method="post" enctype="multipart/form-data" action="list.do">
+                                    <div class="category-form" style="float:right; margin-right:5px; margin-bottom:10px;">
+                                        <fieldset>
+                                            <select name="category_idx" id="category_idx" form="categoryForm" onChange="this.form.submit();">
+                                                <option value="0">전체목록</option>
+                                                <option value="all">일반</option>
+                                            </select>
+                                        </fieldset>
+                                    </div>
+                                </form>
+                                <div class="articles">
+                                    전체글 : <span>1</span> 개 | 공지글 : <span>2</span> | 현재페이지 : <span>1</span> | 총페이지 : <span>10</span>
+                                </div>
+                                <form name="listForm" method="post" enctype="multipart/form-data" action="list.do">
+                                    <fieldset>
+                                        <legend>Board List Form</legend>
+                                        <table summary="기본게시판 보여주고 있습니다." class="table">
+                                            <caption>등록일 : 2017년08월24일 기준</caption>
+                                            <colgroup>
+                                                <col width="5%" />
+                                                <col width="5%" />
+                                                <col width="50%" />
+                                                <col width="10%" />
+                                                <col width="10%" />
+                                                <col width="10%" />
+                                                <col width="10%" />
+                                            </colgroup>
+                                            <thead>
+                                                <tr class="tline">
+                                                    <th scope="col"><input type="checkbox" id="allCheck" /></th>
+                                                    <th scope="col">N</th>
+                                                    <th scope="col">카테고리</th>
+                                                    <th scope="col">작성자</th>
+                                                    <th scope="col">등록일</th>
+                                                    <th scope="col">M</th>
+                                                    <th scope="col">D</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><label><input type="checkbox" name="check" /></label></td>
+                                                    <td>1</td>
+                                                    <td class="text-left"><a href="./category_view.html">일반</a></td>
+                                                    <td>작성자</td>
+                                                    <td>2012-02-21</td>
+                                                    <td><a href="#">Modify</a></td>
+                                                    <td><a href="#">Delete</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="7"><label>등록된 글이 없습니다.</label></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <nav class="paging-group">
+                                            <ul>
+                                                <li><a href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+                                                <li><a href="#" class="active">1</a></li>
+                                                <li><a href="#">2</a></li>
+                                                <li><a href="#">3</a></li>
+                                                <li><a href="#">4</a></li>
+                                                <li><a href="#">5</a></li>
+                                                <li><a href="#">6</a></li>
+                                                <li><a href="#">7</a></li>
+                                                <li><a href="#">8</a></li>
+                                                <li><a href="#">9</a></li>
+                                                <li><a href="#">10</a></li>
+                                                <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+                                            </ul>
+                                        </nav>
+                                        <nav class="btn-group">
+                                            <ul>
+                                                <li>
+                                                    <input type="button" value="글목록" onclick="location.href='./category_list.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글보기" onclick="location.href='./category_view.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글작성" onclick="location.href='./category_write.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="답변글작성" onclick="location.href='./category_reply.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글수정" onclick="location.href='./category_edit.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글삭제" onclick="location.href='./category_delete.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="전체선택" id="allCheck">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="선택삭제" onClick="window.location='write.do'">
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+
+                    <? include ('../include/foot.html');?>
+<script type="text/javascript">
+$(document).ready(function() {
+    // 검색어
+    $("#searchBtn").click(function() {
+        self.location = "list.do" +
+            '${pageMaker.makeQuery(1)}' +
+            "&searchField=" + $('#searchField').val() +
+            "&keyWord=" + $('#keyWord').val();
+    });
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+    // 체크박스 전체선택/해제 토글 
+    $('#allCheck').click(function() {
+        if ($("#allCheck").prop("checked")) {
+            $("input[name=check]").prop("checked", true);
+        } else {
+            $("input[name=check]").prop("checked", false);
+        }
+    });
+});
+</script>

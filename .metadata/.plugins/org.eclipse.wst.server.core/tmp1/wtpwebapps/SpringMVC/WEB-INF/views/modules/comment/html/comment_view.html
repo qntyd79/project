@@ -1,0 +1,113 @@
+<? include ('../include/head.html');?>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>글보기</h2>
+                                <form>
+                                    <fieldset>
+                                        <legend>Borad View Form</legend>
+                                        <table summary="기본게시판 보여주고 있습니다." class="table">
+                                            <caption>등록일 : 2017년08월24일 기준</caption>
+                                            <colgroup>
+                                                <col width="20%" />
+                                                <col width="20%" />
+                                                <col width="15%" />
+                                                <col width="15%" />
+                                                <col width="15%" />
+                                                <col width="15%" />
+                                            </colgroup>
+                                            <tbody>
+                                                <tr class="tline">
+                                                    <th scope="col">
+                                                        <label for="date">제목 </label>
+                                                    </th>
+                                                    <td scope="col" colspan="3" class="text-left">제목이 나오는 곳입니다.</td>
+                                                    <th><label for="hit">분류</label></th>
+                                                    <td>분류</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="date">작성자</label>
+                                                    </th>
+                                                    <td>홍길동</td>
+                                                    <th>
+                                                        <label for="date">등록일</label>
+                                                    </th>
+                                                    <td>2011-04-08</td>
+                                                    <th>
+                                                        <label for="hit">조회수</label>
+                                                    </th>
+                                                    <td>10</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="6" class="text-left" style="height: 500px; padding: 20px;" valign="top">캐시플레이스 베타 테스터 모집 <br>
+                                                        실내위치 플랫폼을 개발한 로플랫이 매장 정보를 수집하기 위해 모바일 앱 캐시플레이스를 선보였습니다. <br>캐시플레이스는 매장 방문 시 사진을 찍어 업로드하면, 100원~500원 수준의 리워드가 적립되는 앱입니다. <br>불쾌한 광고나 지루한 과정 없이, 카페, 상점, 식당 등을 오가면서 생각날 때 매장 내부 사진을 찰칵 찍기만 하면 됩니다. <br>캐시플레이스는 오는 9월 정식 서비스를 시작할 예정이며, 현재 베타테스터를 모집하고 있습니다. <br>많은 참여와 관심 보내주시기 바랍니다. <br>> 캐시플레이스 베타테스터 신청 바로가기 > 찍으면 돈주는 앱? '캐시플레이스' / 벤처스퀘어 <br>* CBT는 안드로이드 유저 대상으로 진행합니다. * 문의 : service@loplat.com
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="6" class="align-left">첨부파일목록출력</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="date">관련링크1</label>
+                                                    </th>
+                                                    <td colspan="5" class="text-left">www.naver.com</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="date">관련링크2</label>
+                                                    </th>
+                                                    <td colspan="5" class="text-left">www.daum.net</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="date">다음글</label>
+                                                    </th>
+                                                    <td colspan="5" class="text-left">이전글이 존재하지 않습니다.</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="date">이전글</label>
+                                                    </th>
+                                                    <td colspan="5" class="text-left">다음글이 존재하지 않습니다.</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><label for="next">접속아이피</label></th>
+                                                    <td colspan="5" class="text-left">127.168.0.1</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <nav class="btn-group">
+                                            <ul>
+                                                <li>
+                                                    <input type="button" value="글목록" onclick="location.href='./comment_list.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글보기" onclick="location.href='./comment_view.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글작성" onclick="location.href='./comment_write.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="답변글작성" onclick="location.href='./comment_reply.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글수정" onclick="location.href='./comment_edit.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글삭제" onclick="location.href='./comment_delete.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="전체선택" id="allCheck">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="선택삭제" onClick="window.location='write.do'">
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                        
+                    <? include ('../include/foot.html');?>

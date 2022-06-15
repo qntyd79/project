@@ -1,0 +1,341 @@
+    <? include ('../include/head.html');?>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>회원가입</h2>
+                                <form>
+                                    <fieldset>
+                                        <div class="panel-box">
+                                            <legend>Board Write Form</legend>
+                                            <div class="panel-header">
+                                                <h3 class="panel-title"><i class="fas fa-file-alt"></i> 01. 고객님의 기본사항을 입력해 주세요. (필수항목)</h3>
+                                            </div>
+                                            <table summary="회원가입폼을 보여주고 있습니다." class="table">
+                                                <colgroup>
+                                                    <col width="20%" />
+                                                    <col width="80%" />
+                                                </colgroup>
+                                                <tr class="tline">
+                                                    <th scope="row">
+                                                        <label for="user_id">회원아이디</label>
+                                                    </th>
+                                                    <td scope="row" class="text-left">
+                                                        <input type="text" id="user-id" name="user-id" />
+                                                        <input type="button" value="아이디 중복검사" class="modal-open-btn">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <label for="pass"> 비밀번호 </label>
+                                                    </th>
+                                                    <td scope="row" class="text-left">
+                                                        <input type="password" id="pass" name="pass" /> <span>6~12자의 영문 소문자, 숫자만 사용할 수 있습니다.</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <label for="pass_check"> 비밀번호확인 </label>
+                                                    </th>
+                                                    <td scope="row" class="text-left">
+                                                        <input type="password" id="pass_check" name="pass_check" /> <span>다시한번 입력해 주세요</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <label for="pass_ask"> 비밀번호 분실시 질문</label>
+                                                    </th>
+                                                    <td scope="row" class="text-left">
+                                                        <select name="pass_ask">
+                                                            <option value='' selected="selected">-질문을 선택하여 주십시오-</option>
+                                                            <option value="1">가장 인상깊었던 여행지는 </option>
+                                                            <option value="2">나의보물 1호는 </option>
+                                                            <option value="3">아버지 성함은 </option>
+                                                            <option value="4">어머니 성함은 </option>
+                                                            <option value="5">어릴적 별명은 </option>
+                                                            <option value="6">나의 애완동물 이름은 </option>
+                                                            <option value="7">좋아하는 동물은 </option>
+                                                            <option value="8">좋아하는 색깔은 </option>
+                                                            <option value="9">태어난 곳은 </option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <label for="pass_account"> 비밀번호 분실시 답변 </label>
+                                                    </th>
+                                                    <td scope="row" class="text-left">
+                                                        <input type="text" id="pass_account" name="pass_account" value="" /> </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <label for="email"> 이메일 </label>
+                                                    </th>
+                                                    <td scope="row" class="text-left">
+                                                        <input type="text" name="clientEmail1" title="개인메일계정 입력창" id="staff_email" value="" required="담당자 이메일을 입력해주세요." english /> @
+                                                        <input type="text" name="clientEmail2" title="메일관리업체" value="" required="담당자 이메일을 입력해주세요." english />
+                                                        <select title="메일관리업체선택">
+                                                            <option>직접입력</option>
+                                                            <option value="naver.com">naver.com</option>
+                                                            <option value="hanmail.net">hanmail.net</option>
+                                                            <option value="nate.com">nate.com</option>
+                                                            <option value="hotmail.com">hotmail.com</option>
+                                                            <option value="paran.com">paran.com</option>
+                                                            <option value="yahoo.com">yahoo.com</option>
+                                                            <option value="chol.com">chol.com</option>
+                                                            <option value="dreamwiz.com">dreamwiz.com</option>
+                                                            <option value="empal.com">empal.com</option>
+                                                            <option value="freechal.com">freechal.com</option>
+                                                            <option value="gmail.com">gmail.com</option>
+                                                            <option value="hanafos.com">hanafos.com</option>
+                                                            <option value="hanmir.com">hanmir.com</option>
+                                                            <option value="hitel.net">hitel.net</option>
+                                                            <option value="korea.com">korea.com</option>
+                                                            <option value="lycos.co.kr">lycos.co.kr</option>
+                                                            <option value="netian.com">netian.com</option>
+                                                        </select>
+                                                        <span>알찬 서비스 소식 및 이벤트을 전해드립니다.</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <label for="zipcode1"> 우편번호 </label>
+                                                    </th>
+                                                    <td scope="row" class="text-left">
+                                                        <input type="text" id="zipcode1" name="zipcode1" /> -
+                                                        <input type="text" id="zipcode2" name="zipcode2" />
+                                                        <input type="button" value="우편번호검색" class="modal-open-btn" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <label for="address1"> 주소 </label>
+                                                    </th>
+                                                    <td scope="row" class="text-left">
+                                                        <input type="text" name="address1" id="address1" /> </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <label for="address2"> 상세주소 </label>
+                                                    </th>
+                                                    <td scope="row" class="text-left">
+                                                        <input type="text" name="address2" id="address2" /> </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <label for="phone1"> 전화번호</label>
+                                                    </th>
+                                                    <td scope="row" class="text-left">
+                                                        <select name="phone1" id="phone1">
+                                                            <option>선택</option>
+                                                            <option value="02">02</option>
+                                                            <option value="031">031</option>
+                                                            <option value="032">032</option>
+                                                            <option value="033">033</option>
+                                                            <option value="041">041</option>
+                                                            <option value="042">042</option>
+                                                            <option value="043">043</option>
+                                                            <option value="051">051</option>
+                                                            <option value="052">052</option>
+                                                            <option value="053">053</option>
+                                                            <option value="054">054</option>
+                                                            <option value="055">055</option>
+                                                            <option value="061">061</option>
+                                                            <option value="062">062</option>
+                                                            <option value="063">063</option>
+                                                            <option value="064">064</option>
+                                                            <option value="070">070</option>
+                                                        </select>
+                                                        -
+                                                        <input name="phone2" type="text" id="phone2" /> -
+                                                        <input name="phone3" type="text" id="phone3" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <label for="hphone1"> 핸드폰</label>
+                                                    </th>
+                                                    <td scope="row" class="text-left">
+                                                        <select name="hphone1" id="hphone1">
+                                                            <option>선택</option>
+                                                            <option value="010">010</option>
+                                                            <option value="011">011</option>
+                                                            <option value="016">016</option>
+                                                            <option value="017">017</option>
+                                                            <option value="018">018</option>
+                                                            <option value="019">019</option>
+                                                        </select>
+                                                        -
+                                                        <input name="hphone2" type="text" id="hphone2" /> -
+                                                        <input name="hphone3" type="text" id="hphone3" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <hr>
+                                            <div class="panel-header">
+                                                <h3 class="panel-title"><i class="fas fa-file-alt"></i> 02. 고객님의 추가사항을 입력해 주세요. (선택항목)</h3>
+                                            </div>
+                                            <table summary="회원가입폼을 보여주고 있습니다." class="table">
+                                                <colgroup>
+                                                    <col width="20%" />
+                                                    <col width="80%" />
+                                                </colgroup>
+                                                <tr class="tline">
+                                                    <th scope="row">
+                                                        <label for="n_name"> 닉네임</label>
+                                                    </th>
+                                                    <td scope="row" class="text-left">
+                                                        <input type="text" id="homepage" name="homepage" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <label for="homepage"> 홈페이지 </label>
+                                                    </th>
+                                                    <td scope="row" class="text-left">
+                                                        <input type="text" id="homepage" name="homepage" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <label for="job"> 직업</label>
+                                                    </th>
+                                                    <td scope="row" class="text-left">
+                                                        <select name="job">
+                                                            <option value="" selected="selected">선택하세요</option>
+                                                            <option value="은행업">은행업</option>
+                                                            <option value="증권업">증권업</option>
+                                                            <option value="보험업">보험업</option>
+                                                            <option value="운송업">운송업</option>
+                                                            <option value="유통업">유통업</option>
+                                                            <option value="학생">학생</option>
+                                                            <option value="의료">의료</option>
+                                                            <option value="서비스업">서비스업</option>
+                                                            <option value="공무원">공무원</option>
+                                                            <option value="제조업">제조업</option>
+                                                            <option value="농/수/임/축/광업">농/수/임/축/광업</option>
+                                                            <option value="컴퓨터/인터넷">컴퓨터/인터넷</option>
+                                                            <option value="법률">법률</option>
+                                                            <option value="군인">군인</option>
+                                                            <option value="부동산">부동산</option>
+                                                            <option value="예술">예술</option>
+                                                            <option value="종교">종교</option>
+                                                            <option value="연예">연예</option>
+                                                            <option value="가사">가사</option>
+                                                            <option value="무직">무직</option>
+                                                            <option value="방송사">방송사</option>
+                                                            <option value="신문사">신문사</option>
+                                                            <option value="건설업">건설업</option>
+                                                            <option value="기타">기타</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <label for="message"> 메세지 </label>
+                                                    </th>
+                                                    <td scope="row" class="text-left">
+                                                        <textarea name="message" id="message" /></textarea>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <label for="mail_check"> 메일수신여부</label>
+                                                    </th>
+                                                    <td scope="row" class="text-left">
+                                                        <input type="radio" name="mail_check" value="1" /> 예
+                                                        <input type="radio" name="mail_check" value="0" /> 아니오
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <hr>
+                                            <div class="panel-header">
+                                                <h3 class="panel-title"><i class="fas fa-file-alt"></i> 03. 참고 자료가 있으시면 참고 자료 파일을등록하여 주십시오.</h3>
+                                            </div>
+                                            <table summary="회원가입폼을 보여주고 있습니다." class="table">
+                                                <colgroup>
+                                                    <col width="20%" />
+                                                    <col width="80%" />
+                                                </colgroup>
+                                                <tr class="tline">
+                                                    <th scope="row">
+                                                        <label for="attach">첨부파일 </label>
+                                                    </th>
+                                                    <td class="text-left">
+                                                        <div class="filebox">
+                                                            <ul id="example">
+                                                                <li style="margin-bottom: 5px;"><input class="upload-name" value="파일선택" disabled="disabled"> <label for="ex_filename">업로드 #1</label> <input type="file" name="attach" id="ex_filename" class="upload-hidden"></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div>
+                                                            <input type="button" value="파일폼추가" id="addItemBtn" /> <input type="button" value="파일폼삭제" id="delItemBtn" />
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <label for="attach">첨부파일 </label>
+                                                    </th>
+                                                    <td class="text-left">
+                                                        <div class="filebox">
+                                                            <ul id="example">
+                                                                <li style="margin-bottom: 5px;"><input class="upload-name" value="파일선택" disabled="disabled"> <label for="ex_filename">업로드 #1</label> <input type="file" name="attach" id="ex_filename" class="upload-hidden"></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div>
+                                                            <input type="button" value="파일폼추가" id="addItemBtn" /> <input type="button" value="파일폼삭제" id="delItemBtn" />
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <label for="attach">첨부파일 </label>
+                                                    </th>
+                                                    <td class="text-left">
+                                                        <div class="filebox">
+                                                            <ul id="example">
+                                                                <li style="margin-bottom: 5px;"><input class="upload-name" value="파일선택" disabled="disabled"> <label for="ex_filename">업로드 #1</label> <input type="file" name="attach" id="ex_filename" class="upload-hidden"></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div>
+                                                            <input type="button" value="파일폼추가" id="addItemBtn" /> <input type="button" value="파일폼삭제" id="delItemBtn" />
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <hr>
+                                            <div class="panel-header">
+                                                <h3 class="panel-title"><i class="fas fa-file-alt"></i> 04. 기타 하실 말씀이 있으시면 적어주세요.</h3>
+                                            </div>
+                                            <table summary="회원가입폼을 보여주고 있습니다." class="table">
+                                                <colgroup>
+                                                    <col width="20%" />
+                                                    <col width="80%" />
+                                                </colgroup>
+                                                <tr class="tline">
+                                                    <th scope="row">
+                                                        <label for="etc"> 기타</label>
+                                                    </th>
+                                                    <td class="text-left">
+                                                        <textarea name="etc" id="etc"></textarea>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <nav class="btn-group">
+                                                <ul>
+                                                    <li>
+                                                        <input type="button" value="로그인" onclick="location.href='../../modules/login/member_login.html'">
+                                                    </li>
+                                                    <li>
+                                                        <input type="button" value="정보수정" onclick="location.href='../../modules/member/member_edit.html'">
+                                                    </li>
+                                                    <li>
+                                                        <input type="button" value="회원탈퇴" onclick="location.href='../../modules/member/member_delete.html'">
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                        
+                     <? include ('../include/foot.html');?>
+<? include ('../../include/modal.html');?>

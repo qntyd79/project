@@ -1,0 +1,132 @@
+<? include ('../include/head.html');?>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="div-hcenter" style="width:700px;">
+                                    <h2>글쓰기</h2>
+                                    <form>
+                                        <fieldset>
+                                            <div class="panel-box">
+                                                <legend>Borad Write Form</legend>
+                                                <div class="panel-header">
+                                                    <h3 class="panel-title"><i class="fas fa-file-alt"></i> 01. 고객님의 기본사항을 입력해 주세요. (필수항목)</h3>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="name"> 분류</label>
+                                                    <input type="text" id="category" name="category" class="btn-block" required>
+                                                    <input type="text" id="category" name="category" class="btn-block" required>
+                                                    <input type="text" id="category" name="category" class="btn-block" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="name"> 이름</label>
+                                                    <input type="text" id="name" name="name" class="btn-block" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="pw"> 비밀번호 </label>
+                                                    <input type="password" id="pass" name="pass" class="btn-block" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="email"> 이메일 </label>
+                                                    <input type="text" name="clientEmail1" title="개인메일계정 입력창" id="staff_email" value="" required="담당자 이메일을 입력해주세요." english class="btn-block" />
+                                                    <input type="text" name="clientEmail2" title="메일관리업체" value="" required="담당자 이메일을 입력해주세요." english class="btn-block" />
+                                                    <select itle="메일관리업체선택" class="btn-block">
+                                                        <option>직접입력</option>
+                                                        <option value="naver.com">naver.com</option>
+                                                        <option value="hanmail.net">hanmail.net</option>
+                                                        <option value="nate.com">nate.com</option>
+                                                        <option value="hotmail.com">hotmail.com</option>
+                                                        <option value="paran.com">paran.com</option>
+                                                        <option value="yahoo.com">yahoo.com</option>
+                                                        <option value="chol.com">chol.com</option>
+                                                        <option value="dreamwiz.com">dreamwiz.com</option>
+                                                        <option value="empal.com">empal.com</option>
+                                                        <option value="freechal.com">freechal.com</option>
+                                                        <option value="gmail.com">gmail.com</option>
+                                                        <option value="hanafos.com">hanafos.com</option>
+                                                        <option value="hanmir.com">hanmir.com</option>
+                                                        <option value="hitel.net">hitel.net</option>
+                                                        <option value="korea.com">korea.com</option>
+                                                        <option value="lycos.co.kr">lycos.co.kr</option>
+                                                        <option value="netian.com">netian.com</option>
+                                                    </select>
+                                                    <span>알찬 서비스 소식 및 이벤트을 전해드립니다.</span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="homepage"> 홈페이지 </label>
+                                                    <input type="text" id="homepage" name="homepage" placeholder="www.domain.com" class="btn-block" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="title"> 제목 </label>
+                                                    <input type="text" id="title" name="title" placeholder="제목을 입력해주세요" class="btn-block" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="date"> 시작일 </label>
+                                                    <input type="text" name="sdate" id="sdate1" class="btn-block">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="date"> 종료일 </label>
+                                                    <input type="text" name="edate" id="edate1" class="btn-block">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="notice"> 옵션</label>
+                                                    <input type="checkbox" name="notice" value="1" id="notice"> 공지사항
+                                                    <input type="checkbox" name="secret" value="1" id="secret"> 비밀글
+                                                    <input type="checkbox" name="mailsend" value="1" id="mailsend"> 메일발송
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="content">내용</label>
+                                                    <textarea name="message" id="message" required /></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="link1"> 관련링크1 </label>
+                                                    <input type="text" id="link1" name="link1" class="btn-block" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="link2"> 관련링크2 </label>
+                                                    <input type="text" id="link2" name="link2" class="btn-block" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="attach"> 첨부파일 </label>
+                                                    <div class="filebox">
+                                                        <ul id="example">
+                                                            <li style="margin-bottom: 5px;"><input class="upload-name" value="파일선택" disabled="disabled"> <label for="ex_filename">업로드 #1</label> <input type="file" name="attach" id="ex_filename" class="upload-hidden"></li>
+                                                        </ul>
+                                                        <input type="button" value="파일폼추가" id="addItemBtn" /> <input type="button" value="파일폼삭제" id="delItemBtn" />
+                                                    </div>
+                                                </div>
+                                                <nav class="btn-group">
+                                                    <ul>
+                                                        <li>
+                                                            <input type="button" value="글목록" onclick="location.href='./category_list.html'">
+                                                        </li>
+                                                        <li>
+                                                            <input type="button" value="글보기" onclick="location.href='./category_view.html'">
+                                                        </li>
+                                                        <li>
+                                                            <input type="button" value="글작성" onclick="location.href='./category_write.html'">
+                                                        </li>
+                                                        <li>
+                                                            <input type="button" value="답변글작성" onclick="location.href='./category_reply.html'">
+                                                        </li>
+                                                        <li>
+                                                            <input type="button" value="글수정" onclick="location.href='./category_edit.html'">
+                                                        </li>
+                                                        <li>
+                                                            <input type="button" value="글삭제" onclick="location.href='./category_delete.html'">
+                                                        </li>
+                                                        <li>
+                                                            <input type="button" value="전체선택" id="allCheck">
+                                                        </li>
+                                                        <li>
+                                                            <input type="button" value="선택삭제" onClick="window.location='write.do'">
+                                                        </li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    <? include ('../include/foot.html');?>

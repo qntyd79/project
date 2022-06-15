@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="member">
+	
+	
+	<!-- 회원목록 -->
+	<select id="getList" resultType="com.company.bbs.vo.member.MemberVO">
+	<![CDATA[ 
+	select * from jhbbs_member where member_idx > 0 and del = 'N'
+	]]>
+		<include refid="category"></include>
+		<include refid="search"></include>
+	<![CDATA[ 
+	order by member_idx desc limit #{pageStart}, ${perPageNum}
+	]]>
+	</select>	
+	
+	
+	<!-- 카테고리명 -->
+	<select id="getCategory" resultType="com.company.bbs.vo.category.CategoryVO">
+	<![CDATA[ 
+	select category_idx, title from jhbbs_category where del = 'N'
+	]]>
+	<![CDATA[ 
+	order by category_idx DESC
+	]]>
+	</select>
+	
+	<!-- 카테고리목록 -->
+	<select id="getCategoryList" resultType="com.company.bbs.vo.category.CategoryVO">
+	<![CDATA[ 
+	select * from jhbbs_category where kind= 2 and del = 'N'
+	]]>
+	<![CDATA[ 
+	order by category_idx DESC
+	]]>
+	</select>
+
+	<!-- 회원저장 -->
+	<insert id="insert"	parameterType="com.company.bbs.vo.member.MemberVO">
+		INSERT INTO jhbbs_member (
+		userid, pass, pass_ask, pass_account, name,
+		nickname, <!-- jumin1, jumin2, -->
+		email, homepage, zipcode, address, detailaddress, extraaddress,
+		phone,
+		hphone, job, message, etc, mail_check,
+		<!-- com_name, com_homepage, com_station, com_position, com_zipcode, com_address1, 
+			com_address2, com_phone, com_fax, -->
+		level, point, approval, join_date, login_last, login_cnt, login_ip,
+		user_leave, cipp, regdate, del, category_idx
+		) VALUES (
+		#{userid},
+		#{pass}, #{pass_ask}, #{pass_account}, #{name}, #{nickname}, <!-- #{jumin1}, 
+			#{jumin2}, -->
+		#{email}, #{homepage}, #{zipcode}, #{address}, #{detailaddress},
+		#{extraaddress},#{phone}, #{hphone}, #{job}, #{message}, #{etc}, #{mail_check},
+		<!-- #{com_name}, #{com_homepage}, #{com_station}, #{com_position}, #{com_zipcode}, 
+			#{com_address1}, #{com_address2}, #{com_phone}, #{com_fax}, -->
+		#{level}, #{point}, #{approval}, #{join_date}, #{login_last},
+		#{login_cnt}, #{login_ip}, #{user_leave}, #{cipp}, #{regdate}, #{del},
+		#{category_idx}
+		)
+	</insert>	
+	
+	<!-- 첨부파일목록 -->
+	<select id="getFileList" resultType="com.company.bbs.vo.member.MemberVO">
+	<![CDATA[ 
+	select * from jhbbs_file where file_idx > 0 and del = 'N' and member_idx = #{member_idx}
+	]]>
+	<![CDATA[ 
+	order by regdate DESC
+	]]>
+	</select>
+	
+	<!-- 첨부파일저장 -->
+	<insert id="attachInsert" parameterType="com.company.bbs.vo.member.MemberVO"> 
+		INSERT INTO jhbbs_file (
+		file_name, file_hash_name,
+		file_size, file_type, file_ext,
+		download, regdate, del, board_idx, member_idx, email_idx
+		) VALUES (
+		#{file_name}, #{file_hash_name}, 
+		#{file_size}, #{file_type}, #{file_ext},
+		#{download}, #{regdate}, #{del}, #{board_idx}, #{member_idx}, #{email_idx}
+		)
+	</insert>
+	
+	<!-- 첨부파일 수정 -->
+	<update id="attachUpdate">
+		update jhbbs_file set
+		file_name=#{file_name},
+		file_hash_name=#{file_hash_name},
+		file_size=#{file_size},
+		file_type=#{file_type},
+		file_ext=#{file_ext},		
+		board_idx=#{board_idx},
+		member_idx=#{member_idx},
+		email_idx=#{email_idx}
+		where
+		file_idx=#{file_idx}
+	</update>
+	
+	<!-- 첨부파일update처리 -->
+	<update id="attachDelete">
+		update jhbbs_file set del = 'Y' where file_idx = #{file_idx}
+	</update>
+	
+	<!-- 회원보기 -->
+	<select id="getView" resultType="com.company.bbs.vo.member.MemberVO">
+		select * from jhbbs_member where member_idx = #{member_idx}	and del = 'N'
+	</select>
+
+	<!-- 회원정보수정 -->
+	<update id="update">
+		update jhbbs_member set
+		pass_ask=#{pass_ask},
+		pass_account=#{pass_account},
+		email=#{email},
+		homepage=#{homepage},
+		zipcode=#{zipcode},
+		address=#{address},
+		detailaddress=#{detailaddress},
+		extraaddress=#{extraaddress},
+		phone=#{phone},
+		hphone=#{hphone},
+		nickname=#{nickname},
+		homepage=#{homepage},
+		job=#{job},
+		message=#{message},
+		etc=#{etc},
+		mail_check=#{mail_check},
+		cipp=#{cipp}
+		where
+		member_idx=#{member_idx}
+	</update>
+
+	<!-- 회원삭제 <delete id="delete"> delete from jhbbs_member where member_idx 
+		= #{member_idx} </delete> -->
+
+	<!-- 회원삭제 update처리 -->
+	<update id="delete">
+		update jhbbs_member set del = 'Y' where member_idx = #{member_idx}
+	</update>
+
+	<!-- 글이전값 -->
+	<select id="getPrevNum"	resultType="com.company.bbs.vo.member.MemberVO">
+	<![CDATA[ 
+	select * from jhbbs_member where member_idx > #{member_idx} and del = 'N' order by  member_idx asc limit 1
+	]]>
+	</select>
+
+	<!-- 글다음값 -->
+	<select id="getNextNum"	resultType="com.company.bbs.vo.member.MemberVO">
+	<![CDATA[
+	select * from jhbbs_member where member_idx < #{member_idx} and del = 'N' order by  member_idx desc limit 1
+	]]>
+	</select>
+
+	<!-- 회원 member_idx 최고값 -->
+	<select id="getMaxNum" resultType="int">
+	<![CDATA[ 
+		select max(member_idx) from jhbbs_member
+	]]>
+		<include refid="search"></include>
+	</select>
+
+	<!-- 회원갯수 -->
+	<select id="getCount" resultType="int">
+	<![CDATA[ 
+	select count(member_idx) from jhbbs_member where member_idx > 0 and del = 'N'
+	]]>
+		<include refid="category"></include>
+		<include refid="search"></include>
+	</select>
+	
+	<!-- 비밀번호리턴 -->
+	<select id="getPassword" resultType="String">
+	<![CDATA[ 
+	select pass from jhbbs_member where member_idx = #{member_idx} and del = 'N'
+	]]>
+	</select>
+	
+	<!-- 로그인비밀번호리턴 -->
+	<select id="getLoginPassword" resultType="String">
+	<![CDATA[ 
+	select pass from jhbbs_member where userid = #{userid} and del = 'N'
+	]]>
+	</select>
+	
+	<!-- 회원로그인체크 -->
+	<select id="loginCheck" resultType="String">
+	<![CDATA[ 
+		SELECT name FROM jhbbs_member WHERE userid = #{userid} AND pass = #{pass}
+	]]>
+	</select>
+	
+	<!-- 회원로그인정보 -->
+	<select id="getViewMember" resultType="com.company.bbs.vo.member.MemberVO">
+	<![CDATA[ 
+		SELECT * FROM jhbbs_member WHERE userid = #{userid} AND pass = #{pass}
+	]]>
+	</select>
+	
+	<!-- 회원엑셀목록 -->
+	<select id="getExcelList" fetchSize="100" resultType="com.company.bbs.vo.member.MemberVO">
+	<![CDATA[ 
+	select * from jhbbs_member where member_idx > 0 and del = 'N'
+	]]>
+		<include refid="category"></include>
+		<include refid="search"></include>
+	<![CDATA[ 
+	order by member_idx desc 
+	]]>
+	</select>
+	
+	<!-- 아이디중복확인 1이면 존재 0이면 존재하지 않음-->
+	<select id="idCheck" resultType="int">
+	<![CDATA[ 
+		SELECT COUNT(*) FROM jhbbs_member WHERE userid = #{userid} AND del = 'N'
+	]]>	
+	</select>
+	
+	<!-- 아이디찾기-->
+	<select id="idSearch" resultType="com.company.bbs.vo.member.MemberVO">
+	<![CDATA[ 
+		SELECT userid FROM jhbbs_member WHERE name = #{name} AND email = #{email} AND del = 'N'
+	]]>	
+	</select>
+	
+	<!-- 비밀번호찾기 -->
+	<select id="passSearch" resultType="com.company.bbs.vo.member.MemberVO">
+	<![CDATA[ 
+		SELECT pass, email FROM jhbbs_member WHERE userid = #{userid} AND email = #{email} AND del = 'N'
+	]]>	
+	</select>
+	
+	<!-- 비밀번호 확인 -->	
+	<select id="passCheck" resultType="com.company.bbs.vo.member.MemberVO">
+	<![CDATA[ 
+		SELECT pass FROM jhbbs_member WHERE userid = #{userid} AND del = 'N'
+	]]>	
+	</select>	
+	
+	<!-- 임시 비밀번호 업데이트 -->	
+	<update id="updatePass">
+	<![CDATA[ 
+		update jhbbs_member set pass = #{pass} where userid = #{userid}
+	]]>	
+	</update>
+	
+	<!-- 로그인 -->	
+	<select id="login" resultType="com.company.bbs.vo.member.MemberVO">
+	<![CDATA[ 
+		SELECT * FROM jhbbs_member WHERE userid = #{userid} AND del = 'N'
+	]]>	
+	</select>	
+	
+	<sql id="category">
+		<if test="category_idx > 0">
+			AND category_idx = ${category_idx}
+		</if>
+		<if test="category_idx == 0">
+			AND category_idx > 0
+		</if>
+	</sql>
+	
+	<sql id="search">
+		<if test="searchField != null">
+			<if test="searchField == 'n'.toString()">
+				AND (userid LIKE CONCAT('%',#{keyWord},'%') OR etc LIKE CONCAT('%',#{keyWord},'%') OR name LIKE CONCAT('%',#{keyWord},'%'))
+			</if>
+			<if test="searchField == 't'.toString()">
+				AND userid LIKE CONCAT('%',#{keyWord},'%')
+			</if>
+			<if test="searchField == 'c'.toString()">
+				AND etc LIKE CONCAT('%',#{keyWord},'%')
+			</if>
+			<if test="searchField == 'w'.toString()">
+				AND name LIKE CONCAT('%',#{keyWord},'%')
+			</if>
+			<if test="searchField == 'tc'.toString()">
+				AND (userid LIKE CONCAT('%',#{keyWord},'%') OR etc LIKE CONCAT('%', #{keyWord},'%'))
+			</if>
+			<if test="searchField == 'cw'.toString()">
+				AND (etc LIKE CONCAT('%',#{keyWord},'%') OR name LIKE CONCAT('%',#{keyWord},'%'))
+			</if>
+			<if test="searchField == 'tcw'.toString()">
+				AND (userid LIKE CONCAT('%',#{keyWord},'%') OR etc LIKE CONCAT('%',#{keyWord},'%') OR name LIKE CONCAT('%',#{keyWord},'%'))
+			</if>
+		</if>
+	</sql>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

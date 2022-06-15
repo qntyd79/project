@@ -1,0 +1,63 @@
+<? include ('../include/head.html');?>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>글삭제</h2>
+                                <form name="deleteForm" id="deleteForm" method="post" enctype="multipart/form-data" action="delete.do">
+                                    <input type="hidden" name="category_idx" value="">
+                                    <input type="hidden" name="page" value="${criteria.page}">
+                                    <input type="hidden" name="perPageNum" value="${criteria.perPageNum}">
+                                    <input type="hidden" name="searchField" value="${criteria.searchField}">
+                                    <input type="hidden" name="keyWord" value="${criteria.keyWord}">
+                                    <fieldset>
+                                        <legend>Borad Delete Form</legend>
+                                        <table summary="기본게시판 보여주고 있습니다." class="table">
+                                            <caption>등록일 : 2017년08월24일 기준</caption>
+                                            <colgroup>
+                                                <col width="50%" />
+                                                <col width="50%" />
+                                            </colgroup>
+                                            <tbody>
+                                                <tr class="tline">
+                                                    <th colspan="2"><label for="date">해당 글을 삭제하시겠습니까?</label></th>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-right">비밀번호</td>
+                                                    <td class="text-left"><input type="password" name="pass"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <nav class="btn-group">
+                                            <ul>
+                                                <li>
+                                                    <input type="button" value="글목록" onclick="location.href='./category_list.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글보기" onclick="location.href='./category_view.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글작성" onclick="location.href='./category_write.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="답변글작성" onclick="location.href='./category_reply.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글수정" onclick="location.href='./category_edit.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="글삭제" onclick="location.href='./category_delete.html'">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="전체선택" id="allCheck">
+                                                </li>
+                                                <li>
+                                                    <input type="button" value="선택삭제" onClick="window.location='write.do'">
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                        
+                    <? include ('../include/foot.html');?>

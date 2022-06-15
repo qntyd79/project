@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="comment">
+
+	<!-- 글목록 -->
+	<select id="getLista"
+		resultType="com.company.bbs.vo.comment.CommentVO">
+	<![CDATA[ 
+	select * from jhbbs_comment where comment_idx > 0 and del = 'N' and board_idx = #{board_idx}
+	]]>		
+	<![CDATA[ 
+	order by parent desc, sortno asc limit #{criteria.pageStart}, ${criteria.perPageNum}
+	]]>
+	</select>
+
+	<!-- 글목록 -->
+	<select id="getList"
+		resultType="com.company.bbs.vo.comment.CommentVO">
+	<![CDATA[ 
+	select * from jhbbs_comment where comment_idx > 0 and del = 'N'
+	]]>
+		<include refid="search"></include>
+	<![CDATA[ 
+	order by parent desc, sortno asc limit #{pageStart}, ${perPageNum}
+	]]>
+	</select>
+
+	<!-- 글저장 -->
+	<insert id="insert"
+		parameterType="com.company.bbs.vo.comment.CommentVO">
+		INSERT INTO jhbbs_comment (
+		parent, depth, sortno,
+		userid, name, pass, email, content, hit, cipp, vote, regdate, del,
+		board_idx
+		) VALUES (
+		#{parent}, #{depth}, #{sortno},
+		#{userid}, #{name}, #{pass}, #{email}, #{content}, #{hit}, #{cipp},
+		#{vote}, #{regdate}, #{del},
+		#{board_idx}
+		)
+	</insert>
+
+	<!-- 답글업데이트 -->
+	<update id="getReply">
+		update jhbbs_comment set sortno = sortno+1 where parent=#{parent} and sortno > #{sortno}
+	</update>
+
+	<!-- 글보기 -->
+	<select id="getView"
+		resultType="com.company.bbs.vo.comment.CommentVO">
+		select * from jhbbs_comment where comment_idx =
+		#{comment_idx} and del = 'N'
+	</select>
+
+	<!-- 글수정 -->
+	<update id="update">
+		update jhbbs_comment set
+		content=#{content},
+		cipp=#{cipp}
+		where
+		comment_idx=#{comment_idx}
+	</update>
+
+	<!-- 글삭제 <delete id="delete"> delete from jhbbs_bbs_comment where comment_idx 
+		= #{comment_idx} </delete> -->
+
+	<!-- 글삭제 update처리 -->
+	<update id="delete">
+		update jhbbs_comment set del = 'Y' where comment_idx
+		= #{comment_idx}
+	</update>
+
+	<!-- 글조회수 -->
+	<update id="increaseCnt">
+		update jhbbs_comment set hit= hit + 1 where
+		comment_idx = #{comment_idx} and del = 'N'
+	</update>
+
+	<!-- 글이전값 -->
+	<select id="getPrevNum"
+		resultType="com.company.bbs.vo.comment.CommentVO">
+	<![CDATA[ 
+	select * from jhbbs_comment where comment_idx > #{comment_idx} and del = 'N' order by comment_idx asc limit 1
+	]]>
+	</select>
+
+	<!-- 글다음값 -->
+	<select id="getNextNum"
+		resultType="com.company.bbs.vo.comment.CommentVO">
+	<![CDATA[
+	select * from jhbbs_comment where comment_idx < #{comment_idx} and del = 'N' order by comment_idx desc limit 1
+	]]>
+	</select>
+
+	<!-- 글최고값 -->
+	<select id="getMaxNum" resultType="int">
+		select max(comment_idx) from jhbbs_comment
+		<include refid="search"></include>
+	</select>
+
+	<!-- 글갯수 -->
+	<select id="getCount" resultType="int">
+	<![CDATA[ 
+	select count(comment_idx) from jhbbs_comment where comment_idx > 0 and del = 'N'
+	]]>
+		<include refid="search"></include>
+	</select>
+
+	<!-- 글갯수 -->
+	<select id="getCommentCount" resultType="int">
+	<![CDATA[ 
+	select count(comment_idx) from jhbbs_comment where board_idx = ${board_idx} and comment_idx > 0 and del = 'N'
+	]]>
+		<include refid="search"></include>
+	</select>
+
+	<!-- 글비밀번호리턴 -->
+	<select id="getPassword" resultType="String">
+	<![CDATA[ 
+		select pass from
+		jhbbs_comment where comment_idx = #{comment_idx} and del = 'N'
+	]]>
+	</select>
+	
+	<!-- 글번호 가져오기 -->
+	<select id="getBoard_idx" resultType="int">
+	<![CDATA[ 
+		select board_idx from
+		jhbbs_comment where comment_idx = #{comment_idx} and del = 'N'
+	]]>
+	</select>
+
+	<sql id="search">
+		<if test="searchField != null">
+			<if test="searchField == 'n'.toString()">
+				AND (content
+				LIKE CONCAT('%',#{keyWord},'%') OR name LIKE
+				CONCAT('%',#{keyWord},'%'))
+			</if>
+			<if test="searchField == 'c'.toString()">
+				AND content LIKE CONCAT('%',#{keyWord},'%')</if>
+			<if test="searchField == 'w'.toString()">
+				AND name LIKE CONCAT('%',#{keyWord},'%')
+			</if>
+			<if test="searchField == 'cw'.toString()">
+				AND (content LIKE CONCAT('%',#{keyWord},'%') OR name LIKE
+				CONCAT('%',#{keyWord},'%'))
+			</if>
+		</if>
+	</sql>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

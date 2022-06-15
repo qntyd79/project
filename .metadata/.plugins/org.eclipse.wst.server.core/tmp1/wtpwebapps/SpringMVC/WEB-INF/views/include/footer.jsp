@@ -1,0 +1,237 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"  isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<div id="footer-wrap">
+        <div class="footer-box">
+            <button class="toggle-btn1"><i class="fa fa-chevron-down" aria-hidden="true"></i></button>
+            <footer class="footer toggle-content1">
+                <article>
+                    <h2>통합메뉴안내</h2>
+                    <nav class="fnb">
+                        <ul>
+                            <li>
+                                <h4><a href="#"><i class="fas fa-plus-square"></i> 관광/문화</a></h4>
+                                <ul class="sub-fnb">
+                                    <li><a href="#">경기도 관광포털</a></li>
+                                    <li><a href="#">아름다운 경기 건축</a></li>
+                                    <li><a href="#">경기도 문화포털</a></li>
+                                    <li><a href="#">DMZ 비무장 지대</a></li>
+                                    <li><a href="#">남한산성 세계유산센터</a></li>
+                                    <li><a href="#">경기도 박물관 미술관</a></li>
+                                    <li><a href="#">굿모닝 하우스</a></li>
+                                    <li><a href="#">경기도 체육회</a></li>
+                                    <li><a href="#">경기도 장애인 체육회</a></li>
+                                    <li><a href="#">수원 월드컵 경기장</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h4><a href="#"><i class="fas fa-plus-square"></i> 비지니스</a></h4>
+                                <ul class="sub-fnb">
+                                    <li><a href="#">경기통계</a></li>
+                                    <li><a href="#">경제포털</a></li>
+                                    <li><a href="#">부동산 포털</a></li>
+                                    <li><a href="#">한국토지정보 시스템</a></li>
+                                    <li><a href="#">경기 부동산 시스템</a></li>
+                                    <li><a href="#">경기 건축 포털</a></li>
+                                    <li><a href="#">디자인 경기</a></li>
+                                    <li><a href="#">출장연수 정보 시스템</a></li>
+                                    <li><a href="#">투자유치 포털</a></li>
+                                    <li><a href="#">황해 경제 자유 구역청</a></li>
+                                    <li><a href="#">규제 정보 포털</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h4><a href="#"><i class="fas fa-plus-square"></i> 소통</a></h4>
+                                <ul class="sub-fnb">
+                                    <li><a href="#">열린도지사실</a></li>
+                                    <li><a href="#">도민제안 아이디어 카페</a></li>
+                                    <li><a href="#">여론조사</a></li>
+                                    <li><a href="#">경기도 학생기자단</a></li>
+                                    <li><a href="#">경기도 꿈나무 하우스</a></li>
+                                    <li><a href="#">굿모닝 적극행정</a></li>
+                                    <li><a href="#">경기 소비자 정보센터</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h4><a href="#"><i class="fas fa-plus-square"></i> 뉴스</a></h4>
+                                <ul class="sub-fnb">
+                                    <li><a href="#">경기도 뉴스포털</a></li>
+                                    <li><a href="#">경기도의회 웹진</a></li>
+                                    <li><a href="#">g-life</a></li>
+                                    <li><a href="#">소셜 Live 경기</a></li>
+                                    <li><a href="#">기상청</a></li>
+                                    <li><a href="#">영상속 세상</a></li>
+                                    <li><a href="#">g-tv</a></li>
+                                    <li><a href="#">경기 멀티미디어 자료실</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h4><a href="#"><i class="fas fa-plus-square"></i> 민원</a></h4>
+                                <ul class="sub-fnb">
+                                    <li><a href="#">불량식품신고</a></li>
+                                    <li><a href="#">경기도 헬프라인</a></li>
+                                    <li><a href="#">기업 sos 신청</a></li>
+                                    <li><a href="#">콜센터 민원조회</a></li>
+                                    <li><a href="#">원산지 종합관리 시스템</a></li>
+                                    <li><a href="#">환경신문고</a></li>
+                                    <li><a href="#">국민신문고</a></li>
+                                    <li><a href="#">경기옴부즈만</a></li>
+                                    <li><a href="#">국민위원회 공익신고</a></li>
+                                    <li><a href="#">공직자부조리신고</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h4 class="last"><a href="#"><i class="fas fa-plus-square"></i> 생활/복지</a></h4>
+                                <ul class="sub-fnb last">
+                                    <li><a href="#">온라인 행정심판</a></li>
+                                    <li><a href="#">행정자치부 전자관보</a></li>
+                                    <li><a href="#">경기도 공동체 지원센터</a></li>
+                                    <li><a href="#">여성 비전센터</a></li>
+                                    <li><a href="#">아이사랑 보육 포털</a></li>
+                                    <li><a href="#">다누리 지원 포털</a></li>
+                                    <li><a href="#">경기도 평생 교육 진흥원</a></li>
+                                    <li><a href="#">지식 (Greek) 캠퍼스</a></li>
+                                    <li><a href="#">경기 인재 개발원</a></li>
+                                    <li><a href="#">경기 일자리 재단</a></li>
+                                    <li><a href="#">경기 버스 정보 시스템</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </article>
+                <article>
+                    <h2>패밀리사이트</h2>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <nav class="info-box">
+                                <ul>
+                                    <li><a href="#"><i class="fas fa-bars"></i> 회사소개</a></li>
+                                    <li><a href="#"><i class="fas fa-bars"></i> 서비스이용약관</a></li>
+                                    <li><a href="#"><i class="fas fa-bars"></i> 개인정보취급방침</a></li>
+                                    <li><a href="#"><i class="fas fa-bars"></i> 이메일무단수집거부</a></li>
+                                    <li><a href="#"><i class="fas fa-bars"></i> 고객센터</a></li>
+                                    <li><a href="#"><i class="fas fa-bars"></i> 바로가기</a></li>
+                                    <li><a href="#"><i class="fas fa-bars"></i> 회사소개</a></li>
+                                    <li><a href="#"><i class="fas fa-bars"></i> 서비스이용약관</a></li>
+                                    <li><a href="#"><i class="fas fa-bars"></i> 개인정보취급방침</a></li>
+                                    <li><a href="#"><i class="fas fa-bars"></i> 이메일무단수집거부</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </article>
+                <article>
+                    <h2>SNS바로가기</h2>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <nav class="social-box">
+                                <ul>
+                                    <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-google"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-vimeo"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-yahoo"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-snapchat-ghost"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-skype"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-android"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-vimeo"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-tumblr"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-vine"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-foursquare"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-stumbleupon"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-flickr"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-yahoo"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-reddit"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-android"></i></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </article>
+                <article>
+                    <h2>주요사이트</h2>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="banner-box">
+                                <div id="banner-slider" class="banner-slider">
+                                    <a href="#"><img src="<c:url value="/resources/images/clients/pages_0001.jpg"/>"/></a>
+                                    <a href="#"><img src="<c:url value="/resources/images/clients/pages_0002.jpg"/>"/></a>
+                                    <a href="#"><img src="<c:url value="/resources/images/clients/pages_0003.jpg"/>"/></a>
+                                    <a href="#"><img src="<c:url value="/resources/images/clients/pages_0004.jpg"/>"/></a>
+                                    <a href="#"><img src="<c:url value="/resources/images/clients/pages_0005.jpg"/>"/></a>
+                                    <a href="#"><img src="<c:url value="/resources/images/clients/pages_0006.jpg"/>"/></a>
+                                    <a href="#"><img src="<c:url value="/resources/images/clients/pages_0007.jpg"/>"/></a>
+                                    <a href="#"><img src="<c:url value="/resources/images/clients/pages_0008.jpg"/>"/></a>
+                                    <a href="#"><img src="<c:url value="/resources/images/clients/pages_0009.jpg"/>"/></a>
+                                    <a href="#"><img src="<c:url value="/resources/images/clients/pages_0010.jpg"/>"/></a>
+                                    <a href="#"><img src="<c:url value="/resources/images/clients/pages_0011.jpg"/>"/></a>
+                                    <a href="#"><img src="<c:url value="/resources/images/clients/pages_0012.jpg"/>"/></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </footer>
+            <div class="address-box">
+                <div class="address">
+                    <article>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="company-info">
+                                    주소 : 대전광역시 유성구 봉명로93 (주)노라조<br>
+                                    TEL : 02-123-4567 / FAX : 042-123-4567 / E-mail : webmaster@test.com
+                                    <br> COPYRIGHT 2021 IDREAMFACTORY ALL RIGHTS RESERVED.
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <nav class="social-box float-right">
+                                    <ul>
+                                        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-google"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-vimeo"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-yahoo"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-snapchat-ghost"></i></a></li>
+                                        <!-- <li><a href="#"><i class="fab fa-skype"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-android"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-vimeo"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-tumblr"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-vine"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-foursquare"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-stumbleupon"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-flickr"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-yahoo"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-reddit"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-rss"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-android"></i></a></li> -->
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--#wrap-->
+<script>
+	//bxslider heiht 0 처리
+	document.documentElement.addEventListener('DOMContentLoaded', function(event)  {
+	    var $tgt = $('.bx-viewport')[0];
+	    var tgt = document.querySelector('.bx-viewport');
+	    tgt.style.height = ""
+	    tgt.removeAttribute('height');
+	    tgt.style.removeProperty('height');
+	    $tgt.css('height', '');
+	    $tgt.removeAttr('height');
+	}, false);
+</script>
+
+</body>
+
+</html>

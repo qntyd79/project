@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE form-validation PUBLIC 
+    "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.1//EN" 
+    "http://jakarta.apache.org/commons/dtds/validator_1_1.dtd">
+
+<form-validation>
+    <formset>
+        <form name="categoryVO">        	      	
+			<field property="name" depends="required">
+        		<arg0 key="label.name" />
+			</field>
+			<field property="pass" depends="required">
+        		<arg0 key="label.pass" />
+			</field>				
+			<field property="kind" depends="required">
+        		<arg0 key="label.kind" />
+			</field>			
+			<field property="title" depends="required">
+        		<arg0 key="label.categorytitle" />
+			</field>								
+        </form>
+    </formset>
+</form-validation>
