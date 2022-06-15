@@ -6,3 +6,148 @@
 2022-6월-15 09:46:51 오전 [http-nio-8080-exec-1] INFO  com.company.bbs.HomeController - Welcome home! The client locale is ko.
 2022-6월-15 09:46:51 오전 [http-nio-8080-exec-3] INFO  com.company.bbs.HomeController - Welcome home! The client locale is ko.
 2022-6월-15 09:46:51 오전 [http-nio-8080-exec-2] INFO  com.company.bbs.HomeController - Welcome home! The client locale is ko.
+2022-6월-15 10:02:22 오전 [main] INFO  org.springframework.jdbc.datasource.DriverManagerDataSource - Loaded JDBC driver: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+2022-6월-15 10:02:23 오전 [main] INFO  org.springmodules.validation.commons.DefaultValidatorFactory - Loading validation configurations from [class path resource [validator/config/validator-rules.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/attachValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/boardValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/categoryValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/commentValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/config/validator-rules.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/emailValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/memberValidator.xml]]
+2022-6월-15 10:02:27 오전 [http-nio-8080-exec-1] INFO  com.company.bbs.HomeController - Welcome home! The client locale is ko.
+2022-6월-15 10:02:35 오전 [http-nio-8080-exec-2] INFO  com.company.bbs.HomeController - Welcome home! The client locale is ko.
+2022-6월-15 10:02:42 오전 [http-nio-8080-exec-4] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is ko.
+2022-6월-15 10:02:42 오전 [http-nio-8080-exec-4] INFO  com.company.bbs.HomeController - Session locale is ko.
+2022-6월-15 10:02:42 오전 [http-nio-8080-exec-4] INFO  com.company.bbs.HomeController - site.title : 스프링사이트  
+2022-6월-15 10:02:42 오전 [http-nio-8080-exec-4] INFO  com.company.bbs.HomeController - site.count : 첫번째 테스트 사이트 입니다. 
+2022-6월-15 10:02:42 오전 [http-nio-8080-exec-4] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:02:44 오전 [http-nio-8080-exec-2] INFO  com.company.bbs.utill.CommonExceptionAdvice - org.springframework.web.servlet.NoHandlerFoundException: No handler found for GET /favicon.ico
+2022-6월-15 10:02:52 오전 [http-nio-8080-exec-5] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is ko.
+2022-6월-15 10:02:52 오전 [http-nio-8080-exec-5] INFO  com.company.bbs.HomeController - Session locale is ko.
+2022-6월-15 10:02:52 오전 [http-nio-8080-exec-5] INFO  com.company.bbs.HomeController - site.title : 스프링사이트  
+2022-6월-15 10:02:52 오전 [http-nio-8080-exec-5] INFO  com.company.bbs.HomeController - site.count : 첫번째 테스트 사이트 입니다. 
+2022-6월-15 10:02:52 오전 [http-nio-8080-exec-5] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:02:58 오전 [http-nio-8080-exec-9] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is ko.
+2022-6월-15 10:02:58 오전 [http-nio-8080-exec-9] INFO  com.company.bbs.HomeController - Session locale is ko.
+2022-6월-15 10:02:58 오전 [http-nio-8080-exec-9] INFO  com.company.bbs.HomeController - site.title : 스프링사이트  
+2022-6월-15 10:02:58 오전 [http-nio-8080-exec-9] INFO  com.company.bbs.HomeController - site.count : 첫번째 테스트 사이트 입니다. 
+2022-6월-15 10:02:58 오전 [http-nio-8080-exec-9] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:04:18 오전 [http-nio-8080-exec-1] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is ko.
+2022-6월-15 10:04:18 오전 [http-nio-8080-exec-1] INFO  com.company.bbs.HomeController - Session locale is ko.
+2022-6월-15 10:04:18 오전 [http-nio-8080-exec-1] INFO  com.company.bbs.HomeController - site.title : 스프링사이트  
+2022-6월-15 10:04:18 오전 [http-nio-8080-exec-1] INFO  com.company.bbs.HomeController - site.count : 첫번째 테스트 사이트 입니다. 
+2022-6월-15 10:04:18 오전 [http-nio-8080-exec-1] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:04:21 오전 [http-nio-8080-exec-5] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is ko.
+2022-6월-15 10:04:21 오전 [http-nio-8080-exec-5] INFO  com.company.bbs.HomeController - Session locale is ko.
+2022-6월-15 10:04:21 오전 [http-nio-8080-exec-5] INFO  com.company.bbs.HomeController - site.title : 스프링사이트  
+2022-6월-15 10:04:21 오전 [http-nio-8080-exec-5] INFO  com.company.bbs.HomeController - site.count : 첫번째 테스트 사이트 입니다. 
+2022-6월-15 10:04:21 오전 [http-nio-8080-exec-5] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:04:27 오전 [http-nio-8080-exec-10] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is ko.
+2022-6월-15 10:04:27 오전 [http-nio-8080-exec-10] INFO  com.company.bbs.HomeController - Session locale is ko.
+2022-6월-15 10:04:27 오전 [http-nio-8080-exec-10] INFO  com.company.bbs.HomeController - site.title : 스프링사이트  
+2022-6월-15 10:04:27 오전 [http-nio-8080-exec-10] INFO  com.company.bbs.HomeController - site.count : 첫번째 테스트 사이트 입니다. 
+2022-6월-15 10:04:27 오전 [http-nio-8080-exec-10] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:04:30 오전 [http-nio-8080-exec-7] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is ko.
+2022-6월-15 10:04:30 오전 [http-nio-8080-exec-7] INFO  com.company.bbs.HomeController - Session locale is ko.
+2022-6월-15 10:04:30 오전 [http-nio-8080-exec-7] INFO  com.company.bbs.HomeController - site.title : 스프링사이트  
+2022-6월-15 10:04:30 오전 [http-nio-8080-exec-7] INFO  com.company.bbs.HomeController - site.count : 첫번째 테스트 사이트 입니다. 
+2022-6월-15 10:04:30 오전 [http-nio-8080-exec-7] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:04:32 오전 [http-nio-8080-exec-3] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is ko.
+2022-6월-15 10:04:32 오전 [http-nio-8080-exec-3] INFO  com.company.bbs.HomeController - Session locale is ko.
+2022-6월-15 10:04:32 오전 [http-nio-8080-exec-3] INFO  com.company.bbs.HomeController - site.title : 스프링사이트  
+2022-6월-15 10:04:32 오전 [http-nio-8080-exec-3] INFO  com.company.bbs.HomeController - site.count : 첫번째 테스트 사이트 입니다. 
+2022-6월-15 10:04:32 오전 [http-nio-8080-exec-3] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:04:34 오전 [http-nio-8080-exec-6] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is ko.
+2022-6월-15 10:04:34 오전 [http-nio-8080-exec-6] INFO  com.company.bbs.HomeController - Session locale is ko.
+2022-6월-15 10:04:34 오전 [http-nio-8080-exec-6] INFO  com.company.bbs.HomeController - site.title : 스프링사이트  
+2022-6월-15 10:04:34 오전 [http-nio-8080-exec-6] INFO  com.company.bbs.HomeController - site.count : 첫번째 테스트 사이트 입니다. 
+2022-6월-15 10:04:34 오전 [http-nio-8080-exec-6] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:04:35 오전 [http-nio-8080-exec-8] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is ko.
+2022-6월-15 10:04:35 오전 [http-nio-8080-exec-8] INFO  com.company.bbs.HomeController - Session locale is ko.
+2022-6월-15 10:04:35 오전 [http-nio-8080-exec-8] INFO  com.company.bbs.HomeController - site.title : 스프링사이트  
+2022-6월-15 10:04:35 오전 [http-nio-8080-exec-8] INFO  com.company.bbs.HomeController - site.count : 첫번째 테스트 사이트 입니다. 
+2022-6월-15 10:04:35 오전 [http-nio-8080-exec-8] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:04:36 오전 [http-nio-8080-exec-9] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is ko.
+2022-6월-15 10:04:36 오전 [http-nio-8080-exec-9] INFO  com.company.bbs.HomeController - Session locale is ko.
+2022-6월-15 10:04:36 오전 [http-nio-8080-exec-9] INFO  com.company.bbs.HomeController - site.title : 스프링사이트  
+2022-6월-15 10:04:36 오전 [http-nio-8080-exec-9] INFO  com.company.bbs.HomeController - site.count : 첫번째 테스트 사이트 입니다. 
+2022-6월-15 10:04:36 오전 [http-nio-8080-exec-9] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:04:37 오전 [http-nio-8080-exec-4] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is ko.
+2022-6월-15 10:04:37 오전 [http-nio-8080-exec-4] INFO  com.company.bbs.HomeController - Session locale is ko.
+2022-6월-15 10:04:37 오전 [http-nio-8080-exec-4] INFO  com.company.bbs.HomeController - site.title : 스프링사이트  
+2022-6월-15 10:04:37 오전 [http-nio-8080-exec-4] INFO  com.company.bbs.HomeController - site.count : 첫번째 테스트 사이트 입니다. 
+2022-6월-15 10:04:37 오전 [http-nio-8080-exec-4] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:06:44 오전 [http-nio-8080-exec-5] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is ko.
+2022-6월-15 10:06:44 오전 [http-nio-8080-exec-5] INFO  com.company.bbs.HomeController - Session locale is ko.
+2022-6월-15 10:06:44 오전 [http-nio-8080-exec-5] INFO  com.company.bbs.HomeController - site.title : 스프링사이트  
+2022-6월-15 10:06:44 오전 [http-nio-8080-exec-5] INFO  com.company.bbs.HomeController - site.count : 첫번째 테스트 사이트 입니다. 
+2022-6월-15 10:06:44 오전 [http-nio-8080-exec-5] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:06:52 오전 [http-nio-8080-exec-10] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is ko.
+2022-6월-15 10:06:52 오전 [http-nio-8080-exec-10] INFO  com.company.bbs.HomeController - Session locale is ko.
+2022-6월-15 10:06:52 오전 [http-nio-8080-exec-10] INFO  com.company.bbs.HomeController - site.title : 스프링사이트  
+2022-6월-15 10:06:52 오전 [http-nio-8080-exec-10] INFO  com.company.bbs.HomeController - site.count : 첫번째 테스트 사이트 입니다. 
+2022-6월-15 10:06:52 오전 [http-nio-8080-exec-10] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:06:54 오전 [http-nio-8080-exec-7] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is ko.
+2022-6월-15 10:06:54 오전 [http-nio-8080-exec-7] INFO  com.company.bbs.HomeController - Session locale is ko.
+2022-6월-15 10:06:54 오전 [http-nio-8080-exec-7] INFO  com.company.bbs.HomeController - site.title : 스프링사이트  
+2022-6월-15 10:06:54 오전 [http-nio-8080-exec-7] INFO  com.company.bbs.HomeController - site.count : 첫번째 테스트 사이트 입니다. 
+2022-6월-15 10:06:54 오전 [http-nio-8080-exec-7] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:06:56 오전 [http-nio-8080-exec-3] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is ko.
+2022-6월-15 10:06:56 오전 [http-nio-8080-exec-3] INFO  com.company.bbs.HomeController - Session locale is ko.
+2022-6월-15 10:06:56 오전 [http-nio-8080-exec-3] INFO  com.company.bbs.HomeController - site.title : 스프링사이트  
+2022-6월-15 10:06:56 오전 [http-nio-8080-exec-3] INFO  com.company.bbs.HomeController - site.count : 첫번째 테스트 사이트 입니다. 
+2022-6월-15 10:06:56 오전 [http-nio-8080-exec-3] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:07:00 오전 [http-nio-8080-exec-6] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is ko.
+2022-6월-15 10:07:00 오전 [http-nio-8080-exec-6] INFO  com.company.bbs.HomeController - Session locale is ko.
+2022-6월-15 10:07:00 오전 [http-nio-8080-exec-6] INFO  com.company.bbs.HomeController - site.title : 스프링사이트  
+2022-6월-15 10:07:00 오전 [http-nio-8080-exec-6] INFO  com.company.bbs.HomeController - site.count : 첫번째 테스트 사이트 입니다. 
+2022-6월-15 10:07:00 오전 [http-nio-8080-exec-6] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:08:29 오전 [http-nio-8080-exec-4] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is ko.
+2022-6월-15 10:08:29 오전 [http-nio-8080-exec-4] INFO  com.company.bbs.HomeController - Session locale is ko.
+2022-6월-15 10:08:29 오전 [http-nio-8080-exec-4] INFO  com.company.bbs.HomeController - site.title : 스프링사이트  
+2022-6월-15 10:08:29 오전 [http-nio-8080-exec-4] INFO  com.company.bbs.HomeController - site.count : 첫번째 테스트 사이트 입니다. 
+2022-6월-15 10:08:29 오전 [http-nio-8080-exec-4] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:08:34 오전 [http-nio-8080-exec-2] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is ko.
+2022-6월-15 10:08:34 오전 [http-nio-8080-exec-2] INFO  com.company.bbs.HomeController - Session locale is ko.
+2022-6월-15 10:08:34 오전 [http-nio-8080-exec-2] INFO  com.company.bbs.HomeController - site.title : 스프링사이트  
+2022-6월-15 10:08:34 오전 [http-nio-8080-exec-2] INFO  com.company.bbs.HomeController - site.count : 첫번째 테스트 사이트 입니다. 
+2022-6월-15 10:08:34 오전 [http-nio-8080-exec-2] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:09:25 오전 [main] INFO  org.springframework.jdbc.datasource.DriverManagerDataSource - Loaded JDBC driver: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+2022-6월-15 10:09:26 오전 [main] INFO  org.springmodules.validation.commons.DefaultValidatorFactory - Loading validation configurations from [class path resource [validator/config/validator-rules.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/attachValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/boardValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/categoryValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/commentValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/config/validator-rules.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/emailValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/memberValidator.xml]]
+2022-6월-15 10:09:30 오전 [http-nio-8080-exec-1] INFO  com.company.bbs.HomeController - Welcome home! The client locale is ko.
+2022-6월-15 10:09:30 오전 [http-nio-8080-exec-2] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is en.
+2022-6월-15 10:09:30 오전 [http-nio-8080-exec-2] INFO  com.company.bbs.HomeController - Session locale is en.
+2022-6월-15 10:09:30 오전 [http-nio-8080-exec-2] INFO  com.company.bbs.HomeController - site.title : Spring test site 
+2022-6월-15 10:09:30 오전 [http-nio-8080-exec-2] INFO  com.company.bbs.HomeController - site.count : This is 첫번째 test site. 
+2022-6월-15 10:09:30 오전 [http-nio-8080-exec-2] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:09:36 오전 [http-nio-8080-exec-3] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is ko.
+2022-6월-15 10:09:36 오전 [http-nio-8080-exec-3] INFO  com.company.bbs.HomeController - Session locale is ko.
+2022-6월-15 10:09:36 오전 [http-nio-8080-exec-3] INFO  com.company.bbs.HomeController - site.title : 스프링사이트  
+2022-6월-15 10:09:36 오전 [http-nio-8080-exec-3] INFO  com.company.bbs.HomeController - site.count : 첫번째 테스트 사이트 입니다. 
+2022-6월-15 10:09:36 오전 [http-nio-8080-exec-3] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:09:40 오전 [http-nio-8080-exec-4] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is en.
+2022-6월-15 10:09:40 오전 [http-nio-8080-exec-4] INFO  com.company.bbs.HomeController - Session locale is en.
+2022-6월-15 10:09:40 오전 [http-nio-8080-exec-4] INFO  com.company.bbs.HomeController - site.title : Spring test site 
+2022-6월-15 10:09:40 오전 [http-nio-8080-exec-4] INFO  com.company.bbs.HomeController - site.count : This is 첫번째 test site. 
+2022-6월-15 10:09:40 오전 [http-nio-8080-exec-4] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:10:50 오전 [Catalina-utility-1] INFO  org.springframework.jdbc.datasource.DriverManagerDataSource - Loaded JDBC driver: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+2022-6월-15 10:10:51 오전 [Catalina-utility-1] INFO  org.springmodules.validation.commons.DefaultValidatorFactory - Loading validation configurations from [class path resource [validator/config/validator-rules.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/attachValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/boardValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/categoryValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/commentValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/config/validator-rules.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/emailValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/memberValidator.xml]]
+2022-6월-15 10:10:57 오전 [http-nio-8080-exec-8] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is en.
+2022-6월-15 10:10:57 오전 [http-nio-8080-exec-8] INFO  com.company.bbs.HomeController - Session locale is en.
+2022-6월-15 10:10:57 오전 [http-nio-8080-exec-8] INFO  com.company.bbs.HomeController - site.title : Spring test site 
+2022-6월-15 10:10:57 오전 [http-nio-8080-exec-8] INFO  com.company.bbs.HomeController - site.count : This is 첫번째 test site. 
+2022-6월-15 10:10:57 오전 [http-nio-8080-exec-8] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:11:01 오전 [http-nio-8080-exec-9] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is en.
+2022-6월-15 10:11:01 오전 [http-nio-8080-exec-9] INFO  com.company.bbs.HomeController - Session locale is en.
+2022-6월-15 10:11:01 오전 [http-nio-8080-exec-9] INFO  com.company.bbs.HomeController - site.title : Spring test site 
+2022-6월-15 10:11:01 오전 [http-nio-8080-exec-9] INFO  com.company.bbs.HomeController - site.count : This is 첫번째 test site. 
+2022-6월-15 10:11:01 오전 [http-nio-8080-exec-9] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:11:32 오전 [http-nio-8080-exec-7] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is ko.
+2022-6월-15 10:11:32 오전 [http-nio-8080-exec-7] INFO  com.company.bbs.HomeController - Session locale is ko.
+2022-6월-15 10:11:32 오전 [http-nio-8080-exec-7] INFO  com.company.bbs.HomeController - site.title : 스프링사이트  
+2022-6월-15 10:11:32 오전 [http-nio-8080-exec-7] INFO  com.company.bbs.HomeController - site.count : 첫번째 테스트 사이트 입니다. 
+2022-6월-15 10:11:32 오전 [http-nio-8080-exec-7] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:11:35 오전 [http-nio-8080-exec-1] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is en.
+2022-6월-15 10:11:35 오전 [http-nio-8080-exec-1] INFO  com.company.bbs.HomeController - Session locale is en.
+2022-6월-15 10:11:35 오전 [http-nio-8080-exec-1] INFO  com.company.bbs.HomeController - site.title : Spring test site 
+2022-6월-15 10:11:35 오전 [http-nio-8080-exec-1] INFO  com.company.bbs.HomeController - site.count : This is 첫번째 test site. 
+2022-6월-15 10:11:35 오전 [http-nio-8080-exec-1] INFO  com.company.bbs.HomeController - not.exist : default text
+2022-6월-15 10:11:36 오전 [http-nio-8080-exec-3] INFO  com.company.bbs.HomeController - Welcome i18n! The client locale is ko.
+2022-6월-15 10:11:36 오전 [http-nio-8080-exec-3] INFO  com.company.bbs.HomeController - Session locale is ko.
+2022-6월-15 10:11:36 오전 [http-nio-8080-exec-3] INFO  com.company.bbs.HomeController - site.title : 스프링사이트  
+2022-6월-15 10:11:36 오전 [http-nio-8080-exec-3] INFO  com.company.bbs.HomeController - site.count : 첫번째 테스트 사이트 입니다. 
+2022-6월-15 10:11:36 오전 [http-nio-8080-exec-3] INFO  com.company.bbs.HomeController - not.exist : default text

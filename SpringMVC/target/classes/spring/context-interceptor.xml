@@ -14,13 +14,6 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
-	<!-- 지역언어변경 인터셉터 설정 -->
-	<mvc:interceptors>
-		<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-			<property name="paramName" value="lang" />
-		</bean>
-	</mvc:interceptors>
-	
 	<!-- 로그인 세션 인터셉터 설정 -->
 	<mvc:interceptors>
         <mvc:interceptor>

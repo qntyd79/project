@@ -41,7 +41,7 @@ public class HomeController {
 	
 	@Autowired
 	MessageSource messageSource;
-
+	/* https://offbyone.tistory.com/24 */
 	@RequestMapping(value = "i18n.do", method = RequestMethod.GET) 
 	public String i18n(Locale locale, HttpServletRequest request, Model model) throws Exception { 
 		
