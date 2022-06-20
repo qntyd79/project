@@ -212,6 +212,7 @@
 										    url : "${path}/modules/comment/ajaxlist.do?board_idx=" + board_idx,//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
 	    								    dataType : "text",
 	 									    success : function(result){
+	 									    	// 댓글 등록폼을 가져옴
 										    	$("#result").html(result); //div에 받아온 값을 넣는다.
 										    	//alert("통신 데이터 값 : " + result);
 										    	console.log("호출성공");

@@ -2,6 +2,7 @@ package com.company.bbs.controller.board;
 
 import java.io.File;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.ibatis.annotations.ResultMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,6 +44,7 @@ import com.company.bbs.utill.PageMaker;
 import com.company.bbs.utill.UploadFileUtils;
 import com.company.bbs.vo.attach.AttachVO;
 import com.company.bbs.vo.board.BoardVO;
+import com.company.bbs.vo.comment.CommentVO;
 
 @Controller
 @SessionAttributes("memberVO")
@@ -108,6 +113,29 @@ public class BoardController {
 
 		return "modules/board/board_list";
 	}
+	
+	@GetMapping(value ="ajaxlist.do")
+	public String indexListAjax(Model model, @ModelAttribute Criteria criteria) throws Exception {
+
+		logger.info("ajax 글목록");
+		
+		List<ResultMap> list = new ArrayList<>();
+
+		PageMaker pageMaker = new PageMaker();
+
+		pageMaker.setCriteria(criteria);
+		pageMaker.setTotalCount(service.getCount(criteria));
+		pageMaker.setNoticeCount(service.getNoticeCount(criteria));
+
+		model.addAttribute("list", service.getList(criteria));
+		model.addAttribute("noticelist", service.getNoticeList(criteria));
+		model.addAttribute("categoryname", service.getCategory());
+		model.addAttribute("categorylist", service.getCategoryList());
+		model.addAttribute("categoryselect", criteria.getCategory_idx());
+		model.addAttribute("pageMaker", pageMaker);
+
+		return "modules/board/ajax_board_list";
+	}
 
 	// 글목록 (ModelAndView)
 	@RequestMapping(value = "mvlist.do")
@@ -173,7 +201,20 @@ public class BoardController {
 
 		return "modules/board/board_write";
 	}
+	
+	// ajax 글등록폼
+	@RequestMapping(value = "ajaxwrite.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String ajaxWrite(Model model, @ModelAttribute Criteria criteria, @ModelAttribute("boardVO") BoardVO boardVO)
+			throws Exception {
 
+		logger.info("ajax 글쓰기");
+		
+		model.addAttribute("boardVO", boardVO);
+		model.addAttribute("categorylist", service.getCategoryList());
+
+		return "modules/board/ajax_board_write";
+	}
+			
 	// 답글쓰기
 	@RequestMapping(value = "reply.do", method = RequestMethod.GET)
 	public ModelAndView Reply(@ModelAttribute Criteria criteria, @RequestParam int board_idx) throws Exception {

@@ -42,7 +42,6 @@ public class CommentRestController {
 	BoardService bservice;
 	
 	// 댓글등록
-	@ResponseBody
 	@RequestMapping(value = "ajaxInsert", method = RequestMethod.POST)
 	public ResponseEntity<String> Insert(@RequestBody CommentVO commentVO) {
 
@@ -62,8 +61,7 @@ public class CommentRestController {
 		return entity;
 	}	
 	
-	// 댓글목록
-	@ResponseBody
+	// 댓글목록 data사용 
 	@RequestMapping(value = "ajaxlist/all/{board_idx}", method = RequestMethod.GET)
 	public ResponseEntity<List<CommentVO>> List(@PathVariable("board_idx") int board_idx, Criteria criteria) {
 
@@ -79,8 +77,7 @@ public class CommentRestController {
 		return entity;
 	}
 
-	// 댓글목록페이징
-	@ResponseBody
+	// 댓글목록페이징 data.list
 	@RequestMapping(value = "ajaxlist/{board_idx}/{page}", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> List(@PathVariable("board_idx") int board_idx, @PathVariable("page") int page) {
 
@@ -114,7 +111,6 @@ public class CommentRestController {
 	}
 
 	// 댓글보기
-	@ResponseBody
 	@RequestMapping(value = "ajaxlist/read/{comment_idx}", method = RequestMethod.GET)
 	public ResponseEntity<CommentVO> Read(@PathVariable("comment_idx") int comment_idx) {
 
@@ -132,7 +128,6 @@ public class CommentRestController {
 	}
 
 	// 댓글수정
-	@ResponseBody
 	@RequestMapping(value = "ajaxlist/modify/{comment_idx}", method = { RequestMethod.PUT, RequestMethod.PATCH })
 	public ResponseEntity<String> Modify(@PathVariable("comment_idx") int comment_idx, @RequestBody CommentVO commentVO) {
 
@@ -151,7 +146,6 @@ public class CommentRestController {
 	}
 
 	// 댓글삭제
-	@ResponseBody
 	@RequestMapping(value = "ajaxlist/delete/{comment_idx}", method = RequestMethod.DELETE)
 	public ResponseEntity<String> Delete(@PathVariable("comment_idx") int comment_idx) {
 

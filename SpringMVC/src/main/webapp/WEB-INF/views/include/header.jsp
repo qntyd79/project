@@ -60,7 +60,7 @@
                                         <li><a href="/modules/comment/list.do">댓글게시판</a></li>
                                         <li><a href="/modules/attach/list.do">파일게시판</a></li>        
                                         <li><a href="/modules/email/list.do">메일게시판</a></li>
-                                        <li><a href="#">메뉴추가</a></li>
+                                        <li><a href="/modules/board/ajaxlist.do">ajax게시판</a></li>
                                         <li><a href="#">메뉴추가</a></li>
                                         <li><a href="#">메뉴추가</a></li>
                                     </ul>

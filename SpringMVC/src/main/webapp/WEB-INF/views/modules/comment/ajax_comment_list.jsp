@@ -117,8 +117,10 @@
 	
 	    //초기화
 	    getPageList(1);
+	    
+	    //getCommentList();
 	
-	    //댓글목록
+	    //댓글목록(페이징 적용안함)
 	    function getCommentList() {
 	
 	        $.getJSON("${path}/modules/comment/ajaxlist/all/" + board_idx, function(data) {
@@ -126,31 +128,30 @@
 	            var str = "";
 	
 	            $(data).each(function() {
-	                str += "<div class='row'>" +
-	                    "<div class='col-sm-12 col-md-12 col-lg-12'>" +
-	                    "<ul class='content-data-1'>" +
-	                    "<li data-rno='" + this.comment_idx + "'>" +
-	                    "<div class='text-left'>" +
-	                    "<h1 class='title'><p class='modifyname' style='font-weight:400;'>" + this.name + "</p></h1>" +
-	                    "<div class='modifycontent'>" + this.content + "</div>" +
-	                    "<h3 class='desc text-left' style='padding-top:20px;'>" + this.regdate + "</h3>" +
-	                    "<input type='button' value='수정하기' class='modal-open-btn'> " +
-	                    "<input type='button' value='삭제하기' id='deleteBtn'> " +
-	                    "<input type='button' value='댓글달기' id='replyBtn'>" +
-	                    "</div>" +
-	                    "</li>" +
-	                    "</ul>" +
-	                    "</div>" +
-	                    "</div>" +
-	                    "<hr>";
+	            str += "<div class='row'>" +
+	                   "<div class='col-sm-12 col-md-12 col-lg-12'>" +
+	                   "<ul class='content-data-1'>" +
+	                   "<li data-rno='" + this.comment_idx + "'>" +
+	                   "<div class='text-left'>" +
+	                   "<h1 class='title'><p class='modifyname' style='font-weight:400;'>" + this.name + "</p></h1>" +
+	                   "<div class='modifycontent'>" + this.content + "</div>" +
+	                   "<h3 class='desc text-left' style='padding-top:20px;'>" + this.regdate + "</h3>" +
+	                   "<input type='button' value='수정하기' class='modal-open-btn'> " +
+	                   "<input type='button' value='삭제하기' id='deleteBtn'> " +
+	                   "<input type='button' value='댓글달기' id='replyBtn'>" +
+	                   "</div>" +
+	                   "</li>" +
+	                   "</ul>" +
+	                   "</div>" +
+	                   "</div>" +
+	                   "<hr>";
 	            });
 	
-	            $("#replies").html(str);
-	
+	            $("#replies").html(str);	
 	        });
 	    }
 	
-	    //댓글목록페이징
+	    //댓글목록페이징 이거 사용함
 	    function getPageList(page) {
 	
 	        $.getJSON("${path}/modules/comment/ajaxlist/" + board_idx + "/" + page, function(data) {
@@ -187,8 +188,7 @@
 	            $("#replies").html(str);
 	
 	            //페이징 
-	            printPaging(data.pageMaker);
-	
+	            printPaging(data.pageMaker);	
 	        });
 	    }
 	
@@ -249,16 +249,16 @@
 				        headers: { "Content-Type": "application/json", "X-HTTP-Method-Override": "POST" },
 				        dataType: "text",
 				        data: JSON.stringify({ // stringify는 json개체를 string개체로 변환
-				        userid: userid,
-				        pass: pass,
-				        name: name,
-				        email: email,
-				        content: content,
-				        board_idx: board_idx
+				        userid:userid,
+				        pass:pass,
+				        name:name,
+				        email:email,
+				        content:content,
+				        board_idx:board_idx
 				    }),
-				    success: function(result1) {
+				    success: function(result) {
 					    //서비스 성공 시 처리 할 내용
-					    if (result1 == "insertSuccess") {
+					    if (result == "insertSuccess") {
 					      	alert("댓글등록 완료");
 					    }
 					    //댓글목록출력
