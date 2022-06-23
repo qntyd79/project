@@ -5,6 +5,8 @@ import java.util.Arrays;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.company.bbs.vo.attach.AttachVO;
+import com.company.bbs.vo.category.CategoryVO;
+import com.company.bbs.vo.member.MemberVO;
 
 public class BoardVO extends AttachVO {
 
@@ -38,6 +40,7 @@ public class BoardVO extends AttachVO {
 	private MultipartFile[] attach;
 	private int filecnt;
 	private int commentcnt;
+	private CategoryVO categoryVO; //카테고리테이블 조인용
 	
 	public int getCommentcnt() {
 		return commentcnt;
@@ -279,7 +282,14 @@ public class BoardVO extends AttachVO {
 	public void setAttach(MultipartFile[] attach) {
 		this.attach = attach;
 	}
-
+	
+	public CategoryVO getCategoryVO() {
+		return categoryVO;
+	}
+	public void setCategoryVO(CategoryVO categoryVO) {
+		this.categoryVO = categoryVO;
+	}
+	
 	@Override
 	public String toString() {
 		return "BoardVO [board_idx=" + board_idx + ", parent=" + parent + ", depth=" + depth + ", sortno=" + sortno

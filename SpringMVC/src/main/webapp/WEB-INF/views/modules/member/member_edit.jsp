@@ -21,8 +21,13 @@
                             <div class="col-md-12">
                             
                             
-                                <h2><spring:message code="bbs.title.write"/></h2>
-                                <form:form modelAttribute="memberVO" method="post" id="memberForm" name="memberForm" enctype="multipart/form-data" action="insert.do">
+                                <h2><spring:message code="bbs.title.edit"/></h2>
+                                <form:form modelAttribute="memberVO" method="post" id="memberForm" name="memberForm" enctype="multipart/form-data" action="update.do">
+                                	<input type="hidden" name="member_idx" value="<c:out value="${memberVO.member_idx}"/> ">
+                                	<input type="hidden" name="page" value="<c:out value="${criteria.page}"/>" >
+                                	<input type="hidden" name="perPageNum" value="<c:out value="${criteria.perPageNum}"/> ">
+                                	<input type="hidden" name="searchField" value="<c:out value="${criteria.searchField}"/> ">
+                                	<input type="hidden" name="keyWord" value="<c:out value="${criteria.keyWord}"/> ">
                                 	<input type="hidden" name="msgStr" value="<c:out value="${msg}"/> ">  
                                     <fieldset>
                                     	<legend><spring:message code="bbs.table.legend"/></legend>
@@ -44,8 +49,7 @@
                                                                 <option value="<c:out value='${item.category_idx}'/>"
 	                                                                <c:if test="${item.category_idx == categoryselect}">
 	                                                                    <c:out value="selected=selected" />
-	                                                                </c:if> >
-                                                                	<c:out value="${item.title}" />
+	                                                                </c:if>><c:out value="${item.title}" />
                                                                 </option>
                                                             </c:forEach>
                                                         </form:select>

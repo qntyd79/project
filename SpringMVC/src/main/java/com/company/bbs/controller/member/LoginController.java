@@ -50,7 +50,7 @@ public class LoginController {
 		String rawPassword = memberVO.getPass();
 		logger.info("로그인폼 비밀번호 " + rawPassword);
 
-		String encodedPassword = service.getLoginPassword(memberVO.getUserid());
+		String encodedPassword = service.getLoginPassword(memberVO.getEmail());
 		logger.info("DB 비밀번호 " + encodedPassword);
 		
 		boolean passMatch = passwordEncoder.matches(rawPassword, encodedPassword);

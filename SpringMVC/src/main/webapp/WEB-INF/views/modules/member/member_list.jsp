@@ -123,7 +123,7 @@
                                                     <th scope="col">회원이름</th>
                                                     <th scope="col">이메일</th>
                                                     <th scope="col">핸드폰번호</th>
-                                                    <th scope="col">전화번호</th>                                                    
+                                                    <th scope="col">회원구분</th>                                                    
                                                     <th scope="col">포인트</th>
                                                     <th scope="col">메일수신</th>
                                                     <th scope="col">가입일</th>
@@ -146,7 +146,7 @@
                                                     <td>${row.name}</td>
                                                     <td>${row.email}</td>
                                                     <td>${row.hphone}</td>
-                                                    <td>${row.phone}</td>
+                                                    <td>${row.categoryVO.title}</td>
                                                     <td>${row.point}</td>
                                                     <td>${row.mail_check eq '1' ? 'Y' : 'N'}</td>
                                                     <td>${row.join_date}</td>                                                    

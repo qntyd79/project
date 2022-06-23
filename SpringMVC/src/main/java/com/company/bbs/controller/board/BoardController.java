@@ -55,7 +55,7 @@ public class BoardController {
 
 	@Inject
 	private BoardService service;
-	
+
 	@Inject
 	private AttachService fservice;
 
@@ -106,19 +106,19 @@ public class BoardController {
 
 		model.addAttribute("list", service.getList(criteria));
 		model.addAttribute("noticelist", service.getNoticeList(criteria));
-		model.addAttribute("categoryname", service.getCategory());
+		//model.addAttribute("categoryname", service.getCategory());
 		model.addAttribute("categorylist", service.getCategoryList());
 		model.addAttribute("categoryselect", criteria.getCategory_idx());
 		model.addAttribute("pageMaker", pageMaker);
 
 		return "modules/board/board_list";
 	}
-	
-	@GetMapping(value ="ajaxlist.do")
+
+	@RequestMapping(value = "ajaxlist.do")
 	public String indexListAjax(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("ajax 글목록");
-		
+
 		List<ResultMap> list = new ArrayList<>();
 
 		PageMaker pageMaker = new PageMaker();
@@ -141,7 +141,7 @@ public class BoardController {
 	@RequestMapping(value = "mvlist.do")
 	public ModelAndView List(@ModelAttribute Criteria criteria) throws Exception {
 
-		//logger.info("글목록");
+		// logger.info("글목록");
 
 		PageMaker pageMaker = new PageMaker();
 
@@ -195,26 +195,26 @@ public class BoardController {
 			throws Exception {
 
 		logger.info("글쓰기");
-	
+
 		model.addAttribute("boardVO", boardVO);
 		model.addAttribute("categorylist", service.getCategoryList());
 
 		return "modules/board/board_write";
 	}
-	
+
 	// ajax 글등록폼
 	@RequestMapping(value = "ajaxwrite.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String ajaxWrite(Model model, @ModelAttribute Criteria criteria, @ModelAttribute("boardVO") BoardVO boardVO)
 			throws Exception {
 
 		logger.info("ajax 글쓰기");
-		
+
 		model.addAttribute("boardVO", boardVO);
 		model.addAttribute("categorylist", service.getCategoryList());
 
 		return "modules/board/ajax_board_write";
 	}
-			
+
 	// 답글쓰기
 	@RequestMapping(value = "reply.do", method = RequestMethod.GET)
 	public ModelAndView Reply(@ModelAttribute Criteria criteria, @RequestParam int board_idx) throws Exception {
@@ -260,10 +260,10 @@ public class BoardController {
 		String answer = request.getParameter("answer");
 
 		if (getAnswer.equals(answer)) {
-			
+
 			// 글저장프로세스
 			service.insert(boardVO);
-			
+
 			model.addAttribute("msg", "InsertSuccess");
 			model.addAttribute("url", "list.do");
 
@@ -272,11 +272,11 @@ public class BoardController {
 			model.addAttribute("msg", "CaptchaFailed");
 			if (boardVO.getBoard_idx() != 0) {
 				model.addAttribute("url", "reply.do");
-			
+
 				return "modules/board/board_reply";
 			} else {
-				model.addAttribute("url", "write.do");				
-							
+				model.addAttribute("url", "write.do");
+
 				return "modules/board/board_write";
 			}
 		}
@@ -289,57 +289,114 @@ public class BoardController {
 
 	// 글보기
 	@RequestMapping(value = "read.do", method = RequestMethod.GET)
-	public String Read(Model model, @ModelAttribute Criteria criteria, @RequestParam int board_idx, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String Read(Model model, @ModelAttribute Criteria criteria, @RequestParam int board_idx,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		logger.info("글보기");
-		
+
 		// 클라이언트가 보낸 쿠키 읽기 (HttpServletRequest에서 읽기)
 		// 쿠키가 없으면 null이 반환됨
 		Cookie[] cookies = request.getCookies();
-		
+
 		// 비교하기 위해 새로운 쿠키
-        Cookie viewCookie = null;
- 
-        // 쿠키가 있을 경우 
-        if (cookies != null && cookies.length > 0) {
-            for (int i = 0; i < cookies.length; i++) {
-                // Cookie의 name이 cookie + reviewNo와 일치하는 쿠키를 viewCookie에 넣어줌 
-                if (cookies[i].getName().equals("cookie" + board_idx)) { 
-                    System.out.println("처음 쿠키가 생성한 뒤 들어옴.");
-                    viewCookie = cookies[i];
-                }
-            }
-        }
-        
-        if (viewCookie == null) {    
-            System.out.println("cookie 없음");
-            
-            // 쿠키 생성(이름, 값)
-            Cookie newCookie = new Cookie("cookie" + board_idx, "|" + board_idx + "|"); 
-            
-            // 쿠키 시간 설정(쿠키 유지시간 24시간)
-            newCookie.setMaxAge(60 * 60 * 24);
-            
-            // 쿠키 추가
-            response.addCookie(newCookie);
-            
-            // 쿠키를 추가 시키고 조회수 증가시
-            service.increaseCnt(board_idx);   
-            
-        } else {
-        	// 쿠키 값 받아옴.
-            String value = viewCookie.getValue();
-            System.out.println("cookie 값 : " + value);
-        }
-                
-        model.addAttribute("boardVO", service.getView(board_idx));
+		Cookie viewCookie = null;
+
+		// 쿠키가 있을 경우
+		if (cookies != null && cookies.length > 0) {
+			for (int i = 0; i < cookies.length; i++) {
+				// Cookie의 name이 cookie + reviewNo와 일치하는 쿠키를 viewCookie에 넣어줌
+				if (cookies[i].getName().equals("cookie" + board_idx)) {
+					System.out.println("처음 쿠키가 생성한 뒤 들어옴.");
+					viewCookie = cookies[i];
+				}
+			}
+		}
+
+		if (viewCookie == null) {
+			System.out.println("cookie 없음");
+
+			// 쿠키 생성(이름, 값)
+			Cookie newCookie = new Cookie("cookie" + board_idx, "|" + board_idx + "|");
+
+			// 쿠키 시간 설정(쿠키 유지시간 24시간)
+			newCookie.setMaxAge(60 * 60 * 24);
+
+			// 쿠키 추가
+			response.addCookie(newCookie);
+
+			// 쿠키를 추가 시키고 조회수 증가시
+			service.increaseCnt(board_idx);
+
+		} else {
+			// 쿠키 값 받아옴.
+			String value = viewCookie.getValue();
+			System.out.println("cookie 값 : " + value);
+		}
+
+		model.addAttribute("boardVO", service.getView(board_idx));
 		model.addAttribute("prenum", service.getPrevNum(board_idx));
 		model.addAttribute("nextnum", service.getNextNum(board_idx));
 		model.addAttribute("categoryname", service.getCategory());
 		model.addAttribute("categorylist", service.getCategoryList());
 		model.addAttribute("filelist", service.getFileList(board_idx));
-		
+
 		return "modules/board/board_view";
+	}
+
+	// ajax 글보기
+	@RequestMapping(value = "ajaxread.do", method = RequestMethod.GET)
+	public String ajaxRead(Model model, @ModelAttribute Criteria criteria, @RequestParam int board_idx,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		logger.info("글보기");
+
+		// 클라이언트가 보낸 쿠키 읽기 (HttpServletRequest에서 읽기)
+		// 쿠키가 없으면 null이 반환됨
+		Cookie[] cookies = request.getCookies();
+
+		// 비교하기 위해 새로운 쿠키
+		Cookie viewCookie = null;
+
+		// 쿠키가 있을 경우
+		if (cookies != null && cookies.length > 0) {
+			for (int i = 0; i < cookies.length; i++) {
+				// Cookie의 name이 cookie + reviewNo와 일치하는 쿠키를 viewCookie에 넣어줌
+				if (cookies[i].getName().equals("cookie" + board_idx)) {
+					System.out.println("처음 쿠키가 생성한 뒤 들어옴.");
+					viewCookie = cookies[i];
+				}
+			}
+		}
+
+		if (viewCookie == null) {
+			System.out.println("cookie 없음");
+
+			// 쿠키 생성(이름, 값)
+			Cookie newCookie = new Cookie("cookie" + board_idx, "|" + board_idx + "|");
+
+			// 쿠키 시간 설정(쿠키 유지시간 24시간)
+			newCookie.setMaxAge(60 * 60 * 24);
+
+			// 쿠키 추가
+			response.addCookie(newCookie);
+
+			// 쿠키를 추가 시키고 조회수 증가시
+			service.increaseCnt(board_idx);
+
+		} else {
+			// 쿠키 값 받아옴.
+			String value = viewCookie.getValue();
+			System.out.println("cookie 값 : " + value);
+		}
+
+		model.addAttribute("boardVO", service.getView(board_idx));
+		model.addAttribute("prenum", service.getPrevNum(board_idx));
+		model.addAttribute("nextnum", service.getNextNum(board_idx));
+		model.addAttribute("categoryname", service.getCategory());
+		model.addAttribute("categorylist", service.getCategoryList());
+		model.addAttribute("filelist", service.getFileList(board_idx));
+
+		return "modules/board/ajax_board_view";
 	}
 
 	// 글보기
@@ -395,7 +452,7 @@ public class BoardController {
 		String encodedPassword = service.getPassword(boardVO.getBoard_idx());
 
 		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin!@1234")) {
-			//글수정처리프로세스
+			// 글수정처리프로세스
 			service.update(boardVO);
 			model.addAttribute("msg", "UpdateSuccess");
 			model.addAttribute("url", "list.do");
@@ -453,12 +510,11 @@ public class BoardController {
 	// 체크박스글삭제처리(ajax)
 	@ResponseBody
 	@RequestMapping(value = "checkdelete.do", method = RequestMethod.POST)
-	public int checkDelete(Model model, @ModelAttribute Criteria criteria,
-			@ModelAttribute("isAdmin") BoardVO boardVO, @RequestParam(value = "check[]") List<String> valueArr)
-			throws Exception {
+	public int checkDelete(Model model, @ModelAttribute Criteria criteria, @ModelAttribute("isAdmin") BoardVO boardVO,
+			@RequestParam(value = "check[]") List<String> valueArr) throws Exception {
 
 		logger.info("체크박스글삭제처리");
-		
+
 		int result = 0;
 		int checkNum = 0;
 
@@ -467,12 +523,12 @@ public class BoardController {
 			boardVO.setBoard_idx(checkNum);
 			service.delete(boardVO.getBoard_idx());
 		}
-		
+
 		result = 1;
-		
+
 		return result;
 	}
-	
+
 	// 첨부파일 삭제처리
 	@RequestMapping(value = "fileDelete.do", method = RequestMethod.GET)
 	public String attachDelete(Model model, @ModelAttribute Criteria criteria, @ModelAttribute AttachVO attachVO,
@@ -489,35 +545,37 @@ public class BoardController {
 
 		return "/modules/common/common_message";
 	}
-	
+
 	// 첨부파일 다운로드
 	@RequestMapping(value = "fileDownload.do", method = { RequestMethod.POST, RequestMethod.GET })
-	public void fileDownload(@ModelAttribute AttachVO attachVO, @RequestParam int file_idx, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void fileDownload(@ModelAttribute AttachVO attachVO, @RequestParam int file_idx, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 
 		logger.info("파일다운로드");
-		
+
 		AttachVO file = fservice.getView(file_idx);
-		
+
 		String saveFileName = file.getFile_hash_name();
-        String originalFileName = file.getFile_name();
-        
-        // thumb_삭제
-        saveFileName = saveFileName.replace("thumb_","");
+		String originalFileName = file.getFile_name();
+
+		// thumb_삭제
+		saveFileName = saveFileName.replace("thumb_", "");
 		logger.info("thumb_제거 : " + saveFileName);
-        
-        File downloadFile = new File(uploadPath + saveFileName);
-        
-        byte fileByte[] = FileUtils.readFileToByteArray(downloadFile);
-        
-        response.setContentType("application/octet-stream");
-        response.setContentLength(fileByte.length);
-        
-        response.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(originalFileName,"UTF-8") +"\";");
-        response.setHeader("Content-Transfer-Encoding", "binary");
-        
-        response.getOutputStream().write(fileByte);
-        response.getOutputStream().flush();
-        response.getOutputStream().close();
+
+		File downloadFile = new File(uploadPath + saveFileName);
+
+		byte fileByte[] = FileUtils.readFileToByteArray(downloadFile);
+
+		response.setContentType("application/octet-stream");
+		response.setContentLength(fileByte.length);
+
+		response.setHeader("Content-Disposition",
+				"attachment; fileName=\"" + URLEncoder.encode(originalFileName, "UTF-8") + "\";");
+		response.setHeader("Content-Transfer-Encoding", "binary");
+
+		response.getOutputStream().write(fileByte);
+		response.getOutputStream().flush();
+		response.getOutputStream().close();
 	}
 
 	@RequestMapping(value = "captchaImg.do", method = RequestMethod.GET)

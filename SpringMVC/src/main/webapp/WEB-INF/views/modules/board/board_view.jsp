@@ -62,7 +62,7 @@
                                                     <td><c:out value="${boardVO.hit}" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="8" class="text-left" style="padding: 15px;">
+                                                    <td colspan="8" class="text-left" style="height:300px; padding:15px; vertical-align: top;">
                                                         <c:if test="${boardVO.tag == 0}">
                                                             <c:out value="${boardVO.content}" escapeXml="false" />
                                                         </c:if>
@@ -223,7 +223,8 @@
 									    });
 									});
 								</script>
-                                <div id="result"></div>
+                                <div id="result">
+                                </div>
                                 <!-- 코멘트 목록출력 종료 -->
                             </div>
                         </div>

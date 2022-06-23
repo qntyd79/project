@@ -1295,7 +1295,7 @@ $(document).ready(function() {
 
         // 동적추가 파일폼 내 파일명추출 및 변경
         var xid = "item_" + formcount;
-        $(document).on("change", ".upload-hidden_" + formcount, function() {
+        $(document).on("change", ".upload-hidden_" + formcount, function(e) {
 
             var files = $(this);
             var fileName = files[0].files[0].name;
@@ -1345,7 +1345,7 @@ $(document).ready(function() {
         // 동적추가 파일폼 내 삭제버튼 이벤트 처리
         /*
         var xidt = "delItemBtn" + formcount;
-        $(document).on("click", "#delItemBtn" + formcount, function() {
+        $(document).on("click", "#delItemBtn" + formcount, function(e) {
 
             $("#filelist>table>tr").remove("#" + xidt);
             $(this).parent().parent().remove();  
@@ -1354,7 +1354,7 @@ $(document).ready(function() {
 	 	
    	 	// 동적파일폼 삭제 
 	    var xidt = "delItemBtn" + formcount;
-		$(document).on("click", "#delItemBtn" + formcount, function() {			
+		$(document).on("click", "#delItemBtn" + formcount, function(e) {			
 			
 			// 첨부파일 목록에서 삭제
 			$(".filebox>#example li").remove("." + xidt);	
@@ -1367,7 +1367,7 @@ $(document).ready(function() {
         
 
         // 체크박스 처리 삭제버튼 이벤트 처리
-        $(document).on("click", "#del", function() {
+        $(document).on("click", "#del", function(e) {
 
             if ($("input").is(":checked") == true) { //체크된 요소가 있으면               
                 var i = $("input:checked").parents("tr");
@@ -1674,19 +1674,19 @@ $(document).ready(function() {
     
     // 전화번호 자동입력 정규식
     // https://m.blog.naver.com/pcgun70/221722361301
-    $(document).on("keyup", ".phoneNumber", function() { 
+    $(document).on("keyup", ".phoneNumber", function(e) { 
     	$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})/,"$1-$2-$3").replace("--", "-") ); 
     	// copy from https://cublip.tistory.com/326
         //﻿ 원본과 class 명만 바뀐 상태다.
     });
     
     // 사업자번호 자동입력 정규식
-    $(document).on("keyup", ".co_num", function() { 
+    $(document).on("keyup", ".co_num", function(e) { 
     	$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/([0-9]{3})([0-9]{2})([0-9]+)?/,"$1-$2-$3").replace("--", "-") ); 
     });
     
     // 1588-xxxx
-    $(document).on("keyup", ".non_phoneNumber", function() { 
+    $(document).on("keyup", ".non_phoneNumber", function(e) { 
     	$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/([0-9]{2})([0-9]+)?([0-9]{4})/,"$1$2-$3").replace(/^-/, "") ); 
 	});
     
@@ -1747,7 +1747,7 @@ $(document).ready(function() {
     
 	
 	// 회원가입 동의 체크박스 전체 선택
-	$(document).on("click", "#allagree", function () {
+	$(document).on("click", "#allagree", function (e) {
 	    $(this).parents(".checkbox_group").find('input').prop("checked", $(this).is(":checked"));
 			
 		// 버튼 활성화
@@ -1761,7 +1761,7 @@ $(document).ready(function() {
 	});
 
 	// 회원가입 동의 체크박스 개별 선택
-	$(document).on("click", ".normal", function() {
+	$(document).on("click", ".normal", function(e) {
 	    var is_checked = true;
 
 	    $(".checkbox_group .normal").each(function(){

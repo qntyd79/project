@@ -46,8 +46,7 @@
                                                                 <option value="<c:out value='${item.category_idx}'/>"
 	                                                                <c:if test="${item.category_idx == categoryselect}">
 	                                                                    <c:out value="selected=selected" />
-	                                                                </c:if> >
-                                                                	<c:out value="${item.title}" />
+	                                                                </c:if>><c:out value="${item.title}" />
                                                                 </option>
                                                             </c:forEach>
                                                         </form:select>

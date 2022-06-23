@@ -145,8 +145,8 @@ public class MemberDaoImpl implements MemberDao {
 	
 	// 회원로그인 비밀번호 가져오기
 	@Override
-	public String getLoginPassword(String userid) throws Exception {
-		return sqlSession.selectOne("member.getLoginPassword", userid);
+	public String getLoginPassword(String email) throws Exception {
+		return sqlSession.selectOne("member.getLoginPassword", email);
 	}
 
 	// 아이디중복확인

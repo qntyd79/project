@@ -41,6 +41,7 @@ import com.company.bbs.utill.UploadFileUtils;
 import com.company.bbs.vo.attach.AttachVO;
 import com.company.bbs.vo.member.MemberVO;
 
+@SuppressWarnings("unused")
 @Controller
 @RequestMapping("modules/member/*")
 public class MemberController {
@@ -59,12 +60,10 @@ public class MemberController {
 	BCryptPasswordEncoder passwordEncoder;
 
 	// 다국어 지역세션설정
-	@SuppressWarnings("unused")
 	@Autowired
 	private SessionLocaleResolver localeResolver;
 
 	// 다국어 설정
-	@SuppressWarnings("unused")
 	@Autowired
 	private MessageSource messageSource;
 
@@ -252,7 +251,6 @@ public class MemberController {
 	}
 
 	// 회원약관동의폼
-	@SuppressWarnings("unused")
 	@RequestMapping(value = "agree.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String agree(Model model) throws Exception {
 
@@ -293,7 +291,7 @@ public class MemberController {
 		return "modules/member/member_agree";
 	}
 
-	// 회원목록 (Model)
+	// 회원목록(Model)
 	@RequestMapping(value = "list.do")
 	public String List(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
@@ -305,7 +303,7 @@ public class MemberController {
 		pageMaker.setTotalCount(service.getCount(criteria));
 
 		model.addAttribute("list", service.getList(criteria));
-		model.addAttribute("categoryname", service.getCategory());
+		//model.addAttribute("categoryname", service.getCategory());
 		model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
 		model.addAttribute("categoryselect", criteria.getCategory_idx());
 		model.addAttribute("pageMaker", pageMaker);
@@ -469,13 +467,14 @@ public class MemberController {
 		model.addAttribute("categoryname", service.getCategory());
 		model.addAttribute("categorylist", service.getCategoryList(criteria.getKind()));
 		model.addAttribute("categoryselect", criteria.getCategory_idx());
+		model.addAttribute("filelist", service.getFileList(member_idx));
 
 		return "modules/member/member_edit";
 	}
 
 	// 회원수정처리
 	@RequestMapping(value = "update.do", method = RequestMethod.POST)
-	public String Update(Model model, @ModelAttribute MemberVO memberVO, @ModelAttribute Criteria criteria,
+	public String Update(Model model, @ModelAttribute Criteria criteria, @ModelAttribute MemberVO memberVO, 
 			@RequestParam String pass, BindingResult bindingResult) throws Exception {
 
 		logger.info("회원수정처리");
@@ -505,7 +504,7 @@ public class MemberController {
 		return "/modules/common/common_message";
 	}
 
-	// 회원삭제
+	// 회원삭제폼
 	@RequestMapping(value = "delete.do", method = RequestMethod.GET)
 	public String Delete(Model model, @ModelAttribute Criteria criteria, @RequestParam int member_idx)
 			throws Exception {

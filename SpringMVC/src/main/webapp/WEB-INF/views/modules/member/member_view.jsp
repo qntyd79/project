@@ -21,7 +21,7 @@
                             <div class="col-md-12">
                             
                             
-                                <h2><spring:message code="bbs.title.write"/></h2>
+                                <h2><spring:message code="bbs.title.view"/></h2>
                                 <form:form modelAttribute="memberVO" method="post" id="memberForm" name="memberForm" enctype="multipart/form-data" action="update.do">
                                 	<input type="hidden" name="member_idx" value="<c:out value="${memberVO.member_idx}"/>" >
                                     <input type="hidden" name="page" value="<c:out value="${criteria.page}"/>" >
@@ -48,10 +48,9 @@
                                                         <form:select path="category_idx" id="category_idx" name="category_idx" >
                                                             <c:forEach var="item" items="${categorylist}" varStatus="status">
                                                                 <option value="<c:out value='${item.category_idx}'/>"
-	                                                                <c:if test="${item.category_idx == categoryselect}">
+	                                                                <c:if test="${memberVO.category_idx eq item.category_idx}">
 	                                                                    <c:out value="selected=selected" />
-	                                                                </c:if> >
-                                                                	<c:out value="${item.title}" />
+	                                                                </c:if>><c:out value="${item.title}" />
                                                                 </option>
                                                             </c:forEach>
                                                         </form:select>
@@ -107,7 +106,7 @@
                                                 <tr>
                                                     <th><label for="email"><spring:message code="label.email"/></label></th>
                                                     <td class="text-left">
-                                                        <form:input path="email" type="text" placeholder="Email" class="wfull" readonly="readonly" />                                                       
+                                                        <input name="email" type="text" placeholder="Email" class="wfull" value="<c:out value="${memberVO.email}"/>" readonly="readonly" />                                                       
                                                         <form:errors path="email" />
                                                     </td>
                                                 </tr>
@@ -317,7 +316,6 @@
 													<c:if test="${sessionScope.isAdmin == null}">	
 													<li><input type="button" value="<spring:message code="button.list"/>" onClick="location.href='list.do'"/></li>
 													</c:if>
-													<li><input type="button" value="<spring:message code="button.home"/>" onClick="location.href='../../index.do'"/></li>
 													<li><input type="button" value="<spring:message code="button.update"/>" onClick="$(this.form).submit();"/></li>												
 												</ul>
 											</nav>
@@ -338,9 +336,8 @@
 
 <c:import url="/WEB-INF/views/modules/member/member_passchange.jsp"/>
 
-
+<!-- 우편번호 검색 api사용 -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
 <script type="text/javascript">
 
 	$(document).ready(function() {	

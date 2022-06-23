@@ -48,6 +48,7 @@ import com.company.bbs.vo.board.BoardVO;
 import com.company.bbs.vo.email.EmailVO;
 import com.company.bbs.vo.member.MemberVO;
 
+@SuppressWarnings("unused")
 @Service
 public class MemberServiceImpl implements MemberService {
 
@@ -301,7 +302,6 @@ public class MemberServiceImpl implements MemberService {
 			logger.info("-------------- file end --------------\n");
 
 			// UploadFileUtils 사용하여 저장
-			@SuppressWarnings("unused")
 			String savedName = UploadFileUtils.uploadFile(uploadPath, attach.getOriginalFilename(), attach.getBytes());
 		}
 
@@ -434,18 +434,18 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	// 회원저장
-	@SuppressWarnings("unused")
 	@Transactional
 	@Override
 	public void insert(MemberVO memberVO) throws Exception {
 
 		int member_idx = memberVO.getMember_idx();
 		String pass = memberVO.getPass();
-		int level = 10;
+		int level = 10; // 회원등급 관리자1, 정회원9, 일반회원10
 		int point = 100;
 		int approval = 0; // 승인:1 비승인:0
 		int login_cnt = 0;
 		int user_leave = 0; // 탈퇴:1 비탈퇴:0
+		int category_idx = 2;
 
 		// 비밀번호 암호화
 		String pwdBycrypt = passwordEncoder.encode(pass);
@@ -477,6 +477,7 @@ public class MemberServiceImpl implements MemberService {
 		}
 
 		memberVO.setMember_idx(number);
+		memberVO.setCategory_idx(category_idx);
 		memberVO.setPass(pwdBycrypt);
 		memberVO.setLevel(level);
 		memberVO.setPoint(point);
@@ -542,7 +543,6 @@ public class MemberServiceImpl implements MemberService {
 
 			dao.insert(attachVO);
 		}
-
 		// 첨부파일 등록 후 board테이블 filecnt(파일갯수) 업데이트
 		// dao.getAttachCount(attachVO.getMember_idx());
 	}
@@ -660,7 +660,6 @@ public class MemberServiceImpl implements MemberService {
 			boardVO.setHomepage(memberVO2.getHomepage());
 
 			session.setAttribute("boardVO", boardVO);
-			
 		}
 
 		return result;
@@ -684,8 +683,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String getLoginPassword(String userid) throws Exception {
-		return dao.getLoginPassword(userid);
+	public String getLoginPassword(String email) throws Exception {
+		return dao.getLoginPassword(email);
 	}
 
 	// 아이디중복확인

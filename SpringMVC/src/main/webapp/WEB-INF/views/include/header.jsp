@@ -34,7 +34,9 @@
                                     <ul class="dropdown-submenu">
                                         <li><a href="/modules/member/login.do">회원로그인폼</a></li>                                       
                                         <li><a href="/modules/member/auth.do">회원실명인증</a></li>
-                                        <li><a href="#">메뉴추가</a></li>
+                                        <c:if test="${sessionScope.isAdmin != null}">
+                                        <li><a href="/modules/member/list.do">회원목록</a></li>
+                                        </c:if>
                                         <li><a href="#">메뉴추가</a></li>
                                         <li><a href="#">메뉴추가</a></li>
                                         <li><a href="#">메뉴추가</a></li>

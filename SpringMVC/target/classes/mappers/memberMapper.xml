@@ -2,39 +2,60 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
-<mapper namespace="member">
+<mapper namespace="member">	
 	
+	<!-- 카테고리 CategoryVO -->
+	<resultMap type="CategoryVO" id="CategoryVO">
+		<result column="category_idx" property="category_idx" />
+		<result column="categoryname" property="title" />		
+	</resultMap>
 	
+	<!-- 회원 MemberVO -->
+	<resultMap type="MemberVO" id="MemberVO">
+		<result column="member_idx" property="member_idx" />
+		<result column="userid" property="userid" />
+		<result column="name" property="name" />
+		<result column="email" property="email"/>
+		<result column="hphone" property="hphone"/>
+		<result column="point" property="point"/>
+		<result column="mail_check" property="mail_check"/>
+		<result column="join_date" property="join_date"/>
+		<result column="category_idx" property="category_idx"/>
+		<collection property="categoryVO" resultMap="CategoryVO" />
+	</resultMap>
+
 	<!-- 회원목록 -->
-	<select id="getList" resultType="com.company.bbs.vo.member.MemberVO">
-	<![CDATA[ 
-	select * from jhbbs_member where member_idx > 0 and del = 'N'
+	<select id="getList" parameterType="com.company.bbs.vo.member.MemberVO" resultMap="MemberVO">
+	<!-- select * from jhbbs_member where member_idx > 0 and del = 'N' 원본쿼리문-->
+	<![CDATA[ 	
+		select m.member_idx, m.userid, m.name, m.email, m.hphone, m.point, m.mail_check, m.join_date, m.category_idx, c.title as categoryname
+		from jhbbs_member AS m 
+		JOIN jhbbs_category AS c 
+		ON m.category_idx = c.category_idx where m.member_idx > 0 and m.del = 'N'
 	]]>
-		<include refid="category"></include>
+		<if test="category_idx > 0">
+			AND c.category_idx = ${category_idx}
+		</if>
+		<if test="category_idx == 0">
+			AND c.category_idx > 0
+		</if>
 		<include refid="search"></include>
 	<![CDATA[ 
-	order by member_idx desc limit #{pageStart}, ${perPageNum}
+		order by m.member_idx desc limit #{pageStart}, ${perPageNum}
 	]]>
-	</select>	
-	
+	</select>		
 	
 	<!-- 카테고리명 -->
 	<select id="getCategory" resultType="com.company.bbs.vo.category.CategoryVO">
 	<![CDATA[ 
-	select category_idx, title from jhbbs_category where del = 'N'
-	]]>
-	<![CDATA[ 
-	order by category_idx DESC
+		select category_idx, title from jhbbs_category where del = 'N' order by category_idx DESC
 	]]>
 	</select>
 	
 	<!-- 카테고리목록 -->
 	<select id="getCategoryList" resultType="com.company.bbs.vo.category.CategoryVO">
 	<![CDATA[ 
-	select * from jhbbs_category where kind= 2 and del = 'N'
-	]]>
-	<![CDATA[ 
-	order by category_idx DESC
+		select * from jhbbs_category where kind= 2 and del = 'N' order by category_idx DESC
 	]]>
 	</select>
 
@@ -67,10 +88,7 @@
 	<!-- 첨부파일목록 -->
 	<select id="getFileList" resultType="com.company.bbs.vo.member.MemberVO">
 	<![CDATA[ 
-	select * from jhbbs_file where file_idx > 0 and del = 'N' and member_idx = #{member_idx}
-	]]>
-	<![CDATA[ 
-	order by regdate DESC
+		select * from jhbbs_file where file_idx > 0 and del = 'N' and member_idx = #{member_idx} order by regdate DESC
 	]]>
 	</select>
 	
@@ -109,7 +127,8 @@
 	
 	<!-- 회원보기 -->
 	<select id="getView" resultType="com.company.bbs.vo.member.MemberVO">
-		select * from jhbbs_member where member_idx = #{member_idx}	and del = 'N'
+		<!-- select * from jhbbs_member where member_idx = #{member_idx} and del = 'N'  -->
+		select * from jhbbs_member AS m JOIN jhbbs_category AS c ON c.category_idx = m.member_idx WHERE m.member_idx = #{member_idx} and m.del = 'N';
 	</select>
 
 	<!-- 회원정보수정 -->
@@ -147,21 +166,21 @@
 	<!-- 글이전값 -->
 	<select id="getPrevNum"	resultType="com.company.bbs.vo.member.MemberVO">
 	<![CDATA[ 
-	select * from jhbbs_member where member_idx > #{member_idx} and del = 'N' order by  member_idx asc limit 1
+		select * from jhbbs_member where member_idx > #{member_idx} and del = 'N' order by  member_idx asc limit 1
 	]]>
 	</select>
 
 	<!-- 글다음값 -->
 	<select id="getNextNum"	resultType="com.company.bbs.vo.member.MemberVO">
 	<![CDATA[
-	select * from jhbbs_member where member_idx < #{member_idx} and del = 'N' order by  member_idx desc limit 1
+		SELECT * FROM jhbbs_member WHERE member_idx < #{member_idx} and del = 'N' order by  member_idx desc limit 1
 	]]>
 	</select>
 
 	<!-- 회원 member_idx 최고값 -->
 	<select id="getMaxNum" resultType="int">
 	<![CDATA[ 
-		select max(member_idx) from jhbbs_member
+		SELECT max(member_idx) FROM jhbbs_member
 	]]>
 		<include refid="search"></include>
 	</select>
@@ -169,7 +188,7 @@
 	<!-- 회원갯수 -->
 	<select id="getCount" resultType="int">
 	<![CDATA[ 
-	select count(member_idx) from jhbbs_member where member_idx > 0 and del = 'N'
+		SELECT count(member_idx) FROM jhbbs_member WHERE member_idx > 0 and del = 'N'
 	]]>
 		<include refid="category"></include>
 		<include refid="search"></include>
@@ -178,40 +197,40 @@
 	<!-- 비밀번호리턴 -->
 	<select id="getPassword" resultType="String">
 	<![CDATA[ 
-	select pass from jhbbs_member where member_idx = #{member_idx} and del = 'N'
+		SELECT pass FROM jhbbs_member WHERE member_idx = #{member_idx} and del = 'N'
 	]]>
 	</select>
 	
 	<!-- 로그인비밀번호리턴 -->
 	<select id="getLoginPassword" resultType="String">
 	<![CDATA[ 
-	select pass from jhbbs_member where userid = #{userid} and del = 'N'
+		SELECT pass FROM jhbbs_member WHERE email = #{email} and del = 'N'
 	]]>
 	</select>
 	
 	<!-- 회원로그인체크 -->
 	<select id="loginCheck" resultType="String">
 	<![CDATA[ 
-		SELECT name FROM jhbbs_member WHERE userid = #{userid} AND pass = #{pass}
+		SELECT name FROM jhbbs_member WHERE email = #{email} AND pass = #{pass}
 	]]>
 	</select>
 	
 	<!-- 회원로그인정보 -->
 	<select id="getViewMember" resultType="com.company.bbs.vo.member.MemberVO">
 	<![CDATA[ 
-		SELECT * FROM jhbbs_member WHERE userid = #{userid} AND pass = #{pass}
+		SELECT * FROM jhbbs_member WHERE email = #{email} AND pass = #{pass}
 	]]>
 	</select>
 	
 	<!-- 회원엑셀목록 -->
 	<select id="getExcelList" fetchSize="100" resultType="com.company.bbs.vo.member.MemberVO">
 	<![CDATA[ 
-	select * from jhbbs_member where member_idx > 0 and del = 'N'
+		select * from jhbbs_member WHERE member_idx > 0 and del = 'N'
 	]]>
 		<include refid="category"></include>
 		<include refid="search"></include>
 	<![CDATA[ 
-	order by member_idx desc 
+		order by member_idx desc 
 	]]>
 	</select>
 	

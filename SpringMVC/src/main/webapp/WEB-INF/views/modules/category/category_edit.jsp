@@ -81,7 +81,7 @@
                                         <nav class="btn-group">
 											<ul>
 												<li><input type="button" value="<spring:message code="button.list"/>" onClick="location.href='list.do?kind=1'"/></li>
-												<li><input type="button" value="<spring:message code="button.edit"/>" onclick="$(this.form).submit()" /></li>											
+												<li><input type="button" value="<spring:message code="button.update"/>" onclick="$(this.form).submit()" /></li>											
 											</ul>
 										</nav>
 										<!--<c:import url="/WEB-INF/views/modules/common/common_btn.jsp"/>-->

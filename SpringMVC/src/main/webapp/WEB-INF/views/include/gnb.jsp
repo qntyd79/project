@@ -6,7 +6,7 @@
 	<nav class="gnb">
 		<ul>
 			<c:if test="${sessionScope.isAdmin == null && kakaoinfo == null && naverinfo == null && googleinfo == null}">
-				<li><a href="${path}/modules/member/loginfull.do"><i class="fas fa-user-lock"></i> 로그인</a></li>
+				<li><a href="${path}/modules/member/login.do"><i class="fas fa-user-lock"></i> 로그인</a></li>
 				<li><a href="${path}/modules/member/agree.do"><i	class="fas fa-address-card"></i> 회원가입</a></li>
 				<li><a href="${path}/modules/member/find.do"><i class="fas fa-address-card"></i> 아이디/비밀번호찾기</a></li>
 			</c:if>

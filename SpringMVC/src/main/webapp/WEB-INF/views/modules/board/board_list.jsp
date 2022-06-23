@@ -12,12 +12,11 @@
         <div class="content-box">
             <div class="content-full-img02">
             	<div class="bgtitle">
-                	<c:import url="/WEB-INF/views/include/content_header.jsp"/>
                 </div>
             </div>
             <div class="content-full-bg02-hidden">
                 <section class="content">
-                	
+                	<c:import url="/WEB-INF/views/include/content_header.jsp"/>
                     <article>                    
                         <div class="row">
                             <div class="col-md-12">
@@ -115,9 +114,13 @@
                                                                 </c:if>
                                                                 <td><span><spring:message code="bbs.list.notice"/></span></td>
                                                                 <td>
+                                                                	<!-- 카테고리 테이블 조인으로 카테고리명 가져오기 -->
+                                                                	${row1.categoryVO.title}
+                                                                	<!--
                                                                     <c:forEach var="item" items="${categoryname}">
                                                                         <c:if test="${row1.category_idx == item.category_idx}">${item.title}</c:if>
                                                                     </c:forEach>
+                                                                    -->
                                                                 </td>
                                                                 <td class="text-left">
                                                                     <a href="read.do${pageMaker.makeSearch(pageMaker.criteria.page)}&board_idx=<c:out value="${row1.board_idx}"/>">${row1.title} (${row1.commentcnt})</a>
@@ -145,9 +148,13 @@
                                                                 </c:if>
                                                                 <td><strong><c:if test="${row.notice == 0}">${(pageMaker.curNum-status.index)-(pageMaker.noticeCount)}</c:if></strong></td>
                                                                 <td>
+                                                                	<!-- 카테고리 테이블 조인으로 카테고리명 가져오기 -->
+                                                                	${row.categoryVO.title}
+                                                                	<!-- 
                                                                     <c:forEach var="item" items="${categoryname}">
                                                                         <c:if test="${row.category_idx == item.category_idx}">${item.title}</c:if>
                                                                     </c:forEach>
+                                                                	-->
                                                                 </td>
                                                                 <td class="text-left">
                                                                     <c:if test="${row.depth > 0}">

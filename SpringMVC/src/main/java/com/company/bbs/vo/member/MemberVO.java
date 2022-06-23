@@ -5,6 +5,7 @@ import java.util.Arrays;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.company.bbs.vo.attach.AttachVO;
+import com.company.bbs.vo.category.CategoryVO;
 
 public class MemberVO extends AttachVO {
 	
@@ -41,7 +42,8 @@ public class MemberVO extends AttachVO {
 	private String del;
 	private int category_idx;
 	private MultipartFile[] attach;
-	
+	private CategoryVO categoryVO;
+		
 	public int getMember_idx() {
 		return member_idx;
 	}
@@ -239,6 +241,13 @@ public class MemberVO extends AttachVO {
 	}
 	public void setAttach(MultipartFile[] attach) {
 		this.attach = attach;
+	}
+
+	public CategoryVO getCategoryVO() {
+		return categoryVO;
+	}
+	public void setCategoryVO(CategoryVO categoryVO) {
+		this.categoryVO = categoryVO;
 	}
 	
 	@Override

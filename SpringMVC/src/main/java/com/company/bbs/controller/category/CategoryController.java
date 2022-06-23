@@ -281,7 +281,7 @@ public class CategoryController {
 			model.addAttribute("url", "list.do");
 		} else {
 			model.addAttribute("msg", "PassFailed");
-			model.addAttribute("url", "modify.do?category_idx=" + categoryVO.getCategory_idx());
+			model.addAttribute("url", "update.do?category_idx=" + categoryVO.getCategory_idx());
 		}
 
 		return "/modules/common/common_message";

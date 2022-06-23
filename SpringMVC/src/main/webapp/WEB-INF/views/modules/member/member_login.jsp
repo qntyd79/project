@@ -31,10 +31,10 @@
                                             <ul class="content-data-1" style="width:330px;">
                                                 <li>
                                                     <div class="panel">
-                                                       <div class="form-group">
-                                                            <label for="userid"><spring:message code="label.userid"/></label>
-                                                            <input name="userid" type="text" class="btn-block" placeholder="UserID"/> <form:errors path="userid" />
-                                                        </div>
+                                                    	<div class="form-group">
+                                                            <label for="email"><spring:message code="label.email"/></label>
+                                                            <input name="email" type="text" class="btn-block" placeholder="Email"/> <form:errors path="email" />
+                                                    	</div>
                                                         <div class="form-group">
                                                             <label for="pass"><spring:message code="label.pass"/></label>
                                                             <input name="pass" type="password" class="btn-block" placeholder="Password"/> <form:errors path="pass" />

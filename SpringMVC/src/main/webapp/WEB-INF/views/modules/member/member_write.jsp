@@ -35,7 +35,8 @@
                                                 <colgroup>
                                                     <col width="20%" />
                                                     <col width="80%" />
-                                                </colgroup>                                                
+                                                </colgroup> 
+                                                <!--                                           
                                                 <tr>
                                                     <th><label for="category_idx"><spring:message code="label.category_idx"/></label></th>
                                                     <td class="text-left">
@@ -44,14 +45,14 @@
                                                                 <option value="<c:out value='${item.category_idx}'/>"
 	                                                                <c:if test="${item.category_idx == categoryselect}">
 	                                                                    <c:out value="selected=selected" />
-	                                                                </c:if> >
-                                                                	<c:out value="${item.title}" />
+	                                                                </c:if>><c:out value="${item.title}" />
                                                                 </option>
                                                             </c:forEach>
                                                         </form:select>
                                                         <form:errors path="category_idx" />                                                        
                                                     </td>
-                                                </tr>                                                
+                                                </tr> 
+                                                -->                                                   
                                                 <tr>
                                                     <th><label for="userid"><spring:message code="label.userid"/></label></th>
                                                     <td class="text-left">

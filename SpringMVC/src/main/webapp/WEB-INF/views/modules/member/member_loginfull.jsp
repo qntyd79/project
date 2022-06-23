@@ -33,8 +33,8 @@
                                                             <a href="${path}/index.do"><img src="/resources/images/logo/logo.png" /></a>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="userid"><spring:message code="label.userid"/></label>
-                                                            <input name="userid" type="text" class="btn-block" placeholder="UserID"/> <form:errors path="userid" />
+                                                            <label for="email"><spring:message code="label.email"/></label>
+                                                            <input name="email" type="text" class="btn-block" placeholder="Email"/> <form:errors path="email" />
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="pass"><spring:message code="label.pass"/></label>
@@ -65,7 +65,7 @@
 															</a>                                                            
                                                         </div>
                                                         -->
-                                                       	<!--
+                                                       	
                                                         <div class="social-box">
                                                             <a href="#"><i class="fab fa-facebook"></i></a>
                                                             <a href="#"><i class="fab fa-google"></i></a>
@@ -73,8 +73,9 @@
                                                             <a href="#"><i class="fab fa-vimeo"></i></a>
                                                             <a href="#"><i class="fab fa-yahoo"></i></a>
                                                             <a href="#"><i class="fab fa-snapchat-ghost"></i></a>
+                                                            <a href="#"><i class="fab fa-yahoo"></i></a>
                                                         </div>
-                                                        -->
+                                                       
                                                         <div class="btn-group-m">
                                                             <a href="#" onclick="location.href='${path}/index.do'" >홈&nbsp; &nbsp; </a> 
                                                             <a href="#" onclick="location.href='agree.do'">회원가입&nbsp; &nbsp; </a> 
