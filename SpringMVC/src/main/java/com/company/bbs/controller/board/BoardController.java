@@ -46,6 +46,8 @@ import com.company.bbs.vo.attach.AttachVO;
 import com.company.bbs.vo.board.BoardVO;
 import com.company.bbs.vo.comment.CommentVO;
 
+
+@SuppressWarnings("unused")
 @Controller
 @SessionAttributes("memberVO")
 @RequestMapping("modules/board/*")
@@ -108,17 +110,17 @@ public class BoardController {
 		model.addAttribute("noticelist", service.getNoticeList(criteria));
 		//model.addAttribute("categoryname", service.getCategory());
 		model.addAttribute("categorylist", service.getCategoryList());
-		model.addAttribute("categoryselect", criteria.getCategory_idx());
+		model.addAttribute("categoryselect", criteria.getCategory_idx()); //게시물 검색 후 현재선택목록 보여줌
 		model.addAttribute("pageMaker", pageMaker);
 
 		return "modules/board/board_list";
 	}
-
+	
 	@RequestMapping(value = "ajaxlist.do")
 	public String indexListAjax(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("ajax 글목록");
-
+		
 		List<ResultMap> list = new ArrayList<>();
 
 		PageMaker pageMaker = new PageMaker();
@@ -129,9 +131,9 @@ public class BoardController {
 
 		model.addAttribute("list", service.getList(criteria));
 		model.addAttribute("noticelist", service.getNoticeList(criteria));
-		model.addAttribute("categoryname", service.getCategory());
+		//model.addAttribute("categoryname", service.getCategory());
 		model.addAttribute("categorylist", service.getCategoryList());
-		model.addAttribute("categoryselect", criteria.getCategory_idx());
+		model.addAttribute("categoryselect", criteria.getCategory_idx()); //게시물 검색 후 현재선택목록 보여줌
 		model.addAttribute("pageMaker", pageMaker);
 
 		return "modules/board/ajax_board_list";

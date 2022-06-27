@@ -12,56 +12,104 @@
 	
 	<!-- 게시판 BoardVO -->
 	<resultMap type="BoardVO" id="BoardVO">
-		<result column="board_idx" property="board_idx" />
-		<result column="name" property="name" />
+		<result column="board_idx" property="board_idx"/>
+		<result column="name" property="name"/>
 		<result column="title" property="title"/>
+		<result column="content" property="content"/>
 		<result column="regdate" property="regdate"/>
 		<result column="filecnt" property="filecnt"/>
 		<result column="vote" property="vote"/>
 		<result column="hit" property="hit"/>
+		<result column="parent" property="parent"/>
+		<result column="depth" property="depth"/>
+		<result column="notice" property="notice"/>
 		<result column="category_idx" property="category_idx"/>
-		<collection property="categoryVO" resultMap="CategoryVO" />
+		<collection property="categoryVO" resultMap="CategoryVO"/>
 	</resultMap>
 
-	<!-- 글목록 카테고리 조인-->
+	<!-- 글목록 카테고리 조인 2개테이블에서 title이 중복되어서 별칭사용 c.title as categoryname-->
 	<select id="getList" resultType="com.company.bbs.vo.board.BoardVO" resultMap="BoardVO">
 	<!-- select * from jhbbs_board where board_idx > 0 and del = 'N' and notice = 0 -->
 	<![CDATA[ 	
-		select b.board_idx, b.name, b.title, b.regdate, b.filecnt, b.vote, b.hit, b.category_idx, c.title as categoryname
-		 from jhbbs_board AS b 
-		 JOIN jhbbs_category AS c 
-		 ON b.category_idx = c.category_idx where b.board_idx > 0 and b.del = 'N' and b.notice = 0
+	select b.board_idx, b.name, b.title, b.content, b.regdate, b.filecnt, b.vote, b.hit, b.parent, b.depth, b.notice, b.category_idx, c.title as categoryname
+	from jhbbs_board AS b 
+	JOIN jhbbs_category AS c 
+	ON b.category_idx = c.category_idx where b.board_idx > 0 and b.del = 'N' and b.notice = 0
 	]]>
 		<if test="category_idx > 0">
-			AND c.category_idx = ${category_idx}
+			AND b.category_idx = ${category_idx}
 		</if>
 		<if test="category_idx == 0">
-			AND c.category_idx > 0
+			AND b.category_idx > 0
 		</if>
-		<include refid="search"></include>
+		<if test="searchField != null">
+			<if test="searchField == 'n'.toString()">
+				AND (b.title LIKE CONCAT('%',#{keyWord},'%') OR b.content LIKE CONCAT('%',#{keyWord},'%') OR b.name LIKE CONCAT('%',#{keyWord},'%'))
+			</if>
+			<if test="searchField == 't'.toString()">
+				AND b.title LIKE CONCAT('%',#{keyWord},'%')
+			</if>
+			<if test="searchField == 'c'.toString()">
+				AND b.content LIKE CONCAT('%',#{keyWord},'%')
+			</if>
+			<if test="searchField == 'w'.toString()">
+				AND b.name LIKE CONCAT('%',#{keyWord},'%')
+			</if>
+			<if test="searchField == 'tc'.toString()">
+				AND (b.title LIKE CONCAT('%',#{keyWord},'%') OR b.content LIKE CONCAT('%',#{keyWord},'%'))
+			</if>
+			<if test="searchField == 'cw'.toString()">
+				AND (b.content LIKE CONCAT('%',#{keyWord},'%') OR b.name LIKE CONCAT('%',#{keyWord},'%'))
+			</if>
+			<if test="searchField == 'tcw'.toString()">
+				AND (b.title LIKE CONCAT('%',#{keyWord},'%') OR b.content LIKE CONCAT('%',#{keyWord},'%') OR b.name LIKE CONCAT('%',#{keyWord},'%'))
+			</if>
+		</if>
 	<![CDATA[ 
-		order by b.parent desc, b.sortno asc limit #{pageStart}, ${perPageNum}
+	order by b.parent desc, b.sortno asc limit #{pageStart}, ${perPageNum}
 	]]>
 	</select>
 	
-	<!-- 공지글목록 -->
+	<!-- 공지글목록 카테고리 조인 2개테이블에서 title이 중복되어서 별칭사용 c.title as categoryname-->
 	<select id="getNoticeList" resultType="com.company.bbs.vo.board.BoardVO" resultMap="BoardVO">
 	<!-- select * from jhbbs_board where board_idx > 0 and del = 'N' and notice = 1 -->
 	<![CDATA[ 	
-		select b.board_idx, b.name, b.title, b.regdate, b.filecnt, b.vote, b.hit, b.category_idx, c.title as categoryname
-		 from jhbbs_board AS b 
-		 JOIN jhbbs_category AS c 
-		 ON b.category_idx = c.category_idx where b.board_idx > 0 and b.del = 'N' and b.notice = 1
+	select b.board_idx, b.name, b.title, b.content, b.regdate, b.filecnt, b.vote, b.hit, b.parent, b.depth, b.notice, b.category_idx, c.title as categoryname
+	from jhbbs_board AS b 
+	JOIN jhbbs_category AS c 
+	ON b.category_idx = c.category_idx where b.board_idx > 0 and b.del = 'N' and b.notice = 1
 	]]>
 		<if test="category_idx > 0">
-			AND c.category_idx = ${category_idx}
+			AND b.category_idx = ${category_idx}
 		</if>
 		<if test="category_idx == 0">
-			AND c.category_idx > 0
+			AND b.category_idx > 0
 		</if>
-		<include refid="search"></include>
+		<if test="searchField != null">
+			<if test="searchField == 'n'.toString()">
+				AND (b.title LIKE CONCAT('%',#{keyWord},'%') OR b.content LIKE CONCAT('%',#{keyWord},'%') OR b.name LIKE CONCAT('%',#{keyWord},'%'))
+			</if>
+			<if test="searchField == 't'.toString()">
+				AND b.title LIKE CONCAT('%',#{keyWord},'%')
+			</if>
+			<if test="searchField == 'c'.toString()">
+				AND b.content LIKE CONCAT('%',#{keyWord},'%')
+			</if>
+			<if test="searchField == 'w'.toString()">
+				AND b.name LIKE CONCAT('%',#{keyWord},'%')
+			</if>
+			<if test="searchField == 'tc'.toString()">
+				AND (b.title LIKE CONCAT('%',#{keyWord},'%') OR b.content LIKE CONCAT('%',#{keyWord},'%'))
+			</if>
+			<if test="searchField == 'cw'.toString()">
+				AND (b.content LIKE CONCAT('%',#{keyWord},'%') OR b.name LIKE CONCAT('%',#{keyWord},'%'))
+			</if>
+			<if test="searchField == 'tcw'.toString()">
+				AND (b.title LIKE CONCAT('%',#{keyWord},'%') OR b.content LIKE CONCAT('%',#{keyWord},'%') OR b.name LIKE CONCAT('%',#{keyWord},'%'))
+			</if>
+		</if>
 	<![CDATA[ 
-		order by b.parent desc, b.sortno asc 
+	order by b.parent desc, b.sortno asc 
 	]]>
 	</select>
 	

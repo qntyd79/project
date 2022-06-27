@@ -61,7 +61,7 @@ public class BoardRestController {
 		return entity;
 	}	
 	
-	// 목록(페이징없이 전체값 목록으로 뿌려주기
+	// 목록(페이징없이 전체값 목록으로 뿌려주기)
 	@RequestMapping(value = "ajaxlist/all/", method = RequestMethod.GET)
 	public ResponseEntity<List<BoardVO>> List(Criteria criteria) {
 
@@ -78,16 +78,16 @@ public class BoardRestController {
 	}
 	
 	// 목록페이징
-	@RequestMapping(value = "ajaxlist/{page}", method = RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>> List(@PathVariable("page") int page) {
+	@RequestMapping(value = "ajaxlist/{page}/{category_idx}", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> List(Criteria criteria, @PathVariable("page") int page) {
 
 		ResponseEntity<Map<String, Object>> entity = null;
 
 		try {
-			Criteria criteria = new Criteria(); 
+			//Criteria criteria = new Criteria(); 
 			
 			criteria.setPage(page);
-			
+		
 			List<BoardVO> list = service.getList(criteria);
 			
 			PageMaker pageMaker = new PageMaker();
@@ -96,16 +96,10 @@ public class BoardRestController {
 			pageMaker.setTotalCount(service.getCount(criteria));
 			pageMaker.setNoticeCount(service.getNoticeCount(criteria));
 			
-
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("list", service.getList(criteria));
 			map.put("noticelist", service.getNoticeList(criteria));
-			map.put("categoryname", service.getCategory());
-			map.put("categorylist", service.getCategoryList());
-			map.put("categoryselect", criteria.getCategory_idx());
 			map.put("pageMaker", pageMaker);
-			
-
 
 			entity = new ResponseEntity<>(map, HttpStatus.OK);
 		} catch (Exception e) {

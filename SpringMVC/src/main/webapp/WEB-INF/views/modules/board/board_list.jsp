@@ -47,7 +47,7 @@
                                             <select name="category_idx" id="category_idx" form="categoryForm" onChange="$(this.form).submit();">
                                                 <option value="0" <c:if test="${categoryselect == 0}"><c:out value="selected=selected" /></c:if>>전체목록</option>
                                                 <c:forEach var="item" items="${categorylist}" varStatus="status">
-                                                    <option value="<c:out value=" ${item.category_idx}" />" <c:if test="${item.category_idx == categoryselect}">
+                                                    <option value="<c:out value="${item.category_idx}" />" <c:if test="${item.category_idx == categoryselect}">
                                                         <c:out value="selected=selected" />
                                                     </c:if>>
                                                     <c:out value="${item.title}" />

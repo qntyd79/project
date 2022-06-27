@@ -12,7 +12,6 @@
         <div class="content-box">
             <div class="content-full-img02">
             	<div class="bgtitle">
-                	<c:import url="/WEB-INF/views/include/content_header.jsp"/>
                 </div>
             </div>
             <div class="content-full-bg02-hidden">
@@ -25,7 +24,7 @@
                             
                             
                                 <h2><spring:message code="bbs.title.list"/></h2>
-                                <form name="searchForm" id="searchForm" method="post" enctype="multipart/form-data" action="list.do">
+                                <form name="searchForm" id="searchForm" method="post" enctype="multipart/form-data" action="ajaxlist.do">
                                     <div class="search-form" style="float:right; margin-bottom:10px;">
                                         <fieldset>
                                             <select id="searchField" name="searchField" title="<spring:message code="select.searchCondition"/>">
@@ -39,20 +38,19 @@
                                             </select>
                                             <input type="search" id="keyWord" name="keyWord" value="<c:out value="${criteria.keyWord}"/>" title="<spring:message code="button.search"/>" />
                                             <input type="button" value="<spring:message code="button.search"/>" onclick="$(this.form).submit();" />
-                                            <input type="button" value="<spring:message code="button.init"/>" onClick="window.location='list.do'" />
+                                            <input type="button" value="<spring:message code="button.init"/>" onClick="window.location='ajaxlist.do'" />
                                         </fieldset>
                                     </div>
                                 </form>
-                                <form name="categoryForm" id="categoryForm" method="post" enctype="multipart/form-data" action="list.do">
-                                    <div class="category-form" style="float:right; margin-right:5px; margin-bottom:10px;">
+                                <form name="categoryForm" id="categoryForm" method="post" enctype="multipart/form-data" action="ajaxlist.do">
+    	                            <div class="category-form" style="float:right; margin-right:5px; margin-bottom:10px;">
                                         <fieldset>
                                             <select name="category_idx" id="category_idx" form="categoryForm" onChange="$(this.form).submit();">
                                                 <option value="0" <c:if test="${categoryselect == 0}"><c:out value="selected=selected" /></c:if>>전체목록</option>
                                                 <c:forEach var="item" items="${categorylist}" varStatus="status">
-                                                    <option value="<c:out value=" ${item.category_idx}" />" <c:if test="${item.category_idx == categoryselect}">
+                                                    <option value="<c:out value="${item.category_idx}" />" <c:if test="${item.category_idx == categoryselect}">
                                                         <c:out value="selected=selected" />
-                                                    </c:if>>
-                                                    <c:out value="${item.title}" />
+                                                    </c:if>><c:out value="${item.title}" />
                                                     </option>
                                                 </c:forEach>
                                             </select>
@@ -134,7 +132,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		
+
 		//게시판등록    	
 		$("#writeBtn").on("click",function(){
 			//ajax
@@ -168,18 +166,21 @@
 		
 	  	// 게시물목록페이징
 	    function getPageList(page) {
+	  		
+	  		// criteria.category_idx에서 가져옴
+	    	var category_idx = $("#category_idx").val();
+	    	//alert(category_idx);
 	
-	    	$.getJSON("${path}/modules/board/ajaxlist/" + page , function(data) {
-	    		
+	    	$.getJSON("${path}/modules/board/ajaxlist/" + page + "/" + category_idx, function(data) {
+	    			    		
 	    		var str = "";
-	    		var categoryname="";
-	    		var category="";
 	    		
                	// 공지게시물출력
 	            $(data.noticelist).each(function() {
 	            	
+	            	console.log(data.noticelist);
+	            	
 					var depth = this.depth;
-					var category = this.category_idx;
 	            	
 	            	if (depth > 0) {
 		               var icon = "<i class='fas fa-angle-double-right'>&nbsp;";
@@ -204,25 +205,17 @@
 	            	if (this.notice > 0){
 	            		var mark = "<span><spring:message code='bbs.list.notice'/></span>";
 	            	} else {
-	            		var index = index; //3번방법
+	            		var index = index; 
 	            		// 전체게시물수 - (페이지당 레코드 수 * (현재페이지수-1)) nowPage의 초기값이 1일때 -1을 해준다.
 	            		var cum = ${pageMaker.totalCount} - (10 * (page-1));
+	            		console.log(cum);
 	               		var cumN = (cum-index) - ${pageMaker.noticeCount};
 	            	}
-	            	
-	             	// 카테고리 출력
-		    		$(data.categoryname).each(function() {
-		    			for (var i = 0; i <= this.category_idx; i++) {
-	    					if(this.category_idx == category){
-								categoryname = this.title;
-		            		}
-		        		}
-		    		});   
-                
+	            	                
 	            	str += 	"<tr>" + 
 	            			"<td width='5%' class='text-center'><label><input type='checkbox' name='check' value=" + this.board_idx + "/></label></td>" + 
 	            			"<td width='5%' class='text-center'>" + mark + "</td>" + 
-	            			"<td width='10%'class='text-center'>" + categoryname + "</td>" + 
+	            			"<td width='10%'class='text-center'>" + this.categoryVO.title +  "</td>" + 
 	            			"<td width='40%' class='text-left'>" + tab + icon + "<a href='ajaxread.do${pageMaker.makeSearch(pageMaker.criteria.page)}&board_idx=" + this.board_idx + "' >" + tab + this.title + hit + "</a></td>" + 
 	            			"<td width='10%' class='text-center'>" + this.name + "</td>" + 
 	            			"<td width='10%' class='text-center'>" + formatDate(this.regdate) + "</td>" + 
@@ -237,7 +230,6 @@
 	            $(data.list).each(function(index) {
 	            	
 					var depth = this.depth;
-					var category = this.category_idx;
 	            	
 	            	if (depth > 0) {
 		               var icon = "<i class='fas fa-angle-double-right'>&nbsp;";
@@ -263,25 +255,20 @@
 	            		var mark = "<spring:message code='bbs.list.notice'/></span>";
 	            	} else {
 	            		var index = index; //3번방법
-	            		// 전체게시물수 - (페이지당 레코드 수 * (현재페이지수-1)) nowPage의 초기값이 1일때 -1을 해준다.
-	            		var cum = ${pageMaker.totalCount} - (10 * (page-1));
-	               		var cumN = (cum-index) - ${pageMaker.noticeCount};
-	            	}	            	
-	            	
-	             	// 카테고리 출력
-		    		$(data.categoryname).each(function() {
-		    			
-		    			for (var i = 0; i <= this.category_idx; i++) {
-	    					if(this.category_idx == category){
-								categoryname = this.title;
-		            		}
-		        		}
-		    		});   
+	            		console.log("index : " + index);
+	            		var curNum = ${pageMaker.totalCount} - (10 * (page-1)); // 전체게시물수 - (페이지당 레코드 수 * (현재페이지수-1)) nowPage의 초기값이 1일때 -1을 해준다.
+	            		console.log("전체게시물수" + curNum);
+	            		
+	            		var endpage1 = ${pageMaker.endPage};
+	            		console.log("마지막페이지" + endpage1);
+	            		
+	            	    var cumN = (curNum-index) - ${pageMaker.noticeCount};
+	            	}
 	            	
 	            	str += "<tr>" + 
 	            			"<td width='5%' class='text-center'><label><input type='checkbox' name='check' value=" + this.board_idx + "/></label></td>" + 
 	            			"<td width='5%' class='text-center'>" + cumN + "</td>" + 
-	            			"<td width='10%'class='text-center'>" + categoryname + "</td>" + 
+	            			"<td width='10%'class='text-center'>" + this.categoryVO.title + "</td>" + 
 	            			"<td width='40%' class='text-left'>" + tab + icon + "<a href='ajaxread.do${pageMaker.makeSearch(pageMaker.criteria.page)}&board_idx=" + this.board_idx + "' >" + tab + this.title + hit + "</a></td>" + 
 	            			"<td width='10%' class='text-center'>" + this.name + "</td>" + 
 	            			"<td width='10%' class='text-center'>" + formatDate(this.regdate) + "</td>" + 
@@ -293,13 +280,11 @@
 	            });
 	            
 	            $("#boardlist").html(str);
-            	
-            	// 페이징처리 
+
+	            // 페이징처리 
 	            printPaging(data.pageMaker);
-	        });
-    			
-	    }
-	  	  	
+	        });    			
+	    }	  	  	
 	  
 	  	// 날짜변경포맷
 	    function formatDate(date) {
@@ -315,8 +300,7 @@
 
 	        return [year, month, day].join('-');
 	    }
-	    
-	
+	    	
 	    //페이징함수 
 	    function printPaging(pageMaker) {
 	
@@ -328,8 +312,10 @@
 	        }
 	
 	        for (var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++) {
+	        	//alert(i);
+	        	//alert(len);
 	            var strClass = pageMaker.criteria.page == i ? 'class=active' : '';
-	            str += "<li><a href='" + i + "' " + strClass + ">" + i + "</a></li> ";
+	            str += "<li><a href='" + i + "'" + strClass + ">" + i + "</a></li> ";
 	        }
 	
 	        if (pageMaker.next && pageMaker.endPage > 0) {
@@ -348,7 +334,6 @@
 	            getPageList(replyPage);
 	        });
 	    }
-
 });
 
 </script>

@@ -205,7 +205,7 @@
                                 <script type="text/javascript" language="javascript">
                              		$(document).ready(function(){	
 
-                             			var board_idx = "${boardVO.board_idx}";
+                             			var board_idx = ${boardVO.board_idx};
                     
 										$.ajax({
 											type : "POST", //전송방식을 지정한다 (POST,GET)

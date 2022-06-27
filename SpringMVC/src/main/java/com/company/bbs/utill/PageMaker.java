@@ -10,8 +10,8 @@ public class PageMaker {
 	
     private Criteria criteria; // page, perPageNum 을 가지고 있음
     private int totalCount; //전체 게시글 
-    private int startPage;
-    private int endPage;
+    private int startPage; //시작페이지
+    private int endPage; //마지막페이지
     private boolean prev;
     private boolean next;
     private int displayPageNum = 10; // 화면 하단에 보여지는 페이지의 수
@@ -33,7 +33,7 @@ public class PageMaker {
 
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
-		 calcData();
+		calcData();
 	}
 
 	public int getStartPage() {
@@ -119,6 +119,7 @@ public class PageMaker {
                 .queryParam("perPageNum",criteria.getPerPageNum())
                 .queryParam("searchField",criteria.getSearchField())
 				.queryParam("keyWord",encoding(criteria.getKeyWord()))
+				.queryParam("category_idx",criteria.getCategory_idx())
                 .build();
 
         return uriComponents.toUriString();
