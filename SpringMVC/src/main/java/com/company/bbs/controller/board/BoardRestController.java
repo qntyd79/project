@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,10 +38,10 @@ import com.company.bbs.vo.comment.CommentVO;
 public class BoardRestController {
 
 	private static final Logger logger = LoggerFactory.getLogger(BoardRestController.class);
-	
+
 	@Inject
 	BoardService service;
-	
+
 	// 글저장
 	@RequestMapping(value = "ajaxInsert", method = RequestMethod.POST)
 	public ResponseEntity<String> Insert(@RequestBody BoardVO boardVO) {
@@ -49,9 +50,9 @@ public class BoardRestController {
 
 		try {
 			service.insert(boardVO);
-			// 코멘트갯수 업데이트 
+			// 코멘트갯수 업데이트
 			// bservice.getCommentCount(boardVO.getBoard_idx());
-			
+
 			entity = new ResponseEntity<>("insertSuccess", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,14 +60,14 @@ public class BoardRestController {
 		}
 
 		return entity;
-	}	
-	
+	}
+
 	// 목록(페이징없이 전체값 목록으로 뿌려주기)
 	@RequestMapping(value = "ajaxlist/all/", method = RequestMethod.GET)
 	public ResponseEntity<List<BoardVO>> List(Criteria criteria) {
 
 		ResponseEntity<List<BoardVO>> entity = null;
-		
+
 		try {
 			entity = new ResponseEntity<>(service.getList(criteria), HttpStatus.OK);
 		} catch (Exception e) {
@@ -76,26 +77,27 @@ public class BoardRestController {
 
 		return entity;
 	}
-	
-	// 목록페이징
-	@RequestMapping(value = "ajaxlist/{page}/{category_idx}", method = RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>> List(Criteria criteria, @PathVariable("page") int page) {
 
+	// 목록페이징
+	// @GetMapping(value = {"/", "/index", "/main"}) 출처: https://byul91oh.tistory.com/433 [개꼬 [: 개발하는 꼬바리]:티스토리]	
+	@GetMapping(value = {"ajaxlist/{page}/{category_idx}","ajaxlist/{page}/{category_idx}/{searchField}/{keyWord}"})
+	public ResponseEntity<Map<String, Object>> List(@ModelAttribute Criteria criteria, @PathVariable("page") int page) {
 		ResponseEntity<Map<String, Object>> entity = null;
 
 		try {
-			//Criteria criteria = new Criteria(); 
-			
+			// Criteria criteria = new Criteria();
+
 			criteria.setPage(page);
-		
-			List<BoardVO> list = service.getList(criteria);
-			
+			criteria.setSearchField(criteria.getSearchField());
+			System.out.println("ajaxlist/" + criteria.getSearchField());
+			criteria.setKeyWord(criteria.getKeyWord());
+			System.out.println("ajaxlist/" + criteria.getKeyWord());
+
 			PageMaker pageMaker = new PageMaker();
-				
 			pageMaker.setCriteria(criteria);
 			pageMaker.setTotalCount(service.getCount(criteria));
 			pageMaker.setNoticeCount(service.getNoticeCount(criteria));
-			
+
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("list", service.getList(criteria));
 			map.put("noticelist", service.getNoticeList(criteria));

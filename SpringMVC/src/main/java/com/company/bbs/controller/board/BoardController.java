@@ -121,10 +121,7 @@ public class BoardController {
 
 		logger.info("ajax 글목록");
 		
-		List<ResultMap> list = new ArrayList<>();
-
 		PageMaker pageMaker = new PageMaker();
-
 		pageMaker.setCriteria(criteria);
 		pageMaker.setTotalCount(service.getCount(criteria));
 		pageMaker.setNoticeCount(service.getNoticeCount(criteria));
@@ -135,6 +132,7 @@ public class BoardController {
 		model.addAttribute("categorylist", service.getCategoryList());
 		model.addAttribute("categoryselect", criteria.getCategory_idx()); //게시물 검색 후 현재선택목록 보여줌
 		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("criteria", criteria);
 
 		return "modules/board/ajax_board_list";
 	}

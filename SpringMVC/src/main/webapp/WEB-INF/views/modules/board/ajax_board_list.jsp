@@ -144,11 +144,9 @@
 				    //서비스 성공 시 처리 할 내용
 				    if (result == "insertSuccess") {
 				      	alert("게시글등록폼 완료");
-				    } 
-				    
+				    } 				    
 				    $('#ajaxlistform').remove();
-				    $('#formcontent').html(result);
-				    
+				    $('#formcontent').html(result);				    
 				},
 				error : function(request, status, error) {
 					 // 서비스 실패 시 처리 할 내용
@@ -169,15 +167,25 @@
 	  		
 	  		// criteria.category_idx에서 가져옴
 	    	var category_idx = $("#category_idx").val();
-	    	//alert(category_idx);
-	
-	    	$.getJSON("${path}/modules/board/ajaxlist/" + page + "/" + category_idx, function(data) {
+	    	var searchField = $("#searchField").val();
+	    	var keyWord = $("#keyWord").val();
+	    	
+	    	var url="";
+	    	
+	    	if(keyWord != ""){
+	    		url = "${path}/modules/board/ajaxlist/" + page + "/" + category_idx + "/" + searchField + "/" + keyWord;
+	    	} else {
+	    		url = "${path}/modules/board/ajaxlist/" + page + "/" + category_idx;
+	    	}
+	    	
+	    	// BoardRestController.java 실행 
+	    	$.getJSON(url, function(data) {
 	    			    		
 	    		var str = "";
 	    		
                	// 공지게시물출력
 	            $(data.noticelist).each(function() {
-	            	
+	  
 	            	console.log(data.noticelist);
 	            	
 					var depth = this.depth;

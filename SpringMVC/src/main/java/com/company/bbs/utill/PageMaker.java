@@ -8,7 +8,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 public class PageMaker {
 	
-    private Criteria criteria; // page, perPageNum 을 가지고 있음
+    private Criteria criteria; // page, perPageNum , 카테고리, 검색관련 을 가지고 있음
     private int totalCount; //전체 게시글 
     private int startPage; //시작페이지
     private int endPage; //마지막페이지
