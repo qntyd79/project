@@ -18,7 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.view.AbstractView;
 
-
+@SuppressWarnings("unused")
 public class ExcelDownloadFileUtils extends AbstractView {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ExcelDownloadFileUtils.class);
@@ -41,7 +41,7 @@ public class ExcelDownloadFileUtils extends AbstractView {
         String browser = request.getHeader("User-Agent");
         if (browser.indexOf("MSIE") > -1) {
             fileName = URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+", "%20");
-        } else if (browser.indexOf("Trident") > -1) {       // IE11
+        } else if (browser.indexOf("Trident") > -1) { // IE11
             fileName = URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+", "%20");
         } else if (browser.indexOf("Firefox") > -1) {
             fileName = "\"" + new String(fileName.getBytes("UTF-8"), "8859_1") + "\"";

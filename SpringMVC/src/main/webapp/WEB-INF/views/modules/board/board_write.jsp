@@ -5,7 +5,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="validator" uri="http://www.springmodules.org/tags/commons-validator" %>
-
 <validator:javascript formName="boardVO" staticJavascript="false" xhtml="true" cdata="false"/>
 	
 <!--For Commons Validator Client Side-->
@@ -28,7 +27,6 @@
 	    	frm.submit();
 	    }
 	}	
-
 	
 </script>
 
@@ -62,7 +60,7 @@
                                                     <th><label for="category_idx"><spring:message code="label.category_idx"/></label></th>
                                                     <td class="text-left">
                                                         <form:select path="category_idx" id="category_idx" name="category_idx" >
-                                                            <c:forEach var="item" items="${categorylist}" varStatus="status">
+                                                            <c:forEach var="item" items="${category}" varStatus="status">
                                                                 <option value="<c:out value='${item.category_idx}'/>"
 	                                                                <c:if test="${item.category_idx == categoryselect}">
 	                                                                    <c:out value="selected=selected" />

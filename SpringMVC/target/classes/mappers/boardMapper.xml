@@ -122,17 +122,7 @@
 	order by category_idx DESC
 	]]>
 	</select>
-	
-	<!-- 카테고리목록 -->
-	<select id="getCategoryList" resultType="com.company.bbs.vo.category.CategoryVO">
-	<![CDATA[ 
-	select * from jhbbs_category where kind=1 and del = 'N'
-	]]>
-	<![CDATA[ 
-	order by category_idx DESC
-	]]>
-	</select>
-	
+		 
 	<!-- 파일목록 -->
 	<select id="getFileList" resultType="com.company.bbs.vo.board.BoardVO">
 	<![CDATA[ 
@@ -281,14 +271,6 @@
 		<include refid="search"></include>
 	</select>
 	
-	<!-- 목록 코멘트갯수 업데이트
-	<update id="updateCommentCount" parameterType="int">
-		update jhbbs_board b
-		set b.commentcnt = (select count(comment_idx) from jhbbs_comment where board_idx = #{board_idx} and comment_idx > 0 and del = 'N')
-		where b.board_idx = #{board_idx}
-	</update>
-	 -->
-	 
 	<!-- 코멘트갯수 업데이트 -->
 	<update id="updateCommentCnt">
 		update jhbbs_board set commentcnt = commentcnt + #{amount} where board_idx = #{board_idx} and del = 'N'
@@ -300,15 +282,7 @@
 	select count(comment_idx) from jhbbs_comment where board_idx = #{board_idx} and comment_idx > 0 and del = 'N'
 	]]>
 	</select>
-	 
-	<!-- 첨부파일 갯수
-	<update id="getAttachCount" parameterType="int">
-		update jhbbs_board b
-		set b.filecnt = (select count(file_idx) from JHBBS_file where board_idx = #{board_idx} and file_idx > 0 and del = 'N') 
-		where b.board_idx = #{board_idx} 
-	</update>
-	-->
-	
+		
 	<!-- 첨부파일가져오기 -->
 	<select id="getFile_idx" resultType="int">
 	<![CDATA[ 
@@ -379,17 +353,3 @@
 		</if>
 	</sql>
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

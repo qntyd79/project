@@ -1,192 +1,307 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <c:import url="/WEB-INF/views/include/header.jsp"/>
 <div id="container-wrap">
     <div class="clearfix">
         <div class="content-box">
-            <div class="content-full-img02"></div>
+            <div class="content-full-img02">
+            	<div class="bgtitle">
+                </div>
+            </div>
             <div class="content-full-bg02-hidden">
                 <section class="content">
-                    <%@ include file="include/content_header.jsp"%>
-                    <article>
+                	<c:import url="/WEB-INF/views/include/content_header.jsp"/>
+                    <article>                    
                         <div class="row">
                             <div class="col-md-12">
-                                <h2>글목록</h2>
+                                <h2><spring:message code="bbs.title.list"/></h2>
+                                <form name="searchForm" id="searchForm" method="post" enctype="multipart/form-data" action="list.do">
+                                    <div class="search-form" style="float:right; margin-bottom:10px;">
+                                        <fieldset>
+                                        	<select id="sido_code">
+												<option>선택해주세요</option>
+											</select>
+											<select id="sigoon_code">
+												<option>선택해주세요</option>
+											</select>
+											<select id="dong_code">
+												<option>선택해주세요</option>
+											</select>
+											<select id="lee_code">
+												<option>선택해주세요</option>
+											</select>
+                                            <input type="button" id="btn" value="<spring:message code="button.search"/>" onclick="$(this.form).submit();" />
+                                        </fieldset>
+                                    </div>
+                                </form>
                                 <div class="articles">
-                                    전체글 : <span>${pageMaker.totalCount}</span> 개 | 현재페이지 : <span>${pageMaker.criteria.page}</span>
-                                    | 총페이지 : <span>${pageMaker.totalPage}</span>
+                                    	전체글 : <span>${pageMaker.totalCount}</span> 개 | 공지글 : <span>${pageMaker.noticeCount}</span> | 현재페이지 : <span>${pageMaker.criteria.page}</span> | 총페이지 : <span>${pageMaker.totalPage}</span>
                                 </div>
+                                <form name="listForm" method="post" enctype="multipart/form-data" action="list.do">
+                                    <fieldset>
+                                        <legend><spring:message code="bbs.table.legend"/></legend>
+                                        <table summary="<spring:message code="bbs.table.summary.list"/>">
+                                            <caption><spring:message code="bbs.table.caption"/></caption>
+                                            <colgroup>
+                                                <col width="5%" />
+                                                <col width="5%" />
+                                                <col width="25%" />
+                                                <col width="10%" />
+                                                <col width="5%" />
+                                                <col width="10%" />
+                                                <col width="10%" />
+                                                <col width="10%" />
+                                                <col width="10%" />
+                                                <col width="10%" />
+                                            </colgroup>
+                                            <thead>
+                                                <tr class="tline">                                               	
+                                                    <th scope="col"><label><input type="checkbox" class="allCheck" name="allCheck" /></label></th>                                            	
+                                                    <th scope="col"><spring:message code="bbs.list.no"/></th>
+                                                    <th scope="col">아파트명</th>
+                                                    <th scope="col">전용면적(㎡)</th>
+                                                    <th scope="col">층</th>
+                                                    <th scope="col">계약일</th>
+                                                    <th scope="col">거래금액(만원)</th>
+                                                    <th scope="col">거래유형</th>
+                                                    <th scope="col">도로명</th>
+                                                    <th scope="col">지번</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="boardlist">
+                                            </tbody>
+                                            </table> 
+                                           <nav class="paging-group">
+				                            <ul class="pagination"></ul>
+				                        </nav>
+                                       	<nav class="btn-group">
+											<ul>
+												<c:if test="${sessionScope.isAdmin != null}">												
+												<li><input type="button" value="<spring:message code="button.allselect"/>" class="btnallCheck"/></li>
+												<li><input type="button" value="<spring:message code="button.selectreverse"/>" class="reversalallCheck"/></li>
+												<li><input type="button" value="<spring:message code="button.selectcancle"/>" class="unallCheck"/></li>
+												<li><input type="button" value="<spring:message code="button.selectdelete"/>" class="checkDeleteBtn"/></li>
+												</c:if>	
+												<li><input type="button" value="<spring:message code="button.list"/>" onClick="location.href='ajaxlist.do'"/></li>
+												<li><input type="button" value="<spring:message code="button.create"/>" id="writeBtn"/></li>											
+											</ul>
+										</nav>
+                                    </fieldset>
+                                </form>           
                             </div>
-                        </div>
-                        <!-- 글작성폼 -->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h2>글쓰기</h2>
-                                <fieldset>
-                                    <legend>Board Write Form</legend>
-                                    <table summary="기본게시판 보여주고 있습니다." class="table">
-                                        <caption>등록일 : 2017년08월24일 기준</caption>
-                                        <colgroup>
-                                            <col width="20%" />
-                                            <col width="30%" />
-                                            <col width="20%" />
-                                            <col width="30%" />
-                                        </colgroup>
-                                        <tbody>
-                                            <tr>
-                                                <th><label for="userid"> 아이디 </label></th>
-                                                <td class="text-left"><input type="text" id="userid" name="userid" value="testid" placeholder="UserID"></td>
-                                                <th><label for="pw"> 비밀번호 </label></th>
-                                                <td class="text-left"><input type="password" id="pass" name="pass" value="1234" placeholder="Password"></td>
-                                            </tr>
-                                            <tr>
-                                                <th><label for="name"> 이름</label></th>
-                                                <td class="text-left"><input type="text" id="name" name="name" value="홍길동" placeholder="Name"></td>
-                                                <th scope="row"><label for="email"> 이메일 </label></th>
-                                                <td class="text-left"><input type="text" id="email" name="email" value="test@domain.com" placeholder="Email" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="4" class="text-left">
-                                                	<textarea name="content" id="editor" placeholder="Content"></textarea>
-                                                    <script>
-                                                        CKEDITOR.replace('editor',{customConfig: '${path}/plugin/ckeditor4/full/custom-config.js'});
-                                                    </script>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th><label for="code">자동등록방지</label></th>
-                                                <td colspan="3" class="text-left"><input type="text" name="anti_robotCodeimg"></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <nav class="btn-group">
-                                        <ul>
-                                            <li><input type="button" value="목록가기" onClick="location.href='list.do'"></li>
-                                            <!--<li><input type="button" value="등록하기" onClick="Board_Write_Check();"></li> -->
-                                            <li><input type="button" value="등록하기" id="writeBtn"></li>
-                                        </ul>
-                                    </nav>
-                                </fieldset>
-                            </div>
-                        </div>
-                        <!-- 글목록 -->
-                        <div id="replies"></div>
-                    </article>
+                        </div>                        
+                    </article>                    
                 </section>
             </div>
         </div>
     </div>
 </div>
-<c:import url="/WEB-INF/views/include/footer.jsp"/>
-<script type="text/javascript">
-$(document).ready(function() {
 
-    var board_idx = 1;
 
-    // 댓글목록 초기화
-    getCommentList();
 
-    // 댓글목록 출력함수
-    function getCommentList() {
-        $.getJSON("${path}/replies/all/" + board_idx, function(data) {
-            // console.log(data);
-            // console.log(data.length);
+<script>
+$.support.cors = true;
+	
+	$(document).ready(function(){
+		// 아파트실거래상세정보
+		//xml.jsp페이지에서 xml데이터를 읽어와서 출력하기
+		var skey = "hiViuwIGjr7rUCTyOmmmvPnPjPcUNSZg6XvXbo2llXpf2xHXAuYWtCREqrOmXIEE5a0McLePjyCHja%2B6FMzQ1Q%3D%3D";
+		var url="http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?LAWD_CD=11110&DEAL_YMD=201512&serviceKey=";
+		var queryParams = '?' + encodeURIComponent('serviceKey') + '='+ skey;
+		queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1');
+		queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10');
+		queryParams += '&' + encodeURIComponent('LAWD_CD') + '=' + encodeURIComponent('11110');
+		queryParams += '&' + encodeURIComponent('DEAL_YMD') + '=' + encodeURIComponent('201512');
+	   	
+		$.ajax({
+	   		type : "GET",
+			url : url + queryParams,
+			dataType : "xml",  
+		   	success : function(data){
+				// 1. alert창으로 잘 처리되는지 확인
+			   	//alert('xml데이터를 읽어오기 성공');
+			   	//alert(data); //출력값 [object XMLDocument]
+			   
+			   	// 2. data안에서 person태그를 찾아서 그안의 데이터 출력 > object라서 접근을 each로 해야함
+			   	let tmp = $(data).find('person');
+			   	//alert(tmp) //출력값 [object Object]
+			   
+			   	// 2-1. each로 반복문을 돌린 후 body에 출력
+			   	// xml파일에서 불어올 데이터접근 people에 접근할 필요없이 원하는 태그인 person에 바로 접근 가능
+			   	$(data).find('person').each(function(){
+					let name = $(this).find('name').text();
+				 	let gender = $(this).find('gender').text();
+					let hobby = $(this).find('hobby').text();
+				   
+					//3. body에 출력시키기
+				   	//$('body').append(name+"/"+gender+"/"+hobby+"<br>");	
+					
+				   	str += 	"<tr>" + 
+        			"<td width='5%' class='text-center'><label><input type='checkbox' name='check' value=" + this.board_idx + "/></label></td>" + 
+        			"<td width='5%' class='text-center'>" + mark + "</td>" + 
+        			"<td width='10%'class='text-center'>" + this.categoryVO.title +  "</td>" + 
+        			"<td width='40%' class='text-left'>" + tab + icon + "<a href='ajaxread.do${pageMaker.makeSearch(pageMaker.criteria.page)}&board_idx=" + this.board_idx + "' >" + tab + this.title + hit + "</a></td>" + 
+        			"<td width='10%' class='text-center'>" + this.name + "</td>" + 
+        			"<td width='10%' class='text-center'>" + formatDate(this.regdate) + "</td>" + 
+        			"<td width='5%' class='text-center'>" + this.filecnt + "</td>" + 
+        			"<td width='5%' class='text-center'>" + this.vote + "</td>" + 
+        			"<td width='5%' class='text-center'>" + this.hit + "</td>" + 
+        			"<td width='5%' class='text-center'><a href='ajaxdelete.do${pageMaker.makeSearch(pageMaker.criteria.page)}&board_idx=" + this.board_idx + "'>삭제</a></td>" +
+        			"</tr>";
+			   });
+			   	
+			   $("#boardlist").html(str);
+		   	},
+		   	error : function(request, status, error) {
+				 // 서비스 실패 시 처리 할 내용
+		    	alert("아파트 실거래 상세조회 서비스 실패");
+			} 
+  		});
+		
+		// 시도코드
+		var skey = "hiViuwIGjr7rUCTyOmmmvPnPjPcUNSZg6XvXbo2llXpf2xHXAuYWtCREqrOmXIEE5a0McLePjyCHja%2B6FMzQ1Q%3D%3D";
+		var url = 'http://apis.data.go.kr/1741000/StanReginCd/getStanReginCdList';
+		var queryParams = '?' + encodeURIComponent('serviceKey') + '='+ skey;
+		queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1');
+		queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('3');
+		queryParams += '&' + encodeURIComponent('type') + '=' + encodeURIComponent('json');
+		queryParams += '&' + encodeURIComponent('locatadd_nm') + '=' + encodeURIComponent('서울특별시');
+		
+		$.ajax({
+			type: "get",
+			url: url + queryParams,
+			async: false,
+			dataType: 'json',
+			success: function(data) {
+				let html = "<option>선택해주세요</option>";
+				$(data).find('sido_cd').each(function(){					
+					let code = $(this).find('sido_cd').text();
+					alert(code);
+					let nm = $(this).find('locatadd_nm').text();
+					
+					html +="<option value=" + code + ">" + nm + "</option>"	
+				})
+				
+	            $('#sido_code').html(html);				
+			},
+			error : function(request, status, error) {
+				 // 서비스 실패 시 처리 할 내용
+		    	alert("시도코드 조회서비스 실패");
+			}
+		});
+		
+		// 시군구코드
+		$(document).on("change","#sido_code",function(){
+			
+			let thisVal = $(this).val();		
 
-            var str = "";
+			$.ajax({
+				type: "get",
+				url: "https://api.vworld.kr/req/data?key=5638C501-9663-3A53-8DDF-701B190423EE&domain=http://localhost:8090&service=data&version=2.0&request=getfeature&format=json&size=1000&page=1&geometry=false&attribute=true&crs=EPSG:3857&geomfilter=BOX(13663271.680031825,3894007.9689600193,14817776.555251127,4688953.0631258525)&data=LT_C_ADSIGG_INFO",
+				data : {attrfilter : 'sig_cd:like:'+thisVal},
+				async: false,
+				dataType: 'jsonp',
+				success: function(data) {
+					let html = "<option>선택해주세요</option>";
+					data.response.result.featureCollection.features.forEach(function(f){
+						console.log(f.properties)
+						let code = f.properties.sig_cd;
+						let nm = f.properties.sig_kor_nm;
+						
+						html +="<option value=" + code + ">" + nm + "</option>"							
+					})
+		            $('#sigoon_code').html(html);					
+				},
+				error : function(request, status, error) {
+					 // 서비스 실패 시 처리 할 내용
+			    	alert("서비스 실패");
+				}
+			});
+		});
+		
+		// 읍면동코드
+		$(document).on("change","#sigoon_code",function(){ 
+			
+			let thisVal = $(this).val();		
 
-            $(data).each(function() {
-                str += "<div class='row'>" +
-                    "<div class='col-sm-12 col-md-12 col-lg-12'>" +
-                    "<ul class='content-data-1'>" +
-                    "<li>" +
-                    "<div class='text-left'>" +
-                    "<h1 class='title'>" +
-                    "<a href='${path}/modules/comment/read.do${pageMaker.makeSearch(pageMaker.criteria.page)}&comment_idx=" + this.comment_idx + "'>" + this.name + "</a>" +
-                    "<a href='${path}/modules/comment/modify.do${pageMaker.makeSearch(pageMaker.criteria.page)}&comment_idx=<c:out value='${row.comment_idx}'/>'>" +
-                    "<span class='more'>수정</span></a>" +
-                    "<a href='${path}/modules/comment/delete.do${pageMaker.makeSearch(pageMaker.criteria.page)}&comment_idx=<c:out value='${row.comment_idx}'/>'>" +
-                    "<span class='more'>삭제</span></a>" +
-                    "<a href='${path}/modules/comment/reply.do${pageMaker.makeSearch(pageMaker.criteria.page)}&comment_idx=<c:out value='${row.comment_idx}'/>'>" +
-                    "<span class='more'>답글</span></a>" +
-                    "</h1>" +
-                    "<p>" + this.content + "</p>" +
-                    "<h3 class='desc text-left'>" + this.regdate + '/' + this.comment_idx + "</h3>" +
-                    "</div>" +
-                    "</li>" +
-                    "</ul>" +
-                    "</div>" +
-                    "</div>" +
-                    "<hr>";
-            });
+			$.ajax({
+				type: "get",
+				url: "https://api.vworld.kr/req/data?key=5638C501-9663-3A53-8DDF-701B190423EE&domain=http://localhost:8090&service=data&version=2.0&request=getfeature&format=json&size=1000&page=1&geometry=false&attribute=true&crs=EPSG:3857&geomfilter=BOX(13663271.680031825,3894007.9689600193,14817776.555251127,4688953.0631258525)&data=LT_C_ADEMD_INFO",
+				data : {attrfilter : 'emd_cd:like:'+thisVal},
+				async: false,
+				dataType: 'jsonp',
+				success: function(data) {
+					let html = "<option>선택해주세요</option>";
+					data.response.result.featureCollection.features.forEach(function(f){
+						console.log(f.properties)
+						let code = f.properties.emd_cd;
+						let nm = f.properties.emd_kor_nm;
+						
+						html +="<option value=" + code + ">" + nm + "</option>"							
+					})
+		            $('#dong_code').html(html);					
+				},
+				error : function(request, status, error) {
+					 // 서비스 실패 시 처리 할 내용
+			    	alert("서비스 실패");
+				}
+			});
 
-            $("#replies").html(str);
-        });
-    }
+		});
 
-    // 댓글등록 함수
-    $("#writeBtn").click(function() {
-
-        CKupdate();
-
-        // 화면입력값 변수처리
-        var userid = $("#userid");
-        var pass = $("#pass");
-        var name = $("#name");
-        var email = $("#email");
-        var content = $("#editor");
-
-        var useridVal = userid.val();
-        var passVal = pass.val();
-        var nameVal = name.val();
-        var emailVal = email.val();
-        var contentVal = content.val();
-
-        // ajax 통신
-        $.ajax({
-            type: "post",
-            url: "${path}/replies",
-            headers: { "Content-Type": "application/json", "X-HTTP-Method-Override": "POST" },
-            dataType: "text",
-            data: JSON.stringify({
-                userid: useridVal,
-                pass: passVal,
-                name: nameVal,
-                email: emailVal,
-                content: contentVal,
-                board_idx: 1
-            }),
-            success: function(result) {
-                // 서비스 성공 시 처리 할 내용
-                if (result == "regSuccess") {
-                    alert("댓글 등록 완료");
-                }
-
-                // 댓글목록출력
-                getCommentList();
-
-                // 댓글입력폼 초기화
-                //userid.val("");
-                //pass.val("");
-                //name.val("");
-                //email.val("");
-                CKreset();
-            },
-            error: function() {
-                // 서비스 실패 시 처리 할 내용
-                alert("댓글 등록 실패");
-            }
-        });
-
-        //AJAX 로 폼의 데이터를 전송할 때 CKEDITOR로 변환 된 textarea값을 다시 변경해줘야 데이터가 전달된다.
-        function CKupdate() {
-            for (instance in CKEDITOR.instances)
-                CKEDITOR.instances[instance].updateElement();
-        }
-
-        function CKreset() {
-            for (instance in CKEDITOR.instances)
-                CKEDITOR.instances[instance].setData("");
-        }
-    });
-
-});
+		// 리코드
+		$(document).on("change","#dong_code",function(){ 
+			
+			let thisVal = $(this).val();	
+			
+			$.ajax({
+				type: "get",
+				url: "https://api.vworld.kr/req/data?key=5638C501-9663-3A53-8DDF-701B190423EE&domain=http://localhost:8090&service=data&version=2.0&request=getfeature&format=json&size=1000&page=1&geometry=false&attribute=true&crs=EPSG:3857&geomfilter=BOX(13663271.680031825,3894007.9689600193,14817776.555251127,4688953.0631258525)&data=LT_C_ADRI_INFO",
+				data : {attrfilter : 'li_cd:like:'+thisVal},
+				async: false,
+				dataType: 'jsonp',
+				success: function(data) {				
+					let html = "<option>선택해주세요</option>";				
+					data.response.result.featureCollection.features.forEach(function(f){
+						console.log(f.properties)
+						let code = f.properties.li_cd;
+						let nm = f.properties.li_kor_nm;
+									
+						html +="<option value=" + code + ">" + nm + "</option>"							
+					})
+					$('#lee_code').html(html);						
+				},
+				error : function(request, status, error) {
+					 // 서비스 실패 시 처리 할 내용
+			    	alert("서비스 실패");
+				}
+			});
+		});	
+		
+		// 검색 클릭시 이벤트 처리
+		$(document).on("click","#btn",function(){ 
+			var sido = $('#sido_code option:selected').val();
+		    var sigugun = $('#sigoon_code option:selected').val();
+		    var dong = $('#dong_code option:selected').val();
+		    var dongCode = sido + sigugun + dong + '00';
+		    
+			// 동네예보 URL
+		    var url = 'https://www.weather.go.kr/weather/process/timeseries-dfs-body-ajax.jsp?myPointCode=' + dongCode + '&unit=K';
+	
+		    // iframe으로 결과 보기
+		    fn_iframe(url);
+		});	
+	   	    
+	    function fn_iframe(url){
+	    	$('#iframe').attr('src', url);
+	    }
+		
+	})
+	
 </script>
+<c:import url="/WEB-INF/views/include/footer.jsp"/>

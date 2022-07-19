@@ -15,8 +15,6 @@ public class CategoryVO {
 	private String cipp;
 	private String regdate;
 	private String del;
-	private int board_idx;	
-	private int member_idx;	
 
 	public int getCategory_idx() {
 		return category_idx;
@@ -122,28 +120,13 @@ public class CategoryVO {
 		this.del = del;
 	}
 	
-	public int getBoard_idx() {
-		return board_idx;
-	}
 	
-	public void setBoard_idx(int board_idx) {
-		this.board_idx = board_idx;
-	}
-	
-	public int getMember_idx() {
-		return member_idx;
-	}
-	
-	public void setMember_idx(int member_idx) {
-		this.member_idx = member_idx;
-	}
 
 	@Override
 	public String toString() {
 		return "CategoryDto [category_idx=" + category_idx + ", parent=" + parent + ", depth=" + depth + ", sortno="
 				+ sortno + ", title=" + title + ", name=" + name + ", pass=" + pass + ", hit=" + hit + ", total="
-				+ total + ", kind=" + kind + ", cipp=" + cipp + ", regdate=" + regdate + ", del=" + del + ", board_idx="
-				+ board_idx +", member_idx=" + member_idx + "]";
+				+ total + ", kind=" + kind + ", cipp=" + cipp + ", regdate=" + regdate + ", del=" + del + "]";
 	}
 	
 	

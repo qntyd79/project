@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    // 2020.02.05
+    // 2022.07.08
 
 	// 좌표설정
 	proj4.defs("EPSG:5186", "+proj=tmerc +lat_0=38 +lon_0=127 +k=1 +x_0=200000 +y_0=600000 +ellps=GRS80 +units=m +no_defs");
@@ -15,13 +15,121 @@ $(document).ready(function() {
         axisOrientation : 'neu',
         global : false
     }); 
+	
+	
+    // VWORLD Base 설정 WMTS(월드맵타일서비스) API 사용
+    var url1 = 'http://api.vworld.kr/req/wmts/1.3.0/5638C501-9663-3A53-8DDF-701B190423EE/';
 
-    // OSM 설정
-    var OSM = new ol.layer.Tile({
-    	visible: true,
-    	source : new ol.source.OSM(),
-    	zIndex : 1    	
+    var Base = new ol.layer.Tile({
+    	visible: false,
+        source : new ol.source.XYZ({
+            url : url1,
+            attributions: [
+                new ol.Attribution({ 
+                    html: ['&copy; <a href="http://map.vworld.kr">V-World Map</a>']
+                })
+            ]
+        }),
+        zIndex : 1
     });
+    
+    // VWORLD Satellite 설정 
+    var Satellite = new ol.layer.Tile({
+    	visible: false,
+        source : new ol.source.XYZ({
+             url : url1,
+            attributions: [
+                new ol.Attribution({ 
+                    html: ['&copy; <a href="http://map.vworld.kr">V-World Map</a>'] 
+                })
+            ]
+        }),
+        zIndex : 1
+    });
+    
+    // VWORLD Hybrid 설정 
+    var Hybrid = new ol.layer.Tile({
+    	visible: false,
+        source : new ol.source.XYZ({
+            url : url1,
+            attributions: [
+                new ol.Attribution({ 
+                    html: ['&copy; <a href="http://map.vworld.kr">V-World Map</a>'] 
+                })
+            ]
+        }),
+        zIndex : 1
+    });
+    
+    // VWORLD Gray 설정 
+    var Gray = new ol.layer.Tile({
+    	visible: false,
+        source : new ol.source.XYZ({
+            url : url1,
+            attributions: [
+                new ol.Attribution({ 
+                    html: ['&copy; <a href="http://map.vworld.kr">V-World Map</a>'] 
+                })
+            ]
+        }),
+        zIndex : 1
+    });
+    
+    // VWORLD Midnight 설정 
+    var Midnight = new ol.layer.Tile({
+    	visible: false,
+        source : new ol.source.XYZ({
+            url : url1,
+            attributions: [
+                new ol.Attribution({ 
+                    html: ['&copy; <a href="http://map.vworld.kr">V-World Map</a>'] 
+                })
+            ]
+        }),
+        zIndex : 1
+    });
+    
+    // VWORLD Selectbox 설정
+    var vbaseStyles = ['Base', 'Satellite', 'Hybrid', 'gray', 'midnight'];
+
+    var VWORLDMap=[];
+    for (var i = 0, ii = vbaseStyles.length; i < ii; ++i) {
+		if(vbaseStyles[i] === 'Satellite'){ 
+			type = 'jpeg'
+		} else {
+			type = 'png'
+		}
+		
+    	VWORLDMap.push(new ol.layer.Tile({
+    		visible: false,
+            preload: Infinity,
+            source : new ol.source.XYZ({
+            	url : url1 + '/' + vbaseStyles[i] + '/{z}/{y}/{x}.' + type
+            }),
+            zIndex : 1
+        }));
+    }
+       
+    var VWORLDMapGroup = new ol.layer.Group({
+    	visible: true,
+        layers: VWORLDMap
+    });
+
+   	/*
+    // VWORLD 설정
+    var VwordMap = new ol.layer.Tile({
+    	visible: false,
+        source : new ol.source.XYZ({
+            url : 'http://xdworld.vworld.kr:8080/2d/Base/202002/{z}/{x}/{y}.png',
+            attributions: [
+                new ol.Attribution({ 
+                    html: ['&copy; <a href="http://map.vworld.kr">V-World Map</a>'] 
+                })
+            ]
+        }),
+        zIndex : 3
+    });
+    */   
         
     // BingMaps 설정   
     var keyValue = 'AoTWblM8Bf48thwSrZ6Y4Bib9qkwA1ikfYBbcMadQdFNI-i1YI9ITnbc4Coz3_NO'
@@ -80,142 +188,13 @@ $(document).ready(function() {
     	visible: false,
         layers: BingMap
     });
-    
-
-    // VWORLD Base 설정 WMTS API 사용
-    var url1 = 'http://api.vworld.kr/req/wmts/1.3.0/5638C501-9663-3A53-8DDF-701B190423EE/';
-    var Base = new ol.layer.Tile({
+    	
+    // OSM 설정
+    var OSM = new ol.layer.Tile({
     	visible: false,
-        source : new ol.source.XYZ({
-            url : url1,
-            attributions: [
-                new ol.Attribution({ 
-                    html: ['&copy; <a href="http://map.vworld.kr">V-World Map</a>'] 
-                })
-            ]
-        }),
-        zIndex : 3
+    	source : new ol.source.OSM(),
+    	zIndex : 3    	
     });
-    
-    // VWORLD Satellite 설정 
-    var Satellite = new ol.layer.Tile({
-    	visible: false,
-        source : new ol.source.XYZ({
-             url : url1,
-            attributions: [
-                new ol.Attribution({ 
-                    html: ['&copy; <a href="http://map.vworld.kr">V-World Map</a>'] 
-                })
-            ]
-        }),
-        zIndex : 3
-    });
-    
-    // VWORLD Hybrid 설정 
-    var Hybrid = new ol.layer.Tile({
-    	visible: false,
-        source : new ol.source.XYZ({
-            url : url1,
-            attributions: [
-                new ol.Attribution({ 
-                    html: ['&copy; <a href="http://map.vworld.kr">V-World Map</a>'] 
-                })
-            ]
-        }),
-        zIndex : 3
-    });
-    
-    // VWORLD Gray 설정 
-    var Gray = new ol.layer.Tile({
-    	visible: false,
-        source : new ol.source.XYZ({
-            url : url1,
-            attributions: [
-                new ol.Attribution({ 
-                    html: ['&copy; <a href="http://map.vworld.kr">V-World Map</a>'] 
-                })
-            ]
-        }),
-        zIndex : 3
-    });
-    
-    // VWORLD Midnight 설정 
-    var Midnight = new ol.layer.Tile({
-    	visible: false,
-        source : new ol.source.XYZ({
-            url : url1,
-            attributions: [
-                new ol.Attribution({ 
-                    html: ['&copy; <a href="http://map.vworld.kr">V-World Map</a>'] 
-                })
-            ]
-        }),
-        zIndex : 3
-    });
-    
-    // VWORLD Selectbox 설정
-    var vbaseStyles = ['Base', 'Satellite', 'Hybrid', 'gray', 'midnight'];
-    var VWORLDMap=[];
-    for (var i = 0, ii = vbaseStyles.length; i < ii; ++i) {
-		if(vbaseStyles[i] === 'Satellite'){ 
-			type = 'jpeg'
-		} else {
-			type = 'png'
-		}
-		
-    	VWORLDMap.push(new ol.layer.Tile({
-    		visible: false,
-            preload: Infinity,
-            source : new ol.source.XYZ({
-            	url : url1 + '/' + vbaseStyles[i] + '/{z}/{y}/{x}.' + type
-            }),
-            zIndex : 3
-        }));
-    }
-       
-    var VWORLDMapGroup = new ol.layer.Group({
-    	visible: false,
-        layers: VWORLDMap
-    });
-
-   	/*
-    // VWORLD 설정
-    var VwordMap = new ol.layer.Tile({
-    	visible: false,
-        source : new ol.source.XYZ({
-            url : 'http://xdworld.vworld.kr:8080/2d/Base/202002/{z}/{x}/{y}.png',
-            attributions: [
-                new ol.Attribution({ 
-                    html: ['&copy; <a href="http://map.vworld.kr">V-World Map</a>'] 
-                })
-            ]
-        }),
-        zIndex : 3
-    });
-    */
-   
-   /*
-   	var wms_title = '지적도';
-	var wms_val = 'lp_pa_cbnd_bubun';
-
-	var wms_tile = new ol.layer.Tile({
-		name : "WMS_LAYER",
-		source : new ol.source.TileWMS({
-			url : "http://api.vworld.kr/req/wms?",
-			params : {
-				LAYERS : wms_val,
-				STYLES : wms_val,
-				CRS : "EPSG:900913",
-				apikey : "CEB52025-E065-364C-9DBA-44880E3B02B8",
-				DOMAIN : "http://loacalhost:8080",
-				title : wms_title,
-				FORMAT : "image/png",
-				domain : "http://localhost"
-			}
-		})
-	});
-	map.addLayer(wms_tile);
-	*/
        
     // GIS:base geoserver 백그라운드레이어 그룹명
     var customBase = new ol.layer.Image({
@@ -233,6 +212,47 @@ $(document).ready(function() {
         }),
         zIndex : 4
     });
+
+
+	// 브이월드 연속지적도
+	var wms_val = 'lp_pa_cbnd_bubun';
+	var WMS = new ol.layer.Tile({
+		visible: false,
+		source : new ol.source.TileWMS({
+			url : "http://api.vworld.kr/req/wms?",
+			params : {
+				LAYERS : wms_val,
+				STYLES : wms_val,
+				CRS : "EPSG:900913",
+				apikey : "5638C501-9663-3A53-8DDF-701B190423EE",
+				DOMAIN : "http://loacalhost:8090",
+				title : "연속지적도",
+				FORMAT : "image/png",
+				domain : "http://localhost"
+			}
+		}),
+		zIndex : 5
+	});
+	
+	// 브이월드 경계
+	var wms_val = 'lt_c_adsido,lt_c_adsigg,lt_c_ademd,lt_c_adri,lt_p_bycracks,lt_l_byclink,lt_c_wgisnpgug,lt_c_wgisnpgun,lt_c_wgisnpdo,lt_l_frstclimb,lt_p_climball,lt_l_trkroad,lt_p_trkroad';
+	var WMS1 = new ol.layer.Tile({
+		visible: false,
+		source : new ol.source.TileWMS({
+			url : "http://api.vworld.kr/req/wms?",
+			params : {
+				LAYERS : wms_val,
+				STYLES : wms_val,
+				CRS : "EPSG:900913",
+				apikey : "5638C501-9663-3A53-8DDF-701B190423EE",
+				DOMAIN : "http://loacalhost:8090",
+				title : "경계",
+				FORMAT : "image/png",
+				domain : "http://localhost"
+			}
+		}),
+		zIndex : 5
+	});
             
     // OSM TileGrid 설정
     var TileGrid = new ol.layer.Tile({
@@ -264,7 +284,7 @@ $(document).ready(function() {
     ]); 
     
     // layers 설정      
-    var addLayers = [OSM, BingMapGroup, VWORLDMapGroup, customBase, TileGrid];
+    var addLayers = [VWORLDMapGroup, BingMapGroup, OSM, customBase, WMS1, TileGrid];
     
     // view 설정
     var view = new ol.View({

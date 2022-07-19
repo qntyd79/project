@@ -294,9 +294,16 @@
                             <div id="layerTree">
                                 <ul>
                                     <li id="layer0">
-                                        <input id="visible0" class="visible" type="checkbox" /><span> OpenStreetMap</span>
+                                        <input id="visible0" class="visible" type="checkbox" /><span> VworldMap</span>
                                         <fieldset>
                                             <input class="opacity" type="range" min="0" max="1" step="0.01" />
+                                            <select id="vworldlayerSelect">
+                                            	<option value="Base" selected>Base</option>
+                                                <option value="Satellite">Satellite</option>                                               
+                                                <option value="Hybrid">Hybrid</option>
+                                                <option value="gray">gray</option> 
+                                                <option value="midnight">midnight</option>                                              
+                                            </select>
                                         </fieldset>
                                     </li>
                                     <li id="layer1">
@@ -334,16 +341,9 @@
                                         </fieldset>
                                     </li>
                                     <li id="layer2">
-                                        <input id="visible2" class="visible" type="checkbox" /><span> VworldMap</span>
+                                        <input id="visible2" class="visible" type="checkbox" /><span> OpenStreetMap</span>
                                         <fieldset>
                                             <input class="opacity" type="range" min="0" max="1" step="0.01" />
-                                            <select id="vworldlayerSelect">
-                                            	<option value="Base" selected>Base</option>
-                                                <option value="Satellite">Satellite</option>                                               
-                                                <option value="Hybrid">Hybrid</option>
-                                                <option value="gray">gray</option> 
-                                                <option value="midnight">midnight</option>                                               
-                                            </select>
                                         </fieldset>
                                     </li>
                                     <li id="layer3">
@@ -503,12 +503,18 @@
                                                     </ul>
                                                 </fieldset>
                                                 </li>
-                                       -->           
-                                    <li id="layer4"><input id="visible4" class="visible" type="checkbox" /><span> TileGrid</span>
+                                       --> 
+                                       <li id="layer4"><input id="visible4" class="visible" type="checkbox" /><span> 브이월드 연속지적도</span>
                                         <fieldset>
                                             <input class="opacity" type="range" min="0" max="1" step="0.01" />
                                         </fieldset>
-                                    </li>
+                                    	</li>          
+	                                    <li id="layer5"><input id="visible5" class="visible" type="checkbox" /><span> TileGrid</span>
+	                                        <fieldset>
+	                                            <input class="opacity" type="range" min="0" max="1" step="0.01" />
+	                                        </fieldset>
+	                                    </li>
+                                    
                                 </ul>
                             </div>
                             <!--

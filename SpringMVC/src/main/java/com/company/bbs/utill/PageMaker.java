@@ -8,13 +8,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 public class PageMaker {
 	
-    private Criteria criteria; // page, perPageNum , 카테고리, 검색관련 을 가지고 있음
-    private int totalCount; //전체 게시글 
+    private Criteria criteria; // page, perPageNum, 카테고리와 검색관련 데이터를 가지고 있음
+    private int totalCount; //전체게시글 
     private int startPage; //시작페이지
     private int endPage; //마지막페이지
     private boolean prev;
     private boolean next;
     private int displayPageNum = 10; // 화면 하단에 보여지는 페이지의 수
+    
     private int totalPage;
     private int noticeCount; 
     private int curNum;
@@ -35,6 +36,23 @@ public class PageMaker {
 		this.totalCount = totalCount;
 		calcData();
 	}
+	
+	private void calcData() {
+
+        endPage = (int)(Math.ceil(criteria.getPage() / (double)displayPageNum) * displayPageNum);
+
+        startPage = (endPage - displayPageNum) + 1;
+
+        int tempEndPage = (int)(Math.ceil(totalCount / (double)criteria.getPerPageNum()));
+
+        if (endPage > tempEndPage) {
+            endPage = tempEndPage;
+        }
+
+        prev = startPage == 1 ? false : true;
+
+        next = endPage * criteria.getPerPageNum() >= totalCount ? false : true;
+    }
 
 	public int getStartPage() {
 		return startPage;
@@ -75,26 +93,9 @@ public class PageMaker {
 	public void setDisplayPageNum(int displayPageNum) {
 		this.displayPageNum = displayPageNum;
 	}
-
-	private void calcData() {
-
-        endPage = (int) (Math.ceil (criteria.getPage() / (double) displayPageNum) * displayPageNum);
-
-        startPage = (endPage - displayPageNum) + 1;
-
-        int tempEndPage = (int) (Math.ceil (totalCount / (double) criteria.getPerPageNum()));
-
-        if (endPage > tempEndPage) {
-            endPage = tempEndPage;
-        }
-
-        prev = startPage == 1 ? false : true;
-
-        next = endPage * criteria.getPerPageNum() >= totalCount ? false : true;
-    }
 	
 	public int getTotalPage() {		
-		totalPage = (int) Math.ceil (totalCount / (double) criteria.getPerPageNum()); // 전체페이지 수
+		totalPage = (int)Math.ceil(totalCount / (double)criteria.getPerPageNum()); // 전체페이지 수
 		
 		return totalPage;
 	}
@@ -119,7 +120,6 @@ public class PageMaker {
                 .queryParam("perPageNum",criteria.getPerPageNum())
                 .queryParam("searchField",criteria.getSearchField())
 				.queryParam("keyWord",encoding(criteria.getKeyWord()))
-				.queryParam("category_idx",criteria.getCategory_idx())
                 .build();
 
         return uriComponents.toUriString();

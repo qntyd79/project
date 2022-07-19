@@ -47,7 +47,7 @@
                                         <fieldset>
                                             <select name="category_idx" id="category_idx" form="categoryForm" onChange="$(this.form).submit();">
                                                 <option value="0" <c:if test="${categoryselect == 0}"><c:out value="selected=selected" /></c:if>>전체목록</option>
-                                                <c:forEach var="item" items="${categorylist}" varStatus="status">
+                                                <c:forEach var="item" items="${category}" varStatus="status">
                                                     <option value="<c:out value="${item.category_idx}" />" <c:if test="${item.category_idx == categoryselect}">
                                                         <c:out value="selected=selected" />
                                                     </c:if>><c:out value="${item.title}" />
@@ -58,7 +58,7 @@
                                     </div>
                                 </form>
                                 <div class="articles">
-                                    	전체글 : <span>${pageMaker.totalCount}</span> 개 | 공지글 : <span>${pageMaker.noticeCount}</span> | 현재페이지 : <span>${pageMaker.criteria.page}</span> | 총페이지 : <span>${pageMaker.totalPage}</span>
+                                    	전체글 : <span>${pageMaker.totalCount}</span> 개 | 공지글 : <span>${pageMaker.noticeCount}</span> | 현재페이지 : <span class="nowpage"></span> | 총페이지 : <span>${pageMaker.totalPage}</span>
                                 </div>
                                 <form name="listForm" method="post" enctype="multipart/form-data" action="list.do">
                                     <fieldset>
@@ -128,9 +128,8 @@
     </div>
 </div>
 
-<c:import url="/WEB-INF/views/include/footer.jsp"/>
-
 <script type="text/javascript">
+
 	$(document).ready(function() {
 
 		//게시판등록    	
@@ -139,7 +138,7 @@
 			$.ajax({
 				type: "GET",
 				url: "${path}/modules/board/ajaxwrite.do",	
-				dataType: "text",
+				dataType: "text", //vo로 데이터 받기 위해 text로 설정
 				success: function(result) {
 				    //서비스 성공 시 처리 할 내용
 				    if (result == "insertSuccess") {
@@ -185,9 +184,7 @@
 	    		
                	// 공지게시물출력
 	            $(data.noticelist).each(function() {
-	  
-	            	console.log(data.noticelist);
-	            	
+           	
 					var depth = this.depth;
 	            	
 	            	if (depth > 0) {
@@ -211,18 +208,16 @@
 	            	}
 	            	
 	            	if (this.notice > 0){
-	            		var mark = "<span><spring:message code='bbs.list.notice'/></span>";
+	            		var cumN = "<span><spring:message code='bbs.list.notice'/></span>";
 	            	} else {
-	            		var index = index; 
-	            		// 전체게시물수 - (페이지당 레코드 수 * (현재페이지수-1)) nowPage의 초기값이 1일때 -1을 해준다.
-	            		var cum = ${pageMaker.totalCount} - (10 * (page-1));
-	            		console.log(cum);
-	               		var cumN = (cum-index) - ${pageMaker.noticeCount};
+	            		var index = index; //3번방법
+	            		var curNum = ${pageMaker.totalCount} - (10 * (page-1)); // 전체게시물수 - (페이지당 레코드 수 * (현재페이지수-1)) nowPage의 초기값이 1일때 -1을 해준다.
+	            	    var cumN = (curNum-index) - ${pageMaker.noticeCount};
 	            	}
 	            	                
 	            	str += 	"<tr>" + 
 	            			"<td width='5%' class='text-center'><label><input type='checkbox' name='check' value=" + this.board_idx + "/></label></td>" + 
-	            			"<td width='5%' class='text-center'>" + mark + "</td>" + 
+	            			"<td width='5%' class='text-center'>" + cumN + "</td>" + 
 	            			"<td width='10%'class='text-center'>" + this.categoryVO.title +  "</td>" + 
 	            			"<td width='40%' class='text-left'>" + tab + icon + "<a href='ajaxread.do${pageMaker.makeSearch(pageMaker.criteria.page)}&board_idx=" + this.board_idx + "' >" + tab + this.title + hit + "</a></td>" + 
 	            			"<td width='10%' class='text-center'>" + this.name + "</td>" + 
@@ -260,16 +255,10 @@
 	            	}
 	            	
 	            	if (this.notice > 0){
-	            		var mark = "<spring:message code='bbs.list.notice'/></span>";
+	            		var cumN = "<spring:message code='bbs.list.notice'/></span>";
 	            	} else {
 	            		var index = index; //3번방법
-	            		console.log("index : " + index);
 	            		var curNum = ${pageMaker.totalCount} - (10 * (page-1)); // 전체게시물수 - (페이지당 레코드 수 * (현재페이지수-1)) nowPage의 초기값이 1일때 -1을 해준다.
-	            		console.log("전체게시물수" + curNum);
-	            		
-	            		var endpage1 = ${pageMaker.endPage};
-	            		console.log("마지막페이지" + endpage1);
-	            		
 	            	    var cumN = (curNum-index) - ${pageMaker.noticeCount};
 	            	}
 	            	
@@ -287,6 +276,7 @@
 	            			"</tr>";
 	            });
 	            
+	          	$(".nowpage").text(page);
 	            $("#boardlist").html(str);
 
 	            // 페이징처리 
@@ -313,22 +303,20 @@
 	    function printPaging(pageMaker) {
 	
 	        var str = "";
-	
+	        
 	        if (pageMaker.prev) {
-	            str += "<li><a href='" + (pageMaker.page) + "'><i class='fa fa-angle-double-left' aria-hidden='true'></i></a></li>";
-	            str += "<li><a href='" + (pageMaker.startPage - 1) + "'><i class='fa fa-angle-left' aria-hidden='true'></i></a></li>";
+	            str += "<li><a href='" + 1 + "'><i class='fa fa-angle-double-left' aria-hidden='true'></i></a></li> ";
+	            str += "<li><a href='" + (pageMaker.startPage - 1) + "'><i class='fa fa-angle-left' aria-hidden='true'></i></a></li> ";
 	        }
 	
 	        for (var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++) {
-	        	//alert(i);
-	        	//alert(len);
 	            var strClass = pageMaker.criteria.page == i ? 'class=active' : '';
 	            str += "<li><a href='" + i + "'" + strClass + ">" + i + "</a></li> ";
 	        }
 	
 	        if (pageMaker.next && pageMaker.endPage > 0) {
-	            str += "<li><a href='" + (pageMaker.endPage + 1) + "'><i class='fa fa-angle-right' aria-hidden='true'></i></a></li>";
-	            str += "<li><a href='" + (pageMaker.totalPage) + "'><i class='fa fa-angle-double-right' aria-hidden='true'></i></a></li>";
+	            str += "<li><a href='" + (pageMaker.endPage + 1) + "'><i class='fa fa-angle-right' aria-hidden='true'></i></a></li> ";
+	            str += "<li><a href='" + (pageMaker.totalPage) + "'><i class='fa fa-angle-double-right' aria-hidden='true'></i></a></li> ";
 	        }
 	
 	        $(".pagination").html(str);
@@ -345,3 +333,5 @@
 });
 
 </script>
+
+<c:import url="/WEB-INF/views/include/footer.jsp"/>

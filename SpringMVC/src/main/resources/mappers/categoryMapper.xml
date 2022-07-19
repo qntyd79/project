@@ -5,7 +5,8 @@
 <mapper namespace="category">
 
 	<!-- 글목록 -->
-	<select id="getList" resultType="com.company.bbs.vo.category.CategoryVO">
+	<select id="getList"
+		resultType="com.company.bbs.vo.category.CategoryVO">
 	<![CDATA[ 
 	select * from jhbbs_category where category_idx > 0 and del = 'N'
 	]]>
@@ -15,9 +16,10 @@
 	order by kind desc, parent desc, sortno asc limit #{pageStart}, ${perPageNum}
 	]]>
 	</select>
-	
+
 	<!-- 카테고리명 -->
-	<select id="getCategory" resultType="com.company.bbs.vo.category.CategoryVO">
+	<select id="getCategory"
+		resultType="com.company.bbs.vo.category.CategoryVO">
 	<![CDATA[ 
 	select category_idx, title from jhbbs_category where del = 'N'
 	]]>
@@ -25,9 +27,10 @@
 	order by category_idx DESC
 	]]>
 	</select>
-	
-	<!-- 카테고리목록 -->
-	<select id="getCategoryList" resultType="com.company.bbs.vo.category.CategoryVO">
+
+	<!-- 카테고리목록
+	<select id="getCategoryList"
+		resultType="com.company.bbs.vo.category.CategoryVO">
 	<![CDATA[ 
 	select * from jhbbs_category where del = 'N'
 	]]>
@@ -35,18 +38,17 @@
 	order by category_idx DESC
 	]]>
 	</select>
-
+	 -->
+	 
 	<!-- 글저장 -->
 	<insert id="insert"
 		parameterType="com.company.bbs.vo.category.CategoryVO">
 		INSERT INTO jhbbs_category (
 		parent, depth, sortno,
-		title, name, pass, total, kind, cipp, hit, regdate, del, board_idx,
-		member_idx
+		title, name, pass, total, kind, cipp, hit, regdate, del
 		) VALUES (
 		#{parent}, #{depth}, #{sortno}, #{title}, #{name},
-		#{pass}, #{total}, #{kind}, #{cipp}, #{hit}, #{regdate}, #{del},
-		#{board_idx} ,#{member_idx}
+		#{pass}, #{total}, #{kind}, #{cipp}, #{hit}, #{regdate}, #{del}
 		)
 	</insert>
 
@@ -115,7 +117,7 @@
 	<select id="getCount" resultType="int">
 	<![CDATA[ 
 	select count(category_idx) from jhbbs_category where category_idx > 0 and del = 'N' 
-	]]>	
+	]]>
 		<include refid="category"></include>
 		<include refid="search"></include>
 	</select>

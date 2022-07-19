@@ -192,37 +192,37 @@
 	        });
 	    }
 	
-	    //페이징함수 
-	    function printPaging(pageMaker) {
-	
-	        var str = "";
-	
-	        if (pageMaker.prev) {
-	            str += "<li><a href='" + (pageMaker.page) + "'><i class='fa fa-angle-double-left' aria-hidden='true'></i></a></li>";
-	            str += "<li><a href='" + (pageMaker.startPage - 1) + "'><i class='fa fa-angle-left' aria-hidden='true'></i></a></li>";
-	        }
-	
-	        for (var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++) {
-	            var strClass = pageMaker.criteria.page == i ? 'class=active' : '';
-	            str += "<li><a href='" + i + "' " + strClass + ">" + i + "</a></li> ";
-	        }
-	
-	        if (pageMaker.next && pageMaker.endPage > 0) {
-	            str += "<li><a href='" + (pageMaker.endPage + 1) + "'><i class='fa fa-angle-right' aria-hidden='true'></i></a></li>";
-	            str += "<li><a href='" + (pageMaker.totalPage) + "'><i class='fa fa-angle-double-right' aria-hidden='true'></i></a></li>";
-	        }
-	
-	        $(".pagination").html(str);
-	
-	        //페이징 번호클릭시 처리 
-	        var replyPage = 1;
-	
-	        $(".pagination").on("click", "li a", function(event) {
-	            event.preventDefault();
-	            replyPage = $(this).attr("href");
-	            getPageList(replyPage);
-	        });
-	    }
+	 // 페이징함수 
+		function printPaging(pageMaker) {
+			
+		 	var str = "";
+		
+		   	if (pageMaker.prev) {
+		        str += "<li><a href='" + pageMaker.startPage + "'><i class='fa fa-angle-double-left' aria-hidden='true'></i></a></li> ";
+		        str += "<li><a href='" + (pageMaker.startPage - 1) + "'><i class='fa fa-angle-left' aria-hidden='true'></i></a></li> ";
+		   	}
+		
+		    for (var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++) {
+		        var strClass = pageMaker.criteria.page == i ? 'class=active' : '';
+		        str += "<li><a href='" + i + "'" + strClass + ">" + i + "</a></li> ";
+		    }
+		
+		  	if (pageMaker.next && pageMaker.endPage > 0) {
+		    	str += "<li><a href='" + (pageMaker.endPage + 1) + "'><i class='fa fa-angle-right' aria-hidden='true'></i></a></li> ";
+		        str += "<li><a href='" + (pageMaker.totalPage) + "'><i class='fa fa-angle-double-right' aria-hidden='true'></i></a></li> ";
+		  	}
+		
+		    $(".pagination").html(str);
+		
+		    // 페이징 번호클릭시 처리 
+		    var replyPage = 1;
+		    
+		    $(".pagination").on("click", "li a", function(event) {
+		    	event.preventDefault();
+		        replyPage = $(this).attr("href");
+		        getPageList(replyPage);
+		    });
+		}
 		
 		//댓글등록    	
 		$("#writeBtn").on("click",function(){

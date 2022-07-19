@@ -1,4 +1,4 @@
-
+/* 게시판테이블 */
 CREATE TABLE IF NOT EXISTS mydb.JHBBS_board (
 board_idx		INT(10) NOT NULL AUTO_INCREMENT,
 parent		  	INT(10) NOT NULL,
@@ -32,6 +32,7 @@ member_idx 		INT(10) DEFAULT '0',
 PRIMARY KEY(board_idx)
 );
 
+/* 카테고리테이블 */
 CREATE TABLE IF NOT EXISTS  mydb.JHBBS_category (
 category_idx	INT(10) NOT NULL AUTO_INCREMENT,
 parent		  	INT(10) NOT NULL,
@@ -52,18 +53,7 @@ email_idx       INT(10) DEFAULT '0',
 PRIMARY KEY (category_idx)
 );
 
-/* 게시판 기본분류 */
-INSERT INTO mydb.JHBBS_category (category_idx, parent, depth, sortno, title, name, pass, total, kind, hit, cipp, regdate, del, board_idx, member_idx) 
-VALUES ('1', '1', '0', '0', '일반', '관리자', 'admin!@1234', '0', '1', '0', '127.0.0.1', CURRENT_TIMESTAMP(), 'N', '0', '0'); 
-
-/* 회원게시판 기본분류 */
-INSERT INTO mydb.JHBBS_category (category_idx, parent, depth, sortno, title, name, pass, total, kind, hit, cipp, regdate, del, board_idx, member_idx) 
-VALUES ('2', '2', '0', '0', '일반회원', '관리자', 'admin!@1234', '0', '2', '0', '127.0.0.1', CURRENT_TIMESTAMP(), 'N', '0', '0'); 
-
-/* 메일게시판 기본분류 */
-INSERT INTO mydb.JHBBS_category (category_idx, parent, depth, sortno, title, name, pass, total, kind, hit, cipp, regdate, del, board_idx, member_idx) 
-VALUES ('3', '3', '0', '0', '수신', '관리자', 'admin!@1234', '0', '3', '0', '127.0.0.1', CURRENT_TIMESTAMP(), 'N', '0', '0'); 
-
+/* 코멘트테이블 */
 CREATE TABLE IF NOT EXISTS  mydb.JHBBS_comment (
 comment_idx		INT(10) NOT NULL AUTO_INCREMENT,
 parent		  	INT(10) NOT NULL,
@@ -83,8 +73,7 @@ board_idx 		INT(10) DEFAULT '0',
 PRIMARY KEY (comment_idx)
 );
 
-ALTER TABLE mydb.JHBBS_comment ADD CONSTRAINT `fk_comment_idx` FOREIGN KEY (`board_idx`) REFERENCES mydb.JHBBS_board (`board_idx`);
-
+/* 게시판연동 파일테이블 */
 CREATE TABLE IF NOT EXISTS  mydb.JHBBS_file (
 file_idx		INT(10) NOT NULL AUTO_INCREMENT,
 file_name 		VARCHAR(255) NOT NULL,
@@ -96,38 +85,13 @@ download 		INT(10) NOT NULL,
 regdate 		DATETIME DEFAULT CURRENT_TIMESTAMP,
 del 			VARCHAR(2) NOT NULL DEFAULT 'N',
 board_idx 		INT(10) DEFAULT '0',
+category_idx 	INT(10) DEFAULT '1',
 member_idx      INT(10) DEFAULT '0',
 email_idx       INT(10) DEFAULT '0',
-category_idx 	INT(10) DEFAULT '1',
 PRIMARY KEY (file_idx)
 );
 
-ALTER TABLE mydb.JHBBS_file ADD CONSTRAINT `fk_board_idx` FOREIGN KEY (`board_idx`) REFERENCES mydb.JHBBS_board (`board_idx`);
-
-CREATE TABLE IF NOT EXISTS  mydb.JHBBS_attach(
-file_idx		INT(10) NOT NULL AUTO_INCREMENT,
-file_name 		VARCHAR(255) NOT NULL,
-file_hash_name 	VARCHAR(255) NOT NULL,
-file_size 		VARCHAR(100) NOT NULL,
-file_type		VARCHAR(100) NOT NULL,
-file_ext		VARCHAR(100) NOT NULL,
-download 		INT(10) NOT NULL,
-userid			VARCHAR(100),
-name 			VARCHAR(100) NOT NULL,
-pass 			VARCHAR(100) NOT NULL,
-title 			VARCHAR(100) NOT NULL,   
-content 		LONGTEXT NOT NULL, 
-hit 			INT(10) NOT NULL,       
-cipp 			VARCHAR(30) DEFAULT '127.0.0.1',
-vote 			INT(10) DEFAULT '0',   
-regdate 		DATETIME DEFAULT CURRENT_TIMESTAMP,
-del 			VARCHAR(2) NOT NULL DEFAULT 'N',
-category_idx 	INT(10) DEFAULT '1',
-board_idx 		INT(10) DEFAULT '0',
-email_idx       INT(10) DEFAULT '0',
-PRIMARY KEY (file_idx)
-);
-
+/* 회원테이블 */
 CREATE TABLE  IF NOT EXISTS mydb.JHBBS_member (
 member_idx		INT(10) NOT NULL AUTO_INCREMENT,
 userid			VARCHAR(10) NOT NULL,
@@ -186,8 +150,7 @@ add_frm10		VARCHAR(100),
 PRIMARY KEY(member_idx)
 );
 
-ALTER TABLE mydb.JHBBS_file ADD CONSTRAINT `fk_member_idx` FOREIGN KEY (`member_idx`) REFERENCES mydb.JHBBS_member (`member_idx`);
-
+/* 이메일테이블 */
 CREATE TABLE  IF NOT EXISTS mydb.JHBBS_email (
 email_idx		INT(10) NOT NULL AUTO_INCREMENT,
 userid			VARCHAR(10) NOT NULL,
@@ -203,5 +166,24 @@ del 			VARCHAR(2) NOT NULL DEFAULT 'N',
 category_idx 	INT(10) DEFAULT '1',
 PRIMARY KEY(email_idx)
 );
+
+/* 게시판 기본분류 */
+INSERT INTO mydb.JHBBS_category (category_idx, parent, depth, sortno, title, name, pass, total, kind, hit, cipp, regdate, del, board_idx, member_idx) 
+VALUES ('1', '1', '0', '0', '일반', '관리자', 'admin!@1234', '0', '1', '0', '127.0.0.1', CURRENT_TIMESTAMP(), 'N', '0', '0'); 
+
+/* 회원게시판 기본분류 */
+INSERT INTO mydb.JHBBS_category (category_idx, parent, depth, sortno, title, name, pass, total, kind, hit, cipp, regdate, del, board_idx, member_idx) 
+VALUES ('2', '2', '0', '0', '일반회원', '관리자', 'admin!@1234', '0', '2', '0', '127.0.0.1', CURRENT_TIMESTAMP(), 'N', '0', '0'); 
+
+/* 메일게시판 기본분류 */
+INSERT INTO mydb.JHBBS_category (category_idx, parent, depth, sortno, title, name, pass, total, kind, hit, cipp, regdate, del, board_idx, member_idx) 
+VALUES ('3', '3', '0', '0', '수신', '관리자', 'admin!@1234', '0', '3', '0', '127.0.0.1', CURRENT_TIMESTAMP(), 'N', '0', '0'); 
+
+/* FOREIGN KEY 설정 */
+ALTER TABLE mydb.JHBBS_comment ADD CONSTRAINT `fk_comment_idx` FOREIGN KEY (`board_idx`) REFERENCES mydb.JHBBS_board (`board_idx`);
+
+ALTER TABLE mydb.JHBBS_file ADD CONSTRAINT `fk_board_idx` FOREIGN KEY (`board_idx`) REFERENCES mydb.JHBBS_board (`board_idx`);
+
+ALTER TABLE mydb.JHBBS_file ADD CONSTRAINT `fk_member_idx` FOREIGN KEY (`member_idx`) REFERENCES mydb.JHBBS_member (`member_idx`);
 
 ALTER TABLE mydb.JHBBS_file ADD CONSTRAINT `fk_email_idx` FOREIGN KEY (`email_idx`) REFERENCES mydb.JHBBS_email (`email_idx`);

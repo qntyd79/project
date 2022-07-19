@@ -70,12 +70,10 @@ public class BoardController {
 	private BCryptPasswordEncoder passwordEncoder;
 
 	// 다국어 지역세션설정
-	@SuppressWarnings("unused")
 	@Autowired
 	private SessionLocaleResolver localeResolver;
 
 	// 다국어 설정
-	@SuppressWarnings("unused")
 	@Autowired
 	private MessageSource messageSource;
 
@@ -94,7 +92,7 @@ public class BoardController {
 		return new BoardVO();
 	}
 
-	// 글목록 (Model)
+	// 게시판 글목록 (Model)
 	@RequestMapping(value = "list.do")
 	public String List(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
@@ -108,14 +106,14 @@ public class BoardController {
 
 		model.addAttribute("list", service.getList(criteria));
 		model.addAttribute("noticelist", service.getNoticeList(criteria));
-		//model.addAttribute("categoryname", service.getCategory());
-		model.addAttribute("categorylist", service.getCategoryList());
+		model.addAttribute("category", service.getCategory());
 		model.addAttribute("categoryselect", criteria.getCategory_idx()); //게시물 검색 후 현재선택목록 보여줌
 		model.addAttribute("pageMaker", pageMaker);
 
 		return "modules/board/board_list";
 	}
 	
+	// 게시판 ajax
 	@RequestMapping(value = "ajaxlist.do")
 	public String indexListAjax(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
@@ -128,8 +126,7 @@ public class BoardController {
 
 		model.addAttribute("list", service.getList(criteria));
 		model.addAttribute("noticelist", service.getNoticeList(criteria));
-		//model.addAttribute("categoryname", service.getCategory());
-		model.addAttribute("categorylist", service.getCategoryList());
+		model.addAttribute("category", service.getCategory());
 		model.addAttribute("categoryselect", criteria.getCategory_idx()); //게시물 검색 후 현재선택목록 보여줌
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("criteria", criteria);
@@ -137,7 +134,7 @@ public class BoardController {
 		return "modules/board/ajax_board_list";
 	}
 
-	// 글목록 (ModelAndView)
+	// 게시판 글목록 (ModelAndView)
 	@RequestMapping(value = "mvlist.do")
 	public ModelAndView List(@ModelAttribute Criteria criteria) throws Exception {
 
@@ -153,8 +150,7 @@ public class BoardController {
 
 		mav.addObject("list", service.getList(criteria));
 		mav.addObject("noticelist", service.getNoticeList(criteria));
-		mav.addObject("categoryname", service.getCategory());
-		mav.addObject("categorylist", service.getCategoryList());
+		mav.addObject("category", service.getCategory());
 		mav.addObject("categoryselect", criteria.getCategory_idx());
 		mav.addObject("pageMaker", pageMaker);
 
@@ -163,7 +159,7 @@ public class BoardController {
 		return mav;
 	}
 
-	// 글목록 (Map)
+	// 게시판 글목록 (Map)
 	@RequestMapping(value = "mlist.do")
 	public String List1(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
@@ -179,8 +175,7 @@ public class BoardController {
 
 		map.put("list", service.getList(criteria));
 		map.put("noticelist", service.getNoticeList(criteria));
-		map.put("categoryname", service.getCategory());
-		map.put("categorylist", service.getCategoryList());
+		map.put("category", service.getCategory());
 		map.put("categoryselect", criteria.getCategory_idx());
 		map.put("pageMaker", pageMaker);
 
@@ -189,7 +184,7 @@ public class BoardController {
 		return "modules/board/board_list";
 	}
 
-	// 글등록폼
+	// 게시판 글등록폼
 	@RequestMapping(value = "write.do", method = RequestMethod.GET)
 	public String Write(Model model, @ModelAttribute Criteria criteria, @ModelAttribute("boardVO") BoardVO boardVO)
 			throws Exception {
@@ -197,7 +192,7 @@ public class BoardController {
 		logger.info("글쓰기");
 
 		model.addAttribute("boardVO", boardVO);
-		model.addAttribute("categorylist", service.getCategoryList());
+		model.addAttribute("category", service.getCategory());
 
 		return "modules/board/board_write";
 	}
@@ -210,12 +205,12 @@ public class BoardController {
 		logger.info("ajax 글쓰기");
 
 		model.addAttribute("boardVO", boardVO);
-		model.addAttribute("categorylist", service.getCategoryList());
+		model.addAttribute("category", service.getCategory());
 
 		return "modules/board/ajax_board_write";
 	}
 
-	// 답글쓰기
+	// 게시판 답글쓰기
 	@RequestMapping(value = "reply.do", method = RequestMethod.GET)
 	public ModelAndView Reply(@ModelAttribute Criteria criteria, @RequestParam int board_idx) throws Exception {
 
@@ -224,13 +219,13 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("boardVO", service.getView(board_idx));
-		mav.addObject("categorylist", service.getCategoryList());
+		mav.addObject("category", service.getCategory());
 		mav.setViewName("modules/board/board_reply");
 
 		return mav;
 	}
 
-	// 글저장
+	// 게시판 글저장
 	@RequestMapping(value = "insert.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public String Insert(Model model, @ModelAttribute Criteria criteria, @ModelAttribute("boardVO") BoardVO boardVO,
 			SessionStatus sessionStatus, BindingResult bindingResult, HttpServletRequest request) throws Exception {
@@ -243,8 +238,7 @@ public class BoardController {
 		// 서버측 유효성검증 후 에러가 발생할 경우 등록폼 출력
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("boardVO", boardVO);
-			model.addAttribute("categoryname", service.getCategory());
-			model.addAttribute("categorylist", service.getCategoryList());
+			model.addAttribute("category", service.getCategory());
 
 			if (boardVO.getBoard_idx() != 0) {
 				// 새글이 아니면 답글폼 출력
@@ -287,7 +281,7 @@ public class BoardController {
 		return "/modules/common/common_message";
 	}
 
-	// 글보기
+	// 게시판 글보기 (Model)
 	@RequestMapping(value = "read.do", method = RequestMethod.GET)
 	public String Read(Model model, @ModelAttribute Criteria criteria, @RequestParam int board_idx,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -336,8 +330,7 @@ public class BoardController {
 		model.addAttribute("boardVO", service.getView(board_idx));
 		model.addAttribute("prenum", service.getPrevNum(board_idx));
 		model.addAttribute("nextnum", service.getNextNum(board_idx));
-		model.addAttribute("categoryname", service.getCategory());
-		model.addAttribute("categorylist", service.getCategoryList());
+		model.addAttribute("category", service.getCategory());
 		model.addAttribute("filelist", service.getFileList(board_idx));
 
 		return "modules/board/board_view";
@@ -392,14 +385,13 @@ public class BoardController {
 		model.addAttribute("boardVO", service.getView(board_idx));
 		model.addAttribute("prenum", service.getPrevNum(board_idx));
 		model.addAttribute("nextnum", service.getNextNum(board_idx));
-		model.addAttribute("categoryname", service.getCategory());
-		model.addAttribute("categorylist", service.getCategoryList());
+		model.addAttribute("category", service.getCategory());
 		model.addAttribute("filelist", service.getFileList(board_idx));
 
 		return "modules/board/ajax_board_view";
 	}
 
-	// 글보기
+	// 게사판 글보기 (ModelAndView)
 	@RequestMapping(value = "mvread.do", method = RequestMethod.GET)
 	public ModelAndView Read(@ModelAttribute Criteria criteria, @RequestParam int board_idx) throws Exception {
 
@@ -410,29 +402,27 @@ public class BoardController {
 		mav.addObject("boardVO", service.getView(board_idx));
 		mav.addObject("prenum", service.getPrevNum(board_idx));
 		mav.addObject("nextnum", service.getNextNum(board_idx));
-		mav.addObject("categoryname", service.getCategory());
-		mav.addObject("categorylist", service.getCategoryList());
+		mav.addObject("category", service.getCategory());
 		mav.setViewName("modules/board/board_view");
 
 		return mav;
 	}
 
-	// 글수정폼
+	// 게시판 글수정폼
 	@RequestMapping(value = "edit.do", method = RequestMethod.GET)
 	public String Edit(Model model, @ModelAttribute Criteria criteria, @RequestParam int board_idx) throws Exception {
 
 		logger.info("글수정");
 
 		model.addAttribute("boardVO", service.getView(board_idx));
-		model.addAttribute("categoryname", service.getCategory());
-		model.addAttribute("categorylist", service.getCategoryList());
+		model.addAttribute("category", service.getCategory());
 		model.addAttribute("categoryselect", criteria.getCategory_idx());
 		model.addAttribute("filelist", service.getFileList(board_idx));
 
 		return "modules/board/board_edit";
 	}
 
-	// 글수정처리
+	// 게시판 글수정처리
 	@RequestMapping(value = "update.do", method = RequestMethod.POST)
 	public String Update(Model model, @ModelAttribute Criteria criteria, @ModelAttribute("isAdmin") BoardVO boardVO,
 			SessionStatus sessionStatus, @RequestParam String pass, BindingResult bindingResult) throws Exception {
@@ -469,7 +459,7 @@ public class BoardController {
 
 	}
 
-	// 글삭제폼
+	// 게시판 글삭제폼
 	@RequestMapping(value = "delete.do", method = RequestMethod.GET)
 	public String Delete(Model model, @ModelAttribute Criteria criteria, @RequestParam int board_idx) throws Exception {
 
@@ -480,7 +470,7 @@ public class BoardController {
 		return "modules/board/board_delete";
 	}
 
-	// 글삭제처리
+	// 게시판 글삭제처리
 	@RequestMapping(value = "delete.do", method = RequestMethod.POST)
 	public String Delete(Model model, @ModelAttribute Criteria criteria, @ModelAttribute("isAdmin") BoardVO boardVO,
 			SessionStatus sessionStatus, @RequestParam String pass, BindingResult bindingResult) throws Exception {
@@ -507,7 +497,7 @@ public class BoardController {
 		return "/modules/common/common_message";
 	}
 
-	// 체크박스글삭제처리(ajax)
+	// 게시판 체크박스 글삭제처리(ajax)
 	@ResponseBody
 	@RequestMapping(value = "checkdelete.do", method = RequestMethod.POST)
 	public int checkDelete(Model model, @ModelAttribute Criteria criteria, @ModelAttribute("isAdmin") BoardVO boardVO,
@@ -529,7 +519,7 @@ public class BoardController {
 		return result;
 	}
 
-	// 첨부파일 삭제처리
+	// 게시판 첨부파일 삭제처리
 	@RequestMapping(value = "fileDelete.do", method = RequestMethod.GET)
 	public String attachDelete(Model model, @ModelAttribute Criteria criteria, @ModelAttribute AttachVO attachVO,
 			@RequestParam int board_idx, @RequestParam String filename) throws Exception {
@@ -546,7 +536,7 @@ public class BoardController {
 		return "/modules/common/common_message";
 	}
 
-	// 첨부파일 다운로드
+	// 게시판 첨부파일 다운로드
 	@RequestMapping(value = "fileDownload.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public void fileDownload(@ModelAttribute AttachVO attachVO, @RequestParam int file_idx, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -577,12 +567,14 @@ public class BoardController {
 		response.getOutputStream().flush();
 		response.getOutputStream().close();
 	}
-
+	
+	// 게시판 자동등록방지 이미지
 	@RequestMapping(value = "captchaImg.do", method = RequestMethod.GET)
 	public void cpatchaImg(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		new CaptchaUtil().captchaImg(request, response);
 	}
-
+	
+	// 게시판 자동등록방지 오디오
 	@RequestMapping(value = "captchaAudio.do", method = RequestMethod.GET)
 	public void cpatchaAudio(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		new CaptchaUtil().captchaAudio(request, response);

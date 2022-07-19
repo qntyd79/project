@@ -50,6 +50,6 @@
 function openNewMapPanelBrowser(){
 	var sWidth = screen.availWidth;
 	var sHeight = screen.availHeight;
-	window.open('/contents/map.do', '지도서비스', 'width='+sWidth+',height='+sHeight+',left=0,top=0, menubar=no,status=no,directiories=no');
+	window.open('/contents/map.do', '지도서비스', 'width='+sWidth+',height='+sHeight+',left=0,top=0, menubar=no, status=no');
 }
 </script>

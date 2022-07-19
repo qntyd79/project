@@ -45,7 +45,6 @@ public class CategoryServiceImpl implements CategoryService {
 		int sortno = categoryVO.getSortno();
 		String del = categoryVO.getDel();
 		String pass = categoryVO.getPass();
-		int board_idx  = categoryVO.getBoard_idx();
 		
 		// 비밀번호 암호화 
 		String pwdBycrypt = passwordEncoder.encode(pass);
@@ -96,7 +95,6 @@ public class CategoryServiceImpl implements CategoryService {
 		categoryVO.setRegdate(regdate);
 		categoryVO.setDel(del);
 		categoryVO.setPass(pwdBycrypt);
-		categoryVO.setBoard_idx(board_idx);
 		// categoryVO.setTitle(i + "번쨰 제목입니다.");
 
 		dao.insert(categoryVO);

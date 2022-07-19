@@ -54,6 +54,7 @@
 /Users/ojeonghwan/git/project/SpringMVC/src/main/java/com/company/bbs/vo/email/EmailVO2.java
 /Users/ojeonghwan/git/project/SpringMVC/src/main/java/com/company/bbs/controller/member/ExcelController.java
 /Users/ojeonghwan/git/project/SpringMVC/src/main/java/com/company/bbs/vo/attach/AttachVO.java
+/Users/ojeonghwan/git/project/SpringMVC/src/main/java/com/company/bbs/controller/board/BoardRestController.java
 /Users/ojeonghwan/git/project/SpringMVC/src/main/java/com/company/bbs/controller/email/EmailController.java
 /Users/ojeonghwan/git/project/SpringMVC/src/main/java/com/company/bbs/utill/UploadFileUtils.java
 /Users/ojeonghwan/git/project/SpringMVC/src/main/java/com/company/bbs/dao/email/EmailDaoImpl.java

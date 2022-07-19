@@ -6,7 +6,6 @@ public class Criteria implements Serializable {
 	// 참고 https://rongscodinghistory.tistory.com/7
 	// 페이징
 	private static final long serialVersionUID = 706986535304576134L;
-
 	private int page; // 보여줄 페이지
 	private int perPageNum; // 페이지당 보여줄 게시물수 기본 10개
 	private int category_idx; // 카테고리
@@ -38,7 +37,6 @@ public class Criteria implements Serializable {
 	}
 
 	public int getPerPageNum() {
-
 		return this.perPageNum;
 	}
 
@@ -47,6 +45,7 @@ public class Criteria implements Serializable {
 			this.perPageNum = 10;
 			return;
 		}
+		
 		this.perPageNum = perPageNum;
 	}
 

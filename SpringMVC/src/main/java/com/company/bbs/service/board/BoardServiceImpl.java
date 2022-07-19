@@ -262,18 +262,12 @@ public class BoardServiceImpl implements BoardService {
 		return dao.getPassword(board_idx);
 	}
 
-	// 카테고리명
+	// 카테고리목록
 	@Override
 	public List<Object> getCategory() throws Exception {
 		return dao.getCategory();
 	}
 
-	// 카테고리목록
-	@Override
-	public List<Object> getCategoryList() throws Exception {
-		return dao.getCategoryList();
-	}
-		
 	// 첨부파일목록
 	@Override
 	public List<Object> getFileList(int board_idx) throws Exception {
@@ -285,24 +279,26 @@ public class BoardServiceImpl implements BoardService {
 	public int getAttachCount(int board_idx) throws Exception {
 		return dao.getAttachCount(board_idx);
 	}
-
 	
 	// 코멘트갯수
 	@Override
 	public void getCommentCount(int board_idx) throws Exception {
 		dao.getCommentCount(board_idx);		
 	}
-
+	
+	// 코멘트갯수 업데이트
 	@Override
 	public void updateCommentCount(int board_idx) throws Exception {
 		dao.getCommentCount(board_idx);			
 	}
-
+	
+	// 첨부파일삭제
 	@Override
 	public void attachDelete(int file_idx) throws Exception {
 		dao.attachDelete(file_idx);		
 	}
-
+	
+	// 첨부파일목록삭제
 	@Override
 	public List<Object> attachDeleteList(int board_idx) throws Exception {
 		return dao.attachDeleteList(board_idx);

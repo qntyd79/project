@@ -5,7 +5,8 @@
 <mapper namespace="attach">
 
 	<!-- 글목록 -->
-	<select id="getList" resultType="com.company.bbs.vo.attach.AttachVO">
+	<select id="getList"
+		resultType="com.company.bbs.vo.attach.AttachVO">
 	<![CDATA[ 
 	select * from jhbbs_file where file_idx > 0 and del = 'N'
 	]]>
@@ -14,9 +15,10 @@
 	order by regdate desc limit #{pageStart}, ${perPageNum}
 	]]>
 	</select>
-	
+
 	<!-- 파일목록 -->
-	<select id="getFileList" resultType="com.company.bbs.vo.attach.AttachVO">
+	<select id="getFileList"
+		resultType="com.company.bbs.vo.attach.AttachVO">
 	<![CDATA[ 
 	select * from jhbbs_file where file_idx > 0 and del = 'N' and board_idx = #{board_idx}
 	]]>
@@ -24,9 +26,10 @@
 	order by regdate DESC
 	]]>
 	</select>
-	
+
 	<!-- 카테고리명 -->
-	<select id="getCategory" resultType="com.company.bbs.vo.category.CategoryVO">
+	<select id="getCategory"
+		resultType="com.company.bbs.vo.category.CategoryVO">
 	<![CDATA[ 
 	select category_idx, title from jhbbs_category where del = 'N'
 	]]>
@@ -34,9 +37,10 @@
 	order by category_idx DESC
 	]]>
 	</select>
-	
+
 	<!-- 카테고리목록 -->
-	<select id="getCategoryList" resultType="com.company.bbs.vo.category.CategoryVO">
+	<select id="getCategoryList"
+		resultType="com.company.bbs.vo.category.CategoryVO">
 	<![CDATA[ 
 	select * from jhbbs_category where kind=#{kind} and del = 'N'
 	]]>
@@ -44,23 +48,29 @@
 	order by category_idx DESC
 	]]>
 	</select>
-	
+
 	<!-- 글저장 -->
-	<insert id="insert"  parameterType="com.company.bbs.vo.attach.AttachVO">
+	<insert id="insert"
+		parameterType="com.company.bbs.vo.attach.AttachVO">
 		INSERT INTO jhbbs_file (
 		file_name, file_hash_name,
 		file_size, file_type, file_ext,
-		download, regdate, del, board_idx, member_idx, email_idx, category_idx
+		download, regdate, del, board_idx,
+		member_idx, email_idx, category_idx
 		) VALUES (
-		#{file_name}, #{file_hash_name}, 
+		#{file_name},
+		#{file_hash_name},
 		#{file_size}, #{file_type}, #{file_ext},
-		#{download}, #{regdate}, #{del}, #{board_idx}, #{member_idx}, #{email_idx}, #{category_idx}
+		#{download}, #{regdate}, #{del},
+		#{board_idx}, #{member_idx}, #{email_idx}, #{category_idx}
 		)
 	</insert>
 
 	<!-- 글보기 -->
-	<select id="getView" resultType="com.company.bbs.vo.attach.AttachVO">
-		select * from jhbbs_file where file_idx = #{file_idx} and del = 'N'
+	<select id="getView"
+		resultType="com.company.bbs.vo.attach.AttachVO">
+		select * from jhbbs_file where file_idx = #{file_idx} and
+		del = 'N'
 	</select>
 
 	<!-- 글수정 -->
@@ -70,7 +80,7 @@
 		file_hash_name=#{file_hash_name},
 		file_size=#{file_size},
 		file_type=#{file_type},
-		file_ext=#{file_ext},		
+		file_ext=#{file_ext},
 		board_idx=#{board_idx},
 		member_idx=#{member_idx},
 		email_idx=#{email_idx},
@@ -95,14 +105,16 @@
 	</update>
 
 	<!-- 글이전값 -->
-	<select id="getPrevNum" resultType="com.company.bbs.vo.attach.AttachVO">
+	<select id="getPrevNum"
+		resultType="com.company.bbs.vo.attach.AttachVO">
 	<![CDATA[ 
 	select * from jhbbs_file where file_idx > #{file_idx} and del = 'N' order by file_idx asc limit 1
 	]]>
 	</select>
 
 	<!-- 글다음값 -->
-	<select id="getNextNum" resultType="com.company.bbs.vo.attach.AttachVO">
+	<select id="getNextNum"
+		resultType="com.company.bbs.vo.attach.AttachVO">
 	<![CDATA[
 	select * from jhbbs_file where file_idx < #{file_idx} and del = 'N' order by file_idx desc limit 1
 	]]>
@@ -125,9 +137,10 @@
 	<!-- 글비밀번호리턴 -->
 	<select id="getPassword" resultType="String">
 		select pass from
-		jhbbs_file where file_idx = #{file_idx} and del = 'N'
+		jhbbs_file
+		where file_idx = #{file_idx} and del = 'N'
 	</select>
-	
+
 	<!-- 첨부파일갯수 -->
 	<select id="getFileCount" resultType="int">
 	<![CDATA[ 
@@ -135,12 +148,13 @@
 	]]>
 		<include refid="search"></include>
 	</select>
-	
+
 	<!-- 글삭제 첨부파일 update처리 -->
 	<update id="attachDelete">
-		update jhbbs_file set del = 'Y' where file_idx = #{file_idx}
+		update jhbbs_file set del = 'Y' where file_idx =
+		#{file_idx}
 	</update>
-	
+
 	<sql id="category">
 		<if test="category_idx > 0">
 			AND category_idx = ${category_idx}
@@ -149,7 +163,7 @@
 			AND category_idx > 0
 		</if>
 	</sql>
-	
+
 	<!-- 글번호 가져오기 -->
 	<select id="getBoard_idx" resultType="int">
 	<![CDATA[ 
@@ -161,7 +175,9 @@
 	<sql id="search">
 		<if test="searchField != null">
 			<if test="searchField == 'n'.toString()">
-				AND (title LIKE CONCAT('%',#{keyWord},'%') OR content LIKE CONCAT('%',#{keyWord},'%') OR name LIKE CONCAT('%',#{keyWord},'%'))
+				AND (title LIKE CONCAT('%',#{keyWord},'%') OR content
+				LIKE CONCAT('%',#{keyWord},'%') OR name LIKE
+				CONCAT('%',#{keyWord},'%'))
 			</if>
 			<if test="searchField == 't'.toString()">
 				AND title LIKE CONCAT('%',#{keyWord},'%')
@@ -173,13 +189,17 @@
 				AND name LIKE CONCAT('%',#{keyWord},'%')
 			</if>
 			<if test="searchField == 'tc'.toString()">
-				AND (title LIKE CONCAT('%',#{keyWord},'%') OR content LIKE CONCAT('%',#{keyWord},'%'))
+				AND (title LIKE CONCAT('%',#{keyWord},'%') OR content
+				LIKE CONCAT('%',#{keyWord},'%'))
 			</if>
 			<if test="searchField == 'cw'.toString()">
-				AND (content LIKE CONCAT('%',#{keyWord},'%') OR name LIKE CONCAT('%',#{keyWord},'%'))
+				AND (content LIKE CONCAT('%',#{keyWord},'%') OR name LIKE
+				CONCAT('%',#{keyWord},'%'))
 			</if>
 			<if test="searchField == 'tcw'.toString()">
-				AND (title LIKE CONCAT('%',#{keyWord},'%') OR content LIKE CONCAT('%',#{keyWord},'%') OR name LIKE CONCAT('%',#{keyWord},'%'))
+				AND (title LIKE CONCAT('%',#{keyWord},'%') OR content
+				LIKE CONCAT('%',#{keyWord},'%') OR name LIKE
+				CONCAT('%',#{keyWord},'%'))
 			</if>
 		</if>
 	</sql>

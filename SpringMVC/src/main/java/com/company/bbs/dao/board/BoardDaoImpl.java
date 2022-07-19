@@ -104,16 +104,10 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectOne("board.getPassword", board_idx);
 	}
 	
-	// 카테고리명
+	// 카테고리목록
 	@Override
 	public List<Object> getCategory() throws Exception {
 		return sqlSession.selectList("board.getCategory");
-	}
-	
-	// 카테고리목록
-	@Override
-	public List<Object> getCategoryList() throws Exception {
-		return sqlSession.selectList("board.getCategoryList");
 	}
 	
 	// 첨부파일가져오기
@@ -173,7 +167,8 @@ public class BoardDaoImpl implements BoardDao {
 		
 		sqlSession.update("board.updateCommentCnt", paramMap);
 	}
-
+	
+	// 첨부파일목록삭제
 	@Override
 	public List<Object> attachDeleteList(int board_idx) throws Exception {
 		return sqlSession.selectList("board.attachDeleteList", board_idx);		

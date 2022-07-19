@@ -48,7 +48,7 @@
                                                 <tr>
                                                 	<th><label for="category_idx"><spring:message code="label.category_idx"/></label></th>
                                                     <td>
-                                                        <c:forEach var="item" items="${categoryname}">
+                                                        <c:forEach var="item" items="${category}">
                                                             <c:if test="${boardVO.category_idx eq item.category_idx}">${item.title}</c:if>
                                                         </c:forEach>
                                                     </td>

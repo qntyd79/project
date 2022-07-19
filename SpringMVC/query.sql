@@ -68,6 +68,5 @@ ALTER TABLE `mydb`.`JHBBS_file` ADD CONSTRAINT `fk_member_idx` FOREIGN KEY (`mem
 ALTER TABLE `mydb`.`JHBBS_file` ADD CONSTRAINT `fk_email_idx` FOREIGN KEY (`email_idx`) REFERENCES `mydb`.`JHBBS_email` (`email_idx`);*/
 ALTER TABLE `mydb`.`JHBBS_comment` ADD CONSTRAINT `fk_comment_idx` FOREIGN KEY (`board_idx`) REFERENCES `mydb`.`JHBBS_board` (`board_idx`);
 
-
 /* 회원정보에 카테고리 조인 */
 select * from mydb.jhbbs_member AS m JOIN mydb.jhbbs_category AS c ON  m.category_idx = c.category_idx WHERE c.category_idx > 0 and m.del = 'N';

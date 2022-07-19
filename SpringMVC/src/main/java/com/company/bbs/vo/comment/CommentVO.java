@@ -16,7 +16,6 @@ public class CommentVO {
 	private int vote;
 	private String regdate;
 	private String del;
-	private int member_idx;
 	private int board_idx;
 	
 	public int getComment_idx() {
@@ -103,12 +102,7 @@ public class CommentVO {
 	public void setDel(String del) {
 		this.del = del;
 	}	
-	public int getMember_idx() {
-		return member_idx;
-	}
-	public void setMember_idx(int member_idx) {
-		this.member_idx = member_idx;
-	}
+	
 	public int getBoard_idx() {
 		return board_idx;
 	}
@@ -121,7 +115,7 @@ public class CommentVO {
 		return "CommentVO [comment_idx=" + comment_idx + ", parent=" + parent + ", depth=" + depth + ", sortno="
 				+ sortno + ", userid=" + userid + ", name=" + name + ", pass=" + pass + ", email=" + email
 				+ ", content=" + content + ", hit=" + hit + ", cipp=" + cipp + ", vote=" + vote + ", regdate=" + regdate
-				+ ", del=" + del + ", member_idx=" + member_idx + ", board_idx="
+				+ ", del=" + del + ", board_idx="
 				+ board_idx + "]";
 	}
 		
