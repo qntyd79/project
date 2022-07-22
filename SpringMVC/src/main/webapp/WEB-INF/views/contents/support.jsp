@@ -19,46 +19,51 @@
                     </article>
                     <article>
                          <div class="row">
-                            <div class="col-md-12">                               
-                                <form>
-                                    <div class="search-form">
-                                        <fieldset>
-                                            <select name="category_idx" id="category_idx" form="categoryForm" onChange="this.form.submit();">
-                                                <option value="0">전체목록</option>
-                                                <option value="1">일반</option>
-                                            </select>
-                                            <select id="sam001" title="검색카테고리선택" name="type">
-                                                <option value="all">전체</option>
-                                                <option value="title">제목</option>
-                                                <option value="content">내용</option>
-                                                <option value="name">이름</option>
-                                            </select>
-                                            <input type="search" value="" name="key" title="검색어입력" placeholder="Search.."/>
-                                            <a href="delete.php">
-                                                <input type="button" value="검색" />
-                                                <input type="button" value="초기화" onClick="window.location='#'" />
-                                            </a>
-                                        </fieldset>
-                                    </div>
-                                </form>
-                                
-                                <!--
-                            <form>
-                                <div class="category-form">                          
-                                    <fieldset>                              
-                                        <select name="category_idx" id="category_idx" form="categoryForm" onChange="this.form.submit();">                                   
-                                            <option value="0">전체목록</option>     
-                                            <option value="1">일반</option>              
-                                        </select>                                                           
-                                    </fieldset>
-                                </div>      
-                            </form>
-                            -->
-                                <form>
-                                    <fieldset>
-                                        <div class="articles">
+                            <div class="col-md-12">        
+                              	<article>
+			                        <div class="row">
+			                            <div class="col-md-12">
+			                            <div class="search-form">
+			                                <dl>
+			                                    <dt class="padding">지역선택</dt>
+			                                    <dd>
+			                                    	<select id="sido_code" name="sido_code">
+														<option value="">선택해주세요</option>
+													</select>
+													<select id="sigoon_code" name="sigoon_code">
+														<option value="">선택해주세요</option>
+													</select>
+													<select id="dong_code" name="dong_code">
+														<option>선택해주세요</option>
+													</select>
+													<select id="lee_code" name="lee_code">
+														<option>선택해주세요</option>
+													</select>
+												</dd>
+			                                    <dt class="padding">기간선택</dt>
+			                                    <dd>	
+			                                    	<select id="year" name="year">
+														<option value="">선택해주세요</option>
+													</select>
+													<select id="month" name="month">
+														<option value="">선택해주세요</option>
+													</select>
+													<select id="day" name="day">
+														<option value="">선택해주세요</option>
+													</select>
+													<!-- <input type="search" id="dealymd" name="dealymd" placeholder="ex)202201" onfocus="this.placeholder = ''" onblur="this.placeholder = 'ex)202201'" maxlength="6" oninput="numberMaxLength(this);" title="<spring:message code="button.search"/>" onKeyup="$(this).val($(this).val().replace(/[^0-9]/gi,''));"/> -->
+													<input type="button" id="searchbtn" value="조회"/>
+			                                    </dd>			                                    
+			                                </dl>
+			                            </div>
+			                            </div>
+			                        </div>
+			                    </article>
+                                <div class="articles">
                                     전체글 : <span>10</span> 개 | 공지글 : <span>5</span> | 현재페이지 : <span>1</span> | 총페이지 : <span>10</span>
                                 </div>
+                                <form>
+                                    <fieldset>
                                         <legend>Board List Form</legend>
                                         <table summary="기본게시판 보여주고 있습니다." class="table">
                                             <caption>등록일 : 2017년08월24일 기준</caption>
@@ -228,7 +233,27 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        
+                                        <form>
+	                                    <div class="search-form" style="float:right; margin:10px 0;">
+	                                        <fieldset>
+	                                            <select name="category_idx" id="category_idx" form="categoryForm" onChange="this.form.submit();">
+	                                                <option value="0">전체목록</option>
+	                                                <option value="1">일반</option>
+	                                            </select>
+	                                            <select id="sam001" title="검색카테고리선택" name="type">
+	                                                <option value="all">전체</option>
+	                                                <option value="title">제목</option>
+	                                                <option value="content">내용</option>
+	                                                <option value="name">이름</option>
+	                                            </select>
+	                                            <input type="search" value="" name="key" title="검색어입력" placeholder="Search.."/>
+	                                            <a href="delete.php">
+	                                                <input type="button" value="검색" />
+	                                                <input type="button" value="초기화" onClick="window.location='#'" />
+	                                            </a>
+	                                        </fieldset>
+	                                    </div>
+                                		</form>
                                         <nav class="paging-group">
                                             <ul>
                                                 <li><a href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
@@ -246,8 +271,7 @@
                                                 <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
                                                 <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
                                             </ul>
-                                        </nav>
-                                        
+                                        </nav>                                        
                                         <nav class="btn-group">
                                             <ul>
                                                 <li>

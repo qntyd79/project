@@ -15,8 +15,7 @@ public class PageMaker {
     private boolean prev;
     private boolean next;
     private int displayPageNum = 10; // 화면 하단에 보여지는 페이지의 수
-    
-    private int totalPage;
+    private int totalPage; 
     private int noticeCount; 
     private int curNum;
        

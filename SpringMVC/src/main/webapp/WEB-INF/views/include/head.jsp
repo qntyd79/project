@@ -48,6 +48,7 @@
     <link href="<c:url value="/resources/css/fontawesome.all.min.css" />" rel="stylesheet" type="text/css" media="all">
     <link href="<c:url value="/resources/css/jquery.bxslider.css" />" rel="stylesheet" type="text/css" media="all">    
     <link href="<c:url value="/resources/css/jquery-ui.min.css" />" rel="stylesheet" type="text/css" media="all">
+    <link href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="<c:url value="/resources/css/odefault.less" />" rel="stylesheet/less" type="text/css" media="all" >  
     <link href="<c:url value="/resources/css/ol.css" />" rel="stylesheet" type="text/css" media="all" >
     <link href="<c:url value="/resources/plugin/syntaxhighlighter/styles/shCoreDefault.css" />" rel="stylesheet" type="text/css" media="all" >  
@@ -62,6 +63,7 @@
     <script src="<c:url value="/resources/js/jquery.bxslider.min.js"/>" type="text/javascript" charset="UTF-8"></script> 
     <script src="<c:url value="/resources/js/jquery.validate.min.js" />"type="text/javascript" charset="UTF-8"></script>
     <script src="<c:url value="/resources/js/messages_ko.min.js"/>" type="text/javascript" charset="UTF-8"></script>
+    <script src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js" type="text/javascript" ></script>
     <script src="<c:url value="/resources/js/ol.js"/>" type="text/javascript" charset="UTF-8"></script>
     <script src="<c:url value="/resources/js/proj4.js" />"type="text/javascript" charset="UTF-8"></script>
     <script src="<c:url value="/resources/js/map.js" />"type="text/javascript" charset="UTF-8"></script>

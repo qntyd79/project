@@ -197,11 +197,11 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 		
-		<!-- json 관ㄹㅕㄴ ㄹㅏ이브ㄹㅓ리 -->
+		<!-- json 관련 라이브러리 -->
 		<dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20180813</version>
+            <version>20220320</version>
         </dependency>
 
 		<!-- mysql 관련 라이브러리 -->

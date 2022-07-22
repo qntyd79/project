@@ -306,36 +306,35 @@ $(document).ready(function() {
 		} 	
 	});
 		
-		// 게시판 - 작성 콜백 함수
-	    function insertBoardCallback(obj){
+	// 게시판 - 작성 콜백 함수
+	function insertBoardCallback(obj){
 	    
-		   	if(obj != null){        
+	  	if(obj != null){        
 		            
-			   	var result = obj.result;
+		   	var result = obj.result;
 
-				if(result == "insertSuccess"){                
-			    	alert("게시글 등록을 성공하였습니다.");                
-			    	goBoardList();                 
-			    } else {                
-			    	alert("게시글 등록을 실패하였습니다.");    
-			    	return;
-			   	}
-	        }
-	    }
+			if(result == "insertSuccess"){                
+		    	alert("게시글 등록을 성공하였습니다.");                
+		    	goBoardList();                 
+		    } else {                
+		    	alert("게시글 등록을 실패하였습니다.");    
+		    	return;
+		   	}
+		}
+	}
 	
-	    //AJAX 로 폼의 데이터를 전송할 때 CKEDITOR로 변환 된 textarea값을 다시 변경해줘야 데이터가 전달된다.
-	    function CKupdate() {
-	        for (instance in CKEDITOR.instances)
-	            CKEDITOR.instances[instance].updateElement();
-	    }
+	//AJAX 로 폼의 데이터를 전송할 때 CKEDITOR로 변환 된 textarea값을 다시 변경해줘야 데이터가 전달된다.
+	function CKupdate() {
+		for (instance in CKEDITOR.instances)
+	    	CKEDITOR.instances[instance].updateElement();
+	}
 	
-	    function CKreset() {
-	        for (instance in CKEDITOR.instances)
-	            CKEDITOR.instances[instance].setData("");
+	function CKreset() {
+		for (instance in CKEDITOR.instances)
+		CKEDITOR.instances[instance].setData("");
 
-        		$("#content-error").remove();
-	    }
-	 
+        $("#content-error").remove();
+	}	 
 });
 
 </script>
