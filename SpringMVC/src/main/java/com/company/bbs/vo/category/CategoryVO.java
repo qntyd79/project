@@ -2,7 +2,7 @@ package com.company.bbs.vo.category;
 
 public class CategoryVO {
 	
-	private int category_idx;
+	private int category_idx; 
 	private int parent;
 	private int depth;
 	private int sortno;

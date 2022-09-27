@@ -35,22 +35,7 @@
                                         </fieldset>
                                     </div>
                                 </form>
-                                <form name="categoryForm" id="categoryForm" method="post" enctype="multipart/form-data" action="list.do">
-                                    <div class="category-form" style="float:right; margin-right:5px; margin-bottom:10px;">
-                                        <fieldset>
-                                            <select name="category_idx" id="category_idx" form="categoryForm" onChange="$(this.form).submit();">
-                                                <option value="0" <c:if test="${categoryselect == 0}"><c:out value="selected=selected" /></c:if>>전체목록</option>
-                                                <c:forEach var="item" items="${categorylist}" varStatus="status">
-                                                    <option value="<c:out value=" ${item.category_idx}" />" <c:if test="${item.category_idx == categoryselect}">
-                                                        <c:out value="selected=selected" />
-                                                    </c:if>>
-                                                    <c:out value="${item.title}" />
-                                                    </option>
-                                                </c:forEach>
-                                            </select>
-                                        </fieldset>
-                                    </div>
-                                </form>
+                                
                                 <div class="articles">
                                     	전체글 : <span>${pageMaker.totalCount}</span> 개 | 현재페이지 : <span>${pageMaker.criteria.page}</span> | 총페이지 : <span>${pageMaker.totalPage}</span>
                                 </div>

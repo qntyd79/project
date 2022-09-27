@@ -48,8 +48,8 @@
     <link href="<c:url value="/resources/css/fontawesome.all.min.css" />" rel="stylesheet" type="text/css" media="all">
     <link href="<c:url value="/resources/css/jquery.bxslider.css" />" rel="stylesheet" type="text/css" media="all">    
     <link href="<c:url value="/resources/css/jquery-ui.min.css" />" rel="stylesheet" type="text/css" media="all">
-    <link href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css" rel="stylesheet" type="text/css" media="all"/>
-    <link href="<c:url value="/resources/css/odefault.less" />" rel="stylesheet/less" type="text/css" media="all" >  
+    <link href="<c:url value="/resources/css/dataTables.min.css" />" rel="stylesheet" type="text/css" media="all"/> 
+     <link href="<c:url value="/resources/css/odefault.less" />" rel="stylesheet/less" type="text/css" media="all" > 
     <link href="<c:url value="/resources/css/ol.css" />" rel="stylesheet" type="text/css" media="all" >
     <link href="<c:url value="/resources/plugin/syntaxhighlighter/styles/shCoreDefault.css" />" rel="stylesheet" type="text/css" media="all" >  
     <link href="<c:url value="/resources/plugin/syntaxhighlighter/styles/shThemeEclipse.css" />" rel="stylesheet" type="text/css" media="all" >   

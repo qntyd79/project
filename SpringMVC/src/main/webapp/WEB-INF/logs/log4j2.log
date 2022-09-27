@@ -1,139 +1,68 @@
-2022-7월-22 00:17:59 오전 [http-nio-8090-exec-5] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 00:18:41 오전 [http-nio-8090-exec-10] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 00:19:08 오전 [http-nio-8090-exec-4] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 00:20:43 오전 [http-nio-8090-exec-8] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:05:52 오전 [main] INFO  org.springframework.jdbc.datasource.DriverManagerDataSource - Loaded JDBC driver: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-2022-7월-22 07:05:53 오전 [main] INFO  org.springmodules.validation.commons.DefaultValidatorFactory - Loading validation configurations from [class path resource [validator/config/validator-rules.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/attachValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/boardValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/categoryValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/commentValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/config/validator-rules.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/emailValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/memberValidator.xml]]
-2022-7월-22 07:05:59 오전 [http-nio-8090-exec-1] INFO  com.company.bbs.HomeController - Welcome home! The client locale is ko.
-2022-7월-22 07:06:34 오전 [http-nio-8090-exec-3] INFO  com.company.bbs.HomeController - Welcome home! The client locale is ko.
-2022-7월-22 07:06:39 오전 [http-nio-8090-exec-5] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:09:22 오전 [http-nio-8090-exec-9] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:27:21 오전 [http-nio-8090-exec-6] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:27:39 오전 [http-nio-8090-exec-3] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:28:27 오전 [http-nio-8090-exec-10] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:29:25 오전 [http-nio-8090-exec-1] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:31:16 오전 [http-nio-8090-exec-4] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:32:14 오전 [http-nio-8090-exec-7] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:33:58 오전 [http-nio-8090-exec-6] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:34:37 오전 [http-nio-8090-exec-10] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:36:53 오전 [http-nio-8090-exec-1] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:37:40 오전 [http-nio-8090-exec-4] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:38:04 오전 [http-nio-8090-exec-8] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:38:46 오전 [http-nio-8090-exec-10] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:39:26 오전 [http-nio-8090-exec-2] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:41:11 오전 [http-nio-8090-exec-4] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:41:28 오전 [http-nio-8090-exec-8] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:41:57 오전 [http-nio-8090-exec-2] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:42:23 오전 [http-nio-8090-exec-4] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:43:19 오전 [http-nio-8090-exec-7] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:43:42 오전 [http-nio-8090-exec-5] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:44:30 오전 [http-nio-8090-exec-8] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:46:26 오전 [http-nio-8090-exec-2] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:47:16 오전 [http-nio-8090-exec-4] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:48:03 오전 [http-nio-8090-exec-7] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:48:57 오전 [http-nio-8090-exec-5] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:49:51 오전 [http-nio-8090-exec-8] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:50:26 오전 [http-nio-8090-exec-2] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 07:50:49 오전 [http-nio-8090-exec-4] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 08:03:39 오전 [http-nio-8090-exec-7] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 08:04:56 오전 [http-nio-8090-exec-5] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 08:06:09 오전 [http-nio-8090-exec-8] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 08:06:34 오전 [http-nio-8090-exec-2] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 08:08:51 오전 [http-nio-8090-exec-4] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 08:19:06 오전 [http-nio-8090-exec-7] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 08:28:54 오전 [http-nio-8090-exec-5] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 08:29:33 오전 [http-nio-8090-exec-8] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 08:30:34 오전 [http-nio-8090-exec-2] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 08:31:25 오전 [http-nio-8090-exec-4] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 08:31:50 오전 [http-nio-8090-exec-7] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:09:21 오전 [http-nio-8090-exec-5] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:09:44 오전 [http-nio-8090-exec-8] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:11:02 오전 [http-nio-8090-exec-2] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:11:47 오전 [http-nio-8090-exec-4] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:12:26 오전 [http-nio-8090-exec-7] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:14:43 오전 [http-nio-8090-exec-5] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:17:40 오전 [http-nio-8090-exec-8] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:18:49 오전 [http-nio-8090-exec-2] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:34:03 오전 [http-nio-8090-exec-4] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:34:29 오전 [http-nio-8090-exec-7] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:35:41 오전 [http-nio-8090-exec-5] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:36:31 오전 [http-nio-8090-exec-8] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:36:54 오전 [http-nio-8090-exec-2] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:37:02 오전 [http-nio-8090-exec-9] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:37:44 오전 [http-nio-8090-exec-7] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:38:05 오전 [http-nio-8090-exec-2] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:38:39 오전 [http-nio-8090-exec-10] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:40:03 오전 [http-nio-8090-exec-7] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:40:26 오전 [http-nio-8090-exec-5] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:40:38 오전 [http-nio-8090-exec-10] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:42:27 오전 [http-nio-8090-exec-7] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:42:31 오전 [http-nio-8090-exec-2] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:44:45 오전 [http-nio-8090-exec-10] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:45:14 오전 [http-nio-8090-exec-7] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:45:40 오전 [http-nio-8090-exec-5] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:45:44 오전 [http-nio-8090-exec-10] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:46:38 오전 [http-nio-8090-exec-7] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:47:17 오전 [http-nio-8090-exec-5] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:49:04 오전 [http-nio-8090-exec-4] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:49:50 오전 [http-nio-8090-exec-6] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:50:22 오전 [http-nio-8090-exec-9] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:50:29 오전 [http-nio-8090-exec-8] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:50:51 오전 [http-nio-8090-exec-10] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:56:49 오전 [http-nio-8090-exec-4] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 09:57:58 오전 [http-nio-8090-exec-8] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 10:02:16 오전 [http-nio-8090-exec-4] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 10:03:14 오전 [http-nio-8090-exec-3] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 10:03:57 오전 [http-nio-8090-exec-5] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 10:07:48 오전 [http-nio-8090-exec-6] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 10:08:23 오전 [http-nio-8090-exec-10] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 10:08:35 오전 [http-nio-8090-exec-1] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 10:09:38 오전 [http-nio-8090-exec-10] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 10:10:07 오전 [http-nio-8090-exec-7] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 10:14:45 오전 [http-nio-8090-exec-3] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 10:14:51 오전 [http-nio-8090-exec-1] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 10:17:48 오전 [http-nio-8090-exec-9] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 10:17:56 오전 [http-nio-8090-exec-7] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 10:19:47 오전 [http-nio-8090-exec-5] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 10:21:32 오전 [http-nio-8090-exec-3] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 10:22:07 오전 [http-nio-8090-exec-5] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 10:22:45 오전 [http-nio-8090-exec-1] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 10:24:15 오전 [http-nio-8090-exec-7] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 10:24:43 오전 [http-nio-8090-exec-9] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 10:27:34 오전 [http-nio-8090-exec-3] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 10:28:09 오전 [http-nio-8090-exec-5] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 10:28:57 오전 [http-nio-8090-exec-1] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 11:10:39 오전 [Catalina-utility-2] INFO  org.springframework.jdbc.datasource.DriverManagerDataSource - Loaded JDBC driver: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-2022-7월-22 11:10:39 오전 [Catalina-utility-2] INFO  org.springmodules.validation.commons.DefaultValidatorFactory - Loading validation configurations from [class path resource [validator/config/validator-rules.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/attachValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/boardValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/categoryValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/commentValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/config/validator-rules.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/emailValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/memberValidator.xml]]
-2022-7월-22 11:18:05 오전 [http-nio-8090-exec-12] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 11:18:41 오전 [http-nio-8090-exec-19] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 11:20:30 오전 [http-nio-8090-exec-16] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 11:23:59 오전 [http-nio-8090-exec-13] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 11:24:06 오전 [http-nio-8090-exec-19] INFO  com.company.bbs.controller.board.BoardController - 글목록
-2022-7월-22 11:25:44 오전 [http-nio-8090-exec-15] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 11:25:48 오전 [http-nio-8090-exec-17] INFO  com.company.bbs.controller.board.BoardController - 글목록
-2022-7월-22 11:37:28 오전 [http-nio-8090-exec-15] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 13:38:46 오후 [http-nio-8090-exec-15] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 13:44:30 오후 [http-nio-8090-exec-15] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 13:45:12 오후 [http-nio-8090-exec-12] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 13:45:34 오후 [http-nio-8090-exec-15] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 13:45:58 오후 [http-nio-8090-exec-19] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 13:46:52 오후 [http-nio-8090-exec-18] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 13:50:11 오후 [http-nio-8090-exec-19] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 13:51:49 오후 [http-nio-8090-exec-18] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 13:53:36 오후 [http-nio-8090-exec-19] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 13:54:06 오후 [http-nio-8090-exec-18] INFO  com.company.bbs.controller.board.BoardController - 글목록
-2022-7월-22 13:54:11 오후 [http-nio-8090-exec-15] INFO  com.company.bbs.controller.board.BoardController - 글쓰기
-2022-7월-22 13:59:03 오후 [http-nio-8090-exec-15] INFO  com.company.bbs.controller.board.BoardController - 글쓰기
-2022-7월-22 13:59:10 오후 [http-nio-8090-exec-12] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 13:59:32 오후 [http-nio-8090-exec-13] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 13:59:49 오후 [http-nio-8090-exec-18] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 14:00:26 오후 [http-nio-8090-exec-12] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 14:02:13 오후 [http-nio-8090-exec-13] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 14:02:29 오후 [http-nio-8090-exec-15] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 14:02:41 오후 [http-nio-8090-exec-12] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 14:02:52 오후 [http-nio-8090-exec-16] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 14:03:20 오후 [http-nio-8090-exec-18] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 14:03:26 오후 [http-nio-8090-exec-17] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 14:54:46 오후 [http-nio-8090-exec-16] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 14:56:52 오후 [http-nio-8090-exec-15] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
-2022-7월-22 14:57:30 오후 [http-nio-8090-exec-11] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 11:05:21 오전 [main] INFO  org.springframework.jdbc.datasource.DriverManagerDataSource - Loaded JDBC driver: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+2022-9월-27 11:05:22 오전 [main] INFO  org.springmodules.validation.commons.DefaultValidatorFactory - Loading validation configurations from [class path resource [validator/config/validator-rules.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/attachValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/boardValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/categoryValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/commentValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/config/validator-rules.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/emailValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/memberValidator.xml]]
+2022-9월-27 11:05:27 오전 [http-nio-8090-exec-1] INFO  com.company.bbs.HomeController - Welcome home! The client locale is ko.
+2022-9월-27 11:08:25 오전 [http-nio-8090-exec-3] INFO  com.company.bbs.controller.board.BoardController - ajax 글목록
+2022-9월-27 11:08:33 오전 [http-nio-8090-exec-10] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 11:08:49 오전 [http-nio-8090-exec-4] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 11:13:50 오전 [Catalina-utility-1] INFO  org.springframework.jdbc.datasource.DriverManagerDataSource - Loaded JDBC driver: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+2022-9월-27 11:13:51 오전 [Catalina-utility-1] INFO  org.springmodules.validation.commons.DefaultValidatorFactory - Loading validation configurations from [class path resource [validator/config/validator-rules.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/attachValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/boardValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/categoryValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/commentValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/config/validator-rules.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/emailValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/memberValidator.xml]]
+2022-9월-27 11:17:50 오전 [http-nio-8090-exec-11] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 11:18:24 오전 [http-nio-8090-exec-2] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 11:18:40 오전 [http-nio-8090-exec-8] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 11:20:54 오전 [http-nio-8090-exec-18] INFO  com.company.bbs.controller.board.BoardController - ajax 글목록
+2022-9월-27 11:20:59 오전 [http-nio-8090-exec-11] INFO  com.company.bbs.controller.board.BoardController - ajax 글쓰기
+2022-9월-27 11:21:26 오전 [http-nio-8090-exec-15] INFO  com.company.bbs.controller.board.BoardController - ajax 글목록
+2022-9월-27 11:21:46 오전 [http-nio-8090-exec-13] INFO  com.company.bbs.controller.board.BoardController - 글보기
+2022-9월-27 11:21:47 오전 [http-nio-8090-exec-18] INFO  com.company.bbs.controller.comment.CommentController - 댓글쓰기
+2022-9월-27 11:22:36 오전 [http-nio-8090-exec-13] INFO  com.company.bbs.controller.board.BoardController - 글목록
+2022-9월-27 11:22:39 오전 [http-nio-8090-exec-19] INFO  com.company.bbs.controller.board.BoardController - 글보기
+2022-9월-27 11:22:39 오전 [http-nio-8090-exec-18] INFO  com.company.bbs.controller.comment.CommentController - 댓글쓰기
+2022-9월-27 11:23:01 오전 [http-nio-8090-exec-12] INFO  com.company.bbs.controller.board.BoardController - ajax 글목록
+2022-9월-27 11:23:05 오전 [http-nio-8090-exec-13] INFO  com.company.bbs.controller.board.BoardController - 글보기
+2022-9월-27 11:23:05 오전 [http-nio-8090-exec-19] INFO  com.company.bbs.controller.comment.CommentController - 댓글쓰기
+2022-9월-27 11:23:13 오전 [http-nio-8090-exec-14] INFO  com.company.bbs.controller.board.BoardController - 글목록
+2022-9월-27 11:23:16 오전 [http-nio-8090-exec-16] INFO  com.company.bbs.controller.category.CategoryController - 카테고리목록
+2022-9월-27 11:23:19 오전 [http-nio-8090-exec-15] INFO  com.company.bbs.controller.attach.AttachController - 글목록
+2022-9월-27 11:23:22 오전 [http-nio-8090-exec-17] INFO  com.company.bbs.controller.comment.CommentController - 글목록
+2022-9월-27 11:23:24 오전 [http-nio-8090-exec-13] INFO  com.company.bbs.controller.comment.CommentController - 글보기
+2022-9월-27 11:23:27 오전 [http-nio-8090-exec-11] INFO  com.company.bbs.controller.comment.CommentController - 글목록
+2022-9월-27 11:23:29 오전 [http-nio-8090-exec-19] INFO  com.company.bbs.controller.comment.CommentController - 글쓰기
+2022-9월-27 11:37:06 오전 [http-nio-8090-exec-18] INFO  com.company.bbs.utill.CommonExceptionAdvice - org.springframework.web.servlet.NoHandlerFoundException: No handler found for GET /jhbbs/index.do
+2022-9월-27 11:37:08 오전 [http-nio-8090-exec-19] INFO  com.company.bbs.HomeController - Welcome home! The client locale is ko.
+2022-9월-27 11:42:45 오전 [http-nio-8090-exec-16] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 11:43:12 오전 [http-nio-8090-exec-17] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 11:45:54 오전 [http-nio-8090-exec-20] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 11:49:56 오전 [http-nio-8090-exec-11] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 11:50:28 오전 [http-nio-8090-exec-20] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 11:51:25 오전 [http-nio-8090-exec-14] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 11:51:50 오전 [http-nio-8090-exec-20] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 11:56:19 오전 [http-nio-8090-exec-14] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 11:57:59 오전 [http-nio-8090-exec-13] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 11:58:28 오전 [http-nio-8090-exec-11] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 11:58:58 오전 [http-nio-8090-exec-13] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 12:01:05 오후 [http-nio-8090-exec-11] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 12:02:32 오후 [http-nio-8090-exec-12] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 12:03:08 오후 [http-nio-8090-exec-19] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 12:06:22 오후 [http-nio-8090-exec-20] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 12:08:29 오후 [http-nio-8090-exec-14] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 12:08:36 오후 [http-nio-8090-exec-19] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 12:09:04 오후 [http-nio-8090-exec-12] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 12:09:18 오후 [http-nio-8090-exec-15] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 12:36:01 오후 [http-nio-8090-exec-13] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 12:44:33 오후 [Catalina-utility-2] INFO  org.springframework.jdbc.datasource.DriverManagerDataSource - Loaded JDBC driver: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+2022-9월-27 12:44:34 오후 [Catalina-utility-2] INFO  org.springmodules.validation.commons.DefaultValidatorFactory - Loading validation configurations from [class path resource [validator/config/validator-rules.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/attachValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/boardValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/categoryValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/commentValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/config/validator-rules.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/emailValidator.xml],file [/Users/ojeonghwan/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SpringMVC/WEB-INF/classes/validator/memberValidator.xml]]
+2022-9월-27 12:46:23 오후 [http-nio-8090-exec-15] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 12:46:37 오후 [http-nio-8090-exec-21] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 12:47:05 오후 [http-nio-8090-exec-23] INFO  com.company.bbs.utill.CommonExceptionAdvice - org.springframework.web.servlet.NoHandlerFoundException: No handler found for GET /favicon.ico
+2022-9월-27 12:47:13 오후 [http-nio-8090-exec-20] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 12:47:32 오후 [http-nio-8090-exec-24] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 12:49:26 오후 [http-nio-8090-exec-25] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 12:49:34 오후 [http-nio-8090-exec-26] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 12:49:44 오후 [http-nio-8090-exec-28] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 12:50:34 오후 [http-nio-8090-exec-21] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 12:50:41 오후 [http-nio-8090-exec-22] INFO  com.company.bbs.controller.board.BoardController - 글목록
+2022-9월-27 12:50:45 오후 [http-nio-8090-exec-30] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 12:50:57 오후 [http-nio-8090-exec-23] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 12:51:19 오후 [http-nio-8090-exec-29] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 12:52:01 오후 [http-nio-8090-exec-22] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록
+2022-9월-27 12:52:18 오후 [http-nio-8090-exec-26] INFO  com.company.bbs.controller.board.OpenapiController - openapi 글목록

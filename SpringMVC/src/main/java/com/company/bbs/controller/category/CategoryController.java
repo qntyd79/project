@@ -63,12 +63,11 @@ public class CategoryController {
 		return "modules/category/validator";
 	}
 
-	// 글목록 (Model)
+	// 목록(Model)
 	@RequestMapping(value = "list.do")
-	public String List(Model model, @ModelAttribute Criteria criteria)
-			throws Exception {
+	public String List(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
-		logger.info("글목록");
+		logger.info("카테고리목록");
 
 		PageMaker pageMaker = new PageMaker();
 
@@ -85,7 +84,7 @@ public class CategoryController {
 		return "modules/category/category_list";
 	}
 
-	// 글목록 (ModelAndView)
+	// 목록(ModelAndView)
 	@RequestMapping(value = "mvlist.do")
 	public ModelAndView List(@ModelAttribute Criteria criteria) throws Exception {
 
@@ -107,10 +106,9 @@ public class CategoryController {
 		return mav;
 	}
 
-	// 글목록 (Map)
+	// 목록(Map)
 	@RequestMapping(value = "mlist.do")
-	public String List1(Model model, @ModelAttribute Criteria criteria)
-			throws Exception {
+	public String List1(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("글목록");
 
@@ -130,7 +128,7 @@ public class CategoryController {
 		return "modules/category/category_list";
 	}
 
-	// 글등록
+	// 등록폼
 	@RequestMapping(value = "write.do", method = RequestMethod.GET)
 	public String Write(Model model, @ModelAttribute Criteria criteria, @ModelAttribute CategoryVO categoryVO)
 			throws Exception {
@@ -143,7 +141,7 @@ public class CategoryController {
 		return "modules/category/category_write";
 	}
 
-	// 답글쓰기
+	// 답글등록폼
 	@RequestMapping(value = "reply.do", method = RequestMethod.GET)
 	public ModelAndView Reply(@ModelAttribute Criteria criteria, @RequestParam int category_idx) throws Exception {
 
@@ -158,9 +156,9 @@ public class CategoryController {
 		return mav;
 	}
 
-	// 글저장
+	// 저장처리
 	@RequestMapping(value = "insert.do", method = { RequestMethod.POST, RequestMethod.GET })
-	public String Insert(Model model, @ModelAttribute Criteria criteria, @ModelAttribute CategoryVO categoryVO, 
+	public String Insert(Model model, @ModelAttribute Criteria criteria, @ModelAttribute CategoryVO categoryVO,
 			BindingResult bindingResult, HttpServletRequest request) throws Exception {
 
 		logger.info("글저장처리");
@@ -199,12 +197,12 @@ public class CategoryController {
 				model.addAttribute("url", "write.do");
 				return "modules/category/category_write";
 			}
-		}		
+		}
 
 		return "/modules/common/common_message";
 	}
 
-	// 글보기
+	// 보기
 	@RequestMapping(value = "read.do", method = RequestMethod.GET)
 	public String Read(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
@@ -220,7 +218,7 @@ public class CategoryController {
 		return "modules/category/category_view";
 	}
 
-	// 글보기
+	// 보기
 	@RequestMapping(value = "mvread.do", method = RequestMethod.GET)
 	public ModelAndView Read(@ModelAttribute Criteria criteria) throws Exception {
 
@@ -239,7 +237,7 @@ public class CategoryController {
 		return mav;
 	}
 
-	// 글수정폼
+	// 수정폼
 	@RequestMapping(value = "edit.do", method = RequestMethod.GET)
 	public String Edit(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
@@ -252,11 +250,10 @@ public class CategoryController {
 		return "modules/category/category_edit";
 	}
 
-	// 글수정처리
+	// 수정처리
 	@RequestMapping(value = "update.do", method = RequestMethod.POST)
 	public String Update(Model model, @ModelAttribute Criteria criteria, @ModelAttribute CategoryVO categoryVO,
-			@RequestParam String pass, BindingResult bindingResult
-	) throws Exception {
+			@RequestParam String pass, BindingResult bindingResult) throws Exception {
 
 		logger.info("글수정처리");
 
@@ -268,15 +265,14 @@ public class CategoryController {
 			model.addAttribute("categoryVO", categoryVO);
 			return "modules/category/category_edit";
 		}
-		
-				
-		String rawPassword = categoryVO.getPass();		
+
+		String rawPassword = categoryVO.getPass();
 		String encodedPassword = service.getPassword(categoryVO.getCategory_idx());
-				
-		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin!@1234")) {	
-			
+
+		if (passwordEncoder.matches(rawPassword, encodedPassword) || pass.equals("admin!@1234")) {
+
 			service.update(categoryVO);
-			
+
 			model.addAttribute("msg", "UpdateSuccess");
 			model.addAttribute("url", "list.do");
 		} else {
@@ -287,10 +283,9 @@ public class CategoryController {
 		return "/modules/common/common_message";
 	}
 
-	// 글삭제
+	// 삭제폼
 	@RequestMapping(value = "delete.do", method = RequestMethod.GET)
-	public String Delete(Model model, @ModelAttribute Criteria criteria)
-			throws Exception {
+	public String Delete(Model model, @ModelAttribute Criteria criteria) throws Exception {
 
 		logger.info("글삭제");
 
@@ -299,11 +294,10 @@ public class CategoryController {
 		return "modules/category/category_delete";
 	}
 
-	// 글삭제처리
+	// 삭제처리
 	@RequestMapping(value = "delete.do", method = RequestMethod.POST)
 	public String Delete(Model model, @ModelAttribute Criteria criteria, @ModelAttribute CategoryVO categoryVO,
-			@RequestParam String pass, BindingResult bindingResult
-	) throws Exception {
+			@RequestParam String pass, BindingResult bindingResult) throws Exception {
 
 		logger.info("글삭제처리");
 
@@ -323,11 +317,13 @@ public class CategoryController {
 		return "/modules/common/common_message";
 	}
 
+	// 자동등록방지처리(이미지)
 	@RequestMapping(value = "captchaImg.do", method = RequestMethod.GET)
 	public void cpatchaImg(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		new CaptchaUtil().captchaImg(request, response);
 	}
 
+	// 자동등록방지처리(오디오)
 	@RequestMapping(value = "captchaAudio.do", method = RequestMethod.GET)
 	public void cpatchaAudio(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		new CaptchaUtil().captchaAudio(request, response);

@@ -28,7 +28,7 @@
 	]]>
 	</select>
 
-	<!-- 카테고리목록
+	<!-- 카테고리목록 -->
 	<select id="getCategoryList"
 		resultType="com.company.bbs.vo.category.CategoryVO">
 	<![CDATA[ 
@@ -38,7 +38,6 @@
 	order by category_idx DESC
 	]]>
 	</select>
-	 -->
 	 
 	<!-- 글저장 -->
 	<insert id="insert"
