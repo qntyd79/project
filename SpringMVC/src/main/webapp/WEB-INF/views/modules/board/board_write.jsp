@@ -193,10 +193,10 @@
                                                                 <caption><spring:message code="bbs.table.caption"/></caption>
                                                                 <colgroup>
                                                                    	<!--<col width="5%" />-->
-                                                                    <col width="65%" />
-                                                                    <col width="10%" />
-                                                                    <col width="10%" />
-                                                                    <col width="10%" />
+                                                                    <col width="70%" />
+                                                                    <col width="15%" />
+                                                                    <col width="15%" />
+                                                                    <!--<col width="10%" />-->
                                                                     <!--<col width="10%" />-->
                                                                 </colgroup>
                                                                 <thead>
@@ -205,7 +205,7 @@
                                                                         <th scope="col"><spring:message code="bbs.list.filename"/></th>
                                                                         <th scope="col"><spring:message code="bbs.list.filesize"/></th>
                                                                         <th scope="col"><spring:message code="bbs.list.filetype"/></th>
-                                                                        <th scope="col"><spring:message code="bbs.list.regdate"/></th>
+                                                                        <!-- <th scope="col"><spring:message code="bbs.list.regdate"/></th> -->
                                                                         <!-- <th scope="col"><spring:message code="bbs.list.del"/></th> -->
                                                                     </tr>
                                                                 </thead>

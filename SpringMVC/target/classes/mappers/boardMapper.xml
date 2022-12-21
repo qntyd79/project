@@ -141,16 +141,15 @@
 		name, pass, email, homepage, link1, link2,
 		title, content, hit, cipp,
 		tag, secret, notice, vote,
-		sdate, edate, regdate, del,
+		sdate, edate, regdate, del, filecnt, commentcnt,
 		category_idx,comment_idx, file_idx, member_idx
 		) VALUES (
 		#{parent}, #{depth}, #{sortno},
 		#{userid}, #{name}, #{pass}, #{email}, #{homepage}, #{link1}, #{link2},
 		#{title}, #{content}, #{hit}, #{cipp}, #{tag}, #{secret}, #{notice},
 		#{vote},
-		#{sdate}, #{edate}, #{regdate}, #{del},
-		#{category_idx},
-		#{comment_idx}, #{file_idx}, #{member_idx}
+		#{sdate}, #{edate}, #{regdate}, #{del}, #{filecnt}, #{commentcnt},
+		#{category_idx}, #{comment_idx}, #{file_idx}, #{member_idx}
 		)
 	</insert>
 	
@@ -298,7 +297,7 @@
 	<!-- board_idx의 첨부파일 갯수가져오기 -->
 	<select id="getAttachCount" resultType="int">
 	<![CDATA[ 
-	select count(file_idx) from JHBBS_file where board_idx = #{board_idx} and file_idx > 0 and del = 'N'
+	select count(file_idx) from jhbbs_file where board_idx = #{board_idx} and file_idx > 0 and del = 'N'
 	]]>   
 	</select>
 	

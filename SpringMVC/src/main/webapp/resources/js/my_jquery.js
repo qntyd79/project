@@ -1328,11 +1328,11 @@ $(document).ready(function() {
                 
                 html +="<tr class='itemt_" + count + "'>";
                 //html +="<td>" + count + "</td>";
-                html +="<td>" + files[i].files[0].name + "</td>";
+                html +="<td class='text-left'>" + files[i].files[0].name + "</td>";
                 html +="<td>" + fileUnitCheck(files[i].files[0].size) + "</td>";
                 //html +="<td>" + files[i].files[0].type + "</td>";
 				html +="<td>" + fileExt(files[i].files[0].name) + "</td>";
-				html +="<td>등록일</td>";
+				//html +="<td>등록일</td>";//
 				//html +="<td><input type='button' id='delItemBtn' value='삭제'/></td>";
                 html +="</tr>";
 
