@@ -17,7 +17,7 @@
                         <h1 class="logo"><a href="/jhbbs/index.html"><img src="/jhbbs/images/logo/logo.png" width="150px" /></a></h1>
                     </div> -->
                 </header>
-                <header class="map-header" style="min-width:1280px;" >
+                <header class="map-header" >
                     <div class="logo-box" style="background: #333;">
                         <h1 class="logo">
                             <a href="index.do" style="color: #fff;">GIS공간정보서비스</a>
@@ -62,7 +62,7 @@
                         </nav>
                     </div>
                     
-                    <div class="aside-box">
+                    <div class="aside-box" style="height:100%; overflow: auto">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="tabs-box">
@@ -289,7 +289,7 @@
                 </div>
                 <div id="map-wrap">
                     <div class="map-box">
-                            <div id="map" class="map"></div>
+                            <div id="map" class="map"  ></div>
                             <div id="mouseLocation"></div>
                             <div id="layerTree">
                                 <ul>
@@ -503,16 +503,21 @@
                                                     </ul>
                                                 </fieldset>
                                                 </li>
-                                       --> 
-                                       <li id="layer4"><input id="visible4" class="visible" type="checkbox" /><span> 브이월드 연속지적도</span>
-                                        <fieldset>
-                                            <input class="opacity" type="range" min="0" max="1" step="0.01" />
-                                        </fieldset>
-                                    	</li>          
-	                                    <li id="layer5"><input id="visible5" class="visible" type="checkbox" /><span> TileGrid</span>
-	                                        <fieldset>
+                                       	--> 
+                                    	<li id="layer4"><input id="visible4" class="visible" type="checkbox" /><span> 연속지적도</span>
+	                                       <fieldset>
 	                                            <input class="opacity" type="range" min="0" max="1" step="0.01" />
-	                                        </fieldset>
+	                                       </fieldset>
+                                    	</li> 
+                                    	<li id="layer5"><input id="visible5" class="visible" type="checkbox" /><span> 경계구설정</span>
+	                                       <fieldset>
+	                                            <input class="opacity" type="range" min="0" max="1" step="0.01" />
+	                                       </fieldset>
+                                    	</li>          
+	                                    <li id="layer6"><input id="visible6" class="visible" type="checkbox" /><span> TileGrid</span>
+	                                       <fieldset>
+	                                            <input class="opacity" type="range" min="0" max="1" step="0.01" />
+	                                       </fieldset>
 	                                    </li>
                                     
                                 </ul>

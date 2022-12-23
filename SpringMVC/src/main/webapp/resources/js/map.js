@@ -18,7 +18,8 @@ $(document).ready(function() {
 	
 	
     // VWORLD Base 설정 WMTS(월드맵타일서비스) API 사용
-    var url1 = 'http://api.vworld.kr/req/wmts/1.3.0/5638C501-9663-3A53-8DDF-701B190423EE/';
+	var authKey = '3BE9C60B-8F69-32CF-8614-D7515AED236D';
+    var url1 = 'http://api.vworld.kr/req/wmts/1.3.0/' + authKey + '/';
 
     var Base = new ol.layer.Tile({
     	visible: false,
@@ -61,8 +62,8 @@ $(document).ready(function() {
         zIndex : 1
     });
     
-    // VWORLD Gray 설정 
-    var Gray = new ol.layer.Tile({
+    // VWORLD gray 설정 
+    var gray = new ol.layer.Tile({
     	visible: false,
         source : new ol.source.XYZ({
             url : url1,
@@ -75,8 +76,8 @@ $(document).ready(function() {
         zIndex : 1
     });
     
-    // VWORLD Midnight 설정 
-    var Midnight = new ol.layer.Tile({
+    // VWORLD midnight 설정
+    var midnight = new ol.layer.Tile({
     	visible: false,
         source : new ol.source.XYZ({
             url : url1,
@@ -200,12 +201,12 @@ $(document).ready(function() {
     var customBase = new ol.layer.Image({
     	visible: false,
         source: new ol.source.ImageWMS({
-            url: 'http://localhost:8080/geoserver/GIS/wms',
+            url: 'http://localhost:8090/geoserver/GIS/wms?',
             params: {
-                'FORMAT': format,
-                'VERSION': version,
-                'TILED': true,
-                'LAYERS': 'GIS:base',
+                FORMAT: format,
+                VERSION: version,
+                TILED: true,
+                LAYERS: 'GIS:base',
                 STYLES: ''
             },
             serverType: 'geoserver'
@@ -215,40 +216,40 @@ $(document).ready(function() {
 
 
 	// 브이월드 연속지적도
-	var wms_val = 'lp_pa_cbnd_bubun';
+	var wms_val = 'lp_pa_cbnd_bubun,lp_pa_cbnd_bonbun';
 	var WMS = new ol.layer.Tile({
 		visible: false,
 		source : new ol.source.TileWMS({
-			url : "http://api.vworld.kr/req/wms?",
+			url : 'http://api.vworld.kr/req/wms',
 			params : {
 				LAYERS : wms_val,
 				STYLES : wms_val,
-				CRS : "EPSG:900913",
-				apikey : "5638C501-9663-3A53-8DDF-701B190423EE",
-				DOMAIN : "http://loacalhost:8090",
-				title : "연속지적도",
-				FORMAT : "image/png",
-				domain : "http://localhost"
+				CRS : 'EPSG:5174',
+				key : authKey,
+				title : '연속지적도',
+				FORMAT : 'image/png',
+				transparent : 'true',
+				domain : 'http://localhost:8080/' //인증받을때 등록한 도메인주소입력
 			}
 		}),
 		zIndex : 5
 	});
 	
-	// 브이월드 경계
-	var wms_val = 'lt_c_adsido,lt_c_adsigg,lt_c_ademd,lt_c_adri,lt_p_bycracks,lt_l_byclink,lt_c_wgisnpgug,lt_c_wgisnpgun,lt_c_wgisnpdo,lt_l_frstclimb,lt_p_climball,lt_l_trkroad,lt_p_trkroad';
+	// 브이월드 경계 https://www.vworld.kr/dev/v4dv_wmsguide2_s001.do참고 
+	var wms_val = 'lt_c_adsido,lt_c_adsigg,lt_c_ademd,lt_c_adri';
 	var WMS1 = new ol.layer.Tile({
 		visible: false,
 		source : new ol.source.TileWMS({
-			url : "http://api.vworld.kr/req/wms?",
+			url : 'http://api.vworld.kr/req/wms',
 			params : {
 				LAYERS : wms_val,
 				STYLES : wms_val,
-				CRS : "EPSG:900913",
-				apikey : "5638C501-9663-3A53-8DDF-701B190423EE",
-				DOMAIN : "http://loacalhost:8090",
-				title : "경계",
-				FORMAT : "image/png",
-				domain : "http://localhost"
+				CRS : 'EPSG:3857',
+				key : authKey,
+				title : '경계',
+				FORMAT : 'image/png',
+				transparent : 'true',
+				domain : 'http://localhost:8080/' //인증받을때 등록한 도메인주소입력
 			}
 		}),
 		zIndex : 5
@@ -274,17 +275,17 @@ $(document).ready(function() {
           }
     }).extend([    	
         new ol.control.FullScreen(),
-        new ol.control.ZoomSlider(),
-        new ol.control.ScaleLine(),
-        new ol.control.Zoom(),
-        new ol.control.Rotate(),
+        //new ol.control.ZoomSlider(),
+        //new ol.control.ScaleLine(),
+        //new ol.control.Zoom(),
+        //new ol.control.Rotate(),
         new ol.control.Attribution(),
-        new ol.control.OverviewMap(),
-        new ol.control.ZoomToExtent()
+        //new ol.control.OverviewMap(),
+        //new ol.control.ZoomToExtent()
     ]); 
     
     // layers 설정      
-    var addLayers = [VWORLDMapGroup, BingMapGroup, OSM, customBase, WMS1, TileGrid];
+    var addLayers = [VWORLDMapGroup, BingMapGroup, OSM, customBase, WMS, WMS1, TileGrid];
     
     // view 설정
     var view = new ol.View({

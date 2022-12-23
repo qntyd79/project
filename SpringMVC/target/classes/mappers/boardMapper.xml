@@ -17,12 +17,13 @@
 		<result column="title" property="title"/>
 		<result column="content" property="content"/>
 		<result column="regdate" property="regdate"/>
-		<result column="filecnt" property="filecnt"/>
 		<result column="vote" property="vote"/>
 		<result column="hit" property="hit"/>
 		<result column="parent" property="parent"/>
 		<result column="depth" property="depth"/>
 		<result column="notice" property="notice"/>
+		<result column="filecnt" property="filecnt"/>
+		<result column="commentcnt" property="commentcnt"/>
 		<result column="category_idx" property="category_idx"/>
 		<collection property="categoryVO" resultMap="CategoryVO"/>
 	</resultMap>
@@ -31,7 +32,7 @@
 	<select id="getList" resultType="com.company.bbs.vo.board.BoardVO" resultMap="BoardVO">
 	<!-- select * from jhbbs_board where board_idx > 0 and del = 'N' and notice = 0 -->
 	<![CDATA[ 	
-	select b.board_idx, b.name, b.title, b.content, b.regdate, b.filecnt, b.vote, b.hit, b.parent, b.depth, b.notice, b.category_idx, c.title as categoryname
+	select b.board_idx, b.name, b.title, b.content, b.regdate, b.filecnt, b.vote, b.hit, b.parent, b.depth, b.notice, b.commentcnt, b.category_idx, c.title as categoryname
 	from jhbbs_board AS b 
 	JOIN jhbbs_category AS c 
 	ON b.category_idx = c.category_idx where b.board_idx > 0 and b.del = 'N' and b.notice = 0
@@ -74,7 +75,7 @@
 	<select id="getNoticeList" resultType="com.company.bbs.vo.board.BoardVO" resultMap="BoardVO">
 	<!-- select * from jhbbs_board where board_idx > 0 and del = 'N' and notice = 1 -->
 	<![CDATA[ 	
-	select b.board_idx, b.name, b.title, b.content, b.regdate, b.filecnt, b.vote, b.hit, b.parent, b.depth, b.notice, b.category_idx, c.title as categoryname
+	select b.board_idx, b.name, b.title, b.content, b.regdate, b.filecnt, b.vote, b.hit, b.parent, b.depth, b.notice, b.commentcnt, b.category_idx, c.title as categoryname
 	from jhbbs_board AS b 
 	JOIN jhbbs_category AS c 
 	ON b.category_idx = c.category_idx where b.board_idx > 0 and b.del = 'N' and b.notice = 1
