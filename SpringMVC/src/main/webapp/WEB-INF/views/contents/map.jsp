@@ -61,7 +61,6 @@
                             </ul>
                         </nav>
                     </div>
-                    
                     <div class="aside-box" style="height:100%; overflow: auto">
                             <div class="row">
                                 <div class="col-md-12">
@@ -78,7 +77,6 @@
                                                 <ul class="content-data-1">
                                                     <li>
                                                         <div class="panel text-left">
-                                                            <h1 class="title">통합검색</h1>
                                                             <form>
                                                                 <fieldset>
                                                                     <legend>Borad Write Form</legend>
@@ -102,16 +100,16 @@
                                                         <ul class="content-data-1">
                                                             <li>
                                                                 <div class="panel text-left">
-                                                                    <form>
-                                                                        <fieldset>
-                                                                            <legend>Borad Write Form</legend>
-                                                                            <label for="attach"> 시도 </label> <input type="text" id="name" name="name" style="width: 100%;">
-                                                                            <label for="attach"> 시군구 </label> <input type="text" id="name" name="name" style="width: 100%;">
-                                                                            <label for="attach"> 도로명 </label> <input type="text" id="name" name="name" style="width: 100%;">
-                                                                            <label for="attach"> 건물번호 </label> <input type="text" id="name" name="name" style="width: 50px;">
-                                                                            - <input type="text" id="name" name="name" style="width: 50px;"> 번 <input type="button" value="검색" class="default" style="width: 100%; margin-top: 10px;">
-                                                                        </fieldset>
-                                                                    </form>
+	                                                                    <form>
+	                                                                        <fieldset>
+	                                                                            <legend>Borad Write Form</legend>
+	                                                                            <label for="attach"> 시도 </label> <input type="text" id="name" name="name" style="width: 100%;">
+	                                                                            <label for="attach"> 시군구 </label> <input type="text" id="name" name="name" style="width: 100%;">
+	                                                                            <label for="attach"> 도로명 </label> <input type="text" id="name" name="name" style="width: 100%;">
+	                                                                            <label for="attach"> 건물번호 </label> <input type="text" id="name" name="name" style="width: 50px;">
+	                                                                            - <input type="text" id="name" name="name" style="width: 50px;"> 번 <input type="button" value="검색" class="default" style="width: 100%; margin-top: 10px;">
+	                                                                        </fieldset>
+	                                                                    </form>
                                                                 </div>
                                                             </li>
                                                         </ul>
@@ -230,7 +228,7 @@
                                     <ul class="content-data-1">
                                         <li>
                                             <div class="panel text-left">
-                                                <h1 class="title">검색결과 <a href="#"><span class="more">총2건</span></a></h1>
+                                                <h3 class="title">검색결과 총5건<a href="#"><span class="more">더보기</span></a></h3>
                                                 <ul class="list">
                                                     <li><a href="#">대전광역시 서구 둔산중로 지하 55 (둔산동)</a> <i class="fa fa-map-marker" aria-hidden="true"></i></li>
                                                     <li><a href="#">대전광역시 서구 둔산로 100 (둔산동)</a> <i class="fa fa-map-marker" aria-hidden="true"></i></li>
@@ -249,9 +247,7 @@
                                     <ul class="content-data-1">
                                         <li>
                                             <div class="panel text-left">
-                                                <h1 class="title">
-                                                    공지사항 <a href="#"><span class="more">더보기</span></a>
-                                                </h1>
+                                                <h3 class="title">공지사항 <a href="#"><span class="more">더보기</span></a></h3>
                                                 <ul class="list">
                                                     <li><a href="#">데이터 세트 생성, 열기 및 제거</a></li>
                                                     <li><a href="#">데이터 세트 컨텍스트 메뉴</a></li>
@@ -270,9 +266,7 @@
                                     <ul class="content-data-1">
                                         <li>
                                             <div class="panel text-left">
-                                                <h1 class="title">
-                                                    자주있는질문 <a href="#"><span class="more">더보기</span></a>
-                                                </h1>
+                                                <h3 class="title">자주있는질문 <a href="#"><span class="more">더보기</span></a></h3>
                                                 <ul class="list">
                                                     <li><a href="#">데이터 세트 생성, 열기 및 제거</a></li>
                                                     <li><a href="#">데이터 세트 컨텍스트 메뉴</a></li>

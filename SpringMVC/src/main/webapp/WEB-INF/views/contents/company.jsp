@@ -20,6 +20,7 @@
                             주요 사업영역은 건설, 토목, 재해, 재난관리를 위한 지형 및 시설물 데이터 수집장비(하드웨어) 개발 그리고 변환 소프트웨어 개발.</div>
                     </article>
                     <article>
+                    	<h3>Company Plan</h3>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="test-box">

@@ -15,11 +15,11 @@
                    <%@ include file="../include/content_header.jsp"%>
                     <article>
                         <h2>Services</h2>
-                        <h3>가. Data Collecting Devices</h3>
                         <div class="lead">국내 MMS 맞춤제작 기업으로 세계시장에서 경쟁할 수 있는 최상의 MMS장비를 제작, 공급 및 기술 지원 서비스를 지원합니다.<BR>
                             MMS 장비개발 제작에 축적된 개발 및 운영 경험으로 다양한 고객사 환경을 고려한 맞춤형 장비 제작 서비스를 제공합니다.</div>
                     </article>
                     <article>
+                    	<h3>가. Data Collecting Devices</h3>
                         <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <ul class="content-panel-3">
@@ -124,12 +124,7 @@
                         </div>
                     </article>
                     <article>
-                        <h3>나. Data Processing & Service Software</h3>
-                        <div class="lead">Manage and optimize your mobile mapping data after capture using the powerful 3DM Content Manager.
-                            Auto produce & update assets faster and richer than ever before based on the 3DM Feature Extraction portfolio.
-                            Install the 3DM Publisher on-premises or activate your profile on 3dmapping.cloud to share mobile mapping projects over the internet, embed in corporate software, or to make them available via mobile devices.</div>
-                    </article>
-                    <article>
+                    	<h3>나. Data Processing & Service Software</h3>
                         <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <ul class="content-panel-3">

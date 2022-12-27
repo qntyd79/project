@@ -13,7 +13,11 @@
             <div class="content-full-bg01-hidden">
                 <section class="content">
                    <%@ include file="/WEB-INF/views/include/content_header.jsp"%>
-                   
+                   <article>
+                        <h2>Solution</h2>
+                        <div class="lead">MMS 관련 뛰어난 가격 경쟁력과 효율적인 유지보수를 지원하며 다양한 하드웨어와 소프트웨어 자체 개발이 가능하여<BR>다양한 고객니즈에 차별화 된 서비스로 최적의 맞춤솔루션을 제공합니다.
+                        </div>
+                    </article>
                     <article>
                         <div class="gnb-box">
                             <nav class="gnb">
@@ -53,7 +57,7 @@
                                             <li>LiDAR smoothly integrated with INS/GNSS unit</li>
                                             <li>Network RTK support</li>
                                             <li>Built-in Applanix Ap-20E or AP40E</li>
-                                            <li>Built-in Quanergy M8(400,000 point/sec) or Velodyne HDL-32E(650,000 point/sec)</li>
+                                            <li>Built-in Quanergy M8(400,000 point/sec)</li>
                                             <li>Support FLIR ladybug 5</li>
                                         </ul>
                                         <!--  <div class="btn-group-m">

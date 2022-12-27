@@ -48,7 +48,7 @@
 <script type="text/javascript">
 	function openNewMapPanelBrowser(){
 		var sWidth = screen.width-10;
-		var sHeight = screen.height-220;
+		var sHeight = screen.height-200;
 		window.open('/contents/map.do', '지도서비스', 'width='+sWidth+',height='+sHeight+',left=0, top=0, menubar=no, toolbar=no, status=no, location=no');
 	}
 </script>
