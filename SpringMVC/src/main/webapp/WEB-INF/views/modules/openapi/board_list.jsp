@@ -127,6 +127,7 @@
 										<nav class="paging-group">
 											<ul class="pagination"></ul>
 										</nav>
+										<!--
 										<nav class="btn-group">
 											<ul>
 											<c:if test="${sessionScope.isAdmin != null}">
@@ -139,6 +140,7 @@
 												<li><input type="button" value="<spring:message code="button.create"/>" id="writeBtn" /></li>
 											</ul>
 										</nav>
+										-->
 									</fieldset>
 								</form>
 							</div>
@@ -345,7 +347,7 @@ $(document).ready(function(){
 	//시도코드
 	$.ajax({
 		type: "get",
-		url: "https://api.vworld.kr/req/data?key=5638C501-9663-3A53-8DDF-701B190423EE&domain=http://localhost:8090&service=data&version=2.0&request=getfeature&format=json&size=1000&page=1&geometry=false&attribute=true&crs=EPSG:3857&geomfilter=BOX(13663271.680031825,3894007.9689600193,14817776.555251127,4688953.0631258525)&data=LT_C_ADSIDO_INFO",
+		url: "https://api.vworld.kr/req/data?key=3BE9C60B-8F69-32CF-8614-D7515AED236D&domain=http://localhost:8080&service=data&version=2.0&request=getfeature&format=json&size=1000&page=1&geometry=false&attribute=true&crs=EPSG:3857&geomfilter=BOX(13663271.680031825,3894007.9689600193,14817776.555251127,4688953.0631258525)&data=LT_C_ADSIDO_INFO",
 		async: false,
 		dataType: 'jsonp',
 		success: function(data) {
@@ -371,7 +373,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			type: "get",
-			url: "https://api.vworld.kr/req/data?key=5638C501-9663-3A53-8DDF-701B190423EE&domain=http://localhost:8090&service=data&version=2.0&request=getfeature&format=json&size=1000&page=1&geometry=false&attribute=true&crs=EPSG:3857&geomfilter=BOX(13663271.680031825,3894007.9689600193,14817776.555251127,4688953.0631258525)&data=LT_C_ADSIGG_INFO",
+			url: "https://api.vworld.kr/req/data?key=3BE9C60B-8F69-32CF-8614-D7515AED236D&domain=http://localhost:8080&service=data&version=2.0&request=getfeature&format=json&size=1000&page=1&geometry=false&attribute=true&crs=EPSG:3857&geomfilter=BOX(13663271.680031825,3894007.9689600193,14817776.555251127,4688953.0631258525)&data=LT_C_ADSIGG_INFO",
 			data : {attrfilter : 'sig_cd:like:' + thisVal},
 			async: false,
 			dataType: 'jsonp',
@@ -399,7 +401,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			type: "get",
-			url: "https://api.vworld.kr/req/data?key=5638C501-9663-3A53-8DDF-701B190423EE&domain=http://localhost:8090&service=data&version=2.0&request=getfeature&format=json&size=1000&page=1&geometry=false&attribute=true&crs=EPSG:3857&geomfilter=BOX(13663271.680031825,3894007.9689600193,14817776.555251127,4688953.0631258525)&data=LT_C_ADEMD_INFO",
+			url: "https://api.vworld.kr/req/data?key=3BE9C60B-8F69-32CF-8614-D7515AED236D&domain=http://localhost:8080&service=data&version=2.0&request=getfeature&format=json&size=1000&page=1&geometry=false&attribute=true&crs=EPSG:3857&geomfilter=BOX(13663271.680031825,3894007.9689600193,14817776.555251127,4688953.0631258525)&data=LT_C_ADEMD_INFO",
 			data : {attrfilter : 'emd_cd:like:' + thisVal},
 			async: false,
 			dataType: 'jsonp',
@@ -433,7 +435,7 @@ $(document).ready(function(){
 		if((selectvalue.includes("읍") || selectvalue.includes("면")) == true){
 			$.ajax({
 				type: "get",
-				url: "https://api.vworld.kr/req/data?key=5638C501-9663-3A53-8DDF-701B190423EE&domain=http://localhost:8090&service=data&version=2.0&request=getfeature&format=json&size=1000&page=1&geometry=false&attribute=true&crs=EPSG:3857&geomfilter=BOX(13663271.680031825,3894007.9689600193,14817776.555251127,4688953.0631258525)&data=LT_C_ADRI_INFO",
+				url: "https://api.vworld.kr/req/data?key=3BE9C60B-8F69-32CF-8614-D7515AED236D&domain=http://localhost:8080&service=data&version=2.0&request=getfeature&format=json&size=1000&page=1&geometry=false&attribute=true&crs=EPSG:3857&geomfilter=BOX(13663271.680031825,3894007.9689600193,14817776.555251127,4688953.0631258525)&data=LT_C_ADRI_INFO",
 				data : {attrfilter : 'li_cd:like:' + thisVal},
 				async: false,
 				dataType: 'jsonp',

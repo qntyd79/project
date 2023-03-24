@@ -98,21 +98,15 @@ public class OpenapiController {
 	// @ResponseBody
 	@RequestMapping(value = "alist.do")
 	public Map<String, Object> aList(Model model, @ModelAttribute Criteria criteria, @RequestParam("pageNo") int pageNo,
-			@RequestParam("perPageNum") int perPageNum, @RequestParam("lawdcd") String lawdcd,
+			@RequestParam("perPageNum") int perPageNum, @RequestParam("lawdcd") String lawdcd, 
 			@RequestParam("dealymd") String dealymd) throws Exception {
 
-		StringBuilder urlBuilder = new StringBuilder(
-				"http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev"); /*
-																															 * URL
-																															 */
-		urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8")
-				+ "=hiViuwIGjr7rUCTyOmmmvPnPjPcUNSZg6XvXbo2llXpf2xHXAuYWtCREqrOmXIEE5a0McLePjyCHja%2B6FMzQ1Q%3D%3D");
+		StringBuilder urlBuilder = new StringBuilder("http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev"); 
+		urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=hiViuwIGjr7rUCTyOmmmvPnPjPcUNSZg6XvXbo2llXpf2xHXAuYWtCREqrOmXIEE5a0McLePjyCHja%2B6FMzQ1Q%3D%3D");
 		urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + pageNo); /* 페이지번호 */
 		urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + perPageNum); /* 한 페이지 결과 수 */
-		urlBuilder.append(
-				"&" + URLEncoder.encode("LAWD_CD", "UTF-8") + "=" + URLEncoder.encode(lawdcd, "UTF-8")); /* 지역코드 */
-		urlBuilder.append(
-				"&" + URLEncoder.encode("DEAL_YMD", "UTF-8") + "=" + URLEncoder.encode(dealymd, "UTF-8")); /* 계약월 */
+		urlBuilder.append("&" + URLEncoder.encode("LAWD_CD", "UTF-8") + "=" + URLEncoder.encode(lawdcd, "UTF-8")); /* 지역코드 */
+		urlBuilder.append("&" + URLEncoder.encode("DEAL_YMD", "UTF-8") + "=" + URLEncoder.encode(dealymd, "UTF-8")); /* 계약월 */
 
 		// URI를 URL객체로 저장
 		URL url = new URL(urlBuilder.toString());

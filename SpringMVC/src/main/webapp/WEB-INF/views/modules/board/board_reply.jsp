@@ -6,6 +6,29 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="validator" uri="http://www.springmodules.org/tags/commons-validator" %>
 <validator:javascript formName="boardVO" staticJavascript="false" xhtml="true" cdata="false"/>
+	
+<!--For Commons Validator Client Side-->
+<script type="text/javaScript" language="javascript" defer="defer">
+	
+	function fn_egov_save() {
+		
+		var frm = document.writeForm;
+		frm.content.value = CKEDITOR.instances['content'].getData();
+		
+	   	if(!validateBoardVO(frm)){
+		    return;
+	    } 
+	   	
+		if(frm.answer.value == ""){
+			alert("자동등록방지는(은) 필수 입력값입니다.")
+				frm.answer.focus();
+			return;
+		} else { 
+	    	frm.submit();
+	    }
+	}	
+	
+</script>
 
 <c:import url="/WEB-INF/views/include/header.jsp"/>
 
@@ -22,7 +45,7 @@
                             
                                                         
                                 <h2><spring:message code="bbs.title.reply"/></h2>
-                                <form method="post" id="writeForm" name="writeForm" enctype="multipart/form-data" action="insert.do">
+                                <form:form modelAttribute="boardVO" method="post" id="writeForm" name="writeForm" enctype="multipart/form-data" action="insert.do">
                                 <input type="hidden" name="board_idx" value="<c:out value="${boardVO.board_idx}"/>" > 
 								<input type="hidden" name="page" value="<c:out value="${criteria.page}"/>" > 
 								<input type="hidden" name="perPageNum" value="<c:out value="${criteria.perPageNum}"/>" > 
@@ -44,7 +67,7 @@
                                                 <tr>
                                                     <th><label for="category_idx"><spring:message code="label.category_idx"/></label></th>
                                                     <td class="text-left">
-                                                        <select name="category_idx" id="category_idx" name="category_idx" >
+                                                        <form:select path="category_idx" id="category_idx" name="category_idx" >
                                                             <c:forEach var="item" items="${category}" varStatus="status">
                                                                 <option value="<c:out value='${item.category_idx}'/>"
 	                                                                <c:if test="${item.category_idx == categoryselect}">
@@ -53,7 +76,7 @@
                                                                 	<c:out value="${item.title}" />
                                                                 </option>
                                                             </c:forEach>
-                                                        </select>
+                                                        </form:select>
                                                         <form:errors path="category_idx" />
                                                         <!-- 
                                                         <button type="button" value="#layer1" class="popupBtn" >분류추가</button>
@@ -74,23 +97,25 @@
                                                         -->
                                                     </td>
                                                 </tr>
+                               					<!--<c:if test="${sessionScope.isAdmin == null && kakaoinfo == null && naverinfo == null && googleinfo == null}">-->
                                                 <tr>
                                                     <th><label for="userid"><spring:message code="label.userid"/></label></th>
-                                                    <td class="text-left"><input name="userid" type="text" placeholder="UserID" class="wfull"/> <form:errors path="userid" /> </td>
+                                                    <td class="text-left"><input name="userid" type="text" placeholder="UserID" class="wfull" /> <form:errors path="userid" /> </td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="name"><spring:message code="label.name"/></label></th>
-                                                    <td class="text-left"><input name="name" type="text"  placeholder="Name" class="wfull"/> <form:errors path="name" /> </td>
+                                                    <td class="text-left"><input name="name" type="text"  placeholder="Name" class="wfull" /> <form:errors path="name" /> </td>
                                                 </tr>
+                                                <!--</c:if>-->                                               
                                                 <tr>
                                                     <th><label for="pass"><spring:message code="label.pass"/></label></th>
-                                                    <td class="text-left"><input name="pass" type="password" placeholder="Password" class="wfull"/> <form:errors path="pass" /> </td>
-                                                </tr>                                               
+                                                    <td class="text-left"><form:input path="pass" type="password" placeholder="Password" class="wfull" value="test!@1234"/> <form:errors path="pass" /> </td>
+                                                </tr> 
+                                                <!--<c:if test="${sessionScope.isAdmin == null && kakaoinfo == null && naverinfo == null && googleinfo == null}">-->                                             
                                                 <tr>
                                                     <th><label for="email"><spring:message code="label.email"/></label></th>
-                                                    <td class="text-left">
-                                                        <input name="email" type="text" placeholder="Email" class="wfull"/>
-                                                        <!-- <input type="text" name="email2" />
+                                                    <td class="text-left"><input name="email" type="text" placeholder="Email"/>
+                                                       <input type="text" name="email2" value="기능업그레이드 예정"/>
                                                         <select id="selectEmail">
                                                             <option value="1" selected="selected">직접입력</option>
                                                             <option value="naver.com">naver.com</option>
@@ -110,28 +135,33 @@
                                                             <option value="korea.com">korea.com</option>
                                                             <option value="lycos.co.kr">lycos.co.kr</option>
                                                             <option value="netian.com">netian.com</option>
-                                                        </select> -->
+                                                        </select>
                                                         <form:errors path="email" />
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="homepage"><spring:message code="label.homepage"/></label></th>
-                                                    <td class="text-left"><input name="homepage" type="text" placeholder="Homepage" class="wfull"/> <form:errors path="homepage" /></td>
+                                                    <td class="text-left">
+                                                    	<form:input path="homepage" type="text" placeholder="Homepage" class="wfull" value="test.co.kr"/> <form:errors path="homepage" />
+                                                    </td>
                                                 </tr>
+                                                <!--</c:if>-->
                                                 <tr>
                                                     <th><label for="title"><spring:message code="label.title"/></label></th>
-                                                    <td class="text-left"><input name="title" type="text" placeholder="Title" class="wfull"/> <form:errors path="title" /></td>
+                                                    <td class="text-left">
+                                                    	<form:input path="title" type="text" placeholder="Title" class="wfull" value="테스트입니다."/> <form:errors path="title" />
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="date"><spring:message code="label.sdate"/></label></th>
                                                     <td class="text-left">
-                                                        <input name="sdate" id="sdate" type="text" placeholder="StartDay" class="datePicker"/> <form:errors path="sdate" />                                                        
+                                                        <form:input path="sdate" id="sdate" type="text" placeholder="StartDay" class="datePicker" value="2022-01-03"/> <form:errors path="sdate" />                                                        
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="date"><spring:message code="label.edate"/></label></th>
                                                     <td class="text-left">
-                                                        <input name="edate" id="edate" type="text" placeholder="EndDay" class="datePicker"/> <form:errors path="edate" />
+                                                        <form:input path="edate" id="edate" type="text" placeholder="EndDay" class="datePicker" value="2022-01-04"/> <form:errors path="edate" />
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -144,8 +174,8 @@
                                                 </tr>
                                                 <tr>
                                                     <td colspan="10" class="text-left">
-                                                        <textarea name="content" id="content" placeholder="Content"> </textarea><form:errors path="content"/>
-                                                         <script>
+                                                        <form:textarea path="content" id="content" placeholder="Content"/><form:errors path="content"/>
+                                                        <script>
                                                             CKEDITOR.replace('content',{"removePlugins": "exportpdf"});
                                                         </script>
                                                         <!--<label for="content"><spring:message code="label.content"/></label>-->   
@@ -153,11 +183,11 @@
                                                 </tr>                                                
                                                 <tr>
                                                     <th><label for="link1"><spring:message code="label.link1"/></label></th>
-                                                    <td class="text-left"><input name="link1" type="text" placeholder="Link1"  class="wfull"/> <form:errors path="link1"/></td>
+                                                    <td class="text-left"><form:input path="link1" type="text" placeholder="Link1"  class="wfull" value="link1.co.kr"/> <form:errors path="link1"/></td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="link2"> <spring:message code="label.link2"/></label></th>
-                                                    <td class="text-left"><input name="link2" type="text" placeholder="Link2"  class="wfull"/> <form:errors path="link2"/></td>
+                                                    <td class="text-left"><form:input path="link2" type="text" placeholder="Link2"  class="wfull" value="link2.co.kr"/> <form:errors path="link2"/></td>
                                                 </tr>
                                                 <tr>
                                                     <th><label for="name"><spring:message code="label.file"/></label></th>
@@ -170,19 +200,21 @@
                                                             <table summary="기본게시판 보여주고 있습니다." id="filelist">
                                                                 <caption><spring:message code="bbs.table.caption"/></caption>
                                                                 <colgroup>
-                                                                    <col width="20%" />
-                                                                    <col width="40%" />
+                                                                   	<!--<col width="5%" />-->
+                                                                    <col width="70%" />
                                                                     <col width="15%" />
                                                                     <col width="15%" />
-                                                                    <col width="10%" />
+                                                                    <!--<col width="10%" />-->
+                                                                    <!--<col width="10%" />-->
                                                                 </colgroup>
                                                                 <thead>
                                                                     <tr>
-                                                                        <th scope="col"><spring:message code="bbs.list.preview"/></th>
+                                                                        <!--<th scope="col"><spring:message code="bbs.list.no"/></th>-->
                                                                         <th scope="col"><spring:message code="bbs.list.filename"/></th>
                                                                         <th scope="col"><spring:message code="bbs.list.filesize"/></th>
                                                                         <th scope="col"><spring:message code="bbs.list.filetype"/></th>
-                                                                        <th scope="col"><spring:message code="bbs.list.del"/></th>
+                                                                        <!-- <th scope="col"><spring:message code="bbs.list.regdate"/></th> -->
+                                                                        <!-- <th scope="col"><spring:message code="bbs.list.del"/></th> -->
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -212,12 +244,11 @@
                                         <nav class="btn-group">
 											<ul>
 												<li><input type="button" value="<spring:message code="button.list"/>" onClick="location.href='list.do'"/></li>
-												<li><input type="button" value="<spring:message code="button.create"/>" onClick="$(this.form).submit();"/></li>												
+												<li><input type="button" value="<spring:message code="button.create"/>" onclick="$(this.form).submit()" /></li>												
 											</ul>
 										</nav>
-										<!--<c:import url="/WEB-INF/views/modules/common/common_btn.jsp"/>-->
-                                        </fieldset>
-                                </form>
+									</fieldset>
+                            	</form:form>
                                 
                                 
                             </div>

@@ -46,7 +46,7 @@
                             
                                 <h2><spring:message code="bbs.title.write"/></h2>
                                 <form:form modelAttribute="boardVO" method="post" id="writeForm" name="writeForm" enctype="multipart/form-data" action="insert.do">
-                                	<input type="hidden" name="msgStr" value="<c:out value="${msg}"/> ">
+                                <input type="hidden" name="msgStr" value="<c:out value="${msg}"/> ">
                                     <fieldset>
                                         <legend><spring:message code="bbs.table.legend"/></legend>
                                         <table summary="<spring:message code="bbs.table.summary.write"/>" class="board_detail">
@@ -236,7 +236,7 @@
                                         <nav class="btn-group">
 											<ul>
 												<li><input type="button" value="<spring:message code="button.list"/>" onClick="location.href='list.do'"/></li>
-												<li><input type="button" value="<spring:message code="button.create"/>" onclick="$(this.form).submit()" /></li>												
+												<li><input type="button" value="<spring:message code="button.create"/>" onclick="$(this.form).submit()"/></li>												
 											</ul>
 										</nav>
 									</fieldset>

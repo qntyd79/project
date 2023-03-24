@@ -18,7 +18,7 @@ $(document).ready(function() {
 	
 	
     // VWORLD Base 설정 WMTS(월드맵타일서비스) API 사용
-	var authKey = '3BE9C60B-8F69-32CF-8614-D7515AED236D';
+	var authKey = 'C6F35290-A79D-3175-838A-01CA55D8085A';
     var url1 = 'http://api.vworld.kr/req/wmts/1.3.0/' + authKey + '/';
 
     var Base = new ol.layer.Tile({
@@ -133,7 +133,7 @@ $(document).ready(function() {
     */   
         
     // BingMaps 설정   
-    var keyValue = 'AoTWblM8Bf48thwSrZ6Y4Bib9qkwA1ikfYBbcMadQdFNI-i1YI9ITnbc4Coz3_NO'
+    var keyValue = 'AoTWblM8Bf48thwSrZ6Y4Bib9qkwA1ikfYBbcMadQdFNI-i1YI9ITnbc4Coz3_NO';
     var Road = new ol.layer.Tile({
     	visible: false,
         source: new ol.source.BingMaps({
