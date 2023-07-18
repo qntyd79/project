@@ -1,3 +1,4 @@
+/* 20230718 */
 /* 게시판테이블 */
 CREATE TABLE IF NOT EXISTS mydb.JHBBS_board (
 board_idx		INT(10) NOT NULL AUTO_INCREMENT,
@@ -181,8 +182,7 @@ VALUES ('3', '3', '0', '0', '수신', '관리자', 'admin!@1234', '0', '3', '0',
 
 /* FOREIGN KEY 설정 */
 ALTER TABLE mydb.JHBBS_comment ADD CONSTRAINT `fk_comment_idx` FOREIGN KEY (`board_idx`) REFERENCES mydb.JHBBS_board (`board_idx`);
-
-/*ALTER TABLE mydb.JHBBS_file ADD CONSTRAINT `fk_board_idx` FOREIGN KEY (`board_idx`) REFERENCES mydb.JHBBS_board (`board_idx`);
+ALTER TABLE mydb.JHBBS_file ADD CONSTRAINT `fk_board_idx` FOREIGN KEY (`board_idx`) REFERENCES mydb.JHBBS_board (`board_idx`);
 
 ALTER TABLE mydb.JHBBS_file ADD CONSTRAINT `fk_member_idx` FOREIGN KEY (`member_idx`) REFERENCES mydb.JHBBS_member (`member_idx`);
 

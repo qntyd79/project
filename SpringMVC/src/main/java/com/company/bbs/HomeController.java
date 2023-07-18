@@ -240,6 +240,7 @@ public class HomeController {
 		return "contents/sitemap";
 	}
 	
+	
 	/*
 	 * // Model은 파라미터 방식으로 메소드 즉 testModel(Model model)에 Model model 인자를 넣어준다. 또한
 	 * 돌려줄때는 String형으로 돌려준다.

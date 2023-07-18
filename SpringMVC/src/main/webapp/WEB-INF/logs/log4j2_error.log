@@ -2461,3 +2461,155 @@
 
 2023-3월-24 16:27:21 오후 [http-nio-8080-exec-4] DEBUG jdbc.resultset - 168. ResultSet.next() returned false  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValuesForSimpleResultMap(DefaultResultSetHandler.java:352)
 2023-3월-24 16:27:21 오후 [http-nio-8080-exec-4] DEBUG jdbc.resultset - 168. ResultSet.close() returned void  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.closeResultSet(DefaultResultSetHandler.java:276)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 1. ResultSet.new ResultSet returned   org.apache.ibatis.executor.resultset.DefaultResultSetHandler.getFirstResultSet(DefaultResultSetHandler.java:237)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 1. ResultSet.getMetaData() returned com.mysql.cj.jdbc.result.ResultSetMetaData@743dba97 - Field level information: 
+	com.mysql.cj.result.Field@20d988f6[dbName=null,tableName=null,originalTableName=null,columnName=count(board_idx),originalColumnName=null,mysqlType=8(FIELD_TYPE_BIGINT),sqlType=-5,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]  org.apache.ibatis.executor.resultset.ResultSetWrapper.<init>(ResultSetWrapper.java:56)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 1. ResultSet.getType() returned 1003  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.skipRows(DefaultResultSetHandler.java:378)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 1. ResultSet.isClosed() returned false  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValuesForSimpleResultMap(DefaultResultSetHandler.java:352)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 1. ResultSet.next() returned true  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValuesForSimpleResultMap(DefaultResultSetHandler.java:352)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 1. ResultSet.getInt(count(board_idx)) returned 1  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 1. ResultSet.isClosed() returned false  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValuesForSimpleResultMap(DefaultResultSetHandler.java:352)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] INFO  jdbc.resultsettable - 
+|-----------------|
+|count(board_idx) |
+|-----------------|
+|1                |
+|-----------------|
+
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 1. ResultSet.next() returned false  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValuesForSimpleResultMap(DefaultResultSetHandler.java:352)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 1. ResultSet.close() returned void  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.closeResultSet(DefaultResultSetHandler.java:276)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 2. ResultSet.new ResultSet returned   org.apache.ibatis.executor.resultset.DefaultResultSetHandler.getFirstResultSet(DefaultResultSetHandler.java:237)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 2. ResultSet.getMetaData() returned com.mysql.cj.jdbc.result.ResultSetMetaData@34e8b97a - Field level information: 
+	com.mysql.cj.result.Field@2a405b0f[dbName=null,tableName=null,originalTableName=null,columnName=count(notice),originalColumnName=null,mysqlType=8(FIELD_TYPE_BIGINT),sqlType=-5,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]  org.apache.ibatis.executor.resultset.ResultSetWrapper.<init>(ResultSetWrapper.java:56)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 2. ResultSet.getType() returned 1003  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.skipRows(DefaultResultSetHandler.java:378)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 2. ResultSet.isClosed() returned false  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValuesForSimpleResultMap(DefaultResultSetHandler.java:352)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 2. ResultSet.next() returned true  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValuesForSimpleResultMap(DefaultResultSetHandler.java:352)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 2. ResultSet.getInt(count(notice)) returned 0  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 2. ResultSet.wasNull() returned false  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:38)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 2. ResultSet.isClosed() returned false  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValuesForSimpleResultMap(DefaultResultSetHandler.java:352)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] INFO  jdbc.resultsettable - 
+|--------------|
+|count(notice) |
+|--------------|
+|0             |
+|--------------|
+
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 2. ResultSet.next() returned false  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValuesForSimpleResultMap(DefaultResultSetHandler.java:352)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 2. ResultSet.close() returned void  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.closeResultSet(DefaultResultSetHandler.java:276)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.new ResultSet returned   org.apache.ibatis.executor.resultset.DefaultResultSetHandler.getFirstResultSet(DefaultResultSetHandler.java:237)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getMetaData() returned com.mysql.cj.jdbc.result.ResultSetMetaData@3513f59e - Field level information: 
+	com.mysql.cj.result.Field@f773e4b[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=board_idx,originalColumnName=board_idx,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags= AUTO_INCREMENT PRIMARY_KEY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@2b24f833[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=name,originalColumnName=name,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=33, charsetName=UTF-8]
+	com.mysql.cj.result.Field@3516d5b9[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=title,originalColumnName=title,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=33, charsetName=UTF-8]
+	com.mysql.cj.result.Field@1f837980[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=content,originalColumnName=content,mysqlType=252(FIELD_TYPE_LONGTEXT),sqlType=-1,flags= BLOB, charsetIndex=33, charsetName=UTF-8]
+	com.mysql.cj.result.Field@2930895d[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=regdate,originalColumnName=regdate,mysqlType=12(FIELD_TYPE_DATETIME),sqlType=93,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@25d91928[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=filecnt,originalColumnName=filecnt,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags=, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@2661ab37[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=vote,originalColumnName=vote,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags=, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@22aa8902[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=hit,originalColumnName=hit,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags=, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@ffd966b[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=parent,originalColumnName=parent,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags=, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@6280dee5[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=depth,originalColumnName=depth,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags=, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@4913f991[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=notice,originalColumnName=notice,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags=, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@3f879b28[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=commentcnt,originalColumnName=commentcnt,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags=, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@5c2a0c7d[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=category_idx,originalColumnName=category_idx,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags=, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@383986eb[dbName=mydb,tableName=c,originalTableName=jhbbs_category,columnName=categoryname,originalColumnName=title,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=33, charsetName=UTF-8]  org.apache.ibatis.executor.resultset.ResultSetWrapper.<init>(ResultSetWrapper.java:56)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getType() returned 1003  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.skipRows(DefaultResultSetHandler.java:378)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.isClosed() returned false  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValuesForNestedResultMap(DefaultResultSetHandler.java:858)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.next() returned true  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValuesForNestedResultMap(DefaultResultSetHandler.java:858)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getInt(board_idx) returned 1  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getString(name) returned 관리자  org.apache.ibatis.type.StringTypeHandler.getNullableResult(StringTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getString(title) returned 테스트입니다.  org.apache.ibatis.type.StringTypeHandler.getNullableResult(StringTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getString(content) returned 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세<br />
+무궁화 삼천리 화려강산 대한사람 대한으로 길이보전하세  org.apache.ibatis.type.StringTypeHandler.getNullableResult(StringTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getString(regdate) returned 2023-07-18 12:12:45  org.apache.ibatis.type.StringTypeHandler.getNullableResult(StringTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getInt(vote) returned 0  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.wasNull() returned false  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:38)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getInt(hit) returned 2  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getInt(parent) returned 1  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getInt(depth) returned 0  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.wasNull() returned false  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:38)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getInt(notice) returned 0  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.wasNull() returned false  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:38)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getInt(filecnt) returned 0  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.wasNull() returned false  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:38)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getInt(commentcnt) returned 0  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.wasNull() returned false  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:38)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getInt(category_idx) returned 1  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getInt(board_idx) returned 1  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getString(name) returned 관리자  org.apache.ibatis.type.StringTypeHandler.getNullableResult(StringTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getString(title) returned 테스트입니다.  org.apache.ibatis.type.StringTypeHandler.getNullableResult(StringTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getString(content) returned 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세<br />
+무궁화 삼천리 화려강산 대한사람 대한으로 길이보전하세  org.apache.ibatis.type.StringTypeHandler.getNullableResult(StringTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getString(regdate) returned 2023-07-18 12:12:45  org.apache.ibatis.type.StringTypeHandler.getNullableResult(StringTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getInt(vote) returned 0  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.wasNull() returned false  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:38)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getInt(hit) returned 2  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getInt(parent) returned 1  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getInt(depth) returned 0  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.wasNull() returned false  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:38)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getInt(notice) returned 0  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.wasNull() returned false  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:38)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getInt(filecnt) returned 0  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.wasNull() returned false  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:38)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getInt(commentcnt) returned 0  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.wasNull() returned false  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:38)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getInt(category_idx) returned 1  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getInt(category_idx) returned 1  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getString(categoryname) returned 일반  org.apache.ibatis.type.StringTypeHandler.getNullableResult(StringTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getInt(category_idx) returned 1  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.getString(categoryname) returned 일반  org.apache.ibatis.type.StringTypeHandler.getNullableResult(StringTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.isClosed() returned false  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValuesForNestedResultMap(DefaultResultSetHandler.java:858)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] INFO  jdbc.resultsettable - 
+|----------|-----|--------|------------------------------------------------------------------------|--------------------|--------|-----|----|-------|------|-------|-----------|-------------|------|
+|board_idx |name |title   |content                                                                 |regdate             |filecnt |vote |hit |parent |depth |notice |commentcnt |category_idx |title |
+|----------|-----|--------|------------------------------------------------------------------------|--------------------|--------|-----|----|-------|------|-------|-----------|-------------|------|
+|1         |관리자  |테스트입니다. |동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세<br />
+무궁화 삼천리 화려강산 대한사람 대한으로 길이보전하세 |2023-07-18 12:12:45 |0       |0    |2   |1      |0     |0      |0          |1            |일반    |
+|----------|-----|--------|------------------------------------------------------------------------|--------------------|--------|-----|----|-------|------|-------|-----------|-------------|------|
+
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.next() returned false  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValuesForNestedResultMap(DefaultResultSetHandler.java:858)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 3. ResultSet.close() returned void  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.closeResultSet(DefaultResultSetHandler.java:276)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 4. ResultSet.new ResultSet returned   org.apache.ibatis.executor.resultset.DefaultResultSetHandler.getFirstResultSet(DefaultResultSetHandler.java:237)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 4. ResultSet.getMetaData() returned com.mysql.cj.jdbc.result.ResultSetMetaData@2c404059 - Field level information: 
+	com.mysql.cj.result.Field@3f1b507[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=board_idx,originalColumnName=board_idx,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags= AUTO_INCREMENT PRIMARY_KEY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@78ab35a8[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=name,originalColumnName=name,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=33, charsetName=UTF-8]
+	com.mysql.cj.result.Field@4494ad98[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=title,originalColumnName=title,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=33, charsetName=UTF-8]
+	com.mysql.cj.result.Field@6af86fdb[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=content,originalColumnName=content,mysqlType=252(FIELD_TYPE_LONGTEXT),sqlType=-1,flags= BLOB, charsetIndex=33, charsetName=UTF-8]
+	com.mysql.cj.result.Field@642fb60e[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=regdate,originalColumnName=regdate,mysqlType=12(FIELD_TYPE_DATETIME),sqlType=93,flags= BINARY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@4508d956[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=filecnt,originalColumnName=filecnt,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags=, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@24115402[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=vote,originalColumnName=vote,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags=, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@d3e61ec[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=hit,originalColumnName=hit,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags=, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@14382983[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=parent,originalColumnName=parent,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags=, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@1779803b[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=depth,originalColumnName=depth,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags=, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@39666792[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=notice,originalColumnName=notice,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags=, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@47295053[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=commentcnt,originalColumnName=commentcnt,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags=, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@12881d04[dbName=mydb,tableName=b,originalTableName=jhbbs_board,columnName=category_idx,originalColumnName=category_idx,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags=, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@49ab2f36[dbName=mydb,tableName=c,originalTableName=jhbbs_category,columnName=categoryname,originalColumnName=title,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=33, charsetName=UTF-8]  org.apache.ibatis.executor.resultset.ResultSetWrapper.<init>(ResultSetWrapper.java:56)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 4. ResultSet.getType() returned 1003  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.skipRows(DefaultResultSetHandler.java:378)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 4. ResultSet.isClosed() returned false  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValuesForNestedResultMap(DefaultResultSetHandler.java:858)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] INFO  jdbc.resultsettable - 
+|----------|-----|------|--------|--------|--------|-----|----|-------|------|-------|-----------|-------------|------|
+|board_idx |name |title |content |regdate |filecnt |vote |hit |parent |depth |notice |commentcnt |category_idx |title |
+|----------|-----|------|--------|--------|--------|-----|----|-------|------|-------|-----------|-------------|------|
+|----------|-----|------|--------|--------|--------|-----|----|-------|------|-------|-----------|-------------|------|
+
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 4. ResultSet.next() returned false  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValuesForNestedResultMap(DefaultResultSetHandler.java:858)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 4. ResultSet.close() returned void  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.closeResultSet(DefaultResultSetHandler.java:276)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 5. ResultSet.new ResultSet returned   org.apache.ibatis.executor.resultset.DefaultResultSetHandler.getFirstResultSet(DefaultResultSetHandler.java:237)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 5. ResultSet.getMetaData() returned com.mysql.cj.jdbc.result.ResultSetMetaData@53473515 - Field level information: 
+	com.mysql.cj.result.Field@305b1af3[dbName=mydb,tableName=jhbbs_category,originalTableName=jhbbs_category,columnName=category_idx,originalColumnName=category_idx,mysqlType=3(FIELD_TYPE_INT),sqlType=4,flags= AUTO_INCREMENT PRIMARY_KEY, charsetIndex=63, charsetName=ISO-8859-1]
+	com.mysql.cj.result.Field@30499e74[dbName=mydb,tableName=jhbbs_category,originalTableName=jhbbs_category,columnName=title,originalColumnName=title,mysqlType=253(FIELD_TYPE_VARCHAR),sqlType=12,flags=, charsetIndex=33, charsetName=UTF-8]  org.apache.ibatis.executor.resultset.ResultSetWrapper.<init>(ResultSetWrapper.java:56)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 5. ResultSet.getType() returned 1003  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.skipRows(DefaultResultSetHandler.java:378)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 5. ResultSet.isClosed() returned false  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValuesForSimpleResultMap(DefaultResultSetHandler.java:352)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 5. ResultSet.next() returned true  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValuesForSimpleResultMap(DefaultResultSetHandler.java:352)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 5. ResultSet.getInt(category_idx) returned 1  org.apache.ibatis.type.IntegerTypeHandler.getNullableResult(IntegerTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 5. ResultSet.getString(title) returned 일반  org.apache.ibatis.type.StringTypeHandler.getNullableResult(StringTypeHandler.java:37)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 5. ResultSet.isClosed() returned false  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValuesForSimpleResultMap(DefaultResultSetHandler.java:352)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] INFO  jdbc.resultsettable - 
+|-------------|------|
+|category_idx |title |
+|-------------|------|
+|1            |일반    |
+|-------------|------|
+
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 5. ResultSet.next() returned false  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValuesForSimpleResultMap(DefaultResultSetHandler.java:352)
+2023-7월-18 21:06:46 오후 [http-nio-8090-exec-5] DEBUG jdbc.resultset - 5. ResultSet.close() returned void  org.apache.ibatis.executor.resultset.DefaultResultSetHandler.closeResultSet(DefaultResultSetHandler.java:276)
