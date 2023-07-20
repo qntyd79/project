@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    // 2022.07.08
+    // 2023.07.20
 
 	// 좌표설정
 	proj4.defs("EPSG:5186", "+proj=tmerc +lat_0=38 +lon_0=127 +k=1 +x_0=200000 +y_0=600000 +ellps=GRS80 +units=m +no_defs");
@@ -18,7 +18,8 @@ $(document).ready(function() {
 	
 	
     // VWORLD Base 설정 WMTS(월드맵타일서비스) API 사용
-	var authKey = 'C6F35290-A79D-3175-838A-01CA55D8085A';
+	// 만료일 2023년 10월20일 
+	var authKey = 'FE8D2E66-2942-3BF7-A990-0BEE4D72B43C';
     var url1 = 'http://api.vworld.kr/req/wmts/1.3.0/' + authKey + '/';
 
     var Base = new ol.layer.Tile({
@@ -62,8 +63,8 @@ $(document).ready(function() {
         zIndex : 1
     });
     
-    // VWORLD gray 설정 
-    var gray = new ol.layer.Tile({
+    // VWORLD White 설정 
+    var White = new ol.layer.Tile({
     	visible: false,
         source : new ol.source.XYZ({
             url : url1,
@@ -76,8 +77,8 @@ $(document).ready(function() {
         zIndex : 1
     });
     
-    // VWORLD midnight 설정
-    var midnight = new ol.layer.Tile({
+    // VWORLD Midnight 설정
+    var Midnight = new ol.layer.Tile({
     	visible: false,
         source : new ol.source.XYZ({
             url : url1,
@@ -91,7 +92,7 @@ $(document).ready(function() {
     });
     
     // VWORLD Selectbox 설정
-    var vbaseStyles = ['Base', 'Satellite', 'Hybrid', 'gray', 'midnight'];
+    var vbaseStyles = ['Base', 'Satellite', 'Hybrid', 'White', 'Midnight'];
 
     var VWORLDMap=[];
     for (var i = 0, ii = vbaseStyles.length; i < ii; ++i) {
@@ -215,7 +216,8 @@ $(document).ready(function() {
     });
 
 
-	// 브이월드 연속지적도
+	// WMS/WFS API 2.0 레퍼런스
+	// 브이월드 연속지적도 https://www.vworld.kr/dev/v4dv_wmsguide2_s001.do참고
 	var wms_val = 'lp_pa_cbnd_bubun,lp_pa_cbnd_bonbun';
 	var WMS = new ol.layer.Tile({
 		visible: false,
@@ -235,6 +237,7 @@ $(document).ready(function() {
 		zIndex : 5
 	});
 	
+	// WMS/WFS API 2.0 레퍼런스
 	// 브이월드 경계 https://www.vworld.kr/dev/v4dv_wmsguide2_s001.do참고 
 	var wms_val = 'lt_c_adsido,lt_c_adsigg,lt_c_ademd,lt_c_adri';
 	var WMS1 = new ol.layer.Tile({

@@ -295,7 +295,7 @@
                                             	<option value="Base" selected>Base</option>
                                                 <option value="Satellite">Satellite</option>                                               
                                                 <option value="Hybrid">Hybrid</option>
-                                                <option value="gray">gray</option> 
+                                                <option value="white">white</option> 
                                                 <option value="midnight">midnight</option>                                              
                                             </select>
                                         </fieldset>
